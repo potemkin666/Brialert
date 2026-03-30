@@ -439,6 +439,27 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
   line-height: 1.6;
   color: var(--muted);
 }
+.scene-clock-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.scene-clock-item {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.scene-clock-item strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.scene-clock-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
 .corroboration-list {
   display: grid;
   gap: 10px;

@@ -123,8 +123,10 @@ const modalTitle = document.getElementById('modal-title');
 const modalMeta = document.getElementById('modal-meta');
 const modalAiSummary = document.getElementById('modal-ai-summary');
 const modalSummary = document.getElementById('modal-summary');
+const modalSceneClock = document.getElementById('modal-scene-clock');
 const modalAudit = document.getElementById('modal-audit');
 const modalCorroboration = document.getElementById('modal-corroboration');
+const sceneClockPanel = document.getElementById('scene-clock-panel');
 const auditPanel = document.getElementById('audit-panel');
 const corroborationPanel = document.getElementById('corroboration-panel');
 const modalSeverity = document.getElementById('modal-severity');
@@ -420,6 +422,91 @@ function reliabilityLabel(profile) {
   };
   return labels[profile] || 'Unknown';
 }
+function clockDisplay(dateLike) {
+  if (!dateLike) return 'unconfirmed';
+  const stamp = dateLike instanceof Date ? dateLike : new Date(dateLike);
+  if (Number.isNaN(stamp.getTime())) return 'unconfirmed';
+  const diffMinutes = Math.max(0, Math.round((Date.now() - stamp.getTime()) / 60000));
+  if (diffMinutes < 60) return `${diffMinutes}m ago`;
+  const hours = Math.floor(diffMinutes / 60);
+  const minutes = diffMinutes % 60;
+  if (hours < 24) return minutes ? `${hours}h ${minutes}m ago` : `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  const remHours = hours % 24;
+  return remHours ? `${days}d ${remHours}h ago` : `${days}d ago`;
+}
+function sceneClockStamp(dateLike) {
+  if (!dateLike) return 'Timestamp unconfirmed';
+  const stamp = dateLike instanceof Date ? dateLike : new Date(dateLike);
+  if (Number.isNaN(stamp.getTime())) return 'Timestamp unconfirmed';
+  return stamp.toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+}
+function isOfficialProfile(profile) {
+  return clean(profile).startsWith('official_');
+}
+function sourceStack(alert) {
+  const corroborating = Array.isArray(alert.corroboratingSources) ? alert.corroboratingSources : [];
+  return [
+    {
+      source: alert.source,
+      sourceUrl: alert.sourceUrl,
+      publishedAt: alert.publishedAt,
+      reliabilityProfile: inferReliabilityProfile(alert),
+      sourceTier: normaliseSourceTier(alert.sourceTier),
+      isPrimary: true
+    },
+    ...corroborating.map((entry) => ({
+      ...entry,
+      isPrimary: false
+    }))
+  ].filter((entry) => clean(entry.publishedAt));
+}
+function buildSceneClock(alert) {
+  const stack = sourceStack(alert);
+  const timed = stack
+    .map((entry) => ({ ...entry, timeMs: new Date(entry.publishedAt).getTime() }))
+    .filter((entry) => Number.isFinite(entry.timeMs));
+  const firstReport = timed.length ? timed.reduce((min, entry) => (entry.timeMs < min.timeMs ? entry : min)) : null;
+  const lastOfficial = timed.filter((entry) => isOfficialProfile(entry.reliabilityProfile)).sort((a, b) => b.timeMs - a.timeMs)[0] || null;
+  const lastCorroboration = timed.filter((entry) => !entry.isPrimary).sort((a, b) => b.timeMs - a.timeMs)[0] || null;
+  return {
+    firstReport,
+    lastOfficial,
+    lastCorroboration
+  };
+}
+function renderSceneClock(alert) {
+  const clock = buildSceneClock(alert);
+  const items = [
+    {
+      label: 'Since first report',
+      entry: clock.firstReport,
+      fallback: 'No report timestamp confirmed yet.'
+    },
+    {
+      label: 'Since last official update',
+      entry: clock.lastOfficial,
+      fallback: 'No official update has been attached yet.'
+    },
+    {
+      label: 'Since last corroboration',
+      entry: clock.lastCorroboration,
+      fallback: 'No corroborating source has landed yet.'
+    }
+  ];
+  return `<div class="scene-clock-grid">${items.map(({ label, entry, fallback }) => `
+    <article class="scene-clock-item">
+      <strong>${label}</strong>
+      <p>${entry ? `${clockDisplay(entry.publishedAt)} | ${sceneClockStamp(entry.publishedAt)}${entry.source ? ` | ${entry.source}` : ''}` : fallback}</p>
+    </article>`).join('')}</div>`;
+}
 function buildAuditBlock(alert) {
   const terrorTerms = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
   const age = alert.publishedAt ? formatAgeFrom(alert.publishedAt) : 'age unknown';
@@ -448,6 +535,7 @@ function topPriority() { const pool = responderAlerts().length ? responderAlerts
 function buildBriefing(alert, summaryText) {
   const matches = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
   const peopleInvolved = extractPeopleInvolved(alert);
+  const sceneClock = buildSceneClock(alert);
   return [
     `WHAT: ${alert.title}`,
     `WHERE: ${alert.location}`,
@@ -460,8 +548,13 @@ function buildBriefing(alert, summaryText) {
       alert.geoPrecision ? `GEO PRECISION: ${alert.geoPrecision}` : '',
       Number(alert.corroborationCount || 0) ? `CORROBORATION COUNT: ${alert.corroborationCount}` : '',
       '',
-    peopleInvolved.length ? ['PEOPLE INVOLVED:', ...peopleInvolved, ''] : [],
-    'SUMMARY:',
+      'SCENE CLOCK:',
+      `FIRST REPORT: ${sceneClock.firstReport ? `${clockDisplay(sceneClock.firstReport.publishedAt)} | ${sceneClockStamp(sceneClock.firstReport.publishedAt)}` : 'Unconfirmed'}`,
+      `LAST OFFICIAL UPDATE: ${sceneClock.lastOfficial ? `${clockDisplay(sceneClock.lastOfficial.publishedAt)} | ${sceneClockStamp(sceneClock.lastOfficial.publishedAt)}` : 'No official update yet'}`,
+      `LAST CORROBORATION: ${sceneClock.lastCorroboration ? `${clockDisplay(sceneClock.lastCorroboration.publishedAt)} | ${sceneClockStamp(sceneClock.lastCorroboration.publishedAt)}` : 'No corroboration yet'}`,
+      '',
+      peopleInvolved.length ? ['PEOPLE INVOLVED:', ...peopleInvolved, ''] : [],
+      'SUMMARY:',
     summaryText,
     '',
     matches.length ? `TRIGGER KEYWORDS: ${matches.join(', ')}` : '',
@@ -720,10 +813,12 @@ function zoomMap(direction) {
 function openDetail(alert) {
   const summaryText = effectiveSummary(alert);
   modalTitle.textContent = alert.title;
-    modalMeta.textContent = `${alert.location} | ${alert.time}`;
-    modalAiSummary.textContent = summaryText;
-    modalSummary.textContent = '';
+  modalMeta.textContent = `${alert.location} | ${alert.time}`;
+  modalAiSummary.textContent = summaryText;
+  modalSummary.textContent = '';
   modalSummary.hidden = true;
+  modalSceneClock.innerHTML = renderSceneClock(alert);
+  sceneClockPanel.hidden = false;
   modalAudit.textContent = buildAuditBlock(alert);
   modalCorroboration.innerHTML = renderCorroboratingSources(alert);
   auditPanel.hidden = false;
