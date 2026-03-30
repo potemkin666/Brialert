@@ -297,12 +297,16 @@ function freshnessBucketForAlert(alert) {
   return 0;
 }
 function sourceTierRank(alert) {
-  const tier = clean(alert.sourceTier).toLowerCase();
+  const tier = normaliseSourceTier(alert.sourceTier);
   if (tier === 'trigger') return 4;
   if (tier === 'corroboration') return 3;
   if (tier === 'context') return 2;
   if (tier === 'research') return 1;
   return 0;
+}
+function normaliseSourceTier(value) {
+  const tier = clean(value).toLowerCase();
+  return ['trigger', 'corroboration', 'context', 'research'].includes(tier) ? tier : '';
 }
 function incidentScore(alert) {
   if (Number.isFinite(alert.priorityScore)) return alert.priorityScore;
@@ -319,7 +323,8 @@ function incidentScore(alert) {
 function isLiveIncidentCandidate(alert) {
   if (alert.lane !== 'incidents') return false;
   if (!isTerrorRelevant(alert)) return false;
-  if (clean(alert.sourceTier) === 'context' || clean(alert.sourceTier) === 'research') return false;
+  const tier = normaliseSourceTier(alert.sourceTier);
+  if (tier === 'context' || tier === 'research') return false;
   if (alertAgeHours(alert) > 72) return false;
   if (alert.freshUntil) {
     const freshUntil = new Date(alert.freshUntil);
@@ -401,9 +406,9 @@ function normaliseAlert(alert, index) {
     lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? (alert.region === 'uk' ? -2.5 : 15)),
     major: !!alert.major,
     eventType: clean(alert.eventType),
-    geoPrecision: clean(alert.geoPrecision),
-    isOfficial: !!alert.isOfficial,
-    sourceTier: clean(alert.sourceTier),
+      geoPrecision: clean(alert.geoPrecision),
+      isOfficial: !!alert.isOfficial,
+      sourceTier: normaliseSourceTier(alert.sourceTier),
     isDuplicateOf: clean(alert.isDuplicateOf),
     freshUntil: clean(alert.freshUntil),
     needsHumanReview: !!alert.needsHumanReview,

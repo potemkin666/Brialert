@@ -16,6 +16,11 @@ The app is designed around a simple operational flow:
 ## Core features
 
 - broad UK + Europe source catalog
+- explicit source tiers:
+  - `trigger`
+  - `corroboration`
+  - `context`
+  - `research`
 - incident-first prioritisation
 - lane filtering:
   - `Incidents`
@@ -51,7 +56,7 @@ The frontend is static. The feed builder requires Node.js 20+.
 Install dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 Build the live alert feed:
@@ -64,4 +69,5 @@ npm run build:feeds
 
 - This repo is web-first, not native iOS.
 - GitHub Actions refreshes `live-alerts.json` on a schedule and on relevant pushes.
+- `data/sources.json` is the source of truth for lane and `sourceTier` metadata.
 - Albert stays.

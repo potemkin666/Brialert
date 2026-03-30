@@ -145,7 +145,14 @@ function sourceHasTerrorTopic(source) {
   ].some((term) => text.includes(term));
 }
 
+function normaliseSourceTier(value) {
+  const tier = clean(value).toLowerCase();
+  return ['trigger', 'corroboration', 'context', 'research'].includes(tier) ? tier : '';
+}
+
 function inferSourceTier(source) {
+  const declaredTier = normaliseSourceTier(source.sourceTier);
+  if (declaredTier) return declaredTier;
   if (source.lane === 'incidents') {
     if (sourceHasTerrorTopic(source)) return source.isTrustedOfficial ? 'trigger' : 'corroboration';
     return 'corroboration';
