@@ -24,6 +24,7 @@ const laneWords = {
   border: ['border', 'document', 'fraud', 'etias', 'travel', 'screening', 'migration'],
   prevention: ['radicalisation', 'prevention', 'extremism', 'newsletter', 'research']
 };
+const severityRank = { critical: 4, high: 3, elevated: 2, moderate: 1 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const clean = (value) => (value || '')
@@ -73,6 +74,14 @@ function inferConfidence(source) {
   return 'Secondary source signal';
 }
 
+function inferConfidenceScore(source, text, publishedIso) {
+  let score = source.isTrustedOfficial ? 0.92 : 0.62;
+  if (['Reuters', 'The Guardian', 'The Independent', 'Associated Press', 'BBC News'].includes(source.provider)) score = Math.max(score, 0.78);
+  if (matchesKeywords(text).length >= 4) score += 0.04;
+  if (!publishedIso) score -= 0.08;
+  return Math.max(0.25, Math.min(0.99, Number(score.toFixed(2))));
+}
+
 function inferStatus(source, itemText) {
   if (source.lane !== 'incidents') return 'Update';
   const text = itemText.toLowerCase();
@@ -89,6 +98,33 @@ function inferLocation(source, title) {
   const hit = patterns.find((name) => text.includes(name));
   if (hit) return hit;
   return source.region === 'uk' ? 'United Kingdom' : 'Europe';
+}
+
+function inferEventType(source, text) {
+  const lower = text.toLowerCase();
+  if (source.lane === 'sanctions') return 'sanctions_update';
+  if (source.lane === 'oversight') return 'oversight_update';
+  if (source.lane === 'border') return 'border_security_update';
+  if (source.lane === 'prevention') return 'prevention_update';
+  if (lower.includes('sentenced') || lower.includes('convicted')) return 'sentencing';
+  if (lower.includes('charged')) return 'charge';
+  if (lower.includes('arrest') || lower.includes('arrested') || lower.includes('raid')) return 'arrest';
+  if (lower.includes('foiled') || lower.includes('disrupt') || lower.includes('disrupted')) return 'disrupted_plot';
+  if (lower.includes('threat level') || lower.includes('threat')) return 'threat_update';
+  if (matchesKeywords(lower, criticalKeywords).length) return 'active_attack';
+  return 'incident_update';
+}
+
+function inferGeoPrecision(location) {
+  if (!location) return 'unknown';
+  const cityLike = [
+    'Leeds', 'London', 'Manchester', 'Birmingham', 'Liverpool', 'Glasgow', 'Belfast', 'Northumberland',
+    'Paris', 'Brussels', 'Berlin', 'Madrid', 'Rome', 'Amsterdam', 'Stockholm', 'Copenhagen', 'Dublin',
+    'Athens', 'Vienna', 'Vilnius', 'Warsaw', 'Kyiv', 'Tehran', 'Beirut', 'Jerusalem', 'Tel Aviv'
+  ];
+  if (cityLike.includes(location)) return 'city';
+  if (['United Kingdom', 'Europe', 'Iran', 'Israel', 'Lebanon', 'Iraq', 'Yemen', 'Nigeria', 'Pakistan', 'California', 'Yosemite'].includes(location)) return 'country';
+  return 'region';
 }
 
 const geoLookup = [
@@ -163,6 +199,51 @@ function formatDisplayDate(rawDate) {
     hour12: false,
     timeZone: SOURCE_TIMEZONE
   });
+}
+
+function freshUntilFor(source, publishedIso, severity) {
+  const published = parseSourceDate(publishedIso) || now;
+  const hoursByLane = {
+    incidents: severity === 'critical' ? 18 : severity === 'high' ? 36 : 72,
+    sanctions: 24 * 14,
+    oversight: 24 * 21,
+    border: 24 * 10,
+    prevention: 24 * 21
+  };
+  const hours = hoursByLane[source.lane] || 72;
+  return new Date(published.getTime() + hours * 3600000).toISOString();
+}
+
+function priorityScoreFor(source, severity, keywordHits, publishedIso) {
+  let score = severityRank[severity] || 1;
+  if (source.lane === 'incidents') score += 4;
+  if (source.isTrustedOfficial) score += 2;
+  score += Math.min(keywordHits.length, 5) * 0.6;
+  if (publishedIso) {
+    const ageHours = Math.max(0, (now.getTime() - new Date(publishedIso).getTime()) / 3600000);
+    if (ageHours <= 6) score += 2;
+    else if (ageHours <= 24) score += 1;
+    else if (ageHours > 168) score -= 2;
+  } else {
+    score -= 0.5;
+  }
+  return Number(score.toFixed(2));
+}
+
+function needsHumanReviewFor(source, severity, keywordHits, publishedIso) {
+  if (source.lane !== 'incidents') return false;
+  if (!source.isTrustedOfficial && severity === 'critical') return true;
+  if (!publishedIso) return true;
+  return keywordHits.length < 2;
+}
+
+function sameStoryKey(item) {
+  return clean(item.title)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\b(the|a|an|and|of|to|in|for|on|with|from)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function recencyOkay(source, rawDate) {
@@ -361,18 +442,24 @@ function buildAlert(source, item, idx) {
   const coords = coordFor(location, item.title, item.summary, source.region);
   const publishedIso = formatWhen(item.published);
   const displayWhen = formatDisplayDate(item.published);
+  const keywordHits = matchesKeywords(text);
+  const severity = inferSeverity(source, text);
+  const eventType = inferEventType(source, text);
+  const confidenceScore = inferConfidenceScore(source, text, publishedIso);
+  const priorityScore = priorityScoreFor(source, severity, keywordHits, publishedIso);
   return {
     id: `${source.id}-${idx}`,
     title: titleCase(item.title),
     location,
     region: source.region,
     lane: source.lane,
-    severity: inferSeverity(source, text),
+    severity,
     status: inferStatus(source, text),
     actor: source.provider,
     subject: source.provider,
     happenedWhen: displayWhen,
     confidence: inferConfidence(source),
+    confidenceScore,
     summary: clean(item.summary || item.title).slice(0, 260),
     aiSummary: makeSummary(source, item),
     source: source.provider,
@@ -380,9 +467,16 @@ function buildAlert(source, item, idx) {
     time: displayWhen,
     x: coords.x,
     y: coords.y,
-    major: source.lane === 'incidents' && ['critical', 'high'].includes(inferSeverity(source, text)),
+    major: source.lane === 'incidents' && ['critical', 'high'].includes(severity),
     publishedAt: publishedIso,
-    keywordHits: matchesKeywords(text)
+    keywordHits,
+    eventType,
+    geoPrecision: inferGeoPrecision(location),
+    isOfficial: !!source.isTrustedOfficial,
+    priorityScore,
+    freshUntil: freshUntilFor(source, publishedIso, severity),
+    needsHumanReview: needsHumanReviewFor(source, severity, keywordHits, publishedIso),
+    isDuplicateOf: null
   };
 }
 
@@ -415,21 +509,32 @@ async function main() {
   }
 
   const deduped = [];
-  const seen = new Set();
+  const seen = new Map();
   for (const item of items) {
-    const key = `${item.title}|${item.sourceUrl}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
+    const key = `${sameStoryKey(item)}|${item.location}|${item.eventType}`;
+    if (seen.has(key)) {
+      const existingIndex = seen.get(key);
+      const incumbent = deduped[existingIndex];
+      if ((item.priorityScore || 0) > (incumbent.priorityScore || 0)) {
+        item.isDuplicateOf = incumbent.id;
+        deduped[existingIndex] = item;
+        seen.set(key, existingIndex);
+      } else {
+        incumbent.isDuplicateOf = incumbent.isDuplicateOf || item.id;
+      }
+      continue;
+    }
+    seen.set(key, deduped.length);
     deduped.push(item);
   }
 
   deduped.sort((a, b) => {
-    const rank = { critical: 4, high: 3, elevated: 2, moderate: 1 };
     const timeA = parseSourceDate(a.publishedAt)?.getTime() || 0;
     const timeB = parseSourceDate(b.publishedAt)?.getTime() || 0;
-    const timeGap = timeB - timeA;
-    if (rank[b.severity] !== rank[a.severity]) return rank[b.severity] - rank[a.severity];
-    return timeGap;
+    if ((b.priorityScore || 0) !== (a.priorityScore || 0)) return (b.priorityScore || 0) - (a.priorityScore || 0);
+    if ((b.confidenceScore || 0) !== (a.confidenceScore || 0)) return (b.confidenceScore || 0) - (a.confidenceScore || 0);
+    if (severityRank[b.severity] !== severityRank[a.severity]) return severityRank[b.severity] - severityRank[a.severity];
+    return timeB - timeA;
   });
 
   const payload = {

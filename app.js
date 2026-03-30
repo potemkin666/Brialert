@@ -1,6 +1,8 @@
 const LIVE_FEED_URL = '/Brialert/live-alerts.json';
 const POLL_INTERVAL_MS = 60_000;
 const SOURCE_PULL_MINUTES = 15;
+const WATCHED_STORAGE_KEY = 'brialert.watched';
+const NOTES_STORAGE_KEY = 'brialert.notes';
 
 const laneLabels = { all: 'All lanes', incidents: 'Incidents', sanctions: 'Sanctions', oversight: 'Oversight', border: 'Border', prevention: 'Prevention' };
 const incidentKeywords = ['terror','terrorism','attack','attacks','bomb','bombing','explosion','explosive','device','ramming','stabbing','shooting','hostage','plot','suspect','arrest','charged','charged with','parcel','radicalised','extremist','isis','islamic state','al-qaeda','threat'];
@@ -69,7 +71,7 @@ const albertQuotes = Array.from({ length: 666 }, (_, index) => {
   const closer = albertQuoteClosers[index % albertQuoteClosers.length];
   return `${opener}. ${closer.charAt(0).toUpperCase()}${closer.slice(1)}`;
 });
-const notes = [
+const defaultNotes = [
   { title: 'Morning posture', body: 'Maintain focus on transport hubs, symbolic sites, and fast-moving public order environments with terrorism indicators.' },
   { title: 'Cross-border watch', body: 'Track whether any developing European incidents show common method, travel pathway, or propaganda overlap with UK activity.' }
 ];
@@ -77,13 +79,14 @@ const notes = [
 let alerts = [];
 let activeRegion = 'all';
 let activeLane = 'all';
-let watched = new Set(['eurojust-self-igniting-parcels']);
+let watched = new Set();
 let lastBrowserPollAt = new Date();
 let liveFeedGeneratedAt = null;
 let liveSourceCount = 0;
 let albertIndex = -1;
 let mapTransform = { scale: 1, x: 0, y: 0 };
 let mapDrag = { active: false, startX: 0, startY: 0, originX: 0, originY: 0 };
+let notes = [];
 
 const priorityCard = document.getElementById('priority-card');
 const feedList = document.getElementById('feed-list');
@@ -126,6 +129,33 @@ const modalBriefing = document.getElementById('modal-briefing');
 const modalLink = document.getElementById('modal-link');
 
 const clean = (value) => String(value || '').trim();
+function loadWatched() {
+  try {
+    const raw = localStorage.getItem(WATCHED_STORAGE_KEY);
+    const parsed = JSON.parse(raw || '[]');
+    return new Set(Array.isArray(parsed) ? parsed.filter(Boolean) : []);
+  } catch {
+    return new Set();
+  }
+}
+function saveWatched() {
+  try {
+    localStorage.setItem(WATCHED_STORAGE_KEY, JSON.stringify([...watched]));
+  } catch {}
+}
+function loadNotes() {
+  try {
+    const raw = localStorage.getItem(NOTES_STORAGE_KEY);
+    const parsed = JSON.parse(raw || 'null');
+    if (Array.isArray(parsed) && parsed.length) return parsed;
+  } catch {}
+  return [...defaultNotes];
+}
+function saveNotes() {
+  try {
+    localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
+  } catch {}
+}
 const geoLookup = [
   { terms: ['leeds'], x: 47, y: 27 },
   { terms: ['london', 'golders green'], x: 46, y: 28 },
@@ -225,8 +255,27 @@ function extractPeopleInvolved(alert) {
   return people.length ? people : ['No named individuals were identified in the captured source text.'];
 }
 function effectiveSummary(alert) { return looksGenericSummary(alert.aiSummary) ? buildIncidentSummary(alert) : alert.aiSummary; }
-function incidentScore(alert) { const matches = keywordMatches(alert); let score = matches.length; if (alert.lane === 'incidents') score += 3; if (alert.severity === 'critical') score += 3; if (alert.severity === 'high') score += 2; if (alert.major) score += 2; if (trustedMajorSources.has(alert.source)) score += 2; return score; }
-function isLiveIncidentCandidate(alert) { return alert.lane === 'incidents' && incidentScore(alert) >= 6; }
+function incidentScore(alert) {
+  if (Number.isFinite(alert.priorityScore)) return alert.priorityScore;
+  const matches = keywordMatches(alert);
+  let score = matches.length;
+  if (alert.lane === 'incidents') score += 3;
+  if (alert.severity === 'critical') score += 3;
+  if (alert.severity === 'high') score += 2;
+  if (alert.major) score += 2;
+  if (trustedMajorSources.has(alert.source)) score += 2;
+  return score;
+}
+function isLiveIncidentCandidate(alert) {
+  if (alert.lane !== 'incidents') return false;
+  if (alert.freshUntil) {
+    const freshUntil = new Date(alert.freshUntil);
+    if (!Number.isNaN(freshUntil.getTime()) && freshUntil.getTime() < Date.now()) return false;
+  }
+  if (alert.eventType && ['sanctions_update', 'oversight_update', 'border_security_update', 'prevention_update'].includes(alert.eventType)) return false;
+  if (alert.needsHumanReview && !alert.isOfficial && (alert.confidenceScore || 0) < 0.75) return false;
+  return incidentScore(alert) >= 6;
+}
 function filteredAlerts() { return alerts.filter((alert) => (activeRegion === 'all' || alert.region === activeRegion) && (activeLane === 'all' || alert.lane === activeLane)); }
 function responderAlerts() { return filteredAlerts().filter(isLiveIncidentCandidate); }
 function contextAlerts() { return filteredAlerts().filter((alert) => !isLiveIncidentCandidate(alert)); }
@@ -243,6 +292,8 @@ function buildBriefing(alert, summaryText) {
     `SOURCE: ${alert.source}`,
     `CONFIDENCE: ${alert.confidence}`,
     `LANE: ${laneLabels[alert.lane] || alert.lane}`,
+    alert.eventType ? `EVENT TYPE: ${clean(alert.eventType).replace(/_/g, ' ')}` : '',
+    alert.geoPrecision ? `GEO PRECISION: ${alert.geoPrecision}` : '',
     '',
     'PEOPLE INVOLVED:',
     ...peopleInvolved,
@@ -251,10 +302,7 @@ function buildBriefing(alert, summaryText) {
     summaryText,
     sourceExtract ? ['', 'SOURCE EXTRACT:', sourceExtract] : '',
     '',
-    'FLAG REASON:',
-    `This item sits in the ${(laneLabels[alert.lane] || alert.lane || 'monitoring').toLowerCase()} lane and should be read as ${isLiveIncidentCandidate(alert) ? 'a live incident responder candidate' : 'a contextual monitoring item'}.`,
-    matches.length ? `TRIGGER KEYWORDS: ${matches.join(', ')}` : 'TRIGGER KEYWORDS: none matched',
-    '',
+    matches.length ? `TRIGGER KEYWORDS: ${matches.join(', ')}` : '',
     `ORIGINAL LINK: ${alert.sourceUrl}`
   ].flat().filter(Boolean).join('\n');
 }
@@ -280,7 +328,15 @@ function normaliseAlert(alert, index) {
     time: clean(alert.time) || clean(alert.happenedWhen) || 'Now',
     x: geoPoint?.x ?? (Number.isFinite(alert.x) ? alert.x : (alert.region === 'uk' ? 45 : 52)),
     y: geoPoint?.y ?? (Number.isFinite(alert.y) ? alert.y : (alert.region === 'uk' ? 27 : 29)),
-    major: !!alert.major
+    major: !!alert.major,
+    eventType: clean(alert.eventType),
+    geoPrecision: clean(alert.geoPrecision),
+    isOfficial: !!alert.isOfficial,
+    isDuplicateOf: clean(alert.isDuplicateOf),
+    freshUntil: clean(alert.freshUntil),
+    needsHumanReview: !!alert.needsHumanReview,
+    priorityScore: Number.isFinite(alert.priorityScore) ? alert.priorityScore : null,
+    confidenceScore: Number.isFinite(alert.confidenceScore) ? alert.confidenceScore : null
   };
 }
 
@@ -353,7 +409,7 @@ function renderFeed() {
   feedList.innerHTML = items.length ? items.map(responderCardMarkup).join('') : "<p class='panel-copy'>No verified responder triggers are currently in this filter.</p>";
   watchedCount.textContent = `${watched.size} watched`;
   feedList.querySelectorAll('.feed-card').forEach((card) => card.addEventListener('click', () => openDetail(alerts.find((item) => item.id === card.dataset.id))));
-  feedList.querySelectorAll('.star-button').forEach((button) => button.addEventListener('click', (event) => { event.stopPropagation(); const id = button.dataset.star; watched.has(id) ? watched.delete(id) : watched.add(id); renderAll(); }));
+  feedList.querySelectorAll('.star-button').forEach((button) => button.addEventListener('click', (event) => { event.stopPropagation(); const id = button.dataset.star; watched.has(id) ? watched.delete(id) : watched.add(id); saveWatched(); renderAll(); }));
 }
 
 function renderContext() {
@@ -453,7 +509,7 @@ function closeDetailPanel() { modal.classList.add('hidden'); }
 filters.addEventListener('click', (event) => { const button = event.target.closest('[data-region]'); if (!button) return; activeRegion = button.dataset.region; filters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active')); button.classList.add('active'); renderAll(); });
 laneFilters.addEventListener('click', (event) => { const button = event.target.closest('[data-lane]'); if (!button) return; activeLane = button.dataset.lane; laneFilters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active')); button.classList.add('active'); renderAll(); });
 tabbar.addEventListener('click', (event) => { const button = event.target.closest('[data-tab]'); if (!button) return; const next = button.dataset.tab; tabbar.querySelectorAll('.tab').forEach((item) => item.classList.remove('active')); button.classList.add('active'); document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === next)); });
-document.getElementById('note-form').addEventListener('submit', (event) => { event.preventDefault(); const title = document.getElementById('note-title'); const body = document.getElementById('note-body'); notes.unshift({ title: title.value.trim(), body: body.value.trim() }); title.value = ''; body.value = ''; renderNotes(); });
+document.getElementById('note-form').addEventListener('submit', (event) => { event.preventDefault(); const title = document.getElementById('note-title'); const body = document.getElementById('note-body'); notes.unshift({ title: title.value.trim(), body: body.value.trim() }); saveNotes(); title.value = ''; body.value = ''; renderNotes(); });
 copyBriefing.addEventListener('click', async () => { const briefing = copyBriefing.dataset.briefing || ''; try { await navigator.clipboard.writeText(briefing); copyBriefing.textContent = 'Copied'; setTimeout(() => { copyBriefing.textContent = 'Copy Briefing'; }, 1200); } catch { copyBriefing.textContent = 'Copy failed'; setTimeout(() => { copyBriefing.textContent = 'Copy Briefing'; }, 1200); } });
 closeModal.addEventListener('click', closeDetailPanel);
 modalBackdrop.addEventListener('click', closeDetailPanel);
@@ -478,6 +534,8 @@ window.addEventListener('pointerup', () => {
   mapDrag.active = false;
   mapViewport.classList.remove('is-dragging');
 });
+watched = loadWatched();
+notes = loadNotes();
 albertQuote.textContent = nextAlbertQuote();
 albertCard.addEventListener('click', () => { albertQuote.textContent = nextAlbertQuote(); });
 document.querySelector('.bulldog-card').addEventListener('dblclick', () => { albertNote.classList.toggle('hidden'); });
