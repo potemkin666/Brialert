@@ -85,11 +85,49 @@ function inferStatus(source, itemText) {
 
 function inferLocation(source, title) {
   const text = title || '';
-  const patterns = ['Leeds', 'London', 'Manchester', 'Birmingham', 'Liverpool', 'Glasgow', 'Belfast', 'Paris', 'Brussels', 'Berlin', 'Madrid', 'Rome', 'Amsterdam', 'Stockholm', 'Copenhagen', 'Dublin'];
+  const patterns = ['Leeds', 'London', 'Manchester', 'Birmingham', 'Liverpool', 'Glasgow', 'Belfast', 'Northumberland', 'Paris', 'Brussels', 'Berlin', 'Madrid', 'Rome', 'Amsterdam', 'Stockholm', 'Copenhagen', 'Dublin', 'Athens', 'Vienna', 'Vilnius', 'Warsaw', 'Kyiv', 'Tehran', 'Beirut', 'Jerusalem', 'Tel Aviv', 'Yemen', 'Iraq', 'Iran', 'Israel', 'Lebanon', 'Nigeria', 'Pakistan', 'California', 'Yosemite'];
   const hit = patterns.find((name) => text.includes(name));
   if (hit) return hit;
   return source.region === 'uk' ? 'United Kingdom' : 'Europe';
 }
+
+const geoLookup = [
+  { terms: ['leeds'], x: 47, y: 27 },
+  { terms: ['london', 'golders green'], x: 46, y: 28 },
+  { terms: ['manchester'], x: 45, y: 26 },
+  { terms: ['birmingham'], x: 46, y: 27 },
+  { terms: ['liverpool'], x: 44, y: 26 },
+  { terms: ['glasgow'], x: 43, y: 23 },
+  { terms: ['belfast'], x: 41, y: 25 },
+  { terms: ['northumberland'], x: 47, y: 24 },
+  { terms: ['paris', 'france'], x: 48, y: 31 },
+  { terms: ['brussels', 'belgium'], x: 49, y: 29 },
+  { terms: ['amsterdam', 'netherlands'], x: 49, y: 27 },
+  { terms: ['berlin', 'germany'], x: 53, y: 27 },
+  { terms: ['madrid', 'spain'], x: 45, y: 38 },
+  { terms: ['rome', 'italy'], x: 52, y: 37 },
+  { terms: ['athens', 'greece'], x: 58, y: 39 },
+  { terms: ['stockholm', 'sweden'], x: 55, y: 19 },
+  { terms: ['copenhagen', 'denmark'], x: 52, y: 22 },
+  { terms: ['dublin', 'ireland'], x: 40, y: 27 },
+  { terms: ['vilnius', 'lithuania'], x: 58, y: 23 },
+  { terms: ['warsaw', 'poland'], x: 56, y: 26 },
+  { terms: ['kyiv', 'ukraine'], x: 61, y: 29 },
+  { terms: ['tehran', 'iran'], x: 68, y: 33 },
+  { terms: ['israel', 'tel aviv', 'jerusalem'], x: 61, y: 38 },
+  { terms: ['lebanon', 'beirut'], x: 60, y: 37 },
+  { terms: ['iraq'], x: 63, y: 35 },
+  { terms: ['yemen'], x: 62, y: 42 },
+  { terms: ['nigeria'], x: 49, y: 51 },
+  { terms: ['pakistan'], x: 68, y: 35 },
+  { terms: ['austria', 'vienna'], x: 54, y: 30 },
+  { terms: ['switzerland'], x: 50, y: 31 },
+  { terms: ['united states', 'usa', 'california', 'yosemite'], x: 18, y: 31 },
+  { terms: ['canada'], x: 18, y: 18 },
+  { terms: ['australia'], x: 84, y: 68 },
+  { terms: ['europe'], x: 52, y: 29 },
+  { terms: ['united kingdom', 'uk'], x: 45, y: 27 }
+];
 
 function summariseTextBlock(text, maxParts = 8) {
   return clean(text)
@@ -100,14 +138,11 @@ function summariseTextBlock(text, maxParts = 8) {
     .slice(0, maxParts);
 }
 
-function coordFor(region, seed) {
-  let hash = 0;
-  for (const char of seed) hash = ((hash << 5) - hash) + char.charCodeAt(0);
-  hash = Math.abs(hash);
-  if (region === 'uk') {
-    return { x: 18 + (hash % 18), y: 28 + (hash % 22) };
-  }
-  return { x: 50 + (hash % 24), y: 30 + (hash % 28) };
+function coordFor(location, title, summary, region) {
+  const haystack = clean(`${location} ${title} ${summary}`).toLowerCase();
+  const match = geoLookup.find((entry) => entry.terms.some((term) => haystack.includes(term)));
+  if (match) return { x: match.x, y: match.y };
+  return region === 'uk' ? { x: 45, y: 27 } : { x: 52, y: 29 };
 }
 
 function formatWhen(rawDate) {
@@ -322,13 +357,14 @@ function shouldKeepItem(source, item) {
 
 function buildAlert(source, item, idx) {
   const text = `${item.title} ${item.summary}`;
-  const coords = coordFor(source.region, `${source.id}-${item.title}-${idx}`);
+  const location = inferLocation(source, item.title);
+  const coords = coordFor(location, item.title, item.summary, source.region);
   const publishedIso = formatWhen(item.published);
   const displayWhen = formatDisplayDate(item.published);
   return {
     id: `${source.id}-${idx}`,
     title: titleCase(item.title),
-    location: inferLocation(source, item.title),
+    location,
     region: source.region,
     lane: source.lane,
     severity: inferSeverity(source, text),
