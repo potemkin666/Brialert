@@ -21,6 +21,14 @@ The app is designed around a simple operational flow:
   - `corroboration`
   - `context`
   - `research`
+- explicit reliability profiles:
+  - `official_ct`
+  - `official_general`
+  - `official_context`
+  - `major_media`
+  - `general_media`
+  - `tabloid`
+  - `specialist_research`
 - incident-first prioritisation
 - lane filtering:
   - `Incidents`
@@ -70,4 +78,5 @@ npm run build:feeds
 - This repo is web-first, not native iOS.
 - GitHub Actions refreshes `live-alerts.json` on a schedule and on relevant pushes.
 - `data/sources.json` is the source of truth for lane and `sourceTier` metadata.
+- incident alerts are split into `live` vs `case` tracks so prosecution-stage items stop crowding the live queue.
 - Albert stays.

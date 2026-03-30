@@ -42,6 +42,14 @@ const nonEnglishEndpointPatterns = [
   'liberation.fr', 'repubblica.it', 'lastampa.it', 'ilsole24ore.com', 'nrc.nl', 'standard.be', 'lesoir.be',
   'dewereldmorgen.be', 'svd.se', 'pravda.sk', 'polisen.se/', 'cathimerini.gr', 'pst.no/kunnskapsbank/'
 ];
+const majorMediaProviders = new Set([
+  'Reuters', 'The Guardian', 'BBC News', 'Associated Press', 'AP News', 'The Telegraph',
+  'Financial Times', 'France 24', 'DW', 'Politico Europe', 'Euronews', 'Brussels Times',
+  'The Independent', 'Irish Times', 'Politico', 'Kyiv Post', 'RFE/RL'
+]);
+const tabloidProviders = new Set([
+  'The Sun', 'Daily Mail', 'Daily Record', 'Belfast Telegraph', 'iNews'
+]);
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const clean = (value) => (value || '')
@@ -85,12 +93,6 @@ function inferSeverity(source, text) {
   return 'moderate';
 }
 
-function inferConfidence(source) {
-  if (source.isTrustedOfficial) return 'Verified official source update';
-  if (['Reuters', 'The Guardian', 'The Independent'].includes(source.provider)) return 'Reputable media source';
-  return 'Secondary source signal';
-}
-
 function normaliseLanguageTag(value) {
   return clean(value).toLowerCase().replace('_', '-');
 }
@@ -107,9 +109,15 @@ function sourceLooksEnglish(source) {
   return true;
 }
 
-function inferConfidenceScore(source, text, publishedIso) {
-  let score = source.isTrustedOfficial ? 0.92 : 0.62;
-  if (['Reuters', 'The Guardian', 'The Independent', 'Associated Press', 'BBC News'].includes(source.provider)) score = Math.max(score, 0.78);
+function inferConfidenceScore(source, text, publishedIso, reliabilityProfile) {
+  let score = 0.62;
+  if (reliabilityProfile === 'official_ct') score = 0.94;
+  else if (reliabilityProfile === 'official_general') score = 0.88;
+  else if (reliabilityProfile === 'official_context') score = 0.84;
+  else if (reliabilityProfile === 'major_media') score = 0.76;
+  else if (reliabilityProfile === 'specialist_research') score = 0.68;
+  else if (reliabilityProfile === 'general_media') score = 0.6;
+  else if (reliabilityProfile === 'tabloid') score = 0.48;
   if (matchesKeywords(text).length >= 4) score += 0.04;
   if (!publishedIso) score -= 0.08;
   return Math.max(0.25, Math.min(0.99, Number(score.toFixed(2))));
@@ -150,6 +158,11 @@ function normaliseSourceTier(value) {
   return ['trigger', 'corroboration', 'context', 'research'].includes(tier) ? tier : '';
 }
 
+function normaliseReliabilityProfile(value) {
+  const profile = clean(value).toLowerCase();
+  return ['official_ct', 'official_general', 'official_context', 'major_media', 'general_media', 'tabloid', 'specialist_research'].includes(profile) ? profile : '';
+}
+
 function inferSourceTier(source) {
   const declaredTier = normaliseSourceTier(source.sourceTier);
   if (declaredTier) return declaredTier;
@@ -161,6 +174,18 @@ function inferSourceTier(source) {
   return source.isTrustedOfficial ? 'context' : 'research';
 }
 
+function inferReliabilityProfile(source, sourceTier = inferSourceTier(source)) {
+  const declaredProfile = normaliseReliabilityProfile(source.reliabilityProfile);
+  if (declaredProfile) return declaredProfile;
+  if (sourceTier === 'trigger') return 'official_ct';
+  if (source.isTrustedOfficial && source.lane === 'incidents') return 'official_general';
+  if (source.isTrustedOfficial) return 'official_context';
+  if (tabloidProviders.has(source.provider)) return 'tabloid';
+  if (majorMediaProviders.has(source.provider)) return 'major_media';
+  if (sourceTier === 'research' || source.lane === 'prevention') return 'specialist_research';
+  return 'general_media';
+}
+
 function sourceTierRankValue(sourceTier) {
   if (sourceTier === 'trigger') return 4;
   if (sourceTier === 'corroboration') return 3;
@@ -169,16 +194,45 @@ function sourceTierRankValue(sourceTier) {
   return 0;
 }
 
-function isTerrorRelevantIncident(source, item) {
+function incidentTrackRankValue(incidentTrack) {
+  if (incidentTrack === 'live') return 2;
+  if (incidentTrack === 'case') return 1;
+  return 0;
+}
+
+function reliabilityWeight(profile) {
+  if (profile === 'official_ct') return 2.6;
+  if (profile === 'official_general') return 2.1;
+  if (profile === 'official_context') return 1.6;
+  if (profile === 'major_media') return 1.2;
+  if (profile === 'specialist_research') return 0.7;
+  if (profile === 'general_media') return 0.35;
+  if (profile === 'tabloid') return -0.4;
+  return 0;
+}
+
+function inferConfidence(source, reliabilityProfile) {
+  if (reliabilityProfile === 'official_ct') return 'Verified CT source update';
+  if (reliabilityProfile === 'official_general' || reliabilityProfile === 'official_context') return 'Verified official source update';
+  if (reliabilityProfile === 'major_media') return 'Major media source signal';
+  if (reliabilityProfile === 'specialist_research') return 'Research or analytical source';
+  if (reliabilityProfile === 'tabloid') return 'Low-confidence media signal';
+  return 'Secondary source signal';
+}
+
+function isTerrorRelevantIncident(source, item, reliabilityProfile = inferReliabilityProfile(source)) {
   if (source.lane !== 'incidents') return true;
   const text = clean(`${item.title} ${item.summary} ${item.sourceExtract || ''}`).toLowerCase();
   const terrorHits = matchesKeywords(text, terrorismKeywords);
-  if (terrorHits.length) return true;
-  if (sourceHasTerrorTopic(source)) {
-    const incidentHits = matchesKeywords(text, incidentKeywords);
-    return incidentHits.length >= 1;
-  }
-  return false;
+  const incidentHits = matchesKeywords(text, incidentKeywords);
+  const terrorTopic = sourceHasTerrorTopic(source);
+  if (reliabilityProfile === 'official_ct') return terrorHits.length >= 1 || (terrorTopic && incidentHits.length >= 1);
+  if (reliabilityProfile === 'official_general') return terrorHits.length >= 1 && incidentHits.length >= 1;
+  if (reliabilityProfile === 'major_media') return terrorHits.length >= 1 && incidentHits.length >= 2;
+  if (reliabilityProfile === 'general_media') return terrorHits.length >= 2 && incidentHits.length >= 2;
+  if (reliabilityProfile === 'tabloid') return terrorHits.length >= 2 && incidentHits.length >= 3;
+  if (reliabilityProfile === 'specialist_research') return terrorHits.length >= 2 || terrorTopic;
+  return terrorHits.length > 0;
 }
 
 function inferLocation(source, title) {
@@ -195,6 +249,8 @@ function inferEventType(source, text) {
   if (source.lane === 'oversight') return 'oversight_update';
   if (source.lane === 'border') return 'border_security_update';
   if (source.lane === 'prevention') return 'prevention_update';
+  if (lower.includes('medal') || lower.includes('award') || lower.includes('anniversary') || lower.includes('memorial') || lower.includes('commemoration')) return 'recognition';
+  if (lower.includes('podcast') || lower.includes('inside counter terrorism') || lower.includes('about us')) return 'feature';
   if (lower.includes('sentenced') || lower.includes('convicted')) return 'sentencing';
   if (lower.includes('charged')) return 'charge';
   if (lower.includes('arrest') || lower.includes('arrested') || lower.includes('raid')) return 'arrest';
@@ -202,6 +258,15 @@ function inferEventType(source, text) {
   if (lower.includes('threat level') || lower.includes('threat')) return 'threat_update';
   if (matchesKeywords(lower, criticalKeywords).length) return 'active_attack';
   return 'incident_update';
+}
+
+function inferIncidentTrack(source, text, eventType) {
+  if (source.lane !== 'incidents') return '';
+  if (['charge', 'arrest', 'sentencing', 'recognition', 'feature'].includes(eventType)) return 'case';
+  if (['active_attack', 'disrupted_plot', 'threat_update'].includes(eventType)) return 'live';
+  const lower = text.toLowerCase();
+  if (lower.includes('police cordon') || lower.includes('evacuated') || lower.includes('explosive device') || lower.includes('ongoing')) return 'live';
+  return 'case';
 }
 
 function inferGeoPrecision(location) {
@@ -271,10 +336,10 @@ function formatDisplayDate(rawDate) {
   });
 }
 
-function freshUntilFor(source, publishedIso, severity) {
+function freshUntilFor(source, publishedIso, severity, incidentTrack) {
   const published = parseSourceDate(publishedIso) || now;
   const hoursByLane = {
-    incidents: severity === 'critical' ? 18 : severity === 'high' ? 36 : 72,
+    incidents: incidentTrack === 'live' ? (severity === 'critical' ? 18 : severity === 'high' ? 36 : 72) : 24 * 14,
     sanctions: 24 * 14,
     oversight: 24 * 21,
     border: 24 * 10,
@@ -284,23 +349,31 @@ function freshUntilFor(source, publishedIso, severity) {
   return new Date(published.getTime() + hours * 3600000).toISOString();
 }
 
-function priorityScoreFor(source, severity, keywordHits, publishedIso) {
+function priorityScoreFor(source, severity, keywordHits, publishedIso, incidentTrack, reliabilityProfile) {
   let score = severityRank[severity] || 1;
   if (source.lane === 'incidents') score += 4;
-  if (source.isTrustedOfficial) score += 2;
+  if (incidentTrack === 'live') score += 3.5;
+  if (incidentTrack === 'case') score -= 1.5;
+  score += reliabilityWeight(reliabilityProfile);
   score += Math.min(keywordHits.length, 5) * 0.6;
   if (publishedIso) {
     const ageHours = Math.max(0, (now.getTime() - new Date(publishedIso).getTime()) / 3600000);
     if (source.lane === 'incidents') {
-      if (ageHours <= 2) score += 6;
-      else if (ageHours <= 6) score += 5;
-      else if (ageHours <= 12) score += 4;
-      else if (ageHours <= 24) score += 3;
-      else if (ageHours <= 48) score += 1.5;
-      else if (ageHours <= 72) score += 0.5;
-      else if (ageHours <= 96) score -= 2;
-      else if (ageHours <= 168) score -= 5;
-      else score -= 9;
+      if (incidentTrack === 'live') {
+        if (ageHours <= 2) score += 6;
+        else if (ageHours <= 6) score += 5;
+        else if (ageHours <= 12) score += 4;
+        else if (ageHours <= 24) score += 3;
+        else if (ageHours <= 48) score += 1.5;
+        else if (ageHours <= 72) score += 0.5;
+        else if (ageHours <= 96) score -= 2;
+        else if (ageHours <= 168) score -= 5;
+        else score -= 9;
+      } else {
+        if (ageHours <= 24) score += 1.25;
+        else if (ageHours <= 72) score += 0.5;
+        else if (ageHours > 336) score -= 2;
+      }
     } else {
       if (ageHours <= 24) score += 1.5;
       else if (ageHours <= 72) score += 0.75;
@@ -312,9 +385,11 @@ function priorityScoreFor(source, severity, keywordHits, publishedIso) {
   return Number(score.toFixed(2));
 }
 
-function needsHumanReviewFor(source, severity, keywordHits, publishedIso) {
+function needsHumanReviewFor(source, severity, keywordHits, publishedIso, reliabilityProfile, incidentTrack) {
   if (source.lane !== 'incidents') return false;
-  if (!source.isTrustedOfficial && severity === 'critical') return true;
+  if (reliabilityProfile === 'tabloid') return true;
+  if (reliabilityProfile === 'general_media' && incidentTrack === 'live') return true;
+  if (severity === 'critical' && !['official_ct', 'official_general', 'major_media'].includes(reliabilityProfile)) return true;
   if (!publishedIso) return true;
   return keywordHits.length < 2;
 }
@@ -547,9 +622,10 @@ async function enrichHtmlItems(source, items) {
 
 function shouldKeepItem(source, item) {
   const text = `${item.title} ${item.summary}`;
+  const reliabilityProfile = inferReliabilityProfile(source);
   if (item.language && !isEnglishLanguage(item.language)) return false;
   if (!recencyOkay(source, item.published)) return false;
-  if (!isTerrorRelevantIncident(source, item)) return false;
+  if (!isTerrorRelevantIncident(source, item, reliabilityProfile)) return false;
   if (source.requiresKeywordMatch) {
     return matchesKeywords(text).length > 0;
   }
@@ -559,6 +635,7 @@ function shouldKeepItem(source, item) {
 function buildAlert(source, item, idx) {
   const text = `${item.title} ${item.summary}`;
   const sourceTier = inferSourceTier(source);
+  const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
   const location = inferLocation(source, item.title);
   const coords = geoFor(location, item.title, item.summary, source.region);
   const publishedIso = formatWhen(item.published);
@@ -567,46 +644,49 @@ function buildAlert(source, item, idx) {
   const terrorismHits = matchesKeywords(text, terrorismKeywords);
   const severity = inferSeverity(source, text);
   const eventType = inferEventType(source, text);
-  const confidenceScore = inferConfidenceScore(source, text, publishedIso);
-  const priorityScore = priorityScoreFor(source, severity, keywordHits, publishedIso);
+  const incidentTrack = inferIncidentTrack(source, text, eventType);
+  const confidenceScore = inferConfidenceScore(source, text, publishedIso, reliabilityProfile);
+  const priorityScore = priorityScoreFor(source, severity, keywordHits, publishedIso, incidentTrack, reliabilityProfile);
   return {
-    id: `${source.id}-${idx}`,
-    title: titleCase(item.title),
-    location,
-    region: source.region,
-    lane: source.lane,
-    severity,
-    status: inferStatus(source, text),
-    actor: source.provider,
-    subject: source.provider,
-    happenedWhen: displayWhen,
-    confidence: inferConfidence(source),
-    confidenceScore,
-    summary: clean(item.summary || item.title).slice(0, 260),
-    aiSummary: makeSummary(source, item),
-    sourceExtract: clean(item.sourceExtract || item.summary || item.title).slice(0, 1800),
-    peopleInvolved: Array.isArray(item.peopleInvolved) ? item.peopleInvolved.slice(0, 6) : [],
-    source: source.provider,
-    sourceUrl: item.link,
-    sourceTier,
-    time: displayWhen,
-    lat: coords.lat,
-    lng: coords.lng,
-    major: source.lane === 'incidents' && ['critical', 'high'].includes(severity),
-    publishedAt: publishedIso,
-    keywordHits,
+      id: `${source.id}-${idx}`,
+      title: titleCase(item.title),
+      location,
+      region: source.region,
+      lane: source.lane,
+      severity,
+      status: inferStatus(source, text),
+      actor: source.provider,
+      subject: source.provider,
+      happenedWhen: displayWhen,
+      confidence: inferConfidence(source, reliabilityProfile),
+      confidenceScore,
+      summary: clean(item.summary || item.title).slice(0, 260),
+      aiSummary: makeSummary(source, item),
+      sourceExtract: clean(item.sourceExtract || item.summary || item.title).slice(0, 1800),
+      peopleInvolved: Array.isArray(item.peopleInvolved) ? item.peopleInvolved.slice(0, 6) : [],
+      source: source.provider,
+      sourceUrl: item.link,
+      sourceTier,
+      reliabilityProfile,
+      incidentTrack,
+      time: displayWhen,
+      lat: coords.lat,
+      lng: coords.lng,
+      major: source.lane === 'incidents' && ['critical', 'high'].includes(severity),
+      publishedAt: publishedIso,
+      keywordHits,
     terrorismHits,
     eventType,
-    geoPrecision: inferGeoPrecision(location),
-    isOfficial: !!source.isTrustedOfficial,
-    priorityScore,
-    freshnessBucket: freshnessBucket(source, publishedIso),
-    freshUntil: freshUntilFor(source, publishedIso, severity),
-    needsHumanReview: needsHumanReviewFor(source, severity, keywordHits, publishedIso),
-    isTerrorRelevant: isTerrorRelevantIncident(source, item),
-    isDuplicateOf: null
-  };
-}
+      geoPrecision: inferGeoPrecision(location),
+      isOfficial: !!source.isTrustedOfficial,
+      priorityScore,
+      freshnessBucket: freshnessBucket(source, publishedIso),
+      freshUntil: freshUntilFor(source, publishedIso, severity, incidentTrack),
+      needsHumanReview: needsHumanReviewFor(source, severity, keywordHits, publishedIso, reliabilityProfile, incidentTrack),
+      isTerrorRelevant: isTerrorRelevantIncident(source, item, reliabilityProfile),
+      isDuplicateOf: null
+      };
+    }
 
 async function readExisting() {
   try {
@@ -645,13 +725,16 @@ async function main() {
     const key = `${sameStoryKey(item)}|${item.location}|${item.eventType}`;
     if (seen.has(key)) {
       const existingIndex = seen.get(key);
-      const incumbent = deduped[existingIndex];
-      const itemTier = sourceTierRankValue(item.sourceTier);
-      const incumbentTier = sourceTierRankValue(incumbent.sourceTier);
-      if (
-        itemTier > incumbentTier ||
-        (itemTier === incumbentTier && (item.priorityScore || 0) > (incumbent.priorityScore || 0))
-      ) {
+        const incumbent = deduped[existingIndex];
+        const itemTier = sourceTierRankValue(item.sourceTier);
+        const incumbentTier = sourceTierRankValue(incumbent.sourceTier);
+        const itemTrack = incidentTrackRankValue(item.incidentTrack);
+        const incumbentTrack = incidentTrackRankValue(incumbent.incidentTrack);
+        if (
+          itemTrack > incumbentTrack ||
+          (itemTrack === incumbentTrack && itemTier > incumbentTier) ||
+          (itemTrack === incumbentTrack && itemTier === incumbentTier && (item.priorityScore || 0) > (incumbent.priorityScore || 0))
+        ) {
         item.isDuplicateOf = incumbent.id;
         deduped[existingIndex] = item;
         seen.set(key, existingIndex);
@@ -668,6 +751,7 @@ async function main() {
     const timeA = parseSourceDate(a.publishedAt)?.getTime() || 0;
     const timeB = parseSourceDate(b.publishedAt)?.getTime() || 0;
     if ((b.freshnessBucket || 0) !== (a.freshnessBucket || 0)) return (b.freshnessBucket || 0) - (a.freshnessBucket || 0);
+    if (incidentTrackRankValue(b.incidentTrack) !== incidentTrackRankValue(a.incidentTrack)) return incidentTrackRankValue(b.incidentTrack) - incidentTrackRankValue(a.incidentTrack);
     if (sourceTierRankValue(b.sourceTier) !== sourceTierRankValue(a.sourceTier)) return sourceTierRankValue(b.sourceTier) - sourceTierRankValue(a.sourceTier);
     if (timeB !== timeA) return timeB - timeA;
     if ((b.priorityScore || 0) !== (a.priorityScore || 0)) return (b.priorityScore || 0) - (a.priorityScore || 0);

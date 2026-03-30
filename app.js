@@ -8,7 +8,8 @@ const NOTES_STORAGE_KEY = 'brialert.notes';
 const laneLabels = { all: 'All lanes', incidents: 'Incidents', sanctions: 'Sanctions', oversight: 'Oversight', border: 'Border', prevention: 'Prevention' };
 const incidentKeywords = ['terror','terrorism','attack','attacks','bomb','bombing','explosion','explosive','device','ramming','stabbing','shooting','hostage','plot','suspect','arrest','charged','charged with','parcel','radicalised','extremist','isis','islamic state','al-qaeda','threat'];
 const terrorismKeywords = ['terror','terrorism','counter-terror','counter terrorism','terrorist','extremist','extremism','radicalised','radicalized','radicalisation','radicalization','jihadist','jihad','isis','islamic state','al-qaeda','far-right extremist','far right extremist','neo-nazi','proscribed organisation','proscribed organization','bomb hoax','ira','dissident republican','loyalist paramilitary','terror offences','terrorism offences','terrorist propaganda'];
-const trustedMajorSources = new Set(['Counter Terrorism Policing','Eurojust','GOV.UK','Europol','Reuters','The Guardian','BBC News','Associated Press','INTERPOL','National Crime Agency']);
+const majorMediaSources = new Set(['Reuters','The Guardian','BBC News','Associated Press','AP News','The Telegraph','Financial Times','France 24','DW','Politico Europe','Euronews','Brussels Times','The Independent','Irish Times','Politico','Kyiv Post','RFE/RL']);
+const tabloidSources = new Set(['The Sun','Daily Mail','Daily Record','Belfast Telegraph','iNews']);
 const albertQuoteOpeners = [
   'Stay steady',
   'Hold your nerve',
@@ -308,6 +309,34 @@ function normaliseSourceTier(value) {
   const tier = clean(value).toLowerCase();
   return ['trigger', 'corroboration', 'context', 'research'].includes(tier) ? tier : '';
 }
+function normaliseReliabilityProfile(value) {
+  const profile = clean(value).toLowerCase();
+  return ['official_ct', 'official_general', 'official_context', 'major_media', 'general_media', 'tabloid', 'specialist_research'].includes(profile) ? profile : '';
+}
+function inferReliabilityProfile(alert) {
+  const declared = normaliseReliabilityProfile(alert.reliabilityProfile);
+  if (declared) return declared;
+  const tier = normaliseSourceTier(alert.sourceTier);
+  if (tier === 'trigger') return 'official_ct';
+  if (alert.isOfficial && alert.lane === 'incidents') return 'official_general';
+  if (alert.isOfficial) return 'official_context';
+  if (tabloidSources.has(alert.source)) return 'tabloid';
+  if (majorMediaSources.has(alert.source)) return 'major_media';
+  if (tier === 'research' || alert.lane === 'prevention') return 'specialist_research';
+  return 'general_media';
+}
+function normaliseIncidentTrack(value) {
+  const track = clean(value).toLowerCase();
+  return ['live', 'case'].includes(track) ? track : '';
+}
+function inferIncidentTrack(alert) {
+  const declared = normaliseIncidentTrack(alert.incidentTrack);
+  if (declared) return declared;
+  const eventType = clean(alert.eventType).toLowerCase();
+  if (['charge', 'arrest', 'sentencing', 'recognition', 'feature'].includes(eventType)) return 'case';
+  if (['active_attack', 'disrupted_plot', 'threat_update'].includes(eventType)) return 'live';
+  return '';
+}
 function incidentScore(alert) {
   if (Number.isFinite(alert.priorityScore)) return alert.priorityScore;
   if (!isTerrorRelevant(alert)) return -1;
@@ -317,14 +346,26 @@ function incidentScore(alert) {
   if (alert.severity === 'critical') score += 3;
   if (alert.severity === 'high') score += 2;
   if (alert.major) score += 2;
-  if (trustedMajorSources.has(alert.source)) score += 2;
+  const profile = inferReliabilityProfile(alert);
+  if (profile === 'official_ct') score += 3;
+  else if (profile === 'official_general') score += 2.5;
+  else if (profile === 'major_media') score += 1.5;
+  else if (profile === 'tabloid') score -= 1;
   return score;
+}
+function incidentTrackRank(alert) {
+  const track = inferIncidentTrack(alert);
+  if (track === 'live') return 2;
+  if (track === 'case') return 1;
+  return 0;
 }
 function isLiveIncidentCandidate(alert) {
   if (alert.lane !== 'incidents') return false;
   if (!isTerrorRelevant(alert)) return false;
   const tier = normaliseSourceTier(alert.sourceTier);
   if (tier === 'context' || tier === 'research') return false;
+  const incidentTrack = inferIncidentTrack(alert);
+  if (incidentTrack && incidentTrack !== 'live') return false;
   if (alertAgeHours(alert) > 72) return false;
   if (alert.freshUntil) {
     const freshUntil = new Date(alert.freshUntil);
@@ -340,6 +381,8 @@ function sortAlertsByFreshness(alertList) {
   return [...alertList].sort((a, b) => {
     const freshnessGap = freshnessBucketForAlert(b) - freshnessBucketForAlert(a);
     if (freshnessGap !== 0) return freshnessGap;
+    const trackGap = incidentTrackRank(b) - incidentTrackRank(a);
+    if (trackGap !== 0) return trackGap;
     const tierGap = sourceTierRank(b) - sourceTierRank(a);
     if (tierGap !== 0) return tierGap;
     const timeGap = alertPublishedTime(b) - alertPublishedTime(a);
@@ -357,6 +400,10 @@ function contextAlerts() {
     return !isLiveIncidentCandidate(alert);
   }));
 }
+function contextLabel(alert) {
+  if (alert.lane === 'incidents' && inferIncidentTrack(alert) === 'case') return 'Case / Prosecution';
+  return laneLabels[alert.lane] || alert.lane;
+}
 function topPriority() { const pool = responderAlerts().length ? responderAlerts() : contextAlerts(); return pool[0]; }
 
 function buildBriefing(alert, summaryText) {
@@ -366,11 +413,12 @@ function buildBriefing(alert, summaryText) {
     `WHAT: ${alert.title}`,
     `WHERE: ${alert.location}`,
     `WHEN: ${alert.happenedWhen || alert.time}`,
-    `SOURCE: ${alert.source}`,
-    `CONFIDENCE: ${alert.confidence}`,
-    `LANE: ${laneLabels[alert.lane] || alert.lane}`,
-    alert.eventType ? `EVENT TYPE: ${clean(alert.eventType).replace(/_/g, ' ')}` : '',
-    alert.geoPrecision ? `GEO PRECISION: ${alert.geoPrecision}` : '',
+      `SOURCE: ${alert.source}`,
+      `CONFIDENCE: ${alert.confidence}`,
+      `LANE: ${laneLabels[alert.lane] || alert.lane}`,
+      alert.lane === 'incidents' && inferIncidentTrack(alert) ? `INCIDENT TRACK: ${inferIncidentTrack(alert) === 'live' ? 'Live incident' : 'Case / prosecution'}` : '',
+      alert.eventType ? `EVENT TYPE: ${clean(alert.eventType).replace(/_/g, ' ')}` : '',
+      alert.geoPrecision ? `GEO PRECISION: ${alert.geoPrecision}` : '',
     '',
     peopleInvolved.length ? ['PEOPLE INVOLVED:', ...peopleInvolved, ''] : [],
     'SUMMARY:',
@@ -383,6 +431,15 @@ function buildBriefing(alert, summaryText) {
 
 function normaliseAlert(alert, index) {
   const geoPoint = inferGeoPoint(alert);
+  const sourceTier = normaliseSourceTier(alert.sourceTier);
+  const reliabilityProfile = inferReliabilityProfile({
+    ...alert,
+    sourceTier,
+    isOfficial: !!alert.isOfficial,
+    lane: ['incidents','sanctions','oversight','border','prevention'].includes(alert.lane) ? alert.lane : 'incidents',
+    source: clean(alert.source) || 'Unknown source'
+  });
+  const incidentTrack = inferIncidentTrack(alert);
   return {
     id: clean(alert.id) || `live-${index}`,
     title: clean(alert.title) || 'Untitled source item',
@@ -408,8 +465,10 @@ function normaliseAlert(alert, index) {
     eventType: clean(alert.eventType),
       geoPrecision: clean(alert.geoPrecision),
       isOfficial: !!alert.isOfficial,
-      sourceTier: normaliseSourceTier(alert.sourceTier),
-    isDuplicateOf: clean(alert.isDuplicateOf),
+      sourceTier,
+      reliabilityProfile,
+      incidentTrack,
+      isDuplicateOf: clean(alert.isDuplicateOf),
     freshUntil: clean(alert.freshUntil),
     needsHumanReview: !!alert.needsHumanReview,
     priorityScore: Number.isFinite(alert.priorityScore) ? alert.priorityScore : null,
@@ -496,7 +555,7 @@ function renderFeed() {
 function renderContext() {
   const items = contextAlerts().slice(0, 4);
   contextCount.textContent = `${items.length} contextual items`;
-  contextList.innerHTML = items.length ? items.map((alert) => `<article class="context-pill actionable" data-context="${alert.id}"><h4>${alert.title}</h4><p>${laneLabels[alert.lane]} | ${alert.source}</p></article>`).join('') : "<p class='panel-copy'>No contextual items have been published into this filter yet.</p>";
+  contextList.innerHTML = items.length ? items.map((alert) => `<article class="context-pill actionable" data-context="${alert.id}"><h4>${alert.title}</h4><p>${contextLabel(alert)} | ${alert.source}</p></article>`).join('') : "<p class='panel-copy'>No contextual items have been published into this filter yet.</p>";
   contextList.querySelectorAll('[data-context]').forEach((card) => card.addEventListener('click', () => openDetail(alerts.find((item) => item.id === card.dataset.context))));
 }
 

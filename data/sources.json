@@ -9,7 +9,8 @@
         "lane":  "border",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "frontex-etias-about",
@@ -21,7 +22,8 @@
         "lane":  "border",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "abc-spain-home",
@@ -33,7 +35,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "aftonbladet-home",
@@ -45,7 +48,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "aktuality-home",
@@ -57,7 +61,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "amnesty-latest",
@@ -69,7 +74,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "ansa-english-home",
@@ -81,7 +87,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "ap-europe-hub",
@@ -93,7 +100,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "balkan-insight-home",
@@ -105,7 +113,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "bka-central-agency",
@@ -117,7 +126,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "ccb-advisories",
@@ -129,7 +139,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "ccb-news",
@@ -141,7 +152,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-latvia-all",
@@ -153,7 +165,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-polska-en",
@@ -165,7 +178,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-eu-security-advisories",
@@ -177,7 +191,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-eu-security-guidance",
@@ -189,7 +204,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-eu-threat-intelligence-2025",
@@ -201,7 +217,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-fr-advisories",
@@ -213,7 +230,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-fr-alerts",
@@ -225,7 +243,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-at-en-blog",
@@ -237,7 +256,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "corriere-home",
@@ -249,7 +269,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "consilium-jha-meetings",
@@ -261,7 +282,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "consilium-press-releases",
@@ -273,7 +295,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "consilium-rss-directory",
@@ -285,7 +308,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "consilium-streaming",
@@ -297,7 +321,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "consilium-euco-meetings",
@@ -309,7 +334,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cyprus-mail-home",
@@ -321,7 +347,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "dn-home",
@@ -333,7 +360,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "daily-sabah-home",
@@ -345,7 +373,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "telegraaf-nl-home",
@@ -357,7 +386,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "volkskrant-home",
@@ -369,7 +399,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "derstandard-home",
@@ -381,7 +412,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "dw-en-home",
@@ -393,7 +425,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "dewereldmorgen-home",
@@ -405,7 +438,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "diepresse-home",
@@ -417,7 +451,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "welt-home",
@@ -429,7 +464,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "duvar-english-home",
@@ -441,7 +477,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "ekathimerini-home",
@@ -453,7 +490,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "ekathimerini-news",
@@ -465,7 +503,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "elmundo-home",
@@ -477,7 +516,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "elpais-english",
@@ -489,7 +529,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "err-en-home",
@@ -501,7 +542,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "euobserver-home",
@@ -513,7 +555,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "euractiv-home",
@@ -525,7 +568,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "eurojust-counter-terrorism-register",
@@ -537,7 +581,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "eurojust-press-releases",
@@ -549,7 +594,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "eurojust-rss-directory",
@@ -561,7 +607,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "eurojust-terrorism-topic",
@@ -573,7 +620,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "euronews-europe",
@@ -585,7 +633,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "fecc-chemical-security",
@@ -597,7 +646,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "fecc-precursors-committee",
@@ -609,7 +659,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "eu-counterterrorism-portal",
@@ -621,7 +672,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "ec-homemade-explosives-legislation",
@@ -633,7 +685,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "eeas-counter-terrorism",
@@ -645,7 +698,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "europol-main-reports",
@@ -657,7 +711,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "europol-newsroom",
@@ -669,7 +724,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "france24-europe",
@@ -681,7 +737,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "faz-home",
@@ -693,7 +750,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "info-gouv-vigipirate",
@@ -705,7 +763,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "vigipirate-home",
@@ -717,7 +776,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "globalsecurity-terror-news",
@@ -729,7 +789,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "handelsblatt-home",
@@ -741,7 +802,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "hs-english",
@@ -753,7 +815,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "parool-home",
@@ -765,7 +828,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "human-rights-watch-news",
@@ -777,7 +841,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "hungary-today-home",
@@ -789,7 +854,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "hurriyet-daily-news",
@@ -801,7 +867,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "ilsole24ore-home",
@@ -813,7 +880,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "intelligence-online-home",
@@ -825,7 +893,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "intellinews-home",
@@ -837,7 +906,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "crisis-group-crisiswatch",
@@ -849,7 +919,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "interpol-operation-neptune-vii",
@@ -861,7 +932,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "jihadology",
@@ -873,7 +945,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "kallxo-english-home",
@@ -885,7 +958,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "cathimerini-gr-home",
@@ -897,7 +971,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "kleinezeitung-home",
@@ -909,7 +984,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "kyivpost-home",
@@ -921,7 +997,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "standard-be-home",
@@ -933,7 +1010,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "repubblica-home",
@@ -945,7 +1023,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "lastampa-home",
@@ -957,7 +1036,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "lavanguardia-home",
@@ -969,7 +1049,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "le-figaro-home",
@@ -981,7 +1062,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "le-monde-home",
@@ -993,7 +1075,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "le-monde-rss-policy",
@@ -1005,7 +1088,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "le-parisien-home",
@@ -1017,7 +1101,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "lesoir-home",
@@ -1029,7 +1114,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "liberation-home",
@@ -1041,7 +1127,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "lrt-en-home",
@@ -1053,7 +1140,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "lsm-eng-home",
@@ -1065,7 +1153,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "meduza-en-home",
@@ -1077,7 +1166,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "memri-jttm",
@@ -1089,7 +1179,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "middle-east-eye-home",
@@ -1101,7 +1192,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "militant-wire-home",
@@ -1113,7 +1205,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "nctv-counterterrorism-theme",
@@ -1125,7 +1218,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "nctv-home",
@@ -1137,7 +1231,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "nctv-topics",
@@ -1149,7 +1244,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "notes-from-poland-home",
@@ -1161,7 +1257,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "nrc-home",
@@ -1173,7 +1270,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "nzz-english",
@@ -1185,7 +1283,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "occrp-home",
@@ -1197,7 +1296,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "pap-english",
@@ -1209,7 +1309,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "pet-home",
@@ -1221,7 +1322,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "pet-threat-assessment-2022",
@@ -1233,7 +1335,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "pet-threat-assessments",
@@ -1245,7 +1348,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "swedish-police-democracy-crime-lead",
@@ -1257,7 +1361,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "swedish-police-democracy-crime-manager",
@@ -1269,7 +1374,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "swedish-police-terrorism",
@@ -1281,7 +1387,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "politico-czech-page",
@@ -1293,7 +1400,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "politico-eu-home",
@@ -1305,7 +1413,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "politico-spain-page",
@@ -1317,7 +1426,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "pravda-sk-home",
@@ -1329,7 +1439,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "pst-terror-page",
@@ -1341,7 +1452,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "radio-prague-english",
@@ -1353,7 +1465,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "rferl-home",
@@ -1365,7 +1478,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "sarajevo-times-home",
@@ -1377,7 +1491,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "seenews-home",
@@ -1389,7 +1504,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "sgdsn-english",
@@ -1401,7 +1517,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "sgdsn-vigipirate",
@@ -1413,7 +1530,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "syriahr",
@@ -1425,7 +1543,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "svd-home",
@@ -1437,7 +1556,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "swissinfo-english",
@@ -1449,7 +1569,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "sueddeutsche-home",
@@ -1461,7 +1582,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "tagesanzeiger-home",
@@ -1473,7 +1595,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "taz-home",
@@ -1485,7 +1608,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "telex-english",
@@ -1497,7 +1621,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "brussels-times-home",
@@ -1509,7 +1634,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "irish-times-home",
@@ -1521,7 +1647,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "moscow-times-home",
@@ -1533,7 +1660,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "spectator-sme-home",
@@ -1545,7 +1673,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "times-of-malta-home",
@@ -1557,7 +1686,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "total-croatia-news-home",
@@ -1569,7 +1699,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "tracking-terrorism",
@@ -1581,7 +1712,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "ncsc-fi-en",
@@ -1593,7 +1725,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "un-counterterrorism",
@@ -1605,7 +1738,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "un-ctitf-news",
@@ -1617,7 +1751,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "un-news-all",
@@ -1629,7 +1764,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cert-fr-all",
@@ -1641,7 +1777,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "eurojust-annual-report-terrorism",
@@ -1653,7 +1790,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "eurojust-publications",
@@ -1665,7 +1803,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "eurojust-terrorism-convictions-monitor-24",
@@ -1677,7 +1816,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "frontex-publications",
@@ -1689,7 +1829,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "gwu-extremism",
@@ -1701,7 +1842,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "pst-report",
@@ -1713,7 +1855,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "sgdsn-tackling-terrorism-together",
@@ -1725,7 +1868,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "statewatch-europol",
@@ -1737,7 +1881,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "statewatch-frontex",
@@ -1749,7 +1894,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "al-monitor-home",
@@ -1761,7 +1907,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "behorizon",
@@ -1773,7 +1920,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "bellingcat-extremism",
@@ -1785,7 +1933,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "bellingcat-main",
@@ -1797,7 +1946,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "besa-terrorism",
@@ -1809,7 +1959,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "bka-terrorism-extremism",
@@ -1821,7 +1972,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "bne-home",
@@ -1833,7 +1985,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "carnegie-security-terrorism",
@@ -1845,7 +1998,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "cepol-radicalisation-elesson",
@@ -1857,7 +2011,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "cert-fr-threats-incidents",
@@ -1869,7 +2024,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "ctc-westpoint-home",
@@ -1881,7 +2037,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "correctiv-en",
@@ -1893,7 +2050,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "coe-skopje-prisons-radicalisation",
@@ -1905,7 +2063,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "coe-violent-extremism-radicalisation",
@@ -1917,7 +2076,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "wb-region-prisons",
@@ -1929,7 +2089,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "consilium-preventing-radicalisation",
@@ -1941,7 +2102,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "counterextremism-project",
@@ -1953,7 +2115,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "counter-project",
@@ -1965,7 +2128,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "csis-transnational-threats",
@@ -1977,7 +2141,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "eic-network",
@@ -1989,7 +2154,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "ethz-isn-archive",
@@ -2001,7 +2167,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "ec-extremism-database",
@@ -2013,7 +2180,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "eu-knowledge-hub-radicalisation",
@@ -2025,7 +2193,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "ran-archive",
@@ -2037,7 +2206,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "ecfr-feeds",
@@ -2049,7 +2219,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "eeradicalization-icsr-insights",
@@ -2061,7 +2232,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "eeradicalization",
@@ -2073,7 +2245,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "frontex-risk-analysis-2025-2026",
@@ -2085,7 +2258,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "gnet-research",
@@ -2097,7 +2271,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "greydynamics",
@@ -2109,7 +2284,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "hatelab-home",
@@ -2121,7 +2297,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "hedayah-home",
@@ -2133,7 +2310,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "hstoday-counterterrorism",
@@ -2145,7 +2323,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "hope-rad-project",
@@ -2157,7 +2336,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "icct-main",
@@ -2169,7 +2349,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "icct-preventing-terrorism",
@@ -2181,7 +2362,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "icct-russia-crime-terror-nexus",
@@ -2193,7 +2375,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "icsve-eu",
@@ -2205,7 +2388,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "isd-extremism",
@@ -2217,7 +2401,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "crisis-group-global",
@@ -2229,7 +2414,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "interpol-terrorism-page",
@@ -2241,7 +2427,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "terrorism-info",
@@ -2253,7 +2440,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "jamestown-program",
@@ -2265,7 +2453,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "jamestown-militant-leadership-monitor",
@@ -2277,7 +2466,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "jamestown-terrorism-monitor",
@@ -2289,7 +2479,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "just-security-counterterrorism",
@@ -2301,7 +2492,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "just-security-main",
@@ -2313,7 +2505,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "lawfare-main",
@@ -2325,7 +2518,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "lawfare-terrorism",
@@ -2337,7 +2531,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "long-war-journal-home",
@@ -2349,7 +2544,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "lowy-terrorism-extremism",
@@ -2361,7 +2557,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "manara-magazine",
@@ -2373,7 +2570,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "mei-countering-terrorism",
@@ -2385,7 +2583,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "eu-knowledge-hub-newsletter-feb-2026",
@@ -2397,7 +2596,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "ec-prevention-radicalisation",
@@ -2409,7 +2609,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "nctv-online-radicalisation-news",
@@ -2421,7 +2622,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "new-eastern-europe-home",
@@ -2433,7 +2635,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "ocad-home",
@@ -2445,7 +2648,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "osce-pverlt-secretariat",
@@ -2457,7 +2661,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "osce-pverlt",
@@ -2469,7 +2674,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "pet-terrorism-extremism",
@@ -2481,7 +2687,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "swedish-police-school-attacks",
@@ -2493,7 +2700,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "radicalisation-research",
@@ -2505,7 +2713,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "rand-terrorism-counterterrorism",
@@ -2517,7 +2726,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "security-in-transition",
@@ -2529,7 +2739,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "small-wars-journal-home",
@@ -2541,7 +2752,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "small-wars-journal-terrorism",
@@ -2553,7 +2765,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "apex-spain",
@@ -2565,7 +2778,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "stop-radicalismos",
@@ -2577,7 +2791,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "takedown-project",
@@ -2589,7 +2804,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "thejournal-home",
@@ -2601,7 +2817,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "therealjihad",
@@ -2613,7 +2830,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "soufan-center-home",
@@ -2625,7 +2843,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "trivalent-project",
@@ -2637,7 +2856,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "start-umd",
@@ -2649,7 +2869,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "unodc-e4j-terrorism",
@@ -2661,7 +2882,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "global-terrorism-index",
@@ -2673,7 +2895,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "voxpol-home",
@@ -2685,7 +2908,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "voxeurop-en-home",
@@ -2697,7 +2921,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "washington-institute-countering-terrorism",
@@ -2709,7 +2934,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "consilium-terrorism-sanctions-press",
@@ -2721,7 +2947,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "consilium-terrorism-sanctions-timeline",
@@ -2733,7 +2960,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "swedish-police-iru-role",
@@ -2745,7 +2973,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "unsc-consolidated-list-page",
@@ -2757,7 +2986,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "dft-aviation-security-regs-2026",
@@ -2769,7 +2999,8 @@
         "lane":  "border",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "foreign-travel-advice-atom",
@@ -2781,7 +3012,8 @@
         "lane":  "border",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "bbc-rss-directory",
@@ -2793,7 +3025,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "belfast-telegraph-home",
@@ -2805,7 +3038,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "tabloid"
     },
     {
         "id":  "ctp-latest-news-html",
@@ -2817,7 +3051,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "ctp-news",
@@ -2829,7 +3064,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "ctp-search",
@@ -2841,7 +3077,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "ctp-protective-security-register",
@@ -2853,7 +3090,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "ctp-northeast-news",
@@ -2865,7 +3103,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "cps-crimes-against-humanity-damascus",
@@ -2877,7 +3116,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cps-terrorism-news",
@@ -2889,7 +3129,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "cps-terrorism-search",
@@ -2901,7 +3142,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "daily-mail-home",
@@ -2913,7 +3155,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "tabloid"
     },
     {
         "id":  "daily-record-home",
@@ -2925,7 +3168,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "tabloid"
     },
     {
         "id":  "ft-uk-world-page",
@@ -2937,7 +3181,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "govuk-counter-terrorism-search",
@@ -2949,7 +3194,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "govuk-terrorism-search",
@@ -2961,7 +3207,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "govuk-home-office-news",
@@ -2973,7 +3220,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "home-office-proscription-announcements-search",
@@ -2985,7 +3233,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "govuk-nactso-news",
@@ -2997,7 +3246,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "herald-scotland-home",
@@ -3009,7 +3259,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "home-office-counter-terrorism-statistics-collection",
@@ -3021,7 +3272,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "inews-home",
@@ -3033,7 +3285,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "tabloid"
     },
     {
         "id":  "jewish-news-home",
@@ -3045,7 +3298,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "mi5-threat-levels",
@@ -3057,7 +3311,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "trigger"
+        "sourceTier":  "trigger",
+        "reliabilityProfile":  "official_ct"
     },
     {
         "id":  "nactso-home",
@@ -3069,7 +3324,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "nca-all-news",
@@ -3081,7 +3337,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "ncsc-all",
@@ -3093,7 +3350,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "ncsc-news",
@@ -3105,7 +3363,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "ncsc-reports",
@@ -3117,7 +3376,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "ncsc-rss-directory",
@@ -3129,7 +3389,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "newsletter-home",
@@ -3141,7 +3402,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "protectuk-home",
@@ -3153,7 +3415,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "protectuk-about",
@@ -3165,7 +3428,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "protectuk-news",
@@ -3177,7 +3441,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "official_general"
     },
     {
         "id":  "reuters-uk-world-page",
@@ -3189,7 +3454,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "guardian-uk-page",
@@ -3201,7 +3467,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "independent-home",
@@ -3213,7 +3480,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "irish-news-home",
@@ -3225,7 +3493,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "jc-home",
@@ -3237,7 +3506,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "scotsman-home",
@@ -3249,7 +3519,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "the-sun-home",
@@ -3261,7 +3532,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "tabloid"
     },
     {
         "id":  "tablet-home",
@@ -3273,7 +3545,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "telegraph-home",
@@ -3285,7 +3558,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "major_media"
     },
     {
         "id":  "times-uk-page",
@@ -3297,7 +3571,8 @@
         "lane":  "incidents",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration"
+        "sourceTier":  "corroboration",
+        "reliabilityProfile":  "general_media"
     },
     {
         "id":  "gov-responses-irtl",
@@ -3309,7 +3584,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "state-threats-reviewer-report",
@@ -3321,7 +3597,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "irtl-about",
@@ -3333,7 +3610,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "separation-centres-response",
@@ -3345,7 +3623,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "hmiprobation-home",
@@ -3357,7 +3636,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "hmip-public-protection-inspection",
@@ -3369,7 +3649,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "rusi-publications",
@@ -3381,7 +3662,8 @@
         "lane":  "oversight",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "chatham-house-terrorism",
@@ -3393,7 +3675,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "crest-research",
@@ -3405,7 +3688,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "cps-teenager-terrorist-material",
@@ -3417,7 +3701,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "iiss-terrorism",
@@ -3429,7 +3714,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "icsr-home",
@@ -3441,7 +3727,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "rusi-commentary",
@@ -3453,7 +3740,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "rusi-terrorism-conflict",
@@ -3465,7 +3753,8 @@
         "lane":  "prevention",
         "isTrustedOfficial":  false,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "research"
+        "sourceTier":  "research",
+        "reliabilityProfile":  "specialist_research"
     },
     {
         "id":  "uk-sanctions-list-html",
@@ -3477,7 +3766,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "fcdo-counter-terrorism-international-guidance",
@@ -3489,7 +3779,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "fcdo-counter-terrorism-designations",
@@ -3501,7 +3792,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "fcdo-counter-terrorism-international-designations",
@@ -3513,7 +3805,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "uk-sanctions-list-landing",
@@ -3525,7 +3818,8 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     },
     {
         "id":  "home-office-proscribed-list",
@@ -3537,6 +3831,7 @@
         "lane":  "sanctions",
         "isTrustedOfficial":  true,
         "requiresKeywordMatch":  false,
-        "sourceTier":  "context"
+        "sourceTier":  "context",
+        "reliabilityProfile":  "official_context"
     }
 ]
