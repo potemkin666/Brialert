@@ -2,7 +2,7 @@
   "name": "Brialert",
   "short_name": "Brialert",
   "description": "Responder-first terrorism monitoring dashboard for iPhone Safari home screen install.",
-  "start_url": "/Brialert/",
+  "start_url": "/Brialert/index.html",
   "scope": "/Brialert/",
   "display": "standalone",
   "background_color": "#070914",
