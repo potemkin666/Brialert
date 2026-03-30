@@ -2,15 +2,6 @@ const LIVE_FEED_URL = '/Brialert/live-alerts.json';
 const POLL_INTERVAL_MS = 60_000;
 const SOURCE_PULL_MINUTES = 15;
 
-const fallbackAlerts = [
-  {
-    id: 'leeds-terrorism-charges', title: 'Leeds Man Charged with Eleven Terrorism Offences', location: 'Leeds', region: 'uk', lane: 'incidents', severity: 'critical', status: 'Charged', actor: 'Counter Terrorism Policing North East and CPS', subject: 'A 33-year-old man from Leeds', happenedWhen: '13 Mar 2026', confidence: 'Verified official case update', summary: 'Counter Terrorism Policing North East said a 33-year-old man from Leeds was charged with eleven terrorism offences after an intelligence-led investigation.', aiSummary: 'This is a fallback local item. Once the live feed file is being refreshed by GitHub Actions, this view should be replaced by newer source material.', source: 'Counter Terrorism Policing', sourceUrl: 'https://www.counterterrorism.police.uk/leeds-man-charged-with-eleven-terrorism-offences/', time: '13 Mar 2026', x: 24, y: 36, major: true
-  },
-  {
-    id: 'eurojust-self-igniting-parcels', title: 'Joint Investigation Team Disrupts Group Using Self-Igniting Parcels', location: 'Europe-wide', region: 'europe', lane: 'incidents', severity: 'high', status: 'Press release', actor: 'Eurojust', subject: 'A cross-border group linked to self-igniting parcel attacks', happenedWhen: '06 Mar 2026', confidence: 'Verified official judicial update', summary: 'Eurojust said a joint investigation team was crucial in exposing several attacks across Europe involving self-igniting parcels and linked suspects in Lithuania and Poland.', aiSummary: 'This is a fallback local item. Once the live feed file refreshes, more recent incident candidates should appear here automatically.', source: 'Eurojust', sourceUrl: 'https://www.eurojust.europa.eu/news/joint-investigation-team-disrupts-group-using-self-igniting-parcels-terrorist-attacks', time: '06 Mar 2026', x: 56, y: 50, major: true
-  }
-];
-
 const laneLabels = { all: 'All lanes', incidents: 'Incidents', sanctions: 'Sanctions', oversight: 'Oversight', border: 'Border', prevention: 'Prevention' };
 const incidentKeywords = ['terror','terrorism','attack','attacks','bomb','bombing','explosion','explosive','device','ramming','stabbing','shooting','hostage','plot','suspect','arrest','charged','charged with','parcel','radicalised','extremist','isis','islamic state','al-qaeda','threat'];
 const trustedMajorSources = new Set(['Counter Terrorism Policing','Eurojust','GOV.UK','Europol','Reuters','The Guardian','BBC News','Associated Press','INTERPOL','National Crime Agency']);
@@ -20,7 +11,7 @@ const notes = [
   { title: 'Cross-border watch', body: 'Track whether any developing European incidents show common method, travel pathway, or propaganda overlap with UK activity.' }
 ];
 
-let alerts = [...fallbackAlerts];
+let alerts = [];
 let activeRegion = 'all';
 let activeLane = 'all';
 let watched = new Set(['eurojust-self-igniting-parcels']);
@@ -125,17 +116,11 @@ async function loadLiveFeed() {
     const response = await fetch(`${LIVE_FEED_URL}?t=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
-    if (Array.isArray(data.alerts) && data.alerts.length) {
-      alerts = data.alerts.map(normaliseAlert);
-      liveFeedGeneratedAt = data.generatedAt ? new Date(data.generatedAt) : new Date();
-      liveSourceCount = Number(data.sourceCount || 0);
-    } else {
-      alerts = [...fallbackAlerts];
-      liveFeedGeneratedAt = null;
-      liveSourceCount = 0;
-    }
+    alerts = Array.isArray(data.alerts) ? data.alerts.map(normaliseAlert) : [];
+    liveFeedGeneratedAt = data.generatedAt ? new Date(data.generatedAt) : new Date();
+    liveSourceCount = Number(data.sourceCount || 0);
   } catch {
-    alerts = [...fallbackAlerts];
+    alerts = [];
     liveFeedGeneratedAt = null;
     liveSourceCount = 0;
   }
@@ -145,7 +130,20 @@ async function loadLiveFeed() {
 
 function renderPriority() {
   const alert = topPriority();
-  if (!alert) { priorityCard.classList.remove('context-priority'); priorityCard.innerHTML = '<p>No alerts available for this filter.</p>'; return; }
+  if (!alert) {
+    priorityCard.classList.remove('context-priority');
+    priorityCard.innerHTML = `
+      <div class="eyebrow">Live Feed Status</div>
+      <h2>Waiting for a verified source pull</h2>
+      <p class="muted">The app is not showing placeholder incidents anymore. Once the feed builder publishes live items, responder candidates will appear here automatically.</p>
+      <div class="meta-row">
+        <span>${activeRegion === 'all' ? 'All feeds' : `${regionLabel(activeRegion)} feeds`}</span>
+        <span>${activeLane === 'all' ? 'All lanes' : laneLabels[activeLane]}</span>
+        <span>${liveSourceCount ? `${liveSourceCount} sources checked` : 'No live feed yet'}</span>
+      </div>`;
+    priorityCard.onclick = null;
+    return;
+  }
   const liveCandidate = isLiveIncidentCandidate(alert);
   const matches = keywordMatches(alert);
   priorityCard.classList.toggle('context-priority', !liveCandidate);
@@ -179,7 +177,7 @@ function responderCardMarkup(alert) {
 
 function renderFeed() {
   const items = responderAlerts();
-  feedList.innerHTML = items.length ? items.map(responderCardMarkup).join('') : "<p class='panel-copy'>No live incident triggers in this filter.</p>";
+  feedList.innerHTML = items.length ? items.map(responderCardMarkup).join('') : "<p class='panel-copy'>No verified responder triggers are currently in this filter.</p>";
   watchedCount.textContent = `${watched.size} watched`;
   feedList.querySelectorAll('.feed-card').forEach((card) => card.addEventListener('click', () => openDetail(alerts.find((item) => item.id === card.dataset.id))));
   feedList.querySelectorAll('.star-button').forEach((button) => button.addEventListener('click', (event) => { event.stopPropagation(); const id = button.dataset.star; watched.has(id) ? watched.delete(id) : watched.add(id); renderAll(); }));
@@ -188,7 +186,7 @@ function renderFeed() {
 function renderContext() {
   const items = contextAlerts().slice(0, 4);
   contextCount.textContent = `${items.length} contextual items`;
-  contextList.innerHTML = items.length ? items.map((alert) => `<article class="context-pill actionable" data-context="${alert.id}"><h4>${alert.title}</h4><p>${laneLabels[alert.lane]} | ${alert.source}</p></article>`).join('') : "<p class='panel-copy'>No contextual items in this filter.</p>";
+  contextList.innerHTML = items.length ? items.map((alert) => `<article class="context-pill actionable" data-context="${alert.id}"><h4>${alert.title}</h4><p>${laneLabels[alert.lane]} | ${alert.source}</p></article>`).join('') : "<p class='panel-copy'>No contextual items have been published into this filter yet.</p>";
   contextList.querySelectorAll('[data-context]').forEach((card) => card.addEventListener('click', () => openDetail(alerts.find((item) => item.id === card.dataset.context))));
 }
 
@@ -222,7 +220,7 @@ function renderHero() {
   heroRegion.textContent = `${regionCopy} | ${laneCopy}`;
   heroPolling.textContent = `Phone refresh 60s | source pull ~${SOURCE_PULL_MINUTES}m`;
   const stamp = liveFeedGeneratedAt || lastBrowserPollAt;
-  const sourceSuffix = liveSourceCount ? ` | ${liveSourceCount} sources` : ' | fallback';
+  const sourceSuffix = liveSourceCount ? ` | ${liveSourceCount} sources` : ' | awaiting live pull';
   heroUpdated.textContent = `${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${sourceSuffix}`;
 }
 

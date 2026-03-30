@@ -2,6 +2,14 @@ name: Update live feeds
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - package.json
+      - data/sources.json
+      - scripts/build-live-feed.mjs
+      - .github/workflows/update-live-feed.yml
   schedule:
     - cron: '*/15 * * * *'
 
