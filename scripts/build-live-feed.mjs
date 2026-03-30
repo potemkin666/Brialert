@@ -25,6 +25,20 @@ const laneWords = {
   prevention: ['radicalisation', 'prevention', 'extremism', 'newsletter', 'research']
 };
 const severityRank = { critical: 4, high: 3, elevated: 2, moderate: 1 };
+const englishFriendlyPatterns = [
+  '/en/', '/english', 'english.', '/eng', 'dw.com/en', 'ansa.it/english', 'nzz.ch/english',
+  'apnews.com', 'reuters.com', 'theguardian.com', 'bbc.', 'france24.com/en', 'swissinfo.ch/eng',
+  'spectator.sme.sk', 'telex.hu/english', 'pap.pl/en', 'err.ee/en', 'eng.lsm.lv', 'lrt.lt/en',
+  'hurriyetdailynews.com', 'duvarenglish.com', 'kallxo.com/english', 'english.radio.cz',
+  '/EN/', 'sgdsn-english', 'pet.dk/en', 'pst.no/en', 'english.nctv.nl'
+];
+const nonEnglishEndpointPatterns = [
+  'abc.es', 'aftonbladet.se', 'aktuality.sk', 'corriere.it', 'dn.se', 'telegraaf.nl', 'volkskrant.nl',
+  'derstandard.at', 'diepresse.com', 'welt.de', 'elmundo.es', 'faz.net', 'info.gouv.fr/risques/le-plan-vigipirate',
+  'vigipirate.gouv.fr', 'handelsblatt.com', 'lavanguardia.com', 'lefigaro.fr', 'lemonde.fr', 'leparisien.fr',
+  'liberation.fr', 'repubblica.it', 'lastampa.it', 'ilsole24ore.com', 'nrc.nl', 'standard.be', 'lesoir.be',
+  'dewereldmorgen.be', 'svd.se', 'pravda.sk', 'polisen.se/', 'cathimerini.gr', 'pst.no/kunnskapsbank/'
+];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const clean = (value) => (value || '')
@@ -72,6 +86,22 @@ function inferConfidence(source) {
   if (source.isTrustedOfficial) return 'Verified official source update';
   if (['Reuters', 'The Guardian', 'The Independent'].includes(source.provider)) return 'Reputable media source';
   return 'Secondary source signal';
+}
+
+function normaliseLanguageTag(value) {
+  return clean(value).toLowerCase().replace('_', '-');
+}
+
+function isEnglishLanguage(value) {
+  const lang = normaliseLanguageTag(value);
+  return !lang || lang === 'en' || lang.startsWith('en-');
+}
+
+function sourceLooksEnglish(source) {
+  const endpoint = clean(source.endpoint).toLowerCase();
+  if (englishFriendlyPatterns.some((pattern) => endpoint.includes(pattern.toLowerCase()))) return true;
+  if (nonEnglishEndpointPatterns.some((pattern) => endpoint.includes(pattern.toLowerCase()))) return false;
+  return true;
 }
 
 function inferConfidenceScore(source, text, publishedIso) {
@@ -373,6 +403,12 @@ function collectJsonLd(node, collected = []) {
 
 function extractArticleMeta(html, url) {
   const $ = cheerio.load(html);
+  const htmlLang = clean($('html').attr('lang'));
+  const metaLanguage = clean(
+    $('meta[http-equiv="content-language"]').attr('content') ||
+    $('meta[name="language"]').attr('content') ||
+    $('meta[property="og:locale"]').attr('content')
+  );
   const metaDate = clean(
     $('meta[property="article:published_time"]').attr('content') ||
     $('meta[name="article:published_time"]').attr('content') ||
@@ -421,6 +457,7 @@ function extractArticleMeta(html, url) {
     summary: detailText || jsonLdDescription || metaDescription || articleParagraphs,
     sourceExtract: detailText,
     peopleInvolved: extractPeopleFromText(detailText),
+    language: normaliseLanguageTag(htmlLang || metaLanguage),
     published: jsonLdDate || metaDate,
     link: url
   };
@@ -446,6 +483,7 @@ async function enrichHtmlItems(source, items) {
         summary: meta.summary || item.summary,
         sourceExtract: meta.sourceExtract || item.sourceExtract || item.summary,
         peopleInvolved: meta.peopleInvolved || item.peopleInvolved || [],
+        language: meta.language || item.language || '',
         published: meta.published || item.published
       });
       await sleep(150);
@@ -458,6 +496,7 @@ async function enrichHtmlItems(source, items) {
 
 function shouldKeepItem(source, item) {
   const text = `${item.title} ${item.summary}`;
+  if (item.language && !isEnglishLanguage(item.language)) return false;
   if (!recencyOkay(source, item.published)) return false;
   if (source.requiresKeywordMatch) {
     return matchesKeywords(text).length > 0;
@@ -526,6 +565,9 @@ async function main() {
   let checked = 0;
 
   for (const source of sources) {
+    if (!sourceLooksEnglish(source)) {
+      continue;
+    }
     try {
       const body = await fetchText(source.endpoint);
       const parsed = source.kind === 'rss' || source.kind === 'atom' ? parseFeedItems(source, body) : parseHtmlItems(source, body);
