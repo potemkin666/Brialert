@@ -74,14 +74,28 @@ function incidentTypeLabel(alert) {
   if (text.includes('threat')) return 'a threat-related development';
   return 'a terrorism-related source update';
 }
-function buildIncidentSummary(alert) {
+function articleBodyBits(alert) {
   const base = clean(alert.summary && alert.summary !== alert.title ? alert.summary : '');
+  return base
+    .split(/(?<=[.!?])\s+|\s{2,}/)
+    .map((part) => clean(part))
+    .filter(Boolean)
+    .filter((part, index, all) => all.indexOf(part) === index)
+    .slice(0, 4);
+}
+function buildIncidentSummary(alert) {
   const type = incidentTypeLabel(alert);
-  const firstLine = `${alert.source} published ${type} linked to ${alert.location} on ${alert.time}.`;
-  const secondLine = base
-    ? `What we have from the source so far is: ${base}`
-    : `At this stage the available source line is limited to the headline: ${alert.title}.`;
-  return [firstLine, secondLine].join(' ');
+  const bodyBits = articleBodyBits(alert);
+  const lines = [
+    `${alert.source} published ${type} linked to ${alert.location} on ${alert.time}.`,
+    `The headline is: ${alert.title}.`
+  ];
+  if (bodyBits.length) {
+    lines.push(bodyBits.join(' '));
+  } else {
+    lines.push('The source page did not expose a fuller body extract in the feed pull, so the available facts are currently limited to the headline and source metadata.');
+  }
+  return lines.join(' ');
 }
 function effectiveSummary(alert) { return looksGenericSummary(alert.aiSummary) ? buildIncidentSummary(alert) : alert.aiSummary; }
 function incidentScore(alert) { const matches = keywordMatches(alert); let score = matches.length; if (alert.lane === 'incidents') score += 3; if (alert.severity === 'critical') score += 3; if (alert.severity === 'high') score += 2; if (alert.major) score += 2; if (trustedMajorSources.has(alert.source)) score += 2; return score; }

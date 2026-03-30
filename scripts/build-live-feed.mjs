@@ -88,6 +88,15 @@ function inferLocation(source, title) {
   return source.region === 'uk' ? 'United Kingdom' : 'Europe';
 }
 
+function summariseTextBlock(text, maxParts = 4) {
+  return clean(text)
+    .split(/(?<=[.!?])\s+|\s{2,}/)
+    .map((part) => clean(part))
+    .filter(Boolean)
+    .filter((part, index, all) => all.indexOf(part) === index)
+    .slice(0, maxParts);
+}
+
 function coordFor(region, seed) {
   let hash = 0;
   for (const char of seed) hash = ((hash << 5) - hash) + char.charCodeAt(0);
@@ -143,9 +152,13 @@ function makeSummary(source, item) {
           : text.includes('threat')
             ? 'a threat-related development'
             : 'a terrorism-related update';
+    const factualBits = summariseTextBlock(summary);
     return [
       `${source.provider} published ${type} linked to ${where} on ${when}.`,
-      summary ? `What the source gives us at this stage is: ${summary}` : `The available source line is limited to the headline: ${title}.`
+      `The headline is: ${title}.`,
+      factualBits.length
+        ? factualBits.join(' ')
+        : 'The source page did not expose a fuller body extract in this pull, so the available facts are currently limited to the headline and source metadata.'
     ].join(' ');
   }
   if (source.lane === 'sanctions') {
@@ -254,6 +267,10 @@ function extractArticleMeta(html, url) {
     $('meta[property="og:title"]').attr('content') ||
     $('title').first().text()
   );
+  const articleParagraphs = clean(
+    $('article p').slice(0, 6).map((_, el) => $(el).text()).get().join(' ') ||
+    $('main p').slice(0, 6).map((_, el) => $(el).text()).get().join(' ')
+  ).slice(0, 1200);
 
   let jsonLdDate = '';
   let jsonLdDescription = '';
@@ -276,7 +293,7 @@ function extractArticleMeta(html, url) {
 
   return {
     title: jsonLdHeadline || metaTitle || clean($('h1').first().text()),
-    summary: jsonLdDescription || metaDescription || clean($('article p').slice(0, 3).text()).slice(0, 420),
+    summary: jsonLdDescription || metaDescription || articleParagraphs,
     published: jsonLdDate || metaDate,
     link: url
   };
