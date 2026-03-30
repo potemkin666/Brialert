@@ -81,7 +81,7 @@ let watched = new Set(['eurojust-self-igniting-parcels']);
 let lastBrowserPollAt = new Date();
 let liveFeedGeneratedAt = null;
 let liveSourceCount = 0;
-let albertIndex = 0;
+let albertIndex = -1;
 
 const priorityCard = document.getElementById('priority-card');
 const feedList = document.getElementById('feed-list');
@@ -324,6 +324,20 @@ function renderHero() {
 
 function renderAll() { renderHero(); renderPriority(); renderFeed(); renderContext(); renderMap(); renderWatchlist(); renderNotes(); }
 
+function nextAlbertQuote() {
+  if (!albertQuotes.length) return '';
+  if (albertQuotes.length === 1) {
+    albertIndex = 0;
+    return albertQuotes[0];
+  }
+  let nextIndex = Math.floor(Math.random() * albertQuotes.length);
+  while (nextIndex === albertIndex) {
+    nextIndex = Math.floor(Math.random() * albertQuotes.length);
+  }
+  albertIndex = nextIndex;
+  return albertQuotes[nextIndex];
+}
+
 function openDetail(alert) {
   const summaryText = effectiveSummary(alert);
   modalTitle.textContent = alert.title;
@@ -351,7 +365,8 @@ copyBriefing.addEventListener('click', async () => { const briefing = copyBriefi
 closeModal.addEventListener('click', closeDetailPanel);
 modalBackdrop.addEventListener('click', closeDetailPanel);
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeDetailPanel(); });
-albertCard.addEventListener('click', () => { albertIndex = (albertIndex + 1) % albertQuotes.length; albertQuote.textContent = albertQuotes[albertIndex]; });
+albertQuote.textContent = nextAlbertQuote();
+albertCard.addEventListener('click', () => { albertQuote.textContent = nextAlbertQuote(); });
 document.querySelector('.bulldog-card').addEventListener('dblclick', () => { albertNote.classList.toggle('hidden'); });
 
 renderAll();
