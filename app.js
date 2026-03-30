@@ -1,4 +1,5 @@
 const LIVE_FEED_URL = 'live-alerts.json';
+const GEO_LOOKUP_URL = 'data/geo-lookup.json';
 const POLL_INTERVAL_MS = 60_000;
 const SOURCE_PULL_MINUTES = 15;
 const WATCHED_STORAGE_KEY = 'brialert.watched';
@@ -89,6 +90,7 @@ let notes = [];
 let liveMap = null;
 let liveMarkers = [];
 let lastMapSignature = '';
+let geoLookup = [];
 
 const priorityCard = document.getElementById('priority-card');
 const feedList = document.getElementById('feed-list');
@@ -168,45 +170,16 @@ function saveNotes() {
     localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
   } catch {}
 }
-const geoLookup = [
-  { terms: ['leeds'], lat: 53.8008, lng: -1.5491 },
-  { terms: ['london', 'golders green'], lat: 51.5074, lng: -0.1278 },
-  { terms: ['manchester'], lat: 53.4808, lng: -2.2426 },
-  { terms: ['birmingham'], lat: 52.4862, lng: -1.8904 },
-  { terms: ['liverpool'], lat: 53.4084, lng: -2.9916 },
-  { terms: ['glasgow'], lat: 55.8642, lng: -4.2518 },
-  { terms: ['belfast'], lat: 54.5973, lng: -5.9301 },
-  { terms: ['northumberland'], lat: 55.2083, lng: -2.0784 },
-  { terms: ['paris', 'france'], lat: 48.8566, lng: 2.3522 },
-  { terms: ['brussels', 'belgium'], lat: 50.8503, lng: 4.3517 },
-  { terms: ['amsterdam', 'netherlands'], lat: 52.3676, lng: 4.9041 },
-  { terms: ['berlin', 'germany'], lat: 52.52, lng: 13.405 },
-  { terms: ['madrid', 'spain'], lat: 40.4168, lng: -3.7038 },
-  { terms: ['rome', 'italy'], lat: 41.9028, lng: 12.4964 },
-  { terms: ['athens', 'greece'], lat: 37.9838, lng: 23.7275 },
-  { terms: ['stockholm', 'sweden'], lat: 59.3293, lng: 18.0686 },
-  { terms: ['copenhagen', 'denmark'], lat: 55.6761, lng: 12.5683 },
-  { terms: ['dublin', 'ireland'], lat: 53.3498, lng: -6.2603 },
-  { terms: ['vilnius', 'lithuania'], lat: 54.6872, lng: 25.2797 },
-  { terms: ['warsaw', 'poland'], lat: 52.2297, lng: 21.0122 },
-  { terms: ['kyiv', 'ukraine'], lat: 50.4501, lng: 30.5234 },
-  { terms: ['tehran', 'iran'], lat: 35.6892, lng: 51.389 },
-  { terms: ['israel', 'tel aviv'], lat: 32.0853, lng: 34.7818 },
-  { terms: ['jerusalem'], lat: 31.7683, lng: 35.2137 },
-  { terms: ['lebanon', 'beirut'], lat: 33.8938, lng: 35.5018 },
-  { terms: ['iraq', 'baghdad'], lat: 33.3152, lng: 44.3661 },
-  { terms: ['yemen', 'sanaa'], lat: 15.3694, lng: 44.191 },
-  { terms: ['nigeria', 'abuja'], lat: 9.0765, lng: 7.3986 },
-  { terms: ['pakistan', 'islamabad'], lat: 33.6844, lng: 73.0479 },
-  { terms: ['austria', 'vienna'], lat: 48.2082, lng: 16.3738 },
-  { terms: ['switzerland'], lat: 46.8182, lng: 8.2275 },
-  { terms: ['united states', 'us ', 'usa'], lat: 39.8283, lng: -98.5795 },
-  { terms: ['california', 'yosemite'], lat: 37.8651, lng: -119.5383 },
-  { terms: ['canada'], lat: 56.1304, lng: -106.3468 },
-  { terms: ['australia'], lat: -25.2744, lng: 133.7751 },
-  { terms: ['europe'], lat: 54, lng: 15 },
-  { terms: ['united kingdom', 'uk'], lat: 54.5, lng: -2.5 }
-];
+async function loadGeoLookup() {
+  try {
+    const response = await fetch(`${GEO_LOOKUP_URL}?t=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    geoLookup = Array.isArray(data) ? data : [];
+  } catch {
+    geoLookup = [];
+  }
+}
 function severityLabel(severity) { return clean(severity).charAt(0).toUpperCase() + clean(severity).slice(1); }
 function regionLabel(region) { return region === 'uk' ? 'UK' : 'EU'; }
 function inferGeoPoint(alert) {
@@ -684,5 +657,7 @@ albertCard.addEventListener('click', () => { albertQuote.textContent = nextAlber
 document.querySelector('.bulldog-card').addEventListener('dblclick', () => { albertNote.classList.toggle('hidden'); });
 
 renderAll();
-loadLiveFeed();
+loadGeoLookup().finally(() => {
+  loadLiveFeed();
+});
 setInterval(loadLiveFeed, POLL_INTERVAL_MS);
