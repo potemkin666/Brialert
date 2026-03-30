@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-30T00:32:58.307Z",
+  "generatedAt": "2026-03-30T00:38:36.227Z",
   "sourceCount": 19,
   "alertCount": 52,
   "alerts": [
@@ -16,14 +16,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Man who stopped Leeds hospital bomber receives George Medal",
-      "aiSummary": "Counter Terrorism Policing published an attack-related development linked to Leeds on 30 Mar 2026. The source headline is: Man who stopped Leeds hospital bomber receives George Medal. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published an attack-related development linked to Leeds on 30 Mar 2026. The available source line is limited to the headline: Man who stopped Leeds hospital bomber receives George Medal. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://www.counterterrorism.police.uk/?post_type=post&p=32800",
       "time": "30 Mar 2026",
       "x": 32,
       "y": 48,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "bomb"
       ]
@@ -41,14 +41,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Secondary source signal",
       "summary": "'BOMB' PLOT Three arrested after foiled 'terror attack' outside Bank of America in Paris",
-      "aiSummary": "The Sun published a disrupted plot or enforcement action linked to Paris on 30 Mar 2026. The source headline is: 'BOMB' PLOT Three arrested after foiled 'terror attack' outside Bank of America in Paris. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Sun published a disrupted plot or enforcement action linked to Paris on 30 Mar 2026. The available source line is limited to the headline: 'BOMB' PLOT Three arrested after foiled 'terror attack' outside Bank of America in Paris. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Sun",
       "sourceUrl": "https://www.thesun.co.uk/news/38667183/foiled-terror-attack-bank-america-paris-linked-iran-war-cops-arrest-three/",
       "time": "30 Mar 2026",
       "x": 32,
       "y": 30,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "attack",
@@ -71,7 +71,7 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Reputable media source",
       "summary": "A destroyed building including the Qatari Al Araby TV channel in northern TehranA mechanic's workshop in Tehran, Iran, damaged by US-Israeli strikesA girl walks past tents at a displacement camp in Beirut StadiumAbed Driss, displaced with his family from Beiru",
-      "aiSummary": "The Guardian published an attack-related development linked to United Kingdom on 30 Mar 2026. The source text says: A destroyed building including the Qatari Al Araby TV channel in northern TehranA mechanic's workshop in Tehran, Iran, damaged by US-Israeli strikesA girl walks past tents at a displacement camp in Beirut StadiumAbed Driss, displaced with his family from Beirut's southern suburbsThe Zubair oilfield in Iraq, where production has been reduced because of the warAn Israeli artillery unit fires towards LebanonSmoke rising This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Guardian published an attack-related development linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: A destroyed building including the Qatari Al Araby TV channel in northern TehranA mechanic's workshop in Tehran, Iran, damaged by US-Israeli strikesA girl walks past tents at a displacement camp in Beirut StadiumAbed Driss, displaced with his family from Beirut's southern suburbsThe Zubair oilfield in Iraq, where production has been reduced because of the warAn Israeli artillery unit fires towards LebanonSmoke rising Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Guardian",
       "sourceUrl": "https://www.theguardian.com/world/live/2026/mar/29/middle-east-crisis-live-explosions-tehran-yemen-houthis-iran-war-updates-trump-us-israel-strikes-lebanon",
       "time": "30 Mar 2026",
@@ -97,7 +97,7 @@
       "happenedWhen": "27 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "A list of approved National Canine Training and Accreditation Scheme – Private Security Industry (NCTAS-P) explosives detection dog (EDD) teams.",
-      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 27 Mar 2026. The source text says: A list of approved National Canine Training and Accreditation Scheme – Private Security Industry (NCTAS-P) explosives detection dog (EDD) teams. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 27 Mar 2026. What the source gives us at this stage is: A list of approved National Canine Training and Accreditation Scheme – Private Security Industry (NCTAS-P) explosives detection dog (EDD) teams. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "GOV.UK",
       "sourceUrl": "https://www.gov.uk/government/publications/find-an-accredited-explosives-detection-dog-team",
       "time": "27 Mar 2026",
@@ -122,7 +122,7 @@
       "happenedWhen": "27 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "What businesses and professionals need to do when using and supplying certain chemicals.",
-      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 27 Mar 2026. The source text says: What businesses and professionals need to do when using and supplying certain chemicals. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 27 Mar 2026. What the source gives us at this stage is: What businesses and professionals need to do when using and supplying certain chemicals. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "GOV.UK",
       "sourceUrl": "https://www.gov.uk/government/publications/supplying-explosives-precursors",
       "time": "27 Mar 2026",
@@ -147,7 +147,7 @@
       "happenedWhen": "23 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "A statement from the Security Minister on the Hatzola ambulance attack, which took place in Golders Green on Monday 23 March.",
-      "aiSummary": "GOV.UK published an attack-related development linked to United Kingdom on 23 Mar 2026. The source text says: A statement from the Security Minister on the Hatzola ambulance attack, which took place in Golders Green on Monday 23 March. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "GOV.UK published an attack-related development linked to United Kingdom on 23 Mar 2026. What the source gives us at this stage is: A statement from the Security Minister on the Hatzola ambulance attack, which took place in Golders Green on Monday 23 March. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "GOV.UK",
       "sourceUrl": "https://www.gov.uk/government/speeches/security-minister-statement-hatzola-ambulance-attack",
       "time": "23 Mar 2026",
@@ -172,14 +172,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "A joint investigation conducted under the framework of a Europol task force resulted in a significant disruption of the migrant smuggling supply chain serving criminal networks active along the English Channel. This operation is the outcome of close cooperatio",
-      "aiSummary": "Europol published a disrupted plot or enforcement action linked to Europe on 30 Mar 2026. The source text says: A joint investigation conducted under the framework of a Europol task force resulted in a significant disruption of the migrant smuggling supply chain serving criminal networks active along the English Channel. This operation is the outcome of close cooperation between law enforcement and judicial authorities from Belgium, France, Germany, the Netherlands, and the United Kingdom, with support from Eurojust. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Europol published a disrupted plot or enforcement action linked to Europe on 30 Mar 2026. What the source gives us at this stage is: A joint investigation conducted under the framework of a Europol task force resulted in a significant disruption of the migrant smuggling supply chain serving criminal networks active along the English Channel. This operation is the outcome of close cooperation between law enforcement and judicial authorities from Belgium, France, Germany, the Netherlands, and the United Kingdom, with support from Eurojust. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Europol",
       "sourceUrl": "https://www.europol.europa.eu/media-press/newsroom/news/small-boats-supply-chain-disrupted-21-arrested-for-supplying-channel-smugglers-nautical-equipment",
       "time": "30 Mar 2026",
       "x": 65,
       "y": 45,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "arrest",
         "arrested"
@@ -198,14 +198,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "On 11 March 2026, Europol in collaboration with law enforcement agencies from Austria, France, the Netherlands, and the United States, alongside Eurojust, executed Operation Lightning. This coordinated effort targeted the malicious proxy service ‘SocksEscort’,",
-      "aiSummary": "Europol published a disrupted plot or enforcement action linked to Europe on 30 Mar 2026. The source text says: On 11 March 2026, Europol in collaboration with law enforcement agencies from Austria, France, the Netherlands, and the United States, alongside Eurojust, executed Operation Lightning. This coordinated effort targeted the malicious proxy service ‘SocksEscort’, which allegedly compromised over 369 000 routers and Internet of Things devices in 163 countries, and offered ‘SocksEscort’ customers over 35 000 proxies in recent years. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Europol published a disrupted plot or enforcement action linked to Europe on 30 Mar 2026. What the source gives us at this stage is: On 11 March 2026, Europol in collaboration with law enforcement agencies from Austria, France, the Netherlands, and the United States, alongside Eurojust, executed Operation Lightning. This coordinated effort targeted the malicious proxy service ‘SocksEscort’, which allegedly compromised over 369 000 routers and Internet of Things devices in 163 countries, and offered ‘SocksEscort’ customers over 35 000 proxies in recent years. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Europol",
       "sourceUrl": "https://www.europol.europa.eu/media-press/newsroom/news/europol-and-international-partners-disrupt-socksescort-proxy-service",
       "time": "30 Mar 2026",
       "x": 62,
       "y": 54,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "device"
       ]
@@ -223,14 +223,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Reputable media source",
       "summary": "Full reportIran accuses US of plotting ground assault while publicly seeking talks",
-      "aiSummary": "The Guardian published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source headline is: Full reportIran accuses US of plotting ground assault while publicly seeking talks. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Guardian published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Full reportIran accuses US of plotting ground assault while publicly seeking talks. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Guardian",
       "sourceUrl": "https://www.theguardian.com/world/2026/mar/29/iran-accuses-us-plotting-ground-assault-publicly-seeking-talks",
       "time": "30 Mar 2026",
       "x": 24,
       "y": 44,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "plot"
       ]
@@ -248,14 +248,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Reputable media source",
       "summary": "Powerball winner arrested for third time after $167M win",
-      "aiSummary": "The Independent published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. The source headline is: Powerball winner arrested for third time after $167M win. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Independent published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Powerball winner arrested for third time after $167M win. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Independent",
       "sourceUrl": "https://www.independent.co.uk/news/world/americas/crime/powerball-winner-arrested-third-time-kentucky-b2947925.html",
       "time": "30 Mar 2026",
       "x": 34,
       "y": 30,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "arrest",
         "arrested"
@@ -274,14 +274,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Secondary source signal",
       "summary": "Sickening discoveries made at luxury holiday rental near Yosemite after homeowner is arrested for secretly filming guests A luxury vacation rental near Yosemite National Park has become the center of a criminal investigation after authorities say a homeowner t",
-      "aiSummary": "Daily Mail published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. The source text says: Sickening discoveries made at luxury holiday rental near Yosemite after homeowner is arrested for secretly filming guests A luxury vacation rental near Yosemite National Park has become the center of a criminal investigation after authorities say a homeowner turned a peaceful getaway into a hidden surveillance trap and kept deeply disturbing items inside. The property in Oakhurst, California, a gateway town for touri This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Daily Mail published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: Sickening discoveries made at luxury holiday rental near Yosemite after homeowner is arrested for secretly filming guests A luxury vacation rental near Yosemite National Park has become the center of a criminal investigation after authorities say a homeowner turned a peaceful getaway into a hidden surveillance trap and kept deeply disturbing items inside. The property in Oakhurst, California, a gateway town for touri Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Daily Mail",
       "sourceUrl": "https://www.dailymail.co.uk/news/article-15689751/mansion-near-Yosemite-secretly-filmed-guests.html",
       "time": "30 Mar 2026",
       "x": 33,
       "y": 47,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "arrest",
         "arrested"
@@ -300,14 +300,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Secondary source signal",
       "summary": "EXCLUSIVEThe new honey-trap plot targeting conservative men: Patriot Babes, X-rated videos and MAGA's dream girl To her one million adoring Instagram fans, Jessica Foster was the ultimate MAGA dream girl. But the truth came with a dark twist. 69 comments share",
-      "aiSummary": "Daily Mail published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source text says: EXCLUSIVEThe new honey-trap plot targeting conservative men: Patriot Babes, X-rated videos and MAGA's dream girl To her one million adoring Instagram fans, Jessica Foster was the ultimate MAGA dream girl. But the truth came with a dark twist. 69 comments share The new honey-trap plot targeting conservative men This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Daily Mail published a terrorism-related update linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: EXCLUSIVEThe new honey-trap plot targeting conservative men: Patriot Babes, X-rated videos and MAGA's dream girl To her one million adoring Instagram fans, Jessica Foster was the ultimate MAGA dream girl. But the truth came with a dark twist. 69 comments share The new honey-trap plot targeting conservative men Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Daily Mail",
       "sourceUrl": "https://www.dailymail.co.uk/news/article-15677957/new-honey-trap-plot-conservative-men-maga-dream-girl.html",
       "time": "30 Mar 2026",
       "x": 34,
       "y": 32,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "plot"
       ]
@@ -325,14 +325,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Secondary source signal",
       "summary": "EXCLUSIVETiger Woods insider reveals girlfriend Vanessa Trump's FURY at 'mortified' golf star after DUI arrest... and her fierce 'get your s*** together' ultimatum The golf legend, 50, stunned the world when he flipped his Range Rover SUV onto its side in a hi",
-      "aiSummary": "Daily Mail published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. The source text says: EXCLUSIVETiger Woods insider reveals girlfriend Vanessa Trump's FURY at 'mortified' golf star after DUI arrest... and her fierce 'get your s*** together' ultimatum The golf legend, 50, stunned the world when he flipped his Range Rover SUV onto its side in a high-speed crash on the millionaire's playground of Jupiter Island on Friday afternoon. 112 This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Daily Mail published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: EXCLUSIVETiger Woods insider reveals girlfriend Vanessa Trump's FURY at 'mortified' golf star after DUI arrest... and her fierce 'get your s*** together' ultimatum The golf legend, 50, stunned the world when he flipped his Range Rover SUV onto its side in a high-speed crash on the millionaire's playground of Jupiter Island on Friday afternoon. 112 Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Daily Mail",
       "sourceUrl": "https://www.dailymail.co.uk/sport/golf/article-15688133/tiger-woods-vanessa-trump-dui-arrest.html",
       "time": "30 Mar 2026",
       "x": 30,
       "y": 44,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "arrest"
       ]
@@ -350,14 +350,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Secondary source signal",
       "summary": "Tiger Woods set to PROFIT from his DUI arrest as fans clamor to buy polo shirt he was wearing when he flipped his SUV In what appears to be an unexpected boost for the golf legend and his Sun Day Red clothing brand, he will now profit from the disastrous circu",
-      "aiSummary": "Daily Mail published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. The source text says: Tiger Woods set to PROFIT from his DUI arrest as fans clamor to buy polo shirt he was wearing when he flipped his SUV In what appears to be an unexpected boost for the golf legend and his Sun Day Red clothing brand, he will now profit from the disastrous circumstances surrounding his arrest on Jupiter Island on Friday. 38 comments 1 video share Woods set to PROFIT from DUI arrest as fans clamor to buy polo shirt This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Daily Mail published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: Tiger Woods set to PROFIT from his DUI arrest as fans clamor to buy polo shirt he was wearing when he flipped his SUV In what appears to be an unexpected boost for the golf legend and his Sun Day Red clothing brand, he will now profit from the disastrous circumstances surrounding his arrest on Jupiter Island on Friday. 40 comments 1 video share Woods set to PROFIT from DUI arrest as fans clamor to buy polo shirt Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Daily Mail",
       "sourceUrl": "https://www.dailymail.co.uk/sport/golf/article-15689523/tiger-woods-dui-arrest-florida-shirt-sun-day-red.html",
       "time": "30 Mar 2026",
       "x": 32,
       "y": 38,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "arrest"
       ]
@@ -375,14 +375,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Secondary source signal",
       "summary": "MURDER PROBE Girl, 16, who died after being found unconscious in street was 'stabbed in the back in fight over boy' – as 4 arrested UK News Share",
-      "aiSummary": "The Sun published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. The source text says: MURDER PROBE Girl, 16, who died after being found unconscious in street was 'stabbed in the back in fight over boy' – as 4 arrested UK News Share This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Sun published a disrupted plot or enforcement action linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: MURDER PROBE Girl, 16, who died after being found unconscious in street was 'stabbed in the back in fight over boy' – as 4 arrested UK News Share Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Sun",
       "sourceUrl": "https://www.thesun.co.uk/news/38661923/murder-probe-launched-teen-girl-leeds/",
       "time": "30 Mar 2026",
       "x": 34,
       "y": 42,
       "major": true,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "arrest",
         "arrested"
@@ -401,7 +401,7 @@
       "happenedWhen": "27 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Two individuals suspected of committing serious economic and financial crimes resulting in losses amounting to tens of millions of euros have been arrested during an international operation coordinated from Eurojust. Over 400 investigators worked together acro",
-      "aiSummary": "Eurojust published a disrupted plot or enforcement action linked to Europe on 27 Mar 2026. The source text says: Two individuals suspected of committing serious economic and financial crimes resulting in losses amounting to tens of millions of euros have been arrested during an international operation coordinated from Eurojust. Over 400 investigators worked together across six countries to search 49 properties and gather essential evidence to continue the investigations. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Eurojust published a disrupted plot or enforcement action linked to Europe on 27 Mar 2026. What the source gives us at this stage is: Two individuals suspected of committing serious economic and financial crimes resulting in losses amounting to tens of millions of euros have been arrested during an international operation coordinated from Eurojust. Over 400 investigators worked together across six countries to search 49 properties and gather essential evidence to continue the investigations. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Eurojust",
       "sourceUrl": "https://www.eurojust.europa.eu/news/financial-crime-investigation-culminates-arrests-and-frozen-assets-high-value",
       "time": "27 Mar 2026",
@@ -428,7 +428,7 @@
       "happenedWhen": "27 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "A joint action day coordinated from Eurojust’s headquarters has led to the arrest of 13 suspects from a Scottish organised crime group. The group is suspected of running a prolific criminal network involved in the transport of large quantities of drugs, includ",
-      "aiSummary": "Eurojust published a disrupted plot or enforcement action linked to Europe on 27 Mar 2026. The source text says: A joint action day coordinated from Eurojust’s headquarters has led to the arrest of 13 suspects from a Scottish organised crime group. The group is suspected of running a prolific criminal network involved in the transport of large quantities of drugs, including hundreds of kilograms of cocaine, into Scotland. Thanks to close cooperation by UK and Spanish authorities, coordinated by Eurojust, five suspects were arrested in Spain and a further eight in the United Kingdom. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Eurojust published a disrupted plot or enforcement action linked to Europe on 27 Mar 2026. What the source gives us at this stage is: A joint action day coordinated from Eurojust’s headquarters has led to the arrest of 13 suspects from a Scottish organised crime group. The group is suspected of running a prolific criminal network involved in the transport of large quantities of drugs, including hundreds of kilograms of cocaine, into Scotland. Thanks to close cooperation by UK and Spanish authorities, coordinated by Eurojust, five suspects were arrested in Spain and a further eight in the United Kingdom. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Eurojust",
       "sourceUrl": "https://www.eurojust.europa.eu/news/arrests-take-down-violent-criminal-network-trafficking-hundreds-kilograms-cocaine-scotland",
       "time": "27 Mar 2026",
@@ -455,7 +455,7 @@
       "happenedWhen": "25 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Belgian, German and UK authorities continue to work together to disrupt migrant smuggling networks operating along the English Channel. A joint investigation team, set up at Eurojust and supported by Europol, focused on targeting the smuggling supply chain. Du",
-      "aiSummary": "Eurojust published a disrupted plot or enforcement action linked to Europe on 25 Mar 2026. The source text says: Belgian, German and UK authorities continue to work together to disrupt migrant smuggling networks operating along the English Channel. A joint investigation team, set up at Eurojust and supported by Europol, focused on targeting the smuggling supply chain. During an international operation, four individuals suspected of organising the delivery of nautical equipment were arrested. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Eurojust published a disrupted plot or enforcement action linked to Europe on 25 Mar 2026. What the source gives us at this stage is: Belgian, German and UK authorities continue to work together to disrupt migrant smuggling networks operating along the English Channel. A joint investigation team, set up at Eurojust and supported by Europol, focused on targeting the smuggling supply chain. During an international operation, four individuals suspected of organising the delivery of nautical equipment were arrested. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Eurojust",
       "sourceUrl": "https://www.eurojust.europa.eu/news/international-operation-hits-supply-chain-migrant-smugglers",
       "time": "25 Mar 2026",
@@ -482,7 +482,7 @@
       "happenedWhen": "20 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "The joint investigation team (JIT) established at Eurojust to investigate core international crimes committed in Ukraine has had its mandate extended by two years. Authorities from Estonia, Latvia, Lithuania, Poland, Romania, Slovakia and Ukraine, together wit",
-      "aiSummary": "Eurojust published a terrorism-related update linked to Europe on 20 Mar 2026. The source text says: The joint investigation team (JIT) established at Eurojust to investigate core international crimes committed in Ukraine has had its mandate extended by two years. Authorities from Estonia, Latvia, Lithuania, Poland, Romania, Slovakia and Ukraine, together with partners Eurojust, Europol and the Office of the Prosecutor of the International Criminal Court (ICC-OTP), will now place additional focus on the illegal transfer of Ukrainian children and their deportation to Russia and Belarus. These collaborative efforts have been key to national investigations and have already led to a trial in Ukraine and the identification of suspects in Lithuania. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Eurojust published a terrorism-related update linked to Europe on 20 Mar 2026. What the source gives us at this stage is: The joint investigation team (JIT) established at Eurojust to investigate core international crimes committed in Ukraine has had its mandate extended by two years. Authorities from Estonia, Latvia, Lithuania, Poland, Romania, Slovakia and Ukraine, together with partners Eurojust, Europol and the Office of the Prosecutor of the International Criminal Court (ICC-OTP), will now place additional focus on the illegal transfer of Ukrainian children and their deportation to Russia and Belarus. These collaborative efforts have been key to national investigations and have already led to a trial in Ukraine and the identification of suspects in Lithuania. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Eurojust",
       "sourceUrl": "https://www.eurojust.europa.eu/news/joint-investigation-team-continues-work-added-focus-illegal-transfer-ukrainian-children",
       "time": "20 Mar 2026",
@@ -507,14 +507,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Northumberland Teenager Jailed for Multiple Terrorism Offences",
-      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source headline is: Northumberland Teenager Jailed for Multiple Terrorism Offences. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Northumberland Teenager Jailed for Multiple Terrorism Offences. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://www.counterterrorism.police.uk/?post_type=post&p=32815",
       "time": "30 Mar 2026",
       "x": 35,
       "y": 33,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -533,14 +533,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Our next podcast guest talks us through working with convicted terrorists in the community",
-      "aiSummary": "Counter Terrorism Policing published a prosecution-stage development linked to United Kingdom on 30 Mar 2026. The source headline is: Our next podcast guest talks us through working with convicted terrorists in the community. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published a prosecution-stage development linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Our next podcast guest talks us through working with convicted terrorists in the community. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://www.counterterrorism.police.uk/?post_type=post&p=32812",
       "time": "30 Mar 2026",
       "x": 23,
       "y": 45,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror"
       ]
@@ -558,14 +558,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Our next podcast guest talks going from warzones to keeping the streets of London safe",
-      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to London on 30 Mar 2026. The source headline is: Our next podcast guest talks going from warzones to keeping the streets of London safe. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to London on 30 Mar 2026. The available source line is limited to the headline: Our next podcast guest talks going from warzones to keeping the streets of London safe. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://www.counterterrorism.police.uk/?post_type=post&p=32763",
       "time": "30 Mar 2026",
       "x": 28,
       "y": 40,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -581,14 +581,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Countering State Threats",
-      "aiSummary": "Counter Terrorism Policing published a threat-related development linked to United Kingdom on 30 Mar 2026. The source headline is: Countering State Threats. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published a threat-related development linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Countering State Threats. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://www.counterterrorism.police.uk/what-we-do/countering-state-threats/",
       "time": "30 Mar 2026",
       "x": 20,
       "y": 32,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "threat"
       ]
@@ -606,14 +606,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Action Counters Terrorism (ACT)",
-      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source headline is: Action Counters Terrorism (ACT). This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Action Counters Terrorism (ACT). Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://act.campaign.gov.uk/?utm_source=dropdown&utm_medium=ctp-header&utm_campaign=act-header",
       "time": "30 Mar 2026",
       "x": 28,
       "y": 40,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -632,14 +632,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Inside Counter Terrorism Policing Podcast",
-      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source headline is: Inside Counter Terrorism Policing Podcast. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Inside Counter Terrorism Policing Podcast. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://www.counterterrorism.police.uk/our-people/inside-counter-terrorism-policing/",
       "time": "30 Mar 2026",
       "x": 34,
       "y": 46,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -658,14 +658,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Current threat level: SUBSTANTIAL",
-      "aiSummary": "Counter Terrorism Policing published a threat-related development linked to United Kingdom on 30 Mar 2026. The source headline is: Current threat level: SUBSTANTIAL. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Counter Terrorism Policing published a threat-related development linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Current threat level: SUBSTANTIAL. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Counter Terrorism Policing",
       "sourceUrl": "https://www.mi5.gov.uk/threat-levels",
       "time": "30 Mar 2026",
       "x": 18,
       "y": 34,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "threat"
       ]
@@ -683,14 +683,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Today, Europol has launched its new European Centre Against Migrant Smuggling (ECAMS), stepping up the European Union fight against migrant smuggling networks that are threatening the lives of hundreds of thousands of migrants each year. Active across continen",
-      "aiSummary": "Europol published a threat-related development linked to Europe on 30 Mar 2026. The source text says: Today, Europol has launched its new European Centre Against Migrant Smuggling (ECAMS), stepping up the European Union fight against migrant smuggling networks that are threatening the lives of hundreds of thousands of migrants each year. Active across continents, these criminal networks are increasingly present online – recruiting associates, advertising their criminal services and luring migrants into life-threatening trips that cost thousands of euros for those who take the risk. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Europol published a threat-related development linked to Europe on 30 Mar 2026. What the source gives us at this stage is: Today, Europol has launched its new European Centre Against Migrant Smuggling (ECAMS), stepping up the European Union fight against migrant smuggling networks that are threatening the lives of hundreds of thousands of migrants each year. Active across continents, these criminal networks are increasingly present online – recruiting associates, advertising their criminal services and luring migrants into life-threatening trips that cost thousands of euros for those who take the risk. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Europol",
       "sourceUrl": "https://www.europol.europa.eu/media-press/newsroom/news/grip-migrant-smuggling-tightens-new-department-europol-to-step-fight",
       "time": "30 Mar 2026",
       "x": 53,
       "y": 41,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "threat"
       ]
@@ -708,14 +708,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Europol has coordinated the largest Referral Action Day (RAD) to date targeting terrorist propaganda shared through audio content, resulting in the referral of 17 298 URLs across 40 online platforms. Combined, the audio content in these links represents more t",
-      "aiSummary": "Europol published a terrorism-related update linked to Europe on 30 Mar 2026. The source text says: Europol has coordinated the largest Referral Action Day (RAD) to date targeting terrorist propaganda shared through audio content, resulting in the referral of 17 298 URLs across 40 online platforms. Combined, the audio content in these links represents more than 1 100 hours – the equivalent of 47 days of continuous listening. The operation focused on terrorist audio propaganda used by groups across the ideological spectrum, including jihadist and violent right-wing extremist networks. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "Europol published a terrorism-related update linked to Europe on 30 Mar 2026. What the source gives us at this stage is: Europol has coordinated the largest Referral Action Day (RAD) to date targeting terrorist propaganda shared through audio content, resulting in the referral of 17 298 URLs across 40 online platforms. Combined, the audio content in these links represents more than 1 100 hours – the equivalent of 47 days of continuous listening. The operation focused on terrorist audio propaganda used by groups across the ideological spectrum, including jihadist and violent right-wing extremist networks. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "Europol",
       "sourceUrl": "https://www.europol.europa.eu/media-press/newsroom/news/europol-coordinates-largest-referral-action-targeting-terrorist-audio-propaganda",
       "time": "30 Mar 2026",
       "x": 69,
       "y": 45,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "extremist",
@@ -735,14 +735,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Reputable media source",
       "summary": "Middle East crisis",
-      "aiSummary": "The Guardian published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source headline is: Middle East crisis. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Guardian published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: Middle East crisis. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Guardian",
       "sourceUrl": "https://www.theguardian.com/world/us-israel-war-on-iran",
       "time": "30 Mar 2026",
       "x": 27,
       "y": 43,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "isis"
       ]
@@ -760,14 +760,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Reputable media source",
       "summary": "AnalysisIsraeli strikes and US troop buildup put Pakistan’s peacemaker role under pressure",
-      "aiSummary": "The Guardian published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source headline is: AnalysisIsraeli strikes and US troop buildup put Pakistan’s peacemaker role under pressure. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Guardian published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The available source line is limited to the headline: AnalysisIsraeli strikes and US troop buildup put Pakistan’s peacemaker role under pressure. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Guardian",
       "sourceUrl": "https://www.theguardian.com/world/2026/mar/29/israeli-strikes-us-troop-buildup-pakistan-peacemaker-role-under-pressure",
       "time": "30 Mar 2026",
       "x": 28,
       "y": 28,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "isis"
       ]
@@ -785,14 +785,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Reputable media source",
       "summary": "Liveiran warTehran threatens American and Israeli officials homes as Trump warned over ground invasionMarines and sailors arrived in the region on FridayUS-Iran conflict in numbers: The growing toll of war one month onUS-Iran war mapped as more countries dragg",
-      "aiSummary": "The Independent published a threat-related development linked to United Kingdom on 30 Mar 2026. The source text says: Liveiran warTehran threatens American and Israeli officials homes as Trump warned over ground invasionMarines and sailors arrived in the region on FridayUS-Iran conflict in numbers: The growing toll of war one month onUS-Iran war mapped as more countries dragged into Middle East conflictPentagon waits for Trump’s approval after planning ‘weeks of ground operations’ in Iran, report says This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Independent published a threat-related development linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: Liveiran warTehran threatens American and Israeli officials homes as Trump warned over ground invasionMarines and sailors arrived in the region on FridayUS-Iran conflict in numbers: The growing toll of war one month onUS-Iran war mapped as more countries dragged into Middle East conflictPentagon waits for Trump’s approval after planning ‘weeks of ground operations’ in Iran, report says Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Independent",
       "sourceUrl": "https://www.independent.co.uk/news/world/middle-east/iran-us-war-live-updates-trump-israel-houthis-hormuz-b2947546.html",
       "time": "30 Mar 2026",
       "x": 25,
       "y": 47,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "threat"
       ]
@@ -810,14 +810,14 @@
       "happenedWhen": "30 Mar 2026",
       "confidence": "Secondary source signal",
       "summary": "Exclusive WAR PATH How Iranian migrants are heading for UK as chaos reigns in Calais Jungle & fears grow of ‘unprecedented’ refugee crisis Sun Club Comments",
-      "aiSummary": "The Sun published a terrorism-related update linked to United Kingdom on 30 Mar 2026. The source text says: Exclusive WAR PATH How Iranian migrants are heading for UK as chaos reigns in Calais Jungle & fears grow of ‘unprecedented’ refugee crisis Sun Club Comments This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "The Sun published a terrorism-related update linked to United Kingdom on 30 Mar 2026. What the source gives us at this stage is: Exclusive WAR PATH How Iranian migrants are heading for UK as chaos reigns in Calais Jungle & fears grow of ‘unprecedented’ refugee crisis Sun Club Comments Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "The Sun",
       "sourceUrl": "https://www.thesun.co.uk/news/38663987/iran-turmoil-refugees-heading-here/",
       "time": "30 Mar 2026",
       "x": 20,
       "y": 28,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "isis"
       ]
@@ -842,7 +842,7 @@
       "x": 31,
       "y": 35,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -865,7 +865,7 @@
       "x": 23,
       "y": 29,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -891,7 +891,7 @@
       "x": 25,
       "y": 33,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -910,7 +910,7 @@
       "happenedWhen": "25 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Correspondence relating to the Crime and Policing Bill, which was introduced in the House of Commons on 25 February 2025.",
-      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 25 Mar 2026. The source text says: Correspondence relating to the Crime and Policing Bill, which was introduced in the House of Commons on 25 February 2025. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 25 Mar 2026. What the source gives us at this stage is: Correspondence relating to the Crime and Policing Bill, which was introduced in the House of Commons on 25 February 2025. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "GOV.UK",
       "sourceUrl": "https://www.gov.uk/government/publications/crime-and-policing-bill-government-amendments-for-committee",
       "time": "25 Mar 2026",
@@ -933,7 +933,7 @@
       "happenedWhen": "24 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "Statement by Ambassador James Kariuki, UK Chargé d’Affaires to the UN, at the UN Security Council meeting on the Middle East.",
-      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 24 Mar 2026. The source text says: Statement by Ambassador James Kariuki, UK Chargé d’Affaires to the UN, at the UN Security Council meeting on the Middle East. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 24 Mar 2026. What the source gives us at this stage is: Statement by Ambassador James Kariuki, UK Chargé d’Affaires to the UN, at the UN Security Council meeting on the Middle East. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "GOV.UK",
       "sourceUrl": "https://www.gov.uk/government/speeches/we-must-preserve-the-land-and-the-people-of-palestine-so-that-a-two-state-solution-remains-viable-uk-statement-at-the-un-security-council",
       "time": "24 Mar 2026",
@@ -956,7 +956,7 @@
       "happenedWhen": "19 Mar 2026",
       "confidence": "Verified official source update",
       "summary": "The Prime Minister welcomed the Nigerian President, Mr Bola Ahmed Tinubu, to Downing Street today.",
-      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 19 Mar 2026. The source text says: The Prime Minister welcomed the Nigerian President, Mr Bola Ahmed Tinubu, to Downing Street today. This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.",
+      "aiSummary": "GOV.UK published a terrorism-related update linked to United Kingdom on 19 Mar 2026. What the source gives us at this stage is: The Prime Minister welcomed the Nigerian President, Mr Bola Ahmed Tinubu, to Downing Street today. Initial read should focus on whether this reflects an active scene, a recently disrupted plot, or a later judicial, commemorative, or recognition-stage development. Immediate follow-up should check for corroboration, current public-safety posture, casualties or scene control, and any references to suspects, arrests, devices, ideology, or linked actors.",
       "source": "GOV.UK",
       "sourceUrl": "https://www.gov.uk/government/news/pm-meeting-with-president-bola-ahmed-tinubu-of-nigeria-19-march-2026",
       "time": "19 Mar 2026",
@@ -986,7 +986,7 @@
       "x": 35,
       "y": 31,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -1012,7 +1012,7 @@
       "x": 26,
       "y": 46,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -1035,7 +1035,7 @@
       "x": 28,
       "y": 42,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -1061,7 +1061,7 @@
       "x": 34,
       "y": 34,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism"
@@ -1087,7 +1087,7 @@
       "x": 22,
       "y": 28,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -1110,7 +1110,7 @@
       "x": 31,
       "y": 47,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -1133,7 +1133,7 @@
       "x": 27,
       "y": 33,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -1156,7 +1156,7 @@
       "x": 22,
       "y": 34,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -1179,7 +1179,7 @@
       "x": 52,
       "y": 36,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "threat",
         "radicalised"
@@ -1205,7 +1205,7 @@
       "x": 66,
       "y": 42,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "terrorism",
@@ -1232,7 +1232,7 @@
       "x": 50,
       "y": 30,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -1255,7 +1255,7 @@
       "x": 58,
       "y": 42,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": []
     },
     {
@@ -1278,7 +1278,7 @@
       "x": 70,
       "y": 46,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror",
         "attack",
@@ -1306,7 +1306,7 @@
       "x": 65,
       "y": 57,
       "major": false,
-      "publishedAt": "2026-03-30T00:32:33.361Z",
+      "publishedAt": "2026-03-30T00:37:58.912Z",
       "keywordHits": [
         "terror"
       ]
