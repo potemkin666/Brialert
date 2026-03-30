@@ -123,6 +123,10 @@ const modalTitle = document.getElementById('modal-title');
 const modalMeta = document.getElementById('modal-meta');
 const modalAiSummary = document.getElementById('modal-ai-summary');
 const modalSummary = document.getElementById('modal-summary');
+const modalAudit = document.getElementById('modal-audit');
+const modalCorroboration = document.getElementById('modal-corroboration');
+const auditPanel = document.getElementById('audit-panel');
+const corroborationPanel = document.getElementById('corroboration-panel');
 const modalSeverity = document.getElementById('modal-severity');
 const modalStatus = document.getElementById('modal-status');
 const modalSource = document.getElementById('modal-source');
@@ -404,6 +408,41 @@ function contextLabel(alert) {
   if (alert.lane === 'incidents' && inferIncidentTrack(alert) === 'case') return 'Case / Prosecution';
   return laneLabels[alert.lane] || alert.lane;
 }
+function reliabilityLabel(profile) {
+  const labels = {
+    official_ct: 'Official CT',
+    official_general: 'Official',
+    official_context: 'Official context',
+    major_media: 'Major media',
+    general_media: 'General media',
+    tabloid: 'Tabloid',
+    specialist_research: 'Specialist research'
+  };
+  return labels[profile] || 'Unknown';
+}
+function buildAuditBlock(alert) {
+  const terrorTerms = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
+  const age = alert.publishedAt ? formatAgeFrom(alert.publishedAt) : 'age unknown';
+  return [
+    `SOURCE TIER: ${normaliseSourceTier(alert.sourceTier) || 'unclassified'}`,
+    `RELIABILITY PROFILE: ${reliabilityLabel(inferReliabilityProfile(alert))}`,
+    `AGE: ${age}`,
+    `LANE REASON: ${clean(alert.laneReason) || contextLabel(alert)}`,
+    terrorTerms.length ? `TERROR TERMS HIT: ${terrorTerms.join(', ')}` : 'TERROR TERMS HIT: none',
+    `CORROBORATION COUNT: ${Number(alert.corroborationCount || 0)}`
+  ].join('\n');
+}
+function renderCorroboratingSources(alert) {
+  const sources = Array.isArray(alert.corroboratingSources) ? alert.corroboratingSources : [];
+  if (!sources.length) {
+    return "<p class='panel-copy'>No additional corroborating sources are attached to this incident yet.</p>";
+  }
+  return `<div class="corroboration-list">${sources.map((entry) => `
+    <article class="corroboration-item">
+      <a href="${entry.sourceUrl}" target="_blank" rel="noreferrer">${entry.source}</a>
+      <p>${reliabilityLabel(normaliseReliabilityProfile(entry.reliabilityProfile))} | ${clean(entry.sourceTier) || 'source tier unknown'} | ${clean(entry.publishedAt) ? formatAgeFrom(entry.publishedAt) : 'age unknown'}</p>
+    </article>`).join('')}</div>`;
+}
 function topPriority() { const pool = responderAlerts().length ? responderAlerts() : contextAlerts(); return pool[0]; }
 
 function buildBriefing(alert, summaryText) {
@@ -419,7 +458,8 @@ function buildBriefing(alert, summaryText) {
       alert.lane === 'incidents' && inferIncidentTrack(alert) ? `INCIDENT TRACK: ${inferIncidentTrack(alert) === 'live' ? 'Live incident' : 'Case / prosecution'}` : '',
       alert.eventType ? `EVENT TYPE: ${clean(alert.eventType).replace(/_/g, ' ')}` : '',
       alert.geoPrecision ? `GEO PRECISION: ${alert.geoPrecision}` : '',
-    '',
+      Number(alert.corroborationCount || 0) ? `CORROBORATION COUNT: ${alert.corroborationCount}` : '',
+      '',
     peopleInvolved.length ? ['PEOPLE INVOLVED:', ...peopleInvolved, ''] : [],
     'SUMMARY:',
     summaryText,
@@ -469,16 +509,26 @@ function normaliseAlert(alert, index) {
       reliabilityProfile,
       incidentTrack,
       isDuplicateOf: clean(alert.isDuplicateOf),
-    freshUntil: clean(alert.freshUntil),
-    needsHumanReview: !!alert.needsHumanReview,
-    priorityScore: Number.isFinite(alert.priorityScore) ? alert.priorityScore : null,
-    confidenceScore: Number.isFinite(alert.confidenceScore) ? alert.confidenceScore : null,
-    publishedAt: clean(alert.publishedAt),
-    freshnessBucket: Number.isFinite(alert.freshnessBucket) ? alert.freshnessBucket : null,
-    terrorismHits: Array.isArray(alert.terrorismHits) ? alert.terrorismHits.filter(Boolean) : [],
-    isTerrorRelevant: typeof alert.isTerrorRelevant === 'boolean' ? alert.isTerrorRelevant : null
-  };
-}
+      freshUntil: clean(alert.freshUntil),
+      needsHumanReview: !!alert.needsHumanReview,
+      priorityScore: Number.isFinite(alert.priorityScore) ? alert.priorityScore : null,
+      confidenceScore: Number.isFinite(alert.confidenceScore) ? alert.confidenceScore : null,
+      publishedAt: clean(alert.publishedAt),
+      freshnessBucket: Number.isFinite(alert.freshnessBucket) ? alert.freshnessBucket : null,
+      terrorismHits: Array.isArray(alert.terrorismHits) ? alert.terrorismHits.filter(Boolean) : [],
+      isTerrorRelevant: typeof alert.isTerrorRelevant === 'boolean' ? alert.isTerrorRelevant : null,
+      laneReason: clean(alert.laneReason),
+      corroboratingSources: Array.isArray(alert.corroboratingSources) ? alert.corroboratingSources.filter(Boolean).map((entry) => ({
+        source: clean(entry.source),
+        sourceUrl: clean(entry.sourceUrl),
+        sourceTier: normaliseSourceTier(entry.sourceTier),
+        reliabilityProfile: normaliseReliabilityProfile(entry.reliabilityProfile),
+        publishedAt: clean(entry.publishedAt),
+        confidence: clean(entry.confidence)
+      })) : [],
+      corroborationCount: Number.isFinite(alert.corroborationCount) ? alert.corroborationCount : 0
+    };
+  }
 
 async function loadLiveFeed() {
   try {
@@ -538,10 +588,10 @@ function responderCardMarkup(alert) {
           <button class="star-button ${watched.has(alert.id) ? 'active' : ''}" data-star="${alert.id}">${watched.has(alert.id) ? 'Watch' : 'Track'}</button>
           <span class="severity severity-${alert.severity}">${severityLabel(alert.severity)}</span>
         </div>
-      </div>
-      <p>${alert.summary}</p>
-      <div class="meta-row"><span>${alert.source}</span><span>${alert.status}</span></div>
-    </article>`;
+        </div>
+        <p>${alert.summary}</p>
+        <div class="meta-row"><span>${alert.source}</span><span>${alert.status}</span><span>${Number(alert.corroborationCount || 0)} corroborating</span></div>
+      </article>`;
 }
 
 function renderFeed() {
@@ -670,10 +720,14 @@ function zoomMap(direction) {
 function openDetail(alert) {
   const summaryText = effectiveSummary(alert);
   modalTitle.textContent = alert.title;
-  modalMeta.textContent = `${alert.location} | ${alert.time}`;
-  modalAiSummary.textContent = summaryText;
-  modalSummary.textContent = '';
+    modalMeta.textContent = `${alert.location} | ${alert.time}`;
+    modalAiSummary.textContent = summaryText;
+    modalSummary.textContent = '';
   modalSummary.hidden = true;
+  modalAudit.textContent = buildAuditBlock(alert);
+  modalCorroboration.innerHTML = renderCorroboratingSources(alert);
+  auditPanel.hidden = false;
+  corroborationPanel.hidden = false;
   modalSeverity.textContent = severityLabel(alert.severity);
   modalStatus.textContent = alert.status;
   modalSource.textContent = alert.source;

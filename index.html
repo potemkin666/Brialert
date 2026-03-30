@@ -158,17 +158,25 @@
         <span class="detail-label">Incident Summary</span>
         <p id="modal-ai-summary"></p>
       </div>
-      <div class="briefing-panel">
-        <div class="section-heading">
-          <div>
-            <span class="detail-label">Copy Briefing</span>
-            <p class="panel-copy">Built for a fast paste into an email or note.</p>
+        <div class="briefing-panel">
+          <div class="section-heading">
+            <div>
+              <span class="detail-label">Copy Briefing</span>
+              <p class="panel-copy">Built for a fast paste into an email or note.</p>
+            </div>
+            <button class="primary-button copy-button" id="copy-briefing" type="button">Copy Briefing</button>
           </div>
-          <button class="primary-button copy-button" id="copy-briefing" type="button">Copy Briefing</button>
+          <pre id="modal-briefing"></pre>
         </div>
-        <pre id="modal-briefing"></pre>
-      </div>
-      <p id="modal-summary"></p>
+        <div class="summary-panel" id="audit-panel">
+          <span class="detail-label">Why This Is In The Queue</span>
+          <pre id="modal-audit"></pre>
+        </div>
+        <div class="summary-panel" id="corroboration-panel">
+          <span class="detail-label">Corroborating Sources</span>
+          <div id="modal-corroboration"></div>
+        </div>
+        <p id="modal-summary"></p>
       <div class="modal-grid">
         <div>
           <span class="detail-label">Severity</span>

@@ -452,6 +452,47 @@ function makeSummary(source, item) {
   return `${source.provider} has published a prevention or radicalisation update. The value is horizon scanning, theme detection, and context for later operational or analytical work.`;
 }
 
+function laneReasonFor(source, incidentTrack) {
+  if (source.lane === 'incidents') {
+    return incidentTrack === 'live'
+      ? 'Terror-related live incident or disrupted plot candidate from an incident feed.'
+      : 'Terror-related case, prosecution, or recognition update kept as incident context.';
+  }
+  if (source.lane === 'sanctions') return 'Sanctions change with terrorism relevance.';
+  if (source.lane === 'oversight') return 'Oversight, legislation, or review signal relevant to counter-terror posture.';
+  if (source.lane === 'border') return 'Border, document, or screening signal relevant to threat movement.';
+  return 'Prevention, radicalisation, or analytical context source.';
+}
+
+function sourceReferenceFor(alert) {
+  return {
+    source: alert.source,
+    sourceUrl: alert.sourceUrl,
+    sourceTier: alert.sourceTier,
+    reliabilityProfile: alert.reliabilityProfile,
+    publishedAt: alert.publishedAt,
+    confidence: alert.confidence
+  };
+}
+
+function mergeCorroboratingSources(primary, secondary) {
+  const merged = [...(Array.isArray(primary.corroboratingSources) ? primary.corroboratingSources : []), sourceReferenceFor(secondary)];
+  const seen = new Set();
+  return merged
+    .filter((entry) => clean(entry.source) && clean(entry.sourceUrl))
+    .filter((entry) => {
+      const key = `${clean(entry.source).toLowerCase()}|${clean(entry.sourceUrl).toLowerCase()}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => {
+      const timeA = parseSourceDate(a.publishedAt)?.getTime() || 0;
+      const timeB = parseSourceDate(b.publishedAt)?.getTime() || 0;
+      return timeB - timeA;
+    });
+}
+
 async function fetchText(url) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
@@ -669,14 +710,15 @@ function buildAlert(source, item, idx) {
       sourceTier,
       reliabilityProfile,
       incidentTrack,
+      laneReason: laneReasonFor(source, incidentTrack),
       time: displayWhen,
       lat: coords.lat,
       lng: coords.lng,
-      major: source.lane === 'incidents' && ['critical', 'high'].includes(severity),
+      major: source.lane === 'incidents' && incidentTrack === 'live' && ['critical', 'high'].includes(severity),
       publishedAt: publishedIso,
       keywordHits,
-    terrorismHits,
-    eventType,
+      terrorismHits,
+      eventType,
       geoPrecision: inferGeoPrecision(location),
       isOfficial: !!source.isTrustedOfficial,
       priorityScore,
@@ -684,9 +726,11 @@ function buildAlert(source, item, idx) {
       freshUntil: freshUntilFor(source, publishedIso, severity, incidentTrack),
       needsHumanReview: needsHumanReviewFor(source, severity, keywordHits, publishedIso, reliabilityProfile, incidentTrack),
       isTerrorRelevant: isTerrorRelevantIncident(source, item, reliabilityProfile),
+      corroboratingSources: [],
+      corroborationCount: 0,
       isDuplicateOf: null
-      };
-    }
+    };
+}
 
 async function readExisting() {
   try {
@@ -723,8 +767,8 @@ async function main() {
   const seen = new Map();
   for (const item of items) {
     const key = `${sameStoryKey(item)}|${item.location}|${item.eventType}`;
-    if (seen.has(key)) {
-      const existingIndex = seen.get(key);
+      if (seen.has(key)) {
+        const existingIndex = seen.get(key);
         const incumbent = deduped[existingIndex];
         const itemTier = sourceTierRankValue(item.sourceTier);
         const incumbentTier = sourceTierRankValue(incumbent.sourceTier);
@@ -735,14 +779,18 @@ async function main() {
           (itemTrack === incumbentTrack && itemTier > incumbentTier) ||
           (itemTrack === incumbentTrack && itemTier === incumbentTier && (item.priorityScore || 0) > (incumbent.priorityScore || 0))
         ) {
-        item.isDuplicateOf = incumbent.id;
-        deduped[existingIndex] = item;
-        seen.set(key, existingIndex);
-      } else {
-        incumbent.isDuplicateOf = incumbent.isDuplicateOf || item.id;
+          item.isDuplicateOf = incumbent.id;
+          item.corroboratingSources = mergeCorroboratingSources(item, incumbent);
+          item.corroborationCount = item.corroboratingSources.length;
+          deduped[existingIndex] = item;
+          seen.set(key, existingIndex);
+        } else {
+          incumbent.corroboratingSources = mergeCorroboratingSources(incumbent, item);
+          incumbent.corroborationCount = incumbent.corroboratingSources.length;
+          incumbent.isDuplicateOf = incumbent.isDuplicateOf || item.id;
+        }
+        continue;
       }
-      continue;
-    }
     seen.set(key, deduped.length);
     deduped.push(item);
   }

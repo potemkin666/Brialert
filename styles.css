@@ -431,6 +431,35 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
   background: rgba(255, 255, 255, 0.05);
 }
 .summary-panel p { color: var(--muted); line-height: 1.5; }
+.summary-panel pre {
+  margin: 12px 0 0;
+  white-space: pre-wrap;
+  font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.corroboration-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.corroboration-item {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.corroboration-item a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+.corroboration-item p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
 .modal-actions { margin-top: 18px; }
 .primary-link {
   display: inline-block;
