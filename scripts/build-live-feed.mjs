@@ -113,9 +113,26 @@ function recencyOkay(source, rawDate) {
 }
 
 function makeSummary(source, item) {
-  const text = clean(item.summary || item.title);
+  const title = clean(item.title);
+  const summary = clean(item.summary && item.summary !== item.title ? item.summary : '');
+  const when = formatDisplayDate(item.published);
+  const where = inferLocation(source, title);
+  const text = `${title} ${summary}`.toLowerCase();
   if (source.lane === 'incidents') {
-    return `${source.provider} has a new item that matched the incident watch logic. The immediate value is source validation, extracting what happened, where it occurred, and whether the item indicates an active attack, a disrupted plot, or a prosecution-stage development.`;
+    const type = text.includes('charged') || text.includes('sentenced') || text.includes('convicted')
+      ? 'a prosecution-stage development'
+      : text.includes('arrest') || text.includes('raid') || text.includes('foiled') || text.includes('disrupt')
+        ? 'a disrupted plot or enforcement action'
+        : text.includes('attack') || text.includes('bomb') || text.includes('explosion') || text.includes('shooting') || text.includes('stabbing') || text.includes('ramming') || text.includes('hostage')
+          ? 'an attack-related development'
+          : text.includes('threat')
+            ? 'a threat-related development'
+            : 'a terrorism-related update';
+    return [
+      `${source.provider} published ${type} linked to ${where} on ${when}.`,
+      summary ? `The source text says: ${summary}` : `The source headline is: ${title}.`,
+      'This should be assessed for whether it reflects an active scene, a recently disrupted plot, or a later judicial or recognition-stage development.'
+    ].join(' ');
   }
   if (source.lane === 'sanctions') {
     return `${source.provider} has published a sanctions-related update. The value here is legal and entity-resolution context, including designations, aliases, listing changes, and notice-level movement.`;

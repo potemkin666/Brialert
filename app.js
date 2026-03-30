@@ -58,6 +58,36 @@ const clean = (value) => String(value || '').trim();
 function severityLabel(severity) { return clean(severity).charAt(0).toUpperCase() + clean(severity).slice(1); }
 function regionLabel(region) { return region === 'uk' ? 'UK' : 'EU'; }
 function keywordMatches(alert) { const haystack = `${alert.title} ${alert.summary} ${alert.aiSummary}`.toLowerCase(); return incidentKeywords.filter((keyword) => haystack.includes(keyword)); }
+function looksGenericSummary(text) {
+  const summary = clean(text).toLowerCase();
+  return !summary ||
+    summary.includes('matched the incident watch logic') ||
+    summary.includes('the immediate value is source validation') ||
+    summary.includes('should be read as') ||
+    summary.includes('contextual monitoring item');
+}
+function incidentTypeLabel(alert) {
+  const text = `${alert.title} ${alert.summary}`.toLowerCase();
+  if (text.includes('charged') || text.includes('sentenced') || text.includes('convicted')) return 'a prosecution-stage development';
+  if (text.includes('arrest') || text.includes('raid') || text.includes('disrupt') || text.includes('foiled')) return 'a disrupted plot or enforcement action';
+  if (text.includes('attack') || text.includes('bomb') || text.includes('explosion') || text.includes('shooting') || text.includes('stabbing') || text.includes('ramming') || text.includes('hostage')) return 'a reported attack-related development';
+  if (text.includes('threat')) return 'a threat-related development';
+  return 'a terrorism-related source update';
+}
+function buildIncidentSummary(alert) {
+  const base = clean(alert.summary && alert.summary !== alert.title ? alert.summary : '');
+  const type = incidentTypeLabel(alert);
+  const firstLine = `${alert.source} published ${type} linked to ${alert.location} on ${alert.time}.`;
+  const secondLine = base
+    ? `The source line is: ${base}`
+    : `The headline is: ${alert.title}.`;
+  const thirdLine = isLiveIncidentCandidate(alert)
+    ? 'Treat this as a responder-facing item first, then confirm whether reporting points to an active scene, a recently disrupted plot, or a post-incident judicial step.'
+    : 'Treat this as context unless corroborating reporting shows an active public-safety dimension or linked operational activity.';
+  const fourthLine = `Current source confidence is ${alert.confidence.toLowerCase()}, and the item is currently classified in the ${laneLabels[alert.lane].toLowerCase()} lane.`;
+  return [firstLine, secondLine, thirdLine, fourthLine].join(' ');
+}
+function effectiveSummary(alert) { return looksGenericSummary(alert.aiSummary) ? buildIncidentSummary(alert) : alert.aiSummary; }
 function incidentScore(alert) { const matches = keywordMatches(alert); let score = matches.length; if (alert.lane === 'incidents') score += 3; if (alert.severity === 'critical') score += 3; if (alert.severity === 'high') score += 2; if (alert.major) score += 2; if (trustedMajorSources.has(alert.source)) score += 2; return score; }
 function isLiveIncidentCandidate(alert) { return alert.lane === 'incidents' && incidentScore(alert) >= 6; }
 function filteredAlerts() { return alerts.filter((alert) => (activeRegion === 'all' || alert.region === activeRegion) && (activeLane === 'all' || alert.lane === activeLane)); }
@@ -227,17 +257,18 @@ function renderHero() {
 function renderAll() { renderHero(); renderPriority(); renderFeed(); renderContext(); renderMap(); renderWatchlist(); renderNotes(); }
 
 function openDetail(alert) {
+  const summaryText = effectiveSummary(alert);
   modalTitle.textContent = alert.title;
   modalMeta.textContent = `${alert.location} | ${alert.time}`;
-  modalAiSummary.textContent = alert.aiSummary;
+  modalAiSummary.textContent = summaryText;
   modalSummary.textContent = alert.summary;
   modalSeverity.textContent = severityLabel(alert.severity);
   modalStatus.textContent = alert.status;
   modalSource.textContent = alert.source;
   modalRegion.textContent = alert.region === 'uk' ? 'United Kingdom' : 'Europe';
-  modalBriefing.textContent = buildBriefing(alert, alert.aiSummary);
+  modalBriefing.textContent = buildBriefing(alert, summaryText);
   modalLink.href = alert.sourceUrl;
-  copyBriefing.dataset.briefing = buildBriefing(alert, alert.aiSummary);
+  copyBriefing.dataset.briefing = buildBriefing(alert, summaryText);
   modal.classList.remove('hidden');
 }
 
