@@ -10,6 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Brialert">
   <meta name="description" content="Responder-first terrorism incident briefing workflow for iPhone web app use.">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="assets/albert-icon.jpg">
   <link rel="icon" href="assets/albert-icon.jpg" type="image/jpeg">
@@ -106,32 +107,7 @@
             </div>
             <div class="map-surface" id="map-grid">
               <div class="map-viewport" id="map-viewport">
-                <div class="map-stage" id="map-stage">
-                  <svg class="map-art" viewBox="0 0 800 420" aria-hidden="true">
-                    <rect class="sea" x="0" y="0" width="800" height="420" />
-                    <g class="graticule" opacity="0.42">
-                      <path d="M80 95h640M80 145h640M80 195h640M80 245h640M80 295h640M80 345h640" />
-                      <path d="M140 70v300M220 70v300M300 70v300M380 70v300M460 70v300M540 70v300M620 70v300M700 70v300" />
-                    </g>
-                    <path class="land" d="M105 129l20-13 26-7 29 1 22 8 12 10 2 12-12 5-8 12 6 17 15 15 14 19 4 24-9 31-7 33 8 28 18 27 3 15-13 2-12-11-16-8-14-24-15-20-10-23-5-25-12-18-18-7-20-29-7-25 6-23 13-17 11-17 9-14z" />
-                    <path class="land" d="M236 106l11-8 16-2 13 4 7 8-6 11-14 7-18-3-10-9z" />
-                    <path class="land" d="M289 142l15-12 22-4 17 2 14 13-4 14-20 4-16 12-4 16 4 14-7 15-19 6-12-7-7-18 4-17-6-12 3-13 16-13z" />
-                    <path class="land" d="M334 114l19-18 33-18 45-7 44 2 38 11 21 14 8 16-4 13 14 8 25-4 34 5 29 11 28 18 27 6 18 16-10 13-24 7-24 20-8 18-21 8-11 21 6 16-18 20-27 0-24 9-21 24-24 19-26 1-8 11-13 3-11-10-2-31 8-29 16-28-3-19-16-8-14-25-20-14-11-22 5-17 21-14 24-10 19-18-3-18-24-6-16-17 2-18z" />
-                    <path class="land" d="M448 205l18 2 18 14 10 18-5 22-16 11-19 2-10-12-4-19 3-24z" />
-                    <path class="land" d="M456 275l18 5 17 25 7 23-6 28-15 21-14 10-18-5-8-24 4-34-5-24 6-18z" />
-                    <path class="land" d="M587 104l37-14 41-2 36 7 28 13 9 14-11 12-26 2-10 10 11 12 24 8 17 17-7 13-23 9-33 4-27 17-23-5-12 7 2 18-12 20-25-4-14-15-24-10-2-16 14-13 31-6 12-12-14-14-26-7-16-16 6-14 21-8 18-17 12-4z" />
-                    <path class="land" d="M642 236l15 7 19 3 19 18 20 10 12 22-11 11-30-6-24-9-16-18-7-17z" />
-                    <path class="land" d="M692 320l20 5 17 17-7 16-17 7-18-5-10-14 5-17z" />
-                    <path class="land" d="M246 303l14 5 9 14-4 17-15 8-10-8v-17z" />
-                    <text class="map-label-svg" x="112" y="104">North America</text>
-                    <text class="map-label-svg" x="264" y="118">Atlantic</text>
-                    <text class="map-label-svg" x="344" y="88">Europe</text>
-                    <text class="map-label-svg" x="430" y="302">Africa</text>
-                    <text class="map-label-svg" x="592" y="84">Asia</text>
-                    <text class="map-label-svg" x="671" y="318">Oceania</text>
-                  </svg>
-                  <div class="map-marker-layer" id="map-marker-layer"></div>
-                </div>
+                <div class="leaflet-map" id="leaflet-map" aria-label="Interactive alert map"></div>
               </div>
             </div>
             <p class="panel-copy">Drag to pan, use the controls to zoom, and tap markers to open the underlying incident or context item.</p>
@@ -217,6 +193,7 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -274,81 +274,64 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
   color: var(--text);
   font-weight: 700;
 }
-.map-viewport {
+.leaflet-map {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  cursor: grab;
 }
-.map-viewport.is-dragging {
-  cursor: grabbing;
-}
-.map-stage {
-  position: absolute;
-  inset: 0;
-  transform-origin: center center;
-  will-change: transform;
-}
-.map-art {
-  position: absolute;
-  inset: 0;
+.leaflet-container {
   width: 100%;
   height: 100%;
+  background: #081320;
+  font: inherit;
 }
-.sea { fill: rgba(4, 15, 32, 0.88); }
-.graticule path {
-  fill: none;
-  stroke: rgba(184, 225, 255, 0.12);
-  stroke-width: 1.2;
-  stroke-dasharray: 6 10;
+.leaflet-tile-pane {
+  filter: saturate(0.85) contrast(1.05) brightness(0.72);
 }
-.land {
-  fill: rgba(96, 216, 255, 0.86);
-  stroke: rgba(224, 248, 255, 0.48);
-  stroke-width: 2;
-  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.18));
+.leaflet-control-attribution {
+  background: rgba(7, 9, 20, 0.72) !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  border-radius: 10px 0 0 0;
+  padding: 2px 6px !important;
 }
-.map-label-svg {
-  fill: rgba(225, 244, 255, 0.52);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.leaflet-control-attribution a {
+  color: rgba(255, 255, 255, 0.88) !important;
 }
-.map-marker-layer {
-  position: absolute;
-  inset: 0;
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 2;
 }
-.pin {
-  position: absolute;
-  width: 20px;
-  height: 20px;
+.map-pin-icon {
+  background: transparent;
+  border: 0;
+}
+.map-pin {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
   border-radius: 50% 50% 50% 0;
-  border: 2px solid rgba(255, 255, 255, 0.94);
-  transform: translate(-50%, -50%) rotate(-45deg);
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08), 0 8px 18px rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.96);
+  transform: rotate(-45deg);
+  box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.08), 0 10px 20px rgba(0, 0, 0, 0.35);
 }
-.pin::after {
+.map-pin::after {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 4px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
 }
-.pin:hover,
-.pin:focus-visible {
-  transform: translate(-50%, -50%) rotate(-45deg) scale(1.12);
-}
-.pin.severity-critical {
+.map-pin--critical {
   background: linear-gradient(180deg, #ff6b52, #c42d1f);
 }
-.pin.severity-high {
+.map-pin--high {
   background: linear-gradient(180deg, #ffad4d, #c96a10);
 }
-.pin.severity-elevated {
+.map-pin--elevated {
   background: linear-gradient(180deg, #f2d55b, #b89a21);
 }
-.pin.severity-moderate {
+.map-pin--moderate {
   background: linear-gradient(180deg, #4fd2d0, #1d8381);
 }
 #context-list {

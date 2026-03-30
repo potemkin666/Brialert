@@ -84,9 +84,10 @@ let lastBrowserPollAt = new Date();
 let liveFeedGeneratedAt = null;
 let liveSourceCount = 0;
 let albertIndex = -1;
-let mapTransform = { scale: 1, x: 0, y: 0 };
-let mapDrag = { active: false, startX: 0, startY: 0, originX: 0, originY: 0 };
 let notes = [];
+let liveMap = null;
+let liveMarkers = [];
+let lastMapSignature = '';
 
 const priorityCard = document.getElementById('priority-card');
 const feedList = document.getElementById('feed-list');
@@ -99,10 +100,7 @@ const watchlistSummary = document.getElementById('watchlist-summary');
 const heroRegion = document.getElementById('hero-region');
 const heroUpdated = document.getElementById('hero-updated');
 const heroPolling = document.getElementById('hero-polling');
-const mapGrid = document.getElementById('map-grid');
-const mapViewport = document.getElementById('map-viewport');
-const mapStage = document.getElementById('map-stage');
-const mapMarkerLayer = document.getElementById('map-marker-layer');
+const mapElement = document.getElementById('leaflet-map');
 const mapSummary = document.getElementById('map-summary');
 const mapZoomIn = document.getElementById('map-zoom-in');
 const mapZoomOut = document.getElementById('map-zoom-out');
@@ -170,48 +168,50 @@ function saveNotes() {
   } catch {}
 }
 const geoLookup = [
-  { terms: ['leeds'], x: 47, y: 27 },
-  { terms: ['london', 'golders green'], x: 46, y: 28 },
-  { terms: ['manchester'], x: 45, y: 26 },
-  { terms: ['birmingham'], x: 46, y: 27 },
-  { terms: ['liverpool'], x: 44, y: 26 },
-  { terms: ['glasgow'], x: 43, y: 23 },
-  { terms: ['belfast'], x: 41, y: 25 },
-  { terms: ['northumberland'], x: 47, y: 24 },
-  { terms: ['paris', 'france'], x: 48, y: 31 },
-  { terms: ['brussels', 'belgium'], x: 49, y: 29 },
-  { terms: ['amsterdam', 'netherlands'], x: 49, y: 27 },
-  { terms: ['berlin', 'germany'], x: 53, y: 27 },
-  { terms: ['madrid', 'spain'], x: 45, y: 38 },
-  { terms: ['rome', 'italy'], x: 52, y: 37 },
-  { terms: ['athens', 'greece'], x: 58, y: 39 },
-  { terms: ['stockholm', 'sweden'], x: 55, y: 19 },
-  { terms: ['copenhagen', 'denmark'], x: 52, y: 22 },
-  { terms: ['dublin', 'ireland'], x: 40, y: 27 },
-  { terms: ['vilnius', 'lithuania'], x: 58, y: 23 },
-  { terms: ['warsaw', 'poland'], x: 56, y: 26 },
-  { terms: ['kyiv', 'ukraine'], x: 61, y: 29 },
-  { terms: ['tehran', 'iran'], x: 68, y: 33 },
-  { terms: ['israel', 'tel aviv', 'jerusalem'], x: 61, y: 38 },
-  { terms: ['lebanon', 'beirut'], x: 60, y: 37 },
-  { terms: ['iraq'], x: 63, y: 35 },
-  { terms: ['yemen'], x: 62, y: 42 },
-  { terms: ['nigeria'], x: 49, y: 51 },
-  { terms: ['pakistan'], x: 68, y: 35 },
-  { terms: ['austria', 'vienna'], x: 54, y: 30 },
-  { terms: ['switzerland'], x: 50, y: 31 },
-  { terms: ['united states', 'us ', 'usa', 'california', 'yosemite'], x: 18, y: 31 },
-  { terms: ['canada'], x: 18, y: 18 },
-  { terms: ['australia'], x: 84, y: 68 },
-  { terms: ['europe'], x: 52, y: 29 },
-  { terms: ['united kingdom', 'uk'], x: 45, y: 27 }
+  { terms: ['leeds'], lat: 53.8008, lng: -1.5491 },
+  { terms: ['london', 'golders green'], lat: 51.5074, lng: -0.1278 },
+  { terms: ['manchester'], lat: 53.4808, lng: -2.2426 },
+  { terms: ['birmingham'], lat: 52.4862, lng: -1.8904 },
+  { terms: ['liverpool'], lat: 53.4084, lng: -2.9916 },
+  { terms: ['glasgow'], lat: 55.8642, lng: -4.2518 },
+  { terms: ['belfast'], lat: 54.5973, lng: -5.9301 },
+  { terms: ['northumberland'], lat: 55.2083, lng: -2.0784 },
+  { terms: ['paris', 'france'], lat: 48.8566, lng: 2.3522 },
+  { terms: ['brussels', 'belgium'], lat: 50.8503, lng: 4.3517 },
+  { terms: ['amsterdam', 'netherlands'], lat: 52.3676, lng: 4.9041 },
+  { terms: ['berlin', 'germany'], lat: 52.52, lng: 13.405 },
+  { terms: ['madrid', 'spain'], lat: 40.4168, lng: -3.7038 },
+  { terms: ['rome', 'italy'], lat: 41.9028, lng: 12.4964 },
+  { terms: ['athens', 'greece'], lat: 37.9838, lng: 23.7275 },
+  { terms: ['stockholm', 'sweden'], lat: 59.3293, lng: 18.0686 },
+  { terms: ['copenhagen', 'denmark'], lat: 55.6761, lng: 12.5683 },
+  { terms: ['dublin', 'ireland'], lat: 53.3498, lng: -6.2603 },
+  { terms: ['vilnius', 'lithuania'], lat: 54.6872, lng: 25.2797 },
+  { terms: ['warsaw', 'poland'], lat: 52.2297, lng: 21.0122 },
+  { terms: ['kyiv', 'ukraine'], lat: 50.4501, lng: 30.5234 },
+  { terms: ['tehran', 'iran'], lat: 35.6892, lng: 51.389 },
+  { terms: ['israel', 'tel aviv'], lat: 32.0853, lng: 34.7818 },
+  { terms: ['jerusalem'], lat: 31.7683, lng: 35.2137 },
+  { terms: ['lebanon', 'beirut'], lat: 33.8938, lng: 35.5018 },
+  { terms: ['iraq', 'baghdad'], lat: 33.3152, lng: 44.3661 },
+  { terms: ['yemen', 'sanaa'], lat: 15.3694, lng: 44.191 },
+  { terms: ['nigeria', 'abuja'], lat: 9.0765, lng: 7.3986 },
+  { terms: ['pakistan', 'islamabad'], lat: 33.6844, lng: 73.0479 },
+  { terms: ['austria', 'vienna'], lat: 48.2082, lng: 16.3738 },
+  { terms: ['switzerland'], lat: 46.8182, lng: 8.2275 },
+  { terms: ['united states', 'us ', 'usa'], lat: 39.8283, lng: -98.5795 },
+  { terms: ['california', 'yosemite'], lat: 37.8651, lng: -119.5383 },
+  { terms: ['canada'], lat: 56.1304, lng: -106.3468 },
+  { terms: ['australia'], lat: -25.2744, lng: 133.7751 },
+  { terms: ['europe'], lat: 54, lng: 15 },
+  { terms: ['united kingdom', 'uk'], lat: 54.5, lng: -2.5 }
 ];
 function severityLabel(severity) { return clean(severity).charAt(0).toUpperCase() + clean(severity).slice(1); }
 function regionLabel(region) { return region === 'uk' ? 'UK' : 'EU'; }
 function inferGeoPoint(alert) {
   const haystack = `${clean(alert.location)} ${clean(alert.title)} ${clean(alert.summary)}`.toLowerCase();
   const match = geoLookup.find((entry) => entry.terms.some((term) => haystack.includes(term)));
-  if (match) return { x: match.x, y: match.y };
+  if (match) return { lat: match.lat, lng: match.lng };
   return null;
 }
 function keywordMatches(alert) { const haystack = `${alert.title} ${alert.summary} ${alert.aiSummary}`.toLowerCase(); return incidentKeywords.filter((keyword) => haystack.includes(keyword)); }
@@ -342,8 +342,8 @@ function normaliseAlert(alert, index) {
     source: clean(alert.source) || 'Unknown source',
     sourceUrl: clean(alert.sourceUrl) || '#',
     time: clean(alert.time) || clean(alert.happenedWhen) || 'Now',
-    x: geoPoint?.x ?? (Number.isFinite(alert.x) ? alert.x : (alert.region === 'uk' ? 45 : 52)),
-    y: geoPoint?.y ?? (Number.isFinite(alert.y) ? alert.y : (alert.region === 'uk' ? 27 : 29)),
+    lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? (alert.region === 'uk' ? 54.5 : 54)),
+    lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? (alert.region === 'uk' ? -2.5 : 15)),
     major: !!alert.major,
     eventType: clean(alert.eventType),
     geoPrecision: clean(alert.geoPrecision),
@@ -435,32 +435,69 @@ function renderContext() {
   contextList.querySelectorAll('[data-context]').forEach((card) => card.addEventListener('click', () => openDetail(alerts.find((item) => item.id === card.dataset.context))));
 }
 
-function clampMapTransform() {
-  const maxX = ((mapTransform.scale - 1) * mapGrid.clientWidth) / 2;
-  const maxY = ((mapTransform.scale - 1) * mapGrid.clientHeight) / 2;
-  mapTransform.x = Math.max(-maxX, Math.min(maxX, mapTransform.x));
-  mapTransform.y = Math.max(-maxY, Math.min(maxY, mapTransform.y));
-}
-
-function applyMapTransform() {
-  clampMapTransform();
-  mapStage.style.transform = `translate(${mapTransform.x}px, ${mapTransform.y}px) scale(${mapTransform.scale})`;
-}
-
-function renderMap() {
-  mapMarkerLayer.querySelectorAll('.pin').forEach((pin) => pin.remove());
-  filteredAlerts().forEach((alert) => {
-    const pin = document.createElement('button');
-    pin.className = `pin actionable severity-${alert.severity}`;
-    pin.style.left = `${alert.x}%`;
-    pin.style.top = `${alert.y}%`;
-    pin.dataset.pin = alert.id;
-    pin.setAttribute('aria-label', alert.title);
-    pin.addEventListener('click', () => openDetail(alert));
-    mapMarkerLayer.appendChild(pin);
+function ensureMap() {
+  if (liveMap || !mapElement || typeof L === 'undefined') return;
+  liveMap = L.map(mapElement, {
+    center: [20, 10],
+    zoom: 2,
+    minZoom: 2,
+    maxZoom: 8,
+    zoomControl: false,
+    worldCopyJump: true,
+    attributionControl: true
   });
-  mapSummary.textContent = `${responderAlerts().length} responder items | ${contextAlerts().length} context`;
-  applyMapTransform();
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(liveMap);
+}
+
+function mapIconForSeverity(severity) {
+  const safeSeverity = ['critical', 'high', 'elevated', 'moderate'].includes(severity) ? severity : 'moderate';
+  return L.divIcon({
+    className: 'map-pin-icon',
+    html: `<span class="map-pin map-pin--${safeSeverity}"></span>`,
+    iconSize: [22, 22],
+    iconAnchor: [11, 22],
+    popupAnchor: [0, -16]
+  });
+}
+
+function renderMap(forceFit = false) {
+  ensureMap();
+  if (!liveMap) return;
+  liveMarkers.forEach((marker) => marker.remove());
+  liveMarkers = [];
+
+  const items = filteredAlerts().filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
+  const signature = items.map((alert) => `${alert.id}:${alert.lat.toFixed(3)},${alert.lng.toFixed(3)}`).join('|');
+  const bounds = [];
+
+  items.forEach((alert) => {
+    const marker = L.marker([alert.lat, alert.lng], {
+      icon: mapIconForSeverity(alert.severity),
+      keyboard: true,
+      title: alert.title
+    });
+    marker.on('click', () => openDetail(alert));
+    marker.addTo(liveMap);
+    liveMarkers.push(marker);
+    bounds.push([alert.lat, alert.lng]);
+  });
+
+  mapSummary.textContent = `${responderAlerts().length} responder items | ${contextAlerts().length} context | ${items.length} plotted`;
+
+  if (items.length && (forceFit || signature !== lastMapSignature)) {
+    liveMap.fitBounds(bounds, {
+      padding: [28, 28],
+      maxZoom: items.length === 1 ? 6 : 5
+    });
+  } else if (!items.length && (forceFit || lastMapSignature)) {
+    liveMap.setView([20, 10], 2);
+  }
+
+  lastMapSignature = signature;
+  requestAnimationFrame(() => liveMap.invalidateSize());
 }
 
 function renderWatchlist() {
@@ -499,9 +536,11 @@ function nextAlbertQuote() {
   return albertQuotes[nextIndex];
 }
 
-function zoomMap(scaleDelta) {
-  mapTransform.scale = Math.max(1, Math.min(2.4, mapTransform.scale + scaleDelta));
-  applyMapTransform();
+function zoomMap(direction) {
+  ensureMap();
+  if (!liveMap) return;
+  if (direction > 0) liveMap.zoomIn();
+  if (direction < 0) liveMap.zoomOut();
 }
 
 function openDetail(alert) {
@@ -525,31 +564,31 @@ function closeDetailPanel() { modal.classList.add('hidden'); }
 
 filters.addEventListener('click', (event) => { const button = event.target.closest('[data-region]'); if (!button) return; activeRegion = button.dataset.region; filters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active')); button.classList.add('active'); renderAll(); });
 laneFilters.addEventListener('click', (event) => { const button = event.target.closest('[data-lane]'); if (!button) return; activeLane = button.dataset.lane; laneFilters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active')); button.classList.add('active'); renderAll(); });
-tabbar.addEventListener('click', (event) => { const button = event.target.closest('[data-tab]'); if (!button) return; const next = button.dataset.tab; tabbar.querySelectorAll('.tab').forEach((item) => item.classList.remove('active')); button.classList.add('active'); document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === next)); });
+tabbar.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-tab]');
+  if (!button) return;
+  const next = button.dataset.tab;
+  tabbar.querySelectorAll('.tab').forEach((item) => item.classList.remove('active'));
+  button.classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === next));
+  if (next === 'map') {
+    setTimeout(() => {
+      ensureMap();
+      renderMap(true);
+    }, 60);
+  }
+});
 document.getElementById('note-form').addEventListener('submit', (event) => { event.preventDefault(); const title = document.getElementById('note-title'); const body = document.getElementById('note-body'); notes.unshift({ title: title.value.trim(), body: body.value.trim() }); saveNotes(); title.value = ''; body.value = ''; renderNotes(); });
 copyBriefing.addEventListener('click', async () => { const briefing = copyBriefing.dataset.briefing || ''; try { await navigator.clipboard.writeText(briefing); copyBriefing.textContent = 'Copied'; setTimeout(() => { copyBriefing.textContent = 'Copy Briefing'; }, 1200); } catch { copyBriefing.textContent = 'Copy failed'; setTimeout(() => { copyBriefing.textContent = 'Copy Briefing'; }, 1200); } });
 closeModal.addEventListener('click', closeDetailPanel);
 modalBackdrop.addEventListener('click', closeDetailPanel);
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeDetailPanel(); });
-mapZoomIn.addEventListener('click', () => zoomMap(0.22));
-mapZoomOut.addEventListener('click', () => zoomMap(-0.22));
-mapReset.addEventListener('click', () => {
-  mapTransform = { scale: 1, x: 0, y: 0 };
-  applyMapTransform();
-});
-mapViewport.addEventListener('pointerdown', (event) => {
-  mapDrag = { active: true, startX: event.clientX, startY: event.clientY, originX: mapTransform.x, originY: mapTransform.y };
-  mapViewport.classList.add('is-dragging');
-});
-window.addEventListener('pointermove', (event) => {
-  if (!mapDrag.active) return;
-  mapTransform.x = mapDrag.originX + (event.clientX - mapDrag.startX);
-  mapTransform.y = mapDrag.originY + (event.clientY - mapDrag.startY);
-  applyMapTransform();
-});
-window.addEventListener('pointerup', () => {
-  mapDrag.active = false;
-  mapViewport.classList.remove('is-dragging');
+mapZoomIn.addEventListener('click', () => zoomMap(1));
+mapZoomOut.addEventListener('click', () => zoomMap(-1));
+mapReset.addEventListener('click', () => renderMap(true));
+window.addEventListener('resize', () => {
+  if (!liveMap) return;
+  requestAnimationFrame(() => liveMap.invalidateSize());
 });
 watched = loadWatched();
 notes = loadNotes();
