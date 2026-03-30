@@ -24,6 +24,9 @@
         <header class="hero-card">
           <p class="eyebrow">brialert</p>
           <h1>F.O.C</h1>
+          <div class="hero-actions">
+            <button class="mode-toggle" id="briefing-mode-toggle" type="button" aria-pressed="false">Briefing mode off</button>
+          </div>
           <div class="hero-metrics">
             <div class="metric">
               <span class="metric-label">Source Scope</span>
@@ -40,7 +43,7 @@
           </div>
         </header>
 
-        <section class="bulldog-card actionable" id="albert-card">
+        <section class="bulldog-card actionable briefing-mode-hidden" id="albert-card">
           <img src="assets/albert-icon.jpg" alt="Albert bulldog mascot">
           <div>
             <h2>Albert watches</h2>
@@ -49,7 +52,7 @@
           </div>
         </section>
 
-        <nav class="tabbar" id="tabbar">
+        <nav class="tabbar briefing-mode-hidden" id="tabbar">
           <button class="tab active" data-tab="firstalert">Live</button>
           <button class="tab" data-tab="map">Map</button>
           <button class="tab" data-tab="watchlists">Watchlists</button>
@@ -57,13 +60,28 @@
         </nav>
 
         <section class="tab-panel active" data-panel="firstalert">
-          <section class="filters" id="filters">
+          <section class="briefing-mode-panel hidden" id="briefing-mode-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Briefing Mode</p>
+                <h3 id="briefing-mode-title">Waiting for a verified source pull</h3>
+                <p class="panel-copy" id="briefing-mode-meta">The app will collapse into one live operational brief here.</p>
+              </div>
+              <button class="primary-button" id="briefing-mode-copy" type="button">Copy Briefing</button>
+            </div>
+            <div class="summary-panel">
+              <span class="detail-label">Incident Summary</span>
+              <p id="briefing-mode-summary">Once the feed builder publishes a live responder candidate, the stripped briefing will appear here automatically.</p>
+            </div>
+          </section>
+
+          <section class="filters briefing-mode-hidden" id="filters">
             <button class="filter active" data-region="all">All</button>
             <button class="filter" data-region="uk">UK</button>
             <button class="filter" data-region="europe">EU</button>
           </section>
 
-          <section class="filters lane-filters" id="lane-filters">
+          <section class="filters lane-filters briefing-mode-hidden" id="lane-filters">
             <button class="filter active" data-lane="all">All lanes</button>
             <button class="filter" data-lane="incidents">Incidents</button>
             <button class="filter" data-lane="sanctions">Sanctions</button>
@@ -72,9 +90,9 @@
             <button class="filter" data-lane="prevention">Prevention</button>
           </section>
 
-          <section class="priority-card actionable" id="priority-card"></section>
+          <section class="priority-card actionable briefing-mode-hidden" id="priority-card"></section>
 
-          <section class="section">
+          <section class="section briefing-mode-hidden">
             <div class="section-heading">
               <h3>Responder Queue</h3>
               <span id="watched-count">0 watched</span>
@@ -82,7 +100,7 @@
             <div id="feed-list"></div>
           </section>
 
-          <section class="section">
+          <section class="section briefing-mode-hidden">
             <div class="section-heading">
               <h3>Context Strip</h3>
               <span id="context-count">0 contextual items</span>

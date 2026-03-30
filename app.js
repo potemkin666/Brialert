@@ -4,6 +4,7 @@ const POLL_INTERVAL_MS = 60_000;
 const SOURCE_PULL_MINUTES = 15;
 const WATCHED_STORAGE_KEY = 'brialert.watched';
 const NOTES_STORAGE_KEY = 'brialert.notes';
+const BRIEFING_MODE_STORAGE_KEY = 'brialert.briefingMode';
 
 const laneLabels = { all: 'All lanes', incidents: 'Incidents', sanctions: 'Sanctions', oversight: 'Oversight', border: 'Border', prevention: 'Prevention' };
 const incidentKeywords = ['terror','terrorism','attack','attacks','bomb','bombing','explosion','explosive','device','ramming','stabbing','shooting','hostage','plot','suspect','arrest','charged','charged with','parcel','radicalised','extremist','isis','islamic state','al-qaeda','threat'];
@@ -88,12 +89,15 @@ let liveFeedGeneratedAt = null;
 let liveSourceCount = 0;
 let albertIndex = -1;
 let notes = [];
+let briefingMode = false;
+let activeTab = 'firstalert';
 let liveMap = null;
 let liveMarkers = [];
 let lastMapSignature = '';
 let geoLookup = [];
 
 const priorityCard = document.getElementById('priority-card');
+const screen = document.querySelector('.screen');
 const feedList = document.getElementById('feed-list');
 const contextList = document.getElementById('context-list');
 const watchlistList = document.getElementById('watchlist-list');
@@ -112,6 +116,12 @@ const mapReset = document.getElementById('map-reset');
 const filters = document.getElementById('filters');
 const laneFilters = document.getElementById('lane-filters');
 const tabbar = document.getElementById('tabbar');
+const briefingModeToggle = document.getElementById('briefing-mode-toggle');
+const briefingModePanel = document.getElementById('briefing-mode-panel');
+const briefingModeTitle = document.getElementById('briefing-mode-title');
+const briefingModeMeta = document.getElementById('briefing-mode-meta');
+const briefingModeSummary = document.getElementById('briefing-mode-summary');
+const briefingModeCopy = document.getElementById('briefing-mode-copy');
 const albertCard = document.getElementById('albert-card');
 const albertQuote = document.getElementById('albert-quote');
 const albertNote = document.getElementById('albert-note');
@@ -172,9 +182,21 @@ function loadNotes() {
   } catch {}
   return [...defaultNotes];
 }
+function loadBriefingMode() {
+  try {
+    return localStorage.getItem(BRIEFING_MODE_STORAGE_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
 function saveNotes() {
   try {
     localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
+  } catch {}
+}
+function saveBriefingMode() {
+  try {
+    localStorage.setItem(BRIEFING_MODE_STORAGE_KEY, String(briefingMode));
   } catch {}
 }
 async function loadGeoLookup() {
@@ -531,6 +553,27 @@ function renderCorroboratingSources(alert) {
     </article>`).join('')}</div>`;
 }
 function topPriority() { const pool = responderAlerts().length ? responderAlerts() : contextAlerts(); return pool[0]; }
+function setActiveTab(next) {
+  activeTab = next;
+  tabbar.querySelectorAll('.tab').forEach((item) => item.classList.toggle('active', item.dataset.tab === next));
+  document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === next));
+  if (next === 'map') {
+    setTimeout(() => {
+      ensureMap();
+      renderMap(true);
+    }, 60);
+  }
+}
+function applyBriefingMode() {
+  screen.classList.toggle('briefing-mode', briefingMode);
+  briefingModeToggle.classList.toggle('active', briefingMode);
+  briefingModeToggle.setAttribute('aria-pressed', briefingMode ? 'true' : 'false');
+  briefingModeToggle.textContent = briefingMode ? 'Briefing mode on' : 'Briefing mode off';
+  if (briefingMode) {
+    setActiveTab('firstalert');
+    closeDetailPanel();
+  }
+}
 
 function buildBriefing(alert, summaryText) {
   const matches = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
@@ -671,6 +714,30 @@ function renderPriority() {
     </div>`;
   priorityCard.onclick = () => openDetail(alert);
 }
+function renderBriefingMode() {
+  if (!briefingMode) {
+    briefingModePanel.classList.add('hidden');
+    return;
+  }
+
+  briefingModePanel.classList.remove('hidden');
+  const alert = topPriority();
+  if (!alert) {
+    briefingModeTitle.textContent = 'Waiting for a verified source pull';
+    briefingModeMeta.textContent = 'The briefing screen will lock onto the top live responder item as soon as one arrives.';
+    briefingModeSummary.textContent = 'No live responder candidate is available yet, so the app is holding on a clean standby state rather than surfacing stale or placeholder material.';
+    briefingModeCopy.disabled = true;
+    briefingModeCopy.dataset.briefing = '';
+    return;
+  }
+
+  const summaryText = effectiveSummary(alert);
+  briefingModeTitle.textContent = alert.title;
+  briefingModeMeta.textContent = `${alert.location} | ${alert.time} | ${alert.source}`;
+  briefingModeSummary.textContent = summaryText;
+  briefingModeCopy.disabled = false;
+  briefingModeCopy.dataset.briefing = buildBriefing(alert, summaryText);
+}
 
 function responderCardMarkup(alert) {
   return `
@@ -777,8 +844,8 @@ function renderWatchlist() {
 function renderNotes() { notesList.innerHTML = notes.map((note) => `<article class="note-card"><strong>${note.title}</strong><p>${note.body}</p></article>`).join(''); }
 
 function renderHero() {
-  const regionCopy = activeRegion === 'all' ? 'All feeds' : `${regionLabel(activeRegion)} feeds`;
-  const laneCopy = activeLane === 'all' ? 'Responder posture' : laneLabels[activeLane];
+  const regionCopy = briefingMode ? 'Top alert only' : (activeRegion === 'all' ? 'All feeds' : `${regionLabel(activeRegion)} feeds`);
+  const laneCopy = briefingMode ? 'Briefing posture' : (activeLane === 'all' ? 'Responder posture' : laneLabels[activeLane]);
   heroRegion.textContent = `${regionCopy} | ${laneCopy}`;
   const sourceAge = liveFeedGeneratedAt ? formatAgeFrom(liveFeedGeneratedAt) : 'waiting';
   heroPolling.textContent = `UI checks 60s | feed build ~${SOURCE_PULL_MINUTES}m | source age ${sourceAge}`;
@@ -787,7 +854,7 @@ function renderHero() {
   heroUpdated.textContent = `${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${sourceSuffix}`;
 }
 
-function renderAll() { renderHero(); renderPriority(); renderFeed(); renderContext(); renderMap(); renderWatchlist(); renderNotes(); }
+function renderAll() { renderHero(); renderBriefingMode(); renderPriority(); renderFeed(); renderContext(); renderMap(); renderWatchlist(); renderNotes(); }
 
 function nextAlbertQuote() {
   if (!albertQuotes.length) return '';
@@ -834,25 +901,29 @@ function openDetail(alert) {
 }
 
 function closeDetailPanel() { modal.classList.add('hidden'); }
+async function copyTextToButton(text, button, idleLabel) {
+  try {
+    await navigator.clipboard.writeText(text);
+    button.textContent = 'Copied';
+  } catch {
+    button.textContent = 'Copy failed';
+  }
+  setTimeout(() => {
+    button.textContent = idleLabel;
+  }, 1200);
+}
 
 filters.addEventListener('click', (event) => { const button = event.target.closest('[data-region]'); if (!button) return; activeRegion = button.dataset.region; filters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active')); button.classList.add('active'); renderAll(); });
 laneFilters.addEventListener('click', (event) => { const button = event.target.closest('[data-lane]'); if (!button) return; activeLane = button.dataset.lane; laneFilters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active')); button.classList.add('active'); renderAll(); });
 tabbar.addEventListener('click', (event) => {
   const button = event.target.closest('[data-tab]');
   if (!button) return;
-  const next = button.dataset.tab;
-  tabbar.querySelectorAll('.tab').forEach((item) => item.classList.remove('active'));
-  button.classList.add('active');
-  document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === next));
-  if (next === 'map') {
-    setTimeout(() => {
-      ensureMap();
-      renderMap(true);
-    }, 60);
-  }
+  setActiveTab(button.dataset.tab);
 });
 document.getElementById('note-form').addEventListener('submit', (event) => { event.preventDefault(); const title = document.getElementById('note-title'); const body = document.getElementById('note-body'); notes.unshift({ title: title.value.trim(), body: body.value.trim() }); saveNotes(); title.value = ''; body.value = ''; renderNotes(); });
-copyBriefing.addEventListener('click', async () => { const briefing = copyBriefing.dataset.briefing || ''; try { await navigator.clipboard.writeText(briefing); copyBriefing.textContent = 'Copied'; setTimeout(() => { copyBriefing.textContent = 'Copy Briefing'; }, 1200); } catch { copyBriefing.textContent = 'Copy failed'; setTimeout(() => { copyBriefing.textContent = 'Copy Briefing'; }, 1200); } });
+copyBriefing.addEventListener('click', async () => { const briefing = copyBriefing.dataset.briefing || ''; if (!briefing) return; await copyTextToButton(briefing, copyBriefing, 'Copy Briefing'); });
+briefingModeToggle.addEventListener('click', () => { briefingMode = !briefingMode; saveBriefingMode(); applyBriefingMode(); renderAll(); });
+briefingModeCopy.addEventListener('click', async () => { const briefing = briefingModeCopy.dataset.briefing || ''; if (!briefing) return; await copyTextToButton(briefing, briefingModeCopy, 'Copy Briefing'); });
 closeModal.addEventListener('click', closeDetailPanel);
 modalBackdrop.addEventListener('click', closeDetailPanel);
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeDetailPanel(); });
@@ -865,10 +936,12 @@ window.addEventListener('resize', () => {
 });
 watched = loadWatched();
 notes = loadNotes();
+briefingMode = loadBriefingMode();
 albertQuote.textContent = nextAlbertQuote();
 albertCard.addEventListener('click', () => { albertQuote.textContent = nextAlbertQuote(); });
 document.querySelector('.bulldog-card').addEventListener('dblclick', () => { albertNote.classList.toggle('hidden'); });
 
+applyBriefingMode();
 renderAll();
 loadGeoLookup().finally(() => {
   loadLiveFeed();

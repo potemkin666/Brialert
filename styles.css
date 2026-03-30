@@ -107,6 +107,11 @@ button { cursor: pointer; }
   position: relative;
   z-index: 1;
 }
+.hero-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
 .eyebrow, .detail-label {
   margin: 0 0 8px;
   font-size: 12px;
@@ -127,13 +132,22 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
 .hero-metrics, .tabbar, .filters { flex-wrap: wrap; }
 .tabbar, .filters { margin: 16px 0; }
 .lane-filters { margin-top: 0; }
-.filter, .severity, .star-button, .tab, .primary-button {
+.filter, .severity, .star-button, .tab, .primary-button, .mode-toggle {
   border-radius: 999px;
   min-height: 42px;
   padding: 10px 14px;
   font-size: 13px;
   font-weight: 700;
   border: 0;
+}
+.mode-toggle {
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.mode-toggle.active {
+  background: var(--amber);
+  color: black;
 }
 .bulldog-card {
   display: flex;
@@ -163,6 +177,21 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
 }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
+.briefing-mode-panel { margin: 16px 0 20px; }
+.screen.briefing-mode .briefing-mode-hidden { display: none !important; }
+.screen.briefing-mode .briefing-mode-panel.hidden { display: block !important; }
+.screen.briefing-mode .tab-panel.active {
+  display: block;
+}
+.screen.briefing-mode .tab-panel.active:not([data-panel="firstalert"]) {
+  display: none;
+}
+.screen.briefing-mode .hero-card {
+  min-height: 200px;
+}
+.screen.briefing-mode .summary-panel {
+  margin-bottom: 0;
+}
 .priority-card {
   background: linear-gradient(145deg, rgba(213, 61, 47, 0.88), rgba(61, 28, 25, 0.95));
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
@@ -198,6 +227,13 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
   color: rgba(255, 255, 255, 0.86);
 }
 .copy-button { justify-self: auto; align-self: flex-start; }
+.briefing-mode-panel .primary-button {
+  justify-self: auto;
+}
+.primary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
 .metric {
   min-width: 110px;
   flex: 1;
@@ -521,6 +557,13 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
     background:
       linear-gradient(180deg, rgba(7, 9, 20, 0.90), rgba(7, 9, 20, 0.56) 46%, rgba(7, 9, 20, 0.30)),
       url("/Brialert/assets/owl-night.gif") center top / cover no-repeat;
+  }
+  .hero-actions {
+    justify-content: stretch;
+  }
+  .mode-toggle {
+    width: 100%;
+    text-align: center;
   }
   .section-heading {
     align-items: flex-start;
