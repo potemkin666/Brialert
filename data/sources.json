@@ -1,4 +1,4 @@
-[
+ï»¿[
     {
         "id":  "frontex-document-fraud",
         "name":  "Frontex Document Fraud",
@@ -521,8 +521,8 @@
     },
     {
         "id":  "elpais-english",
-        "name":  "El País English",
-        "provider":  "El País",
+        "name":  "El PaÃ­s English",
+        "provider":  "El PaÃ­s",
         "kind":  "html",
         "endpoint":  "https://english.elpais.com/",
         "region":  "europe",
@@ -859,8 +859,8 @@
     },
     {
         "id":  "hurriyet-daily-news",
-        "name":  "Hürriyet Daily News",
-        "provider":  "Hürriyet Daily News",
+        "name":  "HÃ¼rriyet Daily News",
+        "provider":  "HÃ¼rriyet Daily News",
         "kind":  "html",
         "endpoint":  "https://www.hurriyetdailynews.com/",
         "region":  "europe",
@@ -1119,8 +1119,8 @@
     },
     {
         "id":  "liberation-home",
-        "name":  "Libération",
-        "provider":  "Libération",
+        "name":  "LibÃ©ration",
+        "provider":  "LibÃ©ration",
         "kind":  "html",
         "endpoint":  "https://www.liberation.fr/",
         "region":  "europe",
@@ -1574,8 +1574,8 @@
     },
     {
         "id":  "sueddeutsche-home",
-        "name":  "Süddeutsche Zeitung",
-        "provider":  "Süddeutsche Zeitung",
+        "name":  "SÃ¼ddeutsche Zeitung",
+        "provider":  "SÃ¼ddeutsche Zeitung",
         "kind":  "html",
         "endpoint":  "https://www.sueddeutsche.de/",
         "region":  "europe",
