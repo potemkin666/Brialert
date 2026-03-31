@@ -518,10 +518,14 @@ function openDetail(alert) {
   modalBriefing.textContent = briefing;
   modalLink.href = alert.sourceUrl;
   copyBriefing.dataset.briefing = briefing;
+  document.body.classList.add('modal-open');
   modal.classList.remove('hidden');
 }
 
-function closeDetailPanel() { modal.classList.add('hidden'); }
+function closeDetailPanel() {
+  document.body.classList.remove('modal-open');
+  modal.classList.add('hidden');
+}
 async function copyTextToButton(text, button, idleLabel) {
   try {
     await navigator.clipboard.writeText(text);
