@@ -1,6 +1,8 @@
+import { isLondonAlert } from './alert-view-model.mjs';
+
 export function filteredAlerts(state) {
   return state.alerts.filter((alert) =>
-    (state.activeRegion === 'all' || alert.region === state.activeRegion) &&
+    (state.activeRegion === 'all' || (state.activeRegion === 'london' ? isLondonAlert(alert) : alert.region === state.activeRegion)) &&
     (state.activeLane === 'all' || alert.lane === state.activeLane)
   );
 }

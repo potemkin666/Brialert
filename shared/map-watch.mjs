@@ -33,10 +33,17 @@ export function createMapController(config) {
     government: { radius: 700, color: '#ff7a64', fillOpacity: 0.08 }
   };
 
+  function isLondonCoordinate(lat, lng) {
+    return Number.isFinite(lat) && Number.isFinite(lng) && lat >= 51.28 && lat <= 51.70 && lng >= -0.52 && lng <= 0.24;
+  }
+
   function visibleWatchSites(state) {
     return state.watchGeographySites.filter((site) =>
       state.activeWatchLayers.has(site.category) &&
-      (state.activeRegion === 'all' || site.region === state.activeRegion)
+      (
+        state.activeRegion === 'all'
+        || (state.activeRegion === 'london' ? isLondonCoordinate(site.lat, site.lng) : site.region === state.activeRegion)
+      )
     );
   }
 
@@ -422,6 +429,8 @@ export function createMapController(config) {
         padding: [28, 28],
         maxZoom: 5
       });
+    } else if (!items.length && lastState?.activeRegion === 'london' && (forceFit || lastMapSignature)) {
+      liveMap.setView([51.5072, -0.1276], 10);
     } else if (!items.length && (forceFit || lastMapSignature)) {
       liveMap.setView([20, 10], 2);
     }

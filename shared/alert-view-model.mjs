@@ -29,7 +29,33 @@ export function severityLabel(severity) {
 }
 
 export function regionLabel(region) {
+  if (region === 'london') return 'London';
   return region === 'uk' ? 'UK' : 'EU';
+}
+
+export function isLondonAlert(alert) {
+  const lat = Number(alert?.lat);
+  const lng = Number(alert?.lng);
+  if (Number.isFinite(lat) && Number.isFinite(lng)) {
+    if (lat >= 51.28 && lat <= 51.70 && lng >= -0.52 && lng <= 0.24) {
+      return true;
+    }
+  }
+
+  const haystack = `${clean(alert?.location)} ${clean(alert?.title)} ${clean(alert?.summary)} ${clean(alert?.sourceExtract)}`.toLowerCase();
+  return [
+    'london',
+    'westminster',
+    "king's cross",
+    'kings cross',
+    'st pancras',
+    'heathrow',
+    'downing street',
+    'scotland yard',
+    'whitehall',
+    'east london',
+    'golders green'
+  ].some((term) => haystack.includes(term));
 }
 
 export function inferGeoPoint(alert, geoLookup = []) {
@@ -243,6 +269,8 @@ export function sortAlertsByFreshness(alertList) {
     if (trackGap !== 0) return trackGap;
     const tierGap = sourceTierRank(b) - sourceTierRank(a);
     if (tierGap !== 0) return tierGap;
+    const londonGap = Number(isLondonAlert(b)) - Number(isLondonAlert(a));
+    if (londonGap !== 0) return londonGap;
     const timeGap = alertPublishedTime(b) - alertPublishedTime(a);
     if (timeGap !== 0) return timeGap;
     const scoreGap = incidentScore(b) - incidentScore(a);
