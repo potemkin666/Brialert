@@ -3510,19 +3510,6 @@
         "reliabilityProfile":  "general_media"
     },
     {
-        "id":  "scotsman-home",
-        "name":  "The Scotsman",
-        "provider":  "The Scotsman",
-        "kind":  "html",
-        "endpoint":  "https://www.scotsman.com/",
-        "region":  "uk",
-        "lane":  "context",
-        "isTrustedOfficial":  false,
-        "requiresKeywordMatch":  true,
-        "sourceTier":  "corroboration",
-        "reliabilityProfile":  "general_media"
-    },
-    {
         "id":  "the-sun-home",
         "name":  "The Sun",
         "provider":  "The Sun",
