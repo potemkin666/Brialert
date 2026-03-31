@@ -1,6 +1,6 @@
 export const watchLayerLabels = {
   transport: 'Transport hubs',
-  embassy: 'Embassies',
+  embassy: 'Diplomatic sites',
   hospital: 'Hospitals',
   worship: 'Places of worship',
   government: 'Government sites'
