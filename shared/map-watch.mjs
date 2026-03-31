@@ -10,9 +10,19 @@ export function createMapController(config) {
   let liveMap = null;
   let liveMarkers = [];
   let watchSiteMarkers = [];
+  let watchZoneLayers = [];
+  let fusionLayers = [];
   let lastMapSignature = '';
   let lastState = null;
   let lastView = null;
+
+  const watchZoneConfig = {
+    transport: { radius: 900, color: '#53b6ff', fillOpacity: 0.07 },
+    embassy: { radius: 550, color: '#c46bff', fillOpacity: 0.08 },
+    hospital: { radius: 500, color: '#48c97d', fillOpacity: 0.07 },
+    worship: { radius: 380, color: '#f0c95e', fillOpacity: 0.07 },
+    government: { radius: 700, color: '#ff7a64', fillOpacity: 0.08 }
+  };
 
   function visibleWatchSites(state) {
     return state.watchGeographySites.filter((site) =>
@@ -89,6 +99,80 @@ export function createMapController(config) {
     });
   }
 
+  function watchZoneForSite(site) {
+    const config = watchZoneConfig[site.category] || watchZoneConfig.government;
+    return L.circle([site.lat, site.lng], {
+      radius: config.radius,
+      stroke: true,
+      color: config.color,
+      weight: 1.25,
+      opacity: 0.45,
+      fillColor: config.color,
+      fillOpacity: config.fillOpacity,
+      interactive: false,
+      className: `watch-zone watch-zone--${site.category}`
+    });
+  }
+
+  function fusionSatellitesFor(alert) {
+    if (!liveMap || !Array.isArray(alert?.corroboratingSources) || !alert.corroboratingSources.length) {
+      return [];
+    }
+
+    const sourceCount = Math.min(alert.corroboratingSources.length, 4);
+    const center = liveMap.project(L.latLng(alert.lat, alert.lng), liveMap.getZoom());
+    const radius = sourceCount > 2 ? 28 : 24;
+    const angleStep = (Math.PI * 2) / sourceCount;
+
+    return alert.corroboratingSources.slice(0, sourceCount).map((source, index) => {
+      const angle = (-Math.PI / 2) + (index * angleStep);
+      const point = L.point(
+        center.x + Math.cos(angle) * radius,
+        center.y + Math.sin(angle) * radius
+      );
+      const latLng = liveMap.unproject(point, liveMap.getZoom());
+      return {
+        source,
+        lat: latLng.lat,
+        lng: latLng.lng
+      };
+    });
+  }
+
+  function renderFusionForAlert(alert) {
+    const satellites = fusionSatellitesFor(alert);
+    satellites.forEach(({ source, lat, lng }) => {
+      const line = L.polyline(
+        [
+          [alert.lat, alert.lng],
+          [lat, lng]
+        ],
+        {
+          color: '#8fd3ff',
+          weight: 1.25,
+          opacity: 0.42,
+          dashArray: '4 4',
+          interactive: false,
+          className: 'fusion-line'
+        }
+      );
+      line.addTo(liveMap);
+      fusionLayers.push(line);
+
+      const endpoint = L.circleMarker([lat, lng], {
+        radius: 4,
+        color: '#e8f1ff',
+        weight: 1,
+        fillColor: '#5fa8ff',
+        fillOpacity: 0.9,
+        className: 'fusion-node'
+      });
+      endpoint.bindPopup(`<div class="watch-site-popup"><strong>${source.source || 'Corroborating source'}</strong><p>${source.confidence || 'Attached corroboration'}${source.sourceTier ? ` | ${source.sourceTier}` : ''}</p></div>`);
+      endpoint.addTo(liveMap);
+      fusionLayers.push(endpoint);
+    });
+  }
+
   function clusterIconFor(items) {
     const highestSeverity = items
       .map((item) => item.severity)
@@ -156,8 +240,12 @@ export function createMapController(config) {
 
     liveMarkers.forEach((marker) => marker.remove());
     watchSiteMarkers.forEach((marker) => marker.remove());
+    watchZoneLayers.forEach((layer) => layer.remove());
+    fusionLayers.forEach((layer) => layer.remove());
     liveMarkers = [];
     watchSiteMarkers = [];
+    watchZoneLayers = [];
+    fusionLayers = [];
 
     const items = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
     const clusteredItems = clusterAlerts(items);
@@ -180,6 +268,7 @@ export function createMapController(config) {
         marker.on('click', () => openDetail(alert));
         marker.addTo(liveMap);
         liveMarkers.push(marker);
+        renderFusionForAlert(alert);
         bounds.push([alert.lat, alert.lng]);
         return;
       }
@@ -208,6 +297,10 @@ export function createMapController(config) {
     });
 
     sites.forEach((site) => {
+      const zone = watchZoneForSite(site);
+      zone.addTo(liveMap);
+      watchZoneLayers.push(zone);
+
       const marker = L.marker([site.lat, site.lng], {
         icon: watchSiteIcon(site.category),
         keyboard: true,
