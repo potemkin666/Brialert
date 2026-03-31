@@ -43,14 +43,28 @@ export function createMapController(config) {
     });
   }
 
-  function mapIconForSeverity(severity) {
-    const safeSeverity = ['critical', 'high', 'elevated', 'moderate'].includes(severity) ? severity : 'moderate';
+  function mapRingKind(alert) {
+    if (!alert) return '';
+    if (alert.incidentTrack === 'case' || ['charge', 'arrest', 'sentencing', 'recognition', 'feature'].includes(alert.eventType)) {
+      return 'case';
+    }
+    if (alert.eventType === 'disrupted_plot') return 'disrupted';
+    if (['active_attack', 'threat_update', 'incident_update'].includes(alert.eventType) || alert.incidentTrack === 'live') {
+      return 'active';
+    }
+    return '';
+  }
+
+  function mapIconForAlert(alert) {
+    const safeSeverity = ['critical', 'high', 'elevated', 'moderate'].includes(alert?.severity) ? alert.severity : 'moderate';
+    const ringKind = mapRingKind(alert);
+    const ringMarkup = ringKind ? `<span class="map-ring map-ring--${ringKind}"></span>` : '';
     return L.divIcon({
       className: 'map-pin-icon',
-      html: `<span class="map-pin map-pin--${safeSeverity}"></span>`,
-      iconSize: [22, 22],
-      iconAnchor: [11, 22],
-      popupAnchor: [0, -16]
+      html: `<span class="map-pin-shell">${ringMarkup}<span class="map-pin map-pin--${safeSeverity}"></span></span>`,
+      iconSize: [42, 42],
+      iconAnchor: [21, 32],
+      popupAnchor: [0, -24]
     });
   }
 
@@ -148,7 +162,7 @@ export function createMapController(config) {
       if (entry.type === 'single') {
         const alert = entry.alert;
         const marker = L.marker([alert.lat, alert.lng], {
-          icon: mapIconForSeverity(alert.severity),
+          icon: mapIconForAlert(alert),
           keyboard: true,
           title: alert.title
         });
