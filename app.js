@@ -67,6 +67,9 @@ const state = {
   watchGeographySites: []
 };
 
+let derivedViewCache = null;
+let derivedViewDirty = true;
+
 const elements = {
   priorityCard: document.getElementById('priority-card'),
   screen: document.querySelector('.screen'),
@@ -171,8 +174,15 @@ const mapController = createMapController({
   openDetail: modalController.openDetail
 });
 
+function invalidateDerivedView() {
+  derivedViewDirty = true;
+}
+
 function currentView() {
-  return deriveView(state, feedDeps);
+  if (!derivedViewDirty && derivedViewCache) return derivedViewCache;
+  derivedViewCache = deriveView(state, feedDeps);
+  derivedViewDirty = false;
+  return derivedViewCache;
 }
 
 function setActiveTab(next) {
@@ -295,6 +305,7 @@ function renderFeed(view) {
       const id = button.dataset.star;
       state.watched.has(id) ? state.watched.delete(id) : state.watched.add(id);
       saveSet(WATCHED_STORAGE_KEY, state.watched);
+      invalidateDerivedView();
       renderAll();
     });
   });
@@ -382,6 +393,7 @@ function bindEvents() {
     const button = event.target.closest('[data-region]');
     if (!button) return;
     state.activeRegion = button.dataset.region;
+    invalidateDerivedView();
     elements.filters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
     button.classList.add('active');
     renderAll();
@@ -391,6 +403,7 @@ function bindEvents() {
     const button = event.target.closest('[data-lane]');
     if (!button) return;
     state.activeLane = button.dataset.lane;
+    invalidateDerivedView();
     elements.laneFilters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
     button.classList.add('active');
     renderAll();
@@ -430,6 +443,7 @@ function bindEvents() {
 
   elements.strictResponderModeToggle.addEventListener('click', () => {
     state.strictResponderMode = !state.strictResponderMode;
+    invalidateDerivedView();
     saveBoolean(STRICT_RESPONDER_MODE_STORAGE_KEY, state.strictResponderMode);
     applyStrictResponderMode();
     renderAll();
@@ -492,7 +506,10 @@ async function initialise() {
     loadLiveFeed(state, {
       liveFeedUrl: LIVE_FEED_URL,
       normaliseAlert,
-      onAfterLoad: renderAll
+      onAfterLoad: () => {
+        invalidateDerivedView();
+        renderAll();
+      }
     });
   });
 
@@ -500,7 +517,10 @@ async function initialise() {
     loadLiveFeed(state, {
       liveFeedUrl: LIVE_FEED_URL,
       normaliseAlert,
-      onAfterLoad: renderAll
+      onAfterLoad: () => {
+        invalidateDerivedView();
+        renderAll();
+      }
     });
   }, POLL_INTERVAL_MS);
 }
