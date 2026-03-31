@@ -16,6 +16,15 @@ export function createMapController(config) {
   let lastState = null;
   let lastView = null;
 
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   const watchZoneConfig = {
     transport: { radius: 900, color: '#53b6ff', fillOpacity: 0.07 },
     embassy: { radius: 550, color: '#c46bff', fillOpacity: 0.08 },
@@ -146,20 +155,20 @@ export function createMapController(config) {
   }
 
   function markerPreviewTooltip(alert) {
-    return `<div class="map-preview-tooltip"><strong>${alert.title}</strong><span>${alert.source} | ${alert.time}</span></div>`;
+    return `<div class="map-preview-tooltip"><strong>${escapeHtml(alert.title)}</strong><span>${escapeHtml(alert.source)} | ${escapeHtml(alert.time)}</span></div>`;
   }
 
   function markerPreviewPopup(alert) {
     const summary = previewSummary(alert);
     return `
       <div class="map-preview-card">
-        <p class="map-preview-eyebrow">${alert.lane} | ${alert.location}</p>
-        <strong>${alert.title}</strong>
-        <p>${summary}${summary.length >= 180 ? '...' : ''}</p>
+        <p class="map-preview-eyebrow">${escapeHtml(alert.lane)} | ${escapeHtml(alert.location)}</p>
+        <strong>${escapeHtml(alert.title)}</strong>
+        <p>${escapeHtml(summary)}${summary.length >= 180 ? '...' : ''}</p>
         <div class="map-preview-meta">
-          <span>${alert.source}</span>
-          <span>${alert.status}</span>
-          <span>${alert.time}</span>
+          <span>${escapeHtml(alert.source)}</span>
+          <span>${escapeHtml(alert.status)}</span>
+          <span>${escapeHtml(alert.time)}</span>
         </div>
         <button class="map-preview-button" type="button" data-open-detail="${alert.id}">Open full detail</button>
       </div>`;
@@ -233,7 +242,7 @@ export function createMapController(config) {
         fillOpacity: 0.9,
         className: 'fusion-node'
       });
-      endpoint.bindPopup(`<div class="watch-site-popup"><strong>${source.source || 'Corroborating source'}</strong><p>${source.confidence || 'Attached corroboration'}${source.sourceTier ? ` | ${source.sourceTier}` : ''}</p></div>`);
+      endpoint.bindPopup(`<div class="watch-site-popup"><strong>${escapeHtml(source.source || 'Corroborating source')}</strong><p>${escapeHtml(source.confidence || 'Attached corroboration')}${source.sourceTier ? ` | ${escapeHtml(source.sourceTier)}` : ''}</p></div>`);
       endpoint.addTo(liveMap);
       fusionLayers.push(endpoint);
     });
@@ -372,7 +381,7 @@ export function createMapController(config) {
       clusterMarker.bindPopup(`
         <div class="watch-site-popup">
           <strong>${entry.items.length} grouped incidents</strong>
-          <p>${entry.items.slice(0, 3).map((item) => item.title).join(' | ')}</p>
+          <p>${entry.items.slice(0, 3).map((item) => escapeHtml(item.title)).join(' | ')}</p>
         </div>
       `);
       clusterMarker.addTo(liveMap);
@@ -390,7 +399,7 @@ export function createMapController(config) {
         keyboard: true,
         title: site.name
       });
-      marker.bindPopup(`<div class="watch-site-popup"><strong>${site.name}</strong><p>${watchLayerLabels[site.category]} | ${site.note}</p></div>`);
+      marker.bindPopup(`<div class="watch-site-popup"><strong>${escapeHtml(site.name)}</strong><p>${escapeHtml(watchLayerLabels[site.category])} | ${escapeHtml(site.note)}</p></div>`);
       marker.addTo(liveMap);
       watchSiteMarkers.push(marker);
       bounds.push([site.lat, site.lng]);

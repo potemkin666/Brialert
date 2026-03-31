@@ -78,6 +78,15 @@ const state = {
 let derivedViewCache = null;
 let derivedViewDirty = true;
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function detectDeviceProfile() {
   const ua = navigator.userAgent || '';
   const isIphone = /iPhone/i.test(ua);
@@ -276,13 +285,13 @@ function renderPriority(view) {
   elements.priorityCard.classList.toggle('context-priority', !liveCandidate);
   elements.priorityCard.innerHTML = `
     <div class="eyebrow">${liveCandidate ? 'Live Terror Incident Trigger' : 'Context Item'}</div>
-    <h2>${alert.title}</h2>
-    <p class="muted">${laneLabels[alert.lane]} | ${alert.location} | ${alert.status}</p>
-    <p>${alert.summary}</p>
+    <h2>${escapeHtml(alert.title)}</h2>
+    <p class="muted">${escapeHtml(laneLabels[alert.lane])} | ${escapeHtml(alert.location)} | ${escapeHtml(alert.status)}</p>
+    <p>${escapeHtml(alert.summary)}</p>
     <div class="meta-row">
-      <span>${alert.source}</span>
+      <span>${escapeHtml(alert.source)}</span>
       <span>${matches.length ? `${matches.length} keyword hits` : 'No incident keyword hit'}</span>
-      <span>${alert.time}</span>
+      <span>${escapeHtml(alert.time)}</span>
     </div>`;
   elements.priorityCard.onclick = () => modalController.openDetail(alert);
 }
@@ -320,14 +329,14 @@ function responderCardMarkup(alert) {
   return `
     <article class="feed-card actionable" data-id="${alert.id}">
       <div class="feed-top">
-        <div><h4>${alert.title}</h4><p>${alert.location}</p></div>
+        <div><h4>${escapeHtml(alert.title)}</h4><p>${escapeHtml(alert.location)}</p></div>
         <div class="feed-actions">
           <button class="star-button ${state.watched.has(alert.id) ? 'active' : ''}" data-star="${alert.id}">${state.watched.has(alert.id) ? 'Watch' : 'Track'}</button>
-          <span class="severity severity-${alert.severity}">${severityLabel(alert.severity)}</span>
+          <span class="severity severity-${escapeHtml(alert.severity)}">${escapeHtml(severityLabel(alert.severity))}</span>
         </div>
       </div>
-      <p>${alert.summary}</p>
-      <div class="meta-row"><span>${alert.source}</span><span>${alert.status}</span><span>${Number(alert.corroborationCount || 0)} corroborating</span></div>
+      <p>${escapeHtml(alert.summary)}</p>
+      <div class="meta-row"><span>${escapeHtml(alert.source)}</span><span>${escapeHtml(alert.status)}</span><span>${Number(alert.corroborationCount || 0)} corroborating</span></div>
     </article>`;
 }
 
@@ -354,7 +363,7 @@ function renderContext(view) {
   const items = view.context.slice(0, 4);
   elements.contextCount.textContent = `${items.length} contextual items`;
   elements.contextList.innerHTML = items.length
-    ? items.map((alert) => `<article class="context-pill actionable" data-context="${alert.id}"><h4>${alert.title}</h4><p>${contextLabel(alert)} | ${alert.source}</p></article>`).join('')
+    ? items.map((alert) => `<article class="context-pill actionable" data-context="${alert.id}"><h4>${escapeHtml(alert.title)}</h4><p>${escapeHtml(contextLabel(alert))} | ${escapeHtml(alert.source)}</p></article>`).join('')
     : "<p class='panel-copy'>No contextual items have been published into this filter yet.</p>";
   elements.contextList.querySelectorAll('[data-context]').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.context)));
@@ -367,14 +376,14 @@ function renderQuarantine(view) {
   elements.quarantineList.innerHTML = items.length ? items.map((alert) => `
     <article class="quarantine-card actionable" data-quarantine="${alert.id}">
       <div class="section-heading">
-        <h4>${alert.title}</h4>
+        <h4>${escapeHtml(alert.title)}</h4>
         <span class="quarantine-badge">Quarantine</span>
       </div>
-      <p>${alert.summary}</p>
+      <p>${escapeHtml(alert.summary)}</p>
       <div class="meta-row">
-        <span>${alert.source}</span>
-        <span>${quarantineReason(alert)}</span>
-        <span>${alert.time}</span>
+        <span>${escapeHtml(alert.source)}</span>
+        <span>${escapeHtml(quarantineReason(alert))}</span>
+        <span>${escapeHtml(alert.time)}</span>
       </div>
     </article>`).join('') : "<p class='panel-copy'>No doubtful items are parked in quarantine for this filter.</p>";
   elements.quarantineList.querySelectorAll('[data-quarantine]').forEach((card) => {
@@ -386,7 +395,7 @@ function renderWatchlist() {
   const tracked = state.alerts.filter((alert) => state.watched.has(alert.id));
   elements.watchlistSummary.textContent = tracked.length ? `${tracked.length} tracked incidents` : 'No tracked incidents';
   elements.watchlistList.innerHTML = tracked.length
-    ? tracked.map((alert) => `<article class="feed-card actionable" data-watch="${alert.id}"><div class="feed-top"><div><h4>${alert.title}</h4><p>${alert.location}</p></div><span class="severity severity-${alert.severity}">${laneLabels[alert.lane]}</span></div><p>${alert.summary}</p></article>`).join('')
+    ? tracked.map((alert) => `<article class="feed-card actionable" data-watch="${alert.id}"><div class="feed-top"><div><h4>${escapeHtml(alert.title)}</h4><p>${escapeHtml(alert.location)}</p></div><span class="severity severity-${escapeHtml(alert.severity)}">${escapeHtml(laneLabels[alert.lane])}</span></div><p>${escapeHtml(alert.summary)}</p></article>`).join('')
     : "<p class='panel-copy'>Track incidents in F.O.C to pin them here.</p>";
   elements.watchlistList.querySelectorAll('[data-watch]').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.watch)));
@@ -394,7 +403,17 @@ function renderWatchlist() {
 }
 
 function renderNotes() {
-  elements.notesList.innerHTML = state.notes.map((note) => `<article class="note-card"><strong>${note.title}</strong><p>${note.body}</p></article>`).join('');
+  elements.notesList.replaceChildren();
+  state.notes.forEach((note) => {
+    const card = document.createElement('article');
+    card.className = 'note-card';
+    const title = document.createElement('strong');
+    title.textContent = String(note.title || '');
+    const body = document.createElement('p');
+    body.textContent = String(note.body || '');
+    card.append(title, body);
+    elements.notesList.append(card);
+  });
 }
 
 function renderHero() {
@@ -541,7 +560,7 @@ function refreshAlbertQuote() {
 }
 
 function bindEvents() {
-  elements.filters.addEventListener('click', (event) => {
+  elements.filters?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-region]');
     if (!button) return;
     state.activeRegion = button.dataset.region;
@@ -551,7 +570,7 @@ function bindEvents() {
     renderAll();
   });
 
-  elements.laneFilters.addEventListener('click', (event) => {
+  elements.laneFilters?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-lane]');
     if (!button) return;
     state.activeLane = button.dataset.lane;
@@ -561,7 +580,7 @@ function bindEvents() {
     renderAll();
   });
 
-  elements.tabbar.addEventListener('click', (event) => {
+  elements.tabbar?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-tab]');
     if (!button) return;
     setActiveTab(button.dataset.tab);
@@ -570,9 +589,12 @@ function bindEvents() {
   elements.noteForm?.addEventListener('submit', (event) => {
     event.preventDefault();
     if (!elements.noteTitle || !elements.noteBody) return;
+    const title = elements.noteTitle.value.trim();
+    const body = elements.noteBody.value.trim();
+    if (!title || !body) return;
     state.notes.unshift({
-      title: elements.noteTitle.value.trim(),
-      body: elements.noteBody.value.trim()
+      title,
+      body
     });
     saveArray(NOTES_STORAGE_KEY, state.notes);
     elements.noteTitle.value = '';
@@ -580,7 +602,7 @@ function bindEvents() {
     renderNotes();
   });
 
-  elements.copyBriefing.addEventListener('click', async () => {
+  elements.copyBriefing?.addEventListener('click', async () => {
     const briefing = elements.copyBriefing.dataset.briefing || '';
     if (!briefing) return;
     await modalController.copyTextToButton(briefing, elements.copyBriefing, 'Copy Briefing');
@@ -593,14 +615,14 @@ function bindEvents() {
     await modalController.copyTextToButton(brief, elements.copyExpandedBrief, 'Copy Long Brief');
   });
 
-  elements.briefingModeToggle.addEventListener('click', () => {
+  elements.briefingModeToggle?.addEventListener('click', () => {
     state.briefingMode = !state.briefingMode;
     saveBoolean(BRIEFING_MODE_STORAGE_KEY, state.briefingMode);
     applyBriefingMode();
     renderAll();
   });
 
-  elements.strictResponderModeToggle.addEventListener('click', () => {
+  elements.strictResponderModeToggle?.addEventListener('click', () => {
     state.strictResponderMode = !state.strictResponderMode;
     invalidateDerivedView();
     saveBoolean(STRICT_RESPONDER_MODE_STORAGE_KEY, state.strictResponderMode);
@@ -608,22 +630,22 @@ function bindEvents() {
     renderAll();
   });
 
-  elements.briefingModeCopy.addEventListener('click', async () => {
+  elements.briefingModeCopy?.addEventListener('click', async () => {
     const briefing = elements.briefingModeCopy.dataset.briefing || '';
     if (!briefing) return;
     await modalController.copyTextToButton(briefing, elements.briefingModeCopy, 'Copy Briefing');
   });
 
-  elements.closeModal.addEventListener('click', modalController.closeDetailPanel);
-  elements.modalBackdrop.addEventListener('click', modalController.closeDetailPanel);
+  elements.closeModal?.addEventListener('click', modalController.closeDetailPanel);
+  elements.modalBackdrop?.addEventListener('click', modalController.closeDetailPanel);
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') modalController.closeDetailPanel();
   });
 
-  elements.mapZoomIn.addEventListener('click', () => mapController.zoomMap(1));
-  elements.mapZoomOut.addEventListener('click', () => mapController.zoomMap(-1));
-  elements.mapReset.addEventListener('click', () => mapController.renderMap(state, filteredMapView(currentView()), true));
-  elements.mapPostureFilters.addEventListener('click', (event) => {
+  elements.mapZoomIn?.addEventListener('click', () => mapController.zoomMap(1));
+  elements.mapZoomOut?.addEventListener('click', () => mapController.zoomMap(-1));
+  elements.mapReset?.addEventListener('click', () => mapController.renderMap(state, filteredMapView(currentView()), true));
+  elements.mapPostureFilters?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-map-filter]');
     if (!button) return;
     const filterKey = button.dataset.mapFilter;
@@ -647,7 +669,7 @@ function bindEvents() {
     });
     mapController.renderMap(state, filteredMapView(currentView()), true);
   });
-  elements.mapTimelineFilters.addEventListener('click', (event) => {
+  elements.mapTimelineFilters?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-map-window]');
     if (!button) return;
     state.mapTimelineWindow = button.dataset.mapWindow || '24h';
@@ -656,7 +678,7 @@ function bindEvents() {
     });
     mapController.renderMap(state, filteredMapView(currentView()), true);
   });
-  elements.mapLayerToggles.addEventListener('click', (event) => {
+  elements.mapLayerToggles?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-watch-layer]');
     if (!button) return;
     const layer = button.dataset.watchLayer;
