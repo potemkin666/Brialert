@@ -73,10 +73,3 @@ export function applyBriefingMode(briefingMode, elements, callbacks) {
     callbacks?.closeDetailPanel?.();
   }
 }
-
-export function applyStrictResponderMode(strictResponderMode, elements) {
-  const { strictResponderModeToggle } = elements;
-  strictResponderModeToggle.classList.toggle('active', strictResponderMode);
-  strictResponderModeToggle.setAttribute('aria-pressed', strictResponderMode ? 'true' : 'false');
-  strictResponderModeToggle.textContent = strictResponderMode ? 'Strict responder on' : 'Strict responder off';
-}

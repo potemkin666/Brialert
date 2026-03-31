@@ -280,12 +280,6 @@ export function sortAlertsByFreshness(alertList) {
   });
 }
 
-export function isStrictTopAlertCandidate(alert) {
-  return isLiveIncidentCandidate(alert)
-    && normaliseSourceTier(alert.sourceTier) === 'trigger'
-    && normaliseReliabilityProfile(alert.reliabilityProfile) === 'official_ct';
-}
-
 export function contextLabel(alert) {
   if (alert.lane === 'incidents' && resolvedIncidentTrack(alert) === 'case') return 'Case / Prosecution';
   if (alert.lane === 'context') return 'Context / Corroboration';

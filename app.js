@@ -10,7 +10,6 @@ import {
   isLiveIncidentCandidate,
   quarantineReason,
   isQuarantineCandidate,
-  isStrictTopAlertCandidate,
   contextLabel,
   renderSceneClock,
   renderConfidenceLadder,
@@ -33,11 +32,9 @@ import {
   loadArray,
   saveArray,
   loadBoolean,
-  saveBoolean,
   nextAlbertQuote,
   setActiveTab as applyTabState,
-  applyBriefingMode as syncBriefingMode,
-  applyStrictResponderMode as syncStrictResponderMode
+  applyBriefingMode as syncBriefingMode
 } from './shared/persistence-ui.mjs';
 
 const LIVE_FEED_URL = 'live-alerts.json';
@@ -49,7 +46,6 @@ const SOURCE_PULL_MINUTES = 15;
 const WATCHED_STORAGE_KEY = 'brialert.watched';
 const NOTES_STORAGE_KEY = 'brialert.notes';
 const BRIEFING_MODE_STORAGE_KEY = 'brialert.briefingMode';
-const STRICT_RESPONDER_MODE_STORAGE_KEY = 'brialert.strictResponderMode';
 
 const state = {
   alerts: [],
@@ -58,8 +54,7 @@ const state = {
   mapTimelineWindow: '24h',
   mapFilters: {
     liveOnly: false,
-    officialOnly: false,
-    strictResponder: false
+    officialOnly: false
   },
   activeWatchLayers: new Set(Object.keys(watchLayerLabels)),
   watched: new Set(),
@@ -69,7 +64,6 @@ const state = {
   albertIndex: -1,
   notes: [],
   briefingMode: false,
-  strictResponderMode: false,
   activeTab: 'firstalert',
   geoLookup: [],
   watchGeographySites: []
@@ -187,7 +181,6 @@ const elements = {
   laneFilters: document.getElementById('lane-filters'),
   tabbar: document.getElementById('tabbar'),
   briefingModeToggle: document.getElementById('briefing-mode-toggle'),
-  strictResponderModeToggle: document.getElementById('strict-responder-mode-toggle'),
   briefingModePanel: document.getElementById('briefing-mode-panel'),
   briefingModeTitle: document.getElementById('briefing-mode-title'),
   briefingModeMeta: document.getElementById('briefing-mode-meta'),
@@ -231,8 +224,7 @@ const feedDeps = {
   sortAlertsByFreshness,
   isLiveIncidentCandidate,
   isQuarantineCandidate,
-  isTerrorRelevant,
-  isStrictTopAlertCandidate
+  isTerrorRelevant
 };
 
 const modalController = createModalController({
@@ -313,12 +305,6 @@ function applyBriefingMode() {
   });
 }
 
-function applyStrictResponderMode() {
-  syncStrictResponderMode(state.strictResponderMode, {
-    strictResponderModeToggle: elements.strictResponderModeToggle
-  });
-}
-
 function renderPriority(view) {
   const alert = view.topPriority;
   if (!alert) {
@@ -326,11 +312,11 @@ function renderPriority(view) {
     elements.priorityCard.innerHTML = `
       <div class="eyebrow">Live Feed Status</div>
       <h2>Waiting for a verified source pull</h2>
-      <p class="muted">${state.strictResponderMode ? 'Strict responder mode is on, so only trigger-tier official CT sources can drive this top alert.' : 'The app is not showing placeholder incidents anymore. Once the feed builder publishes live items, responder candidates will appear here automatically.'}</p>
+      <p class="muted">The app is not showing placeholder incidents anymore. Once the feed builder publishes live items, responder candidates will appear here automatically.</p>
       <div class="meta-row">
         <span>${state.activeRegion === 'all' ? 'All feeds' : `${regionLabel(state.activeRegion)} feeds`}</span>
         <span>${state.activeLane === 'all' ? 'All lanes' : laneLabels[state.activeLane]}</span>
-        <span>${state.strictResponderMode ? 'Strict responder gate on' : (state.liveSourceCount ? `${state.liveSourceCount} sources checked` : 'No live feed yet')}</span>
+        <span>${state.liveSourceCount ? `${state.liveSourceCount} sources checked` : 'No live feed yet'}</span>
       </div>`;
     elements.priorityCard.onclick = null;
     return;
@@ -362,12 +348,8 @@ function renderBriefingMode(view) {
   const alert = view.topPriority;
   if (!alert) {
     elements.briefingModeTitle.textContent = 'Waiting for a verified source pull';
-    elements.briefingModeMeta.textContent = state.strictResponderMode
-      ? 'Strict responder mode is active, so this view waits for a trigger-tier official CT alert.'
-      : 'The briefing screen will lock onto the top live responder item as soon as one arrives.';
-    elements.briefingModeSummary.textContent = state.strictResponderMode
-      ? 'No trigger-tier official CT candidate is available yet, so the app is holding a clean standby state instead of promoting broader corroboration or media-led material.'
-      : 'No live responder candidate is available yet, so the app is holding on a clean standby state rather than surfacing stale or placeholder material.';
+    elements.briefingModeMeta.textContent = 'The briefing screen will lock onto the top live responder item as soon as one arrives.';
+    elements.briefingModeSummary.textContent = 'No live responder candidate is available yet, so the app is holding on a clean standby state rather than surfacing stale or placeholder material.';
     elements.briefingModeCopy.disabled = true;
     elements.briefingModeCopy.dataset.briefing = '';
     return;
@@ -477,7 +459,7 @@ function renderHero() {
   const laneCopy = state.briefingMode ? 'Briefing posture' : (state.activeLane === 'all' ? 'Responder posture' : laneLabels[state.activeLane]);
   elements.heroRegion.textContent = `${regionCopy} | ${laneCopy}`;
   const sourceAge = state.liveFeedGeneratedAt ? formatAgeFrom(state.liveFeedGeneratedAt) : 'waiting';
-  elements.heroPolling.textContent = `UI checks 60s | feed build ~${SOURCE_PULL_MINUTES}m | source age ${sourceAge}${state.strictResponderMode ? ' | strict trigger gate' : ''}`;
+  elements.heroPolling.textContent = `UI checks 60s | feed build ~${SOURCE_PULL_MINUTES}m | source age ${sourceAge}`;
   const stamp = state.liveFeedGeneratedAt || state.lastBrowserPollAt;
   const sourceSuffix = state.liveSourceCount ? ` | ${state.liveSourceCount} sources` : ' | awaiting live pull';
   elements.heroUpdated.textContent = `${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${sourceSuffix}`;
@@ -512,12 +494,8 @@ function filteredMapView(view) {
   const now = Date.now();
 
   const filtered = view.filtered.filter((alert) => {
-    if (state.mapFilters.strictResponder) {
-      if (!isStrictTopAlertCandidate(alert)) return false;
-    } else {
-      if (state.mapFilters.liveOnly && !isLiveIncidentCandidate(alert)) return false;
-      if (state.mapFilters.officialOnly && !alert.isOfficial) return false;
-    }
+    if (state.mapFilters.liveOnly && !isLiveIncidentCandidate(alert)) return false;
+    if (state.mapFilters.officialOnly && !alert.isOfficial) return false;
     if (windowMs !== Infinity) {
       const stamp = alertTimeMsForMap(alert);
       if (!stamp || now - stamp > windowMs) return false;
@@ -533,7 +511,6 @@ function filteredMapView(view) {
       ...activeFilters.map((key) => {
       if (key === 'liveOnly') return 'live only';
       if (key === 'officialOnly') return 'official only';
-      if (key === 'strictResponder') return 'strict responder';
       return key;
       })
     ]
@@ -671,14 +648,6 @@ function bindEvents() {
     renderAll();
   });
 
-  elements.strictResponderModeToggle?.addEventListener('click', () => {
-    state.strictResponderMode = !state.strictResponderMode;
-    invalidateDerivedView();
-    saveBoolean(STRICT_RESPONDER_MODE_STORAGE_KEY, state.strictResponderMode);
-    applyStrictResponderMode();
-    renderAll();
-  });
-
   elements.briefingModeCopy?.addEventListener('click', async () => {
     const briefing = elements.briefingModeCopy.dataset.briefing || '';
     if (!briefing) return;
@@ -699,19 +668,7 @@ function bindEvents() {
     if (!button) return;
     const filterKey = button.dataset.mapFilter;
     if (!Object.prototype.hasOwnProperty.call(state.mapFilters, filterKey)) return;
-
-    if (filterKey === 'strictResponder') {
-      state.mapFilters.strictResponder = !state.mapFilters.strictResponder;
-      if (state.mapFilters.strictResponder) {
-        state.mapFilters.liveOnly = false;
-        state.mapFilters.officialOnly = false;
-      }
-    } else {
-      state.mapFilters[filterKey] = !state.mapFilters[filterKey];
-      if (state.mapFilters[filterKey]) {
-        state.mapFilters.strictResponder = false;
-      }
-    }
+    state.mapFilters[filterKey] = !state.mapFilters[filterKey];
 
     elements.mapPostureFilters.querySelectorAll('[data-map-filter]').forEach((item) => {
       item.classList.toggle('active', !!state.mapFilters[item.dataset.mapFilter]);
@@ -759,11 +716,9 @@ async function initialise() {
   state.watched = loadSet(WATCHED_STORAGE_KEY);
   state.notes = loadArray(NOTES_STORAGE_KEY, defaultNotes);
   state.briefingMode = loadBoolean(BRIEFING_MODE_STORAGE_KEY);
-  state.strictResponderMode = loadBoolean(STRICT_RESPONDER_MODE_STORAGE_KEY);
 
   refreshAlbertQuote();
   applyBriefingMode();
-  applyStrictResponderMode();
   renderAll();
   bindEvents();
 

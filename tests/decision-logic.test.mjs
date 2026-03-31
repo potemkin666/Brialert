@@ -111,15 +111,13 @@ test('quarantine routing catches weak secondary incident-like items', () => {
   const state = {
     alerts: [liveOfficial, weakSecondary],
     activeRegion: 'all',
-    activeLane: 'all',
-    strictResponderMode: false
+    activeLane: 'all'
   };
 
   const view = deriveView(state, {
     sortAlertsByFreshness: (alerts) => alerts,
     isLiveIncidentCandidate,
     isQuarantineCandidate,
-    isStrictTopAlertCandidate: () => false,
     isTerrorRelevant: (alert) => alert.isTerrorRelevant
   });
 

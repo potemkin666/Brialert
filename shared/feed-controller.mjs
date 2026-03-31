@@ -16,9 +16,7 @@ export function deriveView(state, deps) {
     return !deps.isLiveIncidentCandidate(alert);
   }));
   const quarantine = deps.sortAlertsByFreshness(filtered.filter(deps.isQuarantineCandidate)).slice(0, 6);
-  const topPriority = state.strictResponderMode
-    ? responder.filter(deps.isStrictTopAlertCandidate)[0] || null
-    : (responder[0] || context[0] || null);
+  const topPriority = responder[0] || context[0] || null;
 
   return { filtered, responder, context, quarantine, topPriority };
 }
