@@ -165,6 +165,7 @@ function inferEventType(source, text) {
   if (source.lane === 'sanctions') return 'sanctions_update';
   if (source.lane === 'oversight') return 'oversight_update';
   if (source.lane === 'border') return 'border_security_update';
+  if (source.lane === 'context') return 'context_update';
   if (source.lane === 'prevention') return 'prevention_update';
   if (lower.includes('medal') || lower.includes('award') || lower.includes('anniversary') || lower.includes('memorial') || lower.includes('commemoration')) return 'recognition';
   if (lower.includes('podcast') || lower.includes('inside counter terrorism') || lower.includes('about us')) return 'feature';
@@ -248,6 +249,7 @@ function freshUntilFor(source, publishedIso, severity, incidentTrack) {
   const published = parseSourceDate(publishedIso) || now;
   const hoursByLane = {
     incidents: incidentTrack === 'live' ? (severity === 'critical' ? 18 : severity === 'high' ? 36 : 72) : 24 * 14,
+    context: 24 * 7,
     sanctions: 24 * 14,
     oversight: 24 * 21,
     border: 24 * 10,
@@ -334,6 +336,7 @@ function recencyOkay(source, rawDate) {
   if (Number.isNaN(parsed.getTime())) return true;
   const ageDays = (now.getTime() - parsed.getTime()) / 86400000;
   if (source.lane === 'incidents') return ageDays <= 7;
+  if (source.lane === 'context') return ageDays <= 21;
   if (source.lane === 'border' || source.lane === 'sanctions') return ageDays <= 30;
   return ageDays <= 120;
 }
@@ -351,6 +354,9 @@ function makeSummary(source, item) {
   if (source.lane === 'sanctions') {
     return `${source.provider} has published a sanctions-related update. The value here is legal and entity-resolution context, including designations, aliases, listing changes, and notice-level movement.`;
   }
+  if (source.lane === 'context') {
+    return `${source.provider} has published corroborating or adjacent reporting. The value here is supporting detail, follow-on facts, and wider situation context rather than a primary live trigger.`;
+  }
   if (source.lane === 'border') {
     return `${source.provider} has published a border or screening update. The main use is travel, document, screening, or movement risk context that may support later incident interpretation.`;
   }
@@ -366,6 +372,7 @@ function laneReasonFor(source, incidentTrack) {
       ? 'Terror-related live incident or disrupted plot candidate from an incident feed.'
       : 'Terror-related case, prosecution, or recognition update kept as incident context.';
   }
+  if (source.lane === 'context') return 'Corroborating or adjacent source kept out of the live trigger lane.';
   if (source.lane === 'sanctions') return 'Sanctions change with terrorism relevance.';
   if (source.lane === 'oversight') return 'Oversight, legislation, or review signal relevant to counter-terror posture.';
   if (source.lane === 'border') return 'Border, document, or screening signal relevant to threat movement.';

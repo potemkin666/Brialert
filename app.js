@@ -48,7 +48,7 @@ const watchGeographySites = [
   { id: 'gare-du-nord', name: 'Gare du Nord', category: 'transport', lat: 48.8809, lng: 2.3553, region: 'europe', note: 'High-footfall international rail station in Paris.' }
 ];
 
-const laneLabels = { all: 'All lanes', incidents: 'Incidents', sanctions: 'Sanctions', oversight: 'Oversight', border: 'Border', prevention: 'Prevention' };
+const laneLabels = { all: 'All lanes', incidents: 'Incidents', context: 'Context', sanctions: 'Sanctions', oversight: 'Oversight', border: 'Border', prevention: 'Prevention' };
 const albertQuoteOpeners = [
   'Stay steady',
   'Hold your nerve',
@@ -466,6 +466,7 @@ function quarantineAlerts() {
 }
 function contextLabel(alert) {
   if (alert.lane === 'incidents' && inferIncidentTrack({ ...alert, text: `${alert.title} ${alert.summary} ${alert.sourceExtract || ''}` }) === 'case') return 'Case / Prosecution';
+  if (alert.lane === 'context') return 'Context / Corroboration';
   return laneLabels[alert.lane] || alert.lane;
 }
 function reliabilityLabel(profile) {
@@ -648,12 +649,12 @@ function normaliseAlert(alert, index) {
     ...alert,
     sourceTier,
     isOfficial: !!alert.isOfficial,
-    lane: ['incidents','sanctions','oversight','border','prevention'].includes(alert.lane) ? alert.lane : 'incidents',
+    lane: ['incidents','context','sanctions','oversight','border','prevention'].includes(alert.lane) ? alert.lane : 'incidents',
     source: clean(alert.source) || 'Unknown source'
   });
   const incidentTrack = inferIncidentTrack({
     ...alert,
-    lane: ['incidents','sanctions','oversight','border','prevention'].includes(alert.lane) ? alert.lane : 'incidents',
+    lane: ['incidents','context','sanctions','oversight','border','prevention'].includes(alert.lane) ? alert.lane : 'incidents',
     text: `${clean(alert.title)} ${clean(alert.summary)} ${clean(alert.sourceExtract)}`
   });
   return {
@@ -661,7 +662,7 @@ function normaliseAlert(alert, index) {
     title: clean(alert.title) || 'Untitled source item',
     location: clean(alert.location) || (alert.region === 'uk' ? 'United Kingdom' : 'Europe'),
     region: alert.region === 'uk' ? 'uk' : 'europe',
-    lane: ['incidents','sanctions','oversight','border','prevention'].includes(alert.lane) ? alert.lane : 'incidents',
+    lane: ['incidents','context','sanctions','oversight','border','prevention'].includes(alert.lane) ? alert.lane : 'incidents',
     severity: ['critical','high','elevated','moderate'].includes(alert.severity) ? alert.severity : 'moderate',
     status: clean(alert.status) || 'Update',
     actor: clean(alert.actor) || clean(alert.source),
