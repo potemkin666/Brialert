@@ -5,6 +5,35 @@ const SOURCE_PULL_MINUTES = 15;
 const WATCHED_STORAGE_KEY = 'brialert.watched';
 const NOTES_STORAGE_KEY = 'brialert.notes';
 const BRIEFING_MODE_STORAGE_KEY = 'brialert.briefingMode';
+const watchLayerLabels = {
+  transport: 'Transport hubs',
+  embassy: 'Embassies',
+  hospital: 'Hospitals',
+  worship: 'Places of worship',
+  government: 'Government sites'
+};
+const watchGeographySites = [
+  { id: 'heathrow-airport', name: 'Heathrow Airport', category: 'transport', lat: 51.4700, lng: -0.4543, region: 'uk', note: 'Major UK aviation hub with national symbolic and economic significance.' },
+  { id: 'st-pancras', name: 'St Pancras International', category: 'transport', lat: 51.5314, lng: -0.1261, region: 'uk', note: 'Cross-border rail hub and dense public footfall site in central London.' },
+  { id: 'kings-cross', name: 'King’s Cross Station', category: 'transport', lat: 51.5308, lng: -0.1238, region: 'uk', note: 'Major interchange and historically relevant transport target environment.' },
+  { id: 'manchester-airport', name: 'Manchester Airport', category: 'transport', lat: 53.3650, lng: -2.2726, region: 'uk', note: 'High-throughput northern aviation hub with international connectivity.' },
+  { id: 'us-embassy-london', name: 'US Embassy London', category: 'embassy', lat: 51.4875, lng: -0.1260, region: 'uk', note: 'High-profile allied diplomatic site with symbolic and protest relevance.' },
+  { id: 'israeli-embassy-london', name: 'Israeli Embassy London', category: 'embassy', lat: 51.5009, lng: -0.1926, region: 'uk', note: 'Diplomatic site with elevated risk during Middle East escalation.' },
+  { id: 'french-embassy-london', name: 'French Embassy London', category: 'embassy', lat: 51.4952, lng: -0.1527, region: 'uk', note: 'Prominent diplomatic location close to other symbolic central-London assets.' },
+  { id: 'st-thomas-hospital', name: 'St Thomas’ Hospital', category: 'hospital', lat: 51.4981, lng: -0.1187, region: 'uk', note: 'Major London hospital close to Westminster and dense civic activity.' },
+  { id: 'royal-london-hospital', name: 'Royal London Hospital', category: 'hospital', lat: 51.5194, lng: -0.0597, region: 'uk', note: 'Large urban trauma hospital in a dense eastern-London environment.' },
+  { id: 'st-james-leeds', name: 'St James’s University Hospital', category: 'hospital', lat: 53.8076, lng: -1.5208, region: 'uk', note: 'Major Leeds hospital with direct relevance to past terrorism-linked reporting.' },
+  { id: 'central-synagogue-london', name: 'Central Synagogue London', category: 'worship', lat: 51.5232, lng: -0.1690, region: 'uk', note: 'Representative central-London Jewish communal site for posture awareness.' },
+  { id: 'east-london-mosque', name: 'East London Mosque', category: 'worship', lat: 51.5177, lng: -0.0713, region: 'uk', note: 'Large and visible Muslim place of worship in a dense urban area.' },
+  { id: 'westminster-abbey', name: 'Westminster Abbey', category: 'worship', lat: 51.4993, lng: -0.1273, region: 'uk', note: 'Nationally symbolic religious site with ceremonial and tourist significance.' },
+  { id: 'downing-street', name: '10 Downing Street', category: 'government', lat: 51.5034, lng: -0.1276, region: 'uk', note: 'Prime ministerial office and one of the most symbolic UK government locations.' },
+  { id: 'palace-of-westminster', name: 'Palace of Westminster', category: 'government', lat: 51.4995, lng: -0.1248, region: 'uk', note: 'Parliamentary complex with exceptional symbolic and constitutional significance.' },
+  { id: 'new-scotland-yard', name: 'New Scotland Yard', category: 'government', lat: 51.4957, lng: -0.1439, region: 'uk', note: 'Metropolitan Police headquarters and visible security/government node.' },
+  { id: 'european-parliament-brussels', name: 'European Parliament Brussels', category: 'government', lat: 50.8382, lng: 4.3755, region: 'europe', note: 'High-value EU institutional site and symbolic governance target.' },
+  { id: 'berlaymont', name: 'Berlaymont Building', category: 'government', lat: 50.8430, lng: 4.3826, region: 'europe', note: 'European Commission headquarters and key Brussels symbolic site.' },
+  { id: 'us-embassy-paris', name: 'US Embassy Paris', category: 'embassy', lat: 48.8696, lng: 2.3176, region: 'europe', note: 'Prominent diplomatic site in central Paris with historic targeting relevance.' },
+  { id: 'gare-du-nord', name: 'Gare du Nord', category: 'transport', lat: 48.8809, lng: 2.3553, region: 'europe', note: 'High-footfall international rail station in Paris.' }
+];
 
 const laneLabels = { all: 'All lanes', incidents: 'Incidents', sanctions: 'Sanctions', oversight: 'Oversight', border: 'Border', prevention: 'Prevention' };
 const incidentKeywords = ['terror','terrorism','attack','attacks','bomb','bombing','explosion','explosive','device','ramming','stabbing','shooting','hostage','plot','suspect','arrest','charged','charged with','parcel','radicalised','extremist','isis','islamic state','al-qaeda','threat'];
@@ -83,6 +112,7 @@ const defaultNotes = [
 let alerts = [];
 let activeRegion = 'all';
 let activeLane = 'all';
+let activeWatchLayers = new Set(Object.keys(watchLayerLabels));
 let watched = new Set();
 let lastBrowserPollAt = new Date();
 let liveFeedGeneratedAt = null;
@@ -93,6 +123,7 @@ let briefingMode = false;
 let activeTab = 'firstalert';
 let liveMap = null;
 let liveMarkers = [];
+let watchSiteMarkers = [];
 let lastMapSignature = '';
 let geoLookup = [];
 
@@ -110,9 +141,11 @@ const heroUpdated = document.getElementById('hero-updated');
 const heroPolling = document.getElementById('hero-polling');
 const mapElement = document.getElementById('leaflet-map');
 const mapSummary = document.getElementById('map-summary');
+const mapLayerSummary = document.getElementById('map-layer-summary');
 const mapZoomIn = document.getElementById('map-zoom-in');
 const mapZoomOut = document.getElementById('map-zoom-out');
 const mapReset = document.getElementById('map-reset');
+const mapLayerToggles = document.getElementById('map-layer-toggles');
 const filters = document.getElementById('filters');
 const laneFilters = document.getElementById('lane-filters');
 const tabbar = document.getElementById('tabbar');
@@ -404,6 +437,12 @@ function isLiveIncidentCandidate(alert) {
   return incidentScore(alert) >= 6;
 }
 function filteredAlerts() { return alerts.filter((alert) => (activeRegion === 'all' || alert.region === activeRegion) && (activeLane === 'all' || alert.lane === activeLane)); }
+function visibleWatchSites() {
+  return watchGeographySites.filter((site) =>
+    activeWatchLayers.has(site.category) &&
+    (activeRegion === 'all' || site.region === activeRegion)
+  );
+}
 function sortAlertsByFreshness(alertList) {
   const ranking = { critical: 4, high: 3, elevated: 2, moderate: 1 };
   return [...alertList].sort((a, b) => {
@@ -796,15 +835,30 @@ function mapIconForSeverity(severity) {
     popupAnchor: [0, -16]
   });
 }
+function watchSiteIcon(category) {
+  return L.divIcon({
+    className: 'watch-site-icon',
+    html: `<span class="watch-site-marker watch-site-marker--${category}"></span>`,
+    iconSize: [16, 16],
+    iconAnchor: [8, 8],
+    popupAnchor: [0, -8]
+  });
+}
 
 function renderMap(forceFit = false) {
   ensureMap();
   if (!liveMap) return;
   liveMarkers.forEach((marker) => marker.remove());
+  watchSiteMarkers.forEach((marker) => marker.remove());
   liveMarkers = [];
+  watchSiteMarkers = [];
 
   const items = filteredAlerts().filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
-  const signature = items.map((alert) => `${alert.id}:${alert.lat.toFixed(3)},${alert.lng.toFixed(3)}`).join('|');
+  const sites = visibleWatchSites();
+  const signature = [
+    items.map((alert) => `${alert.id}:${alert.lat.toFixed(3)},${alert.lng.toFixed(3)}`).join('|'),
+    sites.map((site) => `${site.id}:${site.category}`).join('|')
+  ].join('::');
   const bounds = [];
 
   items.forEach((alert) => {
@@ -819,12 +873,30 @@ function renderMap(forceFit = false) {
     bounds.push([alert.lat, alert.lng]);
   });
 
-  mapSummary.textContent = `${responderAlerts().length} responder items | ${contextAlerts().length} context | ${items.length} plotted`;
+  sites.forEach((site) => {
+    const marker = L.marker([site.lat, site.lng], {
+      icon: watchSiteIcon(site.category),
+      keyboard: true,
+      title: site.name
+    });
+    marker.bindPopup(`<div class="watch-site-popup"><strong>${site.name}</strong><p>${watchLayerLabels[site.category]} | ${site.note}</p></div>`);
+    marker.addTo(liveMap);
+    watchSiteMarkers.push(marker);
+    bounds.push([site.lat, site.lng]);
+  });
+
+  mapSummary.textContent = `${responderAlerts().length} responder items | ${contextAlerts().length} context | ${items.length} plotted alerts`;
+  mapLayerSummary.textContent = `${sites.length} watch sites visible`;
 
   if (items.length && (forceFit || signature !== lastMapSignature)) {
     liveMap.fitBounds(bounds, {
       padding: [28, 28],
       maxZoom: items.length === 1 ? 6 : 5
+    });
+  } else if (!items.length && sites.length && (forceFit || signature !== lastMapSignature)) {
+    liveMap.fitBounds(bounds, {
+      padding: [28, 28],
+      maxZoom: 5
     });
   } else if (!items.length && (forceFit || lastMapSignature)) {
     liveMap.setView([20, 10], 2);
@@ -930,6 +1002,18 @@ document.addEventListener('keydown', (event) => { if (event.key === 'Escape') cl
 mapZoomIn.addEventListener('click', () => zoomMap(1));
 mapZoomOut.addEventListener('click', () => zoomMap(-1));
 mapReset.addEventListener('click', () => renderMap(true));
+mapLayerToggles.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-watch-layer]');
+  if (!button) return;
+  const layer = button.dataset.watchLayer;
+  if (activeWatchLayers.has(layer)) {
+    activeWatchLayers.delete(layer);
+  } else {
+    activeWatchLayers.add(layer);
+  }
+  button.classList.toggle('active', activeWatchLayers.has(layer));
+  renderMap(true);
+});
 window.addEventListener('resize', () => {
   if (!liveMap) return;
   requestAnimationFrame(() => liveMap.invalidateSize());

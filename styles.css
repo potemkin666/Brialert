@@ -304,6 +304,19 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
   gap: 12px;
   margin-top: 12px;
 }
+.map-layer-panel {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.map-layer-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
 .map-chip {
   padding: 8px 12px;
   border-radius: 999px;
@@ -388,6 +401,33 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
 }
 .map-pin--moderate {
   background: linear-gradient(180deg, #4fd2d0, #1d8381);
+}
+.watch-site-icon {
+  background: transparent;
+  border: 0;
+}
+.watch-site-marker {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.06), 0 8px 16px rgba(0, 0, 0, 0.28);
+}
+.watch-site-marker--transport { background: #53b6ff; }
+.watch-site-marker--embassy { background: #c46bff; }
+.watch-site-marker--hospital { background: #48c97d; }
+.watch-site-marker--worship { background: #f0c95e; }
+.watch-site-marker--government { background: #ff7a64; }
+.watch-site-popup strong {
+  display: block;
+  margin-bottom: 4px;
+}
+.watch-site-popup p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
 }
 #context-list {
   display: flex;
@@ -571,6 +611,7 @@ h1 { font-size: 42px; line-height: 1; margin-bottom: 10px; }
   .modal-grid > div { min-width: 100%; }
   .map-surface { height: 260px; }
   .map-toolbar { align-items: stretch; flex-direction: column; }
+  .map-layer-panel .section-heading { gap: 8px; }
   .map-controls { width: 100%; justify-content: space-between; }
 }
 @media (max-width: 640px) {

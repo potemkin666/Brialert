@@ -124,6 +124,22 @@
                 <button class="map-control" id="map-zoom-in" type="button" aria-label="Zoom in">+</button>
               </div>
             </div>
+            <div class="map-layer-panel">
+              <div class="section-heading">
+                <div>
+                  <span class="detail-label">Watch Geography</span>
+                  <p class="panel-copy">Overlay high-attention fixed sites to keep incident reporting grounded in likely target geography.</p>
+                </div>
+                <span id="map-layer-summary">0 watch sites visible</span>
+              </div>
+              <div class="map-layer-toggles" id="map-layer-toggles">
+                <button class="filter active" data-watch-layer="transport">Transport hubs</button>
+                <button class="filter active" data-watch-layer="embassy">Embassies</button>
+                <button class="filter active" data-watch-layer="hospital">Hospitals</button>
+                <button class="filter active" data-watch-layer="worship">Places of worship</button>
+                <button class="filter active" data-watch-layer="government">Government sites</button>
+              </div>
+            </div>
             <div class="map-surface" id="map-grid">
               <div class="map-viewport" id="map-viewport">
                 <div class="leaflet-map" id="leaflet-map" aria-label="Interactive alert map"></div>
