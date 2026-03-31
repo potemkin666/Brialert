@@ -5,20 +5,20 @@ import * as cheerio from 'cheerio';
 import { XMLParser } from 'fast-xml-parser';
 import {
   clean,
-  incidentKeywords,
   terrorismKeywords,
-  criticalKeywords,
-  highKeywords,
   matchesKeywords,
-  sourceHasTerrorTopic,
   normaliseSourceTier,
   normaliseReliabilityProfile,
   inferSourceTier,
   inferReliabilityProfile,
   inferIncidentTrack,
   isTerrorRelevantIncident,
-  majorMediaProviders,
-  tabloidProviders
+  inferSeverity,
+  inferConfidenceScore,
+  inferStatus,
+  inferEventType,
+  inferGeoPrecision,
+  sourceLooksEnglish
 } from '../shared/taxonomy.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -30,20 +30,6 @@ const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' 
 const now = new Date();
 const geoLookup = JSON.parse(await fs.readFile(geoLookupPath, 'utf8'));
 const severityRank = { critical: 4, high: 3, elevated: 2, moderate: 1 };
-const englishFriendlyPatterns = [
-  '/en/', '/english', 'english.', '/eng', 'dw.com/en', 'ansa.it/english', 'nzz.ch/english',
-  'apnews.com', 'reuters.com', 'theguardian.com', 'bbc.', 'france24.com/en', 'swissinfo.ch/eng',
-  'spectator.sme.sk', 'telex.hu/english', 'pap.pl/en', 'err.ee/en', 'eng.lsm.lv', 'lrt.lt/en',
-  'hurriyetdailynews.com', 'duvarenglish.com', 'kallxo.com/english', 'english.radio.cz',
-  '/EN/', 'sgdsn-english', 'pet.dk/en', 'pst.no/en', 'english.nctv.nl'
-];
-const nonEnglishEndpointPatterns = [
-  'abc.es', 'aftonbladet.se', 'aktuality.sk', 'corriere.it', 'dn.se', 'telegraaf.nl', 'volkskrant.nl',
-  'derstandard.at', 'diepresse.com', 'welt.de', 'elmundo.es', 'faz.net', 'info.gouv.fr/risques/le-plan-vigipirate',
-  'vigipirate.gouv.fr', 'handelsblatt.com', 'lavanguardia.com', 'lefigaro.fr', 'lemonde.fr', 'leparisien.fr',
-  'liberation.fr', 'repubblica.it', 'lastampa.it', 'ilsole24ore.com', 'nrc.nl', 'standard.be', 'lesoir.be',
-  'dewereldmorgen.be', 'svd.se', 'pravda.sk', 'polisen.se/', 'cathimerini.gr', 'pst.no/kunnskapsbank/'
-];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const titleCase = (value) => clean(value).replace(/\b\w/g, (m) => m.toUpperCase());
@@ -68,16 +54,6 @@ function parseSourceDate(rawDate) {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
-function inferSeverity(source, text) {
-  if (source.lane === 'incidents') {
-    if (matchesKeywords(text, criticalKeywords).length) return 'critical';
-    if (matchesKeywords(text, highKeywords).length) return 'high';
-    return 'elevated';
-  }
-  if (source.lane === 'sanctions' || source.lane === 'border') return 'elevated';
-  return 'moderate';
-}
-
 function normaliseLanguageTag(value) {
   return clean(value).toLowerCase().replace('_', '-');
 }
@@ -85,37 +61,6 @@ function normaliseLanguageTag(value) {
 function isEnglishLanguage(value) {
   const lang = normaliseLanguageTag(value);
   return !lang || lang === 'en' || lang.startsWith('en-');
-}
-
-function sourceLooksEnglish(source) {
-  const endpoint = clean(source.endpoint).toLowerCase();
-  if (englishFriendlyPatterns.some((pattern) => endpoint.includes(pattern.toLowerCase()))) return true;
-  if (nonEnglishEndpointPatterns.some((pattern) => endpoint.includes(pattern.toLowerCase()))) return false;
-  return true;
-}
-
-function inferConfidenceScore(source, text, publishedIso, reliabilityProfile) {
-  let score = 0.62;
-  if (reliabilityProfile === 'official_ct') score = 0.94;
-  else if (reliabilityProfile === 'official_general') score = 0.88;
-  else if (reliabilityProfile === 'official_context') score = 0.84;
-  else if (reliabilityProfile === 'major_media') score = 0.76;
-  else if (reliabilityProfile === 'specialist_research') score = 0.68;
-  else if (reliabilityProfile === 'general_media') score = 0.6;
-  else if (reliabilityProfile === 'tabloid') score = 0.48;
-  if (matchesKeywords(text).length >= 4) score += 0.04;
-  if (!publishedIso) score -= 0.08;
-  return Math.max(0.25, Math.min(0.99, Number(score.toFixed(2))));
-}
-
-function inferStatus(source, itemText) {
-  if (source.lane !== 'incidents') return 'Update';
-  const text = itemText.toLowerCase();
-  if (text.includes('charged')) return 'Charged';
-  if (text.includes('arrest')) return 'Arrest';
-  if (text.includes('sentenced')) return 'Sentenced';
-  if (text.includes('threat')) return 'Threat update';
-  return 'New source item';
 }
 
 function sourceTierRankValue(sourceTier) {
@@ -158,36 +103,6 @@ function inferLocation(source, title) {
   const hit = patterns.find((name) => text.includes(name));
   if (hit) return hit;
   return source.region === 'uk' ? 'United Kingdom' : 'Europe';
-}
-
-function inferEventType(source, text) {
-  const lower = text.toLowerCase();
-  if (source.lane === 'sanctions') return 'sanctions_update';
-  if (source.lane === 'oversight') return 'oversight_update';
-  if (source.lane === 'border') return 'border_security_update';
-  if (source.lane === 'context') return 'context_update';
-  if (source.lane === 'prevention') return 'prevention_update';
-  if (lower.includes('medal') || lower.includes('award') || lower.includes('anniversary') || lower.includes('memorial') || lower.includes('commemoration')) return 'recognition';
-  if (lower.includes('podcast') || lower.includes('inside counter terrorism') || lower.includes('about us')) return 'feature';
-  if (lower.includes('sentenced') || lower.includes('convicted')) return 'sentencing';
-  if (lower.includes('charged')) return 'charge';
-  if (lower.includes('arrest') || lower.includes('arrested') || lower.includes('raid')) return 'arrest';
-  if (lower.includes('foiled') || lower.includes('disrupt') || lower.includes('disrupted')) return 'disrupted_plot';
-  if (lower.includes('threat level') || lower.includes('threat')) return 'threat_update';
-  if (matchesKeywords(lower, criticalKeywords).length) return 'active_attack';
-  return 'incident_update';
-}
-
-function inferGeoPrecision(location) {
-  if (!location) return 'unknown';
-  const cityLike = [
-    'Leeds', 'London', 'Manchester', 'Birmingham', 'Liverpool', 'Glasgow', 'Belfast', 'Northumberland',
-    'Paris', 'Brussels', 'Berlin', 'Madrid', 'Rome', 'Amsterdam', 'Stockholm', 'Copenhagen', 'Dublin',
-    'Athens', 'Vienna', 'Vilnius', 'Warsaw', 'Kyiv', 'Tehran', 'Beirut', 'Jerusalem', 'Tel Aviv'
-  ];
-  if (cityLike.includes(location)) return 'city';
-  if (['United Kingdom', 'Europe', 'Iran', 'Israel', 'Lebanon', 'Iraq', 'Yemen', 'Nigeria', 'Pakistan', 'California', 'Yosemite'].includes(location)) return 'country';
-  return 'region';
 }
 
 function summariseTextBlock(text, maxParts = 8) {
