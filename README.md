@@ -1,82 +1,98 @@
 # Brialert
 
-Brialert is a responder-first terrorism monitoring web app built for fast mobile use on iPhone Safari and home-screen install.
+Brialert is a terrorism monitoring web app built to be fast, blunt, and actually useful on a phone.
 
-The app is designed around a simple operational flow:
+The idea is simple: too much of this stuff comes in as noise, half-signals, duplicated reporting, or articles that look urgent but are really just stale courtroom sludge wearing fresh timestamps. Brialert tries to cut through that. It pulls from trusted sources, weighs what matters, pushes likely live incidents to the top, and lets you turn that into a usable briefing block without having to fight the interface.
 
-- pull trusted source updates on a schedule
-- rank and filter likely live incidents
-- open a dense incident summary
-- copy a briefing block for email or note use
+It is built first for iPhone Safari and home-screen use because that is where it needed to work, not because “mobile-first” sounds nice in a README.
 
 ## Live site
 
-- Project Pages URL: `https://potemkin666.github.io/Brialert/`
+https://potemkin666.github.io/Brialert/
 
-## Core features
+## What it does
 
-- broad UK + Europe source catalog
-- explicit source tiers:
-  - `trigger`
-  - `corroboration`
-  - `context`
-  - `research`
-- explicit reliability profiles:
-  - `official_ct`
-  - `official_general`
-  - `official_context`
-  - `major_media`
-  - `general_media`
-  - `tabloid`
-  - `specialist_research`
-- incident-first prioritisation
-- lane filtering:
-  - `Incidents`
-  - `Sanctions`
-  - `Oversight`
-  - `Border`
-  - `Prevention`
-- interactive world map with alert markers
-- local watchlist and analyst notes persistence
-- mobile-friendly PWA shell for iPhone use
+Brialert monitors a broad UK and Europe-focused source set, with some wider international coverage where it is operationally relevant.
+
+It sorts sources into rough roles:
+
+- trigger
+- corroboration
+- context
+- research
+
+It also keeps explicit reliability profiles so everything is not treated as morally or operationally equivalent, which is a mistake people make constantly:
+
+- official_ct
+- official_general
+- official_context
+- major_media
+- general_media
+- tabloid
+- specialist_research
+
+The app is incident-first. That is the whole point.  
+If something looks live, serious, or fast-moving, it should not have to compete visually with slower policy or prosecution-stage material.
+
+There are also lane filters for:
+
+- Incidents
+- Sanctions
+- Oversight
+- Border
+- Prevention
+
+Other bits:
+
+- interactive map with alert markers
+- persistent local watchlist
+- persistent analyst notes
+- mobile-friendly PWA shell
+
+## How it works
+
+The flow is intentionally narrow:
+
+1. pull source updates on a schedule
+2. rank and filter for likely live incidents
+3. open a dense incident summary
+4. copy a briefing block for email, notes, or whatever else needs feeding
+
+That is it.  
+It is not trying to be a bloated intel platform. It is trying to be the bit you actually reach for.
 
 ## Project structure
 
-- `index.html`
-  - app shell and modal layout
-- `styles.css`
-  - mobile-first styling and map presentation
-- `app.js`
-  - rendering, filtering, briefing generation, persistence
-- `data/sources.json`
-  - active source catalog
-- `scripts/build-live-feed.mjs`
-  - feed build, extraction, ranking, dedupe, and normalization
-- `live-alerts.json`
-  - generated alert payload consumed by the frontend
-- `.github/workflows/update-live-feed.yml`
-  - scheduled feed refresh workflow
+```text
+index.html
+  app shell and modal layout
 
-## Local development
+styles.css
+  mobile-first styling and map presentation
 
-The frontend is static. The feed builder requires Node.js 20+.
+app.js
+  rendering, filtering, briefing generation, persistence
 
-Install dependencies:
+data/sources.json
+  active source catalog
 
-```bash
-npm ci
-```
+data/geo-lookup.json
+  location term matching for map placement
 
-Build the live alert feed:
+scripts/build-live-feed.mjs
+  feed build, extraction, ranking, dedupe, and normalisation
 
-```bash
-npm run build:feeds
-```
+live-alerts.json
+  generated alert payload consumed by the frontend
 
-## Notes
+.github/workflows/update-live-feed.yml
+  scheduled feed refresh workflow
 
-- This repo is web-first, not native iOS.
-- GitHub Actions refreshes `live-alerts.json` on a schedule and on relevant pushes.
-- `data/sources.json` is the source of truth for lane and `sourceTier` metadata.
-- incident alerts are split into `live` vs `case` tracks so prosecution-stage items stop crowding the live queue.
-- Albert stays.
+
+Notes
+This is a web app, not a native iOS app.
+GitHub Actions refreshes live-alerts.json on a schedule and on relevant pushes.
+data/sources.json is the source of truth for lane and source tier metadata.
+Incident alerts are split into live vs case tracks so old prosecution-stage material stops clogging the live queue.
+UK and Europe are weighted more heavily because that is the actual operational centre of gravity here.
+Albert stays.
