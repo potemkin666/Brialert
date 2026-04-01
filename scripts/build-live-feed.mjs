@@ -30,8 +30,29 @@ const repoRoot = path.resolve(__dirname, '..');
 const sourcePath = path.join(repoRoot, 'data', 'sources.json');
 const geoLookupPath = path.join(repoRoot, 'data', 'geo-lookup.json');
 const outputPath = path.join(repoRoot, 'live-alerts.json');
-const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' });
+const parser = new XMLParser({
+  ignoreAttributes: false,
+  attributeNamePrefix: '',
+  processEntities: false,
+  htmlEntities: false,
+  trimValues: true
+});
 const now = new Date();
+const DEFAULT_TIMEOUT_MS = 12000;
+const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
+const HARD_SKIP_SOURCE_IDS = new Set([
+  'globalsecurity-terror-news',
+  'un-ctitf-news',
+  'statewatch-europol',
+  'besa-terrorism',
+  'icct-main',
+  'jamestown-militant-leadership-monitor',
+  'jamestown-terrorism-monitor',
+  'washington-institute-countering-terrorism',
+  'cps-terrorism-news',
+  'cps-terrorism-search',
+  'kallxo-english-home'
+]);
 const severityRank = { critical: 4, high: 3, elevated: 2, moderate: 1 };
 
 function stripBom(text) {
@@ -443,18 +464,52 @@ function queueReasonFor(source, {
   return 'Trigger-tier terrorism incident candidate';
 }
 
-async function fetchText(url) {
+async function fetchText(url, attempt = 1) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
+
   try {
     const response = await fetch(url, {
       headers: {
-        'user-agent': 'BrialertFeedBot/1.0 (+https://potemkin666.github.io/Brialert/)'
+        'user-agent': 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)',
+        'accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.8',
+        'accept-language': 'en-GB,en;q=0.9',
+        'cache-control': 'no-cache'
       },
+      redirect: 'follow',
       signal: controller.signal
     });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    if (!response.ok) {
+      if (RETRYABLE_STATUS_CODES.has(response.status) && attempt < 3) {
+        const retryAfterHeader = Number(response.headers.get('retry-after'));
+        const retryDelay = Number.isFinite(retryAfterHeader) && retryAfterHeader > 0
+          ? retryAfterHeader * 1000
+          : 1000 * Math.pow(2, attempt - 1);
+
+        await sleep(retryDelay);
+        return fetchText(url, attempt + 1);
+      }
+
+      throw new Error(`HTTP ${response.status}`);
+    }
+
     return await response.text();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    const retryable =
+      message.includes('fetch failed') ||
+      message.includes('aborted') ||
+      message.includes('AbortError') ||
+      message.includes('ECONNRESET') ||
+      message.includes('ETIMEDOUT');
+
+    if (retryable && attempt < 3) {
+      await sleep(1000 * Math.pow(2, attempt - 1));
+      return fetchText(url, attempt + 1);
+    }
+
+    throw error;
   } finally {
     clearTimeout(timeout);
   }
@@ -750,6 +805,12 @@ async function main() {
     if (!sourceLooksEnglish(source)) {
       continue;
     }
+
+    if (HARD_SKIP_SOURCE_IDS.has(source.id)) {
+      console.warn(`Skipping disabled source: ${source.id}`);
+      continue;
+    }
+
     try {
       const body = await fetchText(source.endpoint);
       const parsed = source.kind === 'rss' || source.kind === 'atom' ? parseFeedItems(source, body) : parseHtmlItems(source, body);
@@ -760,9 +821,10 @@ async function main() {
       const kept = hydrated.filter((item) => shouldKeepItem(source, item)).slice(0, itemLimit);
       kept.forEach((item, idx) => items.push(buildAlert(source, item, idx)));
       checked += 1;
-      await sleep(250);
+      await sleep(source.kind === 'html' ? 500 : 250);
     } catch (error) {
-      console.error(`Source failed: ${source.id} - ${error.message}`);
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`Source failed: ${source.id} [${source.kind}/${source.lane}] - ${message}`);
     }
   }
 
