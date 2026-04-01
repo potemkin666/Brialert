@@ -8,8 +8,6 @@ import {
   plainText,
   terrorismKeywords,
   matchesKeywords,
-  normaliseSourceTier,
-  normaliseReliabilityProfile,
   inferSourceTier,
   inferReliabilityProfile,
   inferIncidentTrack,
@@ -118,11 +116,82 @@ function inferConfidence(source, reliabilityProfile) {
   return 'Secondary source signal';
 }
 
-function inferLocation(source, title) {
-  const text = title || '';
-  const patterns = ['Leeds', 'London', 'Manchester', 'Birmingham', 'Liverpool', 'Glasgow', 'Belfast', 'Northumberland', 'Paris', 'Brussels', 'Berlin', 'Madrid', 'Rome', 'Amsterdam', 'Stockholm', 'Copenhagen', 'Dublin', 'Athens', 'Vienna', 'Vilnius', 'Warsaw', 'Kyiv', 'Tehran', 'Beirut', 'Jerusalem', 'Tel Aviv', 'Yemen', 'Iraq', 'Iran', 'Israel', 'Lebanon', 'Nigeria', 'Pakistan', 'California', 'Yosemite'];
-  const hit = patterns.find((name) => text.includes(name));
-  if (hit) return hit;
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function normaliseGeoText(value) {
+  return clean(value)
+    .toLowerCase()
+    .replace(/[’']/g, "'")
+    .replace(/[_/]+/g, ' ')
+    .replace(/[^\p{L}\p{N}\s'-]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function geoTermRegex(term) {
+  const escaped = escapeRegex(normaliseGeoText(term));
+  return new RegExp(`(^|\\W)${escaped}(?=$|\\W)`, 'i');
+}
+
+function scoreGeoEntryMatch(entry, haystack) {
+  let best = 0;
+
+  for (const rawTerm of entry.terms || []) {
+    const term = normaliseGeoText(rawTerm);
+    if (!term) continue;
+
+    const regex = geoTermRegex(term);
+    if (!regex.test(haystack)) continue;
+
+    let score = term.length;
+
+    if ((entry.precision || '') === 'high') score += 40;
+    else if ((entry.precision || '') === 'medium') score += 20;
+    else if ((entry.precision || '') === 'low') score += 5;
+
+    if ((entry.kind || '') === 'neighbourhood') score += 18;
+    else if ((entry.kind || '') === 'borough') score += 16;
+    else if ((entry.kind || '') === 'city') score += 14;
+    else if ((entry.kind || '') === 'town') score += 12;
+    else if ((entry.kind || '') === 'airport_area') score += 11;
+    else if ((entry.kind || '') === 'county' || (entry.kind || '') === 'region' || (entry.kind || '') === 'state') score += 8;
+    else if ((entry.kind || '') === 'country') score += 3;
+    else if ((entry.kind || '') === 'continent') score += 1;
+
+    best = Math.max(best, score);
+  }
+
+  return best;
+}
+
+function fallbackGeoEntryFor(region) {
+  return geoLookup.find((entry) =>
+    region === 'uk'
+      ? (entry.terms || []).includes('united kingdom')
+      : (entry.terms || []).includes('europe')
+  ) || null;
+}
+
+function bestGeoEntryFor(text, region) {
+  const haystack = normaliseGeoText(text);
+  if (!haystack) return fallbackGeoEntryFor(region);
+
+  const scored = geoLookup
+    .map((entry) => ({ entry, score: scoreGeoEntryMatch(entry, haystack) }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  if (scored.length) return scored[0].entry;
+
+  return fallbackGeoEntryFor(region);
+}
+
+function inferLocation(source, title, summary = '') {
+  const text = `${title || ''} ${summary || ''}`;
+  const match = bestGeoEntryFor(text, source.region);
+  if (match?.label) return match.label;
   return source.region === 'uk' ? 'United Kingdom' : 'Europe';
 }
 
@@ -200,8 +269,8 @@ function chooseArticleDetail(metaDescription, articleParagraphs) {
 }
 
 function geoFor(location, title, summary, region) {
-  const haystack = clean(`${location} ${title} ${summary}`).toLowerCase();
-  const match = geoLookup.find((entry) => entry.terms.some((term) => haystack.includes(term)));
+  const text = `${location || ''} ${title || ''} ${summary || ''}`;
+  const match = bestGeoEntryFor(text, region);
   if (match) return { lat: match.lat, lng: match.lng };
   return region === 'uk' ? { lat: 54.5, lng: -2.5 } : { lat: 54, lng: 15 };
 }
@@ -316,13 +385,10 @@ function recencyOkay(source, rawDate) {
 function makeSummary(source, item) {
   const title = clean(item.title);
   const summary = clean(item.summary && item.summary !== item.title ? item.summary : '');
-  const when = formatDisplayDate(item.published);
-  const where = inferLocation(source, title);
-  const text = `${title} ${summary}`.toLowerCase();
   if (source.lane === 'incidents') {
-      const factualBits = summariseTextBlock(summary);
-      return factualBits.length ? factualBits.join(' ') : title;
-    }
+    const factualBits = summariseTextBlock(summary);
+    return factualBits.length ? factualBits.join(' ') : title;
+  }
   if (source.lane === 'sanctions') {
     return `${source.provider} has published a sanctions-related update. The value here is legal and entity-resolution context, including designations, aliases, listing changes, and notice-level movement.`;
   }
@@ -552,22 +618,28 @@ function shouldKeepItem(source, item) {
   const incidentHits = matchesKeywords(text);
   const terrorHits = matchesKeywords(text, terrorismKeywords);
   const terrorRelevant = isTerrorRelevantIncident(source, item);
+
   if (item.language && !isEnglishLanguage(item.language)) return false;
+  if (!item.published && source.lane === 'incidents' && !source.isTrustedOfficial) return false;
   if (!recencyOkay(source, item.published)) return false;
   if (source.lane === 'incidents' && !terrorRelevant) return false;
+
   if (source.lane === 'context' && !source.isTrustedOfficial) {
     const requiredTerrorHits = reliabilityProfile === 'tabloid' ? 2 : 1;
     if (terrorHits.length < requiredTerrorHits) return false;
   }
+
   if (reliabilityProfile === 'tabloid') {
     const titleTerrorHits = matchesKeywords(item.title || '', terrorismKeywords);
     if (titleTerrorHits.length < 1) return false;
     if (terrorHits.length < 2) return false;
     if (incidentHits.length < 3) return false;
   }
+
   if (source.requiresKeywordMatch) {
     return incidentHits.length > 0;
   }
+
   return true;
 }
 
@@ -575,7 +647,7 @@ function buildAlert(source, item, idx) {
   const text = `${item.title} ${item.summary}`;
   const sourceTier = inferSourceTier(source);
   const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
-  const location = inferLocation(source, item.title);
+  const location = inferLocation(source, item.title, item.summary);
   const coords = geoFor(location, item.title, item.summary, source.region);
   const publishedIso = formatWhen(item.published);
   const displayWhen = formatDisplayDate(item.published);
@@ -614,50 +686,51 @@ function buildAlert(source, item, idx) {
     eventType,
     incidentTrack
   });
+
   return {
-      id: `${source.id}-${idx}`,
-      fusedIncidentId,
-      title: titleCase(item.title),
-      location,
-      region: source.region,
-      lane: source.lane,
-      severity,
-      status: inferStatus(source, text),
-      actor: source.provider,
-      subject: source.provider,
-      happenedWhen: displayWhen,
-      confidence: inferConfidence(source, reliabilityProfile),
-      confidenceScore,
-      summary: plainText(item.summary || item.title).slice(0, 260),
-      aiSummary: makeSummary(source, item),
-      sourceExtract: plainText(item.sourceExtract || item.summary || item.title).slice(0, 1800),
-      peopleInvolved,
-      source: source.provider,
-      sourceUrl: item.link,
-      sourceTier,
-      reliabilityProfile,
-      incidentTrack,
-      laneReason: laneReasonFor(source, incidentTrack),
-      queueReason,
-      time: displayWhen,
-      lat: coords.lat,
-      lng: coords.lng,
-      major: source.lane === 'incidents' && incidentTrack === 'live' && ['critical', 'high'].includes(severity),
-      publishedAt: publishedIso,
-      keywordHits,
-      terrorismHits,
-      eventType,
-      geoPrecision: inferGeoPrecision(location),
-      isOfficial: !!source.isTrustedOfficial,
-      priorityScore,
-      freshnessBucket: freshnessBucket(source, publishedIso),
-      freshUntil: freshUntilFor(source, publishedIso, severity, incidentTrack),
-      needsHumanReview,
-      isTerrorRelevant,
-      corroboratingSources: [],
-      corroborationCount: 0,
-      isDuplicateOf: null
-    };
+    id: `${source.id}-${idx}`,
+    fusedIncidentId,
+    title: titleCase(item.title),
+    location,
+    region: source.region,
+    lane: source.lane,
+    severity,
+    status: inferStatus(source, text),
+    actor: source.provider,
+    subject: source.provider,
+    happenedWhen: displayWhen,
+    confidence: inferConfidence(source, reliabilityProfile),
+    confidenceScore,
+    summary: plainText(item.summary || item.title).slice(0, 260),
+    aiSummary: makeSummary(source, item),
+    sourceExtract: plainText(item.sourceExtract || item.summary || item.title).slice(0, 1800),
+    peopleInvolved,
+    source: source.provider,
+    sourceUrl: item.link,
+    sourceTier,
+    reliabilityProfile,
+    incidentTrack,
+    laneReason: laneReasonFor(source, incidentTrack),
+    queueReason,
+    time: displayWhen,
+    lat: coords.lat,
+    lng: coords.lng,
+    major: source.lane === 'incidents' && incidentTrack === 'live' && ['critical', 'high'].includes(severity),
+    publishedAt: publishedIso,
+    keywordHits,
+    terrorismHits,
+    eventType,
+    geoPrecision: inferGeoPrecision(location),
+    isOfficial: !!source.isTrustedOfficial,
+    priorityScore,
+    freshnessBucket: freshnessBucket(source, publishedIso),
+    freshUntil: freshUntilFor(source, publishedIso, severity, incidentTrack),
+    needsHumanReview,
+    isTerrorRelevant,
+    corroboratingSources: [],
+    corroborationCount: 0,
+    isDuplicateOf: null
+  };
 }
 
 async function readExisting() {
@@ -695,33 +768,36 @@ async function main() {
 
   const deduped = [];
   const seen = new Map();
+
   for (const item of items) {
     const key = item.fusedIncidentId || `${sameStoryKey(item)}|${item.location}|${item.eventType}`;
-      if (seen.has(key)) {
-        const existingIndex = seen.get(key);
-        const incumbent = deduped[existingIndex];
-        const itemTier = sourceTierRankValue(item.sourceTier);
-        const incumbentTier = sourceTierRankValue(incumbent.sourceTier);
-        const itemTrack = incidentTrackRankValue(item.incidentTrack);
-        const incumbentTrack = incidentTrackRankValue(incumbent.incidentTrack);
-        if (
-          itemTrack > incumbentTrack ||
-          (itemTrack === incumbentTrack && itemTier > incumbentTier) ||
-          (itemTrack === incumbentTrack && itemTier === incumbentTier && (item.priorityScore || 0) > (incumbent.priorityScore || 0))
-        ) {
-          item.isDuplicateOf = incumbent.fusedIncidentId || incumbent.id;
-          item.fusedIncidentId = incumbent.fusedIncidentId || item.fusedIncidentId;
-          item.corroboratingSources = mergeCorroboratingSources(item, incumbent);
-          item.corroborationCount = item.corroboratingSources.length;
-          deduped[existingIndex] = item;
-          seen.set(key, existingIndex);
-        } else {
-          incumbent.corroboratingSources = mergeCorroboratingSources(incumbent, item);
-          incumbent.corroborationCount = incumbent.corroboratingSources.length;
-          incumbent.isDuplicateOf = incumbent.isDuplicateOf || item.fusedIncidentId || item.id;
-        }
-        continue;
+    if (seen.has(key)) {
+      const existingIndex = seen.get(key);
+      const incumbent = deduped[existingIndex];
+      const itemTier = sourceTierRankValue(item.sourceTier);
+      const incumbentTier = sourceTierRankValue(incumbent.sourceTier);
+      const itemTrack = incidentTrackRankValue(item.incidentTrack);
+      const incumbentTrack = incidentTrackRankValue(incumbent.incidentTrack);
+
+      if (
+        itemTrack > incumbentTrack ||
+        (itemTrack === incumbentTrack && itemTier > incumbentTier) ||
+        (itemTrack === incumbentTrack && itemTier === incumbentTier && (item.priorityScore || 0) > (incumbent.priorityScore || 0))
+      ) {
+        item.isDuplicateOf = incumbent.fusedIncidentId || incumbent.id;
+        item.fusedIncidentId = incumbent.fusedIncidentId || item.fusedIncidentId;
+        item.corroboratingSources = mergeCorroboratingSources(item, incumbent);
+        item.corroborationCount = item.corroboratingSources.length;
+        deduped[existingIndex] = item;
+        seen.set(key, existingIndex);
+      } else {
+        incumbent.corroboratingSources = mergeCorroboratingSources(incumbent, item);
+        incumbent.corroborationCount = incumbent.corroboratingSources.length;
+        incumbent.isDuplicateOf = incumbent.isDuplicateOf || item.fusedIncidentId || item.id;
       }
+      continue;
+    }
+
     seen.set(key, deduped.length);
     deduped.push(item);
   }
@@ -729,13 +805,28 @@ async function main() {
   deduped.sort((a, b) => {
     const timeA = parseSourceDate(a.publishedAt)?.getTime() || 0;
     const timeB = parseSourceDate(b.publishedAt)?.getTime() || 0;
-    if ((b.freshnessBucket || 0) !== (a.freshnessBucket || 0)) return (b.freshnessBucket || 0) - (a.freshnessBucket || 0);
-    if (incidentTrackRankValue(b.incidentTrack) !== incidentTrackRankValue(a.incidentTrack)) return incidentTrackRankValue(b.incidentTrack) - incidentTrackRankValue(a.incidentTrack);
-    if (sourceTierRankValue(b.sourceTier) !== sourceTierRankValue(a.sourceTier)) return sourceTierRankValue(b.sourceTier) - sourceTierRankValue(a.sourceTier);
-    if (timeB !== timeA) return timeB - timeA;
-    if ((b.priorityScore || 0) !== (a.priorityScore || 0)) return (b.priorityScore || 0) - (a.priorityScore || 0);
-    if ((b.confidenceScore || 0) !== (a.confidenceScore || 0)) return (b.confidenceScore || 0) - (a.confidenceScore || 0);
-    if (severityRank[b.severity] !== severityRank[a.severity]) return severityRank[b.severity] - severityRank[a.severity];
+
+    if ((b.freshnessBucket || 0) !== (a.freshnessBucket || 0)) {
+      return (b.freshnessBucket || 0) - (a.freshnessBucket || 0);
+    }
+    if (incidentTrackRankValue(b.incidentTrack) !== incidentTrackRankValue(a.incidentTrack)) {
+      return incidentTrackRankValue(b.incidentTrack) - incidentTrackRankValue(a.incidentTrack);
+    }
+    if ((b.priorityScore || 0) !== (a.priorityScore || 0)) {
+      return (b.priorityScore || 0) - (a.priorityScore || 0);
+    }
+    if (sourceTierRankValue(b.sourceTier) !== sourceTierRankValue(a.sourceTier)) {
+      return sourceTierRankValue(b.sourceTier) - sourceTierRankValue(a.sourceTier);
+    }
+    if ((b.confidenceScore || 0) !== (a.confidenceScore || 0)) {
+      return (b.confidenceScore || 0) - (a.confidenceScore || 0);
+    }
+    if (severityRank[b.severity] !== severityRank[a.severity]) {
+      return severityRank[b.severity] - severityRank[a.severity];
+    }
+    if (timeB !== timeA) {
+      return timeB - timeA;
+    }
     return 0;
   });
 
@@ -749,6 +840,7 @@ async function main() {
   const existing = await readExisting();
   const currentComparable = JSON.stringify(existing?.alerts || []);
   const nextComparable = JSON.stringify(payload.alerts);
+
   if (currentComparable === nextComparable) {
     console.log('No alert changes detected.');
     return;
@@ -762,5 +854,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
-
