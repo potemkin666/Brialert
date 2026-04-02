@@ -2,15 +2,29 @@
   "name": "Brialert",
   "short_name": "Brialert",
   "description": "Responder-first terrorism monitoring dashboard for iPhone Safari home screen install.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "id": "/Brialert/",
+  "start_url": "/Brialert/index.html",
+  "scope": "/Brialert/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
   "background_color": "#070914",
   "theme_color": "#070914",
   "icons": [
     {
-      "src": "assets/albert-icon.jpg",
+      "src": "/Brialert/assets/albert-icon.jpg",
+      "sizes": "180x180",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/Brialert/assets/albert-icon.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/Brialert/assets/albert-icon.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any"
