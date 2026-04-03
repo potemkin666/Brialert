@@ -40,6 +40,8 @@ const parser = new XMLParser({
 const now = new Date();
 const DEFAULT_TIMEOUT_MS = 12000;
 const MAX_SOURCE_ERRORS_TO_REPORT = 25;
+const FEED_SOURCE_CONCURRENCY = 4;
+const HTML_HYDRATION_CONCURRENCY = 3;
 const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
 const HARD_SKIP_SOURCE_IDS = new Set([
   'globalsecurity-terror-news',
@@ -75,6 +77,24 @@ let geoLookup = [];
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const titleCase = (value) => clean(value).replace(/\b\w/g, (m) => m.toUpperCase());
 const SOURCE_TIMEZONE = 'Europe/London';
+
+async function mapWithConcurrency(items, limit, mapper) {
+  if (!Array.isArray(items) || !items.length) return [];
+  const concurrency = Math.max(1, Math.min(limit || 1, items.length));
+  const results = new Array(items.length);
+  let nextIndex = 0;
+
+  async function worker() {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+    }
+  }
+
+  await Promise.all(Array.from({ length: concurrency }, () => worker()));
+  return results;
+}
 
 function arrayify(value) {
   if (!value) return [];
@@ -637,20 +657,19 @@ function extractArticleMeta(html, url) {
 }
 
 async function enrichHtmlItems(source, items) {
-  const enriched = [];
-  for (const [index, item] of items.entries()) {
+  return mapWithConcurrency(items, HTML_HYDRATION_CONCURRENCY, async (item, index) => {
     const shouldHydrate =
       !parseSourceDate(item.published) ||
       clean(item.summary).length < 380 ||
       (source.lane === 'incidents' && index < 2);
     if (!shouldHydrate) {
-      enriched.push(item);
-      continue;
+      return item;
     }
     try {
+      await sleep(index * 40);
       const articleHtml = await fetchText(item.link);
       const meta = extractArticleMeta(articleHtml, item.link);
-      enriched.push({
+      return {
         ...item,
         title: meta.title || item.title,
         summary: meta.summary || item.summary,
@@ -658,13 +677,11 @@ async function enrichHtmlItems(source, items) {
         peopleInvolved: meta.peopleInvolved || item.peopleInvolved || [],
         language: meta.language || item.language || '',
         published: meta.published || item.published
-      });
-      await sleep(150);
+      };
     } catch {
-      enriched.push(item);
+      return item;
     }
-  }
-  return enriched;
+  });
 }
 
 function shouldKeepItem(source, item) {
@@ -862,49 +879,80 @@ async function main() {
   }
 
   const items = [];
-  let checked = 0;
   const sourceErrors = [];
-
-  for (const source of sources) {
+  const eligibleSources = sources.filter((source) => {
     if (!sourceLooksEnglish(source)) {
-      continue;
+      return false;
     }
-
     if (HARD_SKIP_SOURCE_IDS.has(source.id)) {
       console.warn(`Skipping disabled source: ${source.id}`);
-      continue;
+      return false;
     }
+    return true;
+  });
 
-    try {
-      const body = await fetchText(source.endpoint);
-      const parsed = source.kind === 'rss' || source.kind === 'atom' ? parseFeedItems(source, body) : parseHtmlItems(source, body);
-      const preLimited = parsed.slice(0, source.kind === 'html' ? 8 : 6);
-      const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
-      const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
-      const itemLimit = reliabilityProfile === 'tabloid' ? 1 : source.lane === 'incidents' ? 4 : 2;
-      const kept = hydrated.filter((item) => {
-        try {
-          return shouldKeepItem(source, item);
-        } catch (error) {
-          sourceErrors.push(summariseSourceError(source, error));
-          console.error(`Source item filter failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
-          return false;
-        }
-      }).slice(0, itemLimit);
-      kept.forEach((item, idx) => {
-        try {
-          items.push(buildAlert(source, item, idx));
-        } catch (error) {
-          sourceErrors.push(summariseSourceError(source, error));
-          console.error(`Alert build failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
-        }
-      });
-      checked += 1;
-      await sleep(source.kind === 'html' ? 500 : 250);
-    } catch (error) {
-      const summary = summariseSourceError(source, error);
-      sourceErrors.push(summary);
-      console.error(`Source failed: ${summary.id} [${source.kind}/${source.lane}] - ${summary.message}`);
+  const sourceResults = await mapWithConcurrency(
+    eligibleSources,
+    FEED_SOURCE_CONCURRENCY,
+    async (source, sourceIndex) => {
+      const localErrors = [];
+      const builtAlerts = [];
+
+      try {
+        await sleep(sourceIndex * 60);
+        const body = await fetchText(source.endpoint);
+        const parsed = source.kind === 'rss' || source.kind === 'atom'
+          ? parseFeedItems(source, body)
+          : parseHtmlItems(source, body);
+        const preLimited = parsed.slice(0, source.kind === 'html' ? 8 : 6);
+        const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
+        const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
+        const itemLimit = reliabilityProfile === 'tabloid' ? 1 : source.lane === 'incidents' ? 4 : 2;
+        const kept = hydrated.filter((item) => {
+          try {
+            return shouldKeepItem(source, item);
+          } catch (error) {
+            localErrors.push(summariseSourceError(source, error));
+            console.error(`Source item filter failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
+            return false;
+          }
+        }).slice(0, itemLimit);
+
+        kept.forEach((item, idx) => {
+          try {
+            builtAlerts.push(buildAlert(source, item, idx));
+          } catch (error) {
+            localErrors.push(summariseSourceError(source, error));
+            console.error(`Alert build failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
+          }
+        });
+
+        return {
+          checked: 1,
+          alerts: builtAlerts,
+          sourceErrors: localErrors
+        };
+      } catch (error) {
+        const summary = summariseSourceError(source, error);
+        localErrors.push(summary);
+        console.error(`Source failed: ${summary.id} [${source.kind}/${source.lane}] - ${summary.message}`);
+        return {
+          checked: 0,
+          alerts: [],
+          sourceErrors: localErrors
+        };
+      }
+    }
+  );
+
+  let checked = 0;
+  for (const result of sourceResults) {
+    checked += result.checked || 0;
+    if (Array.isArray(result.alerts) && result.alerts.length) {
+      items.push(...result.alerts);
+    }
+    if (Array.isArray(result.sourceErrors) && result.sourceErrors.length) {
+      sourceErrors.push(...result.sourceErrors);
     }
   }
 
