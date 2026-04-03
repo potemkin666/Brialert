@@ -54,6 +54,39 @@ jobs:
           echo "==== live-alerts modified time ===="
           ls -l live-alerts.json || true
 
+      - name: Build debug bundle
+        if: always()
+        run: |
+          mkdir -p .debug-artifacts
+          cat > .debug-artifacts/workflow-context.json <<EOF
+          {
+            "workflow": "${GITHUB_WORKFLOW}",
+            "job": "${GITHUB_JOB}",
+            "runId": "${GITHUB_RUN_ID}",
+            "runNumber": "${GITHUB_RUN_NUMBER}",
+            "runAttempt": "${GITHUB_RUN_ATTEMPT}",
+            "ref": "${GITHUB_REF}",
+            "sha": "${GITHUB_SHA}",
+            "actor": "${GITHUB_ACTOR}",
+            "eventName": "${GITHUB_EVENT_NAME}"
+          }
+          EOF
+          git status --short > .debug-artifacts/git-status.txt || true
+          git rev-parse HEAD > .debug-artifacts/head-sha.txt || true
+          cp live-alerts.json .debug-artifacts/live-alerts.json 2>/dev/null || true
+          cp data/sources.json .debug-artifacts/sources.json 2>/dev/null || true
+          cp data/geo-lookup.json .debug-artifacts/geo-lookup.json 2>/dev/null || true
+          cp package.json .debug-artifacts/package.json 2>/dev/null || true
+          cp package-lock.json .debug-artifacts/package-lock.json 2>/dev/null || true
+
+      - name: Upload build debug artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-feed-debug-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .debug-artifacts
+          if-no-files-found: warn
+
       - name: Commit refreshed feed data
         run: |
           git config user.name 'github-actions[bot]'
