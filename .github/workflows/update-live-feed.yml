@@ -38,6 +38,9 @@ jobs:
       - name: Install feed builder dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Validate feed data files
+        run: npm run validate:feed-data
+
       - name: Build live alert feed
         run: npm run build:feeds
 
