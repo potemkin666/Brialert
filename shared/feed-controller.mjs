@@ -73,6 +73,38 @@ export async function loadWatchGeography(state, url) {
   }
 }
 
+function coerceLiveFeedPayload(raw) {
+  const payload = raw && typeof raw === 'object' ? raw : {};
+  const alerts = Array.isArray(payload.alerts) ? payload.alerts : [];
+  const generatedAt = payload.generatedAt || payload.updatedAt || payload.alertData?.timestamp || null;
+  const sourceCount = Number(payload.sourceCount ?? payload.alertData?.sourceCount ?? 0);
+  const hasRenderableAlerts = !alerts.length || alerts.some((alert) =>
+    alert &&
+    typeof alert === 'object' &&
+    (
+      typeof alert.title === 'string' ||
+      typeof alert.summary === 'string' ||
+      typeof alert.source === 'string' ||
+      typeof alert.actor === 'string'
+    )
+  );
+
+  if (!Array.isArray(payload.alerts)) {
+    throw new Error('Live feed payload is missing an alerts array.');
+  }
+
+  if (!hasRenderableAlerts) {
+    throw new Error('Live feed payload alerts are not in a renderable Brialert format.');
+  }
+
+  return {
+    alerts,
+    generatedAt,
+    sourceCount,
+    health: payload && typeof payload.health === 'object' && payload.health ? payload.health : null
+  };
+}
+
 export async function loadLiveFeed(state, options) {
   const { liveFeedUrl, normaliseAlert, onAfterLoad } = options;
   const previousAlerts = state.alerts;
@@ -82,15 +114,11 @@ export async function loadLiveFeed(state, options) {
   try {
     const response = await fetch(`${liveFeedUrl}?t=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    state.alerts = Array.isArray(data.alerts)
-      ? data.alerts.map((alert, index) => normaliseAlert(alert, index, state.geoLookup))
-      : [];
+    const data = coerceLiveFeedPayload(await response.json());
+    state.alerts = data.alerts.map((alert, index) => normaliseAlert(alert, index, state.geoLookup));
     state.liveFeedGeneratedAt = data.generatedAt ? new Date(data.generatedAt) : new Date();
-    state.liveSourceCount = Number(data.sourceCount || 0);
-    state.liveFeedHealth = data && typeof data.health === 'object' && data.health
-      ? data.health
-      : null;
+    state.liveSourceCount = data.sourceCount;
+    state.liveFeedHealth = data.health;
     state.liveFeedFetchError = null;
   } catch (error) {
     state.alerts = previousAlerts;
