@@ -39,6 +39,7 @@ const parser = new XMLParser({
 });
 const now = new Date();
 const DEFAULT_TIMEOUT_MS = 12000;
+const MAX_SOURCE_ERRORS_TO_REPORT = 25;
 const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
 const HARD_SKIP_SOURCE_IDS = new Set([
   'globalsecurity-terror-news',
@@ -69,7 +70,7 @@ async function readJsonFile(jsonPath) {
   }
 }
 
-const geoLookup = await readJsonFile(geoLookupPath);
+let geoLookup = [];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const titleCase = (value) => clean(value).replace(/\b\w/g, (m) => m.toUpperCase());
@@ -796,10 +797,73 @@ async function readExisting() {
   }
 }
 
+function summariseSourceError(source, error) {
+  const message = error instanceof Error ? error.message : String(error);
+  return {
+    id: clean(source?.id) || 'unknown-source',
+    provider: clean(source?.provider) || 'Unknown provider',
+    endpoint: clean(source?.endpoint) || '',
+    message
+  };
+}
+
+async function safeLoadGeoLookup(existing) {
+  try {
+    geoLookup = await readJsonFile(geoLookupPath);
+    return null;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`Geo lookup load failed: ${message}`);
+    if (Array.isArray(existing?.geoLookupSnapshot) && existing.geoLookupSnapshot.length) {
+      geoLookup = existing.geoLookupSnapshot;
+      console.warn('Falling back to geo lookup snapshot from previous output.');
+      return `Geo lookup load failed; reused previous snapshot. ${message}`;
+    }
+    geoLookup = [];
+    return `Geo lookup load failed with no prior snapshot available. ${message}`;
+  }
+}
+
+function normaliseSourcesPayload(rawSources) {
+  if (Array.isArray(rawSources)) return rawSources;
+  if (Array.isArray(rawSources?.sources)) return rawSources.sources;
+  throw new Error('Expected sources.json to contain an array or { sources: [] }.');
+}
+
 async function main() {
-  const sources = await readJsonFile(sourcePath);
+  const existing = await readExisting();
+  const geoLookupFallbackNote = await safeLoadGeoLookup(existing);
+
+  let sources;
+  try {
+    sources = normaliseSourcesPayload(await readJsonFile(sourcePath));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`Source catalog load failed: ${message}`);
+    if (existing) {
+      const fallbackPayload = {
+        ...existing,
+        generatedAt: new Date().toISOString(),
+        buildWarning: `Source catalog load failed; preserved previous alerts. ${message}`,
+        sourceErrors: [
+          {
+            id: 'sources-json',
+            provider: 'Brialert builder',
+            endpoint: sourcePath,
+            message
+          }
+        ]
+      };
+      await fs.writeFile(outputPath, JSON.stringify(fallbackPayload, null, 2) + '\n', 'utf8');
+      console.log('Preserved previous live-alerts.json because sources.json could not be loaded.');
+      return;
+    }
+    throw error;
+  }
+
   const items = [];
   let checked = 0;
+  const sourceErrors = [];
 
   for (const source of sources) {
     if (!sourceLooksEnglish(source)) {
@@ -818,13 +882,29 @@ async function main() {
       const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
       const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
       const itemLimit = reliabilityProfile === 'tabloid' ? 1 : source.lane === 'incidents' ? 4 : 2;
-      const kept = hydrated.filter((item) => shouldKeepItem(source, item)).slice(0, itemLimit);
-      kept.forEach((item, idx) => items.push(buildAlert(source, item, idx)));
+      const kept = hydrated.filter((item) => {
+        try {
+          return shouldKeepItem(source, item);
+        } catch (error) {
+          sourceErrors.push(summariseSourceError(source, error));
+          console.error(`Source item filter failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
+          return false;
+        }
+      }).slice(0, itemLimit);
+      kept.forEach((item, idx) => {
+        try {
+          items.push(buildAlert(source, item, idx));
+        } catch (error) {
+          sourceErrors.push(summariseSourceError(source, error));
+          console.error(`Alert build failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
+        }
+      });
       checked += 1;
       await sleep(source.kind === 'html' ? 500 : 250);
     } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      console.error(`Source failed: ${source.id} [${source.kind}/${source.lane}] - ${message}`);
+      const summary = summariseSourceError(source, error);
+      sourceErrors.push(summary);
+      console.error(`Source failed: ${summary.id} [${source.kind}/${source.lane}] - ${summary.message}`);
     }
   }
 
@@ -892,18 +972,27 @@ async function main() {
     return 0;
   });
 
+  const preservedAlerts = !deduped.length && sourceErrors.length && Array.isArray(existing?.alerts) && existing.alerts.length;
+  const finalAlerts = preservedAlerts ? existing.alerts : deduped.slice(0, 80);
+  const buildWarning = [
+    geoLookupFallbackNote,
+    preservedAlerts ? 'Build produced no fresh alerts; preserved previous alert set.' : null
+  ].filter(Boolean).join(' | ') || null;
+
   const payload = {
     generatedAt: new Date().toISOString(),
     sourceCount: checked,
-    alertCount: deduped.length,
-    alerts: deduped.slice(0, 80)
+    alertCount: finalAlerts.length,
+    alerts: finalAlerts,
+    sourceErrors: sourceErrors.slice(0, MAX_SOURCE_ERRORS_TO_REPORT),
+    geoLookupSnapshot: geoLookup,
+    buildWarning
   };
 
-  const existing = await readExisting();
   const currentComparable = JSON.stringify(existing?.alerts || []);
   const nextComparable = JSON.stringify(payload.alerts);
 
-  if (currentComparable === nextComparable) {
+  if (currentComparable === nextComparable && !sourceErrors.length && !geoLookupFallbackNote) {
     console.log('No alert changes detected.');
     return;
   }
