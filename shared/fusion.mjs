@@ -38,16 +38,34 @@ function informativeTokens(text, minLength) {
     .filter((token) => token.length >= minLength && !fusionStopwords.has(token));
 }
 
+function uniqueTokens(tokens) {
+  return [...new Set(tokens.filter(Boolean))];
+}
+
 export function stableFusionTerms(item) {
   const weightedCounts = new Map();
-  const titleTokens = informativeTokens(item.title || '', 4);
-  const summaryTokens = informativeTokens(`${item.summary || ''} ${item.sourceExtract || ''}`, 5);
+  const titleTokens = uniqueTokens(informativeTokens(item.title || '', 4));
+  const summaryTokens = uniqueTokens(informativeTokens(item.summary || '', 4));
+  const extractTokens = uniqueTokens(informativeTokens(item.sourceExtract || '', 4));
+  const detailTokens = uniqueTokens([...summaryTokens, ...extractTokens]);
+  const detailSet = new Set(detailTokens);
+  const titleSet = new Set(titleTokens);
+  const sharedTokens = uniqueTokens(titleTokens.filter((token) => detailSet.has(token)));
+  const repeatedDetailTokens = uniqueTokens(
+    summaryTokens.filter((token) => extractTokens.includes(token))
+  );
 
   for (const token of titleTokens) {
     weightedCounts.set(token, (weightedCounts.get(token) || 0) + 3);
   }
-  for (const token of summaryTokens) {
+  for (const token of detailTokens) {
     weightedCounts.set(token, (weightedCounts.get(token) || 0) + 1);
+  }
+  for (const token of sharedTokens) {
+    weightedCounts.set(token, (weightedCounts.get(token) || 0) + 5);
+  }
+  for (const token of repeatedDetailTokens) {
+    weightedCounts.set(token, (weightedCounts.get(token) || 0) + 2);
   }
 
   return [...weightedCounts.entries()]
@@ -57,6 +75,7 @@ export function stableFusionTerms(item) {
     })
     .slice(0, 6)
     .map(([token]) => token)
+    .filter((token) => titleSet.has(token) || detailSet.has(token))
     .sort();
 }
 
