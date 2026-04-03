@@ -1,12 +1,12 @@
 import {
   buildBriefing,
-  deriveFeedHealthStatus,
   effectiveSummary,
   formatAgeFrom,
   isLiveIncidentCandidate,
   keywordMatches,
   regionLabel
 } from '../../shared/alert-view-model.mjs';
+import { deriveFeedHealthStatus } from '../../shared/feed-controller.mjs';
 import { laneLabels } from '../../shared/ui-data.mjs';
 import {
   contextCardMarkup,
