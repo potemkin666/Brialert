@@ -113,15 +113,22 @@ export function stableFusionTerms(item) {
     uniqueTokens([...summaryUnique, ...extractUnique])
   );
   const detailShared = sortedIntersection(summaryUnique, extractUnique);
+  const stableCore = uniqueTokens([
+    ...multiFieldShared,
+    ...titleDetailShared,
+    ...detailShared
+  ]).sort();
   const fallbackInformative = uniqueTokens(allTokens).sort();
 
+  if (stableCore.length >= 3) {
+    return stableCore.slice(0, 6);
+  }
+
   return uniqueTokens([
-    ...multiFieldShared,
+    ...stableCore,
     ...strongestShared,
-    ...titleDetailShared,
-    ...detailShared,
     ...fallbackInformative
-  ]).slice(0, 6);
+  ]).sort().slice(0, 6);
 }
 
 export function fusedIncidentIdFor(item) {
