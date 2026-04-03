@@ -1,13 +1,9 @@
 import {
   clean,
   plainText,
-  incidentKeywords,
-  terrorismKeywords,
-  matchesKeywords,
   normaliseSourceTier,
   normaliseReliabilityProfile,
-  normaliseIncidentTrack,
-  isTerrorRelevantIncident
+  normaliseIncidentTrack
 } from './taxonomy.mjs';
 import { laneLabels } from './ui-data.mjs';
 
@@ -67,31 +63,16 @@ export function inferGeoPoint(alert, geoLookup = []) {
 }
 
 export function keywordMatches(alert) {
-  return matchesKeywords(`${alert.title} ${alert.summary} ${alert.aiSummary}`, incidentKeywords);
+  return Array.isArray(alert.keywordHits) ? alert.keywordHits.filter(Boolean) : [];
 }
 
 export function terrorismMatches(alert) {
-  return matchesKeywords(`${alert.title} ${alert.summary} ${alert.aiSummary} ${alert.sourceExtract}`, terrorismKeywords);
+  return Array.isArray(alert.terrorismHits) ? alert.terrorismHits.filter(Boolean) : [];
 }
 
 export function isTerrorRelevant(alert) {
   if (typeof alert.isTerrorRelevant === 'boolean') return alert.isTerrorRelevant;
-  return isTerrorRelevantIncident(
-    {
-      lane: alert.lane,
-      sourceTier: alert.sourceTier,
-      reliabilityProfile: alert.reliabilityProfile,
-      isOfficial: alert.isOfficial,
-      source: alert.source,
-      sourceUrl: alert.sourceUrl,
-      title: alert.title
-    },
-    {
-      title: alert.title,
-      summary: alert.summary,
-      sourceExtract: alert.sourceExtract
-    }
-  );
+  return alert.lane === 'incidents' ? false : true;
 }
 
 function looksGenericSummary(text) {
@@ -196,18 +177,20 @@ export function resolvedReliabilityProfile(alert) {
 
 function incidentScore(alert) {
   if (Number.isFinite(alert.priorityScore)) return alert.priorityScore;
-  if (!isTerrorRelevant(alert)) return -1;
-  const matches = keywordMatches(alert);
-  let score = matches.length;
+  let score = 0;
   if (alert.lane === 'incidents') score += 3;
   if (alert.severity === 'critical') score += 3;
   if (alert.severity === 'high') score += 2;
   if (alert.major) score += 2;
+  if (resolvedIncidentTrack(alert) === 'live') score += 2;
+  else if (resolvedIncidentTrack(alert) === 'case') score -= 1;
+  score += sourceTierRank(alert);
   const profile = resolvedReliabilityProfile(alert);
   if (profile === 'official_ct') score += 3;
   else if (profile === 'official_general') score += 2.5;
   else if (profile === 'major_media') score += 1.5;
   else if (profile === 'tabloid') score -= 1;
+  if (typeof alert.isTerrorRelevant === 'boolean' && !alert.isTerrorRelevant) score -= 4;
   return score;
 }
 
@@ -237,12 +220,9 @@ export function isLiveIncidentCandidate(alert) {
 
 export function quarantineReason(alert) {
   if (clean(alert.queueReason)) return clean(alert.queueReason);
-  const terrorHits = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
-  const incidentHits = keywordMatches(alert);
   if (alert.needsHumanReview) return 'Needs human review';
-  if (!isTerrorRelevant(alert) && incidentHits.length) return 'Incident wording without clear terrorism signal';
+  if (typeof alert.isTerrorRelevant === 'boolean' && !alert.isTerrorRelevant) return 'Incident kept out of trigger lane';
   if (!alert.isOfficial && Number(alert.confidenceScore || 0) > 0 && Number(alert.confidenceScore || 0) < 0.8) return 'Secondary source with weak confidence';
-  if (!terrorHits.length && incidentHits.length >= 2) return 'Keyword-led match from a broad source';
   if (normaliseSourceTier(alert.sourceTier) !== 'trigger' && alert.lane === 'incidents') return 'Non-trigger source awaiting corroboration';
   return 'Borderline incident relevance';
 }
@@ -250,15 +230,13 @@ export function quarantineReason(alert) {
 export function isQuarantineCandidate(alert) {
   if (alert.lane !== 'incidents') return false;
   if (isLiveIncidentCandidate(alert)) return false;
-  const incidentHits = keywordMatches(alert);
-  const terrorHits = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
   const confidence = Number(alert.confidenceScore || 0);
   const tier = normaliseSourceTier(alert.sourceTier);
-  const notClearlyTerror = !isTerrorRelevant(alert) && incidentHits.length > 0;
+  const notClearlyTerror = typeof alert.isTerrorRelevant === 'boolean' ? !alert.isTerrorRelevant : false;
   const weakSecondarySignal = !alert.isOfficial && ((confidence > 0 && confidence < 0.8) || alert.needsHumanReview);
-  const broadSourceKeywordMatch = tier !== 'trigger' && incidentHits.length >= 2;
-  const thinTerrorCase = terrorHits.length > 0 && incidentScore(alert) < 6;
-  return notClearlyTerror || weakSecondarySignal || broadSourceKeywordMatch || thinTerrorCase;
+  const broadSourceSignal = tier !== 'trigger';
+  const thinTerrorCase = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length > 0 && incidentScore(alert) < 6;
+  return notClearlyTerror || weakSecondarySignal || broadSourceSignal || thinTerrorCase;
 }
 
 export function sortAlertsByFreshness(alertList) {
@@ -438,7 +416,7 @@ export function renderSceneClock(alert) {
 }
 
 export function buildAuditBlock(alert) {
-  const terrorTerms = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
+  const terrorTerms = terrorismMatches(alert);
   const age = alert.publishedAt ? formatAgeFrom(alert.publishedAt) : 'age unknown';
   return [
     `SOURCE TIER: ${normaliseSourceTier(alert.sourceTier) || 'unclassified'}`,
@@ -464,7 +442,7 @@ export function renderCorroboratingSources(alert) {
 }
 
 export function buildBriefing(alert, summaryText) {
-  const matches = Array.isArray(alert.terrorismHits) && alert.terrorismHits.length ? alert.terrorismHits : terrorismMatches(alert);
+  const matches = terrorismMatches(alert);
   const peopleInvolved = extractPeopleInvolved(alert);
   const sceneClock = buildSceneClock(alert);
   return [
@@ -535,6 +513,7 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     confidenceScore: Number.isFinite(alert.confidenceScore) ? alert.confidenceScore : null,
     publishedAt: clean(alert.publishedAt),
     freshnessBucket: Number.isFinite(alert.freshnessBucket) ? alert.freshnessBucket : null,
+    keywordHits: Array.isArray(alert.keywordHits) ? alert.keywordHits.filter(Boolean) : [],
     terrorismHits: Array.isArray(alert.terrorismHits) ? alert.terrorismHits.filter(Boolean) : [],
     isTerrorRelevant: typeof alert.isTerrorRelevant === 'boolean' ? alert.isTerrorRelevant : null,
     laneReason: plainText(alert.laneReason),

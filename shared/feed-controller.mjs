@@ -80,6 +80,17 @@ function coerceLiveFeedPayload(raw) {
   const sourceCount = Number(payload.sourceCount ?? payload.alertData?.sourceCount ?? 0);
   const validLanes = new Set(['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention']);
   const validRegions = new Set(['uk', 'europe']);
+  const validSourceTiers = new Set(['trigger', 'corroboration', 'context', 'research']);
+  const validReliabilityProfiles = new Set([
+    'official_ct',
+    'official_general',
+    'official_context',
+    'major_media',
+    'general_media',
+    'tabloid',
+    'specialist_research'
+  ]);
+  const validIncidentTracks = new Set(['live', 'case']);
   const isValidTimestamp = typeof generatedAt === 'string' && !Number.isNaN(new Date(generatedAt).getTime());
   const hasNumericSourceCount = Number.isFinite(sourceCount) && sourceCount >= 0;
   const hasRenderableAlerts = alerts.every((alert) => {
@@ -92,6 +103,16 @@ function coerceLiveFeedPayload(raw) {
     if (typeof alert.location !== 'string' || !alert.location.trim()) return false;
     if (!validLanes.has(alert.lane)) return false;
     if (!validRegions.has(alert.region)) return false;
+    if (typeof alert.sourceTier !== 'string' || !validSourceTiers.has(alert.sourceTier)) return false;
+    if (typeof alert.reliabilityProfile !== 'string' || !validReliabilityProfiles.has(alert.reliabilityProfile)) return false;
+    if (alert.lane === 'incidents') {
+      if (typeof alert.incidentTrack !== 'string' || !validIncidentTracks.has(alert.incidentTrack)) return false;
+      if (typeof alert.isTerrorRelevant !== 'boolean') return false;
+      if (!Array.isArray(alert.keywordHits)) return false;
+      if (!Array.isArray(alert.terrorismHits)) return false;
+      if (typeof alert.queueReason !== 'string' || !alert.queueReason.trim()) return false;
+      if (typeof alert.laneReason !== 'string' || !alert.laneReason.trim()) return false;
+    }
     return true;
   });
 
