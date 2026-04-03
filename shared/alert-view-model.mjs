@@ -404,9 +404,7 @@ export function renderConfidenceLadder(alert) {
 export function renderSceneClock(alert) {
   const clock = buildSceneClock(alert);
   const items = [
-    { label: 'Since first report', entry: clock.firstReport, fallback: 'No report timestamp confirmed yet.' },
-    { label: 'Since last official update', entry: clock.lastOfficial, fallback: 'No official update has been attached yet.' },
-    { label: 'Since last corroboration', entry: clock.lastCorroboration, fallback: 'No corroborating source has landed yet.' }
+    { label: 'Since first report', entry: clock.firstReport, fallback: 'No report timestamp confirmed yet.' }
   ];
   return `<div class="scene-clock-grid">${items.map(({ label, entry, fallback }) => `
     <article class="scene-clock-item">
@@ -459,8 +457,6 @@ export function buildBriefing(alert, summaryText) {
     '',
     'SCENE CLOCK:',
     `FIRST REPORT: ${sceneClock.firstReport ? `${clockDisplay(sceneClock.firstReport.publishedAt)} | ${sceneClockStamp(sceneClock.firstReport.publishedAt)}` : 'Unconfirmed'}`,
-    `LAST OFFICIAL UPDATE: ${sceneClock.lastOfficial ? `${clockDisplay(sceneClock.lastOfficial.publishedAt)} | ${sceneClockStamp(sceneClock.lastOfficial.publishedAt)}` : 'No official update yet'}`,
-    `LAST CORROBORATION: ${sceneClock.lastCorroboration ? `${clockDisplay(sceneClock.lastCorroboration.publishedAt)} | ${sceneClockStamp(sceneClock.lastCorroboration.publishedAt)}` : 'No corroboration yet'}`,
     '',
     peopleInvolved.length ? ['PEOPLE INVOLVED:', ...peopleInvolved, ''] : [],
     'SUMMARY:',
