@@ -9,6 +9,25 @@ const fusionStopwords = new Set([
   'police', 'officials', 'official', 'man', 'woman', 'group'
 ]);
 
+const fusionTokenAliases = new Map([
+  ['found', 'locate'],
+  ['find', 'locate'],
+  ['finding', 'locate'],
+  ['located', 'locate'],
+  ['locating', 'locate'],
+  ['locate', 'locate'],
+  ['discovers', 'locate'],
+  ['discovered', 'locate'],
+  ['discovering', 'locate'],
+  ['discover', 'locate'],
+  ['disrupted', 'disrupt'],
+  ['disrupting', 'disrupt'],
+  ['disrupts', 'disrupt'],
+  ['disruption', 'disrupt'],
+  ['explosives', 'explosive'],
+  ['devices', 'device']
+]);
+
 export function sameStoryKey(item) {
   return clean(item.title)
     .toLowerCase()
@@ -21,6 +40,7 @@ export function sameStoryKey(item) {
 function normaliseFusionToken(token) {
   const value = clean(token).toLowerCase();
   if (!value) return '';
+  if (fusionTokenAliases.has(value)) return fusionTokenAliases.get(value);
   if (value.endsWith('ing') && value.length > 6) return value.slice(0, -3);
   if (value.endsWith('ed') && value.length > 5) return value.slice(0, -2);
   if (value.endsWith('es') && value.length > 5 && !value.endsWith('ses')) return value.slice(0, -2);
@@ -62,21 +82,41 @@ function highSignalTokens(tokens, minimumOccurrences = 2) {
     .sort();
 }
 
-export function stableFusionTerms(item) {
-  const titleTokens = uniqueTokens(informativeTokens(item.title || '', 4));
-  const summaryTokens = uniqueTokens(informativeTokens(item.summary || '', 4));
-  const extractTokens = uniqueTokens(informativeTokens(item.sourceExtract || '', 4));
+function tokensPresentInMultipleFields(fieldTokenSets, minimumFields = 2) {
+  const counts = new Map();
+  for (const tokens of fieldTokenSets) {
+    for (const token of new Set(tokens)) {
+      counts.set(token, (counts.get(token) || 0) + 1);
+    }
+  }
 
+  return [...counts.entries()]
+    .filter(([, count]) => count >= minimumFields)
+    .map(([token]) => token)
+    .sort();
+}
+
+export function stableFusionTerms(item) {
+  const titleTokens = informativeTokens(item.title || '', 4);
+  const summaryTokens = informativeTokens(item.summary || '', 4);
+  const extractTokens = informativeTokens(item.sourceExtract || '', 4);
+
+  const titleUnique = uniqueTokens(titleTokens);
+  const summaryUnique = uniqueTokens(summaryTokens);
+  const extractUnique = uniqueTokens(extractTokens);
   const allTokens = [...titleTokens, ...summaryTokens, ...extractTokens];
+
   const strongestShared = highSignalTokens(allTokens, 2);
+  const multiFieldShared = tokensPresentInMultipleFields([titleTokens, summaryTokens, extractTokens], 2);
   const titleDetailShared = sortedIntersection(
-    titleTokens,
-    uniqueTokens([...summaryTokens, ...extractTokens])
+    titleUnique,
+    uniqueTokens([...summaryUnique, ...extractUnique])
   );
-  const detailShared = sortedIntersection(summaryTokens, extractTokens);
+  const detailShared = sortedIntersection(summaryUnique, extractUnique);
   const fallbackInformative = uniqueTokens(allTokens).sort();
 
   return uniqueTokens([
+    ...multiFieldShared,
     ...strongestShared,
     ...titleDetailShared,
     ...detailShared,
