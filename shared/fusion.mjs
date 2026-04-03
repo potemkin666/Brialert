@@ -42,41 +42,46 @@ function uniqueTokens(tokens) {
   return [...new Set(tokens.filter(Boolean))];
 }
 
-export function stableFusionTerms(item) {
-  const weightedCounts = new Map();
-  const titleTokens = uniqueTokens(informativeTokens(item.title || '', 4));
-  const summaryTokens = uniqueTokens(informativeTokens(item.summary || '', 4));
-  const extractTokens = uniqueTokens(informativeTokens(item.sourceExtract || '', 4));
-  const detailTokens = uniqueTokens([...summaryTokens, ...extractTokens]);
-  const detailSet = new Set(detailTokens);
-  const titleSet = new Set(titleTokens);
-  const sharedTokens = uniqueTokens(titleTokens.filter((token) => detailSet.has(token)));
-  const repeatedDetailTokens = uniqueTokens(
-    summaryTokens.filter((token) => extractTokens.includes(token))
-  );
+function tokenFrequency(tokens) {
+  const counts = new Map();
+  for (const token of tokens) {
+    counts.set(token, (counts.get(token) || 0) + 1);
+  }
+  return counts;
+}
 
-  for (const token of titleTokens) {
-    weightedCounts.set(token, (weightedCounts.get(token) || 0) + 3);
-  }
-  for (const token of detailTokens) {
-    weightedCounts.set(token, (weightedCounts.get(token) || 0) + 1);
-  }
-  for (const token of sharedTokens) {
-    weightedCounts.set(token, (weightedCounts.get(token) || 0) + 5);
-  }
-  for (const token of repeatedDetailTokens) {
-    weightedCounts.set(token, (weightedCounts.get(token) || 0) + 2);
-  }
+function sortedIntersection(aTokens, bTokens) {
+  const bSet = new Set(bTokens);
+  return uniqueTokens(aTokens.filter((token) => bSet.has(token))).sort();
+}
 
-  return [...weightedCounts.entries()]
-    .sort((a, b) => {
-      if (b[1] !== a[1]) return b[1] - a[1];
-      return a[0].localeCompare(b[0]);
-    })
-    .slice(0, 6)
+function highSignalTokens(tokens, minimumOccurrences = 2) {
+  return [...tokenFrequency(tokens).entries()]
+    .filter(([, count]) => count >= minimumOccurrences)
     .map(([token]) => token)
-    .filter((token) => titleSet.has(token) || detailSet.has(token))
     .sort();
+}
+
+export function stableFusionTerms(item) {
+  const titleTokens = informativeTokens(item.title || '', 4);
+  const summaryTokens = informativeTokens(item.summary || '', 4);
+  const extractTokens = informativeTokens(item.sourceExtract || '', 4);
+
+  const titleSummaryShared = sortedIntersection(titleTokens, summaryTokens);
+  const titleExtractShared = sortedIntersection(titleTokens, extractTokens);
+  const summaryExtractShared = sortedIntersection(summaryTokens, extractTokens);
+  const repeatedAcrossNarrative = highSignalTokens([...titleTokens, ...summaryTokens, ...extractTokens], 2);
+  const fallbackInformative = uniqueTokens([...titleTokens, ...summaryTokens, ...extractTokens]).sort();
+
+  const chosen = [
+    ...titleSummaryShared,
+    ...titleExtractShared,
+    ...summaryExtractShared,
+    ...repeatedAcrossNarrative,
+    ...fallbackInformative
+  ];
+
+  return uniqueTokens(chosen).slice(0, 6);
 }
 
 export function fusedIncidentIdFor(item) {
