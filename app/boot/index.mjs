@@ -24,28 +24,25 @@ import { filteredMapView, renderMapIfActive } from '../render/map.mjs';
 import { createModalRuntime } from '../render/modal.mjs';
 import {
   renderBriefingMode,
-  renderContext,
   renderFeed,
   renderHero,
   renderPriority,
-  renderQuarantine
+  renderSupporting
 } from '../render/live.mjs';
 import { renderNotes, renderWatchlist } from '../render/notes.mjs';
 import {
   BRIEFING_MODE_STORAGE_KEY,
-  CONTEXT_LOAD_STEP,
   GEO_LOOKUP_URL,
-  INITIAL_CONTEXT_VISIBLE,
   MAP_INIT_FALLBACK_DELAY_MS,
   MAP_INIT_IDLE_TIMEOUT_MS,
-  INITIAL_QUARANTINE_VISIBLE,
   INITIAL_RESPONDER_VISIBLE,
+  INITIAL_SUPPORTING_VISIBLE,
   LIVE_FEED_URL,
   NOTES_STORAGE_KEY,
   POLL_INTERVAL_MS,
-  QUARANTINE_LOAD_STEP,
   RESPONDER_LOAD_STEP,
   SOURCE_PULL_MINUTES,
+  SUPPORTING_LOAD_STEP,
   WATCHED_STORAGE_KEY,
   WATCH_GEOGRAPHY_URL,
   createDerivedViewStore,
@@ -61,15 +58,12 @@ function createElements() {
     screen: document.querySelector('.screen'),
     feedList: document.getElementById('feed-list'),
     feedLoadMore: document.getElementById('feed-load-more'),
-    contextList: document.getElementById('context-list'),
-    contextLoadMore: document.getElementById('context-load-more'),
-    quarantineList: document.getElementById('quarantine-list'),
-    quarantineLoadMore: document.getElementById('quarantine-load-more'),
+    supportingList: document.getElementById('supporting-list'),
+    supportingLoadMore: document.getElementById('supporting-load-more'),
     watchlistList: document.getElementById('watchlist-list'),
     notesList: document.getElementById('notes-list'),
     watchedCount: document.getElementById('watched-count'),
-    contextCount: document.getElementById('context-count'),
-    quarantineCount: document.getElementById('quarantine-count'),
+    supportingCount: document.getElementById('supporting-count'),
     watchlistSummary: document.getElementById('watchlist-summary'),
     heroSearch: document.getElementById('hero-search'),
     heroUpdated: document.getElementById('hero-updated'),
@@ -187,8 +181,7 @@ export function initialiseApp() {
       saveSet,
       watchedStorageKey: WATCHED_STORAGE_KEY
     });
-    renderContext({ elements, view, state, modalController });
-    renderQuarantine({ elements, view, state, modalController });
+    renderSupporting({ elements, view, state, modalController });
     renderMapIfActive({ state, view, mapController });
     renderWatchlist({ state, elements, modalController });
     renderNotes({ state, elements });
@@ -207,8 +200,7 @@ export function initialiseApp() {
       state.activeRegion = button.dataset.region;
       invalidateDerivedView();
       state.feedVisibleCount = INITIAL_RESPONDER_VISIBLE;
-      state.contextVisibleCount = INITIAL_CONTEXT_VISIBLE;
-      state.quarantineVisibleCount = INITIAL_QUARANTINE_VISIBLE;
+      state.supportingVisibleCount = INITIAL_SUPPORTING_VISIBLE;
       elements.filters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
       button.classList.add('active');
       renderAll();
@@ -219,13 +211,8 @@ export function initialiseApp() {
       renderAll();
     });
 
-    elements.contextLoadMore?.addEventListener('click', () => {
-      state.contextVisibleCount += CONTEXT_LOAD_STEP;
-      renderAll();
-    });
-
-    elements.quarantineLoadMore?.addEventListener('click', () => {
-      state.quarantineVisibleCount += QUARANTINE_LOAD_STEP;
+    elements.supportingLoadMore?.addEventListener('click', () => {
+      state.supportingVisibleCount += SUPPORTING_LOAD_STEP;
       renderAll();
     });
 

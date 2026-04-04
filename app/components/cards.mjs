@@ -27,21 +27,21 @@ export function responderCardMarkup(alert, watched) {
     </article>`;
 }
 
-export function contextCardMarkup(alert) {
-  return `<article class="context-pill actionable" data-context="${alert.id}"><h4>${escapeHtml(alert.title)}</h4><p>${escapeHtml(contextLabel(alert))} | ${escapeHtml(alert.source)}</p></article>`;
-}
+export function supportingCardMarkup(alert) {
+  const isQuarantine = Boolean(alert.needsHumanReview);
+  const badgeLabel = isQuarantine ? 'Quarantine' : (laneLabels[alert.lane] || 'Context');
+  const metaReason = isQuarantine ? quarantineReason(alert) : contextLabel(alert);
 
-export function quarantineCardMarkup(alert) {
   return `
-    <article class="quarantine-card actionable" data-quarantine="${alert.id}">
+    <article class="supporting-card ${isQuarantine ? 'is-quarantine' : 'is-context'} actionable" data-supporting="${alert.id}">
       <div class="section-heading">
         <h4>${escapeHtml(alert.title)}</h4>
-        <span class="quarantine-badge">Quarantine</span>
+        <span class="supporting-badge ${isQuarantine ? 'is-quarantine' : 'is-context'}">${escapeHtml(badgeLabel)}</span>
       </div>
       <p>${escapeHtml(alert.summary)}</p>
       <div class="meta-row">
         <span>${escapeHtml(alert.source)}</span>
-        <span>${escapeHtml(quarantineReason(alert))}</span>
+        <span>${escapeHtml(metaReason)}</span>
         <span>${escapeHtml(alert.time)}</span>
       </div>
     </article>`;

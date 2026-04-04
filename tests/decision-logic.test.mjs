@@ -26,11 +26,10 @@ import {
 } from '../shared/fusion.mjs';
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
 import { normaliseSourcesPayload } from '../scripts/build-live-feed/io.mjs';
-import { renderContext, renderHero, renderQuarantine } from '../app/render/live.mjs';
+import { renderHero, renderSupporting } from '../app/render/live.mjs';
 import {
-  INITIAL_CONTEXT_VISIBLE,
-  INITIAL_QUARANTINE_VISIBLE,
   INITIAL_RESPONDER_VISIBLE,
+  INITIAL_SUPPORTING_VISIBLE,
   createState
 } from '../app/state/index.mjs';
 
@@ -662,8 +661,7 @@ test('validate-live-feed-output script passes valid feed and fails invalid sourc
 test('createState initialises progressive story visibility defaults', () => {
   const state = createState({ transport: 'Transport hubs' });
   assert.equal(state.feedVisibleCount, INITIAL_RESPONDER_VISIBLE);
-  assert.equal(state.contextVisibleCount, INITIAL_CONTEXT_VISIBLE);
-  assert.equal(state.quarantineVisibleCount, INITIAL_QUARANTINE_VISIBLE);
+  assert.equal(state.supportingVisibleCount, INITIAL_SUPPORTING_VISIBLE);
 });
 
 test('deriveView keeps full quarantine list for progressive rendering', () => {
@@ -691,7 +689,7 @@ test('deriveView keeps full quarantine list for progressive rendering', () => {
   assert.equal(view.quarantine.length, 10);
 });
 
-test('renderContext and renderQuarantine expose load-more state correctly', () => {
+test('renderSupporting merges context and quarantine into one progressive list', () => {
   const makeButton = () => {
     const classes = new Set(['hidden']);
     return {
@@ -708,42 +706,34 @@ test('renderContext and renderQuarantine expose load-more state correctly', () =
     };
   };
 
-  const contextLoadMore = makeButton();
-  const quarantineLoadMore = makeButton();
+  const supportingLoadMore = makeButton();
   const state = {
-    contextVisibleCount: 2,
-    quarantineVisibleCount: 2,
+    supportingVisibleCount: 2,
     alerts: []
   };
   const view = {
-    context: [makeAlert({ id: 'c1', lane: 'context' }), makeAlert({ id: 'c2', lane: 'context' }), makeAlert({ id: 'c3', lane: 'context' })],
+    context: [
+      makeAlert({ id: 'c1', lane: 'context', publishedAt: '2026-04-04T10:01:00.000Z' }),
+      makeAlert({ id: 'c2', lane: 'context', publishedAt: '2026-04-04T10:02:00.000Z' }),
+      makeAlert({ id: 'c3', lane: 'context', publishedAt: '2026-04-04T10:03:00.000Z' })
+    ],
     quarantine: [makeAlert({ id: 'q1', needsHumanReview: true }), makeAlert({ id: 'q2', needsHumanReview: true }), makeAlert({ id: 'q3', needsHumanReview: true })]
   };
   const elements = {
-    contextCount: { textContent: '' },
-    contextList: {
+    supportingCount: { textContent: '' },
+    supportingList: {
       innerHTML: '',
       querySelectorAll() {
         return [];
       }
     },
-    contextLoadMore,
-    quarantineCount: { textContent: '' },
-    quarantineList: {
-      innerHTML: '',
-      querySelectorAll() {
-        return [];
-      }
-    },
-    quarantineLoadMore
+    supportingLoadMore
   };
   const modalController = { openDetail() {} };
 
-  renderContext({ elements, view, state, modalController });
-  renderQuarantine({ elements, view, state, modalController });
+  renderSupporting({ elements, view, state, modalController });
 
-  assert.equal(elements.contextCount.textContent, '2/3 contextual items');
-  assert.equal(elements.quarantineCount.textContent, '2/3 doubtful items');
-  assert.equal(contextLoadMore.hasClass('hidden'), false);
-  assert.equal(quarantineLoadMore.hasClass('hidden'), false);
+  assert.equal(elements.supportingCount.textContent, '2/6 items');
+  assert.match(elements.supportingList.innerHTML, /Quarantine|Context/i);
+  assert.equal(supportingLoadMore.hasClass('hidden'), false);
 });

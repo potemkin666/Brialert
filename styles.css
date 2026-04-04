@@ -1261,36 +1261,26 @@ h1 {
   filter: drop-shadow(0 0 8px rgba(95, 168, 255, 0.25));
 }
 
-#context-list {
-  display: flex;
+#feed-list,
+#supporting-list {
+  display: grid;
   gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 4px;
 }
 
-.context-pill {
-  min-width: 210px;
+.supporting-card {
   padding: 16px;
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.quarantine-card {
-  padding: 16px;
-  border-radius: 22px;
+.supporting-card.is-quarantine {
   background: rgba(213, 61, 47, 0.08);
   border: 1px solid rgba(213, 61, 47, 0.24);
 }
 
-.quarantine-card + .quarantine-card {
+.supporting-card + .supporting-card {
   margin-top: 12px;
-}
-
-#feed-list,
-#quarantine-list {
-  display: grid;
-  gap: 12px;
 }
 
 .list-more-button {
@@ -1298,24 +1288,24 @@ h1 {
   width: 100%;
 }
 
-.quarantine-card h4 {
+.supporting-card h4 {
   font-size: 16px;
   line-height: 1.3;
 }
 
-.quarantine-card p {
+.supporting-card p {
   margin-top: 8px;
   color: var(--muted);
   line-height: 1.5;
 }
 
-.quarantine-badge {
+.supporting-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 7px 10px;
   border-radius: 999px;
-  background: rgba(213, 61, 47, 0.14);
+  background: rgba(255, 255, 255, 0.10);
   color: rgba(255, 255, 255, 0.88);
   font-size: 12px;
   font-weight: 700;
@@ -1323,16 +1313,13 @@ h1 {
   text-transform: uppercase;
 }
 
-.context-pill h4 {
-  font-size: 15px;
-  line-height: 1.3;
+.supporting-badge.is-quarantine {
+  background: rgba(213, 61, 47, 0.14);
 }
 
-.context-pill p {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
+.supporting-badge.is-context {
+  background: rgba(31, 142, 144, 0.16);
+  color: rgba(225, 252, 255, 0.92);
 }
 
 .note-form {
@@ -1694,8 +1681,7 @@ body.device-iphone {
 .device-iphone .tabbar,
 .device-iphone .filters,
 .device-iphone .map-layer-toggles,
-.device-iphone .map-timeline-filters,
-.device-iphone #context-list {
+.device-iphone .map-timeline-filters {
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
@@ -1707,8 +1693,7 @@ body.device-iphone {
 .device-iphone .tabbar::-webkit-scrollbar,
 .device-iphone .filters::-webkit-scrollbar,
 .device-iphone .map-layer-toggles::-webkit-scrollbar,
-.device-iphone .map-timeline-filters::-webkit-scrollbar,
-.device-iphone #context-list::-webkit-scrollbar {
+.device-iphone .map-timeline-filters::-webkit-scrollbar {
   display: none;
 }
 
@@ -2022,8 +2007,7 @@ body.device-iphone {
   .panel,
   .modal-card,
   .note-card,
-  .context-pill,
-  .quarantine-card {
+  .supporting-card {
     border-radius: 22px;
   }
 
@@ -2158,15 +2142,6 @@ body.device-iphone {
   .map-surface {
     height: min(56vh, 480px);
     min-height: 340px;
-  }
-
-  #context-list {
-    scroll-snap-type: x proximity;
-  }
-
-  .context-pill {
-    min-width: min(82vw, 260px);
-    scroll-snap-align: start;
   }
 
   .modal {

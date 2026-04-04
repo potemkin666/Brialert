@@ -7,8 +7,7 @@ import {
 } from '../../shared/alert-view-model.mjs';
 import { laneLabels } from '../../shared/ui-data.mjs';
 import {
-  contextCardMarkup,
-  quarantineCardMarkup,
+  supportingCardMarkup,
   responderCardMarkup
 } from '../components/cards.mjs';
 import { escapeHtml } from '../utils/text.mjs';
@@ -28,6 +27,16 @@ function updateLoadMoreButton(button, shown, total, label) {
   if (hasMore) {
     button.textContent = `${label} (${total - shown} remaining)`;
   }
+}
+
+function alertTimeMs(alert) {
+  const stamp = alert?.publishedAt || alert?.updatedAt || alert?.firstReportedAt || null;
+  const timeMs = stamp ? new Date(stamp).getTime() : NaN;
+  return Number.isFinite(timeMs) ? timeMs : 0;
+}
+
+function supportingItems(view) {
+  return [...view.context, ...view.quarantine].sort((left, right) => alertTimeMs(right) - alertTimeMs(left));
 }
 
 export function renderPriority({ state, elements, view, modalController }) {
@@ -119,45 +128,27 @@ export function renderFeed({ state, elements, view, modalController, invalidateD
   });
 }
 
-export function renderContext({ elements, view, state, modalController }) {
-  const totalItems = view.context.length;
+export function renderSupporting({ elements, view, state, modalController }) {
+  const itemsPool = supportingItems(view);
+  const totalItems = itemsPool.length;
   const hasSearch = Boolean(String(state.searchQuery || '').trim());
-  const visibleCount = hasSearch ? totalItems : Math.max(1, Number(state.contextVisibleCount || 0));
-  const items = view.context.slice(0, visibleCount);
-  elements.contextCount.textContent = hasSearch
+  const visibleCount = hasSearch ? totalItems : Math.max(1, Number(state.supportingVisibleCount || 0));
+  const items = itemsPool.slice(0, visibleCount);
+  elements.supportingCount.textContent = hasSearch
     ? `${items.length} matching items`
-    : `${items.length}/${totalItems} contextual items`;
-  elements.contextList.innerHTML = items.length
-    ? items.map(contextCardMarkup).join('')
+    : totalItems
+      ? `${items.length}/${totalItems} items`
+      : '0 items';
+  elements.supportingList.innerHTML = items.length
+    ? items.map(supportingCardMarkup).join('')
     : `<p class='panel-copy'>${
       hasSearch
         ? 'No results found.'
-        : 'No contextual items have been published into this filter yet.'
+        : 'No additional reporting has landed in this filter yet.'
     }</p>`;
-  updateLoadMoreButton(elements.contextLoadMore, items.length, totalItems, 'Load more context');
-  elements.contextList.querySelectorAll('[data-context]').forEach((card) => {
-    card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.context)));
-  });
-}
-
-export function renderQuarantine({ elements, view, state, modalController }) {
-  const totalItems = view.quarantine.length;
-  const hasSearch = Boolean(String(state.searchQuery || '').trim());
-  const visibleCount = hasSearch ? totalItems : Math.max(1, Number(state.quarantineVisibleCount || 0));
-  const items = view.quarantine.slice(0, visibleCount);
-  elements.quarantineCount.textContent = hasSearch
-    ? `${items.length} matching items`
-    : `${items.length}/${totalItems} doubtful items`;
-  elements.quarantineList.innerHTML = items.length
-    ? items.map(quarantineCardMarkup).join('')
-    : `<p class='panel-copy'>${
-      hasSearch
-        ? 'No results found.'
-        : 'No doubtful items are parked in quarantine for this filter.'
-    }</p>`;
-  updateLoadMoreButton(elements.quarantineLoadMore, items.length, totalItems, 'Load more quarantine');
-  elements.quarantineList.querySelectorAll('[data-quarantine]').forEach((card) => {
-    card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.quarantine)));
+  updateLoadMoreButton(elements.supportingLoadMore, items.length, totalItems, 'Load more reporting');
+  elements.supportingList.querySelectorAll('[data-supporting]').forEach((card) => {
+    card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.supporting)));
   });
 }
 
