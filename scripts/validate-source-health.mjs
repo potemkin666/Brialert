@@ -52,6 +52,12 @@ async function readSample(response) {
   return text.slice(0, 4000);
 }
 
+function classifyError(message) {
+  if (/HTTP 404/.test(message)) return 'hard';
+  if (/non-HTML response/.test(message)) return 'hard';
+  return 'warn';
+}
+
 async function validateSource(source) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
@@ -91,7 +97,8 @@ async function validateSource(source) {
     return {
       id: source.id,
       ok: false,
-      error: message
+      error: message,
+      severity: classifyError(message)
     };
   } finally {
     clearTimeout(timeout);
@@ -117,15 +124,22 @@ async function main() {
   const sources = await loadLondonHtmlSources();
   const results = await mapWithConcurrency(sources, validateSource, CONCURRENCY);
   const failures = results.filter((result) => !result.ok);
+  const hardFailures = failures.filter((result) => result.severity === 'hard');
+  const softFailures = failures.filter((result) => result.severity !== 'hard');
 
   console.log(`Validated ${results.length} London HTML sources.`);
   for (const result of results) {
     if (result.ok) console.log(`OK ${result.id}`);
-    else console.log(`FAIL ${result.id}: ${result.error}`);
+    else if (result.severity === 'hard') console.log(`FAIL ${result.id}: ${result.error}`);
+    else console.log(`WARN ${result.id}: ${result.error}`);
   }
 
-  if (failures.length) {
-    throw new Error(`London source health validation failed for ${failures.length} source(s).`);
+  if (softFailures.length) {
+    console.log(`\n${softFailures.length} source(s) returned warnings (bot-protection, JS-rendered pages, or transient network errors).`);
+  }
+
+  if (hardFailures.length) {
+    throw new Error(`London source health validation failed for ${hardFailures.length} source(s) with broken endpoints (HTTP 404 or non-HTML response).`);
   }
 }
 

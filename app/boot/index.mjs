@@ -64,6 +64,7 @@ function createElements() {
     heroUpdated: document.getElementById('hero-updated'),
     mapElement: document.getElementById('leaflet-map'),
     mapSummary: document.getElementById('map-summary'),
+    mapPostureChip: document.getElementById('map-posture-chip'),
     mapLayerSummary: document.getElementById('map-layer-summary'),
     mapTimelineFilters: document.getElementById('map-timeline-filters'),
     mapZoomIn: document.getElementById('map-zoom-in'),
@@ -127,6 +128,7 @@ export function initialiseApp() {
   const mapController = createMapController({
     mapElement: elements.mapElement,
     mapSummary: elements.mapSummary,
+    mapPostureChip: elements.mapPostureChip,
     mapLayerSummary: elements.mapLayerSummary,
     watchLayerLabels,
     openDetail: modalController.openDetail

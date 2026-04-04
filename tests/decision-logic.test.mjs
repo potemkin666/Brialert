@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView } from '../shared/feed-controller.mjs';
+import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
 import {
   isLiveIncidentCandidate,
   isQuarantineCandidate,
@@ -326,6 +326,72 @@ test('live feed coercion keeps valid alerts and drops malformed ones', () => {
 
   assert.equal(payload.alerts.length, 1);
   assert.equal(payload.alerts[0].id, 'good-1');
+});
+
+test('live feed coercion allows empty renderable alerts for standby posture', () => {
+  const payload = coerceLiveFeedPayload({
+    generatedAt: '2026-04-04T10:00:00.000Z',
+    sourceCount: 1,
+    alerts: [
+      {
+        id: 'bad-1',
+        title: 'Broken alert missing core fields',
+        source: 'Broken Source',
+        location: 'Unknown',
+        region: 'europe',
+        lane: 'incidents'
+      }
+    ]
+  });
+
+  assert.equal(payload.alerts.length, 0);
+});
+
+test('loadLiveFeed accepts empty renderable payload and clears alerts into standby', async () => {
+  const state = {
+    alerts: [makeAlert({ id: 'existing-1' })],
+    geoLookup: [],
+    liveFeedGeneratedAt: null,
+    liveSourceCount: 0,
+    liveFeedHealth: null,
+    liveFeedFetchError: null,
+    lastBrowserPollAt: null
+  };
+
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: true,
+    async json() {
+      return {
+        generatedAt: '2026-04-04T10:00:00.000Z',
+        sourceCount: 1,
+        alerts: [
+          {
+            id: 'bad-1',
+            title: 'Broken alert missing core fields',
+            source: 'Broken Source',
+            location: 'Unknown',
+            region: 'europe',
+            lane: 'incidents'
+          }
+        ]
+      };
+    }
+  });
+
+  try {
+    await loadLiveFeed(state, {
+      liveFeedUrl: 'live-alerts.json',
+      normaliseAlert,
+      onAfterLoad: () => {}
+    });
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+
+  assert.equal(state.alerts.length, 0);
+  assert.equal(state.liveFeedFetchError, null);
+  assert.equal(state.liveSourceCount, 1);
 });
 
 test('matchesKeywords uses word-boundary matching and does not match substrings', () => {

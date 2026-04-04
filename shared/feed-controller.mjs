@@ -131,10 +131,6 @@ export function coerceLiveFeedPayload(raw) {
     throw new Error('Live feed payload is missing a valid sourceCount.');
   }
 
-  if (!renderableAlerts.length) {
-    throw new Error('Live feed payload does not contain any renderable Brialert alerts.');
-  }
-
   return {
     alerts: renderableAlerts,
     generatedAt,

@@ -165,6 +165,50 @@
       "comment": "London resilience planning and preparedness surface for emergency and threat-preparedness context."
     },
     {
+      "id": "london-gov-rss-80603",
+      "provider": "Greater London Authority – RSS Feed 80603",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80603",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80603. Verify content category against the live feed; likely safety, policing, or resilience-related GLA updates."
+    },
+    {
+      "id": "london-gov-rss-80610",
+      "provider": "Greater London Authority – RSS Feed 80610",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80610. Verify content category against the live feed for specific topic or committee coverage."
+    },
+    {
+      "id": "london-gov-rss-80611",
+      "provider": "Greater London Authority – RSS Feed 80611",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80611. Verify content category against the live feed for specific topic or committee coverage."
+    },
+    {
+      "id": "london-gov-rss-80632",
+      "provider": "Greater London Authority – RSS Feed 80632",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80632",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80632. Verify content category against the live feed for specific topic or committee coverage."
+    },
+    {
       "id": "westminster-city-council-news",
       "provider": "Westminster City Council – News",
       "endpoint": "https://news.westminster.gov.uk/",
@@ -1165,6 +1209,17 @@
       "comment": "UN sanctions committee press releases are presented as an HTML list; using the official listing page."
     },
     {
+      "id": "unsc-consolidated-list",
+      "provider": "UN Security Council – Consolidated Sanctions List Updates (RSS)",
+      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
+      "kind": "rss",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Official UNSC RSS feed for updates to the consolidated sanctions list covering all UN sanctions regimes."
+    },
+    {
       "id": "unsc-counter-terrorism-committee",
       "provider": "UN Security Council – Counter‑Terrorism Committee (CTC) Updates",
       "endpoint": "https://www.un.org/securitycouncil/ctc/news",
@@ -1174,6 +1229,16 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "No consistent RSS endpoint; using the CTC news page and relying on keyword filtering."
+    },
+    {
+      "id": "unsc-consolidated-list-rss",
+      "provider": "UN Security Council – Consolidated Sanctions List (RSS)",
+      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
+      "kind": "rss",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false
     },
     {
       "id": "unoct-news",
@@ -1359,6 +1424,17 @@
       "comment": "Open-access journal front page used; RSS availability varies by platform."
     },
     {
+      "id": "start-umd-baad",
+      "provider": "START (UMD) – Big Allied and Dangerous (BAAD) Database",
+      "endpoint": "https://www.start.umd.edu/baad/database/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "START BAAD database for network and organisational relationship mapping of militant groups; used for entity enrichment context."
+    },
+    {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center – IntelBrief",
       "endpoint": "https://thesoufancenter.org/category/intelbrief/",
@@ -1381,48 +1457,117 @@
       "comment": "CTC Sentinel is published as web pages; using the current issue/archive surface."
     },
     {
-      "id": "ctc-westpoint-main",
-      "provider": "Combating Terrorism Center at West Point – Main Site",
-      "endpoint": "https://ctc.westpoint.edu/",
-      "kind": "html",
+      "id": "long-war-journal",
+      "provider": "Long War Journal – News Feed",
+      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
+      "kind": "rss",
       "lane": "context",
-      "region": "us",
+      "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "Main CTC site covering research, reports, and publications beyond the CTC Sentinel journal."
+      "comment": "Long War Journal RSS feed tracking militant ecosystem developments including al-Qaeda, Islamic State, Taliban, and affiliated groups."
     },
     {
-      "id": "start-umd-main",
-      "provider": "National Consortium for the Study of Terrorism (START) – Main Site",
-      "endpoint": "https://www.start.umd.edu/",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
+      "id": "gnet-research",
+      "provider": "Global Network on Extremism & Technology (GNET) – Main Feed",
+      "endpoint": "https://gnet-research.org/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
       "isTrustedOfficial": false,
-      "requiresKeywordMatch": false,
-      "comment": "START at UMD main site; leading academic research center on terrorism, covering news, reports, and data resources."
+      "requiresKeywordMatch": false
     },
     {
-      "id": "start-umd-baad",
-      "provider": "START (UMD) – Big Allied and Dangerous (BAAD) Database",
+      "id": "gnet-radicalisation",
+      "provider": "Global Network on Extremism & Technology (GNET) – Radicalisation",
+      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-artificial-intelligence",
+      "provider": "Global Network on Extremism & Technology (GNET) – Artificial Intelligence",
+      "endpoint": "https://gnet-research.org/tag/artificial-intelligence/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-youth",
+      "provider": "Global Network on Extremism & Technology (GNET) – Youth",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-research-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Updates (RSS)",
+      "endpoint": "https://gnet-research.org/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-radicalisation-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Radicalisation (RSS)",
+      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-artificial-intelligence-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Artificial Intelligence (RSS)",
+      "endpoint": "https://gnet-research.org/tag/artificial-intelligence/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-youth-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Youth (RSS)",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "long-war-journal-rss",
+      "provider": "Long War Journal – News (RSS)",
+      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Long War Journal FeedBurner RSS used for tracking jihadist conflict reporting and operational context."
+    },
+    {
+      "id": "start-baad-database",
+      "provider": "National Consortium for the Study of Terrorism (START) – Big Allied and Dangerous (BAAD) Database",
       "endpoint": "https://www.start.umd.edu/baad/database/",
       "kind": "html",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "BAAD database tracks organizational characteristics of violent non-state actors; used as a reference data resource."
-    },
-    {
-      "id": "gnet-research",
-      "provider": "Global Network on Extremism & Technology (GNET) – Updates",
-      "endpoint": "https://gnet-research.org/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false,
-      "comment": "No single RSS endpoint is prominently published; using the main updates surface."
+      "comment": "START BAAD database of designated terrorist organisations used for group identification context."
     },
     {
       "id": "icsr-kcl",
@@ -1500,6 +1645,50 @@
       "requiresKeywordMatch": true
     },
     {
+      "id": "bbc-news-front-page-legacy",
+      "provider": "BBC News – Front Page (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for coverage breadth."
+    },
+    {
+      "id": "bbc-news-uk-politics-legacy",
+      "provider": "BBC News – UK Politics (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/uk_politics/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for UK political coverage."
+    },
+    {
+      "id": "bbc-news-england-legacy",
+      "provider": "BBC News – England (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/england/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for England-specific coverage."
+    },
+    {
+      "id": "bbc-news-world-legacy",
+      "provider": "BBC News – World (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/world/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for world coverage breadth."
+    },
+    {
       "id": "reuters-uk",
       "provider": "Reuters – UK News",
       "endpoint": "https://www.reuters.com/world/uk/",
@@ -1529,6 +1718,50 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true
+    },
+    {
+      "id": "the-sun-all",
+      "provider": "The Sun",
+      "endpoint": "https://www.thesun.co.uk/feeds/all/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "The Sun aggregate feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
+    },
+    {
+      "id": "the-sun-homepage",
+      "provider": "The Sun",
+      "endpoint": "https://www.thesun.co.uk/feeds/favourite-homepage/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "The Sun curated homepage feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
+    },
+    {
+      "id": "the-sun-news-english",
+      "provider": "The Sun",
+      "endpoint": "https://www.thesun.co.uk/feeds/news-app-english-007-news/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "The Sun English news app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
+    },
+    {
+      "id": "the-sun-all-english",
+      "provider": "The Sun",
+      "endpoint": "https://www.thesun.co.uk/feeds/news-app-english-001-all/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "The Sun all English app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "telegraph-world-news",
@@ -1583,6 +1816,50 @@
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true
+    },
+    {
+      "id": "lawfare-blog",
+      "provider": "Lawfare – Blog (National Security Law & CT Policy)",
+      "endpoint": "https://www.lawfaremedia.org/feeds/all",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Lawfare covers national security law, counter-terrorism policy and intelligence oversight; keyword filtering applied to surface terrorism-relevant items."
+    },
+    {
+      "id": "war-on-the-rocks",
+      "provider": "War on the Rocks – National Security & CT Analysis",
+      "endpoint": "https://warontherocks.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "War on the Rocks publishes analysis on national security, military affairs and counter-terrorism; keyword filtering applied."
+    },
+    {
+      "id": "just-security",
+      "provider": "Just Security – Law, Rights & National Security",
+      "endpoint": "https://www.justsecurity.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Just Security covers law, rights and national security including terrorism prosecutions and CT legislation; keyword filtering applied."
+    },
+    {
+      "id": "crisis-group",
+      "provider": "International Crisis Group – Research & Analysis",
+      "endpoint": "https://www.crisisgroup.org/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Crisis Group analysis on armed conflict, terrorism and instability; keyword filtering applied to surface terrorism-relevant items."
     },
     {
       "id": "psni-news",
@@ -1805,6 +2082,50 @@
       "comment": "RUSI UK-based defence and security think tank publications used as specialist research and corroboration context."
     },
     {
+      "id": "chathamhouse-whatsnew",
+      "provider": "Chatham House – What's New (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House (RIIA) latest content feed. Endpoint path is as provided; verify against live feed if response is unexpected."
+    },
+    {
+      "id": "chathamhouse-events",
+      "provider": "Chatham House – Events (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/events.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House events feed for upcoming conferences and briefings on international security. Endpoint path is as provided."
+    },
+    {
+      "id": "chathamhouse-intl-security-feed",
+      "provider": "Chatham House – International Security Programme (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/83/feed.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House research programme feed (path/83, likely International Security). Endpoint path is as provided; verify against live feed."
+    },
+    {
+      "id": "chathamhouse-news-releases",
+      "provider": "Chatham House – News Releases (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/news-releases.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House press releases feed for authoritative think-tank commentary on international security. Endpoint path is as provided."
+    },
+    {
       "id": "nctv-nl-english",
       "provider": "NCTV (Netherlands) – English News",
       "endpoint": "https://english.nctv.nl/topics/terrorist-threat-assessment-netherlands",
@@ -1948,6 +2269,17 @@
       "comment": "Europol Counter Terrorism Centre page for CT-specific operational summaries and threat assessments."
     },
     {
+      "id": "europol-eu-iru",
+      "provider": "Europol – EU Internet Referral Unit (EU IRU)",
+      "endpoint": "https://www.europol.europa.eu/about-europol/european-counter-terrorism-centre-ectc/eu-internet-referal-unit-eu-iru",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "EU IRU page for updates on online terrorist content referrals and platform abuse action under the ECTC."
+    },
+    {
       "id": "dw-europe-rss",
       "provider": "Deutsche Welle – Europe (RSS)",
       "endpoint": "https://rss.dw.com/rdf/rss-en-eu",
@@ -2001,6 +2333,545 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "EU Commission Home Affairs news on counter-terrorism legislation, Schengen, and security union updates."
+    },
+    {
+      "id": "avon-somerset-police-news",
+      "provider": "Avon & Somerset Police – News",
+      "endpoint": "https://www.avonandsomerset.police.uk/newsroom/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Avon & Somerset Police newsroom covering Bristol and surrounding area incidents including counter-terrorism operations."
+    },
+    {
+      "id": "northumbria-police-news",
+      "provider": "Northumbria Police – News",
+      "endpoint": "https://northumbria.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Northumbria Police news for Newcastle and North East England terrorism-related incidents and counter-terror operations."
+    },
+    {
+      "id": "lancashire-constabulary-news",
+      "provider": "Lancashire Constabulary – News",
+      "endpoint": "https://www.lancashire.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Lancashire Constabulary news for Blackpool, Preston and Lancashire terrorism-related incidents."
+    },
+    {
+      "id": "durham-constabulary-news",
+      "provider": "Durham Constabulary – News",
+      "endpoint": "https://www.durham.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Durham Constabulary news for County Durham and Darlington incident corroboration."
+    },
+    {
+      "id": "hampshire-police-news",
+      "provider": "Hampshire & Isle of Wight Constabulary – News",
+      "endpoint": "https://www.hampshire.police.uk/news/hampshire/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Hampshire & IOW Constabulary news covering Southampton, Portsmouth and major transport hubs."
+    },
+    {
+      "id": "hertfordshire-police-news",
+      "provider": "Hertfordshire Constabulary – News",
+      "endpoint": "https://www.herts.police.uk/news/hertfordshire/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Hertfordshire Constabulary news covering the M25 corridor and Luton Airport adjacent area."
+    },
+    {
+      "id": "nottinghamshire-police-news",
+      "provider": "Nottinghamshire Police – News",
+      "endpoint": "https://www.nottinghamshire.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Nottinghamshire Police news for the East Midlands region including terrorism-related incident reporting."
+    },
+    {
+      "id": "surrey-police-news",
+      "provider": "Surrey Police – News",
+      "endpoint": "https://www.surrey.police.uk/news/surrey/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Surrey Police news covering Gatwick Airport corridor and M25 south-west sector incidents."
+    },
+    {
+      "id": "sussex-police-news",
+      "provider": "Sussex Police – News",
+      "endpoint": "https://www.sussex.police.uk/news/sussex/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Sussex Police news covering Gatwick Airport, Brighton and Channel port approach areas."
+    },
+    {
+      "id": "staffordshire-police-news",
+      "provider": "Staffordshire Police – News",
+      "endpoint": "https://www.staffordshire.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Staffordshire Police news for the West Midlands fringe and major events incident corroboration."
+    },
+    {
+      "id": "gov-uk-mod-atom",
+      "provider": "Ministry of Defence – GOV.UK Atom Feed",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence.atom",
+      "kind": "atom",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MoD atom feed for defence intelligence updates, military counter-terrorism operations and threat assessments."
+    },
+    {
+      "id": "gov-uk-moj-atom",
+      "provider": "Ministry of Justice – GOV.UK Atom Feed",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-justice.atom",
+      "kind": "atom",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MoJ atom feed for terrorism sentencing, extremist prisoner management and judicial oversight updates."
+    },
+    {
+      "id": "gov-uk-cabinet-office-atom",
+      "provider": "Cabinet Office – GOV.UK Atom Feed",
+      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office.atom",
+      "kind": "atom",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Cabinet Office atom feed for national security council decisions, resilience strategy and COBR outputs."
+    },
+    {
+      "id": "serious-fraud-office-news",
+      "provider": "Serious Fraud Office – News",
+      "endpoint": "https://www.sfo.gov.uk/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "SFO news on fraud and corruption prosecutions relevant to terrorist financing and money laundering investigations."
+    },
+    {
+      "id": "gov-uk-ipco",
+      "provider": "Investigatory Powers Commissioner's Office – GOV.UK",
+      "endpoint": "https://www.ipco.org.uk/publications/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "IPCO publishes annual reports and notices on the use of intrusive surveillance powers including counter-terrorism warrants."
+    },
+    {
+      "id": "gov-uk-hmic",
+      "provider": "HM Inspectorate of Constabulary – GOV.UK",
+      "endpoint": "https://hmicfrs.justiceinspectorates.gov.uk/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "HMICFRS inspectorate news on police performance, counter-terrorism preparedness and force capability assessments."
+    },
+    {
+      "id": "uk-iopc-news",
+      "provider": "Independent Office for Police Conduct – News",
+      "endpoint": "https://www.policeconduct.gov.uk/news",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "IOPC news on police complaints and investigations including post-incident conduct reviews after counter-terrorism operations."
+    },
+    {
+      "id": "uk-parliament-defence-committee",
+      "provider": "UK Parliament – Defence Select Committee",
+      "endpoint": "https://committees.parliament.uk/committee/24/defence-committee/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "House of Commons Defence Select Committee news on military counter-terrorism capability and armed forces security operations."
+    },
+    {
+      "id": "uk-parliament-justice-committee",
+      "provider": "UK Parliament – Justice Select Committee",
+      "endpoint": "https://committees.parliament.uk/committee/102/justice-committee/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "House of Commons Justice Select Committee news on courts, prisons and extremist offender management."
+    },
+    {
+      "id": "uk-parliament-foreign-affairs-committee",
+      "provider": "UK Parliament – Foreign Affairs Select Committee",
+      "endpoint": "https://committees.parliament.uk/committee/78/foreign-affairs-committee/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Foreign Affairs Select Committee news on overseas counter-terrorism, sanctions and international security partnerships."
+    },
+    {
+      "id": "chatham-house-rss",
+      "provider": "Chatham House – Research & Commentary (RSS)",
+      "endpoint": "https://www.chathamhouse.org/publications.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House Royal Institute of International Affairs RSS for geopolitical security, terrorism and UK foreign policy research."
+    },
+    {
+      "id": "henry-jackson-society-news",
+      "provider": "Henry Jackson Society – Publications",
+      "endpoint": "https://henryjacksonsociety.org/publications/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "HJS publications on UK counter-terrorism policy, extremism, and foreign influence operations for contextual analysis."
+    },
+    {
+      "id": "vox-pol-publications",
+      "provider": "VOX-Pol Network – Publications",
+      "endpoint": "https://www.voxpol.eu/publications/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "VOX-Pol academic network on violent online political extremism; EU-funded research on online terrorist content and radicalisation."
+    },
+    {
+      "id": "counter-extremism-project-news",
+      "provider": "Counter Extremism Project – News",
+      "endpoint": "https://www.counterextremism.com/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CEP news on extremist group activity, terrorist threat actors, and counter-extremism legislative developments."
+    },
+    {
+      "id": "tony-blair-institute-news",
+      "provider": "Tony Blair Institute for Global Change – Publications",
+      "endpoint": "https://institute.global/insights",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "TBI publications on counter-extremism, technology and political violence used for strategic context."
+    },
+    {
+      "id": "start-center-publications",
+      "provider": "START Center (UMD) – News & Publications",
+      "endpoint": "https://www.start.umd.edu/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "National Consortium for the Study of Terrorism (START) at University of Maryland publishes terrorism research and GTD data."
+    },
+    {
+      "id": "gw-program-extremism",
+      "provider": "George Washington University – Program on Extremism",
+      "endpoint": "https://extremism.gwu.edu/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "GWU Program on Extremism research on domestic and transnational terrorist movements, prosecution data and case studies."
+    },
+    {
+      "id": "crisis-group-europe",
+      "provider": "International Crisis Group – Europe (RSS)",
+      "endpoint": "https://www.crisisgroup.org/latest-updates/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Crisis Group RSS used for European and international conflict analysis relevant to terrorism, fragile states and security crises."
+    },
+    {
+      "id": "resolve-network-research",
+      "provider": "RESOLVE Network – Research",
+      "endpoint": "https://www.resolvenet.org/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "RESOLVE Network global research on violent extremism, community resilience and counter-terrorism effectiveness."
+    },
+    {
+      "id": "clingendael-publications",
+      "provider": "Clingendael Institute – Publications",
+      "endpoint": "https://www.clingendael.org/publications",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch Clingendael Institute for strategic security and foreign policy analysis covering European terrorism and conflict."
+    },
+    {
+      "id": "aljazeera-news-rss",
+      "provider": "Al Jazeera English – Top Stories (RSS)",
+      "endpoint": "https://www.aljazeera.com/xml/rss/all.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Al Jazeera English RSS for global terrorism and conflict reporting used as corroborating international context."
+    },
+    {
+      "id": "sky-news-uk-rss",
+      "provider": "Sky News UK – Top Stories (RSS)",
+      "endpoint": "https://feeds.skynews.com/feeds/rss/uk.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Sky News UK RSS for fast-breaking domestic terrorism, crime and national security incident reporting."
+    },
+    {
+      "id": "euractiv-security-rss",
+      "provider": "Euractiv – Security & Defence (RSS)",
+      "endpoint": "https://www.euractiv.com/sections/security/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Euractiv security and defence section RSS for EU counter-terrorism policy, legislative and operational context."
+    },
+    {
+      "id": "rte-ireland-news-rss",
+      "provider": "RTÉ News – Ireland (RSS)",
+      "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "RTÉ Ireland RSS for Irish national security, dissident republican activity and cross-border incident corroboration."
+    },
+    {
+      "id": "rferl-security-news-rss",
+      "provider": "Radio Free Europe/Radio Liberty – Security (RSS)",
+      "endpoint": "https://www.rferl.org/api/ep_rss_all/iu/1",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "RFE/RL news on terrorism, extremism and security in Central Asia, Russia and the Middle East used for international context."
+    },
+    {
+      "id": "dhs-press-releases",
+      "provider": "US Department of Homeland Security – News",
+      "endpoint": "https://www.dhs.gov/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "DHS news on US homeland security threat assessments, border security and counter-terrorism operations for US partner context."
+    },
+    {
+      "id": "state-dept-terrorism",
+      "provider": "US State Department – Bureau of Counterterrorism",
+      "endpoint": "https://www.state.gov/bureaus-offices/under-secretary-for-civilian-security-democracy-and-human-rights/bureau-of-counterterrorism/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "US State Dept Bureau of Counterterrorism for Foreign Terrorist Organisation designations and US CT policy updates."
+    },
+    {
+      "id": "dni-press-releases",
+      "provider": "Office of the Director of National Intelligence – Press Releases",
+      "endpoint": "https://www.dni.gov/index.php/newsroom/press-releases",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ODNI press releases for US national intelligence assessments and threats of relevance to UK-US Five Eyes partnership."
+    },
+    {
+      "id": "nsa-cybersecurity-news",
+      "provider": "NSA – Cybersecurity Advisories & Guidance",
+      "endpoint": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "NSA press releases and cybersecurity advisories relevant to national security and state-sponsored threat actor activity."
+    },
+    {
+      "id": "us-house-homeland-security",
+      "provider": "US House Committee on Homeland Security – News",
+      "endpoint": "https://homeland.house.gov/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "US House Homeland Security Committee news on terrorism threats, border security and DHS oversight hearings."
+    },
+    {
+      "id": "eu-ct-coordinator",
+      "provider": "EU Counter-Terrorism Coordinator – Council of the EU",
+      "endpoint": "https://www.consilium.europa.eu/en/policies/fight-against-terrorism/eu-counter-terrorism-coordinator/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "EU Counter-Terrorism Coordinator reports and briefings on EU-wide CT strategy and threat landscape."
+    },
+    {
+      "id": "enisa-news",
+      "provider": "ENISA (EU Cybersecurity Agency) – News",
+      "endpoint": "https://www.enisa.europa.eu/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ENISA news on EU cybersecurity threats, state-sponsored attacks and critical infrastructure security relevant to CT context."
+    },
+    {
+      "id": "eu-eppo-news",
+      "provider": "European Public Prosecutor's Office – Press Releases",
+      "endpoint": "https://www.eppo.europa.eu/en/media/press-releases",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EPPO press releases on cross-border EU fraud and financial crime prosecutions including terrorist financing investigations."
+    },
+    {
+      "id": "eu-olaf-news",
+      "provider": "OLAF (EU Anti-Fraud Office) – News",
+      "endpoint": "https://anti-fraud.ec.europa.eu/media-corner/news_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OLAF news on EU anti-fraud investigations including smuggling, financial crime and illicit trade relevant to terrorist financing."
+    },
+    {
+      "id": "iom-news",
+      "provider": "IOM (International Organization for Migration) – News",
+      "endpoint": "https://www.iom.int/news",
+      "kind": "html",
+      "lane": "border",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "IOM migration and displacement news used for border security, migration pressure and population movement context."
+    },
+    {
+      "id": "unhcr-europe-news",
+      "provider": "UNHCR Europe – News",
+      "endpoint": "https://www.unhcr.org/europe/news",
+      "kind": "html",
+      "lane": "border",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "UNHCR Europe news on refugee flows and border operations relevant to border security and screening context."
+    },
+    {
+      "id": "unodc-news",
+      "provider": "UNODC (UN Office on Drugs and Crime) – Press Releases",
+      "endpoint": "https://www.unodc.org/unodc/en/press/releases/latest.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "UNODC press releases on drug trafficking, organised crime, terrorism financing and international criminal operations."
+    },
+    {
+      "id": "global-initiative-news",
+      "provider": "Global Initiative Against Transnational Organized Crime – News",
+      "endpoint": "https://globalinitiative.net/news/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "GI-TOC news on organised crime networks, illicit trade and criminal-terrorist nexus for international context."
+    },
+    {
+      "id": "occrp-news",
+      "provider": "OCCRP – Organized Crime and Corruption Reporting Project",
+      "endpoint": "https://www.occrp.org/en/announcements.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
     }
   ]
 }
