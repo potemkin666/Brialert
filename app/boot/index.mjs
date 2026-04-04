@@ -68,14 +68,10 @@ function createElements() {
     heroSearch: document.getElementById('hero-search'),
     heroUpdated: document.getElementById('hero-updated'),
     mapElement: document.getElementById('leaflet-map'),
-    mapSummary: document.getElementById('map-summary'),
-    mapPostureChip: document.getElementById('map-posture-chip'),
-    mapLayerSummary: document.getElementById('map-layer-summary'),
-    mapTimelineFilters: document.getElementById('map-timeline-filters'),
-    mapZoomIn: document.getElementById('map-zoom-in'),
-    mapZoomOut: document.getElementById('map-zoom-out'),
+    mapStatusLine: document.getElementById('map-status-line'),
+    mapEmptyState: document.getElementById('map-empty-state'),
     mapReset: document.getElementById('map-reset'),
-    mapLayerToggles: document.getElementById('map-layer-toggles'),
+    mapModeTabs: document.getElementById('map-mode-tabs'),
     filters: document.getElementById('filters'),
     tabbar: document.getElementById('tabbar'),
     briefingModePanel: document.getElementById('briefing-mode-panel'),
@@ -150,9 +146,8 @@ export function initialiseApp() {
   const { generateLongBrief } = modalRuntime;
   const mapController = createMapController({
     mapElement: elements.mapElement,
-    mapSummary: elements.mapSummary,
-    mapPostureChip: elements.mapPostureChip,
-    mapLayerSummary: elements.mapLayerSummary,
+    mapStatusLine: elements.mapStatusLine,
+    mapEmptyState: elements.mapEmptyState,
     watchLayerLabels,
     openDetail: modalController.openDetail
   });
@@ -170,6 +165,7 @@ export function initialiseApp() {
           setTimeout(() => {
             mapController.ensureMap();
             mapController.renderMap(state, filteredMapView(state, currentView()), true);
+            mapController.invalidateSize();
           }, 60);
         }
       }
@@ -299,28 +295,21 @@ export function initialiseApp() {
       if (event.key === 'Escape') modalController.closeDetailPanel();
     });
 
-    elements.mapZoomIn?.addEventListener('click', () => mapController.zoomMap(1));
-    elements.mapZoomOut?.addEventListener('click', () => mapController.zoomMap(-1));
-    elements.mapReset?.addEventListener('click', () => mapController.renderMap(state, filteredMapView(state, currentView()), true));
+    elements.mapReset?.addEventListener('click', () => mapController.resetView());
 
-    elements.mapTimelineFilters?.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-map-window]');
+    elements.mapModeTabs?.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-map-mode]');
       if (!button) return;
-      state.mapTimelineWindow = button.dataset.mapWindow || '24h';
-      elements.mapTimelineFilters.querySelectorAll('[data-map-window]').forEach((item) => {
-        item.classList.toggle('active', item.dataset.mapWindow === state.mapTimelineWindow);
+      const nextMode = button.dataset.mapMode === 'world' ? 'world' : 'london';
+      if (state.mapViewMode === nextMode) return;
+      state.mapViewMode = nextMode;
+      elements.mapModeTabs.querySelectorAll('[data-map-mode]').forEach((item) => {
+        const active = item.dataset.mapMode === nextMode;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-selected', String(active));
       });
       mapController.renderMap(state, filteredMapView(state, currentView()), true);
-    });
-
-    elements.mapLayerToggles?.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-watch-layer]');
-      if (!button) return;
-      const layer = button.dataset.watchLayer;
-      if (state.activeWatchLayers.has(layer)) state.activeWatchLayers.delete(layer);
-      else state.activeWatchLayers.add(layer);
-      button.classList.toggle('active', state.activeWatchLayers.has(layer));
-      mapController.renderMap(state, filteredMapView(state, currentView()), true);
+      mapController.invalidateSize();
     });
 
     window.addEventListener('resize', () => {

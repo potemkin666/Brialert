@@ -1,40 +1,19 @@
-function alertTimeMsForMap(alert) {
-  const raw = alert.publishedAt || alert.happenedWhen || alert.time;
-  if (!raw) return 0;
-  const stamp = new Date(raw).getTime();
-  return Number.isFinite(stamp) ? stamp : 0;
-}
-
-function timelineWindowMs(windowKey) {
-  if (windowKey === '24h') return 24 * 60 * 60 * 1000;
-  if (windowKey === '72h') return 72 * 60 * 60 * 1000;
-  if (windowKey === '7d') return 7 * 24 * 60 * 60 * 1000;
-  return Infinity;
-}
-
-function timelineLabel(windowKey) {
-  if (windowKey === '24h') return 'last 24h';
-  if (windowKey === '72h') return 'last 72h';
-  if (windowKey === '7d') return 'last 7d';
-  return 'all time';
-}
+import { isLondonAlert } from '../../shared/alert-view-model.mjs';
+import { matchesAlertSearch } from '../../shared/feed-controller.mjs';
 
 export function filteredMapView(state, view) {
-  const windowMs = timelineWindowMs(state.mapTimelineWindow);
-  const now = Date.now();
-
-  const filtered = view.filtered.filter((alert) => {
-    if (windowMs !== Infinity) {
-      const stamp = alertTimeMsForMap(alert);
-      if (!stamp || now - stamp > windowMs) return false;
-    }
-    return true;
-  });
+  const base = state.alerts.filter((alert) =>
+    (state.activeLane === 'all' || alert.lane === state.activeLane) &&
+    matchesAlertSearch(alert, state.searchQuery)
+  );
+  const isLondonMode = state.mapViewMode === 'london';
+  const filtered = isLondonMode
+    ? base.filter((alert) => isLondonAlert(alert))
+    : base;
 
   return {
     ...view,
-    filtered,
-    mapFilterLabels: [timelineLabel(state.mapTimelineWindow)]
+    filtered
   };
 }
 
