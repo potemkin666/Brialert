@@ -15,6 +15,7 @@ const LONG_BRIEF_API_URL = 'https://brialertbackend.vercel.app/api/generate-brie
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 const LONG_BRIEF_MAX_SOURCE_EXTRACT_CHARS = 8_000;
 const LONG_BRIEF_FALLBACK_SOURCE_EXTRACT_CHARS = 3_500;
+// Require a boundary near the end so truncation does not collapse into an overly short fragment.
 const WORD_BOUNDARY_MIN_RATIO = 0.7;
 
 function buildLocalLongBrief(alert) {
