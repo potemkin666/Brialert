@@ -3,7 +3,6 @@ import {
   buildBriefing,
   effectiveSummary,
   formatAgeFrom,
-  renderConfidenceLadder,
   renderCorroboratingSources,
   renderSceneClock,
   severityLabel
@@ -120,9 +119,7 @@ export function createModalRuntime(elements, options = {}) {
     modalAiSummary: elements.modalAiSummary,
     modalSummary: elements.modalSummary,
     modalSceneClock: elements.modalSceneClock,
-    modalConfidenceLadder: elements.modalConfidenceLadder,
     sceneClockPanel: elements.sceneClockPanel,
-    confidenceLadderPanel: elements.confidenceLadderPanel,
     modalAudit: elements.modalAudit,
     modalCorroboration: elements.modalCorroboration,
     auditPanel: elements.auditPanel,
@@ -142,7 +139,6 @@ export function createModalRuntime(elements, options = {}) {
     effectiveSummary,
     buildBriefing,
     renderSceneClock,
-    renderConfidenceLadder,
     buildAuditBlock,
     renderCorroboratingSources,
     severityLabel
