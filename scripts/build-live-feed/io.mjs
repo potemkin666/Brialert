@@ -101,8 +101,10 @@ function classifyBodyBlock(text = '') {
 
 export async function fetchText(url, attempt = 1, options = {}) {
   const source = options?.source || null;
-  const timeoutMs = Number(source?.timeoutMs) > 0 ? Number(source.timeoutMs) : DEFAULT_TIMEOUT_MS;
-  const maxAttempts = Number(source?.maxRetries) > 0 ? Number(source.maxRetries) : DEFAULT_MAX_RETRIES;
+  const configuredTimeoutMs = Number(source?.timeoutMs);
+  const configuredMaxRetries = Number(source?.maxRetries);
+  const timeoutMs = configuredTimeoutMs > 0 ? configuredTimeoutMs : DEFAULT_TIMEOUT_MS;
+  const maxAttempts = configuredMaxRetries > 0 ? configuredMaxRetries : DEFAULT_MAX_RETRIES;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
