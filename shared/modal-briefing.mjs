@@ -33,17 +33,11 @@ export function createModalController(elements, deps) {
     lockedScrollY = window.scrollY || window.pageYOffset || 0;
     document.body.classList.add('modal-open');
     document.body.style.top = `-${lockedScrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
   }
 
   function unlockBodyScroll() {
     document.body.classList.remove('modal-open');
     document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
     window.scrollTo(0, lockedScrollY);
   }
 
