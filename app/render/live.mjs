@@ -119,8 +119,8 @@ export function renderHero({ state, elements }) {
     : (state.activeRegion === 'all'
       ? (state.userLocationLabel ? `${state.userLocationLabel} feeds` : 'All feeds')
       : `${regionLabel(state.activeRegion)} feeds`);
-  const laneCopy = state.briefingMode ? 'Briefing posture' : (state.activeLane === 'all' ? 'Responder posture' : laneLabels[state.activeLane]);
-  elements.heroRegion.textContent = `${regionCopy} | ${laneCopy}`;
+  const locationCopy = state.userLocationLabel || 'Local user';
+  elements.heroRegion.textContent = `${regionCopy} | ${locationCopy}`;
   const stamp = state.liveFeedGeneratedAt || state.lastBrowserPollAt;
   const sourceSuffix = state.liveSourceCount ? ` | ${state.liveSourceCount} sources` : ` | it's time`;
   elements.heroUpdated.textContent = stamp
