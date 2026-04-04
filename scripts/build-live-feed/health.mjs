@@ -11,7 +11,9 @@ export function buildHealthBlock({
   buildWarning,
   previousHealth = null,
   successfulRefresh = true,
-  usedFallback = false
+  usedFallback = false,
+  sourceHealth = null,
+  autoDeferredSources = []
 }) {
   const runId = clean(process.env.GITHUB_RUN_ID);
   const runNumber = clean(process.env.GITHUB_RUN_NUMBER);
@@ -48,6 +50,11 @@ export function buildHealthBlock({
       : clean(prior.lastSuccessfulEvent) || null,
     lastSuccessfulSourceCount: successfulSourceCount,
     sourceErrorCount: sourceErrors.length,
-    hasWarnings: Boolean(buildWarning) || sourceErrors.length > 0
+    hasWarnings: Boolean(buildWarning) || sourceErrors.length > 0,
+    autoDeferredSourceCount: Array.isArray(autoDeferredSources) ? autoDeferredSources.length : 0,
+    autoDeferredSources: Array.isArray(autoDeferredSources) ? autoDeferredSources.slice(0, 25) : [],
+    sourceHealth: sourceHealth && typeof sourceHealth === 'object'
+      ? sourceHealth
+      : (prior.sourceHealth && typeof prior.sourceHealth === 'object' ? prior.sourceHealth : {})
   };
 }

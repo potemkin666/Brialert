@@ -54,6 +54,10 @@ export const DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE = Object.freeze({
   prevention: 4,
   default: 3
 });
+export const SOURCE_FAILURE_COOLDOWN_HOURS = 24;
+export const SOURCE_EMPTY_COOLDOWN_HOURS = 24;
+export const AUTO_SKIP_FAILURE_THRESHOLD = 4;
+export const AUTO_SKIP_EMPTY_THRESHOLD = 6;
 export const HARD_SKIP_SOURCE_IDS = new Set([
   'globalsecurity-terror-news',
   'un-ctitf-news',

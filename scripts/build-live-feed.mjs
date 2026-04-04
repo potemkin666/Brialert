@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import {
+  AUTO_SKIP_EMPTY_THRESHOLD,
+  AUTO_SKIP_FAILURE_THRESHOLD,
   FEED_SOURCE_CONCURRENCY,
   HARD_SKIP_SOURCE_IDS,
   MAX_FAILING_SOURCES_TO_LOG,
@@ -8,6 +10,8 @@ import {
   MAX_SOURCE_ERRORS_TO_REPORT,
   MAX_HTML_PREFETCH_ITEMS,
   MAX_STORED_ALERTS,
+  SOURCE_EMPTY_COOLDOWN_HOURS,
+  SOURCE_FAILURE_COOLDOWN_HOURS,
   SOURCE_ITEM_LIMITS,
   shouldRefreshSourceThisRun,
   outputPath,
@@ -48,10 +52,100 @@ import {
 
 export { buildHealthBlock } from './build-live-feed/health.mjs';
 
+function parseIsoMs(value) {
+  const ms = new Date(value || '').getTime();
+  return Number.isFinite(ms) ? ms : 0;
+}
+
+function sourceHealthEntry(previousHealth, sourceId) {
+  const sourceHealth = previousHealth?.sourceHealth;
+  if (!sourceHealth || typeof sourceHealth !== 'object') return null;
+  const entry = sourceHealth[sourceId];
+  return entry && typeof entry === 'object' ? entry : null;
+}
+
+function sourceMayAutoCooldown(source, previousEntry, buildDate) {
+  if (!previousEntry) return null;
+  const cooldownUntilMs = parseIsoMs(previousEntry.cooldownUntil);
+  if (!cooldownUntilMs || buildDate.getTime() >= cooldownUntilMs) return null;
+
+  const consecutiveFailures = Number(previousEntry.consecutiveFailures || 0);
+  const consecutiveEmptyRuns = Number(previousEntry.consecutiveEmptyRuns || 0);
+  const isProtected = source?.lane === 'incidents' || source?.isTrustedOfficial;
+
+  if (consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
+    return {
+      reason: 'failure-cooldown',
+      until: previousEntry.cooldownUntil
+    };
+  }
+
+  if (!isProtected && consecutiveEmptyRuns >= AUTO_SKIP_EMPTY_THRESHOLD) {
+    return {
+      reason: 'empty-cooldown',
+      until: previousEntry.cooldownUntil
+    };
+  }
+
+  return null;
+}
+
+function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
+  const prior = previousEntry && typeof previousEntry === 'object' ? previousEntry : {};
+  const next = {
+    provider: source.provider,
+    lane: source.lane,
+    kind: source.kind,
+    lastCheckedAt: generatedAt,
+    lastBuiltCount: Number(stat?.built || 0),
+    successfulRuns: Number(prior.successfulRuns || 0),
+    emptyRuns: Number(prior.emptyRuns || 0),
+    failedRuns: Number(prior.failedRuns || 0),
+    consecutiveFailures: Number(prior.consecutiveFailures || 0),
+    consecutiveEmptyRuns: Number(prior.consecutiveEmptyRuns || 0),
+    lastSuccessfulAt: prior.lastSuccessfulAt || null,
+    lastFailureAt: prior.lastFailureAt || null,
+    lastEmptyAt: prior.lastEmptyAt || null,
+    cooldownUntil: null,
+    autoSkipReason: null
+  };
+
+  if ((stat?.built || 0) > 0) {
+    next.successfulRuns += 1;
+    next.consecutiveFailures = 0;
+    next.consecutiveEmptyRuns = 0;
+    next.lastSuccessfulAt = generatedAt;
+    return next;
+  }
+
+  if ((stat?.errors || 0) > 0) {
+    next.failedRuns += 1;
+    next.consecutiveFailures += 1;
+    next.consecutiveEmptyRuns = 0;
+    next.lastFailureAt = generatedAt;
+    if (next.consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
+      next.cooldownUntil = new Date(Date.parse(generatedAt) + SOURCE_FAILURE_COOLDOWN_HOURS * 3600000).toISOString();
+      next.autoSkipReason = 'failure-cooldown';
+    }
+    return next;
+  }
+
+  next.emptyRuns += 1;
+  next.consecutiveEmptyRuns += 1;
+  next.consecutiveFailures = 0;
+  next.lastEmptyAt = generatedAt;
+  if (!source.isTrustedOfficial && source.lane !== 'incidents' && next.consecutiveEmptyRuns >= AUTO_SKIP_EMPTY_THRESHOLD) {
+    next.cooldownUntil = new Date(Date.parse(generatedAt) + SOURCE_EMPTY_COOLDOWN_HOURS * 3600000).toISOString();
+    next.autoSkipReason = 'empty-cooldown';
+  }
+  return next;
+}
+
 async function main() {
   const buildDate = new Date();
   const existing = await readExisting();
   const geoLookupFallbackNote = await safeLoadGeoLookup(existing);
+  const previousHealth = existing?.health && typeof existing.health === 'object' ? existing.health : null;
 
   let sources;
   try {
@@ -105,6 +199,7 @@ async function main() {
   const items = [];
   const sourceErrors = [];
   const sourceStats = [];
+  const autoDeferredSources = [];
   const eligibleSources = sources.filter((source) => {
     if (!sourceLooksEnglish(source)) return false;
     if (source?.quarantined) {
@@ -117,7 +212,19 @@ async function main() {
     }
     return true;
   });
-  const scheduledSources = eligibleSources.filter((source) => shouldRefreshSourceThisRun(source, buildDate));
+  const scheduledSources = eligibleSources.filter((source) => {
+    const autoCooldown = sourceMayAutoCooldown(source, sourceHealthEntry(previousHealth, source.id), buildDate);
+    if (autoCooldown) {
+      autoDeferredSources.push({
+        id: source.id,
+        provider: source.provider,
+        reason: autoCooldown.reason,
+        until: autoCooldown.until
+      });
+      return false;
+    }
+    return shouldRefreshSourceThisRun(source, buildDate);
+  });
   const deferredSources = Math.max(0, eligibleSources.length - scheduledSources.length);
 
   const sourceResults = await mapWithConcurrency(
@@ -254,9 +361,43 @@ async function main() {
     .join(', ');
   const buildWarning = [
     geoLookupFallbackNote,
+    autoDeferredSources.length ? `Deferred ${autoDeferredSources.length} low-yield source(s) on health cooldown.` : null,
     preservedAlerts ? 'Build produced no fresh alerts; preserved previous alert set.' : null
   ].filter(Boolean).join(' | ') || null;
   const generatedAt = new Date().toISOString();
+  const nextSourceHealth = {};
+  const sourceStatsById = new Map(sourceStats.map((stat) => [stat.id, stat]));
+
+  for (const source of eligibleSources) {
+    const priorEntry = sourceHealthEntry(previousHealth, source.id);
+    const deferred = autoDeferredSources.find((entry) => entry.id === source.id);
+    if (deferred) {
+      nextSourceHealth[source.id] = {
+        ...(priorEntry || {}),
+        provider: source.provider,
+        lane: source.lane,
+        kind: source.kind,
+        autoSkipReason: deferred.reason,
+        cooldownUntil: deferred.until,
+        lastDeferredAt: generatedAt
+      };
+      continue;
+    }
+
+    const stat = sourceStatsById.get(source.id);
+    if (!stat) {
+      nextSourceHealth[source.id] = {
+        ...(priorEntry || {}),
+        provider: source.provider,
+        lane: source.lane,
+        kind: source.kind,
+        autoSkipReason: null
+      };
+      continue;
+    }
+
+    nextSourceHealth[source.id] = nextSourceHealthEntry(source, stat, priorEntry, generatedAt);
+  }
 
   const payload = {
     generatedAt,
@@ -271,9 +412,11 @@ async function main() {
       checked,
       sourceErrors,
       buildWarning,
-      previousHealth: existing?.health,
+      previousHealth,
       successfulRefresh: !preservedAlerts,
-      usedFallback: preservedAlerts || Boolean(geoLookupFallbackNote)
+      usedFallback: preservedAlerts || Boolean(geoLookupFallbackNote),
+      sourceHealth: nextSourceHealth,
+      autoDeferredSources
     })
   };
 
@@ -291,6 +434,7 @@ async function main() {
     `eligible=${eligibleSources.length}`,
     `scheduled=${scheduledSources.length}`,
     `deferred=${deferredSources}`,
+    `cooldownDeferred=${autoDeferredSources.length}`,
     `checked=${checked}`,
     `successfulWithAlerts=${successfulSources}`,
     `failed=${failedSources}`,

@@ -304,6 +304,35 @@ test('health block records a fresh success when the builder completes normally',
   assert.equal(health.usedFallback, false);
 });
 
+test('health block carries source cooldown metadata for low-yield sources', () => {
+  const health = buildHealthBlock({
+    generatedAt: '2026-04-05T09:00:00.000Z',
+    checked: 18,
+    sourceErrors: [],
+    buildWarning: 'Deferred 2 low-yield source(s) on health cooldown.',
+    successfulRefresh: true,
+    usedFallback: false,
+    autoDeferredSources: [
+      {
+        id: 'weak-context-source',
+        reason: 'empty-cooldown',
+        until: '2026-04-06T09:00:00.000Z'
+      }
+    ],
+    sourceHealth: {
+      'weak-context-source': {
+        consecutiveEmptyRuns: 6,
+        autoSkipReason: 'empty-cooldown',
+        cooldownUntil: '2026-04-06T09:00:00.000Z'
+      }
+    }
+  });
+
+  assert.equal(health.autoDeferredSourceCount, 1);
+  assert.equal(health.autoDeferredSources[0].id, 'weak-context-source');
+  assert.equal(health.sourceHealth['weak-context-source'].autoSkipReason, 'empty-cooldown');
+});
+
 test('feed health status flags stale fallback data honestly', () => {
   const snapshot = deriveFeedHealthStatus({
     health: {
