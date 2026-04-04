@@ -78,15 +78,12 @@ async function generateRemoteLongBrief(alert) {
     }
   }
 
-  if (lastError) {
-    const detail = lastError instanceof Error ? lastError.message : String(lastError);
-    throw new Error(`Long brief generation failed after ${payloadAttempts.length} attempts: ${detail}`);
-  }
-  throw new Error(`Long brief generation failed after ${payloadAttempts.length} attempts`);
+  const detail = lastError instanceof Error ? lastError.message : String(lastError);
+  throw new Error(`Long brief generation failed after ${payloadAttempts.length} attempts: ${detail}`);
 }
 
 function mapAlertToLongBriefPayload(alert, maxSourceExtractChars = LONG_BRIEF_MAX_SOURCE_EXTRACT_CHARS) {
-  const sourceExtract = cleanTextBlock(alert.sourceExtract ?? alert.extract ?? alert.summary ?? '');
+  const sourceExtract = alert.sourceExtract ?? alert.extract ?? alert.summary ?? '';
   const trimmedSourceExtract = cleanTextBlock(truncateAtWordBoundary(sourceExtract, maxSourceExtractChars));
   return {
     sourceName: String(alert.sourceName ?? alert.source ?? ''),
