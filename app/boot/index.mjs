@@ -68,7 +68,6 @@ function createElements() {
     mapElement: document.getElementById('leaflet-map'),
     mapSummary: document.getElementById('map-summary'),
     mapLayerSummary: document.getElementById('map-layer-summary'),
-    mapPostureFilters: document.getElementById('map-posture-filters'),
     mapTimelineFilters: document.getElementById('map-timeline-filters'),
     mapZoomIn: document.getElementById('map-zoom-in'),
     mapZoomOut: document.getElementById('map-zoom-out'),
@@ -268,17 +267,6 @@ export function initialiseApp() {
     elements.mapZoomIn?.addEventListener('click', () => mapController.zoomMap(1));
     elements.mapZoomOut?.addEventListener('click', () => mapController.zoomMap(-1));
     elements.mapReset?.addEventListener('click', () => mapController.renderMap(state, filteredMapView(state, currentView()), true));
-    elements.mapPostureFilters?.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-map-filter]');
-      if (!button) return;
-      const filterKey = button.dataset.mapFilter;
-      if (!Object.prototype.hasOwnProperty.call(state.mapFilters, filterKey)) return;
-      state.mapFilters[filterKey] = !state.mapFilters[filterKey];
-      elements.mapPostureFilters.querySelectorAll('[data-map-filter]').forEach((item) => {
-        item.classList.toggle('active', !!state.mapFilters[item.dataset.mapFilter]);
-      });
-      mapController.renderMap(state, filteredMapView(state, currentView()), true);
-    });
 
     elements.mapTimelineFilters?.addEventListener('click', (event) => {
       const button = event.target.closest('[data-map-window]');

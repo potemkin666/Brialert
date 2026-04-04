@@ -1,5 +1,3 @@
-import { isLiveIncidentCandidate } from '../../shared/alert-view-model.mjs';
-
 function alertTimeMsForMap(alert) {
   const raw = alert.publishedAt || alert.happenedWhen || alert.time;
   if (!raw) return 0;
@@ -22,15 +20,10 @@ function timelineLabel(windowKey) {
 }
 
 export function filteredMapView(state, view) {
-  const activeFilters = Object.entries(state.mapFilters)
-    .filter(([, enabled]) => enabled)
-    .map(([key]) => key);
   const windowMs = timelineWindowMs(state.mapTimelineWindow);
   const now = Date.now();
 
   const filtered = view.filtered.filter((alert) => {
-    if (state.mapFilters.liveOnly && !isLiveIncidentCandidate(alert)) return false;
-    if (state.mapFilters.officialOnly && !alert.isOfficial) return false;
     if (windowMs !== Infinity) {
       const stamp = alertTimeMsForMap(alert);
       if (!stamp || now - stamp > windowMs) return false;
@@ -41,14 +34,7 @@ export function filteredMapView(state, view) {
   return {
     ...view,
     filtered,
-    mapFilterLabels: [
-      timelineLabel(state.mapTimelineWindow),
-      ...activeFilters.map((key) => {
-        if (key === 'liveOnly') return 'live only';
-        if (key === 'officialOnly') return 'official only';
-        return key;
-      })
-    ]
+    mapFilterLabels: [timelineLabel(state.mapTimelineWindow)]
   };
 }
 

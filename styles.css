@@ -632,13 +632,6 @@ h1 {
   margin-top: 12px;
 }
 
-.map-posture-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
 .map-timeline-panel {
   margin-top: 14px;
   padding: 14px;
@@ -1555,7 +1548,6 @@ body.device-iphone {
 .device-iphone .tabbar,
 .device-iphone .filters,
 .device-iphone .map-layer-toggles,
-.device-iphone .map-posture-filters,
 .device-iphone .map-timeline-filters,
 .device-iphone #context-list {
   flex-wrap: nowrap;
@@ -1569,7 +1561,6 @@ body.device-iphone {
 .device-iphone .tabbar::-webkit-scrollbar,
 .device-iphone .filters::-webkit-scrollbar,
 .device-iphone .map-layer-toggles::-webkit-scrollbar,
-.device-iphone .map-posture-filters::-webkit-scrollbar,
 .device-iphone .map-timeline-filters::-webkit-scrollbar,
 .device-iphone #context-list::-webkit-scrollbar {
   display: none;
@@ -1718,19 +1709,6 @@ body.device-iphone {
   .map-toolbar {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .map-posture-filters {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .map-posture-filters::-webkit-scrollbar {
-    display: none;
   }
 
   .map-timeline-filters {

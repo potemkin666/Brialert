@@ -14,10 +14,6 @@ export function createState(watchLayerLabels) {
     activeRegion: 'all',
     activeLane: 'all',
     mapTimelineWindow: '24h',
-    mapFilters: {
-      liveOnly: false,
-      officialOnly: false
-    },
     activeWatchLayers: new Set(Object.keys(watchLayerLabels)),
     watched: new Set(),
     lastBrowserPollAt: new Date(),
