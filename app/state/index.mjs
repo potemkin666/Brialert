@@ -21,6 +21,7 @@ export function createState(watchLayerLabels) {
     liveSourceCount: 0,
     liveFeedHealth: null,
     liveFeedFetchError: null,
+    userLocationLabel: null,
     albertIndex: -1,
     notes: [],
     briefingMode: false,

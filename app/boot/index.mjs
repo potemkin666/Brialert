@@ -45,6 +45,7 @@ import {
   createState
 } from '../state/index.mjs';
 import { applyDeviceProfile } from '../utils/device.mjs';
+import { detectUserLocationLabel } from '../utils/location.mjs';
 
 function createElements() {
   return {
@@ -299,6 +300,11 @@ export function initialiseApp() {
   applyBriefingMode();
   renderAll();
   bindEvents();
+  detectUserLocationLabel().then((label) => {
+    if (!label) return;
+    state.userLocationLabel = label;
+    renderHero({ state, elements });
+  });
 
   loadInitialResources(
     state,

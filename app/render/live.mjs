@@ -114,7 +114,11 @@ export function renderQuarantine({ elements, view, state, modalController }) {
 }
 
 export function renderHero({ state, elements }) {
-  const regionCopy = state.briefingMode ? 'Top alert only' : (state.activeRegion === 'all' ? 'All feeds' : `${regionLabel(state.activeRegion)} feeds`);
+  const regionCopy = state.briefingMode
+    ? 'Top alert only'
+    : (state.activeRegion === 'all'
+      ? (state.userLocationLabel ? `${state.userLocationLabel} feeds` : 'All feeds')
+      : `${regionLabel(state.activeRegion)} feeds`);
   const laneCopy = state.briefingMode ? 'Briefing posture' : (state.activeLane === 'all' ? 'Responder posture' : laneLabels[state.activeLane]);
   elements.heroRegion.textContent = `${regionCopy} | ${laneCopy}`;
   const stamp = state.liveFeedGeneratedAt || state.lastBrowserPollAt;
