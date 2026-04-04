@@ -118,7 +118,7 @@ export function renderHero({ state, elements }) {
   const laneCopy = state.briefingMode ? 'Briefing posture' : (state.activeLane === 'all' ? 'Responder posture' : laneLabels[state.activeLane]);
   elements.heroRegion.textContent = `${regionCopy} | ${laneCopy}`;
   const stamp = state.liveFeedGeneratedAt || state.lastBrowserPollAt;
-  const sourceSuffix = state.liveSourceCount ? ` | ${state.liveSourceCount} sources` : ' | awaiting live pull';
+  const sourceSuffix = state.liveSourceCount ? ` | ${state.liveSourceCount} sources` : ` | it's time`;
   elements.heroUpdated.textContent = stamp
     ? `${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${sourceSuffix}`
     : `Loading${sourceSuffix}`;

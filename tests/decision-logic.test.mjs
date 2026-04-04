@@ -21,6 +21,7 @@ import {
   mergeCorroboratingSources
 } from '../shared/fusion.mjs';
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
+import { renderHero } from '../app/render/live.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -471,4 +472,23 @@ test('sources catalog passes structural and per-field validation', () => {
 
   assert.equal(errors.length, 0,
     `Sources catalog has ${errors.length} error(s):\n  ${errors.join('\n  ')}`);
+});
+
+test("renderHero shows requested fallback copy when live pull hasn't happened yet", () => {
+  const state = {
+    briefingMode: false,
+    activeRegion: 'all',
+    activeLane: 'all',
+    liveFeedGeneratedAt: null,
+    lastBrowserPollAt: null,
+    liveSourceCount: 0
+  };
+  const elements = {
+    heroRegion: { textContent: '' },
+    heroUpdated: { textContent: '' }
+  };
+
+  renderHero({ state, elements });
+
+  assert.equal(elements.heroUpdated.textContent, "Loading | it's time");
 });
