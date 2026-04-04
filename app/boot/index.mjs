@@ -316,6 +316,9 @@ export function initialiseApp() {
   state.watched = loadSet(WATCHED_STORAGE_KEY);
   state.notes = loadArray(NOTES_STORAGE_KEY, defaultNotes);
   state.briefingMode = loadBoolean(BRIEFING_MODE_STORAGE_KEY);
+  if (!elements.briefingModeToggle) {
+    state.briefingMode = false;
+  }
 
   refreshAlbertQuote();
   applyBriefingMode();
