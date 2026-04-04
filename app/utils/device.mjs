@@ -7,17 +7,17 @@ export function detectDeviceProfile(win = window, nav = navigator) {
   const shortestEdge = Math.min(screenWidth || Infinity, screenHeight || Infinity);
   const isIphoneUa = /iPhone/i.test(ua);
   const isAndroidUa = /Android/i.test(ua);
+  const isIpadUa = /iPad/i.test(ua);
   const isAndroidPhone = isAndroidUa && (/Mobile/i.test(ua) || shortestEdge <= 600);
   const isIosDesktopMode =
     /Macintosh/i.test(ua) &&
     touchCapable &&
     shortestEdge <= 480;
-  const isSmallTouchApple =
-    !isAndroidUa &&
-    touchCapable &&
-    shortestEdge <= 430;
+  const isAppleTouchDevice = /AppleWebKit/i.test(ua) && !isAndroidUa && touchCapable;
+  const isIosHandsetLike = isAppleTouchDevice && shortestEdge <= 430 && (isIphoneUa || isIosDesktopMode);
 
-  if (isIphoneUa || isIosDesktopMode || isSmallTouchApple) return 'iphone';
+  if (isIphoneUa || isIosHandsetLike) return 'iphone';
+  if (isIpadUa || isIosDesktopMode) return 'desktop';
   if (isAndroidPhone) return 'android';
   return 'desktop';
 }
