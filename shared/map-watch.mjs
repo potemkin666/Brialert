@@ -214,7 +214,11 @@ export function createMapController(config) {
   }
 
   function truncatedSummary(summary, max = MAP_POPUP_SUMMARY_MAX) {
-    return `${escapeHtml(summary.slice(0, max))}${summary.length > max ? '...' : ''}`;
+    return `${summary.slice(0, max)}${summary.length > max ? '...' : ''}`;
+  }
+
+  function signatureValue(value) {
+    return value ?? '';
   }
 
   function markerPreviewTooltip(alert) {
@@ -227,7 +231,7 @@ export function createMapController(config) {
       <div class="map-preview-card">
         <p class="map-preview-eyebrow">${escapeHtml(alert.lane)} | ${escapeHtml(alert.location)}</p>
         <strong>${escapeHtml(alert.title)}</strong>
-        <p>${truncatedSummary(summary)}</p>
+        <p>${escapeHtml(truncatedSummary(summary))}</p>
         <div class="map-preview-meta">
           <span>${escapeHtml(alert.source)}</span>
           <span>${escapeHtml(alert.time)}</span>
@@ -379,7 +383,7 @@ export function createMapController(config) {
     const items = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
     const sites = visibleWatchSites(state);
     const dataSignature = [
-      items.map((alert) => `${alert.id}:${alert.lat.toFixed(3)},${alert.lng.toFixed(3)}:${alert.status}:${alert.sourceTier}:${alert.eventType}`).join('|'),
+      items.map((alert) => `${alert.id}:${alert.lat.toFixed(3)},${alert.lng.toFixed(3)}:${signatureValue(alert.status)}:${signatureValue(alert.sourceTier)}:${signatureValue(alert.eventType)}`).join('|'),
       sites.map((site) => `${site.id}:${site.category}`).join('|')
     ].join('::');
     const zoom = liveMap.getZoom();
