@@ -17,9 +17,9 @@ export function detectDeviceProfile(win = window, nav = navigator) {
   const isIosHandsetLike = isAppleTouchDevice && shortestEdge <= 430 && (isIphoneUa || isIosDesktopMode);
 
   if (isIphoneUa || isIosHandsetLike) return 'iphone';
-  if (isIpadUa || isIosDesktopMode) return 'desktop';
+  if (isIpadUa || isIosDesktopMode) return 'browser';
   if (isAndroidPhone) return 'android';
-  return 'desktop';
+  return 'browser';
 }
 
 export function applyDeviceProfile(doc = document) {
@@ -27,8 +27,8 @@ export function applyDeviceProfile(doc = document) {
   const root = doc.documentElement;
   doc.body.dataset.device = profile;
   root.dataset.device = profile;
-  root.classList.remove('device-iphone', 'device-android', 'device-desktop');
-  doc.body.classList.remove('device-iphone', 'device-android', 'device-desktop');
+  root.classList.remove('device-iphone', 'device-android', 'device-browser');
+  doc.body.classList.remove('device-iphone', 'device-android', 'device-browser');
   root.classList.add(`device-${profile}`);
   doc.body.classList.add(`device-${profile}`);
   return profile;

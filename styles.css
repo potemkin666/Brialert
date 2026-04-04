@@ -134,46 +134,46 @@ button {
   border-radius: 24px;
 }
 
-.device-desktop .page {
+.device-browser .page {
   padding: 24px;
 }
 
-.device-desktop .phone-shell {
+.device-browser .phone-shell {
   width: min(1180px, 100%);
   border-radius: 36px;
   padding: 18px;
 }
 
-.device-desktop .phone-notch {
+.device-browser .phone-notch {
   display: none;
 }
 
-.device-desktop .screen {
+.device-browser .screen {
   min-height: auto;
   padding: 24px 24px 32px;
 }
 
-.device-desktop .hero-card {
+.device-browser .hero-card {
   min-height: 240px;
   background:
     linear-gradient(90deg, rgba(7, 9, 20, 0.92), rgba(7, 9, 20, 0.62) 40%, rgba(7, 9, 20, 0.18)),
     url("assets/foc-background.gif") right center / cover no-repeat;
 }
 
-.device-desktop .tabbar,
-.device-desktop .filters,
-.device-desktop .hero-metrics {
+.device-browser .tabbar,
+.device-browser .filters,
+.device-browser .hero-metrics {
   gap: 12px;
 }
 
-.device-desktop .feed-card,
-.device-desktop .panel,
-.device-desktop .priority-card,
-.device-desktop .hero-card {
+.device-browser .feed-card,
+.device-browser .panel,
+.device-browser .priority-card,
+.device-browser .hero-card {
   border-radius: 30px;
 }
 
-.device-desktop .map-surface {
+.device-browser .map-surface {
   height: 620px;
   min-height: 620px;
 }
