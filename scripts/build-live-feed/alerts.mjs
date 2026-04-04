@@ -38,6 +38,12 @@ function incidentTrackRankValue(incidentTrack) {
   return 0;
 }
 
+function ageHoursForAlert(alert) {
+  const published = parseSourceDate(alert?.publishedAt);
+  if (!published) return Infinity;
+  return Math.max(0, (now.getTime() - published.getTime()) / 3600000);
+}
+
 function reliabilityWeight(profile) {
   if (profile === 'official_ct') return 2.6;
   if (profile === 'official_general') return 2.1;
@@ -440,4 +446,83 @@ export function dedupeAndSortAlerts(items) {
   });
 
   return deduped;
+}
+
+export function retentionScoreFor(alert) {
+  const ageHours = ageHoursForAlert(alert);
+  let score = Number.isFinite(alert?.priorityScore) ? alert.priorityScore : 0;
+
+  if (alert?.lane === 'incidents') {
+    if (alert?.incidentTrack === 'live') {
+      score += 10;
+      if (ageHours <= 24) score += 5;
+      else if (ageHours <= 72) score += 3;
+      else if (ageHours <= 168) score += 1.5;
+      else score -= 2;
+    } else if (alert?.incidentTrack === 'case') {
+      score += 2;
+      if (ageHours <= 72) score += 1;
+      else if (ageHours > 336) score -= 2;
+    }
+
+    if (alert?.major) score += 2;
+    if (alert?.isOfficial) score += 2;
+    return Number(score.toFixed(2));
+  }
+
+  const profile = clean(alert?.reliabilityProfile);
+  const isFreshOfficialCorroboration =
+    !!alert?.isOfficial &&
+    ['corroboration', 'context'].includes(clean(alert?.sourceTier)) &&
+    Number.isFinite(ageHours) &&
+    ageHours <= 96;
+
+  if (isFreshOfficialCorroboration) {
+    if (ageHours <= 24) score += 4.5;
+    else if (ageHours <= 48) score += 3;
+    else score += 1.5;
+  }
+
+  if (!Number.isFinite(ageHours)) {
+    score -= 4;
+    return Number(score.toFixed(2));
+  }
+
+  const isWeakContext = ['general_media', 'specialist_research', 'tabloid'].includes(profile);
+  const isMidContext = ['major_media', 'official_context'].includes(profile);
+
+  if (isWeakContext) {
+    if (ageHours > 336) score -= 12;
+    else if (ageHours > 168) score -= 8;
+    else if (ageHours > 72) score -= 5;
+  } else if (isMidContext) {
+    if (ageHours > 336) score -= 7;
+    else if (ageHours > 168) score -= 4.5;
+    else if (ageHours > 96) score -= 2;
+  } else if (ageHours > 336) {
+    score -= 4;
+  }
+
+  return Number(score.toFixed(2));
+}
+
+export function selectStoredAlerts(items, maxStored) {
+  if (!Array.isArray(items) || maxStored <= 0) return [];
+  if (items.length <= maxStored) return items.slice();
+
+  const retainedIndices = new Set(
+    items
+      .map((item, index) => ({
+        index,
+        retentionScore: retentionScoreFor(item)
+      }))
+      .sort((left, right) => {
+        if (right.retentionScore !== left.retentionScore) return right.retentionScore - left.retentionScore;
+        return left.index - right.index;
+      })
+      .slice(0, maxStored)
+      .map((entry) => entry.index)
+  );
+
+  return items.filter((_, index) => retainedIndices.has(index));
 }

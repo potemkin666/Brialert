@@ -21,6 +21,7 @@ import {
 import {
   buildAlert,
   dedupeAndSortAlerts,
+  selectStoredAlerts,
   shouldKeepItem
 } from './build-live-feed/alerts.mjs';
 import {
@@ -336,7 +337,7 @@ async function main() {
   const deduped = dedupeAndSortAlerts(items);
   const dedupeDropped = Math.max(0, preDedupeCount - deduped.length);
   const preservedAlerts = !deduped.length && sourceErrors.length && Array.isArray(existing?.alerts) && existing.alerts.length;
-  const finalAlerts = preservedAlerts ? existing.alerts : deduped.slice(0, MAX_STORED_ALERTS);
+  const finalAlerts = preservedAlerts ? existing.alerts : selectStoredAlerts(deduped, MAX_STORED_ALERTS);
   const successfulSources = sourceStats.filter((stat) => stat.built > 0).length;
   const failedSources = sourceStats.filter((stat) => stat.built === 0 && stat.errors > 0).length;
   const emptySources = sourceStats.filter((stat) => stat.built === 0 && stat.errors === 0).length;

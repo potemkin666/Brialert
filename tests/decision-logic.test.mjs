@@ -8,6 +8,10 @@ import { fileURLToPath } from 'node:url';
 
 import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
 import {
+  retentionScoreFor,
+  selectStoredAlerts
+} from '../scripts/build-live-feed/alerts.mjs';
+import {
   confidenceScoreLabel,
   isLiveIncidentCandidate,
   isQuarantineCandidate,
@@ -596,6 +600,51 @@ test('sources catalog passes structural and per-field validation', () => {
 
   assert.equal(errors.length, 0,
     `Sources catalog has ${errors.length} error(s):\n  ${errors.join('\n  ')}`);
+});
+
+test('stored alert selection keeps live incidents and fresh official corroboration over stale weak context', () => {
+  const liveIncident = makeAlert({
+    id: 'live-1',
+    lane: 'incidents',
+    sourceTier: 'trigger',
+    reliabilityProfile: 'official_ct',
+    incidentTrack: 'live',
+    isOfficial: true,
+    publishedAt: isoMinutesAgo(45),
+    priorityScore: 16
+  });
+
+  const freshOfficialContext = makeAlert({
+    id: 'context-1',
+    lane: 'context',
+    sourceTier: 'corroboration',
+    reliabilityProfile: 'official_context',
+    incidentTrack: '',
+    isOfficial: true,
+    publishedAt: isoMinutesAgo(180),
+    priorityScore: 8
+  });
+
+  const staleWeakContext = makeAlert({
+    id: 'context-2',
+    lane: 'context',
+    sourceTier: 'context',
+    reliabilityProfile: 'general_media',
+    incidentTrack: '',
+    isOfficial: false,
+    publishedAt: new Date(Date.now() - (10 * 24 * 60 * 60 * 1000)).toISOString(),
+    priorityScore: 7
+  });
+
+  const selected = selectStoredAlerts(
+    [liveIncident, freshOfficialContext, staleWeakContext],
+    2
+  );
+
+  assert.equal(selected.length, 2);
+  assert.deepEqual(selected.map((alert) => alert.id), ['live-1', 'context-1']);
+  assert.ok(retentionScoreFor(liveIncident) > retentionScoreFor(staleWeakContext));
+  assert.ok(retentionScoreFor(freshOfficialContext) > retentionScoreFor(staleWeakContext));
 });
 
 test("renderHero shows requested fallback copy when live pull hasn't happened yet", () => {
