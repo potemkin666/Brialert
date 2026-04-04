@@ -19,6 +19,7 @@ export function createState(watchLayerLabels) {
     searchQuery: '',
     activeRegion: 'all',
     activeLane: 'all',
+    mapViewMode: 'london',
     mapTimelineWindow: '24h',
     activeWatchLayers: new Set(Object.keys(watchLayerLabels)),
     watched: new Set(),

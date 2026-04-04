@@ -112,55 +112,21 @@
         </section>
 
         <section class="tab-panel" data-panel="map">
-          <article class="panel">
-            <div class="section-heading">
-              <h3>Map Posture</h3>
-              <span id="map-summary">0 plotted alerts</span>
-            </div>
-            <div class="map-toolbar">
-              <div class="map-chip" id="map-posture-chip">London standby posture</div>
-              <div class="map-controls">
-                <button class="map-control" id="map-zoom-out" type="button" aria-label="Zoom out">-</button>
-                <button class="map-control" id="map-reset" type="button">Reset</button>
-                <button class="map-control" id="map-zoom-in" type="button" aria-label="Zoom in">+</button>
+          <article class="panel map-panel">
+            <div class="map-header-row">
+              <h3>Map</h3>
+              <div class="map-mode-tabs" id="map-mode-tabs" role="tablist" aria-label="Map mode">
+                <button class="map-mode-tab active" id="map-mode-london-tab" type="button" role="tab" aria-selected="true" aria-controls="map-panel-surface" data-map-mode="london">London</button>
+                <button class="map-mode-tab" id="map-mode-world-tab" type="button" role="tab" aria-selected="false" aria-controls="map-panel-surface" data-map-mode="world">World</button>
               </div>
             </div>
-            <div class="map-timeline-panel">
-              <div class="section-heading">
-                <div>
-                  <span class="detail-label">Timeline Replay</span>
-                  <p class="panel-copy">Replay the mapped posture across the last 24 hours, 72 hours, or 7 days.</p>
-                </div>
-              </div>
-              <div class="map-timeline-filters" id="map-timeline-filters">
-                <button class="filter map-timeline-toggle active" data-map-window="24h" type="button">24h</button>
-                <button class="filter map-timeline-toggle" data-map-window="72h" type="button">72h</button>
-                <button class="filter map-timeline-toggle" data-map-window="7d" type="button">7d</button>
-                <button class="filter map-timeline-toggle" data-map-window="all" type="button">All time</button>
-              </div>
-            </div>
-            <div class="map-layer-panel">
-              <div class="section-heading">
-                <div>
-                  <span class="detail-label">Watch Geography</span>
-                  <p class="panel-copy">Overlay high-attention fixed sites to keep incident reporting grounded in likely target geography.</p>
-                </div>
-                <span id="map-layer-summary">0 watch sites visible</span>
-              </div>
-              <div class="map-layer-toggles" id="map-layer-toggles">
-                <button class="filter map-layer-toggle active" data-watch-layer="transport">Transport hubs</button>
-                <button class="filter map-layer-toggle active" data-watch-layer="embassy">Diplomatic sites</button>
-                <button class="filter map-layer-toggle active" data-watch-layer="hospital">Hospitals</button>
-                <button class="filter map-layer-toggle active" data-watch-layer="worship">Places of worship</button>
-                <button class="filter map-layer-toggle active" data-watch-layer="government">Government sites</button>
-              </div>
-            </div>
-            <div class="map-surface" id="map-grid">
+            <p class="map-status-line" id="map-status-line">No alerts in current view</p>
+            <div class="map-surface" id="map-panel-surface" role="tabpanel" aria-labelledby="map-mode-london-tab">
               <div class="map-viewport" id="map-viewport">
                 <div class="leaflet-map" id="leaflet-map" aria-label="Interactive alert map"></div>
+                <p class="map-empty-state hidden" id="map-empty-state">No mapped alerts for this view.</p>
               </div>
             </div>
-            <p class="panel-copy">Drag to pan, use the controls to zoom, and tap markers to open the underlying incident or context item.</p>
           </article>
         </section>
 
