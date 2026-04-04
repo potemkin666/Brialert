@@ -304,7 +304,7 @@ export function initialiseApp() {
     if (!label) return;
     state.userLocationLabel = label;
     renderHero({ state, elements });
-  });
+  }).catch(() => {});
 
   loadInitialResources(
     state,

@@ -1,3 +1,7 @@
+const GEOLOCATION_TIMEOUT_MS = 5000;
+const GEOLOCATION_MAX_AGE_MS = 300000;
+const LOCATION_CACHE_KEY = 'brialert.userLocationLabel.v1';
+
 function titleCase(value) {
   return String(value || '')
     .split(/[\s_-]+/)
@@ -39,35 +43,69 @@ function pickAddressLabel(address) {
   );
 }
 
-export async function detectUserLocationLabel(nav = navigator, fetchImpl = fetch) {
+function loadCachedLocation(cache = globalThis?.sessionStorage) {
+  try {
+    const value = cache?.getItem?.(LOCATION_CACHE_KEY);
+    return value || null;
+  } catch {
+    return null;
+  }
+}
+
+function saveCachedLocation(value, cache = globalThis?.sessionStorage) {
+  if (!value) return;
+  try {
+    cache?.setItem?.(LOCATION_CACHE_KEY, value);
+  } catch {
+    // ignore cache write failures
+  }
+}
+
+function fallbackLabel(nav) {
+  return timezoneFallback() || localeRegionFallback(nav) || null;
+}
+
+export async function detectUserLocationLabel(nav = navigator, fetchImpl = fetch, cache = globalThis?.sessionStorage) {
+  const cached = loadCachedLocation(cache);
+  if (cached) return cached;
   if (!nav?.geolocation || typeof fetchImpl !== 'function') {
-    return timezoneFallback() || localeRegionFallback(nav) || null;
+    const fallback = fallbackLabel(nav);
+    saveCachedLocation(fallback, cache);
+    return fallback;
   }
 
   try {
     const position = await new Promise((resolve, reject) => {
       nav.geolocation.getCurrentPosition(resolve, reject, {
         enableHighAccuracy: false,
-        timeout: 5000,
-        maximumAge: 300000
+        timeout: GEOLOCATION_TIMEOUT_MS,
+        maximumAge: GEOLOCATION_MAX_AGE_MS
       });
     });
     const lat = position.coords?.latitude;
     const lon = position.coords?.longitude;
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-      return timezoneFallback() || localeRegionFallback(nav) || null;
+      const fallback = fallbackLabel(nav);
+      saveCachedLocation(fallback, cache);
+      return fallback;
     }
 
     const url = `https://geocode.maps.co/reverse?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`;
     const response = await fetchImpl(url, { headers: { Accept: 'application/json' } });
     if (!response.ok) {
-      return timezoneFallback() || localeRegionFallback(nav) || null;
+      const fallback = fallbackLabel(nav);
+      saveCachedLocation(fallback, cache);
+      return fallback;
     }
 
     const payload = await response.json();
     const label = pickAddressLabel(payload?.address);
-    return label || timezoneFallback() || localeRegionFallback(nav) || null;
+    const resolved = label || fallbackLabel(nav);
+    saveCachedLocation(resolved, cache);
+    return resolved;
   } catch {
-    return timezoneFallback() || localeRegionFallback(nav) || null;
+    const fallback = fallbackLabel(nav);
+    saveCachedLocation(fallback, cache);
+    return fallback;
   }
 }
