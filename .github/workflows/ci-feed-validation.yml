@@ -52,3 +52,6 @@ jobs:
 
       - name: Build live alert feed
         run: npm run build:feeds
+
+      - name: Validate generated feed output
+        run: npm run validate:live-feed-output

@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
@@ -531,4 +533,37 @@ test('normaliseSourcesPayload drops duplicate source IDs and keeps first occurre
   assert.equal(normalised[0].id, 'a');
   assert.equal(normalised[0].endpoint, 'https://a.example');
   assert.equal(normalised[1].id, 'b');
+});
+
+test('validate-live-feed-output script passes valid feed and fails invalid sourceCount', () => {
+  const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'brialert-live-feed-'));
+  const scriptsDir = path.join(tmpRoot, 'scripts');
+  fs.mkdirSync(scriptsDir, { recursive: true });
+  fs.copyFileSync(
+    path.join(__dirname, '..', 'scripts', 'validate-live-feed-output.mjs'),
+    path.join(scriptsDir, 'validate-live-feed-output.mjs')
+  );
+
+  const validPayload = {
+    generatedAt: '2026-04-04T09:00:00.000Z',
+    sourceCount: 3,
+    alerts: [],
+    health: {
+      lastSuccessfulSourceCount: 3,
+      lastAttemptedRefreshTime: '2026-04-04T09:00:00.000Z'
+    }
+  };
+  fs.writeFileSync(path.join(tmpRoot, 'live-alerts.json'), JSON.stringify(validPayload));
+  assert.doesNotThrow(() => {
+    execFileSync('node', [path.join(scriptsDir, 'validate-live-feed-output.mjs')], { cwd: tmpRoot, stdio: 'pipe' });
+  });
+
+  const invalidPayload = {
+    ...validPayload,
+    sourceCount: -1
+  };
+  fs.writeFileSync(path.join(tmpRoot, 'live-alerts.json'), JSON.stringify(invalidPayload));
+  assert.throws(() => {
+    execFileSync('node', [path.join(scriptsDir, 'validate-live-feed-output.mjs')], { cwd: tmpRoot, stdio: 'pipe' });
+  }, /sourceCount must be a non-negative number/);
 });

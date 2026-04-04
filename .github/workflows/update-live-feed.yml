@@ -38,6 +38,9 @@ jobs:
       - name: Build live alert feed
         run: npm run build:feeds
 
+      - name: Validate generated feed output
+        run: npm run validate:live-feed-output
+
       - name: Show build output
         if: always()
         run: |
@@ -91,4 +94,10 @@ jobs:
             exit 0
           fi
           git commit -m 'Refresh live alert feed'
+          if git push; then
+            exit 0
+          fi
+          echo 'Initial push failed (likely non-fast-forward). Rebasing and retrying once.'
+          git fetch origin main
+          git pull --rebase origin main
           git push

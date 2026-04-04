@@ -9,6 +9,7 @@
   "scripts": {
     "validate:feed-data": "node ./scripts/validate-feed-data.mjs",
     "validate:source-health": "node ./scripts/validate-source-health.mjs",
+    "validate:live-feed-output": "node ./scripts/validate-live-feed-output.mjs",
     "build:feeds": "node ./scripts/build-live-feed.mjs",
     "test": "node --test ./tests/*.test.mjs"
   },
