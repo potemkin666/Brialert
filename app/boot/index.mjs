@@ -84,7 +84,6 @@ function createElements() {
     mapReset: document.getElementById('map-reset'),
     mapLayerToggles: document.getElementById('map-layer-toggles'),
     filters: document.getElementById('filters'),
-    laneFilters: document.getElementById('lane-filters'),
     tabbar: document.getElementById('tabbar'),
     briefingModePanel: document.getElementById('briefing-mode-panel'),
     briefingModeTitle: document.getElementById('briefing-mode-title'),
@@ -215,19 +214,6 @@ export function initialiseApp() {
       renderAll();
     });
 
-    elements.laneFilters?.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-lane]');
-      if (!button) return;
-      state.activeLane = button.dataset.lane;
-      invalidateDerivedView();
-      state.feedVisibleCount = INITIAL_RESPONDER_VISIBLE;
-      state.contextVisibleCount = INITIAL_CONTEXT_VISIBLE;
-      state.quarantineVisibleCount = INITIAL_QUARANTINE_VISIBLE;
-      elements.laneFilters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
-      button.classList.add('active');
-      renderAll();
-    });
-
     elements.feedLoadMore?.addEventListener('click', () => {
       state.feedVisibleCount += RESPONDER_LOAD_STEP;
       renderAll();
@@ -242,7 +228,6 @@ export function initialiseApp() {
       state.quarantineVisibleCount += QUARANTINE_LOAD_STEP;
       renderAll();
     });
-
     elements.tabbar?.addEventListener('click', (event) => {
       const button = event.target.closest('[data-tab]');
       if (!button) return;
