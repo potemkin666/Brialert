@@ -165,6 +165,16 @@
       "comment": "London resilience planning and preparedness surface for emergency and threat-preparedness context."
     },
     {
+      "id": "london-gov-rss-80603",
+      "provider": "London.gov.uk – RSS Feed",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80603",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
       "id": "westminster-city-council-news",
       "provider": "Westminster City Council – News",
       "endpoint": "https://news.westminster.gov.uk/",
@@ -1154,6 +1164,16 @@
       "comment": "No consistent RSS endpoint; using the CTC news page and relying on keyword filtering."
     },
     {
+      "id": "unsc-consolidated-list-rss",
+      "provider": "UN Security Council – Consolidated Sanctions List (RSS)",
+      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
+      "kind": "rss",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false
+    },
+    {
       "id": "unoct-news",
       "provider": "UN Office of Counter‑Terrorism (UNOCT) – News",
       "endpoint": "https://www.un.org/counterterrorism/news",
@@ -1348,6 +1368,39 @@
       "comment": "CTC Sentinel is published as web pages; using the current issue/archive surface."
     },
     {
+      "id": "ctc-is-predecessor-groups",
+      "provider": "Combating Terrorism Center at West Point – IS Predecessor Groups",
+      "endpoint": "https://ctc.westpoint.edu/terrorist-groups/islamic-state-predecessor-groups/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CTC topic page covering Islamic State predecessor groups; used for deep-context on IS lineage and evolution."
+    },
+    {
+      "id": "ctc-media-communication",
+      "provider": "Combating Terrorism Center at West Point – Media & Communication",
+      "endpoint": "https://ctc.westpoint.edu/topics/media-communication/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CTC topic page for terrorist media and communication research."
+    },
+    {
+      "id": "ctc-teenage-terrorists-digital-is",
+      "provider": "Combating Terrorism Center at West Point – Teenage Terrorists and the Digital Ecosystem of the Islamic State",
+      "endpoint": "https://ctc.westpoint.edu/teenage-terrorists-and-the-digital-ecosystem-of-the-islamic-state/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CTC research article on youth radicalisation and IS digital recruitment ecosystem."
+    },
+    {
       "id": "gnet-research",
       "provider": "Global Network on Extremism & Technology (GNET) – Updates",
       "endpoint": "https://gnet-research.org/",
@@ -1357,6 +1410,68 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
       "comment": "No single RSS endpoint is prominently published; using the main updates surface."
+    },
+    {
+      "id": "gnet-research-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Updates (RSS)",
+      "endpoint": "https://gnet-research.org/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-radicalisation-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Radicalisation (RSS)",
+      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-artificial-intelligence-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Artificial Intelligence (RSS)",
+      "endpoint": "https://gnet-research.org/tag/artificial-intelligence/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-youth-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) – Youth (RSS)",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "long-war-journal-rss",
+      "provider": "Long War Journal – News (RSS)",
+      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Long War Journal FeedBurner RSS used for tracking jihadist conflict reporting and operational context."
+    },
+    {
+      "id": "start-baad-database",
+      "provider": "National Consortium for the Study of Terrorism (START) – Big Allied and Dangerous (BAAD) Database",
+      "endpoint": "https://www.start.umd.edu/baad/database/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "START BAAD database of designated terrorist organisations used for group identification context."
     },
     {
       "id": "icsr-kcl",
@@ -1880,6 +1995,28 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "Europol Counter Terrorism Centre page for CT-specific operational summaries and threat assessments."
+    },
+    {
+      "id": "europol-eu-iru",
+      "provider": "Europol – EU Internet Referral Unit (EU IRU)",
+      "endpoint": "https://www.europol.europa.eu/about-europol/european-counter-terrorism-centre-ectc/eu-internet-referal-unit-eu-iru",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Europol EU IRU page covering online counter-terrorism referrals and takedowns."
+    },
+    {
+      "id": "europol-online-radicalisation-gaming",
+      "provider": "Europol – Online Radicalisation via Gaming Platforms",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom/news/europol-and-partner-countries-combat-online-radicalisation-gaming-platforms",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Europol news article on combating online radicalisation through gaming platforms; used for youth/online prevention context."
     },
     {
       "id": "dw-europe-rss",
