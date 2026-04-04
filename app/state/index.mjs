@@ -1,7 +1,6 @@
 export const LIVE_FEED_URL = 'live-alerts.json';
 export const GEO_LOOKUP_URL = 'data/geo-lookup.json';
 export const WATCH_GEOGRAPHY_URL = 'data/watch-geography.json';
-export const LONG_BRIEF_API_URL = globalThis.BRIALERT_LONG_BRIEF_API_URL || '';
 export const POLL_INTERVAL_MS = 60_000;
 export const SOURCE_PULL_MINUTES = 60;
 export const WATCHED_STORAGE_KEY = 'brialert.watched';

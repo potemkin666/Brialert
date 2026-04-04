@@ -41,7 +41,6 @@ import {
   INITIAL_QUARANTINE_VISIBLE,
   INITIAL_RESPONDER_VISIBLE,
   LIVE_FEED_URL,
-  LONG_BRIEF_API_URL,
   NOTES_STORAGE_KEY,
   POLL_INTERVAL_MS,
   QUARANTINE_LOAD_STEP,
@@ -135,7 +134,7 @@ export function initialiseApp() {
   };
   const derivedViewStore = createDerivedViewStore(deriveView, feedDeps);
   const elements = createElements();
-  const { modalController, generateLongBrief } = createModalRuntime(elements, LONG_BRIEF_API_URL);
+  const { modalController, generateLongBrief } = createModalRuntime(elements);
   const mapController = createMapController({
     mapElement: elements.mapElement,
     mapSummary: elements.mapSummary,

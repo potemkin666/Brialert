@@ -11,6 +11,9 @@ import {
 import { createModalController } from '../../shared/modal-briefing.mjs';
 import { cleanTextBlock, splitLongBriefSentences } from '../utils/text.mjs';
 
+const LONG_BRIEF_API_URL = 'https://brialertbackend.vercel.app/api/generate-brief';
+const LONG_BRIEF_TIMEOUT_MS = 15_000;
+
 function buildLocalLongBrief(alert) {
   const summary = cleanTextBlock(effectiveSummary(alert));
   const sourceSentences = splitLongBriefSentences(alert.sourceExtract || alert.summary || '');
@@ -43,7 +46,45 @@ function buildLocalLongBrief(alert) {
   ].join('\n\n');
 }
 
-export function createModalRuntime(elements, longBriefApiUrl) {
+async function generateRemoteLongBrief(alert) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), LONG_BRIEF_TIMEOUT_MS);
+  const payload = mapAlertToLongBriefPayload(alert);
+
+  try {
+    const response = await fetch(LONG_BRIEF_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const responseData = await response.json();
+    const brief = String(responseData?.brief || '').trim();
+    if (!brief) throw new Error('Invalid brief response');
+    return brief;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function mapAlertToLongBriefPayload(alert) {
+  return {
+    sourceName: alert.sourceName ?? alert.source ?? '',
+    headline: alert.headline ?? alert.title ?? '',
+    sourceExtract: alert.sourceExtract ?? alert.extract ?? alert.summary ?? '',
+    originalUrl: alert.originalUrl ?? alert.url ?? alert.sourceUrl ?? '',
+    timestamp: alert.timestamp ?? alert.publishedAt ?? alert.time ?? '',
+    geography: alert.geography ?? alert.location ?? '',
+    lane: alert.lane ?? alert.track ?? '',
+    confidenceLabel: alert.confidenceLabel ?? alert.confidence ?? '',
+    corroborationStatus: alert.corroborationStatus ?? '',
+    recencyText: alert.recencyText ?? ''
+  };
+}
+
+export function createModalRuntime(elements) {
   const modalController = createModalController({
     modal: elements.modal,
     modalTitle: elements.modalTitle,
@@ -86,37 +127,12 @@ export function createModalRuntime(elements, longBriefApiUrl) {
     elements.generateExpandedBrief.disabled = true;
     elements.generateExpandedBrief.textContent = 'Generating...';
 
-    if (!longBriefApiUrl) {
-      modalController.setExpandedBrief(buildLocalLongBrief(alert));
-      elements.generateExpandedBrief.disabled = false;
-      return;
-    }
-
     try {
-      const response = await fetch(longBriefApiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: alert.title,
-          location: alert.location,
-          region: alert.region,
-          source: alert.source,
-          sourceUrl: alert.sourceUrl,
-          summary: effectiveSummary(alert),
-          sourceExtract: alert.sourceExtract,
-          confidence: alert.confidence,
-          lane: alert.lane,
-          eventType: alert.eventType,
-          peopleInvolved: alert.peopleInvolved
-        })
-      });
-
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const payload = await response.json();
-      const brief = String(payload.brief || payload.longBrief || '').trim();
-      modalController.setExpandedBrief(brief || 'Long brief generation returned no text.');
+      const brief = await generateRemoteLongBrief(alert);
+      modalController.setExpandedBrief(brief);
     } catch (error) {
-      modalController.setExpandedBrief(`LONG BRIEF FAILED\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('Remote long brief generation failed, falling back to local generator:', error);
+      modalController.setExpandedBrief(buildLocalLongBrief(alert));
     } finally {
       elements.generateExpandedBrief.disabled = false;
     }
