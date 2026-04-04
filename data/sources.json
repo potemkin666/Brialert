@@ -1073,6 +1073,28 @@
       "requiresKeywordMatch": true
     },
     {
+      "id": "europol-media-press",
+      "provider": "Europol – Media and Press",
+      "endpoint": "https://www.europol.europa.eu/media-press",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Europol media and press releases page; no dedicated RSS endpoint, using the listing page with keyword filtering."
+    },
+    {
+      "id": "europol-eu-iru",
+      "provider": "Europol – EU Internet Referral Unit (EU IRU)",
+      "endpoint": "https://www.europol.europa.eu/about-europol/european-counter-terrorism-centre-ectc/eu-internet-referal-unit-eu-iru",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "EU IRU page within the European Counter Terrorism Centre; monitors and counters terrorist online content."
+    },
+    {
       "id": "eurojust-press-releases",
       "provider": "Eurojust – Press Releases (RSS)",
       "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
@@ -1239,6 +1261,17 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "INTERPOL does not consistently publish RSS; using the official news and events page."
+    },
+    {
+      "id": "interpol-notices",
+      "provider": "INTERPOL – Notices",
+      "endpoint": "https://www.interpol.int/How-we-work/Notices",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "INTERPOL Notices page covering Red, Orange, and other notice types relevant to terrorism and serious crime."
     },
     {
       "id": "fatf-news",
