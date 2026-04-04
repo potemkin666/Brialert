@@ -29,7 +29,12 @@ import {
   renderPriority,
   renderSupporting
 } from '../render/live.mjs';
-import { renderNotes, renderWatchlist } from '../render/notes.mjs';
+import {
+  addSourceRequest,
+  renderNotes,
+  renderSourceRequests,
+  renderWatchlist
+} from '../render/notes.mjs';
 import {
   BRIEFING_MODE_STORAGE_KEY,
   GEO_LOOKUP_URL,
@@ -41,6 +46,7 @@ import {
   NOTES_STORAGE_KEY,
   POLL_INTERVAL_MS,
   RESPONDER_LOAD_STEP,
+  SOURCE_REQUESTS_STORAGE_KEY,
   SOURCE_PULL_MINUTES,
   SUPPORTING_LOAD_STEP,
   WATCHED_STORAGE_KEY,
@@ -111,7 +117,9 @@ function createElements() {
     copyExpandedBrief: document.getElementById('copy-expanded-brief'),
     noteForm: document.getElementById('note-form'),
     noteTitle: document.getElementById('note-title'),
-    noteBody: document.getElementById('note-body')
+    noteBody: document.getElementById('note-body'),
+    addSourceButton: document.getElementById('add-source-button'),
+    sourceRequestsList: document.getElementById('source-requests-list')
   };
 }
 
@@ -199,6 +207,7 @@ export function initialiseApp() {
     renderMapIfActive({ state, view, mapController });
     renderWatchlist({ state, elements, modalController });
     renderNotes({ state, elements });
+    renderSourceRequests({ state, elements });
     syncModalWatchToggle();
   }
 
@@ -257,6 +266,19 @@ export function initialiseApp() {
       elements.noteTitle.value = '';
       elements.noteBody.value = '';
       renderNotes({ state, elements });
+    });
+
+    elements.addSourceButton?.addEventListener('click', () => {
+      const raw = window.prompt('Paste the full website link you want to add as a source:');
+      if (raw == null) return;
+      const result = addSourceRequest(state.sourceRequests, raw);
+      if (!result.ok) {
+        window.alert(result.message);
+        return;
+      }
+      saveArray(SOURCE_REQUESTS_STORAGE_KEY, state.sourceRequests);
+      renderSourceRequests({ state, elements });
+      window.alert(result.message);
     });
 
     elements.copyBriefing?.addEventListener('click', async () => {
@@ -339,6 +361,7 @@ export function initialiseApp() {
   }
   state.watched = loadSet(WATCHED_STORAGE_KEY);
   state.notes = loadArray(NOTES_STORAGE_KEY, defaultNotes);
+  state.sourceRequests = loadArray(SOURCE_REQUESTS_STORAGE_KEY, []);
   state.briefingMode = false;
 
   refreshAlbertQuote();

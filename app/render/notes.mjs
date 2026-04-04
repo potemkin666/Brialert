@@ -59,3 +59,69 @@ export function renderNotes({ state, elements }) {
     elements.notesList.append(card);
   });
 }
+
+function sourceRequestMatchesSearch(entry, query) {
+  const terms = String(query || '')
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!terms.length) return true;
+  const value = String(entry?.url || '').toLowerCase();
+  return terms.every((term) => value.includes(term));
+}
+
+export function addSourceRequest(sourceRequests, rawUrl, now = new Date()) {
+  const nextUrl = String(rawUrl || '').trim();
+  if (!nextUrl) {
+    return { ok: false, message: 'Please paste a website link first.' };
+  }
+  let parsed = null;
+  try {
+    parsed = new URL(nextUrl);
+  } catch {
+    return { ok: false, message: 'That does not look like a valid website link. Please paste a full link like https://example.com' };
+  }
+  if (!/^https?:$/i.test(parsed.protocol)) {
+    return { ok: false, message: 'Please use an http or https website link.' };
+  }
+  const url = parsed.toString();
+  const alreadyRequested = (Array.isArray(sourceRequests) ? sourceRequests : []).some((entry) => entry?.url === url);
+  if (alreadyRequested) {
+    return { ok: false, message: 'That source link has already been requested.' };
+  }
+  if (!Array.isArray(sourceRequests)) {
+    return { ok: false, message: 'Unable to save source request right now.' };
+  }
+  sourceRequests.unshift({
+    url,
+    requestedAt: now.toISOString()
+  });
+  return { ok: true, message: 'Source request saved.' };
+}
+
+export function renderSourceRequests({ state, elements }) {
+  if (!elements.sourceRequestsList) return;
+  elements.sourceRequestsList.replaceChildren();
+  const matching = (Array.isArray(state.sourceRequests) ? state.sourceRequests : [])
+    .filter((entry) => sourceRequestMatchesSearch(entry, state.searchQuery));
+  if (!matching.length) {
+    const empty = document.createElement('p');
+    empty.className = 'panel-copy';
+    empty.textContent = String(state.searchQuery || '').trim()
+      ? 'No results found.'
+      : 'No source requests yet.';
+    elements.sourceRequestsList.append(empty);
+    return;
+  }
+  matching.forEach((entry) => {
+    const card = document.createElement('article');
+    card.className = 'note-card';
+    const title = document.createElement('strong');
+    title.textContent = String(entry.url || '');
+    const body = document.createElement('p');
+    body.textContent = `Requested ${new Date(entry.requestedAt || Date.now()).toLocaleString()}`;
+    card.append(title, body);
+    elements.sourceRequestsList.append(card);
+  });
+}

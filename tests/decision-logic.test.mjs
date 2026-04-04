@@ -27,6 +27,7 @@ import {
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
 import { normaliseSourcesPayload } from '../scripts/build-live-feed/io.mjs';
 import { renderHero, renderSupporting } from '../app/render/live.mjs';
+import { addSourceRequest } from '../app/render/notes.mjs';
 import {
   INITIAL_RESPONDER_VISIBLE,
   INITIAL_SUPPORTING_VISIBLE,
@@ -736,4 +737,25 @@ test('renderSupporting merges context and quarantine into one progressive list',
   assert.equal(elements.supportingCount.textContent, '2/6 items');
   assert.match(elements.supportingList.innerHTML, /Quarantine|Context/i);
   assert.equal(supportingLoadMore.hasClass('hidden'), false);
+});
+
+test('addSourceRequest accepts valid http/https links and stores newest first', () => {
+  const requests = [];
+  const result = addSourceRequest(requests, 'https://example.com/news', new Date('2026-04-04T12:00:00.000Z'));
+  assert.equal(result.ok, true);
+  assert.equal(result.message, 'Source request saved.');
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].url, 'https://example.com/news');
+  assert.equal(requests[0].requestedAt, '2026-04-04T12:00:00.000Z');
+});
+
+test('addSourceRequest rejects invalid and duplicate links', () => {
+  const requests = [{ url: 'https://example.com/news', requestedAt: '2026-04-04T12:00:00.000Z' }];
+  assert.equal(addSourceRequest(requests, '').ok, false);
+  assert.equal(addSourceRequest(requests, 'not-a-link').ok, false);
+  assert.equal(addSourceRequest(requests, 'javascript:alert(1)').ok, false);
+  const duplicate = addSourceRequest(requests, 'https://example.com/news');
+  assert.equal(duplicate.ok, false);
+  assert.equal(duplicate.message, 'That source link has already been requested.');
+  assert.equal(requests.length, 1);
 });
