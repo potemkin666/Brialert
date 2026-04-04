@@ -60,8 +60,8 @@ async function generateRemoteLongBrief(alert) {
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = await response.json();
-    const brief = String(payload?.brief || '').trim();
+    const responseData = await response.json();
+    const brief = String(responseData?.brief || '').trim();
     if (!brief) throw new Error('Invalid brief response');
     return brief;
   } finally {
