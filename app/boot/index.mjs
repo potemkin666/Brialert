@@ -68,9 +68,9 @@ function createElements() {
     heroSearch: document.getElementById('hero-search'),
     heroUpdated: document.getElementById('hero-updated'),
     mapElement: document.getElementById('leaflet-map'),
+    mapPanelSurface: document.getElementById('map-panel-surface'),
     mapStatusLine: document.getElementById('map-status-line'),
     mapEmptyState: document.getElementById('map-empty-state'),
-    mapReset: document.getElementById('map-reset'),
     mapModeTabs: document.getElementById('map-mode-tabs'),
     filters: document.getElementById('filters'),
     tabbar: document.getElementById('tabbar'),
@@ -148,7 +148,6 @@ export function initialiseApp() {
     mapElement: elements.mapElement,
     mapStatusLine: elements.mapStatusLine,
     mapEmptyState: elements.mapEmptyState,
-    watchLayerLabels,
     openDetail: modalController.openDetail
   });
   let resizeTimer = null;
@@ -295,8 +294,6 @@ export function initialiseApp() {
       if (event.key === 'Escape') modalController.closeDetailPanel();
     });
 
-    elements.mapReset?.addEventListener('click', () => mapController.resetView());
-
     elements.mapModeTabs?.addEventListener('click', (event) => {
       const button = event.target.closest('[data-map-mode]');
       if (!button) return;
@@ -308,6 +305,9 @@ export function initialiseApp() {
         item.classList.toggle('active', active);
         item.setAttribute('aria-selected', String(active));
       });
+      if (elements.mapPanelSurface) {
+        elements.mapPanelSurface.setAttribute('aria-labelledby', nextMode === 'world' ? 'map-mode-world-tab' : 'map-mode-london-tab');
+      }
       mapController.renderMap(state, filteredMapView(state, currentView()), true);
       mapController.invalidateSize();
     });

@@ -116,12 +116,12 @@
             <div class="map-header-row">
               <h3>Map</h3>
               <div class="map-mode-tabs" id="map-mode-tabs" role="tablist" aria-label="Map mode">
-                <button class="map-mode-tab active" type="button" role="tab" aria-selected="true" data-map-mode="london">London</button>
-                <button class="map-mode-tab" type="button" role="tab" aria-selected="false" data-map-mode="world">World</button>
+                <button class="map-mode-tab active" id="map-mode-london-tab" type="button" role="tab" aria-selected="true" aria-controls="map-panel-surface" data-map-mode="london">London</button>
+                <button class="map-mode-tab" id="map-mode-world-tab" type="button" role="tab" aria-selected="false" aria-controls="map-panel-surface" data-map-mode="world">World</button>
               </div>
             </div>
             <p class="map-status-line" id="map-status-line">No alerts in current view</p>
-            <div class="map-surface" id="map-grid">
+            <div class="map-surface" id="map-panel-surface" role="tabpanel" aria-labelledby="map-mode-london-tab">
               <div class="map-viewport" id="map-viewport">
                 <div class="leaflet-map" id="leaflet-map" aria-label="Interactive alert map"></div>
                 <p class="map-empty-state hidden" id="map-empty-state">No mapped alerts for this view.</p>

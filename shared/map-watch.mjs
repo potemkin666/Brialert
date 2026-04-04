@@ -4,15 +4,14 @@ const LONDON_BOUNDS = Object.freeze([
   [51.7, 0.24]
 ]);
 const WORLD_FALLBACK = Object.freeze({ center: [20, 10], zoom: 2 });
-
-function toCountLabel(count, label) {
-  return `${count} ${label}${count === 1 ? '' : 's'}`;
-}
+const LONDON_CLUSTER_MAX_ZOOM = 11;
+const WORLD_CLUSTER_MAX_ZOOM = 7;
 
 function statusLine(mode, count) {
   if (count <= 0) return 'No alerts in current view';
-  if (mode === 'london') return `${toCountLabel(count, 'alert')} in London`;
-  return `${toCountLabel(count, 'alert')} in last 24h`;
+  const countLabel = `${count} alert${count === 1 ? '' : 's'}`;
+  if (mode === 'london') return `${countLabel} in London`;
+  return `${countLabel} in last 24h`;
 }
 
 function severityClass(alert) {
@@ -44,10 +43,14 @@ function markerPopup(alert) {
 }
 
 function clusterSeverity(items) {
-  if (items.some((item) => item.severity === 'critical')) return 'critical';
-  if (items.some((item) => item.severity === 'high')) return 'high';
-  if (items.some((item) => item.severity === 'elevated')) return 'elevated';
-  return 'moderate';
+  let best = 'moderate';
+  for (const item of items) {
+    const severity = String(item?.severity || '').toLowerCase();
+    if (severity === 'critical') return 'critical';
+    if (severity === 'high') best = best === 'moderate' ? 'high' : best;
+    if (severity === 'elevated' && best === 'moderate') best = 'elevated';
+  }
+  return best;
 }
 
 function clusterThreshold(zoom) {
@@ -62,7 +65,7 @@ export function createMapController(config) {
   let liveMap = null;
   let layers = [];
   let lastSignature = '';
-  let lastMode = '';
+  let lastMode = 'london';
   let lastState = null;
   let lastView = null;
 
@@ -209,7 +212,7 @@ export function createMapController(config) {
       clusterMarker.on('click', () => {
         liveMap.fitBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
           padding: [26, 26],
-          maxZoom: Math.min((liveMap.getZoom() || 3) + 2, mode === 'london' ? 11 : 7)
+          maxZoom: Math.min((liveMap.getZoom() || 3) + 2, mode === 'london' ? LONDON_CLUSTER_MAX_ZOOM : WORLD_CLUSTER_MAX_ZOOM)
         });
       });
       clusterMarker.addTo(liveMap);
