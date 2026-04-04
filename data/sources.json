@@ -1552,6 +1552,50 @@
       "requiresKeywordMatch": true
     },
     {
+      "id": "lawfare-blog",
+      "provider": "Lawfare – Blog (National Security Law & CT Policy)",
+      "endpoint": "https://www.lawfaremedia.org/feeds/all",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Lawfare covers national security law, counter-terrorism policy and intelligence oversight; keyword filtering applied to surface terrorism-relevant items."
+    },
+    {
+      "id": "war-on-the-rocks",
+      "provider": "War on the Rocks – National Security & CT Analysis",
+      "endpoint": "https://warontherocks.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "War on the Rocks publishes analysis on national security, military affairs and counter-terrorism; keyword filtering applied."
+    },
+    {
+      "id": "just-security",
+      "provider": "Just Security – Law, Rights & National Security",
+      "endpoint": "https://www.justsecurity.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Just Security covers law, rights and national security including terrorism prosecutions and CT legislation; keyword filtering applied."
+    },
+    {
+      "id": "crisis-group",
+      "provider": "International Crisis Group – Research & Analysis",
+      "endpoint": "https://www.crisisgroup.org/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Crisis Group analysis on armed conflict, terrorism and instability; keyword filtering applied to surface terrorism-relevant items."
+    },
+    {
       "id": "psni-news",
       "provider": "Police Service of Northern Ireland – News",
       "endpoint": "https://www.psni.police.uk/news/",
