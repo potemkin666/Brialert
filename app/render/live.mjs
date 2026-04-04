@@ -119,5 +119,7 @@ export function renderHero({ state, elements }) {
   elements.heroRegion.textContent = `${regionCopy} | ${laneCopy}`;
   const stamp = state.liveFeedGeneratedAt || state.lastBrowserPollAt;
   const sourceSuffix = state.liveSourceCount ? ` | ${state.liveSourceCount} sources` : ' | awaiting live pull';
-  elements.heroUpdated.textContent = `${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${sourceSuffix}`;
+  elements.heroUpdated.textContent = stamp
+    ? `${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${sourceSuffix}`
+    : `Loading${sourceSuffix}`;
 }
