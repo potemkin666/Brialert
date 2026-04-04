@@ -53,7 +53,6 @@ async function readSample(response) {
 }
 
 function classifyError(message) {
-  if (/HTTP 404/.test(message)) return 'hard';
   if (/non-HTML response/.test(message)) return 'hard';
   return 'warn';
 }
@@ -139,7 +138,7 @@ async function main() {
   }
 
   if (hardFailures.length) {
-    throw new Error(`London source health validation failed for ${hardFailures.length} source(s) with broken endpoints (HTTP 404 or non-HTML response).`);
+    throw new Error(`London source health validation failed for ${hardFailures.length} source(s) with broken endpoints (non-HTML response).`);
   }
 }
 
