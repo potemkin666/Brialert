@@ -91,6 +91,10 @@ async function main() {
   const sourceStats = [];
   const eligibleSources = sources.filter((source) => {
     if (!sourceLooksEnglish(source)) return false;
+    if (source?.quarantined) {
+      console.warn(`Skipping quarantined source: ${source.id}`);
+      return false;
+    }
     if (HARD_SKIP_SOURCE_IDS.has(source.id)) {
       console.warn(`Skipping disabled source: ${source.id}`);
       return false;
@@ -113,11 +117,14 @@ async function main() {
 
       try {
         await sleep(sourceIndex * 60);
-        const body = await fetchText(source.endpoint);
+        const body = await fetchText(source.endpoint, 1, { source });
         const parsed = source.kind === 'rss' || source.kind === 'atom'
           ? parseFeedItems(source, body)
           : parseHtmlItems(source, body);
-        if (!parsed.length) discardReasons.parseNoItems += 1;
+        if (!parsed.length) {
+          discardReasons.parseNoItems += 1;
+          localErrors.push(summariseSourceError(source, new Error('No items parsed from source endpoint')));
+        }
         const preLimit = source.kind === 'html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
         const preLimited = parsed.slice(0, preLimit);
         const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
@@ -217,6 +224,16 @@ async function main() {
     .slice(0, MAX_FAILING_SOURCES_TO_LOG)
     .map((stat) => `${stat.id}(${stat.errors})`)
     .join(', ');
+  const failuresByCategory = sourceErrors.reduce((acc, err) => {
+    const category = err?.category || 'unknown';
+    acc[category] = (acc[category] || 0) + 1;
+    return acc;
+  }, {});
+  const failingCategorySummary = Object.entries(failuresByCategory)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([category, count]) => `${category}:${count}`)
+    .join(', ');
   const buildWarning = [
     geoLookupFallbackNote,
     preservedAlerts ? 'Build produced no fresh alerts; preserved previous alert set.' : null
@@ -268,6 +285,9 @@ async function main() {
   ].join(' | '));
   if (topFailingSources) {
     console.log(`Top failing sources by error count: ${topFailingSources}`);
+  }
+  if (failingCategorySummary) {
+    console.log(`Failure categories: ${failingCategorySummary}`);
   }
 }
 

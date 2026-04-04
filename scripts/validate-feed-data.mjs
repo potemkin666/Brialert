@@ -33,6 +33,9 @@ function validateSource(source, index) {
   if (typeof source.requiresKeywordMatch !== 'boolean') {
     throw new Error(`${prefix}: "requiresKeywordMatch" must be a boolean`);
   }
+  if (source.quarantined != null && typeof source.quarantined !== 'boolean') {
+    throw new Error(`${prefix}: "quarantined" must be a boolean when present`);
+  }
 }
 
 const targets = [

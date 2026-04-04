@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {
+  DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
   RETRYABLE_STATUS_CODES,
   outputPath,
@@ -70,37 +71,71 @@ export function isEnglishLanguage(value) {
   return !lang || lang === 'en' || lang.startsWith('en-');
 }
 
-export async function fetchText(url, attempt = 1) {
+function mergedHeaders(source = null) {
+  return {
+    'user-agent': clean(source?.headers?.['user-agent']) || 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)',
+    accept: clean(source?.headers?.accept) || 'application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.8',
+    'accept-language': clean(source?.headers?.['accept-language']) || 'en-GB,en;q=0.9',
+    'cache-control': clean(source?.headers?.['cache-control']) || 'no-cache'
+  };
+}
+
+function classifyBodyBlock(text = '') {
+  const lower = String(text).toLowerCase();
+  if (!lower) return '';
+  if (
+    lower.includes('attention required') ||
+    lower.includes('cloudflare') ||
+    lower.includes('captcha') ||
+    lower.includes('cf-challenge') ||
+    lower.includes('just a moment') ||
+    lower.includes('enable javascript and cookies')
+  ) return 'anti-bot protection';
+  if (
+    lower.includes('access denied') ||
+    lower.includes('request blocked') ||
+    lower.includes('forbidden')
+  ) return 'blocked access page';
+  return '';
+}
+
+export async function fetchText(url, attempt = 1, options = {}) {
+  const source = options?.source || null;
+  const configuredTimeoutMs = Number(source?.timeoutMs);
+  const configuredMaxRetries = Number(source?.maxRetries);
+  const timeoutMs = configuredTimeoutMs > 0 ? configuredTimeoutMs : DEFAULT_TIMEOUT_MS;
+  const maxAttempts = configuredMaxRetries > 0 ? configuredMaxRetries : DEFAULT_MAX_RETRIES;
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const response = await fetch(url, {
-      headers: {
-        'user-agent': 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)',
-        accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.8',
-        'accept-language': 'en-GB,en;q=0.9',
-        'cache-control': 'no-cache'
-      },
+      headers: mergedHeaders(source),
       redirect: 'follow',
       signal: controller.signal
     });
 
     if (!response.ok) {
-      if (RETRYABLE_STATUS_CODES.has(response.status) && attempt < 3) {
+      if (RETRYABLE_STATUS_CODES.has(response.status) && attempt < maxAttempts) {
         const retryAfterHeader = Number(response.headers.get('retry-after'));
         const retryDelay = Number.isFinite(retryAfterHeader) && retryAfterHeader > 0
           ? retryAfterHeader * 1000
           : 1000 * Math.pow(2, attempt - 1);
 
         await sleep(retryDelay);
-        return fetchText(url, attempt + 1);
+        return fetchText(url, attempt + 1, options);
       }
 
       throw new Error(`HTTP ${response.status}`);
     }
 
-    return await response.text();
+    const text = await response.text();
+    const blockedClass = classifyBodyBlock(text);
+    if (blockedClass) {
+      throw new Error(`Blocked by ${blockedClass}`);
+    }
+
+    return text;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     const retryable =
@@ -110,9 +145,9 @@ export async function fetchText(url, attempt = 1) {
       message.includes('ECONNRESET') ||
       message.includes('ETIMEDOUT');
 
-    if (retryable && attempt < 3) {
+    if (retryable && attempt < maxAttempts) {
       await sleep(1000 * Math.pow(2, attempt - 1));
-      return fetchText(url, attempt + 1);
+      return fetchText(url, attempt + 1, options);
     }
 
     throw error;
@@ -131,11 +166,19 @@ export async function readExisting() {
 
 export function summariseSourceError(source, error) {
   const message = error instanceof Error ? error.message : String(error);
+  let category = 'unknown';
+  if (/HTTP 404|HTTP 410/i.test(message)) category = 'dead-or-moved-url';
+  else if (/HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
+  else if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
+  else if (/abort|timeout|timed out|ETIMEDOUT/i.test(message)) category = 'timeout';
+  else if (/fetch failed|ECONNRESET|ENOTFOUND/i.test(message)) category = 'network-failure';
+  else if (/no items parsed|selector/i.test(message)) category = 'brittle-selectors-or-js-rendering';
   return {
     id: clean(source?.id) || 'unknown-source',
     provider: clean(source?.provider) || 'Unknown provider',
     endpoint: clean(source?.endpoint) || '',
-    message
+    message,
+    category
   };
 }
 

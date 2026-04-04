@@ -19,6 +19,7 @@ export const parser = new XMLParser({
 });
 
 export const DEFAULT_TIMEOUT_MS = 12000;
+export const DEFAULT_MAX_RETRIES = 3;
 export const MAX_SOURCE_ERRORS_TO_REPORT = 25;
 export const FEED_SOURCE_CONCURRENCY = 4;
 export const HTML_HYDRATION_CONCURRENCY = 3;

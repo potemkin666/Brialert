@@ -216,7 +216,7 @@ export async function enrichHtmlItems(source, items) {
 
     try {
       await sleep(index * 40);
-      const articleHtml = await fetchText(item.link);
+      const articleHtml = await fetchText(item.link, 1, { source });
       const meta = extractArticleMeta(articleHtml, item.link);
       return {
         ...item,
