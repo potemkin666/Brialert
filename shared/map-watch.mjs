@@ -3,6 +3,7 @@ const LONDON_BOUNDS = Object.freeze([
   [51.28, -0.52],
   [51.7, 0.24]
 ]);
+const INITIAL_LONDON_ZOOM = 11;
 const WORLD_FALLBACK = Object.freeze({ center: [20, 10], zoom: 2 });
 const LONDON_CLUSTER_MAX_ZOOM = 11;
 const WORLD_CLUSTER_MAX_ZOOM = 7;
@@ -68,6 +69,7 @@ export function createMapController(config) {
   let lastMode = 'london';
   let lastState = null;
   let lastView = null;
+  let hasInitialLondonFrame = false;
 
   function ensureMap() {
     if (liveMap || !mapElement || typeof L === 'undefined') return;
@@ -222,6 +224,12 @@ export function createMapController(config) {
 
     if (mapStatusLine) mapStatusLine.textContent = statusLine(mode, items.length);
     if (mapEmptyState) mapEmptyState.classList.toggle('hidden', items.length > 0);
+    if (forceFit && mode === 'london' && !hasInitialLondonFrame) {
+      hasInitialLondonFrame = true;
+      liveMap.setView(LONDON_CENTER, INITIAL_LONDON_ZOOM);
+      requestAnimationFrame(() => liveMap.invalidateSize());
+      return;
+    }
     fitForMode(mode, points);
     requestAnimationFrame(() => liveMap.invalidateSize());
   }
