@@ -737,6 +737,9 @@ h1 {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .map-controls {
@@ -827,20 +830,20 @@ h1 {
 
 .map-preview-card {
   display: grid;
-  gap: 8px;
-  min-width: 220px;
-  max-width: 260px;
+  gap: 6px;
+  min-width: 200px;
+  max-width: 240px;
 }
 
 .map-preview-card strong {
-  font-size: 14px;
-  line-height: 1.3;
+  font-size: 13px;
+  line-height: 1.25;
 }
 
 .map-preview-card p {
   margin: 0;
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 11px;
+  line-height: 1.35;
   color: rgba(226, 232, 240, 0.86);
 }
 
@@ -855,20 +858,24 @@ h1 {
 .map-preview-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  font-size: 11px;
+  gap: 6px;
+  font-size: 10px;
   color: rgba(226, 232, 240, 0.72);
 }
 
 .map-preview-button {
-  min-height: 36px;
-  padding: 9px 12px;
+  min-height: 34px;
+  padding: 8px 10px;
   border: 0;
   border-radius: 12px;
   background: linear-gradient(180deg, #f2b432, #d89a15);
   color: #101418;
   font-size: 12px;
   font-weight: 800;
+}
+
+.leaflet-container {
+  touch-action: pan-x pan-y;
 }
 
 .leaflet-pane,
@@ -1610,13 +1617,14 @@ body.device-iphone {
 }
 
 .device-iphone .map-surface {
-  height: clamp(320px, 42vh, 460px);
-  min-height: 320px;
+  height: clamp(360px, 52vh, 520px);
+  min-height: 360px;
   border-radius: 22px;
 }
 
 .device-iphone .leaflet-container {
   border-radius: 22px;
+  touch-action: pan-x pan-y;
 }
 
 .device-iphone .modal {
@@ -1718,8 +1726,8 @@ body.device-iphone {
   }
 
   .map-surface {
-    height: 360px;
-    min-height: 360px;
+    height: 400px;
+    min-height: 400px;
   }
 
   .map-toolbar {
@@ -1842,7 +1850,7 @@ body.device-iphone {
   }
 
   .map-surface {
-    height: 400px;
-    min-height: 400px;
+    height: 420px;
+    min-height: 420px;
   }
 }
