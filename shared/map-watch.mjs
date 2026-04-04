@@ -70,6 +70,10 @@ export function createMapController(config) {
       minZoom: 2,
       maxZoom: 12,
       zoomControl: false,
+      tapTolerance: 22,
+      tapHold: false,
+      doubleClickZoom: false,
+      bounceAtZoomLimits: false,
       worldCopyJump: true,
       attributionControl: true
     });

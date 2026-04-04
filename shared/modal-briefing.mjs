@@ -27,6 +27,25 @@ export function createModalController(elements, deps) {
   } = elements;
 
   let currentAlert = null;
+  let lockedScrollY = 0;
+
+  function lockBodyScroll() {
+    lockedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.classList.add('modal-open');
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+
+  function unlockBodyScroll() {
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, lockedScrollY);
+  }
 
   function openDetail(alert) {
     if (!alert) return;
@@ -67,13 +86,13 @@ export function createModalController(elements, deps) {
     }
     modalLink.href = alert.sourceUrl;
     copyBriefing.dataset.briefing = briefing;
-    document.body.classList.add('modal-open');
+    lockBodyScroll();
     modal.classList.remove('hidden');
   }
 
   function closeDetailPanel() {
     currentAlert = null;
-    document.body.classList.remove('modal-open');
+    unlockBodyScroll();
     modal.classList.add('hidden');
   }
 
