@@ -141,13 +141,7 @@ export function renderQuarantine({ elements, view, state, modalController }) {
 }
 
 export function renderHero({ state, elements }) {
-  const regionCopy = state.briefingMode
-    ? 'Top alert only'
-    : (state.activeRegion === 'all'
-      ? (state.userLocationLabel ? `${state.userLocationLabel} feeds` : 'All feeds')
-      : `${regionLabel(state.activeRegion)} feeds`);
-  const locationCopy = state.userLocationLabel || 'Local user';
-  elements.heroRegion.textContent = `${regionCopy} | ${locationCopy}`;
+  elements.heroRegion.textContent = '';
   const healthRefresh = state.liveFeedHealth?.lastSuccessfulRefreshTime;
   const stamp = healthRefresh ? new Date(healthRefresh) : state.liveFeedGeneratedAt;
   const hasValidStamp = stamp instanceof Date && !Number.isNaN(stamp.getTime());
