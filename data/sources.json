@@ -1143,6 +1143,17 @@
       "comment": "UN sanctions committee press releases are presented as an HTML list; using the official listing page."
     },
     {
+      "id": "unsc-consolidated-list",
+      "provider": "UN Security Council – Consolidated Sanctions List Updates (RSS)",
+      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
+      "kind": "rss",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Official UNSC RSS feed for updates to the consolidated sanctions list covering all UN sanctions regimes."
+    },
+    {
       "id": "unsc-counter-terrorism-committee",
       "provider": "UN Security Council – Counter‑Terrorism Committee (CTC) Updates",
       "endpoint": "https://www.un.org/securitycouncil/ctc/news",
@@ -1326,6 +1337,17 @@
       "comment": "Open-access journal front page used; RSS availability varies by platform."
     },
     {
+      "id": "start-umd-baad",
+      "provider": "START (UMD) – Big Allied and Dangerous (BAAD) Database",
+      "endpoint": "https://www.start.umd.edu/baad/database/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "START BAAD database for network and organisational relationship mapping of militant groups; used for entity enrichment context."
+    },
+    {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center – IntelBrief",
       "endpoint": "https://thesoufancenter.org/category/intelbrief/",
@@ -1346,6 +1368,17 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
       "comment": "CTC Sentinel is published as web pages; using the current issue/archive surface."
+    },
+    {
+      "id": "long-war-journal",
+      "provider": "Long War Journal – News Feed",
+      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "Long War Journal RSS feed tracking militant ecosystem developments including al-Qaeda, Islamic State, Taliban, and affiliated groups."
     },
     {
       "id": "gnet-research",
@@ -1880,6 +1913,17 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "Europol Counter Terrorism Centre page for CT-specific operational summaries and threat assessments."
+    },
+    {
+      "id": "europol-eu-iru",
+      "provider": "Europol – EU Internet Referral Unit (EU IRU)",
+      "endpoint": "https://www.europol.europa.eu/about-europol/european-counter-terrorism-centre-ectc/eu-internet-referal-unit-eu-iru",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "EU IRU page for updates on online terrorist content referrals and platform abuse action under the ECTC."
     },
     {
       "id": "dw-europe-rss",
