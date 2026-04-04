@@ -81,15 +81,30 @@ function formatDisplayDate(rawDate) {
 function freshUntilFor(source, publishedIso, severity, incidentTrack) {
   const published = parseSourceDate(publishedIso) || now;
   const hoursByLane = {
-    incidents: incidentTrack === 'live' ? (severity === 'critical' ? 18 : severity === 'high' ? 36 : 72) : 24 * 14,
-    context: 24 * 7,
-    sanctions: 24 * 14,
-    oversight: 24 * 21,
-    border: 24 * 10,
-    prevention: 24 * 21
+    incidents: incidentTrack === 'live' ? (severity === 'critical' ? 24 : severity === 'high' ? 48 : 84) : 24 * 14,
+    context: 24 * 4,
+    sanctions: 24 * 10,
+    oversight: 24 * 8,
+    border: 24 * 5,
+    prevention: 24 * 8
   };
   const hours = hoursByLane[source.lane] || 72;
   return new Date(published.getTime() + hours * 3600000).toISOString();
+}
+
+function olderContextPenalty(ageHours, reliabilityProfile, lane, severity) {
+  if (ageHours <= 72) return 0;
+
+  let penalty = 0;
+  if (reliabilityProfile === 'general_media') penalty += ageHours <= 168 ? 2.25 : 3.5;
+  else if (reliabilityProfile === 'specialist_research') penalty += ageHours <= 168 ? 1.5 : 2.5;
+  else if (reliabilityProfile === 'official_context') penalty += ageHours <= 168 ? 0.75 : 1.5;
+  else if (reliabilityProfile === 'tabloid') penalty += ageHours <= 168 ? 3 : 4.5;
+
+  if (['context', 'oversight', 'prevention'].includes(lane) && ageHours > 168) penalty += 1;
+  if (severity === 'moderate' && ageHours > 168) penalty += 0.5;
+  if (severity === 'low' && ageHours > 96) penalty += 0.75;
+  return penalty;
 }
 
 function priorityScoreFor(source, severity, keywordHits, publishedIso, incidentTrack, reliabilityProfile) {
@@ -105,22 +120,29 @@ function priorityScoreFor(source, severity, keywordHits, publishedIso, incidentT
       if (incidentTrack === 'live') {
         if (ageHours <= 2) score += 6;
         else if (ageHours <= 6) score += 5;
-        else if (ageHours <= 12) score += 4;
-        else if (ageHours <= 24) score += 3;
-        else if (ageHours <= 48) score += 1.5;
-        else if (ageHours <= 72) score += 0.5;
-        else if (ageHours <= 96) score -= 2;
-        else if (ageHours <= 168) score -= 5;
-        else score -= 9;
+        else if (ageHours <= 12) score += 4.25;
+        else if (ageHours <= 24) score += 3.5;
+        else if (ageHours <= 48) score += 2.5;
+        else if (ageHours <= 72) score += 1.5;
+        else if (ageHours <= 96) score += 0.5;
+        else if (ageHours <= 168) score -= 1.5;
+        else score -= 5;
       } else {
         if (ageHours <= 24) score += 1.25;
         else if (ageHours <= 72) score += 0.5;
         else if (ageHours > 336) score -= 2;
+        else if (ageHours > 168) score -= 1;
       }
     } else {
-      if (ageHours <= 24) score += 1.5;
-      else if (ageHours <= 72) score += 0.75;
-      else if (ageHours > 720) score -= 2;
+      if (ageHours <= 12) score += 1.5;
+      else if (ageHours <= 24) score += 1;
+      else if (ageHours <= 48) score += 0.35;
+      else if (ageHours <= 72) score += 0;
+      else if (ageHours <= 96) score -= 1;
+      else if (ageHours <= 168) score -= 2.5;
+      else if (ageHours <= 336) score -= 4;
+      else score -= 6;
+      score -= olderContextPenalty(ageHours, reliabilityProfile, source.lane, severity);
     }
   } else {
     score -= source.lane === 'incidents' ? 3 : 1;
@@ -148,9 +170,9 @@ function freshnessBucket(source, publishedIso) {
     if (ageHours <= 72) return 1;
     return 0;
   }
-  if (ageHours <= 24) return 3;
-  if (ageHours <= 72) return 2;
-  if (ageHours <= 168) return 1;
+  if (ageHours <= 12) return 3;
+  if (ageHours <= 36) return 2;
+  if (ageHours <= 72) return 1;
   return 0;
 }
 
@@ -160,9 +182,11 @@ function recencyOkay(source, rawDate) {
   if (Number.isNaN(parsed.getTime())) return true;
   const ageDays = (now.getTime() - parsed.getTime()) / 86400000;
   if (source.lane === 'incidents') return ageDays <= 7;
-  if (source.lane === 'context') return ageDays <= 21;
-  if (source.lane === 'border' || source.lane === 'sanctions') return ageDays <= 30;
-  return ageDays <= 120;
+  if (source.lane === 'context') return ageDays <= 10;
+  if (source.lane === 'border') return ageDays <= 14;
+  if (source.lane === 'sanctions') return ageDays <= 21;
+  if (source.lane === 'oversight' || source.lane === 'prevention') return ageDays <= 30;
+  return ageDays <= 45;
 }
 
 function providerHeadlineTokens(value) {
