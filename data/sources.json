@@ -165,6 +165,50 @@
       "comment": "London resilience planning and preparedness surface for emergency and threat-preparedness context."
     },
     {
+      "id": "london-gov-rss-80603",
+      "provider": "Greater London Authority – RSS Feed 80603",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80603",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80603. Verify content category against the live feed; likely safety, policing, or resilience-related GLA updates."
+    },
+    {
+      "id": "london-gov-rss-80610",
+      "provider": "Greater London Authority – RSS Feed 80610",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80610. Verify content category against the live feed for specific topic or committee coverage."
+    },
+    {
+      "id": "london-gov-rss-80611",
+      "provider": "Greater London Authority – RSS Feed 80611",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80611. Verify content category against the live feed for specific topic or committee coverage."
+    },
+    {
+      "id": "london-gov-rss-80632",
+      "provider": "Greater London Authority – RSS Feed 80632",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80632",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GLA CMS feed ID 80632. Verify content category against the live feed for specific topic or committee coverage."
+    },
+    {
       "id": "westminster-city-council-news",
       "provider": "Westminster City Council – News",
       "endpoint": "https://news.westminster.gov.uk/",
@@ -1382,14 +1426,43 @@
     },
     {
       "id": "gnet-research",
-      "provider": "Global Network on Extremism & Technology (GNET) – Updates",
-      "endpoint": "https://gnet-research.org/",
-      "kind": "html",
+      "provider": "Global Network on Extremism & Technology (GNET) – Main Feed",
+      "endpoint": "https://gnet-research.org/feed/",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": false,
-      "requiresKeywordMatch": false,
-      "comment": "No single RSS endpoint is prominently published; using the main updates surface."
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-radicalisation",
+      "provider": "Global Network on Extremism & Technology (GNET) – Radicalisation",
+      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-artificial-intelligence",
+      "provider": "Global Network on Extremism & Technology (GNET) – Artificial Intelligence",
+      "endpoint": "https://gnet-research.org/tag/artificial-intelligence/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-youth",
+      "provider": "Global Network on Extremism & Technology (GNET) – Youth",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
     },
     {
       "id": "icsr-kcl",
@@ -1465,6 +1538,50 @@
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true
+    },
+    {
+      "id": "bbc-news-front-page-legacy",
+      "provider": "BBC News – Front Page (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for coverage breadth."
+    },
+    {
+      "id": "bbc-news-uk-politics-legacy",
+      "provider": "BBC News – UK Politics (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/uk_politics/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for UK political coverage."
+    },
+    {
+      "id": "bbc-news-england-legacy",
+      "provider": "BBC News – England (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/england/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for England-specific coverage."
+    },
+    {
+      "id": "bbc-news-world-legacy",
+      "provider": "BBC News – World (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/world/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for world coverage breadth."
     },
     {
       "id": "reuters-uk",
@@ -1858,6 +1975,50 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "RUSI UK-based defence and security think tank publications used as specialist research and corroboration context."
+    },
+    {
+      "id": "chathamhouse-whatsnew",
+      "provider": "Chatham House – What's New (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House (RIIA) latest content feed. Endpoint path is as provided; verify against live feed if response is unexpected."
+    },
+    {
+      "id": "chathamhouse-events",
+      "provider": "Chatham House – Events (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/events.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House events feed for upcoming conferences and briefings on international security. Endpoint path is as provided."
+    },
+    {
+      "id": "chathamhouse-intl-security-feed",
+      "provider": "Chatham House – International Security Programme (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/83/feed.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House research programme feed (path/83, likely International Security). Endpoint path is as provided; verify against live feed."
+    },
+    {
+      "id": "chathamhouse-news-releases",
+      "provider": "Chatham House – News Releases (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/news-releases.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House press releases feed for authoritative think-tank commentary on international security. Endpoint path is as provided."
     },
     {
       "id": "nctv-nl-english",
