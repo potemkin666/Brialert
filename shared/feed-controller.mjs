@@ -73,7 +73,7 @@ export async function loadWatchGeography(state, url) {
   }
 }
 
-function coerceLiveFeedPayload(raw) {
+export function coerceLiveFeedPayload(raw) {
   const payload = raw && typeof raw === 'object' ? raw : {};
   const alerts = Array.isArray(payload.alerts) ? payload.alerts : [];
   const generatedAt = payload.generatedAt || payload.updatedAt || payload.alertData?.timestamp || null;
@@ -93,7 +93,8 @@ function coerceLiveFeedPayload(raw) {
   const validIncidentTracks = new Set(['live', 'case']);
   const isValidTimestamp = typeof generatedAt === 'string' && !Number.isNaN(new Date(generatedAt).getTime());
   const hasNumericSourceCount = Number.isFinite(sourceCount) && sourceCount >= 0;
-  const hasRenderableAlerts = alerts.every((alert) => {
+
+  function isRenderableAlert(alert) {
     if (!alert || typeof alert !== 'object') return false;
     if (typeof alert.id !== 'string' || !alert.id.trim()) return false;
     if (typeof alert.title !== 'string' || !alert.title.trim()) return false;
@@ -114,7 +115,9 @@ function coerceLiveFeedPayload(raw) {
       if (typeof alert.laneReason !== 'string' || !alert.laneReason.trim()) return false;
     }
     return true;
-  });
+  }
+
+  const renderableAlerts = alerts.filter(isRenderableAlert);
 
   if (!Array.isArray(payload.alerts)) {
     throw new Error('Live feed payload is missing an alerts array.');
@@ -128,12 +131,12 @@ function coerceLiveFeedPayload(raw) {
     throw new Error('Live feed payload is missing a valid sourceCount.');
   }
 
-  if (!hasRenderableAlerts) {
-    throw new Error('Live feed payload alerts are not in a renderable Brialert format.');
+  if (!renderableAlerts.length) {
+    throw new Error('Live feed payload does not contain any renderable Brialert alerts.');
   }
 
   return {
-    alerts,
+    alerts: renderableAlerts,
     generatedAt,
     sourceCount,
     health: payload && typeof payload.health === 'object' && payload.health ? payload.health : null

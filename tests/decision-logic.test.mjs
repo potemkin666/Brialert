@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { deriveFeedHealthStatus, deriveView } from '../shared/feed-controller.mjs';
+import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView } from '../shared/feed-controller.mjs';
 import {
   isLiveIncidentCandidate,
   isQuarantineCandidate,
@@ -281,4 +281,42 @@ test('feed health status surfaces fetch failure even when last good data exists'
   assert.equal(snapshot.visible, true);
   assert.equal(snapshot.isFetchError, true);
   assert.equal(snapshot.isStale, false);
+});
+
+test('live feed coercion keeps valid alerts and drops malformed ones', () => {
+  const payload = coerceLiveFeedPayload({
+    generatedAt: '2026-04-04T10:00:00.000Z',
+    sourceCount: 2,
+    alerts: [
+      {
+        id: 'good-1',
+        title: 'Counter-terror police disrupt bomb plot in Paris',
+        summary: 'Police disrupted a terrorism plot after locating an explosive device in Paris.',
+        source: 'Counter Terrorism Policing',
+        sourceUrl: 'https://example.test/good-1',
+        location: 'Paris',
+        region: 'europe',
+        lane: 'incidents',
+        sourceTier: 'trigger',
+        reliabilityProfile: 'official_ct',
+        incidentTrack: 'live',
+        isTerrorRelevant: true,
+        keywordHits: ['plot'],
+        terrorismHits: ['terrorism'],
+        queueReason: 'Trigger-tier terrorism incident candidate',
+        laneReason: 'Terror-related live incident or disrupted plot candidate from an incident feed.'
+      },
+      {
+        id: 'bad-1',
+        title: 'Broken alert missing core fields',
+        source: 'Broken Source',
+        location: 'Unknown',
+        region: 'europe',
+        lane: 'incidents'
+      }
+    ]
+  });
+
+  assert.equal(payload.alerts.length, 1);
+  assert.equal(payload.alerts[0].id, 'good-1');
 });
