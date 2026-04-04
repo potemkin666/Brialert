@@ -58,7 +58,7 @@ export async function detectUserLocationLabel(nav = navigator, fetchImpl = fetch
       return timezoneFallback() || localeRegionFallback(nav) || null;
     }
 
-    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&zoom=10&addressdetails=1`;
+    const url = `https://geocode.maps.co/reverse?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`;
     const response = await fetchImpl(url, { headers: { Accept: 'application/json' } });
     if (!response.ok) {
       return timezoneFallback() || localeRegionFallback(nav) || null;
