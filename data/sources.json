@@ -1882,6 +1882,50 @@
       "comment": "Europol Counter Terrorism Centre page for CT-specific operational summaries and threat assessments."
     },
     {
+      "id": "europol-media-press",
+      "provider": "Europol – Media & Press",
+      "endpoint": "https://www.europol.europa.eu/media-press",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Europol media and press hub page for official statements, press releases, and public communications."
+    },
+    {
+      "id": "europol-eu-iru",
+      "provider": "Europol – EU Internet Referral Unit (EU IRU)",
+      "endpoint": "https://www.europol.europa.eu/about-europol/european-counter-terrorism-centre-ectc/eu-internet-referal-unit-eu-iru",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Europol EU IRU page covering online counter-terrorism referral operations and terrorist content removal."
+    },
+    {
+      "id": "europol-iru-launch-article",
+      "provider": "Europol – IRU Launch News Article",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom/news/europol’s-internet-referral-unit-to-combat-terrorist-and-violent-extremist-propaganda",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Europol news article announcing the launch of the EU IRU to combat terrorist and violent extremist propaganda online."
+    },
+    {
+      "id": "europol-gaming-radicalisation-article",
+      "provider": "Europol – Online Radicalisation on Gaming Platforms",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom/news/europol-and-partner-countries-combat-online-radicalisation-gaming-platforms",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Europol article on combating online radicalisation on gaming platforms, highlighting extremist recruitment via gaming communities."
+    },
+    {
       "id": "dw-europe-rss",
       "provider": "Deutsche Welle – Europe (RSS)",
       "endpoint": "https://rss.dw.com/rdf/rss-en-eu",
