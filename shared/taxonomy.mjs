@@ -80,7 +80,18 @@ export function plainText(value) {
 
 export function matchesKeywords(text, words = incidentKeywords) {
   const haystack = clean(text).toLowerCase();
-  return words.filter((word) => haystack.includes(word));
+  return words.filter((word) => {
+    let searchFrom = 0;
+    while (searchFrom < haystack.length) {
+      const idx = haystack.indexOf(word, searchFrom);
+      if (idx === -1) return false;
+      const charBefore = idx > 0 ? haystack[idx - 1] : ' ';
+      const charAfter = idx + word.length < haystack.length ? haystack[idx + word.length] : ' ';
+      if (!/[a-z0-9]/.test(charBefore) && !/[a-z0-9]/.test(charAfter)) return true;
+      searchFrom = idx + 1;
+    }
+    return false;
+  });
 }
 
 export function normaliseSourceTier(value) {
@@ -148,11 +159,20 @@ export function inferIncidentTrack(metadata) {
   return metadata.lane === 'incidents' ? 'case' : '';
 }
 
+function stripNegatedTerrorContext(text) {
+  return text
+    .replace(/\b(?:no|not|without|denies?|denied?)\s+(?:terrorism|terror|terrorist|extremism|extremist)\b[^.!?;]*/gi, ' ')
+    .replace(/\bno\s+(?:\w+\s+)?(?:links?|connections?|ties?)\s+to\s+(?:terrorism|terror)\b[^.!?;]*/gi, ' ')
+    .replace(/\bunrelated\s+to\s+(?:terrorism|terror)\b[^.!?;]*/gi, ' ');
+}
+
 export function isTerrorRelevantIncident(metadata, item) {
   if (metadata.lane !== 'incidents') return true;
   const reliabilityProfile = inferReliabilityProfile(metadata);
-  const text = clean(`${item?.title || ''} ${item?.summary || ''} ${item?.sourceExtract || ''}`).toLowerCase();
-  const terrorHits = matchesKeywords(text, terrorismKeywords);
+  const rawText = clean(`${item?.title || ''} ${item?.summary || ''} ${item?.sourceExtract || ''}`).toLowerCase();
+  const text = rawText;
+  const filteredText = stripNegatedTerrorContext(rawText);
+  const terrorHits = matchesKeywords(filteredText, terrorismKeywords);
   const incidentHits = matchesKeywords(text, incidentKeywords);
   const terrorTopic = sourceHasTerrorTopic(metadata);
   if (reliabilityProfile === 'official_ct') return terrorHits.length >= 1 || (terrorTopic && incidentHits.length >= 1);

@@ -27,7 +27,12 @@ export function severityLabel(severity) {
 
 export function regionLabel(region) {
   if (region === 'london') return 'London';
-  return region === 'uk' ? 'UK' : 'EU';
+  if (region === 'uk') return 'UK';
+  if (region === 'eu') return 'EU';
+  if (region === 'europe') return 'Europe';
+  if (region === 'us') return 'US';
+  if (region === 'international') return 'International';
+  return String(region || '').toUpperCase() || 'Unknown';
 }
 
 export function isLondonAlert(alert) {
@@ -477,7 +482,7 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     id: clean(alert.id) || `live-${index}`,
     title: plainText(alert.title) || 'Untitled source item',
     location: plainText(alert.location) || (alert.region === 'uk' ? 'United Kingdom' : 'Europe'),
-    region: alert.region === 'uk' ? 'uk' : 'europe',
+    region: alert.region === 'uk' ? 'uk' : alert.region === 'london' ? 'london' : 'europe',
     lane,
     severity: ['critical', 'high', 'elevated', 'moderate'].includes(alert.severity) ? alert.severity : 'moderate',
     status: plainText(alert.status) || 'Update',

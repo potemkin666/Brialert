@@ -133,7 +133,7 @@
     },
     {
       "id": "mayor-of-london-press-releases",
-      "provider": "Mayor of London â€“ Press Releases",
+      "provider": "Mayor of London – Press Releases",
       "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-release",
       "kind": "html",
       "lane": "context",
@@ -144,7 +144,7 @@
     },
     {
       "id": "london-assembly-press-releases",
-      "provider": "London Assembly â€“ Press Releases",
+      "provider": "London Assembly – Press Releases",
       "endpoint": "https://www.london.gov.uk/media-centre/assembly-press-release",
       "kind": "html",
       "lane": "oversight",
@@ -155,7 +155,7 @@
     },
     {
       "id": "london-resilience",
-      "provider": "London Resilience â€“ Updates",
+      "provider": "London Resilience – Updates",
       "endpoint": "https://www.london.gov.uk/programmes-strategies/london-resilience",
       "kind": "html",
       "lane": "prevention",
@@ -166,7 +166,7 @@
     },
     {
       "id": "westminster-city-council-news",
-      "provider": "Westminster City Council â€“ News",
+      "provider": "Westminster City Council – News",
       "endpoint": "https://news.westminster.gov.uk/",
       "kind": "html",
       "lane": "context",
@@ -177,7 +177,7 @@
     },
     {
       "id": "camden-council-news",
-      "provider": "Camden Council â€“ News",
+      "provider": "Camden Council – News",
       "endpoint": "https://news.camden.gov.uk/",
       "kind": "html",
       "lane": "context",
@@ -188,7 +188,7 @@
     },
     {
       "id": "islington-council-news",
-      "provider": "Islington Council â€“ News",
+      "provider": "Islington Council – News",
       "endpoint": "https://www.islington.media/",
       "kind": "html",
       "lane": "context",
@@ -199,7 +199,7 @@
     },
     {
       "id": "hackney-council-news",
-      "provider": "Hackney Council â€“ News",
+      "provider": "Hackney Council – News",
       "endpoint": "https://news.hackney.gov.uk/",
       "kind": "html",
       "lane": "context",
@@ -210,7 +210,7 @@
     },
     {
       "id": "newham-council-news",
-      "provider": "Newham Council â€“ News",
+      "provider": "Newham Council – News",
       "endpoint": "https://www.newham.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -221,7 +221,7 @@
     },
     {
       "id": "tower-hamlets-council-news",
-      "provider": "Tower Hamlets Council â€“ News",
+      "provider": "Tower Hamlets Council – News",
       "endpoint": "https://www.towerhamlets.gov.uk/News_events/News/News.aspx",
       "kind": "html",
       "lane": "context",
@@ -232,7 +232,7 @@
     },
     {
       "id": "southwark-newsroom",
-      "provider": "Southwark Council â€“ Newsroom",
+      "provider": "Southwark Council – Newsroom",
       "endpoint": "https://www.southwarknewsroom.com/",
       "kind": "html",
       "lane": "context",
@@ -243,7 +243,7 @@
     },
     {
       "id": "lambeth-council-news",
-      "provider": "Lambeth Council â€“ News",
+      "provider": "Lambeth Council – News",
       "endpoint": "https://love.lambeth.gov.uk/",
       "kind": "html",
       "lane": "context",
@@ -254,7 +254,7 @@
     },
     {
       "id": "wandsworth-council-news",
-      "provider": "Wandsworth Council â€“ News",
+      "provider": "Wandsworth Council – News",
       "endpoint": "https://www.wandsworth.gov.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -265,7 +265,7 @@
     },
     {
       "id": "kensington-chelsea-newsroom",
-      "provider": "Royal Borough of Kensington and Chelsea â€“ Newsroom",
+      "provider": "Royal Borough of Kensington and Chelsea – Newsroom",
       "endpoint": "https://www.rbkc.gov.uk/newsroom",
       "kind": "html",
       "lane": "context",
@@ -276,7 +276,7 @@
     },
     {
       "id": "hammersmith-fulham-news",
-      "provider": "Hammersmith and Fulham Council â€“ News",
+      "provider": "Hammersmith and Fulham Council – News",
       "endpoint": "https://www.lbhf.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -287,7 +287,7 @@
     },
     {
       "id": "ealing-council-news",
-      "provider": "Ealing Council â€“ News",
+      "provider": "Ealing Council – News",
       "endpoint": "https://www.ealing.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -298,7 +298,7 @@
     },
     {
       "id": "brent-council-news",
-      "provider": "Brent Council â€“ News",
+      "provider": "Brent Council – News",
       "endpoint": "https://www.brent.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -309,7 +309,7 @@
     },
     {
       "id": "hounslow-council-news",
-      "provider": "Hounslow Council â€“ News",
+      "provider": "Hounslow Council – News",
       "endpoint": "https://www.hounslow.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -320,7 +320,7 @@
     },
     {
       "id": "barnet-council-news",
-      "provider": "Barnet Council â€“ News",
+      "provider": "Barnet Council – News",
       "endpoint": "https://www.barnet.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -331,7 +331,7 @@
     },
     {
       "id": "royal-greenwich-news",
-      "provider": "Royal Borough of Greenwich â€“ News",
+      "provider": "Royal Borough of Greenwich – News",
       "endpoint": "https://www.royalgreenwich.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -342,7 +342,7 @@
     },
     {
       "id": "bromley-council-news",
-      "provider": "Bromley Council â€“ Newsroom",
+      "provider": "Bromley Council – Newsroom",
       "endpoint": "https://www.bromley.gov.uk/newsroom",
       "kind": "html",
       "lane": "context",
@@ -353,7 +353,7 @@
     },
     {
       "id": "croydon-council-news",
-      "provider": "Croydon Council â€“ News",
+      "provider": "Croydon Council – News",
       "endpoint": "https://news.croydon.gov.uk/",
       "kind": "html",
       "lane": "context",
@@ -364,7 +364,7 @@
     },
     {
       "id": "redbridge-council-news",
-      "provider": "Redbridge Council â€“ News",
+      "provider": "Redbridge Council – News",
       "endpoint": "https://www.redbridge.gov.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -375,7 +375,7 @@
     },
     {
       "id": "harrow-council-news",
-      "provider": "Harrow Council â€“ News",
+      "provider": "Harrow Council – News",
       "endpoint": "https://www.harrow.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -386,7 +386,7 @@
     },
     {
       "id": "hillingdon-council-news",
-      "provider": "Hillingdon Council â€“ News",
+      "provider": "Hillingdon Council – News",
       "endpoint": "https://www.hillingdon.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -397,7 +397,7 @@
     },
     {
       "id": "enfield-council-news",
-      "provider": "Enfield Council â€“ News and Events",
+      "provider": "Enfield Council – News and Events",
       "endpoint": "https://www.enfield.gov.uk/news-and-events",
       "kind": "html",
       "lane": "context",
@@ -408,7 +408,7 @@
     },
     {
       "id": "waltham-forest-council-news",
-      "provider": "Waltham Forest Council â€“ News",
+      "provider": "Waltham Forest Council – News",
       "endpoint": "https://www.walthamforest.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -419,7 +419,7 @@
     },
     {
       "id": "merton-council-news",
-      "provider": "Merton Council â€“ News",
+      "provider": "Merton Council – News",
       "endpoint": "https://www.merton.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -430,7 +430,7 @@
     },
     {
       "id": "sutton-council-news",
-      "provider": "Sutton Council â€“ News",
+      "provider": "Sutton Council – News",
       "endpoint": "https://www.sutton.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -441,7 +441,7 @@
     },
     {
       "id": "bexley-council-news",
-      "provider": "Bexley Council â€“ News",
+      "provider": "Bexley Council – News",
       "endpoint": "https://www.bexley.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -452,7 +452,7 @@
     },
     {
       "id": "havering-council-news",
-      "provider": "Havering Council â€“ News",
+      "provider": "Havering Council – News",
       "endpoint": "https://www.havering.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -463,7 +463,7 @@
     },
     {
       "id": "heathrow-media-centre",
-      "provider": "Heathrow â€“ Media Centre",
+      "provider": "Heathrow – Media Centre",
       "endpoint": "https://mediacentre.heathrow.com/",
       "kind": "html",
       "lane": "context",
@@ -474,7 +474,7 @@
     },
     {
       "id": "london-city-airport-media-centre",
-      "provider": "London City Airport â€“ Media Centre",
+      "provider": "London City Airport – Media Centre",
       "endpoint": "https://www.londoncityairport.com/corporate/media-centre",
       "kind": "html",
       "lane": "context",
@@ -485,7 +485,7 @@
     },
     {
       "id": "port-of-london-authority-news",
-      "provider": "Port of London Authority â€“ News",
+      "provider": "Port of London Authority – News",
       "endpoint": "https://pla.co.uk/News",
       "kind": "html",
       "lane": "context",
@@ -496,7 +496,7 @@
     },
     {
       "id": "london-councils-news",
-      "provider": "London Councils â€“ News",
+      "provider": "London Councils – News",
       "endpoint": "https://www.londoncouncils.gov.uk/news-and-press-releases",
       "kind": "html",
       "lane": "context",
@@ -507,7 +507,7 @@
     },
     {
       "id": "barking-dagenham-council-news",
-      "provider": "Barking and Dagenham Council â€“ News",
+      "provider": "Barking and Dagenham Council – News",
       "endpoint": "https://www.lbbd.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -518,7 +518,7 @@
     },
     {
       "id": "haringey-council-news",
-      "provider": "Haringey Council â€“ News",
+      "provider": "Haringey Council – News",
       "endpoint": "https://new.haringey.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -529,7 +529,7 @@
     },
     {
       "id": "kingston-council-news",
-      "provider": "Kingston Council â€“ News",
+      "provider": "Kingston Council – News",
       "endpoint": "https://www.kingston.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -540,7 +540,7 @@
     },
     {
       "id": "lewisham-council-news",
-      "provider": "Lewisham Council â€“ News",
+      "provider": "Lewisham Council – News",
       "endpoint": "https://news.lewisham.gov.uk/",
       "kind": "html",
       "lane": "context",
@@ -551,7 +551,7 @@
     },
     {
       "id": "richmond-council-news",
-      "provider": "Richmond Council â€“ News",
+      "provider": "Richmond Council – News",
       "endpoint": "https://www.richmond.gov.uk/news",
       "kind": "html",
       "lane": "context",
@@ -562,7 +562,7 @@
     },
     {
       "id": "barts-health-news",
-      "provider": "Barts Health NHS Trust â€“ News",
+      "provider": "Barts Health NHS Trust – News",
       "endpoint": "https://www.bartshealth.nhs.uk/latest-news",
       "kind": "html",
       "lane": "context",
@@ -573,7 +573,7 @@
     },
     {
       "id": "guys-st-thomas-news",
-      "provider": "Guy's and St Thomas' NHS Foundation Trust â€“ News",
+      "provider": "Guy's and St Thomas' NHS Foundation Trust – News",
       "endpoint": "https://www.guysandstthomas.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -584,7 +584,7 @@
     },
     {
       "id": "kings-college-hospital-news",
-      "provider": "King's College Hospital NHS Foundation Trust â€“ News",
+      "provider": "King's College Hospital NHS Foundation Trust – News",
       "endpoint": "https://www.kch.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -595,7 +595,7 @@
     },
     {
       "id": "imperial-healthcare-news",
-      "provider": "Imperial College Healthcare NHS Trust â€“ News",
+      "provider": "Imperial College Healthcare NHS Trust – News",
       "endpoint": "https://www.imperial.nhs.uk/about-us/news",
       "kind": "html",
       "lane": "context",
@@ -606,7 +606,7 @@
     },
     {
       "id": "uclh-news",
-      "provider": "University College London Hospitals â€“ News",
+      "provider": "University College London Hospitals – News",
       "endpoint": "https://www.uclh.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -617,7 +617,7 @@
     },
     {
       "id": "royal-free-london-news",
-      "provider": "Royal Free London NHS Foundation Trust â€“ News",
+      "provider": "Royal Free London NHS Foundation Trust – News",
       "endpoint": "https://www.royalfree.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -628,7 +628,7 @@
     },
     {
       "id": "chelsea-westminster-news",
-      "provider": "Chelsea and Westminster Hospital NHS Foundation Trust â€“ News",
+      "provider": "Chelsea and Westminster Hospital NHS Foundation Trust – News",
       "endpoint": "https://www.chelwest.nhs.uk/about-us/news",
       "kind": "html",
       "lane": "context",
@@ -639,7 +639,7 @@
     },
     {
       "id": "st-georges-news",
-      "provider": "St George's University Hospitals NHS Foundation Trust â€“ News",
+      "provider": "St George's University Hospitals NHS Foundation Trust – News",
       "endpoint": "https://www.stgeorges.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -650,7 +650,7 @@
     },
     {
       "id": "homerton-healthcare-news",
-      "provider": "Homerton Healthcare NHS Foundation Trust â€“ News",
+      "provider": "Homerton Healthcare NHS Foundation Trust – News",
       "endpoint": "https://www.homerton.nhs.uk/latest-news/",
       "kind": "html",
       "lane": "context",
@@ -661,7 +661,7 @@
     },
     {
       "id": "north-middlesex-news",
-      "provider": "North Middlesex University Hospital â€“ News",
+      "provider": "North Middlesex University Hospital – News",
       "endpoint": "https://www.northmid.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -672,7 +672,7 @@
     },
     {
       "id": "whittington-health-news",
-      "provider": "Whittington Health â€“ News",
+      "provider": "Whittington Health – News",
       "endpoint": "https://www.whittington.nhs.uk/news/default.asp",
       "kind": "html",
       "lane": "context",
@@ -683,7 +683,7 @@
     },
     {
       "id": "lnwh-news",
-      "provider": "London North West University Healthcare NHS Trust â€“ News",
+      "provider": "London North West University Healthcare NHS Trust – News",
       "endpoint": "https://www.lnwh.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -694,7 +694,7 @@
     },
     {
       "id": "moorfields-news",
-      "provider": "Moorfields Eye Hospital NHS Foundation Trust â€“ News",
+      "provider": "Moorfields Eye Hospital NHS Foundation Trust – News",
       "endpoint": "https://www.moorfields.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -705,7 +705,7 @@
     },
     {
       "id": "royal-brompton-harefield-news",
-      "provider": "Royal Brompton and Harefield Hospitals â€“ News",
+      "provider": "Royal Brompton and Harefield Hospitals – News",
       "endpoint": "https://www.rbht.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -716,7 +716,7 @@
     },
     {
       "id": "gosh-news",
-      "provider": "Great Ormond Street Hospital â€“ News",
+      "provider": "Great Ormond Street Hospital – News",
       "endpoint": "https://www.gosh.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -727,7 +727,7 @@
     },
     {
       "id": "east-london-nhs-news",
-      "provider": "East London NHS Foundation Trust â€“ News",
+      "provider": "East London NHS Foundation Trust – News",
       "endpoint": "https://www.elft.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -738,7 +738,7 @@
     },
     {
       "id": "slam-news",
-      "provider": "South London and Maudsley NHS Foundation Trust â€“ News",
+      "provider": "South London and Maudsley NHS Foundation Trust – News",
       "endpoint": "https://slam.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -749,7 +749,7 @@
     },
     {
       "id": "tavistock-portman-news",
-      "provider": "Tavistock and Portman NHS Foundation Trust â€“ News",
+      "provider": "Tavistock and Portman NHS Foundation Trust – News",
       "endpoint": "https://tavistockandportman.nhs.uk/about-us/news/",
       "kind": "html",
       "lane": "context",
@@ -760,7 +760,7 @@
     },
     {
       "id": "cnwl-news",
-      "provider": "Central and North West London NHS Foundation Trust â€“ News",
+      "provider": "Central and North West London NHS Foundation Trust – News",
       "endpoint": "https://www.cnwl.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -771,7 +771,7 @@
     },
     {
       "id": "nelft-news",
-      "provider": "North East London NHS Foundation Trust â€“ News",
+      "provider": "North East London NHS Foundation Trust – News",
       "endpoint": "https://www.nelft.nhs.uk/news-events/",
       "kind": "html",
       "lane": "context",
@@ -782,7 +782,7 @@
     },
     {
       "id": "swlstg-news",
-      "provider": "South West London and St George's Mental Health NHS Trust â€“ News",
+      "provider": "South West London and St George's Mental Health NHS Trust – News",
       "endpoint": "https://www.swlstg.nhs.uk/latest-news",
       "kind": "html",
       "lane": "context",
@@ -793,7 +793,7 @@
     },
     {
       "id": "oxleas-news",
-      "provider": "Oxleas NHS Foundation Trust â€“ News",
+      "provider": "Oxleas NHS Foundation Trust – News",
       "endpoint": "https://oxleas.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -804,7 +804,7 @@
     },
     {
       "id": "nhs-london-ncl-news",
-      "provider": "NHS North Central London â€“ News",
+      "provider": "NHS North Central London – News",
       "endpoint": "https://nclhealthandcare.org.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -815,7 +815,7 @@
     },
     {
       "id": "nhs-london-nwl-news",
-      "provider": "NHS North West London â€“ News",
+      "provider": "NHS North West London – News",
       "endpoint": "https://www.nwlondonicb.nhs.uk/news",
       "kind": "html",
       "lane": "context",
@@ -826,7 +826,7 @@
     },
     {
       "id": "nhs-london-sel-news",
-      "provider": "NHS South East London â€“ News",
+      "provider": "NHS South East London – News",
       "endpoint": "https://www.selondonics.org/latest-news/",
       "kind": "html",
       "lane": "context",
@@ -837,7 +837,7 @@
     },
     {
       "id": "nhs-london-swl-news",
-      "provider": "NHS South West London â€“ News",
+      "provider": "NHS South West London – News",
       "endpoint": "https://www.southwestlondon.icb.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -848,7 +848,7 @@
     },
     {
       "id": "nhs-london-nel-news",
-      "provider": "NHS North East London â€“ News",
+      "provider": "NHS North East London – News",
       "endpoint": "https://northeastlondon.icb.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
@@ -1517,6 +1517,424 @@
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true
+    },
+    {
+      "id": "psni-news",
+      "provider": "Police Service of Northern Ireland – News",
+      "endpoint": "https://www.psni.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "PSNI news used for Northern Ireland terrorism-related incidents, dissident republican and loyalist paramilitary activity."
+    },
+    {
+      "id": "police-scotland-news",
+      "provider": "Police Scotland – News",
+      "endpoint": "https://www.scotland.police.uk/whats-happening/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Police Scotland news used for Scotland terrorism-related incidents, national operations, and counter-terror updates."
+    },
+    {
+      "id": "gmp-news",
+      "provider": "Greater Manchester Police – News",
+      "endpoint": "https://www.gmp.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GMP news used for Manchester-area terrorism-related incidents and counter-terror operations."
+    },
+    {
+      "id": "west-yorkshire-police-news",
+      "provider": "West Yorkshire Police – News",
+      "endpoint": "https://www.westyorkshire.police.uk/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "West Yorkshire Police news for Leeds and Bradford-area terrorism-related incidents and operations."
+    },
+    {
+      "id": "west-midlands-police-news",
+      "provider": "West Midlands Police – News",
+      "endpoint": "https://www.westmidlands.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "West Midlands Police news for Birmingham and surrounding area terrorism-related incidents and operations."
+    },
+    {
+      "id": "thames-valley-police-news",
+      "provider": "Thames Valley Police – News",
+      "endpoint": "https://www.thamesvalley.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Thames Valley Police news for Reading, Oxford, and Heathrow-corridor terrorism-related incidents."
+    },
+    {
+      "id": "south-yorkshire-police-news",
+      "provider": "South Yorkshire Police – News",
+      "endpoint": "https://www.southyorkshire.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "South Yorkshire Police news for Sheffield and Rotherham-area terrorism-related incidents."
+    },
+    {
+      "id": "merseyside-police-news",
+      "provider": "Merseyside Police – News",
+      "endpoint": "https://www.merseyside.police.uk/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Merseyside Police news for Liverpool-area terrorism-related incidents and counter-terror operations."
+    },
+    {
+      "id": "kent-police-news",
+      "provider": "Kent Police – News",
+      "endpoint": "https://www.kent.police.uk/news/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Kent Police news for Channel port area, Dover, and border security incident corroboration."
+    },
+    {
+      "id": "essex-police-news",
+      "provider": "Essex Police – News",
+      "endpoint": "https://www.essex.police.uk/news/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Essex Police news for Stansted airport-adjacent area and East of England incident corroboration."
+    },
+    {
+      "id": "gov-uk-contest-strategy",
+      "provider": "GOV.UK – CONTEST Counter-Terrorism Strategy",
+      "endpoint": "https://www.gov.uk/government/collections/contest",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "GOV.UK CONTEST strategy collection; authoritative source for UK counter-terrorism strategic posture updates."
+    },
+    {
+      "id": "gov-uk-proscribed-terrorist-orgs",
+      "provider": "GOV.UK – Proscribed Terrorist Organisations",
+      "endpoint": "https://www.gov.uk/government/publications/proscribed-terror-groups-or-organisations--2",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Official UK proscribed organisations list; updated when new groups are added or removed."
+    },
+    {
+      "id": "gov-uk-counter-extremism-commissioner",
+      "provider": "Counter Extremism Commissioner – GOV.UK",
+      "endpoint": "https://www.gov.uk/government/organisations/independent-commissioner-for-counter-extremism",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Independent Counter Extremism Commissioner publications and reports, used for prevention posture context."
+    },
+    {
+      "id": "gov-uk-hmcts",
+      "provider": "HMCTS – Courts and Tribunals Announcements",
+      "endpoint": "https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "HMCTS announcements used for Crown Court terrorism and extremism case updates and sentencing news."
+    },
+    {
+      "id": "gov-uk-home-office-atom",
+      "provider": "UK Home Office – Atom Feed",
+      "endpoint": "https://www.gov.uk/government/organisations/home-office.atom",
+      "kind": "atom",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Home Office Atom feed for counter-terrorism, extremism, and public security publications."
+    },
+    {
+      "id": "gov-uk-prevent-strategy",
+      "provider": "GOV.UK – Prevent Strategy and Guidance",
+      "endpoint": "https://www.gov.uk/government/collections/revised-prevent-duty-guidance",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "GOV.UK Prevent strategy collection; authoritative source for UK prevent duty and Channel programme updates."
+    },
+    {
+      "id": "gov-uk-parliament-jcnss",
+      "provider": "UK Parliament – Joint Committee on National Security Strategy",
+      "endpoint": "https://committees.parliament.uk/committee/54/joint-committee-on-the-national-security-strategy/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "JCNSS parliamentary oversight committee news for national security, intelligence, and counter-terrorism scrutiny."
+    },
+    {
+      "id": "gov-uk-fcdo-travel-advice",
+      "provider": "FCDO – Foreign Travel Advice Index",
+      "endpoint": "https://www.gov.uk/foreign-travel-advice",
+      "kind": "html",
+      "lane": "border",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "FCDO foreign travel advice index; used for terrorism-threat-level and travel restriction updates."
+    },
+    {
+      "id": "gov-uk-defence-intelligence",
+      "provider": "UK Defence Intelligence – GOV.UK",
+      "endpoint": "https://www.gov.uk/government/organisations/defence-intelligence",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Defence Intelligence publications used for UK threat assessment and intelligence context."
+    },
+    {
+      "id": "rusi-publications",
+      "provider": "RUSI (Royal United Services Institute) – Publications",
+      "endpoint": "https://www.rusi.org/publications",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "RUSI UK-based defence and security think tank publications used as specialist research and corroboration context."
+    },
+    {
+      "id": "nctv-nl-english",
+      "provider": "NCTV (Netherlands) – English News",
+      "endpoint": "https://english.nctv.nl/topics/terrorist-threat-assessment-netherlands",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Dutch National Coordinator for Security and Counterterrorism English terrorism threat assessment page."
+    },
+    {
+      "id": "nctv-nl-english-news",
+      "provider": "NCTV (Netherlands) – English News Updates",
+      "endpoint": "https://english.nctv.nl/news",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Dutch NCTV English news surface for counter-terrorism and security posture updates."
+    },
+    {
+      "id": "ocam-be-english",
+      "provider": "OCAM/CUTA (Belgium) – English News",
+      "endpoint": "https://www.ocam.be/en/newspublications",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Belgian Coordination Unit for Threat Assessment English publications and threat-level updates."
+    },
+    {
+      "id": "bfv-de-english",
+      "provider": "BfV (Germany) – English Publications",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/press-releases/press-releases_node.html",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "German Federal Office for the Protection of the Constitution English press releases on extremism and terrorism threats."
+    },
+    {
+      "id": "sapo-se-english",
+      "provider": "SÄPO (Sweden) – English News",
+      "endpoint": "https://www.sakerhetspolisen.se/en/home/news-room/news.html",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Swedish Security Service English news room for terrorism threat assessment and counter-terrorism updates."
+    },
+    {
+      "id": "pet-dk-english",
+      "provider": "PET (Denmark) – English News",
+      "endpoint": "https://pet.dk/en/news/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Danish Police Intelligence Service English news for terrorism threat assessment and prevention context."
+    },
+    {
+      "id": "pst-no-english",
+      "provider": "PST (Norway) – English News",
+      "endpoint": "https://www.pst.no/en/news/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Norwegian Police Security Service English news for terrorism threat levels and counter-terrorism posture."
+    },
+    {
+      "id": "supo-fi-english",
+      "provider": "SUPO (Finland) – English Publications",
+      "endpoint": "https://supo.fi/en/publications",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Finnish Security Intelligence Service English publications on terrorism and national security threats."
+    },
+    {
+      "id": "dsn-at-english",
+      "provider": "DSN (Austria) – English Reports",
+      "endpoint": "https://www.dsn.gv.at/en/about-us/annual-reports/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Austrian Directorate of State Protection and Intelligence Service English annual reports on terrorism and extremism threats."
+    },
+    {
+      "id": "ran-network",
+      "provider": "Radicalisation Awareness Network (RAN) – Publications",
+      "endpoint": "https://www.radicalisationawarenessnetwork.eu/news-events/publications",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "EU Commission-funded RAN network publications on radicalisation prevention and counter-extremism approaches."
+    },
+    {
+      "id": "coe-counter-terrorism",
+      "provider": "Council of Europe – Counter-Terrorism",
+      "endpoint": "https://www.coe.int/en/web/counter-terrorism/news-updates",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Council of Europe Counter-Terrorism Committee (CDCT) news updates for European counter-terrorism legal framework context."
+    },
+    {
+      "id": "euaa-news",
+      "provider": "EUAA (EU Agency for Asylum) – News",
+      "endpoint": "https://euaa.europa.eu/news-events",
+      "kind": "html",
+      "lane": "border",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EU Agency for Asylum news used for border, screening, and asylum context relevant to threat movement and documentation."
+    },
+    {
+      "id": "europol-ectc-news",
+      "provider": "Europol – Counter Terrorism Centre (ECTC)",
+      "endpoint": "https://www.europol.europa.eu/operations-services-and-innovation/europol-counter-terrorism-centre",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Europol Counter Terrorism Centre page for CT-specific operational summaries and threat assessments."
+    },
+    {
+      "id": "dw-europe-rss",
+      "provider": "Deutsche Welle – Europe (RSS)",
+      "endpoint": "https://rss.dw.com/rdf/rss-en-eu",
+      "kind": "rss",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents."
+    },
+    {
+      "id": "france24-europe-rss",
+      "provider": "France 24 – Europe (RSS)",
+      "endpoint": "https://www.france24.com/en/europe/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "France 24 Europe English RSS used as corroborating context for European terrorism and security incidents."
+    },
+    {
+      "id": "ecfr-publications",
+      "provider": "European Council on Foreign Relations (ECFR) – Publications",
+      "endpoint": "https://ecfr.eu/publications/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "ECFR research and commentary on European security, terrorism, and foreign policy used as specialist context."
+    },
+    {
+      "id": "eu-security-union-strategy",
+      "provider": "European Commission – Security Union Strategy",
+      "endpoint": "https://home-affairs.ec.europa.eu/policies/internal-security_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EU Commission Security Union policy page for counter-terrorism, serious crime, and internal security updates."
+    },
+    {
+      "id": "eu-home-affairs-news",
+      "provider": "European Commission – Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EU Commission Home Affairs news on counter-terrorism legislation, Schengen, and security union updates."
     }
   ]
 }

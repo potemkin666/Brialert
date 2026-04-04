@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView } from '../shared/feed-controller.mjs';
 import {
@@ -9,13 +12,17 @@ import {
 } from '../shared/alert-view-model.mjs';
 import {
   inferIncidentTrack,
-  isTerrorRelevantIncident
+  isTerrorRelevantIncident,
+  matchesKeywords,
+  terrorismKeywords
 } from '../shared/taxonomy.mjs';
 import {
   fusedIncidentIdFor,
   mergeCorroboratingSources
 } from '../shared/fusion.mjs';
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function isoMinutesAgo(minutes) {
   return new Date(Date.now() - (minutes * 60 * 1000)).toISOString();
@@ -319,4 +326,83 @@ test('live feed coercion keeps valid alerts and drops malformed ones', () => {
 
   assert.equal(payload.alerts.length, 1);
   assert.equal(payload.alerts[0].id, 'good-1');
+});
+
+test('matchesKeywords uses word-boundary matching and does not match substrings', () => {
+  // 'threat' must not match 'threatening'
+  assert.deepEqual(matchesKeywords('he was threatening schoolchildren', terrorismKeywords), []);
+  // 'terrorism' must match standalone 'terrorism'
+  const terrorismHits = matchesKeywords('a terrorism plot was disrupted', terrorismKeywords);
+  assert.ok(terrorismHits.includes('terrorism'), 'terrorism should match standalone word');
+  // 'terror' must not match inside 'counterterrorism' (no space boundary)
+  const ctHits = matchesKeywords('counterterrorism agency published guidance', terrorismKeywords);
+  assert.ok(!ctHits.includes('terror'), 'terror should not match as substring of counterterrorism');
+  // Multi-word keywords: 'al-qaeda' should match standalone
+  const aqHits = matchesKeywords('al-qaeda operative charged', terrorismKeywords);
+  assert.ok(aqHits.includes('al-qaeda'), 'al-qaeda should match as standalone term');
+});
+
+test('isTerrorRelevantIncident strips negated terrorism context before scoring', () => {
+  const metadata = {
+    lane: 'incidents',
+    provider: 'BBC News',
+    source: 'BBC News',
+    sourceTier: 'corroboration',
+    reliabilityProfile: 'major_media',
+    isOfficial: false
+  };
+
+  // Denial phrase: "no terrorism links" must NOT cause a terror hit
+  const denialItem = {
+    title: 'Stabbing in city centre',
+    summary: 'A man was arrested after a stabbing near a market.',
+    sourceExtract: 'Police said there are no terrorism links to the incident.'
+  };
+  assert.equal(isTerrorRelevantIncident(metadata, denialItem), false,
+    'denial context "no terrorism links" should not produce a positive terror hit');
+
+  // Real terrorism content MUST still pass
+  const realItem = {
+    title: 'Counter-terror police arrest suspect over bomb plot',
+    summary: 'A terrorism suspect was arrested in connection with a foiled bomb plot.',
+    sourceExtract: 'The suspect had been radicalised online and was planning a terrorist attack.'
+  };
+  assert.equal(isTerrorRelevantIncident(metadata, realItem), true,
+    'genuine terrorism content should still return true');
+});
+
+test('sources catalog passes structural and per-field validation', () => {
+  const sourcesPath = path.join(__dirname, '..', 'data', 'sources.json');
+  const raw = fs.readFileSync(sourcesPath, 'utf8');
+  const parsed = JSON.parse(raw);
+  const sources = Array.isArray(parsed.sources) ? parsed.sources : parsed;
+
+  assert.ok(Array.isArray(sources), 'sources should be an array');
+  assert.ok(sources.length > 0, 'sources array should not be empty');
+
+  const VALID_KINDS = new Set(['rss', 'atom', 'html']);
+  const VALID_LANES = new Set(['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention']);
+  const VALID_REGIONS = new Set(['uk', 'europe', 'london', 'eu', 'international', 'us']);
+  const ids = new Set();
+  const errors = [];
+
+  for (let i = 0; i < sources.length; i++) {
+    const s = sources[i];
+    if (!s || typeof s !== 'object') { errors.push(`[${i}] not an object`); continue; }
+    if (typeof s.id !== 'string' || !s.id.trim()) errors.push(`[${i}] missing id`);
+    if (typeof s.provider !== 'string' || !s.provider.trim()) errors.push(`[${i}] (${s.id}) missing provider`);
+    if (typeof s.endpoint !== 'string' || !s.endpoint.startsWith('http')) errors.push(`[${i}] (${s.id}) bad endpoint`);
+    if (!VALID_KINDS.has(s.kind)) errors.push(`[${i}] (${s.id}) invalid kind: ${s.kind}`);
+    if (!VALID_LANES.has(s.lane)) errors.push(`[${i}] (${s.id}) invalid lane: ${s.lane}`);
+    if (!VALID_REGIONS.has(s.region)) errors.push(`[${i}] (${s.id}) invalid region: ${s.region}`);
+    if (typeof s.isTrustedOfficial !== 'boolean') errors.push(`[${i}] (${s.id}) isTrustedOfficial must be boolean`);
+    if (typeof s.requiresKeywordMatch !== 'boolean') errors.push(`[${i}] (${s.id}) requiresKeywordMatch must be boolean`);
+    if (s.id && ids.has(s.id)) errors.push(`duplicate id: ${s.id}`);
+    if (s.id) ids.add(s.id);
+    // Warn if provider contains mojibake characters
+    if (s.provider && /â€/.test(s.provider)) errors.push(`[${i}] (${s.id}) provider contains mojibake: ${s.provider}`);
+  }
+
+  assert.equal(errors.length, 0,
+    `Sources catalog has ${errors.length} error(s):\n  ${errors.join('\n  ')}`);
 });

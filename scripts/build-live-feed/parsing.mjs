@@ -21,11 +21,11 @@ function extractPeopleFromText(text) {
     'United Kingdom', 'Europe', 'Middle East', 'Paris', 'Leeds', 'France', 'Iran', 'Israel', 'Lebanon'
   ]);
   const rolePatterns = [
-    { role: 'Official', regex: /\b(?:Mr|Mrs|Ms|Dr|Sir|Dame)\s+([A-Z][a-z'â€™-]+(?:\s+[A-Z][a-z'â€™-]+){0,2})\b/g },
-    { role: 'Official', regex: /\b(?:Prime Minister|Security Minister|Ambassador|Commissioner|Prosecutor|Judge|Chief Constable|Commander|Minister|President)\s+([A-Z][a-z'â€™-]+(?:\s+[A-Z][a-z'â€™-]+){0,2})\b/g },
-    { role: 'Suspect', regex: /\b([A-Z][a-z'â€™-]+(?:\s+[A-Z][a-z'â€™-]+){1,2}),?\s+(?:was|is)\s+(?:charged|accused|arrested|jailed|sentenced)\b/g },
-    { role: 'Victim', regex: /\b([A-Z][a-z'â€™-]+(?:\s+[A-Z][a-z'â€™-]+){1,2}),?\s+(?:who\s+)?(?:was|were)\s+(?:killed|injured|wounded|targeted)\b/g },
-    { role: 'Witness', regex: /\b([A-Z][a-z'â€™-]+(?:\s+[A-Z][a-z'â€™-]+){1,2})\s+(?:said|told|described|reported)\b/g }
+    { role: 'Official', regex: /\b(?:Mr|Mrs|Ms|Dr|Sir|Dame)\s+([A-Z][a-z'’-]+(?:\s+[A-Z][a-z'’-]+){0,2})\b/g },
+    { role: 'Official', regex: /\b(?:Prime Minister|Security Minister|Ambassador|Commissioner|Prosecutor|Judge|Chief Constable|Commander|Minister|President)\s+([A-Z][a-z'’-]+(?:\s+[A-Z][a-z'’-]+){0,2})\b/g },
+    { role: 'Suspect', regex: /\b([A-Z][a-z'’-]+(?:\s+[A-Z][a-z'’-]+){1,2}),?\s+(?:was|is)\s+(?:charged|accused|arrested|jailed|sentenced)\b/g },
+    { role: 'Victim', regex: /\b([A-Z][a-z'’-]+(?:\s+[A-Z][a-z'’-]+){1,2}),?\s+(?:who\s+)?(?:was|were)\s+(?:killed|injured|wounded|targeted)\b/g },
+    { role: 'Witness', regex: /\b([A-Z][a-z'’-]+(?:\s+[A-Z][a-z'’-]+){1,2})\s+(?:said|told|described|reported)\b/g }
   ];
 
   const sentences = sourceText
