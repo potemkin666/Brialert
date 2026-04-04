@@ -33,11 +33,19 @@ import {
 import { renderNotes, renderWatchlist } from '../render/notes.mjs';
 import {
   BRIEFING_MODE_STORAGE_KEY,
+  CONTEXT_LOAD_STEP,
   GEO_LOOKUP_URL,
+  INITIAL_CONTEXT_VISIBLE,
+  MAP_INIT_FALLBACK_DELAY_MS,
+  MAP_INIT_IDLE_TIMEOUT_MS,
+  INITIAL_QUARANTINE_VISIBLE,
+  INITIAL_RESPONDER_VISIBLE,
   LIVE_FEED_URL,
   LONG_BRIEF_API_URL,
   NOTES_STORAGE_KEY,
   POLL_INTERVAL_MS,
+  QUARANTINE_LOAD_STEP,
+  RESPONDER_LOAD_STEP,
   SOURCE_PULL_MINUTES,
   WATCHED_STORAGE_KEY,
   WATCH_GEOGRAPHY_URL,
@@ -53,8 +61,11 @@ function createElements() {
     responderSection: document.getElementById('responder-section'),
     screen: document.querySelector('.screen'),
     feedList: document.getElementById('feed-list'),
+    feedLoadMore: document.getElementById('feed-load-more'),
     contextList: document.getElementById('context-list'),
+    contextLoadMore: document.getElementById('context-load-more'),
     quarantineList: document.getElementById('quarantine-list'),
+    quarantineLoadMore: document.getElementById('quarantine-load-more'),
     watchlistList: document.getElementById('watchlist-list'),
     notesList: document.getElementById('notes-list'),
     watchedCount: document.getElementById('watched-count'),
@@ -196,6 +207,9 @@ export function initialiseApp() {
       if (!button) return;
       state.activeRegion = button.dataset.region;
       invalidateDerivedView();
+      state.feedVisibleCount = INITIAL_RESPONDER_VISIBLE;
+      state.contextVisibleCount = INITIAL_CONTEXT_VISIBLE;
+      state.quarantineVisibleCount = INITIAL_QUARANTINE_VISIBLE;
       elements.filters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
       button.classList.add('active');
       renderAll();
@@ -206,8 +220,26 @@ export function initialiseApp() {
       if (!button) return;
       state.activeLane = button.dataset.lane;
       invalidateDerivedView();
+      state.feedVisibleCount = INITIAL_RESPONDER_VISIBLE;
+      state.contextVisibleCount = INITIAL_CONTEXT_VISIBLE;
+      state.quarantineVisibleCount = INITIAL_QUARANTINE_VISIBLE;
       elements.laneFilters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
       button.classList.add('active');
+      renderAll();
+    });
+
+    elements.feedLoadMore?.addEventListener('click', () => {
+      state.feedVisibleCount += RESPONDER_LOAD_STEP;
+      renderAll();
+    });
+
+    elements.contextLoadMore?.addEventListener('click', () => {
+      state.contextVisibleCount += CONTEXT_LOAD_STEP;
+      renderAll();
+    });
+
+    elements.quarantineLoadMore?.addEventListener('click', () => {
+      state.quarantineVisibleCount += QUARANTINE_LOAD_STEP;
       renderAll();
     });
 
@@ -285,6 +317,13 @@ export function initialiseApp() {
       resizeTimer = setTimeout(() => mapController.invalidateSize(), 120);
     });
 
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => mapController.invalidateSize(), 120);
+      });
+    }
+
     elements.albertCard?.addEventListener('click', refreshAlbertQuote);
     document.querySelector('.bulldog-card')?.addEventListener('dblclick', () => {
       elements.albertNote.classList.toggle('hidden');
@@ -292,6 +331,11 @@ export function initialiseApp() {
   }
 
   applyDeviceProfile();
+  if (window.requestIdleCallback) {
+    window.requestIdleCallback(() => mapController.ensureMap(), { timeout: MAP_INIT_IDLE_TIMEOUT_MS });
+  } else {
+    setTimeout(() => mapController.ensureMap(), MAP_INIT_FALLBACK_DELAY_MS);
+  }
   state.watched = loadSet(WATCHED_STORAGE_KEY);
   state.notes = loadArray(NOTES_STORAGE_KEY, defaultNotes);
   state.briefingMode = false;

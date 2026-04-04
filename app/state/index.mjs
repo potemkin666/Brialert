@@ -7,6 +7,14 @@ export const SOURCE_PULL_MINUTES = 60;
 export const WATCHED_STORAGE_KEY = 'brialert.watched';
 export const NOTES_STORAGE_KEY = 'brialert.notes';
 export const BRIEFING_MODE_STORAGE_KEY = 'brialert.briefingMode';
+export const INITIAL_RESPONDER_VISIBLE = 18;
+export const RESPONDER_LOAD_STEP = 16;
+export const INITIAL_CONTEXT_VISIBLE = 16;
+export const CONTEXT_LOAD_STEP = 16;
+export const INITIAL_QUARANTINE_VISIBLE = 12;
+export const QUARANTINE_LOAD_STEP = 12;
+export const MAP_INIT_IDLE_TIMEOUT_MS = 1500;
+export const MAP_INIT_FALLBACK_DELAY_MS = 300;
 
 export function createState(watchLayerLabels) {
   return {
@@ -27,7 +35,10 @@ export function createState(watchLayerLabels) {
     briefingMode: false,
     activeTab: 'firstalert',
     geoLookup: [],
-    watchGeographySites: []
+    watchGeographySites: [],
+    feedVisibleCount: INITIAL_RESPONDER_VISIBLE,
+    contextVisibleCount: INITIAL_CONTEXT_VISIBLE,
+    quarantineVisibleCount: INITIAL_QUARANTINE_VISIBLE
   };
 }
 

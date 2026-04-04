@@ -24,7 +24,13 @@ import {
 } from '../shared/fusion.mjs';
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
 import { normaliseSourcesPayload } from '../scripts/build-live-feed/io.mjs';
-import { renderHero } from '../app/render/live.mjs';
+import { renderContext, renderHero, renderQuarantine } from '../app/render/live.mjs';
+import {
+  INITIAL_CONTEXT_VISIBLE,
+  INITIAL_QUARANTINE_VISIBLE,
+  INITIAL_RESPONDER_VISIBLE,
+  createState
+} from '../app/state/index.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -606,4 +612,93 @@ test('validate-live-feed-output script passes valid feed and fails invalid sourc
   assert.throws(() => {
     execFileSync('node', [path.join(scriptsDir, 'validate-live-feed-output.mjs')], { cwd: tmpRoot, stdio: 'pipe' });
   }, /sourceCount must be a non-negative number/);
+});
+
+test('createState initialises progressive story visibility defaults', () => {
+  const state = createState({ transport: 'Transport hubs' });
+  assert.equal(state.feedVisibleCount, INITIAL_RESPONDER_VISIBLE);
+  assert.equal(state.contextVisibleCount, INITIAL_CONTEXT_VISIBLE);
+  assert.equal(state.quarantineVisibleCount, INITIAL_QUARANTINE_VISIBLE);
+});
+
+test('deriveView keeps full quarantine list for progressive rendering', () => {
+  const alerts = Array.from({ length: 10 }, (_, index) => makeAlert({
+    id: `q-${index}`,
+    title: `Weak secondary signal ${index}`,
+    source: 'Reuters',
+    sourceTier: 'corroboration',
+    reliabilityProfile: 'major_media',
+    isOfficial: false,
+    confidenceScore: 0.71,
+    needsHumanReview: true,
+    queueReason: 'Needs human review'
+  }));
+  const view = deriveView({
+    alerts,
+    activeRegion: 'all',
+    activeLane: 'all'
+  }, {
+    sortAlertsByFreshness: (items) => items,
+    isLiveIncidentCandidate,
+    isQuarantineCandidate,
+    isTerrorRelevant: (alert) => alert.isTerrorRelevant
+  });
+  assert.equal(view.quarantine.length, 10);
+});
+
+test('renderContext and renderQuarantine expose load-more state correctly', () => {
+  const makeButton = () => {
+    const classes = new Set(['hidden']);
+    return {
+      textContent: '',
+      classList: {
+        toggle(name, force) {
+          if (force) classes.add(name);
+          else classes.delete(name);
+        }
+      },
+      hasClass(name) {
+        return classes.has(name);
+      }
+    };
+  };
+
+  const contextLoadMore = makeButton();
+  const quarantineLoadMore = makeButton();
+  const state = {
+    contextVisibleCount: 2,
+    quarantineVisibleCount: 2,
+    alerts: []
+  };
+  const view = {
+    context: [makeAlert({ id: 'c1', lane: 'context' }), makeAlert({ id: 'c2', lane: 'context' }), makeAlert({ id: 'c3', lane: 'context' })],
+    quarantine: [makeAlert({ id: 'q1', needsHumanReview: true }), makeAlert({ id: 'q2', needsHumanReview: true }), makeAlert({ id: 'q3', needsHumanReview: true })]
+  };
+  const elements = {
+    contextCount: { textContent: '' },
+    contextList: {
+      innerHTML: '',
+      querySelectorAll() {
+        return [];
+      }
+    },
+    contextLoadMore,
+    quarantineCount: { textContent: '' },
+    quarantineList: {
+      innerHTML: '',
+      querySelectorAll() {
+        return [];
+      }
+    },
+    quarantineLoadMore
+  };
+  const modalController = { openDetail() {} };
+
+  renderContext({ elements, view, state, modalController });
+  renderQuarantine({ elements, view, state, modalController });
+
+  assert.equal(elements.contextCount.textContent, '2/3 contextual items');
+  assert.equal(elements.quarantineCount.textContent, '2/3 doubtful items');
+  assert.equal(contextLoadMore.hasClass('hidden'), false);
+  assert.equal(quarantineLoadMore.hasClass('hidden'), false);
 });

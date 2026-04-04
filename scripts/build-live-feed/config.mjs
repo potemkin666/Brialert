@@ -22,6 +22,23 @@ export const DEFAULT_TIMEOUT_MS = 12000;
 export const MAX_SOURCE_ERRORS_TO_REPORT = 25;
 export const FEED_SOURCE_CONCURRENCY = 4;
 export const HTML_HYDRATION_CONCURRENCY = 3;
+export const MAX_HTML_CANDIDATES_PER_SOURCE = 18;
+export const MAX_FEED_CANDIDATES_PER_SOURCE = 10;
+export const MAX_HTML_PARSING_THRESHOLD = MAX_HTML_CANDIDATES_PER_SOURCE * 2;
+export const MAX_HTML_PREFETCH_ITEMS = 12;
+export const MAX_FEED_PREFETCH_ITEMS = 8;
+export const SOURCE_ITEM_LIMITS = Object.freeze({
+  tabloid: 1,
+  incidents: 6,
+  context: 4,
+  sanctions: 4,
+  oversight: 4,
+  border: 4,
+  prevention: 4,
+  default: 3
+});
+export const MAX_STORED_ALERTS = 120;
+export const MAX_FAILING_SOURCES_TO_LOG = 10;
 export const EXPECTED_REFRESH_MINUTES = 60;
 export const STALE_AFTER_MINUTES = 75;
 export const SOURCE_TIMEZONE = 'Europe/London';

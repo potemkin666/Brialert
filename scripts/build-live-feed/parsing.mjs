@@ -1,6 +1,12 @@
 import * as cheerio from 'cheerio';
 import { clean, plainText } from '../../shared/taxonomy.mjs';
-import { HTML_HYDRATION_CONCURRENCY, parser } from './config.mjs';
+import {
+  HTML_HYDRATION_CONCURRENCY,
+  MAX_FEED_CANDIDATES_PER_SOURCE,
+  MAX_HTML_CANDIDATES_PER_SOURCE,
+  MAX_HTML_PARSING_THRESHOLD,
+  parser
+} from './config.mjs';
 import {
   absoluteUrl,
   arrayify,
@@ -73,18 +79,35 @@ export function parseFeedItems(source, xml) {
     summary: plainText(item.summary?.['#text'] || item.summary || item.content?.['#text'] || item.content),
     published: clean(item.updated || item.published)
   }));
-  return [...rssItems, ...atomItems].filter((item) => item.title && item.link);
+  return [...rssItems, ...atomItems]
+    .filter((item) => item.title && item.link)
+    .slice(0, MAX_FEED_CANDIDATES_PER_SOURCE);
 }
 
 export function parseHtmlItems(source, html) {
   const $ = cheerio.load(html);
   const seen = new Set();
   const candidates = [];
-  const selectors = ['article a[href]', 'main a[href]', 'h2 a[href]', 'h3 a[href]', 'a[href]'];
+  const configuredSelectors = Array.isArray(source?.selectors)
+    ? source.selectors.map((selector) => clean(selector)).filter(Boolean)
+    : [];
+  const selectors = [
+    ...configuredSelectors,
+    'article a[href]',
+    '[data-testid*="article"] a[href]',
+    '[class*="article"] a[href]',
+    '[class*="story"] a[href]',
+    '[class*="post"] a[href]',
+    '[class*="card"] a[href]',
+    'main a[href]',
+    'h2 a[href]',
+    'h3 a[href]',
+    'a[href]'
+  ];
 
   for (const selector of selectors) {
     $(selector).each((_, el) => {
-      if (candidates.length >= 40) return false;
+      if (candidates.length >= MAX_HTML_PARSING_THRESHOLD) return false;
       const href = $(el).attr('href');
       const title = plainText($(el).text() || $(el).closest('article,li,section').find('h1,h2,h3').first().text());
       if (!href || !title || title.length < 18) return;
@@ -98,10 +121,10 @@ export function parseHtmlItems(source, html) {
       const published = clean(container.find('time').attr('datetime') || container.find('time').text());
       candidates.push({ title, link: url, summary, published });
     });
-    if (candidates.length >= 15) break;
+    if (candidates.length >= MAX_HTML_CANDIDATES_PER_SOURCE) break;
   }
 
-  return candidates.slice(0, 15);
+  return candidates.slice(0, MAX_HTML_CANDIDATES_PER_SOURCE);
 }
 
 function collectJsonLd(node, collected = []) {
@@ -138,8 +161,12 @@ function extractArticleMeta(html, url) {
     $('meta[name="description"]').attr('content') ||
     $('meta[property="og:description"]').attr('content')
   );
+  const twitterDescription = plainText(
+    $('meta[name="twitter:description"]').attr('content')
+  );
   const metaTitle = plainText(
     $('meta[property="og:title"]').attr('content') ||
+    $('meta[name="twitter:title"]').attr('content') ||
     $('title').first().text()
   );
   const articleParagraphs = plainText(
@@ -167,10 +194,10 @@ function extractArticleMeta(html, url) {
     }
   });
 
-  const detailText = chooseArticleDetail(jsonLdDescription || metaDescription, articleParagraphs);
+  const detailText = chooseArticleDetail(jsonLdDescription || metaDescription || twitterDescription, articleParagraphs);
   return {
     title: jsonLdHeadline || metaTitle || plainText($('h1').first().text()),
-    summary: detailText || jsonLdDescription || metaDescription || articleParagraphs,
+    summary: detailText || jsonLdDescription || metaDescription || twitterDescription || articleParagraphs,
     sourceExtract: detailText,
     peopleInvolved: extractPeopleFromText(detailText),
     language: normaliseLanguageTag(htmlLang || metaLanguage),

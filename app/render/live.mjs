@@ -21,6 +21,15 @@ function displaySourceCount(state) {
   return 0;
 }
 
+function updateLoadMoreButton(button, shown, total, label) {
+  if (!button) return;
+  const hasMore = shown < total;
+  button.classList.toggle('hidden', !hasMore);
+  if (hasMore) {
+    button.textContent = `${label} (${total - shown} remaining)`;
+  }
+}
+
 export function renderPriority({ state, elements, view, modalController }) {
   const alert = view.topPriority;
   if (!alert) {
@@ -81,10 +90,13 @@ export function renderBriefingMode({ state, elements, view, modalController }) {
 }
 
 export function renderFeed({ state, elements, view, modalController, invalidateDerivedView, renderAll, saveSet, watchedStorageKey }) {
-  const items = view.responder;
+  const totalItems = view.responder.length;
+  const visibleCount = Math.max(1, Number(state.feedVisibleCount || 0));
+  const items = view.responder.slice(0, visibleCount);
   elements.responderSection?.classList.toggle('hidden', !items.length);
   elements.feedList.innerHTML = items.length ? items.map((alert) => responderCardMarkup(alert, state.watched.has(alert.id))).join('') : '';
-  elements.watchedCount.textContent = `${state.watched.size} watched`;
+  elements.watchedCount.textContent = `${state.watched.size} watched | ${items.length}/${totalItems} shown`;
+  updateLoadMoreButton(elements.feedLoadMore, items.length, totalItems, 'Load more alerts');
   elements.feedList.querySelectorAll('.feed-card').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.id)));
   });
@@ -101,22 +113,28 @@ export function renderFeed({ state, elements, view, modalController, invalidateD
 }
 
 export function renderContext({ elements, view, state, modalController }) {
-  const items = view.context.slice(0, 4);
-  elements.contextCount.textContent = `${items.length} contextual items`;
+  const totalItems = view.context.length;
+  const visibleCount = Math.max(1, Number(state.contextVisibleCount || 0));
+  const items = view.context.slice(0, visibleCount);
+  elements.contextCount.textContent = `${items.length}/${totalItems} contextual items`;
   elements.contextList.innerHTML = items.length
     ? items.map(contextCardMarkup).join('')
     : "<p class='panel-copy'>No contextual items have been published into this filter yet.</p>";
+  updateLoadMoreButton(elements.contextLoadMore, items.length, totalItems, 'Load more context');
   elements.contextList.querySelectorAll('[data-context]').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.context)));
   });
 }
 
 export function renderQuarantine({ elements, view, state, modalController }) {
-  const items = view.quarantine;
-  elements.quarantineCount.textContent = `${items.length} doubtful items`;
+  const totalItems = view.quarantine.length;
+  const visibleCount = Math.max(1, Number(state.quarantineVisibleCount || 0));
+  const items = view.quarantine.slice(0, visibleCount);
+  elements.quarantineCount.textContent = `${items.length}/${totalItems} doubtful items`;
   elements.quarantineList.innerHTML = items.length
     ? items.map(quarantineCardMarkup).join('')
     : "<p class='panel-copy'>No doubtful items are parked in quarantine for this filter.</p>";
+  updateLoadMoreButton(elements.quarantineLoadMore, items.length, totalItems, 'Load more quarantine');
   elements.quarantineList.querySelectorAll('[data-quarantine]').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.quarantine)));
   });

@@ -15,7 +15,7 @@ export function deriveView(state, deps) {
     if (alert.lane === 'incidents' && !deps.isTerrorRelevant(alert)) return false;
     return !deps.isLiveIncidentCandidate(alert);
   }));
-  const quarantine = deps.sortAlertsByFreshness(filtered.filter(deps.isQuarantineCandidate)).slice(0, 6);
+  const quarantine = deps.sortAlertsByFreshness(filtered.filter(deps.isQuarantineCandidate));
   const topPriority = responder[0] || context[0] || null;
 
   return { filtered, responder, context, quarantine, topPriority };

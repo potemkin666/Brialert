@@ -1185,6 +1185,17 @@ h1 {
   margin-top: 12px;
 }
 
+#feed-list,
+#quarantine-list {
+  display: grid;
+  gap: 12px;
+}
+
+.list-more-button {
+  margin-top: 12px;
+  width: 100%;
+}
+
 .quarantine-card h4 {
   font-size: 16px;
   line-height: 1.3;
