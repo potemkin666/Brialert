@@ -1,11 +1,37 @@
+import { matchesAlertSearch } from '../../shared/feed-controller.mjs';
 import { watchlistCardMarkup } from '../components/cards.mjs';
 
+function noteMatchesSearch(note, query) {
+  const terms = String(query || '')
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!terms.length) return true;
+
+  const haystack = [note?.title, note?.body]
+    .filter((value) => typeof value === 'string' && value.trim())
+    .join(' ')
+    .toLowerCase();
+
+  return terms.every((term) => haystack.includes(term));
+}
+
 export function renderWatchlist({ state, elements, modalController }) {
-  const tracked = state.alerts.filter((alert) => state.watched.has(alert.id));
-  elements.watchlistSummary.textContent = tracked.length ? `${tracked.length} tracked incidents` : 'No tracked incidents';
+  const allTracked = state.alerts.filter((alert) => state.watched.has(alert.id));
+  const tracked = allTracked.filter((alert) => matchesAlertSearch(alert, state.searchQuery));
+  const hasSearch = Boolean(String(state.searchQuery || '').trim());
+
+  elements.watchlistSummary.textContent = hasSearch
+    ? (tracked.length ? `${tracked.length} matching tracked incidents` : 'No results found')
+    : (tracked.length ? `${tracked.length} tracked incidents` : 'No tracked incidents');
   elements.watchlistList.innerHTML = tracked.length
     ? tracked.map(watchlistCardMarkup).join('')
-    : "<p class='panel-copy'>Track incidents in F.O.C to pin them here.</p>";
+    : `<p class='panel-copy'>${
+      hasSearch
+        ? 'No results found.'
+        : 'Track incidents in F.O.C to pin them here.'
+    }</p>`;
   elements.watchlistList.querySelectorAll('[data-watch]').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.watch)));
   });
@@ -13,7 +39,16 @@ export function renderWatchlist({ state, elements, modalController }) {
 
 export function renderNotes({ state, elements }) {
   elements.notesList.replaceChildren();
-  state.notes.forEach((note) => {
+  const matchingNotes = state.notes.filter((note) => noteMatchesSearch(note, state.searchQuery));
+  if (!matchingNotes.length) {
+    const empty = document.createElement('p');
+    empty.className = 'panel-copy';
+    empty.textContent = String(state.searchQuery || '').trim() ? 'No results found.' : 'No notes saved yet.';
+    elements.notesList.append(empty);
+    return;
+  }
+
+  matchingNotes.forEach((note) => {
     const card = document.createElement('article');
     card.className = 'note-card';
     const title = document.createElement('strong');

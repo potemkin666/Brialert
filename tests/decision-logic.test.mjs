@@ -533,7 +533,7 @@ test("renderHero shows requested fallback copy when live pull hasn't happened ye
     liveSourceCount: 0
   };
   const elements = {
-    heroRegion: { textContent: '' },
+    heroSearch: { value: '' },
     heroUpdated: { textContent: '' }
   };
 
@@ -555,7 +555,7 @@ test('renderHero uses last successful source count when current source count is 
     }
   };
   const elements = {
-    heroRegion: { textContent: '' },
+    heroSearch: { value: '' },
     heroUpdated: { textContent: '' }
   };
 

@@ -72,7 +72,7 @@ function createElements() {
     contextCount: document.getElementById('context-count'),
     quarantineCount: document.getElementById('quarantine-count'),
     watchlistSummary: document.getElementById('watchlist-summary'),
-    heroRegion: document.getElementById('hero-region'),
+    heroSearch: document.getElementById('hero-search'),
     heroUpdated: document.getElementById('hero-updated'),
     mapElement: document.getElementById('leaflet-map'),
     mapSummary: document.getElementById('map-summary'),
@@ -145,6 +145,7 @@ export function initialiseApp() {
     openDetail: modalController.openDetail
   });
   let resizeTimer = null;
+  let searchTimer = null;
 
   const invalidateDerivedView = () => derivedViewStore.invalidate();
   const currentView = () => derivedViewStore.current(state);
@@ -227,6 +228,16 @@ export function initialiseApp() {
     elements.quarantineLoadMore?.addEventListener('click', () => {
       state.quarantineVisibleCount += QUARANTINE_LOAD_STEP;
       renderAll();
+    });
+
+    elements.heroSearch?.addEventListener('input', (event) => {
+      const nextQuery = String(event.target?.value || '');
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        state.searchQuery = nextQuery;
+        invalidateDerivedView();
+        renderAll();
+      }, 80);
     });
     elements.tabbar?.addEventListener('click', (event) => {
       const button = event.target.closest('[data-tab]');

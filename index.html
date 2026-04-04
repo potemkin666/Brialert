@@ -26,10 +26,25 @@
         <header class="hero-card">
           <h1>F.O.C.</h1>
           <div class="hero-metrics">
-            <div class="metric">
-              <strong id="hero-region"></strong>
+            <div class="metric hero-search-metric">
+              <label class="sr-only" for="hero-search">Search incidents, places, sources</label>
+              <div class="hero-search-shell">
+                <svg class="hero-search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10.5 4.5a6 6 0 1 0 0 12a6 6 0 0 0 0-12Zm0-2a8 8 0 1 1 0 16a8 8 0 0 1 0-16Zm11.2 17.8l-4.35-4.35l1.4-1.4l4.35 4.35l-1.4 1.4Z" fill="currentColor"></path>
+                </svg>
+                <input
+                  id="hero-search"
+                  class="hero-search-input"
+                  type="search"
+                  inputmode="search"
+                  autocomplete="off"
+                  spellcheck="false"
+                  enterkeyhint="search"
+                  aria-label="Search incidents, places, sources"
+                  placeholder="Search incidents, places, sources...">
+              </div>
             </div>
-            <div class="metric">
+            <div class="metric hero-update-metric">
               <span class="metric-label">Updated</span>
               <strong id="hero-updated">Just now</strong>
             </div>

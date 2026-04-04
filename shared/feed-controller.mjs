@@ -1,9 +1,51 @@
 import { isLondonAlert } from './alert-view-model.mjs';
 
+function searchTerms(query) {
+  return String(query || '')
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function alertSearchText(alert) {
+  const fields = [
+    alert?.title,
+    alert?.summary,
+    alert?.source,
+    alert?.location,
+    alert?.status,
+    alert?.aiSummary,
+    alert?.sourceExtract,
+    alert?.laneReason,
+    alert?.queueReason,
+    alert?.actor,
+    alert?.region,
+    alert?.lane
+  ];
+
+  if (Array.isArray(alert?.keywordHits)) fields.push(alert.keywordHits.join(' '));
+  if (Array.isArray(alert?.terrorismHits)) fields.push(alert.terrorismHits.join(' '));
+  if (Array.isArray(alert?.peopleInvolved)) fields.push(alert.peopleInvolved.join(' '));
+
+  return fields
+    .filter((value) => typeof value === 'string' && value.trim())
+    .join(' ')
+    .toLowerCase();
+}
+
+export function matchesAlertSearch(alert, query) {
+  const terms = searchTerms(query);
+  if (!terms.length) return true;
+  const haystack = alertSearchText(alert);
+  return terms.every((term) => haystack.includes(term));
+}
+
 export function filteredAlerts(state) {
   return state.alerts.filter((alert) =>
     (state.activeRegion === 'all' || (state.activeRegion === 'london' ? isLondonAlert(alert) : alert.region === state.activeRegion)) &&
-    (state.activeLane === 'all' || alert.lane === state.activeLane)
+    (state.activeLane === 'all' || alert.lane === state.activeLane) &&
+    matchesAlertSearch(alert, state.searchQuery)
   );
 }
 

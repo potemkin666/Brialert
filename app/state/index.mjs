@@ -19,6 +19,7 @@ export const MAP_INIT_FALLBACK_DELAY_MS = 300;
 export function createState(watchLayerLabels) {
   return {
     alerts: [],
+    searchQuery: '',
     activeRegion: 'all',
     activeLane: 'all',
     mapTimelineWindow: '24h',

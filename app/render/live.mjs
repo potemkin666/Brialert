@@ -33,15 +33,19 @@ function updateLoadMoreButton(button, shown, total, label) {
 export function renderPriority({ state, elements, view, modalController }) {
   const alert = view.topPriority;
   if (!alert) {
+    const query = String(state.searchQuery || '').trim();
     const sourceCount = displaySourceCount(state);
     elements.priorityCard.classList.remove('context-priority');
     elements.priorityCard.innerHTML = `
       <div class="eyebrow">Live Feed Status</div>
-      <h2>Waiting for a verified source pull</h2>
-      <p class="muted">The app is not showing placeholder incidents anymore. Once the feed builder publishes live items, responder candidates will appear here automatically.</p>
+      <h2>${query ? 'No results found' : 'Waiting for a verified source pull'}</h2>
+      <p class="muted">${
+        query
+          ? `Nothing matched "${escapeHtml(query)}" across incidents, places, sources, or briefing text.`
+          : 'The app is not showing placeholder incidents anymore. Once the feed builder publishes live items, responder candidates will appear here automatically.'
+      }</p>
       <div class="meta-row">
-        <span>${state.activeRegion === 'all' ? 'All feeds' : `${regionLabel(state.activeRegion)} feeds`}</span>
-        <span>${state.activeLane === 'all' ? 'All lanes' : laneLabels[state.activeLane]}</span>
+        <span>${query ? 'Search is active' : (state.activeRegion === 'all' ? 'All feeds' : `${regionLabel(state.activeRegion)} feeds`)}</span>
         <span>${sourceCount ? `${sourceCount} sources checked` : 'No live feed yet'}</span>
       </div>`;
     elements.priorityCard.onclick = null;
@@ -91,11 +95,14 @@ export function renderBriefingMode({ state, elements, view, modalController }) {
 
 export function renderFeed({ state, elements, view, modalController, invalidateDerivedView, renderAll, saveSet, watchedStorageKey }) {
   const totalItems = view.responder.length;
-  const visibleCount = Math.max(1, Number(state.feedVisibleCount || 0));
+  const hasSearch = Boolean(String(state.searchQuery || '').trim());
+  const visibleCount = hasSearch ? totalItems : Math.max(1, Number(state.feedVisibleCount || 0));
   const items = view.responder.slice(0, visibleCount);
   elements.responderSection?.classList.toggle('hidden', !items.length);
   elements.feedList.innerHTML = items.length ? items.map((alert) => responderCardMarkup(alert, state.watched.has(alert.id))).join('') : '';
-  elements.watchedCount.textContent = `${state.watched.size} watched | ${items.length}/${totalItems} shown`;
+  elements.watchedCount.textContent = hasSearch
+    ? `${items.length} matching alerts`
+    : `${state.watched.size} watched | ${items.length}/${totalItems} shown`;
   updateLoadMoreButton(elements.feedLoadMore, items.length, totalItems, 'Load more alerts');
   elements.feedList.querySelectorAll('.feed-card').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.id)));
@@ -114,12 +121,19 @@ export function renderFeed({ state, elements, view, modalController, invalidateD
 
 export function renderContext({ elements, view, state, modalController }) {
   const totalItems = view.context.length;
-  const visibleCount = Math.max(1, Number(state.contextVisibleCount || 0));
+  const hasSearch = Boolean(String(state.searchQuery || '').trim());
+  const visibleCount = hasSearch ? totalItems : Math.max(1, Number(state.contextVisibleCount || 0));
   const items = view.context.slice(0, visibleCount);
-  elements.contextCount.textContent = `${items.length}/${totalItems} contextual items`;
+  elements.contextCount.textContent = hasSearch
+    ? `${items.length} matching items`
+    : `${items.length}/${totalItems} contextual items`;
   elements.contextList.innerHTML = items.length
     ? items.map(contextCardMarkup).join('')
-    : "<p class='panel-copy'>No contextual items have been published into this filter yet.</p>";
+    : `<p class='panel-copy'>${
+      hasSearch
+        ? 'No results found.'
+        : 'No contextual items have been published into this filter yet.'
+    }</p>`;
   updateLoadMoreButton(elements.contextLoadMore, items.length, totalItems, 'Load more context');
   elements.contextList.querySelectorAll('[data-context]').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.context)));
@@ -128,12 +142,19 @@ export function renderContext({ elements, view, state, modalController }) {
 
 export function renderQuarantine({ elements, view, state, modalController }) {
   const totalItems = view.quarantine.length;
-  const visibleCount = Math.max(1, Number(state.quarantineVisibleCount || 0));
+  const hasSearch = Boolean(String(state.searchQuery || '').trim());
+  const visibleCount = hasSearch ? totalItems : Math.max(1, Number(state.quarantineVisibleCount || 0));
   const items = view.quarantine.slice(0, visibleCount);
-  elements.quarantineCount.textContent = `${items.length}/${totalItems} doubtful items`;
+  elements.quarantineCount.textContent = hasSearch
+    ? `${items.length} matching items`
+    : `${items.length}/${totalItems} doubtful items`;
   elements.quarantineList.innerHTML = items.length
     ? items.map(quarantineCardMarkup).join('')
-    : "<p class='panel-copy'>No doubtful items are parked in quarantine for this filter.</p>";
+    : `<p class='panel-copy'>${
+      hasSearch
+        ? 'No results found.'
+        : 'No doubtful items are parked in quarantine for this filter.'
+    }</p>`;
   updateLoadMoreButton(elements.quarantineLoadMore, items.length, totalItems, 'Load more quarantine');
   elements.quarantineList.querySelectorAll('[data-quarantine]').forEach((card) => {
     card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.quarantine)));
@@ -141,7 +162,9 @@ export function renderQuarantine({ elements, view, state, modalController }) {
 }
 
 export function renderHero({ state, elements }) {
-  elements.heroRegion.textContent = '';
+  if (elements.heroSearch && elements.heroSearch.value !== state.searchQuery) {
+    elements.heroSearch.value = state.searchQuery;
+  }
   const healthRefresh = state.liveFeedHealth?.lastSuccessfulRefreshTime;
   const stamp = healthRefresh ? new Date(healthRefresh) : state.liveFeedGeneratedAt;
   const hasValidStamp = stamp instanceof Date && !Number.isNaN(stamp.getTime());
