@@ -148,6 +148,14 @@
         <section class="tab-panel" data-panel="notes">
           <article class="panel">
             <h3>Analyst Notes</h3>
+            <p class="panel-copy">Need a new source? Paste the website link and Brialert will save your request.</p>
+            <button class="primary-button" id="add-source-button" type="button">Add new source</button>
+            <section class="section">
+              <div class="section-heading">
+                <h3>Requested Sources</h3>
+              </div>
+              <div id="source-requests-list"></div>
+            </section>
             <form id="note-form" class="note-form">
               <input id="note-title" type="text" placeholder="Note title" required>
               <textarea id="note-body" placeholder="Add your assessment or follow-up task" required></textarea>

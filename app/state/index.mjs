@@ -10,6 +10,7 @@ export const INITIAL_RESPONDER_VISIBLE = 18;
 export const RESPONDER_LOAD_STEP = 16;
 export const INITIAL_SUPPORTING_VISIBLE = 18;
 export const SUPPORTING_LOAD_STEP = 16;
+export const SOURCE_REQUESTS_STORAGE_KEY = 'brialert.sourceRequests';
 export const MAP_INIT_IDLE_TIMEOUT_MS = 1500;
 export const MAP_INIT_FALLBACK_DELAY_MS = 300;
 
@@ -31,6 +32,7 @@ export function createState(watchLayerLabels) {
     userLocationLabel: null,
     albertIndex: -1,
     notes: [],
+    sourceRequests: [],
     briefingMode: false,
     activeTab: 'firstalert',
     geoLookup: [],
