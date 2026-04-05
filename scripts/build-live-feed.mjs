@@ -631,7 +631,7 @@ async function main() {
   const scheduledSourceIds = new Set([...machineReadableScheduled, ...htmlScheduled].map((source) => source.id));
   const scheduledSourcesInitial = [...machineReadableScheduled, ...htmlScheduled];
   const htmlDeferredForBudget = scheduledSources.filter((source) => source?.kind === 'html' && !scheduledSourceIds.has(source.id));
-  const CONTINUATION_OVERSAMPLING_FACTOR = 2;
+  const continuationOversamplingFactor = 2;
   const htmlDeferredReasonById = new Map();
   for (const source of htmlDeferredForBudget) {
     htmlDeferredReasonById.set(source.id, htmlSelection.domainCappedSourceIds.has(source.id) ? 'domain-cap' : 'html-budget');
@@ -813,10 +813,10 @@ async function main() {
     && continuationCandidates.length
   ) {
     const remainingNeeded = TARGET_SUCCESSFUL_SOURCES_PER_RUN - successfulSourcesFound;
-    // Over-sample remaining candidates because many source attempts fail or return zero built alerts.
+    // Oversample remaining candidates because many source attempts fail or return zero built alerts.
     const nextBatchSize = Math.min(
       continuationCandidates.length,
-      Math.max(FEED_SOURCE_CONCURRENCY, remainingNeeded * CONTINUATION_OVERSAMPLING_FACTOR)
+      Math.max(FEED_SOURCE_CONCURRENCY, remainingNeeded * continuationOversamplingFactor)
     );
     const nextBatch = continuationCandidates.splice(0, nextBatchSize);
     await processSourceBatch(nextBatch);
