@@ -579,7 +579,7 @@ test('sources catalog passes structural and per-field validation', () => {
   assert.ok(Array.isArray(sources), 'sources should be an array');
   assert.ok(sources.length > 0, 'sources array should not be empty');
 
-  const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html']);
+  const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html', 'playwright_html']);
   const VALID_LANES = new Set(['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention']);
   const VALID_REGIONS = new Set(['uk', 'europe', 'london', 'eu', 'international', 'us']);
   const ids = new Set();

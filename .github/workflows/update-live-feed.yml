@@ -32,6 +32,9 @@ jobs:
       - name: Install feed builder dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
+
       - name: Validate feed data files
         run: npm run validate:feed-data
 
