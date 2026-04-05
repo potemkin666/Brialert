@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-05T17:35:16.979Z",
-  "count": 5,
+  "generatedAt": "2026-04-05T19:38:38.443Z",
+  "count": 6,
   "sources": [
     {
       "id": "ct-policing-prevent-programme",
@@ -11,12 +11,12 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-05T17:35:16.979Z",
+      "quarantinedAt": "2026-04-05T19:38:38.443Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
-      "lastFailureAt": "2026-04-05T17:35:16.979Z",
-      "lastCheckedAt": "2026-04-05T17:35:16.979Z"
+      "lastFailureAt": "2026-04-05T19:38:38.443Z",
+      "lastCheckedAt": "2026-04-05T19:38:38.443Z"
     },
     {
       "id": "ct-policing-what-you-can-do",
@@ -27,12 +27,12 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-05T17:35:16.979Z",
+      "quarantinedAt": "2026-04-05T19:38:38.443Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
-      "lastFailureAt": "2026-04-05T17:35:16.979Z",
-      "lastCheckedAt": "2026-04-05T17:35:16.979Z"
+      "lastFailureAt": "2026-04-05T19:38:38.443Z",
+      "lastCheckedAt": "2026-04-05T19:38:38.443Z"
     },
     {
       "id": "mi5-terrorism-threat-levels",
@@ -43,44 +43,60 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-05T17:35:16.979Z",
+      "quarantinedAt": "2026-04-05T19:38:38.443Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
-      "lastFailureAt": "2026-04-05T17:35:16.979Z",
-      "lastCheckedAt": "2026-04-05T17:35:16.979Z"
+      "lastFailureAt": "2026-04-05T19:38:38.443Z",
+      "lastCheckedAt": "2026-04-05T19:38:38.443Z"
     },
     {
-      "id": "npsa-blog-news",
-      "provider": "NPSA - Blog News",
-      "endpoint": "https://www.npsa.gov.uk/blog/news",
+      "id": "hope-not-hate-home",
+      "provider": "Hope not hate podcast",
+      "endpoint": "https://feeds.buzzsprout.com/170425.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-05T16:42:53.076Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-05T16:42:53.076Z",
+      "lastCheckedAt": "2026-04-05T16:42:53.076Z"
+    },
+    {
+      "id": "police-scotland-news",
+      "provider": "Police Scotland news",
+      "endpoint": "https://www.scotland.police.uk/what-s-happening/news/",
       "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-05T15:36:10.273Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-05T15:36:10.273Z",
+      "lastCheckedAt": "2026-04-05T15:36:10.273Z"
+    },
+    {
+      "id": "npsa-national-protective-security-authority",
+      "provider": "NPSA - Activity on GOV.UK",
+      "endpoint": "https://www.gov.uk/government/organisations/national-protective-security-authority.atom",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-05T17:35:16.979Z",
+      "quarantinedAt": "2026-04-05T13:02:51.966Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
-      "lastFailureAt": "2026-04-05T17:35:16.979Z",
-      "lastCheckedAt": "2026-04-05T17:35:16.979Z"
-    },
-    {
-      "id": "uk-ncsc-homepage",
-      "provider": "UK NCSC - Homepage",
-      "endpoint": "https://www.ncsc.gov.uk/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-05T17:35:16.979Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 2,
-      "lastFailureAt": "2026-04-05T17:35:16.979Z",
-      "lastCheckedAt": "2026-04-05T17:35:16.979Z"
+      "lastFailureAt": "2026-04-05T13:02:51.966Z",
+      "lastCheckedAt": "2026-04-05T13:02:51.966Z"
     }
   ]
 }
