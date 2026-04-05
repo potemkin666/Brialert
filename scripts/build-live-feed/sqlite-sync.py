@@ -7,7 +7,8 @@ from pathlib import Path
 def ensure_schema(connection: sqlite3.Connection) -> None:
     connection.executescript(
         """
-        PRAGMA journal_mode = WAL;
+        PRAGMA journal_mode = DELETE;
+        PRAGMA synchronous = NORMAL;
 
         CREATE TABLE IF NOT EXISTS source_state (
           source_id TEXT PRIMARY KEY,

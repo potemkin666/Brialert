@@ -2,3 +2,5 @@ node_modules/
 .debug-artifacts/
 .DS_Store
 Thumbs.db
+data/*.sqlite-wal
+data/*.sqlite-shm
