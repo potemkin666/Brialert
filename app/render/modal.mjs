@@ -10,7 +10,10 @@ import {
 import { createModalController } from '../../shared/modal-briefing.mjs';
 import { cleanTextBlock, splitLongBriefSentences } from '../utils/text.mjs';
 
-const LONG_BRIEF_API_URL = 'https://brialertbackend.vercel.app/api/generate-brief';
+const LONG_BRIEF_API_URLS = [
+  'https://brialertbackend.vercel.app/api/generate-brief',
+  'https://brialertbackend.vercel.app/api/generateBrief'
+];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 const LONG_BRIEF_MAX_SOURCE_EXTRACT_CHARS = 8_000;
 const LONG_BRIEF_FALLBACK_SOURCE_EXTRACT_CHARS = 3_500;
@@ -50,36 +53,87 @@ function buildLocalLongBrief(alert) {
 }
 
 async function generateRemoteLongBrief(alert) {
+  const apiUrls = resolveLongBriefApiUrls();
   const primaryPayload = mapAlertToLongBriefPayload(alert, LONG_BRIEF_MAX_SOURCE_EXTRACT_CHARS);
   const fallbackPayload = mapAlertToLongBriefPayload(alert, LONG_BRIEF_FALLBACK_SOURCE_EXTRACT_CHARS);
   const payloadAttempts = [primaryPayload, fallbackPayload];
 
-  let lastError = null;
+  const errors = [];
   for (const payload of payloadAttempts) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), LONG_BRIEF_TIMEOUT_MS);
-    try {
-      const response = await fetch(LONG_BRIEF_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: controller.signal,
-        body: JSON.stringify(payload)
-      });
+    for (const apiUrl of apiUrls) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), LONG_BRIEF_TIMEOUT_MS);
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify(payload)
+        });
 
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const responseData = await response.json();
-      const brief = String(responseData?.brief || '').trim();
-      if (!brief) throw new Error('Invalid brief response');
-      return brief;
-    } catch (error) {
-      lastError = error;
-    } finally {
-      clearTimeout(timeout);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const responseData = await response.json();
+        const brief = extractRemoteBrief(responseData);
+        if (!brief) throw new Error('Invalid brief response');
+        return brief;
+      } catch (error) {
+        const detail = error instanceof Error ? error.message : String(error);
+        errors.push(`${apiUrl}: ${detail}`);
+      } finally {
+        clearTimeout(timeout);
+      }
     }
   }
 
-  const detail = lastError instanceof Error ? lastError.message : String(lastError);
-  throw new Error(`Long brief generation failed after ${payloadAttempts.length} attempts: ${detail}`);
+  throw new Error(`Long brief generation failed after ${apiUrls.length * payloadAttempts.length} attempts: ${errors.join(' | ')}`);
+}
+
+function resolveLongBriefApiUrls() {
+  const runtimeUrls = Array.isArray(globalThis?.BRIALERT_LONG_BRIEF_API_URLS)
+    ? globalThis.BRIALERT_LONG_BRIEF_API_URLS
+    : [];
+  const runtimeUrl = String(globalThis?.BRIALERT_LONG_BRIEF_API_URL || '').trim();
+  const allCandidates = [
+    ...runtimeUrls.map((value) => String(value || '').trim()).filter(Boolean),
+    runtimeUrl,
+    ...LONG_BRIEF_API_URLS
+  ].filter(Boolean);
+  return [...new Set(allCandidates.filter(isSafeAbsoluteHttpUrl))];
+}
+
+function extractRemoteBrief(responseData) {
+  // We intentionally support multiple response shapes because the deployed endpoint may be:
+  // - the direct Brialert API contract { brief }
+  // - a compatibility/proxy contract { longBrief } / { text } / { output_text } / { content } / { data: { brief } }
+  // - a pass-through LLM wrapper with OpenAI-style choices[].message.content or choices[].text
+  // This prevents false local fallback when Vercel is up but a different response adapter is in front.
+  const directBrief = String(
+    responseData?.brief
+    ?? responseData?.longBrief
+    ?? responseData?.text
+    ?? responseData?.output_text
+    ?? responseData?.content
+    ?? responseData?.data?.brief
+    ?? ''
+  ).trim();
+  if (directBrief) return directBrief;
+
+  const choiceContent = String(
+    responseData?.choices?.[0]?.message?.content
+    ?? responseData?.choices?.[0]?.text
+    ?? ''
+  ).trim();
+  return choiceContent;
+}
+
+function isSafeAbsoluteHttpUrl(value) {
+  try {
+    const parsed = new URL(String(value || '').trim());
+    if (!/^https?:$/.test(parsed.protocol)) return false;
+    return Boolean(parsed.hostname);
+  } catch {
+    return false;
+  }
 }
 
 function mapAlertToLongBriefPayload(alert, maxSourceExtractChars = LONG_BRIEF_MAX_SOURCE_EXTRACT_CHARS) {
