@@ -456,6 +456,7 @@ async function main() {
   const sourceErrors = [];
   const sourceStats = [];
   const autoDeferredSources = [];
+  const operationalDeferredSources = [];
   const eligibleSources = sources.filter((source) => {
     if (!sourceLooksEnglish(source)) return false;
     if (source?.quarantined) {
@@ -512,7 +513,7 @@ async function main() {
     source?.kind === 'html' && !scheduledSourceIds.has(source.id)
   );
   for (const source of htmlDeferredForBudget) {
-    autoDeferredSources.push({
+    operationalDeferredSources.push({
       id: source.id,
       provider: source.provider,
       reason: 'html-budget',
@@ -524,7 +525,7 @@ async function main() {
       source?.kind === 'playwright_html' && !scheduledSourceIds.has(source.id)
     );
     for (const source of playwrightDeferredForBudget) {
-      autoDeferredSources.push({
+      operationalDeferredSources.push({
         id: source.id,
         provider: source.provider,
         reason: 'playwright-budget',
@@ -534,7 +535,7 @@ async function main() {
   }
   if (!playwrightEnabled) {
     for (const source of scheduledSources.filter((entry) => entry?.kind === 'playwright_html')) {
-      autoDeferredSources.push({
+      operationalDeferredSources.push({
         id: source.id,
         provider: source.provider,
         reason: 'playwright-disabled',
@@ -542,7 +543,7 @@ async function main() {
       });
     }
   }
-  const deferredSources = Math.max(0, eligibleSources.length - scheduledSources.length);
+  const deferredSources = Math.max(0, eligibleSources.length - scheduledSourcesFinal.length);
 
   const sharedPlaywrightBrowser = playwrightScheduled.length
     ? await chromium.launch({ headless: true })
@@ -700,6 +701,7 @@ async function main() {
   const buildWarning = [
     geoLookupFallbackNote,
     autoDeferredSources.length ? `Deferred ${autoDeferredSources.length} low-yield source(s) on health cooldown.` : null,
+    operationalDeferredSources.length ? `Deferred ${operationalDeferredSources.length} source(s) due to run budget or disabled Playwright fallback.` : null,
     preservedAlerts ? 'Build produced no fresh alerts; preserved previous alert set.' : null
   ].filter(Boolean).join(' | ') || null;
   const generatedAt = new Date().toISOString();
@@ -708,7 +710,8 @@ async function main() {
 
   for (const source of eligibleSources) {
     const priorEntry = sourceHealthEntry(previousHealth, source.id);
-    const deferred = autoDeferredSources.find((entry) => entry.id === source.id);
+    const deferred = autoDeferredSources.find((entry) => entry.id === source.id)
+      || operationalDeferredSources.find((entry) => entry.id === source.id);
     if (deferred) {
       nextSourceHealth[source.id] = {
         ...(priorEntry || {}),
@@ -759,7 +762,8 @@ async function main() {
       successfulRefresh: !preservedAlerts,
       usedFallback: preservedAlerts || Boolean(geoLookupFallbackNote),
       sourceHealth: nextSourceHealth,
-      autoDeferredSources
+      autoDeferredSources,
+      operationalDeferredSources
     })
   };
   const sqliteSnapshot = {
@@ -797,8 +801,9 @@ async function main() {
     'Feed build summary:',
     `eligible=${eligibleSources.length}`,
     `scheduled=${scheduledSourcesFinal.length}`,
-    `deferred=${deferredSources + htmlDeferredForBudget.length}`,
+    `deferred=${deferredSources}`,
     `cooldownDeferred=${autoDeferredSources.length}`,
+    `operationalDeferred=${operationalDeferredSources.length}`,
     `checked=${checked}`,
     `successfulWithAlerts=${successfulSources}`,
     `failed=${failedSources}`,

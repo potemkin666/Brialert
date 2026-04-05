@@ -5229,8 +5229,8 @@
             "comment": "Official FRA RSS feed for rights, justice and security-related updates."
         },
         {
-            "id": "skwawkbox-feed",
-            "provider": "Skwawkbox - Feed",
+            "id": "skwawkbox",
+            "provider": "Skwawkbox",
             "endpoint": "https://www.thecanary.co/skwawkbox/",
             "kind": "playwright_html",
             "lane": "context",
