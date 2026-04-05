@@ -66,6 +66,24 @@ function chooseArticleDetail(metaDescription, articleParagraphs) {
 }
 
 export function parseFeedItems(source, xml) {
+  if (source?.kind === 'json') {
+    let doc;
+    try {
+      doc = JSON.parse(xml);
+    } catch {
+      return [];
+    }
+    const jsonItems = arrayify(doc?.items).map((item) => ({
+      title: plainText(item?.title || item?.summary || item?.content_text || item?.content_html),
+      link: clean(item?.url || item?.external_url),
+      summary: plainText(item?.summary || item?.content_text || item?.content_html),
+      published: clean(item?.date_published || item?.date_modified)
+    }));
+    return jsonItems
+      .filter((item) => item.title && item.link)
+      .slice(0, MAX_FEED_CANDIDATES_PER_SOURCE);
+  }
+
   const doc = parser.parse(xml);
   const rssItems = arrayify(doc?.rss?.channel?.item).map((item) => ({
     title: plainText(item.title),
