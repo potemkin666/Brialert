@@ -788,6 +788,106 @@ h1 {
   min-width: 0;
 }
 
+.map-motion-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 410;
+  overflow: hidden;
+}
+
+.map-motion-track {
+  position: absolute;
+  left: -18%;
+  width: 136%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 20%, rgba(162, 211, 255, 0.36) 52%, rgba(255, 255, 255, 0.10) 84%, transparent 100%);
+  opacity: 0.68;
+}
+
+.map-motion-track--one {
+  top: 24%;
+  transform: rotate(-14deg);
+}
+
+.map-motion-track--two {
+  top: 50%;
+  transform: rotate(8deg);
+  opacity: 0.52;
+}
+
+.map-motion-track--three {
+  top: 73%;
+  transform: rotate(-5deg);
+  opacity: 0.42;
+}
+
+.map-motion-blip {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.96) 0%, rgba(179, 226, 255, 0.92) 56%, rgba(73, 169, 255, 0.82) 100%);
+  box-shadow: 0 0 0 2px rgba(146, 212, 255, 0.18), 0 0 14px rgba(111, 199, 255, 0.5);
+}
+
+.map-motion-blip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(167, 221, 255, 0.42);
+  animation: map-motion-pulse 1.8s ease-out infinite;
+}
+
+.map-motion-blip--one {
+  top: 20%;
+  animation: map-motion-flight-1 10s linear infinite;
+}
+
+.map-motion-blip--two {
+  top: 47%;
+  animation: map-motion-flight-2 13s linear infinite;
+}
+
+.map-motion-blip--three {
+  top: 70%;
+  animation: map-motion-flight-3 16s linear infinite;
+}
+
+@keyframes map-motion-flight-1 {
+  0% { transform: translate3d(-10%, 0, 0); opacity: 0; }
+  8% { opacity: 0.95; }
+  82% { opacity: 0.9; }
+  100% { transform: translate3d(1220%, 0, 0); opacity: 0; }
+}
+
+@keyframes map-motion-flight-2 {
+  0% { transform: translate3d(1180%, 0, 0); opacity: 0; }
+  10% { opacity: 0.9; }
+  82% { opacity: 0.85; }
+  100% { transform: translate3d(-12%, 0, 0); opacity: 0; }
+}
+
+@keyframes map-motion-flight-3 {
+  0% { transform: translate3d(-12%, 0, 0); opacity: 0; }
+  12% { opacity: 0.84; }
+  80% { opacity: 0.8; }
+  100% { transform: translate3d(1220%, 0, 0); opacity: 0; }
+}
+
+@keyframes map-motion-pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.25); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-motion-overlay {
+    display: none;
+  }
+}
+
 .map-timeline-panel {
   margin-top: 14px;
   padding: 14px;
@@ -914,6 +1014,7 @@ h1 {
   width: 100%;
   max-width: 100%;
   height: 100%;
+  z-index: 400;
 }
 
 .leaflet-container {

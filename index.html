@@ -124,6 +124,14 @@
             <p class="map-status-line" id="map-status-line">No alerts in current view</p>
             <div class="map-surface" id="map-panel-surface" role="tabpanel" aria-labelledby="map-mode-london-tab">
               <div class="map-viewport" id="map-viewport">
+                <div class="map-motion-overlay" aria-hidden="true">
+                  <span class="map-motion-track map-motion-track--one"></span>
+                  <span class="map-motion-track map-motion-track--two"></span>
+                  <span class="map-motion-track map-motion-track--three"></span>
+                  <span class="map-motion-blip map-motion-blip--one"></span>
+                  <span class="map-motion-blip map-motion-blip--two"></span>
+                  <span class="map-motion-blip map-motion-blip--three"></span>
+                </div>
                 <div class="leaflet-map" id="leaflet-map" aria-label="Interactive alert map"></div>
                 <p class="map-empty-state hidden" id="map-empty-state">No mapped alerts for this view.</p>
               </div>
