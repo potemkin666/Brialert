@@ -65,6 +65,174 @@ function chooseArticleDetail(metaDescription, articleParagraphs) {
   return articleParagraphs || metaDescription;
 }
 
+function titleCaseWords(value) {
+  return clean(value)
+    .split(/[\s_-]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function buildSyntheticPoliceLink(endpoint, suffix) {
+  return `${endpoint}${endpoint.includes('#') ? '-' : '#'}${encodeURIComponent(clean(suffix) || 'item')}`;
+}
+
+function policeApiItem(source, endpoint, title, summary, published, suffix) {
+  return {
+    title: plainText(title),
+    link: buildSyntheticPoliceLink(endpoint, suffix),
+    summary: plainText(summary),
+    published: clean(published)
+  };
+}
+
+function parsePoliceDataUkItems(source, doc) {
+  const endpoint = clean(source?.endpoint);
+  if (!endpoint || !endpoint.includes('data.police.uk/api/')) return null;
+
+  const makeSummary = (...parts) => clean(parts.filter(Boolean).join(' '));
+  const items = [];
+
+  if (endpoint.includes('/crimes-street-dates')) {
+    for (const entry of arrayify(doc)) {
+      const date = clean(entry?.date);
+      if (!date) continue;
+      items.push(policeApiItem(
+        source,
+        endpoint,
+        `Police.uk street crime data month available: ${date}`,
+        `Official Police.uk API listing of available street crime dataset month ${date}.`,
+        `${date}-01`,
+        date
+      ));
+    }
+    return items;
+  }
+
+  if (endpoint.includes('/crime-categories')) {
+    const date = clean(new URL(endpoint).searchParams.get('date'));
+    for (const entry of arrayify(doc)) {
+      const category = clean(entry?.name || entry?.url);
+      if (!category) continue;
+      items.push(policeApiItem(
+        source,
+        endpoint,
+        `Police.uk crime category: ${category}${date ? ` (${date})` : ''}`,
+        `Official Police.uk API category listing${date ? ` for ${date}` : ''}. Category slug: ${clean(entry?.url)}.`,
+        date ? `${date}-01` : '',
+        entry?.url || category
+      ));
+    }
+    return items;
+  }
+
+  if (endpoint.includes('/crimes-street/all-crime')) {
+    for (const entry of arrayify(doc)) {
+      const category = titleCaseWords(entry?.category || 'crime');
+      const month = clean(entry?.month);
+      const street = clean(entry?.location?.street?.name);
+      items.push(policeApiItem(
+        source,
+        endpoint,
+        `Police.uk street crime: ${category}${street ? ` near ${street}` : ''}`,
+        makeSummary(
+          `Official Police.uk street crime API record${month ? ` for ${month}.` : '.'}`,
+          street ? `Street: ${street}.` : '',
+          clean(entry?.outcome_status?.category) ? `Outcome: ${clean(entry.outcome_status.category)}.` : ''
+        ),
+        month ? `${month}-01` : '',
+        clean(entry?.persistent_id || `${entry?.category}-${entry?.id || month || street}`)
+      ));
+    }
+    return items;
+  }
+
+  if (endpoint.includes('/stops-street')) {
+    for (const entry of arrayify(doc)) {
+      const type = titleCaseWords(entry?.type || 'stop');
+      const date = clean(entry?.datetime || entry?.date || entry?.month);
+      const officerDefinedEthnicity = clean(entry?.officer_defined_ethnicity);
+      items.push(policeApiItem(
+        source,
+        endpoint,
+        `Police.uk stop and search: ${type}`,
+        makeSummary(
+          'Official Police.uk stop-and-search API record.',
+          officerDefinedEthnicity ? `Officer-defined ethnicity: ${officerDefinedEthnicity}.` : '',
+          clean(entry?.object_of_search) ? `Object of search: ${clean(entry.object_of_search)}.` : '',
+          clean(entry?.outcome) ? `Outcome: ${clean(entry.outcome)}.` : ''
+        ),
+        date,
+        clean(`${entry?.type}-${entry?.datetime || entry?.date || entry?.month || items.length}`)
+      ));
+    }
+    return items;
+  }
+
+  if (endpoint.includes('/stops-force')) {
+    const force = clean(new URL(endpoint).searchParams.get('force'));
+    for (const entry of arrayify(doc)) {
+      const type = titleCaseWords(entry?.type || 'stop');
+      const date = clean(entry?.datetime || entry?.date || entry?.month);
+      items.push(policeApiItem(
+        source,
+        endpoint,
+        `Police.uk force stop and search: ${type}${force ? ` (${force})` : ''}`,
+        makeSummary(
+          'Official Police.uk force stop-and-search API record.',
+          clean(entry?.object_of_search) ? `Object of search: ${clean(entry.object_of_search)}.` : '',
+          clean(entry?.outcome) ? `Outcome: ${clean(entry.outcome)}.` : ''
+        ),
+        date,
+        clean(`${force}-${entry?.type}-${entry?.datetime || entry?.date || entry?.month || items.length}`)
+      ));
+    }
+    return items;
+  }
+
+  if (endpoint.includes('/outcomes-at-location')) {
+    const date = clean(new URL(endpoint).searchParams.get('date'));
+    for (const entry of arrayify(doc)) {
+      const category = titleCaseWords(entry?.category?.name || entry?.category);
+      items.push(policeApiItem(
+        source,
+        endpoint,
+        `Police.uk outcome at location${category ? `: ${category}` : ''}`,
+        makeSummary(
+          'Official Police.uk outcomes-at-location API record.',
+          clean(entry?.person_id) ? `Person ID: ${clean(entry.person_id)}.` : '',
+          clean(entry?.crime?.category) ? `Crime category: ${titleCaseWords(entry.crime.category)}.` : ''
+        ),
+        clean(entry?.date || date),
+        clean(entry?.person_id || entry?.category?.code || entry?.category?.name || items.length)
+      ));
+    }
+    return items;
+  }
+
+  if (endpoint.includes('/outcomes-for-crime/')) {
+    const crimeId = endpoint.split('/outcomes-for-crime/')[1] || '';
+    for (const entry of arrayify(doc)) {
+      const category = titleCaseWords(entry?.category?.name || entry?.category?.code || 'outcome');
+      items.push(policeApiItem(
+        source,
+        endpoint,
+        `Police.uk crime outcome: ${category}`,
+        makeSummary(
+          'Official Police.uk outcomes-for-crime API record.',
+          clean(entry?.date) ? `Outcome date: ${clean(entry.date)}.` : '',
+          clean(entry?.person_id) ? `Person ID: ${clean(entry.person_id)}.` : ''
+        ),
+        clean(entry?.date),
+        clean(entry?.person_id || `${crimeId}-${entry?.date || items.length}`)
+      ));
+    }
+    return items;
+  }
+
+  return [];
+}
+
 export function parseFeedItems(source, xml) {
   if (source?.kind === 'json') {
     let doc;
@@ -72,6 +240,12 @@ export function parseFeedItems(source, xml) {
       doc = JSON.parse(xml);
     } catch {
       return [];
+    }
+    const policeApiItems = parsePoliceDataUkItems(source, doc);
+    if (policeApiItems) {
+      return policeApiItems
+        .filter((item) => item.title && item.link)
+        .slice(0, MAX_FEED_CANDIDATES_PER_SOURCE);
     }
     const jsonItems = arrayify(doc?.items).map((item) => ({
       title: plainText(item?.title || item?.summary || item?.content_text || item?.content_html),

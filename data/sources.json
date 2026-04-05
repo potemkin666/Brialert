@@ -4963,6 +4963,83 @@
                         "isTrustedOfficial":  true,
                         "requiresKeywordMatch":  true,
                         "comment":  "West Yorkshire Police all-content feed for broader regional policing updates with downstream filtering."
+                    },
+                    {
+                        "id":  "police-uk-crimes-street-dates",
+                        "provider":  "Police.uk - Street Crime Dataset Dates",
+                        "endpoint":  "https://data.police.uk/api/crimes-street-dates",
+                        "kind":  "json",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  false,
+                        "comment":  "Official Police.uk API endpoint listing available street crime dataset months."
+                    },
+                    {
+                        "id":  "police-uk-crime-categories-2024-01",
+                        "provider":  "Police.uk - Crime Categories (2024-01)",
+                        "endpoint":  "https://data.police.uk/api/crime-categories?date=2024-01",
+                        "kind":  "json",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  false,
+                        "comment":  "Official Police.uk API category listing for January 2024."
+                    },
+                    {
+                        "id":  "police-uk-all-crime-leicester",
+                        "provider":  "Police.uk - Street Crime Around Leicester",
+                        "endpoint":  "https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592",
+                        "kind":  "json",
+                        "lane":  "context",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Official Police.uk API street crime snapshot around Leicester coordinates."
+                    },
+                    {
+                        "id":  "police-uk-stops-street-leicester",
+                        "provider":  "Police.uk - Street Stops Around Leicester",
+                        "endpoint":  "https://data.police.uk/api/stops-street?lat=52.629729&lng=-1.131592",
+                        "kind":  "json",
+                        "lane":  "context",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Official Police.uk API stop-and-search snapshot around Leicester coordinates."
+                    },
+                    {
+                        "id":  "police-uk-stops-force-leicestershire",
+                        "provider":  "Police.uk - Force Stops (Leicestershire)",
+                        "endpoint":  "https://data.police.uk/api/stops-force?force=leicestershire",
+                        "kind":  "json",
+                        "lane":  "context",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Official Police.uk API force-level stop-and-search records for Leicestershire."
+                    },
+                    {
+                        "id":  "police-uk-outcomes-at-location-1609590",
+                        "provider":  "Police.uk - Outcomes At Location 1609590",
+                        "endpoint":  "https://data.police.uk/api/outcomes-at-location?date=2024-01&location_id=1609590",
+                        "kind":  "json",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  false,
+                        "comment":  "Official Police.uk API outcome records for location 1609590 in January 2024."
+                    },
+                    {
+                        "id":  "police-uk-outcomes-for-crime-e11dade0",
+                        "provider":  "Police.uk - Outcomes For Crime e11dade0",
+                        "endpoint":  "https://data.police.uk/api/outcomes-for-crime/e11dade0a92a912d12329b9b2abb856ac9520434ad6845c30f503e9901d140f1",
+                        "kind":  "json",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  false,
+                        "comment":  "Official Police.uk API outcome history for a single recorded crime."
                     }
                 ]
 }

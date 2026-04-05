@@ -69,3 +69,32 @@ test('parseFeedItems parses JSON Feed items', () => {
   assert.equal(items[0].published, '2026-04-04T11:00:00.000Z');
 });
 
+test('parseFeedItems adapts data.police.uk API payloads into synthetic items', () => {
+  const source = {
+    kind: 'json',
+    endpoint: 'https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592'
+  };
+  const json = JSON.stringify([
+    {
+      category: 'criminal-damage-arson',
+      month: '2024-01',
+      persistent_id: 'crime-1',
+      location: {
+        street: {
+          name: 'On or near High Street'
+        }
+      },
+      outcome_status: {
+        category: 'Under investigation'
+      }
+    }
+  ]);
+
+  const items = parseFeedItems(source, json);
+  assert.equal(items.length, 1);
+  assert.match(items[0].title, /Police\.uk street crime/i);
+  assert.match(items[0].summary, /Under investigation/i);
+  assert.equal(items[0].published, '2024-01-01');
+  assert.match(items[0].link, /crime-1/);
+});
+
