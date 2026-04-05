@@ -17,6 +17,37 @@ function noteMatchesSearch(note, query) {
   return terms.every((term) => haystack.includes(term));
 }
 
+export function addSourceRequest(requests, link, now = new Date()) {
+  const value = String(link || '').trim();
+  if (!value) {
+    return { ok: false, message: 'Enter a valid http(s) source link.' };
+  }
+
+  let parsed;
+  try {
+    parsed = new URL(value);
+  } catch {
+    return { ok: false, message: 'Enter a valid http(s) source link.' };
+  }
+
+  if (!['http:', 'https:'].includes(parsed.protocol)) {
+    return { ok: false, message: 'Enter a valid http(s) source link.' };
+  }
+
+  const normalized = parsed.toString();
+  const duplicate = requests.some((request) => String(request?.url || '').trim() === normalized);
+  if (duplicate) {
+    return { ok: false, message: 'That source link has already been requested.' };
+  }
+
+  const requestedAt = now instanceof Date && !Number.isNaN(now.getTime())
+    ? now.toISOString()
+    : new Date().toISOString();
+
+  requests.unshift({ url: normalized, requestedAt });
+  return { ok: true, message: 'Source request saved.' };
+}
+
 export function renderWatchlist({ state, elements, modalController }) {
   const allTracked = state.alerts.filter((alert) => state.watched.has(alert.id));
   const tracked = allTracked.filter((alert) => matchesAlertSearch(alert, state.searchQuery));
