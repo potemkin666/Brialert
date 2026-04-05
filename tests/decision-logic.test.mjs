@@ -30,7 +30,11 @@ import {
 } from '../shared/fusion.mjs';
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
 import { normaliseSourcesPayload } from '../scripts/build-live-feed/io.mjs';
-import { shouldRefreshSourceThisRun } from '../scripts/build-live-feed/config.mjs';
+import {
+  shouldRefreshSourceThisRun,
+  sourceRefreshEveryHours,
+  sourceRefreshOffset
+} from '../scripts/build-live-feed/config.mjs';
 import { renderHero, renderSupporting } from '../app/render/live.mjs';
 import { addSourceRequest } from '../app/render/notes.mjs';
 import {
@@ -716,19 +720,19 @@ test('source refresh cadence keeps incidents hourly and rotates lower-yield lane
     lane: 'context',
     kind: 'html'
   };
-  const fixedHour = new Date('2026-04-05T10:00:00.000Z');
-  const nextHour = new Date('2026-04-05T11:00:00.000Z');
-  const thirdHour = new Date('2026-04-05T13:00:00.000Z');
+  const baseHour = new Date('2026-04-05T10:00:00.000Z');
+  const cadence = sourceRefreshEveryHours(contextSource);
+  const offset = sourceRefreshOffset(contextSource);
+  const baseHourSlot = Math.floor(baseHour.getTime() / 3600000);
+  const deltaToRefresh = (offset - (baseHourSlot % cadence) + cadence) % cadence;
+  const refreshHour = new Date(baseHour.getTime() + deltaToRefresh * 3600000);
+  const nonRefreshHour = new Date(refreshHour.getTime() + 3600000);
 
-  assert.equal(shouldRefreshSourceThisRun(incidentsSource, fixedHour), true);
-  assert.equal(shouldRefreshSourceThisRun(incidentsSource, nextHour), true);
-  const contextAtFixedHour = shouldRefreshSourceThisRun(contextSource, fixedHour);
-  const contextAtNextHour = shouldRefreshSourceThisRun(contextSource, nextHour);
-  const contextAtThirdHour = shouldRefreshSourceThisRun(contextSource, thirdHour);
+  assert.equal(shouldRefreshSourceThisRun(incidentsSource, baseHour), true);
+  assert.equal(shouldRefreshSourceThisRun(incidentsSource, nonRefreshHour), true);
 
-  assert.equal(contextAtFixedHour, false);
-  assert.equal(contextAtNextHour, false);
-  assert.equal(contextAtThirdHour, true);
+  assert.equal(shouldRefreshSourceThisRun(contextSource, refreshHour), true);
+  assert.equal(shouldRefreshSourceThisRun(contextSource, nonRefreshHour), false);
 });
 
 test('validate-live-feed-output script passes valid feed and fails invalid sourceCount', () => {
