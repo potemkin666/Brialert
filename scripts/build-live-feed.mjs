@@ -636,11 +636,14 @@ async function main() {
     htmlDeferredReasonById.set(source.id, htmlSelection.domainCappedSourceIds.has(source.id) ? 'domain-cap' : 'html-budget');
   }
 
-  const continuationCandidates = [...new Map(
-    [...htmlDeferredForBudget, ...cadenceDeferredSources]
-      .filter((source) => !scheduledSourceIds.has(source.id) && !cooldownDeferredSourceIds.has(source.id))
-      .map((source, index) => [source.id, { source, index }])
-  ).values()]
+  const continuationCandidatesById = new Map();
+  for (const source of [...htmlDeferredForBudget, ...cadenceDeferredSources]) {
+    if (scheduledSourceIds.has(source.id) || cooldownDeferredSourceIds.has(source.id)) continue;
+    if (!continuationCandidatesById.has(source.id)) {
+      continuationCandidatesById.set(source.id, { source, index: continuationCandidatesById.size });
+    }
+  }
+  const continuationCandidates = [...continuationCandidatesById.values()]
     .sort((left, right) => {
       const priorityDelta = sourceSchedulingPriority(right.source) - sourceSchedulingPriority(left.source);
       if (priorityDelta !== 0) return priorityDelta;
@@ -656,140 +659,140 @@ async function main() {
     if (!batch.length) return;
     const sourceResults = await mapWithConcurrency(
       batch,
-    FEED_SOURCE_CONCURRENCY,
-    async (source, sourceIndex) => {
-      const localErrors = [];
-      const builtAlerts = [];
-      const failureReasonCounts = {
-        timeout: 0,
-        'bot-block': 0,
-        'parser-error': 0,
-        'http-error': 0,
-        'network-error': 0,
-        unknown: 0
-      };
-      const discardReasons = {
-        parseNoItems: 0,
-        droppedByFilter: 0,
-        droppedByItemCap: 0,
-        buildFailures: 0
-      };
+      FEED_SOURCE_CONCURRENCY,
+      async (source, sourceIndex) => {
+        const localErrors = [];
+        const builtAlerts = [];
+        const failureReasonCounts = {
+          timeout: 0,
+          'bot-block': 0,
+          'parser-error': 0,
+          'http-error': 0,
+          'network-error': 0,
+          unknown: 0
+        };
+        const discardReasons = {
+          parseNoItems: 0,
+          droppedByFilter: 0,
+          droppedByItemCap: 0,
+          buildFailures: 0
+        };
 
-      try {
-        await sleep((sourceAttemptOffset + sourceIndex) * 60);
-        let body;
-        let usedPlaywrightFallback = false;
         try {
-          body = await fetchText(source.endpoint, 1, { source });
+          await sleep((sourceAttemptOffset + sourceIndex) * 60);
+          let body;
+          let usedPlaywrightFallback = false;
+          try {
+            body = await fetchText(source.endpoint, 1, { source });
+          } catch (error) {
+            const summary = summariseSourceError(source, error);
+            const reason = classifyFetchFailure(summary);
+            failureReasonCounts[reason] = (failureReasonCounts[reason] || 0) + 1;
+            if (shouldTryPlaywrightFallback(source, summary, playwrightBudget)) {
+              playwrightBudget.attempts += 1;
+              body = await fetchTextWithPlaywright(source.endpoint, {
+                source,
+                timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS
+              });
+              usedPlaywrightFallback = true;
+              playwrightBudget.successes += 1;
+            } else {
+              throw error;
+            }
+          }
+          const parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
+            ? parseFeedItems(source, body)
+            : parseHtmlItems(source, body);
+          if (!parsed.length) {
+            discardReasons.parseNoItems += 1;
+            const parseError = buildFetchError('No items parsed from source endpoint', 'brittle-selectors-or-js-rendering');
+            const parseSummary = summariseSourceError(source, parseError);
+            localErrors.push(parseSummary);
+            const reason = classifyFetchFailure(parseSummary);
+            failureReasonCounts[reason] = (failureReasonCounts[reason] || 0) + 1;
+          }
+          const preLimit = source.kind === 'html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
+          const preLimited = parsed.slice(0, preLimit);
+          const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
+          const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
+          const itemLimit = reliabilityProfile === 'tabloid'
+            ? SOURCE_ITEM_LIMITS.tabloid
+            : SOURCE_ITEM_LIMITS[source.lane] || SOURCE_ITEM_LIMITS.default;
+          const filtered = hydrated.filter((item) => {
+            try {
+              return shouldKeepItem(source, item);
+            } catch (error) {
+              localErrors.push(summariseSourceError(source, error));
+              console.error(`Source item filter failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
+              return false;
+            }
+          });
+          const kept = filtered.slice(0, itemLimit);
+          discardReasons.droppedByFilter += Math.max(0, hydrated.length - filtered.length);
+          discardReasons.droppedByItemCap += Math.max(0, filtered.length - kept.length);
+
+          kept.forEach((item, idx) => {
+            try {
+              builtAlerts.push(buildAlert(source, item, idx));
+            } catch (error) {
+              localErrors.push(summariseSourceError(source, error));
+              discardReasons.buildFailures += 1;
+              console.error(`Alert build failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
+            }
+          });
+
+          return {
+            checked: 1,
+            alerts: builtAlerts,
+            sourceErrors: localErrors,
+            sourceStat: {
+              id: source.id,
+              provider: source.provider,
+              lane: source.lane,
+              kind: source.kind,
+              parsed: parsed.length,
+              hydrated: hydrated.length,
+              filtered: filtered.length,
+              kept: kept.length,
+              built: builtAlerts.length,
+              errors: localErrors.length,
+              lastErrorCategory: localErrors[0]?.category || null,
+              lastErrorMessage: localErrors[0]?.message || null,
+              usedPlaywrightFallback,
+              failureReasonCounts,
+              discardReasons
+            }
+          };
         } catch (error) {
           const summary = summariseSourceError(source, error);
+          localErrors.push(summary);
           const reason = classifyFetchFailure(summary);
           failureReasonCounts[reason] = (failureReasonCounts[reason] || 0) + 1;
-          if (shouldTryPlaywrightFallback(source, summary, playwrightBudget)) {
-            playwrightBudget.attempts += 1;
-            body = await fetchTextWithPlaywright(source.endpoint, {
-              source,
-              timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS
-            });
-            usedPlaywrightFallback = true;
-            playwrightBudget.successes += 1;
-          } else {
-            throw error;
-          }
+          console.error(`Source failed: ${summary.id} [${source.kind}/${source.lane}] - ${summary.message}`);
+          return {
+            checked: 0,
+            alerts: [],
+            sourceErrors: localErrors,
+            sourceStat: {
+              id: source.id,
+              provider: source.provider,
+              lane: source.lane,
+              kind: source.kind,
+              parsed: 0,
+              hydrated: 0,
+              filtered: 0,
+              kept: 0,
+              built: 0,
+              errors: localErrors.length,
+              lastErrorCategory: localErrors[0]?.category || null,
+              lastErrorMessage: localErrors[0]?.message || null,
+              usedPlaywrightFallback: false,
+              failureReasonCounts,
+              discardReasons
+            }
+          };
         }
-        const parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
-          ? parseFeedItems(source, body)
-          : parseHtmlItems(source, body);
-        if (!parsed.length) {
-          discardReasons.parseNoItems += 1;
-          const parseError = buildFetchError('No items parsed from source endpoint', 'brittle-selectors-or-js-rendering');
-          const parseSummary = summariseSourceError(source, parseError);
-          localErrors.push(parseSummary);
-          const reason = classifyFetchFailure(parseSummary);
-          failureReasonCounts[reason] = (failureReasonCounts[reason] || 0) + 1;
-        }
-        const preLimit = source.kind === 'html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
-        const preLimited = parsed.slice(0, preLimit);
-        const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
-        const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
-        const itemLimit = reliabilityProfile === 'tabloid'
-          ? SOURCE_ITEM_LIMITS.tabloid
-          : SOURCE_ITEM_LIMITS[source.lane] || SOURCE_ITEM_LIMITS.default;
-        const filtered = hydrated.filter((item) => {
-          try {
-            return shouldKeepItem(source, item);
-          } catch (error) {
-            localErrors.push(summariseSourceError(source, error));
-            console.error(`Source item filter failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
-            return false;
-          }
-        });
-        const kept = filtered.slice(0, itemLimit);
-        discardReasons.droppedByFilter += Math.max(0, hydrated.length - filtered.length);
-        discardReasons.droppedByItemCap += Math.max(0, filtered.length - kept.length);
-
-        kept.forEach((item, idx) => {
-          try {
-            builtAlerts.push(buildAlert(source, item, idx));
-          } catch (error) {
-            localErrors.push(summariseSourceError(source, error));
-            discardReasons.buildFailures += 1;
-            console.error(`Alert build failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
-          }
-        });
-
-        return {
-          checked: 1,
-          alerts: builtAlerts,
-          sourceErrors: localErrors,
-          sourceStat: {
-            id: source.id,
-            provider: source.provider,
-            lane: source.lane,
-            kind: source.kind,
-            parsed: parsed.length,
-            hydrated: hydrated.length,
-            filtered: filtered.length,
-            kept: kept.length,
-            built: builtAlerts.length,
-            errors: localErrors.length,
-            lastErrorCategory: localErrors[0]?.category || null,
-            lastErrorMessage: localErrors[0]?.message || null,
-            usedPlaywrightFallback,
-            failureReasonCounts,
-            discardReasons
-          }
-        };
-      } catch (error) {
-        const summary = summariseSourceError(source, error);
-        localErrors.push(summary);
-        const reason = classifyFetchFailure(summary);
-        failureReasonCounts[reason] = (failureReasonCounts[reason] || 0) + 1;
-        console.error(`Source failed: ${summary.id} [${source.kind}/${source.lane}] - ${summary.message}`);
-        return {
-          checked: 0,
-          alerts: [],
-          sourceErrors: localErrors,
-          sourceStat: {
-            id: source.id,
-            provider: source.provider,
-            lane: source.lane,
-            kind: source.kind,
-            parsed: 0,
-            hydrated: 0,
-            filtered: 0,
-            kept: 0,
-            built: 0,
-            errors: localErrors.length,
-            lastErrorCategory: localErrors[0]?.category || null,
-            lastErrorMessage: localErrors[0]?.message || null,
-            usedPlaywrightFallback: false,
-            failureReasonCounts,
-            discardReasons
-          }
-        };
       }
-    }
     );
     sourceAttemptOffset += batch.length;
     sourcesAttemptedCount += batch.length;
@@ -808,6 +811,7 @@ async function main() {
     && continuationCandidates.length
   ) {
     const remainingNeeded = TARGET_SUCCESSFUL_SOURCES_PER_RUN - sourceStats.filter((stat) => stat.built > 0).length;
+    // Over-sample remaining candidates because many attempts can fail or return zero built alerts.
     const nextBatchSize = Math.min(
       continuationCandidates.length,
       Math.max(FEED_SOURCE_CONCURRENCY, remainingNeeded * 2)
