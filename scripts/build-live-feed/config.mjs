@@ -32,14 +32,53 @@ export const MAX_FEED_CANDIDATES_PER_SOURCE = 10;
 export const MAX_HTML_PARSING_THRESHOLD = MAX_HTML_CANDIDATES_PER_SOURCE * 2;
 export const MAX_HTML_PREFETCH_ITEMS = 12;
 export const MAX_FEED_PREFETCH_ITEMS = 8;
-export const MAX_HTML_SOURCES_PER_RUN = 24;
-export const MAX_PLAYWRIGHT_SOURCES_PER_RUN = 5;
-export const DEFAULT_PLAYWRIGHT_TIMEOUT_MS = 15000;
-export const DEFAULT_PLAYWRIGHT_PAGE_SETTLE_MS = 1200;
-export const MAX_PLAYWRIGHT_RAW_CANDIDATES = 60;
-export const PLAYWRIGHT_SCRAPER_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
-export const MAX_PLAYWRIGHT_ITEM_SUMMARY_CHARS = 420;
-export const PLAYWRIGHT_FEATURE_FLAG = 'BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK';
+export const MAX_HTML_SOURCES_PER_RUN = 32;
+export const CONTROL_MAX_HTML_SOURCES_PER_RUN = 24;
+export const HTML_DOMAIN_CAP_PER_RUN = 3;
+export const SCHEDULER_MODE = clean(process.env.BRIALERT_SCHEDULER_AB_MODE || 'candidate').toLowerCase() === 'control'
+  ? 'control'
+  : 'candidate';
+export const PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS = new Set([
+  'met-police-news',
+  'ct-policing-london',
+  ...clean(process.env.BRIALERT_PLAYWRIGHT_ALLOWLIST || '')
+    .split(',')
+    .map((value) => clean(value))
+    .filter(Boolean)
+]);
+export const PLAYWRIGHT_FALLBACK_MAX_ATTEMPTS_PER_RUN = Math.max(
+  0,
+  Number.isFinite(Number(process.env.BRIALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
+    ? Math.floor(Number(process.env.BRIALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
+    : 2
+);
+export const PLAYWRIGHT_FALLBACK_TIMEOUT_MS = Math.max(
+  5000,
+  Number.isFinite(Number(process.env.BRIALERT_PLAYWRIGHT_TIMEOUT_MS))
+    ? Math.floor(Number(process.env.BRIALERT_PLAYWRIGHT_TIMEOUT_MS))
+    : 12000
+);
+export const GUARDRAIL_MAX_RUNTIME_MS = Math.max(
+  60_000,
+  Number.isFinite(Number(process.env.BRIALERT_GUARDRAIL_MAX_RUNTIME_MS))
+    ? Math.floor(Number(process.env.BRIALERT_GUARDRAIL_MAX_RUNTIME_MS))
+    : 12 * 60_000
+);
+export const GUARDRAIL_MAX_FAILED_SOURCE_RATE = Math.max(
+  0,
+  Math.min(
+    1,
+    Number.isFinite(Number(process.env.BRIALERT_GUARDRAIL_MAX_FAILED_SOURCE_RATE))
+      ? Number(process.env.BRIALERT_GUARDRAIL_MAX_FAILED_SOURCE_RATE)
+      : 0.65
+  )
+);
+export const GUARDRAIL_MIN_SUCCESSFUL_SOURCES = Math.max(
+  1,
+  Number.isFinite(Number(process.env.BRIALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES))
+    ? Math.floor(Number(process.env.BRIALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES))
+    : 8
+);
 export const SOURCE_ITEM_LIMITS = Object.freeze({
   tabloid: 1,
   incidents: 6,
@@ -56,6 +95,7 @@ export const EXPECTED_REFRESH_MINUTES = 60;
 export const STALE_AFTER_MINUTES = 75;
 export const SOURCE_TIMEZONE = 'Europe/London';
 export const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
+export const FEED_BOT_USER_AGENT = 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)';
 export const DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE = Object.freeze({
   incidents: 1,
   context: 2,
@@ -96,13 +136,17 @@ function deterministicSourceHash(value) {
     .reduce((sum, char, index) => sum + (char.charCodeAt(0) * (index + 1)), 0);
 }
 
+export function sourceDeterministicHash(value) {
+  return deterministicSourceHash(value);
+}
+
 export function sourceRefreshEveryHours(source) {
   const explicit = Math.floor(Number(source?.refreshEveryHours));
   if (Number.isFinite(explicit) && explicit >= 1) return explicit;
 
   const byLane = DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE[source?.lane] || DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE.default;
   if (source?.lane === 'incidents') return 1;
-  if (source?.kind === 'html' || source?.kind === 'playwright_html') return Math.max(byLane, 3);
+  if (source?.kind === 'html') return Math.max(byLane, 3);
   return byLane;
 }
 

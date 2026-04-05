@@ -14,7 +14,8 @@ export function buildHealthBlock({
   usedFallback = false,
   sourceHealth = null,
   autoDeferredSources = [],
-  operationalDeferredSources = []
+  operationalDeferredSources = [],
+  extraMetrics = null
 }) {
   const runId = clean(process.env.GITHUB_RUN_ID);
   const runNumber = clean(process.env.GITHUB_RUN_NUMBER);
@@ -56,6 +57,9 @@ export function buildHealthBlock({
     autoDeferredSources: Array.isArray(autoDeferredSources) ? autoDeferredSources.slice(0, 25) : [],
     operationalDeferredSourceCount: Array.isArray(operationalDeferredSources) ? operationalDeferredSources.length : 0,
     operationalDeferredSources: Array.isArray(operationalDeferredSources) ? operationalDeferredSources.slice(0, 25) : [],
+    extraMetrics: extraMetrics && typeof extraMetrics === 'object'
+      ? extraMetrics
+      : (prior.extraMetrics && typeof prior.extraMetrics === 'object' ? prior.extraMetrics : {}),
     sourceHealth: sourceHealth && typeof sourceHealth === 'object'
       ? sourceHealth
       : (prior.sourceHealth && typeof prior.sourceHealth === 'object' ? prior.sourceHealth : {})
