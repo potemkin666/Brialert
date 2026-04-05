@@ -4072,6 +4072,237 @@
                         "isTrustedOfficial":  true,
                         "requiresKeywordMatch":  true,
                         "comment":  "Broad GOV.UK news and communications Atom feed for official UK announcements with keyword gating."
+                    },
+                    {
+                        "id":  "avon-and-somerset-police-news-html",
+                        "provider":  "Avon and Somerset Police - News",
+                        "endpoint":  "https://www.avonandsomerset.police.uk/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Avon and Somerset Police news page variant for regional incident reporting and operational notices."
+                    },
+                    {
+                        "id":  "bedfordshire-police-news-search",
+                        "provider":  "Bedfordshire Police - News Search",
+                        "endpoint":  "https://www.beds.police.uk/news/news-search/?ct=News",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Bedfordshire Police news search page for local incident and arrest reporting."
+                    },
+                    {
+                        "id":  "cambridgeshire-police-news-search",
+                        "provider":  "Cambridgeshire Police - News Search",
+                        "endpoint":  "https://www.cambs.police.uk/news/news-search/?ct=News",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Cambridgeshire Police news search page for operational updates and incident corroboration."
+                    },
+                    {
+                        "id":  "cumbria-police-newsroom",
+                        "provider":  "Cumbria Police - Newsroom",
+                        "endpoint":  "https://www.news.cumbria.police.uk/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Cumbria Police newsroom page for county incidents, appeals and operational statements."
+                    },
+                    {
+                        "id":  "devon-and-cornwall-police-newsroom",
+                        "provider":  "Devon and Cornwall Police - Newsroom",
+                        "endpoint":  "https://news.devon-cornwall.police.uk/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Devon and Cornwall Police newsroom for South-West incidents, arrests and coastal security reporting."
+                    },
+                    {
+                        "id":  "dorset-police-newsroom",
+                        "provider":  "Dorset Police - Newsroom",
+                        "endpoint":  "https://news.dorset.police.uk/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Dorset Police newsroom page for public-safety incidents and regional operational updates."
+                    },
+                    {
+                        "id":  "durham-police-durham-news",
+                        "provider":  "Durham Police - Durham News",
+                        "endpoint":  "https://www.durham.police.uk/news/durham/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Durham Police detailed county news page for incidents, arrests and operational notices."
+                    },
+                    {
+                        "id":  "humberside-police-news-search",
+                        "provider":  "Humberside Police - News Search",
+                        "endpoint":  "https://www.humberside.police.uk/news/news-search/?ct=News",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Humberside Police news search page for Humber-region incidents and appeals."
+                    },
+                    {
+                        "id":  "northamptonshire-police-news-html",
+                        "provider":  "Northamptonshire Police - News",
+                        "endpoint":  "https://www.northants.police.uk/news/northants/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Northamptonshire Police detailed news listing for incidents, arrests and event-related security reporting."
+                    },
+                    {
+                        "id":  "northumbria-police-northumbria-news",
+                        "provider":  "Northumbria Police - Northumbria News",
+                        "endpoint":  "https://www.northumbria.police.uk/news/northumbria/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Northumbria Police detailed news page for regional incidents and operational statements."
+                    },
+                    {
+                        "id":  "north-yorkshire-police-news-html",
+                        "provider":  "North Yorkshire Police - News",
+                        "endpoint":  "https://www.northyorkshire.police.uk/news/north-yorkshire/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "North Yorkshire Police detailed news page for county incidents, rural threats and operational notices."
+                    },
+                    {
+                        "id":  "nottinghamshire-police-nottinghamshire-news",
+                        "provider":  "Nottinghamshire Police - Nottinghamshire News",
+                        "endpoint":  "https://www.nottinghamshire.police.uk/news/nottinghamshire/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Nottinghamshire Police detailed news listing for incidents, arrests and operational reporting."
+                    },
+                    {
+                        "id":  "staffordshire-police-staffordshire-news",
+                        "provider":  "Staffordshire Police - Staffordshire News",
+                        "endpoint":  "https://www.staffordshire.police.uk/news/staffordshire/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Staffordshire Police detailed county news page for incidents, arrests and security-related updates."
+                    },
+                    {
+                        "id":  "west-mercia-police-news-html",
+                        "provider":  "West Mercia Police - News",
+                        "endpoint":  "https://www.westmercia.police.uk/news/west-mercia/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Mercia Police detailed news listing for incidents, arrests and county-level operational updates."
+                    },
+                    {
+                        "id":  "judiciary-rss-feeds-page",
+                        "provider":  "Judiciary UK - RSS Feeds",
+                        "endpoint":  "https://www.judiciary.uk/rss-feeds/",
+                        "kind":  "html",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Judiciary UK RSS feed index page for court judgments, sentencing remarks and legal oversight material."
+                    },
+                    {
+                        "id":  "scotcourts-rss-feeds-page",
+                        "provider":  "Scottish Courts and Tribunals - RSS Feeds",
+                        "endpoint":  "https://www.scotcourts.gov.uk/rss-feeds/",
+                        "kind":  "html",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Scottish Courts RSS feed index for judgments, court business and legal oversight context."
+                    },
+                    {
+                        "id":  "hmiprisons-news",
+                        "provider":  "HM Inspectorate of Prisons - News",
+                        "endpoint":  "https://hmiprisons.justiceinspectorates.gov.uk/news/",
+                        "kind":  "html",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "HM Inspectorate of Prisons news page for detention, prison conditions and extremist-risk oversight context."
+                    },
+                    {
+                        "id":  "hmiprobation-news",
+                        "provider":  "HM Inspectorate of Probation - News",
+                        "endpoint":  "https://hmiprobation.justiceinspectorates.gov.uk/news/",
+                        "kind":  "html",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "HM Inspectorate of Probation news page for offender management, supervision and extremism-related oversight."
+                    },
+                    {
+                        "id":  "gov-scot-access-to-justice-latest",
+                        "provider":  "Scottish Government - Access to Justice Latest",
+                        "endpoint":  "https://www.gov.scot/policies/access-to-justice/latest/",
+                        "kind":  "html",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Scottish Government access-to-justice updates for prosecution, courts and legal-system context."
+                    },
+                    {
+                        "id":  "psni-latest-news",
+                        "provider":  "Police Service of Northern Ireland - Latest News",
+                        "endpoint":  "https://www.psni.police.uk/latest-news",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "PSNI latest-news page for incidents, arrests and paramilitary-related reporting."
+                    },
+                    {
+                        "id":  "police-scotland-whats-happening-news",
+                        "provider":  "Police Scotland - What's Happening News",
+                        "endpoint":  "https://www.scotland.police.uk/what-s-happening/news/",
+                        "kind":  "html",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Police Scotland news page variant for incidents, appeals and operational updates."
                     }
                 ]
 }
