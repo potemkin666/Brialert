@@ -118,7 +118,7 @@ export async function loadWatchGeography(state, url) {
 export function coerceLiveFeedPayload(raw) {
   const payload = raw && typeof raw === 'object' ? raw : {};
   const alerts = Array.isArray(payload.alerts) ? payload.alerts : [];
-  const fetchedAlertCount = Number(payload.alertCount);
+  const fetchedAlertCount = Number(payload.alertCount ?? alerts.length);
   const generatedAt = payload.generatedAt || payload.updatedAt || payload.alertData?.timestamp || null;
   const sourceCount = Number(payload.sourceCount ?? payload.alertData?.sourceCount ?? 0);
   const isValidTimestamp = typeof generatedAt === 'string' && !Number.isNaN(new Date(generatedAt).getTime());
@@ -136,11 +136,17 @@ export function coerceLiveFeedPayload(raw) {
     throw new Error('Live feed payload is missing a valid sourceCount.');
   }
 
+  if (!Number.isFinite(fetchedAlertCount) || fetchedAlertCount < 0) {
+    throw new Error('Live feed payload is missing a valid alertCount.');
+  }
+
+  if (fetchedAlertCount < alerts.length) {
+    throw new Error('Live feed payload alertCount cannot be lower than alerts array length.');
+  }
+
   return {
     alerts,
-    fetchedAlertCount: Number.isFinite(fetchedAlertCount) && fetchedAlertCount >= 0
-      ? fetchedAlertCount
-      : alerts.length,
+    fetchedAlertCount,
     generatedAt,
     sourceCount,
     health: payload && typeof payload.health === 'object' && payload.health ? payload.health : null
@@ -152,16 +158,14 @@ export async function loadLiveFeed(state, options) {
   const previousAlerts = state.alerts;
   const previousGeneratedAt = state.liveFeedGeneratedAt;
   const previousSourceCount = state.liveSourceCount;
-  const previousFetchedAlertCount = Number(state.liveFetchedAlertCount || 0);
+  const previousFetchedAlertCount = state.liveFetchedAlertCount || 0;
   const previousHealth = state.liveFeedHealth;
   try {
     const response = await fetch(`${liveFeedUrl}?t=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = coerceLiveFeedPayload(await response.json());
     state.alerts = data.alerts.map((alert, index) => normaliseAlert(alert, index, state.geoLookup));
-    state.liveFetchedAlertCount = Number.isFinite(Number(data.fetchedAlertCount))
-      ? Number(data.fetchedAlertCount)
-      : state.alerts.length;
+    state.liveFetchedAlertCount = data.fetchedAlertCount;
     state.liveFeedGeneratedAt = data.generatedAt ? new Date(data.generatedAt) : new Date();
     state.liveFeedHealth = data.health;
     const sourceCount = Number(data.sourceCount);

@@ -442,6 +442,28 @@ test('live feed coercion accepts malformed alerts without dropping payload entri
   assert.equal(payload.fetchedAlertCount, 1);
 });
 
+test('live feed coercion rejects alertCount lower than alerts length', () => {
+  assert.throws(() => {
+    coerceLiveFeedPayload({
+      generatedAt: '2026-04-04T10:00:00.000Z',
+      sourceCount: 1,
+      alertCount: 0,
+      alerts: [
+        {
+          id: 'a-1',
+          title: 'Alert title',
+          source: 'Alert source',
+          sourceUrl: 'https://example.test/a-1',
+          location: 'London',
+          summary: 'Alert summary',
+          region: 'london',
+          lane: 'context'
+        }
+      ]
+    });
+  }, /alertCount cannot be lower than alerts array length/);
+});
+
 test('loadLiveFeed accepts empty renderable payload and clears alerts into standby', async () => {
   const state = {
     alerts: [makeAlert({ id: 'existing-1' })],
