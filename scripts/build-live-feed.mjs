@@ -785,8 +785,10 @@ async function main() {
   const preDedupeCount = items.length;
   const deduped = dedupeAndSortAlerts(items);
   const dedupeDropped = Math.max(0, preDedupeCount - deduped.length);
-  const preservedAlerts = !deduped.length && sourceErrors.length && Array.isArray(existing?.alerts) && existing.alerts.length;
-  const finalAlerts = preservedAlerts ? existing.alerts : selectStoredAlerts(deduped, MAX_STORED_ALERTS);
+  const existingAlerts = Array.isArray(existing?.alerts) ? existing.alerts : [];
+  const preservedAlerts = !deduped.length && sourceErrors.length && existingAlerts.length;
+  const mergedCandidates = dedupeAndSortAlerts([...deduped, ...existingAlerts]);
+  const finalAlerts = preservedAlerts ? existingAlerts : selectStoredAlerts(mergedCandidates, MAX_STORED_ALERTS);
   const successfulSources = sourceStats.filter((stat) => stat.built > 0).length;
   const failedSources = sourceStats.filter((stat) => stat.built === 0 && stat.errors > 0).length;
   const emptySources = sourceStats.filter((stat) => stat.built === 0 && stat.errors === 0).length;
