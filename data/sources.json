@@ -4897,6 +4897,72 @@
                         "isTrustedOfficial":  true,
                         "requiresKeywordMatch":  true,
                         "comment":  "House of Lords In Focus RSS for topical parliamentary briefings and institutional context."
+                    },
+                    {
+                        "id":  "west-yorkshire-police-appeals-rss",
+                        "provider":  "West Yorkshire Police - Appeals Feed",
+                        "endpoint":  "https://www.westyorkshire.police.uk/news/appeals/feed",
+                        "kind":  "rss",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Yorkshire Police appeals feed for incidents, wanted appeals and operational notices."
+                    },
+                    {
+                        "id":  "west-yorkshire-police-releases-rss",
+                        "provider":  "West Yorkshire Police - Releases Feed",
+                        "endpoint":  "https://www.westyorkshire.police.uk/news/releases/feed",
+                        "kind":  "rss",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Yorkshire Police releases feed for press statements, arrests and public-safety reporting."
+                    },
+                    {
+                        "id":  "west-yorkshire-police-missing-rss",
+                        "provider":  "West Yorkshire Police - Missing Feed",
+                        "endpoint":  "https://www.westyorkshire.police.uk/news/missing/feed",
+                        "kind":  "rss",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Yorkshire Police missing persons feed for time-sensitive operational notices."
+                    },
+                    {
+                        "id":  "west-yorkshire-police-coroner-appeals-rss",
+                        "provider":  "West Yorkshire Police - Coroner Appeals Feed",
+                        "endpoint":  "https://www.westyorkshire.police.uk/news/coroner-appeals/feed",
+                        "kind":  "rss",
+                        "lane":  "context",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Yorkshire Police coroner appeals feed for death investigation and public appeal notices."
+                    },
+                    {
+                        "id":  "west-yorkshire-police-news-rss",
+                        "provider":  "West Yorkshire Police - News Feed",
+                        "endpoint":  "https://www.westyorkshire.police.uk/news/feed",
+                        "kind":  "rss",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Yorkshire Police main news RSS feed for operational updates and incident reporting."
+                    },
+                    {
+                        "id":  "west-yorkshire-police-all-rss",
+                        "provider":  "West Yorkshire Police - All Feed",
+                        "endpoint":  "https://www.westyorkshire.police.uk/news/all/feed",
+                        "kind":  "rss",
+                        "lane":  "incidents",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Yorkshire Police all-content feed for broader regional policing updates with downstream filtering."
                     }
                 ]
 }
