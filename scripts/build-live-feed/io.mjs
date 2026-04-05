@@ -160,7 +160,7 @@ export async function fetchTextWithPlaywright(url, options = {}) {
   const timeoutMs = Math.max(5000, Number(options?.timeoutMs || DEFAULT_TIMEOUT_MS));
   const playwright = await import('playwright').catch(() => null);
   if (!playwright?.chromium) {
-    throw new Error('Playwright fallback unavailable');
+    throw new Error('Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback');
   }
   const browser = await playwright.chromium.launch({ headless: true });
   try {

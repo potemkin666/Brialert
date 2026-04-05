@@ -871,10 +871,12 @@ async function main() {
     return acc;
   }, {});
   const nowMs = Date.now();
-  const freshnessByTier = Object.entries(nextSourceHealth).reduce((acc, [, entry]) => {
-    const tier = schedulingTier(entry);
+  const sourceById = new Map(eligibleSources.map((source) => [source.id, source]));
+  const freshnessByTier = Object.entries(nextSourceHealth).reduce((acc, [sourceId, entry]) => {
+    const source = sourceById.get(sourceId) || entry;
+    const tier = schedulingTier(source);
     const minutes = freshnessMinutes(entry, nowMs);
-    if (minutes == null) return acc;
+    if (minutes === null) return acc;
     if (!acc[tier]) acc[tier] = [];
     acc[tier].push(minutes);
     return acc;
