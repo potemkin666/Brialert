@@ -1,7 +1,23 @@
 {
-  "generatedAt": "2026-04-05T15:36:10.273Z",
-  "count": 5,
+  "generatedAt": "2026-04-05T16:42:53.076Z",
+  "count": 6,
   "sources": [
+    {
+      "id": "hope-not-hate-home",
+      "provider": "Hope Not Hate",
+      "endpoint": "https://www.hopenothate.org.uk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-05T16:42:53.076Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-05T16:42:53.076Z",
+      "lastCheckedAt": "2026-04-05T16:42:53.076Z"
+    },
     {
       "id": "police-scotland-news",
       "provider": "Police Scotland a News",
