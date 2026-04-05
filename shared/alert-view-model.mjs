@@ -275,6 +275,8 @@ export function isQuarantineCandidate(alert) {
 export function sortAlertsByFreshness(alertList) {
   const ranking = { critical: 4, high: 3, elevated: 2, moderate: 1 };
   return [...alertList].sort((a, b) => {
+    const timeGap = alertPublishedTime(b) - alertPublishedTime(a);
+    if (timeGap !== 0) return timeGap;
     const freshnessGap = freshnessBucketForAlert(b) - freshnessBucketForAlert(a);
     if (freshnessGap !== 0) return freshnessGap;
     const trackGap = incidentTrackRank(b) - incidentTrackRank(a);
@@ -283,8 +285,6 @@ export function sortAlertsByFreshness(alertList) {
     if (tierGap !== 0) return tierGap;
     const londonGap = Number(isLondonAlert(b)) - Number(isLondonAlert(a));
     if (londonGap !== 0) return londonGap;
-    const timeGap = alertPublishedTime(b) - alertPublishedTime(a);
-    if (timeGap !== 0) return timeGap;
     const scoreGap = incidentScore(b) - incidentScore(a);
     if (scoreGap !== 0) return scoreGap;
     if (!!a.major !== !!b.major) return a.major ? -1 : 1;

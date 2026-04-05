@@ -16,6 +16,7 @@ import {
   isLiveIncidentCandidate,
   isQuarantineCandidate,
   normaliseAlert,
+  sortAlertsByFreshness,
   trustSignal
 } from '../shared/alert-view-model.mjs';
 import {
@@ -909,6 +910,22 @@ test('deriveView keeps full quarantine list for progressive rendering', () => {
     isTerrorRelevant: (alert) => alert.isTerrorRelevant
   });
   assert.equal(view.quarantine.length, 10);
+});
+
+test('sortAlertsByFreshness prioritises newer stories before older ones', () => {
+  const olderCritical = makeAlert({
+    id: 'older-critical',
+    severity: 'critical',
+    publishedAt: '2026-04-04T10:00:00.000Z'
+  });
+  const newerModerate = makeAlert({
+    id: 'newer-moderate',
+    severity: 'moderate',
+    publishedAt: '2026-04-04T11:00:00.000Z'
+  });
+
+  const sorted = sortAlertsByFreshness([olderCritical, newerModerate]);
+  assert.deepEqual(sorted.map((alert) => alert.id), ['newer-moderate', 'older-critical']);
 });
 
 test('renderSupporting merges context and quarantine into one progressive list', () => {
