@@ -23,17 +23,6 @@
       "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context."
     },
     {
-      "id": "dutch-police-news-no-trailing-slash",
-      "provider": "Politie.nl - Nieuws",
-      "endpoint": "https://www.politie.nl/nieuws",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Dutch police news listing variant for official policing incidents and notices."
-    },
-    {
       "id": "dutch-police-rss-index",
       "provider": "Politie.nl - RSS",
       "endpoint": "https://www.politie.nl/rss",
@@ -101,7 +90,7 @@
     },
     {
       "id": "mossos-news",
-      "provider": "Mossos dEsquadra - News",
+      "provider": "Mossos d'Esquadra - News",
       "endpoint": "https://mossos.gencat.cat/ca/actualitat/",
       "kind": "html",
       "lane": "incidents",

@@ -2,7 +2,7 @@
   "sources": [
     {
       "id": "cisa-cybersecurity-advisories",
-      "provider": "CISA a Cybersecurity Alerts & Advisories",
+      "provider": "CISA - Cybersecurity Alerts & Advisories",
       "endpoint": "https://www.cisa.gov/news-events/cybersecurity-advisories",
       "kind": "html",
       "lane": "oversight",
@@ -13,7 +13,7 @@
     },
     {
       "id": "us-house-homeland-security",
-      "provider": "US House Committee on Homeland Security a News",
+      "provider": "US House Committee on Homeland Security - News",
       "endpoint": "https://homeland.house.gov/news/",
       "kind": "html",
       "lane": "oversight",

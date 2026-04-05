@@ -2,7 +2,7 @@
   "sources": [
     {
       "id": "us-treasury-ofac-press-releases",
-      "provider": "U.S. Treasury (OFAC) a Press Releases",
+      "provider": "U.S. Treasury (OFAC) - Press Releases",
       "endpoint": "https://ofac.treasury.gov/press-releases",
       "kind": "html",
       "lane": "sanctions",
@@ -13,7 +13,7 @@
     },
     {
       "id": "us-treasury-ofac-recent-actions",
-      "provider": "U.S. Treasury (OFAC) a Recent Actions",
+      "provider": "U.S. Treasury (OFAC) - Recent Actions",
       "endpoint": "https://ofac.treasury.gov/recent-actions",
       "kind": "html",
       "lane": "sanctions",

@@ -175,17 +175,6 @@
       "comment": "Direct MI5 RSS endpoint for official security and terrorism-adjacent updates."
     },
     {
-      "id": "mi5-terrorism-news",
-      "provider": "MI5 (Security Service) a Terrorism News",
-      "endpoint": "https://www.mi5.gov.uk/News/News.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Replaced failing category HTML page with MI5 official news XML feed and keyword gating for terrorism-specific retention."
-    },
-    {
       "id": "national-crime-agency-news",
       "provider": "National Crime Agency a News",
       "endpoint": "https://www.nationalcrimeagency.gov.uk/news",

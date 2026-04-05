@@ -318,17 +318,6 @@
       "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context."
     },
     {
-      "id": "dutch-police-news-no-trailing-slash",
-      "provider": "Politie.nl - Nieuws",
-      "endpoint": "https://www.politie.nl/nieuws",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Dutch police news listing variant for official policing incidents and notices."
-    },
-    {
       "id": "dutch-police-rss-index",
       "provider": "Politie.nl - RSS",
       "endpoint": "https://www.politie.nl/rss",
@@ -396,7 +385,7 @@
     },
     {
       "id": "mossos-news",
-      "provider": "Mossos dEsquadra - News",
+      "provider": "Mossos d'Esquadra - News",
       "endpoint": "https://mossos.gencat.cat/ca/actualitat/",
       "kind": "html",
       "lane": "incidents",
@@ -452,7 +441,7 @@
     {
       "id": "curia-press-rss-en",
       "provider": "Court of Justice of the European Union - RSS (EN/FR)",
-      "endpoint": "http://curia.europa.eu/site/rss.jsp?lang=en&secondLang=fr",
+      "endpoint": "https://curia.europa.eu/site/rss.jsp?lang=en&secondLang=fr",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
@@ -462,7 +451,7 @@
     },
     {
       "id": "eppo-news-node-7",
-      "provider": "European Public Prosecutor's Office - News",
+      "provider": "European Public Prosecutor's Office - News and Media",
       "endpoint": "https://www.eppo.europa.eu/en/node/7",
       "kind": "html",
       "lane": "oversight",
@@ -918,7 +907,7 @@
     },
     {
       "id": "icct-publications",
-      "provider": "International Centre for CounteraTerrorism (ICCT) a Publications",
+      "provider": "International Centre for Counter-Terrorism (ICCT) - Publications",
       "endpoint": "https://icct.nl/publications",
       "kind": "html",
       "lane": "context",
@@ -962,7 +951,7 @@
     },
     {
       "id": "rte-ireland-news-rss",
-      "provider": "RTA News a Ireland (RSS)",
+      "provider": "RTÉ News - Ireland (RSS)",
       "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
       "kind": "rss",
       "lane": "context",
@@ -1466,24 +1455,13 @@
     {
       "id": "long-war-journal",
       "provider": "Long War Journal a News Feed",
-      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
+      "endpoint": "https://feeds.feedburner.com/LongWarJournal",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
       "comment": "Long War Journal RSS feed tracking militant ecosystem developments including al-Qaeda, Islamic State, Taliban, and affiliated groups."
-    },
-    {
-      "id": "long-war-journal-rss",
-      "provider": "Long War Journal a News (RSS)",
-      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Long War Journal FeedBurner RSS used for tracking jihadist conflict reporting and operational context."
     },
     {
       "id": "nato-news-rss",
@@ -1562,17 +1540,6 @@
       "comment": "No official RSS link advertised; using the IntelBrief category page and relying on keyword filtering."
     },
     {
-      "id": "start-umd-baad",
-      "provider": "START (UMD) a Big Allied and Dangerous (BAAD) Database",
-      "endpoint": "https://www.start.umd.edu/baad/database/",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false,
-      "comment": "START BAAD database for network and organisational relationship mapping of militant groups; used for entity enrichment context."
-    },
-    {
       "id": "tech-against-terrorism-podcast",
       "provider": "Tech Against Terrorism - Podcast",
       "endpoint": "https://podcast.techagainstterrorism.org/",
@@ -1629,7 +1596,7 @@
     },
     {
       "id": "unoct-news",
-      "provider": "UN Office of CounteraTerrorism (UNOCT) a News",
+      "provider": "UN Office of Counter-Terrorism (UNOCT) - News",
       "endpoint": "https://www.un.org/counterterrorism/news",
       "kind": "html",
       "lane": "oversight",
@@ -1640,7 +1607,7 @@
     },
     {
       "id": "unsc-counter-terrorism-committee",
-      "provider": "UN Security Council a CounteraTerrorism Committee (CTC) Updates",
+      "provider": "UN Security Council - Counter-Terrorism Committee (CTC) Updates",
       "endpoint": "https://www.un.org/securitycouncil/ctc/news",
       "kind": "html",
       "lane": "oversight",
@@ -1725,7 +1692,7 @@
     },
     {
       "id": "unsc-1267-press-releases",
-      "provider": "UN Security Council a ISIL/DaaTMesh & AlaQaida Sanctions Committee Press Releases",
+      "provider": "UN Security Council - ISIL/Da'esh & Al-Qaeda Sanctions Committee Press Releases",
       "endpoint": "https://main.un.org/securitycouncil/en/sanctions/1267/press-releases",
       "kind": "html",
       "lane": "sanctions",
@@ -1736,7 +1703,7 @@
     },
     {
       "id": "unsc-consolidated-list",
-      "provider": "UN Security Council a Consolidated Sanctions List Updates (RSS)",
+      "provider": "UN Security Council - Consolidated Sanctions List Updates (RSS)",
       "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
       "kind": "rss",
       "lane": "sanctions",
@@ -1744,16 +1711,6 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "Official UNSC RSS feed for updates to the consolidated sanctions list covering all UN sanctions regimes."
-    },
-    {
-      "id": "unsc-consolidated-list-rss",
-      "provider": "UN Security Council a Consolidated Sanctions List (RSS)",
-      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
-      "kind": "rss",
-      "lane": "sanctions",
-      "region": "international",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false
     },
     {
       "id": "barking-dagenham-council-news",
@@ -2910,17 +2867,6 @@
       "comment": "Direct MI5 RSS endpoint for official security and terrorism-adjacent updates."
     },
     {
-      "id": "mi5-terrorism-news",
-      "provider": "MI5 (Security Service) a Terrorism News",
-      "endpoint": "https://www.mi5.gov.uk/News/News.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Replaced failing category HTML page with MI5 official news XML feed and keyword gating for terrorism-specific retention."
-    },
-    {
       "id": "national-crime-agency-news",
       "provider": "National Crime Agency a News",
       "endpoint": "https://www.nationalcrimeagency.gov.uk/news",
@@ -3490,17 +3436,6 @@
       "comment": "Lancashire Constabulary news for Blackpool, Preston and Lancashire terrorism-related incidents."
     },
     {
-      "id": "lancashire-police-news",
-      "provider": "Lancashire Police - News",
-      "endpoint": "https://www.lancashire.police.uk/news/",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Lancashire Police updates for North-West UK incidents and major-event security context."
-    },
-    {
       "id": "leicestershire-police-news",
       "provider": "Leicestershire Police - News",
       "endpoint": "https://www.leics.police.uk/news/leicestershire/news/",
@@ -3807,17 +3742,6 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "West Midlands Police news for Birmingham and surrounding area terrorism-related incidents and operations."
-    },
-    {
-      "id": "west-midlands-police-news-html",
-      "provider": "West Midlands Police - News",
-      "endpoint": "https://www.westmidlands.police.uk/news",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "West Midlands Police news page variant for Birmingham and regional incident reporting."
     },
     {
       "id": "west-yorkshire-police-all-rss",
@@ -4675,49 +4599,9 @@
       "comment": "GCHQ mission page used as official counter-terrorism context and prevention source."
     },
     {
-      "id": "gnet-artificial-intelligence",
-      "provider": "Global Network on Extremism & Technology (GNET) a Artificial Intelligence",
-      "endpoint": "https://gnet-research.org/tag/artificial-intelligence/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
-      "id": "gnet-radicalisation",
-      "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation",
-      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
       "id": "gnet-research",
       "provider": "Global Network on Extremism & Technology (GNET) a Main Feed",
       "endpoint": "https://gnet-research.org/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
-      "id": "gnet-research-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Updates (RSS)",
-      "endpoint": "https://gnet-research.org/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
-      "id": "gnet-youth",
-      "provider": "Global Network on Extremism & Technology (GNET) a Youth",
-      "endpoint": "https://gnet-research.org/tag/youth/feed/",
       "kind": "rss",
       "lane": "prevention",
       "region": "uk",
@@ -5054,7 +4938,7 @@
     },
     {
       "id": "ctc-sentinel",
-      "provider": "Combating Terrorism Center at West Point a CTC Sentinel",
+      "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
       "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
       "kind": "html",
       "lane": "context",
@@ -5065,7 +4949,7 @@
     },
     {
       "id": "dhs-press-releases",
-      "provider": "US Department of Homeland Security a News",
+      "provider": "US Department of Homeland Security - News",
       "endpoint": "https://www.dhs.gov/news",
       "kind": "html",
       "lane": "context",
@@ -5076,7 +4960,7 @@
     },
     {
       "id": "dni-press-releases",
-      "provider": "Office of the Director of National Intelligence a Press Releases",
+      "provider": "Office of the Director of National Intelligence - Press Releases",
       "endpoint": "https://www.dni.gov/index.php/newsroom/press-releases",
       "kind": "html",
       "lane": "context",
@@ -5087,7 +4971,7 @@
     },
     {
       "id": "doj-nsd-press-releases",
-      "provider": "U.S. Department of Justice a National Security Division Press Releases",
+      "provider": "U.S. Department of Justice - National Security Division Press Releases",
       "endpoint": "https://www.justice.gov/nsd/press-releases",
       "kind": "html",
       "lane": "context",
@@ -5098,7 +4982,7 @@
     },
     {
       "id": "fbi-national-press-releases",
-      "provider": "FBI a National Press Releases (RSS)",
+      "provider": "FBI - National Press Releases (RSS)",
       "endpoint": "https://www.fbi.gov/feeds/national-press-releases/RSS",
       "kind": "rss",
       "lane": "context",
@@ -5108,7 +4992,7 @@
     },
     {
       "id": "fbi-stories",
-      "provider": "FBI a Stories (RSS)",
+      "provider": "FBI - Stories (RSS)",
       "endpoint": "https://www.fbi.gov/news/stories/RSS",
       "kind": "rss",
       "lane": "context",
@@ -5118,7 +5002,7 @@
     },
     {
       "id": "fbi-top-stories",
-      "provider": "FBI a Top Stories (RSS)",
+      "provider": "FBI - Top Stories (RSS)",
       "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/RSS",
       "kind": "rss",
       "lane": "context",
@@ -5128,7 +5012,7 @@
     },
     {
       "id": "gw-program-extremism",
-      "provider": "George Washington University a Program on Extremism",
+      "provider": "George Washington University - Program on Extremism",
       "endpoint": "https://extremism.gwu.edu/news",
       "kind": "html",
       "lane": "context",
@@ -5139,7 +5023,7 @@
     },
     {
       "id": "nsa-cybersecurity-news",
-      "provider": "NSA a Cybersecurity Advisories & Guidance",
+      "provider": "NSA - Cybersecurity Advisories & Guidance",
       "endpoint": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/",
       "kind": "html",
       "lane": "context",
@@ -5150,7 +5034,7 @@
     },
     {
       "id": "rand-terrorism-topic",
-      "provider": "RAND a Terrorism Topic Updates",
+      "provider": "RAND - Terrorism Topic Updates",
       "endpoint": "https://www.rand.org/topics/terrorism.html",
       "kind": "html",
       "lane": "context",
@@ -5161,7 +5045,7 @@
     },
     {
       "id": "rewards-for-justice",
-      "provider": "U.S. Department of State a Rewards for Justice",
+      "provider": "U.S. Department of State - Rewards for Justice",
       "endpoint": "https://rewardsforjustice.net/rewards/",
       "kind": "html",
       "lane": "context",
@@ -5172,7 +5056,7 @@
     },
     {
       "id": "start-baad-database",
-      "provider": "National Consortium for the Study of Terrorism (START) a Big Allied and Dangerous (BAAD) Database",
+      "provider": "National Consortium for the Study of Terrorism (START) - Big Allied and Dangerous (BAAD) Database",
       "endpoint": "https://www.start.umd.edu/baad/database/",
       "kind": "html",
       "lane": "context",
@@ -5183,7 +5067,7 @@
     },
     {
       "id": "start-center-publications",
-      "provider": "START Center (UMD) a News & Publications",
+      "provider": "START Center (UMD) - News & Publications",
       "endpoint": "https://www.start.umd.edu/news",
       "kind": "html",
       "lane": "context",
@@ -5194,7 +5078,7 @@
     },
     {
       "id": "state-dept-terrorism",
-      "provider": "US State Department a Bureau of Counterterrorism",
+      "provider": "US State Department - Bureau of Counterterrorism",
       "endpoint": "https://www.state.gov/bureaus-offices/under-secretary-for-civilian-security-democracy-and-human-rights/bureau-of-counterterrorism/",
       "kind": "html",
       "lane": "context",
@@ -5205,7 +5089,7 @@
     },
     {
       "id": "cisa-cybersecurity-advisories",
-      "provider": "CISA a Cybersecurity Alerts & Advisories",
+      "provider": "CISA - Cybersecurity Alerts & Advisories",
       "endpoint": "https://www.cisa.gov/news-events/cybersecurity-advisories",
       "kind": "html",
       "lane": "oversight",
@@ -5216,7 +5100,7 @@
     },
     {
       "id": "us-house-homeland-security",
-      "provider": "US House Committee on Homeland Security a News",
+      "provider": "US House Committee on Homeland Security - News",
       "endpoint": "https://homeland.house.gov/news/",
       "kind": "html",
       "lane": "oversight",
@@ -5227,7 +5111,7 @@
     },
     {
       "id": "us-treasury-ofac-press-releases",
-      "provider": "U.S. Treasury (OFAC) a Press Releases",
+      "provider": "U.S. Treasury (OFAC) - Press Releases",
       "endpoint": "https://ofac.treasury.gov/press-releases",
       "kind": "html",
       "lane": "sanctions",
@@ -5238,7 +5122,7 @@
     },
     {
       "id": "us-treasury-ofac-recent-actions",
-      "provider": "U.S. Treasury (OFAC) a Recent Actions",
+      "provider": "U.S. Treasury (OFAC) - Recent Actions",
       "endpoint": "https://ofac.treasury.gov/recent-actions",
       "kind": "html",
       "lane": "sanctions",

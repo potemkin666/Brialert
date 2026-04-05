@@ -2,7 +2,7 @@
   "sources": [
     {
       "id": "ctc-sentinel",
-      "provider": "Combating Terrorism Center at West Point a CTC Sentinel",
+      "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
       "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
       "kind": "html",
       "lane": "context",
@@ -13,7 +13,7 @@
     },
     {
       "id": "dhs-press-releases",
-      "provider": "US Department of Homeland Security a News",
+      "provider": "US Department of Homeland Security - News",
       "endpoint": "https://www.dhs.gov/news",
       "kind": "html",
       "lane": "context",
@@ -24,7 +24,7 @@
     },
     {
       "id": "dni-press-releases",
-      "provider": "Office of the Director of National Intelligence a Press Releases",
+      "provider": "Office of the Director of National Intelligence - Press Releases",
       "endpoint": "https://www.dni.gov/index.php/newsroom/press-releases",
       "kind": "html",
       "lane": "context",
@@ -35,7 +35,7 @@
     },
     {
       "id": "doj-nsd-press-releases",
-      "provider": "U.S. Department of Justice a National Security Division Press Releases",
+      "provider": "U.S. Department of Justice - National Security Division Press Releases",
       "endpoint": "https://www.justice.gov/nsd/press-releases",
       "kind": "html",
       "lane": "context",
@@ -46,7 +46,7 @@
     },
     {
       "id": "fbi-national-press-releases",
-      "provider": "FBI a National Press Releases (RSS)",
+      "provider": "FBI - National Press Releases (RSS)",
       "endpoint": "https://www.fbi.gov/feeds/national-press-releases/RSS",
       "kind": "rss",
       "lane": "context",
@@ -56,7 +56,7 @@
     },
     {
       "id": "fbi-stories",
-      "provider": "FBI a Stories (RSS)",
+      "provider": "FBI - Stories (RSS)",
       "endpoint": "https://www.fbi.gov/news/stories/RSS",
       "kind": "rss",
       "lane": "context",
@@ -66,7 +66,7 @@
     },
     {
       "id": "fbi-top-stories",
-      "provider": "FBI a Top Stories (RSS)",
+      "provider": "FBI - Top Stories (RSS)",
       "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/RSS",
       "kind": "rss",
       "lane": "context",
@@ -76,7 +76,7 @@
     },
     {
       "id": "gw-program-extremism",
-      "provider": "George Washington University a Program on Extremism",
+      "provider": "George Washington University - Program on Extremism",
       "endpoint": "https://extremism.gwu.edu/news",
       "kind": "html",
       "lane": "context",
@@ -87,7 +87,7 @@
     },
     {
       "id": "nsa-cybersecurity-news",
-      "provider": "NSA a Cybersecurity Advisories & Guidance",
+      "provider": "NSA - Cybersecurity Advisories & Guidance",
       "endpoint": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/",
       "kind": "html",
       "lane": "context",
@@ -98,7 +98,7 @@
     },
     {
       "id": "rand-terrorism-topic",
-      "provider": "RAND a Terrorism Topic Updates",
+      "provider": "RAND - Terrorism Topic Updates",
       "endpoint": "https://www.rand.org/topics/terrorism.html",
       "kind": "html",
       "lane": "context",
@@ -109,7 +109,7 @@
     },
     {
       "id": "rewards-for-justice",
-      "provider": "U.S. Department of State a Rewards for Justice",
+      "provider": "U.S. Department of State - Rewards for Justice",
       "endpoint": "https://rewardsforjustice.net/rewards/",
       "kind": "html",
       "lane": "context",
@@ -120,7 +120,7 @@
     },
     {
       "id": "start-baad-database",
-      "provider": "National Consortium for the Study of Terrorism (START) a Big Allied and Dangerous (BAAD) Database",
+      "provider": "National Consortium for the Study of Terrorism (START) - Big Allied and Dangerous (BAAD) Database",
       "endpoint": "https://www.start.umd.edu/baad/database/",
       "kind": "html",
       "lane": "context",
@@ -131,7 +131,7 @@
     },
     {
       "id": "start-center-publications",
-      "provider": "START Center (UMD) a News & Publications",
+      "provider": "START Center (UMD) - News & Publications",
       "endpoint": "https://www.start.umd.edu/news",
       "kind": "html",
       "lane": "context",
@@ -142,7 +142,7 @@
     },
     {
       "id": "state-dept-terrorism",
-      "provider": "US State Department a Bureau of Counterterrorism",
+      "provider": "US State Department - Bureau of Counterterrorism",
       "endpoint": "https://www.state.gov/bureaus-offices/under-secretary-for-civilian-security-democracy-and-human-rights/bureau-of-counterterrorism/",
       "kind": "html",
       "lane": "context",

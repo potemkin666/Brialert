@@ -24,7 +24,7 @@
     },
     {
       "id": "unsc-1267-press-releases",
-      "provider": "UN Security Council a ISIL/DaaTMesh & AlaQaida Sanctions Committee Press Releases",
+      "provider": "UN Security Council - ISIL/Da'esh & Al-Qaeda Sanctions Committee Press Releases",
       "endpoint": "https://main.un.org/securitycouncil/en/sanctions/1267/press-releases",
       "kind": "html",
       "lane": "sanctions",
@@ -35,7 +35,7 @@
     },
     {
       "id": "unsc-consolidated-list",
-      "provider": "UN Security Council a Consolidated Sanctions List Updates (RSS)",
+      "provider": "UN Security Council - Consolidated Sanctions List Updates (RSS)",
       "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
       "kind": "rss",
       "lane": "sanctions",
@@ -43,16 +43,6 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "Official UNSC RSS feed for updates to the consolidated sanctions list covering all UN sanctions regimes."
-    },
-    {
-      "id": "unsc-consolidated-list-rss",
-      "provider": "UN Security Council a Consolidated Sanctions List (RSS)",
-      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
-      "kind": "rss",
-      "lane": "sanctions",
-      "region": "international",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false
     }
   ]
 }

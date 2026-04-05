@@ -62,6 +62,7 @@ Requires Node `20.18.1` or newer.
 
 ```bash
 npm ci
+npm run compile:sources
 npm run validate:feed-data
 npm run validate:source-health
 npm test
@@ -77,6 +78,16 @@ npm run build:feeds
 - Both CI and the hourly workflow now run `validate:live-feed-output` after feed generation to fail fast on malformed publish output.
 - The hourly publish step retries once after rebasing `origin/main` if `git push` hits a non-fast-forward race.
 - If a refresh preserves prior alerts and reports `sourceCount: 0`, the app now falls back to `health.lastSuccessfulSourceCount` so the hero source count does not stick at zero.
+- Source catalog can be managed in sharded files under `data/sources/<region>/<lane>.json`; `npm run compile:sources` rebuilds `data/sources.json`.
+- Build runs now emit `data/source-remediation-sweep.json` and `data/top-20-source-remediation.json` to prioritize dead/moved URLs and replacement actions.
+
+## Source catalog contribution rules
+
+- Every source entry must include: `id`, `provider`, `endpoint`, `kind`, `lane`, `region`, `isTrustedOfficial`, `requiresKeywordMatch`.
+- Prefer canonical `https://` endpoints; `http://` is only allowed for explicit legacy feeds that have no stable HTTPS equivalent.
+- Endpoints must be unique after normalization (scheme/host/path normalization and trailing slash handling).
+- New source proposals should include freshness intent (e.g., lane/cadence relevance), reliability rationale (official vs non-official), and fallback strategy (machine-readable preferred; HTML requires selector/fallback plan).
+- Avoid adding duplicate aliases for the same endpoint unless there is a documented and necessary functional distinction.
 
 ## Status
 

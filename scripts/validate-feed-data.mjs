@@ -8,6 +8,31 @@ const repoRoot = path.resolve(__dirname, '..');
 const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html', 'playwright_html']);
 const VALID_LANES = new Set(['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention']);
 const VALID_REGIONS = new Set(['uk', 'europe', 'london', 'eu', 'international', 'us']);
+const LEGACY_HTTP_ALLOWLIST = new Set([
+  'http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml',
+  'http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/uk_politics/rss.xml',
+  'http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/england/rss.xml',
+  'http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/world/rss.xml',
+  'http://curia.europa.eu/site/rss.jsp?lang=en&secondLang=fr'
+]);
+
+function normaliseEndpoint(endpoint) {
+  const raw = String(endpoint || '').trim();
+  if (!raw) return '';
+  try {
+    const parsed = new URL(raw);
+    parsed.hash = '';
+    return parsed.toString().replace(/\/$/, '').toLowerCase();
+  } catch {
+    return raw.replace(/\/$/, '').toLowerCase();
+  }
+}
+
+function canonicalHttpsCandidate(endpoint) {
+  const raw = String(endpoint || '').trim();
+  if (!raw.startsWith('http://')) return '';
+  return `https://${raw.slice('http://'.length)}`;
+}
 
 function validateSource(source, index) {
   const prefix = `source[${index}] (id=${JSON.stringify(source?.id)})`;
@@ -17,6 +42,9 @@ function validateSource(source, index) {
   if (typeof source.endpoint !== 'string' || !source.endpoint.trim()) throw new Error(`${prefix}: missing or empty "endpoint"`);
   if (!source.endpoint.startsWith('https://') && !source.endpoint.startsWith('http://')) {
     throw new Error(`${prefix}: "endpoint" must be an http/https URL, got ${JSON.stringify(source.endpoint)}`);
+  }
+  if (source.endpoint.startsWith('http://') && !LEGACY_HTTP_ALLOWLIST.has(source.endpoint)) {
+    throw new Error(`${prefix}: "endpoint" must use https:// when available; got ${JSON.stringify(source.endpoint)}`);
   }
   if (!VALID_KINDS.has(source.kind)) {
     throw new Error(`${prefix}: "kind" must be one of [${[...VALID_KINDS].join(', ')}], got ${JSON.stringify(source.kind)}`);
@@ -58,6 +86,7 @@ const targets = [
       const sources = Array.isArray(parsed) ? parsed : Array.isArray(parsed?.sources) ? parsed.sources : null;
       if (!sources) throw new Error('expected a top-level array or an object with a sources array');
       const ids = new Set();
+      const endpoints = new Map();
       const fieldErrors = [];
       for (let i = 0; i < sources.length; i++) {
         try {
@@ -68,6 +97,27 @@ const targets = [
         if (sources[i]?.id) {
           if (ids.has(sources[i].id)) fieldErrors.push(`duplicate source id: ${JSON.stringify(sources[i].id)}`);
           ids.add(sources[i].id);
+        }
+        if (sources[i]?.endpoint) {
+          const key = normaliseEndpoint(sources[i].endpoint);
+          if (key) {
+            if (!endpoints.has(key)) endpoints.set(key, []);
+            endpoints.get(key).push(sources[i].id || `index-${i}`);
+            if (sources[i].endpoint.startsWith('http://')) {
+              const canonicalCandidate = canonicalHttpsCandidate(sources[i].endpoint);
+              if (canonicalCandidate) {
+                const canonicalKey = normaliseEndpoint(canonicalCandidate);
+                if (endpoints.has(canonicalKey)) {
+                  fieldErrors.push(`legacy http endpoint duplicates canonical https endpoint: ${JSON.stringify(sources[i].endpoint)} (ids=${endpoints.get(canonicalKey).join(',')})`);
+                }
+              }
+            }
+          }
+        }
+      }
+      for (const [endpoint, endpointIds] of endpoints.entries()) {
+        if (endpointIds.length > 1) {
+          fieldErrors.push(`duplicate source endpoint: ${JSON.stringify(endpoint)} (ids=${endpointIds.join(', ')})`);
         }
       }
       if (fieldErrors.length) {
@@ -84,6 +134,7 @@ const targets = [
         throw new Error('expected a top-level array or an object with a requests array');
       }
       const ids = new Set();
+      const endpoints = new Map();
       const fieldErrors = [];
       for (let i = 0; i < requests.length; i++) {
         try {
@@ -94,6 +145,17 @@ const targets = [
         if (requests[i]?.id) {
           if (ids.has(requests[i].id)) fieldErrors.push(`duplicate requested source id: ${JSON.stringify(requests[i].id)}`);
           ids.add(requests[i].id);
+        }
+        if (requests[i]?.endpoint) {
+          const key = normaliseEndpoint(requests[i].endpoint);
+          if (!key) continue;
+          if (!endpoints.has(key)) endpoints.set(key, []);
+          endpoints.get(key).push(requests[i].id || `index-${i}`);
+        }
+      }
+      for (const [endpoint, endpointIds] of endpoints.entries()) {
+        if (endpointIds.length > 1) {
+          fieldErrors.push(`duplicate requested source endpoint: ${JSON.stringify(endpoint)} (ids=${endpointIds.join(', ')})`);
         }
       }
       if (fieldErrors.length) {

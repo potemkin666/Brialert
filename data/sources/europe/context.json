@@ -90,7 +90,7 @@
     },
     {
       "id": "icct-publications",
-      "provider": "International Centre for CounteraTerrorism (ICCT) a Publications",
+      "provider": "International Centre for Counter-Terrorism (ICCT) - Publications",
       "endpoint": "https://icct.nl/publications",
       "kind": "html",
       "lane": "context",
@@ -134,7 +134,7 @@
     },
     {
       "id": "rte-ireland-news-rss",
-      "provider": "RTA News a Ireland (RSS)",
+      "provider": "RTÉ News - Ireland (RSS)",
       "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
       "kind": "rss",
       "lane": "context",

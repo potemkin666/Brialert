@@ -198,24 +198,13 @@
     {
       "id": "long-war-journal",
       "provider": "Long War Journal a News Feed",
-      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
+      "endpoint": "https://feeds.feedburner.com/LongWarJournal",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
       "comment": "Long War Journal RSS feed tracking militant ecosystem developments including al-Qaeda, Islamic State, Taliban, and affiliated groups."
-    },
-    {
-      "id": "long-war-journal-rss",
-      "provider": "Long War Journal a News (RSS)",
-      "endpoint": "http://feeds.feedburner.com/LongWarJournal",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Long War Journal FeedBurner RSS used for tracking jihadist conflict reporting and operational context."
     },
     {
       "id": "nato-news-rss",
@@ -292,17 +281,6 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "No official RSS link advertised; using the IntelBrief category page and relying on keyword filtering."
-    },
-    {
-      "id": "start-umd-baad",
-      "provider": "START (UMD) a Big Allied and Dangerous (BAAD) Database",
-      "endpoint": "https://www.start.umd.edu/baad/database/",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false,
-      "comment": "START BAAD database for network and organisational relationship mapping of militant groups; used for entity enrichment context."
     },
     {
       "id": "tech-against-terrorism-podcast",

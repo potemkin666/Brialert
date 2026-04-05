@@ -13,6 +13,8 @@ export const outputPath = path.join(repoRoot, 'live-alerts.json');
 export const sqlitePath = path.join(repoRoot, 'data', 'brialert.sqlite');
 export const quarantinedSourcesPath = path.join(repoRoot, 'data', 'quarantined-sources.json');
 export const quarantinedSourcesReviewPath = path.join(repoRoot, 'source-quarantine.html');
+export const topSourceRemediationPath = path.join(repoRoot, 'data', 'top-20-source-remediation.json');
+export const sourceRemediationSweepPath = path.join(repoRoot, 'data', 'source-remediation-sweep.json');
 
 export const parser = new XMLParser({
   ignoreAttributes: false,
@@ -113,6 +115,9 @@ export const DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE = Object.freeze({
 });
 export const SOURCE_FAILURE_COOLDOWN_HOURS = 24;
 export const SOURCE_EMPTY_COOLDOWN_HOURS = 24;
+export const SOURCE_PROTECTED_FAILURE_COOLDOWN_HOURS = 6;
+export const SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS = 12;
+export const AUTO_QUARANTINE_RECHECK_HOURS = 7 * 24;
 export const AUTO_SKIP_FAILURE_THRESHOLD = 4;
 export const AUTO_SKIP_EMPTY_THRESHOLD = 6;
 export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = 2;

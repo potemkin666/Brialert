@@ -364,17 +364,6 @@
       "comment": "Lancashire Constabulary news for Blackpool, Preston and Lancashire terrorism-related incidents."
     },
     {
-      "id": "lancashire-police-news",
-      "provider": "Lancashire Police - News",
-      "endpoint": "https://www.lancashire.police.uk/news/",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Lancashire Police updates for North-West UK incidents and major-event security context."
-    },
-    {
       "id": "leicestershire-police-news",
       "provider": "Leicestershire Police - News",
       "endpoint": "https://www.leics.police.uk/news/leicestershire/news/",
@@ -681,17 +670,6 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "West Midlands Police news for Birmingham and surrounding area terrorism-related incidents and operations."
-    },
-    {
-      "id": "west-midlands-police-news-html",
-      "provider": "West Midlands Police - News",
-      "endpoint": "https://www.westmidlands.police.uk/news",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "West Midlands Police news page variant for Birmingham and regional incident reporting."
     },
     {
       "id": "west-yorkshire-police-all-rss",

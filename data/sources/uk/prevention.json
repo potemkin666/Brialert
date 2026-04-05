@@ -78,49 +78,9 @@
       "comment": "GCHQ mission page used as official counter-terrorism context and prevention source."
     },
     {
-      "id": "gnet-artificial-intelligence",
-      "provider": "Global Network on Extremism & Technology (GNET) a Artificial Intelligence",
-      "endpoint": "https://gnet-research.org/tag/artificial-intelligence/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
-      "id": "gnet-radicalisation",
-      "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation",
-      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
       "id": "gnet-research",
       "provider": "Global Network on Extremism & Technology (GNET) a Main Feed",
       "endpoint": "https://gnet-research.org/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
-      "id": "gnet-research-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Updates (RSS)",
-      "endpoint": "https://gnet-research.org/feed/",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": false
-    },
-    {
-      "id": "gnet-youth",
-      "provider": "Global Network on Extremism & Technology (GNET) a Youth",
-      "endpoint": "https://gnet-research.org/tag/youth/feed/",
       "kind": "rss",
       "lane": "prevention",
       "region": "uk",

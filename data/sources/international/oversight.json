@@ -13,7 +13,7 @@
     },
     {
       "id": "unoct-news",
-      "provider": "UN Office of CounteraTerrorism (UNOCT) a News",
+      "provider": "UN Office of Counter-Terrorism (UNOCT) - News",
       "endpoint": "https://www.un.org/counterterrorism/news",
       "kind": "html",
       "lane": "oversight",
@@ -24,7 +24,7 @@
     },
     {
       "id": "unsc-counter-terrorism-committee",
-      "provider": "UN Security Council a CounteraTerrorism Committee (CTC) Updates",
+      "provider": "UN Security Council - Counter-Terrorism Committee (CTC) Updates",
       "endpoint": "https://www.un.org/securitycouncil/ctc/news",
       "kind": "html",
       "lane": "oversight",

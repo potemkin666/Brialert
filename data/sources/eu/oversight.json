@@ -3,7 +3,7 @@
     {
       "id": "curia-press-rss-en",
       "provider": "Court of Justice of the European Union - RSS (EN/FR)",
-      "endpoint": "http://curia.europa.eu/site/rss.jsp?lang=en&secondLang=fr",
+      "endpoint": "https://curia.europa.eu/site/rss.jsp?lang=en&secondLang=fr",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
@@ -13,7 +13,7 @@
     },
     {
       "id": "eppo-news-node-7",
-      "provider": "European Public Prosecutor's Office - News",
+      "provider": "European Public Prosecutor's Office - News and Media",
       "endpoint": "https://www.eppo.europa.eu/en/node/7",
       "kind": "html",
       "lane": "oversight",

@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import {
   AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD,
+  AUTO_QUARANTINE_RECHECK_HOURS,
   AUTO_SKIP_EMPTY_THRESHOLD,
   AUTO_SKIP_FAILURE_THRESHOLD,
   CONTROL_MAX_HTML_SOURCES_PER_RUN,
@@ -26,6 +27,8 @@ import {
   PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
   SCHEDULER_MODE,
   SOURCE_EMPTY_COOLDOWN_HOURS,
+  SOURCE_PROTECTED_FAILURE_COOLDOWN_HOURS,
+  SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS,
   SOURCE_FAILURE_COOLDOWN_HOURS,
   TARGET_SUCCESSFUL_SOURCES_PER_RUN,
   SOURCE_ITEM_LIMITS,
@@ -35,7 +38,9 @@ import {
   outputPath,
   quarantinedSourcesPath,
   quarantinedSourcesReviewPath,
+  sourceRemediationSweepPath,
   sqlitePath,
+  topSourceRemediationPath,
   sourcePath,
   sourceRequestsPath
 } from './build-live-feed/config.mjs';
@@ -89,13 +94,31 @@ function sourceHealthEntry(previousHealth, sourceId) {
   return entry && typeof entry === 'object' ? entry : null;
 }
 
+function sourceCriticality(source) {
+  if (source?.lane === 'incidents') return 'critical';
+  if (source?.isTrustedOfficial) return 'high';
+  return 'normal';
+}
+
 function isBlockedFailureCategory(category) {
   return category === 'blocked-or-auth' || category === 'anti-bot-protection';
+}
+
+function sourceFailureCooldownHours(source, errorCategory) {
+  const criticality = sourceCriticality(source);
+  if (isBlockedFailureCategory(errorCategory)) return SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS;
+  if (criticality === 'critical' || criticality === 'high') return SOURCE_PROTECTED_FAILURE_COOLDOWN_HOURS;
+  return SOURCE_FAILURE_COOLDOWN_HOURS;
 }
 
 function sourceMayAutoCooldown(source, previousEntry, buildDate) {
   if (!previousEntry) return null;
   if (previousEntry.quarantined) {
+    const quarantinedAtMs = parseIsoMs(previousEntry.quarantinedAt);
+    const quarantineRecheckAt = quarantinedAtMs + (AUTO_QUARANTINE_RECHECK_HOURS * 3600000);
+    if (quarantinedAtMs && buildDate.getTime() >= quarantineRecheckAt) {
+      return null;
+    }
     return {
       reason: 'review-quarantine',
       until: null
@@ -181,7 +204,8 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       return next;
     }
     if (next.consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
-      next.cooldownUntil = new Date(Date.parse(generatedAt) + SOURCE_FAILURE_COOLDOWN_HOURS * 3600000).toISOString();
+      const cooldownHours = sourceFailureCooldownHours(source, stat?.lastErrorCategory || '');
+      next.cooldownUntil = new Date(Date.parse(generatedAt) + cooldownHours * 3600000).toISOString();
       next.autoSkipReason = 'failure-cooldown';
     }
     return next;
@@ -484,6 +508,78 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
 `;
 }
 
+function remediationActionForCategory(category) {
+  if (category === 'dead-or-moved-url') return 'replace endpoint with current feed/listing URL';
+  if (category === 'moved-temporarily') return 'update source endpoint to redirected final URL';
+  if (category === 'blocked-or-auth' || category === 'anti-bot-protection') return 'downgrade to non-bot-protected endpoint or quarantine if no public feed';
+  if (category === 'brittle-selectors-or-js-rendering') return 'switch to known stable RSS/Atom if available or adjust parser selector';
+  if (category === 'network-failure' || category === 'timeout') return 'retry later and monitor domain circuit-breaker/failure trend';
+  return 'manual source review';
+}
+
+function remediationRankScore(category) {
+  if (category === 'dead-or-moved-url') return 4;
+  if (category === 'moved-temporarily') return 3;
+  if (category === 'blocked-or-auth' || category === 'anti-bot-protection') return 2;
+  if (category === 'brittle-selectors-or-js-rendering') return 2;
+  return 1;
+}
+
+function buildSourceRemediationSweep({ generatedAt, sourceErrors, sourceStats }) {
+  const statsById = new Map(
+    (Array.isArray(sourceStats) ? sourceStats : [])
+      .map((stat) => [clean(stat?.id), stat])
+      .filter(([id]) => id)
+  );
+
+  const entries = (Array.isArray(sourceErrors) ? sourceErrors : []).map((error) => {
+    const id = clean(error?.id);
+    const stat = statsById.get(id) || null;
+    const category = clean(error?.category) || 'unknown';
+    const endpoint = clean(error?.endpoint);
+    const finalUrl = clean(error?.finalUrl || stat?.finalUrl || '');
+    const movedCandidate = finalUrl && endpoint && finalUrl !== endpoint;
+    const effectiveCategory = movedCandidate && category !== 'dead-or-moved-url'
+      ? 'moved-temporarily'
+      : category;
+    return {
+      id,
+      provider: clean(error?.provider),
+      endpoint,
+      finalUrl: movedCandidate ? finalUrl : '',
+      category: effectiveCategory,
+      message: clean(error?.message),
+      status: Number.isFinite(Number(error?.status ?? stat?.status)) ? Number(error?.status ?? stat?.status) : null,
+      rankScore: remediationRankScore(effectiveCategory) + (movedCandidate ? 1 : 0),
+      suggestedAction: remediationActionForCategory(effectiveCategory),
+      replacementCandidate: movedCandidate ? finalUrl : ''
+    };
+  });
+
+  const dedupedById = new Map();
+  for (const entry of entries) {
+    const key = entry.id || `${entry.endpoint}|${entry.category}`;
+    const existing = dedupedById.get(key);
+    if (!existing || entry.rankScore > existing.rankScore) dedupedById.set(key, entry);
+  }
+  const sorted = [...dedupedById.values()].sort((left, right) => {
+    if (right.rankScore !== left.rankScore) return right.rankScore - left.rankScore;
+    return left.id.localeCompare(right.id);
+  });
+
+  return {
+    generatedFrom: 'live-alerts.json',
+    generatedAt,
+    totalSourceErrors: entries.length,
+    byCategory: sorted.reduce((acc, entry) => {
+      acc[entry.category] = (acc[entry.category] || 0) + 1;
+      return acc;
+    }, {}),
+    top20: sorted.slice(0, 20),
+    sources: sorted
+  };
+}
+
 async function syncBuilderSQLite(snapshot) {
   const helperPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'build-live-feed', 'sqlite-sync.py');
   const tempPath = path.join(os.tmpdir(), `brialert-sqlite-sync-${Date.now()}-${process.pid}.json`);
@@ -655,6 +751,10 @@ async function main() {
   let checked = 0;
   let sourceAttemptOffset = 0;
   let sourcesAttemptedCount = 0;
+  const requestState = {
+    conditionalCache: {},
+    domainState: {}
+  };
 
   async function processSourceBatch(batch) {
     if (!batch.length) return;
@@ -683,8 +783,17 @@ async function main() {
           await sleep((sourceAttemptOffset + sourceIndex) * 60);
           let body;
           let usedPlaywrightFallback = false;
+          let finalUrl = clean(source?.endpoint);
+          let responseStatus = null;
           try {
-            body = await fetchText(source.endpoint, 1, { source });
+            const fetched = await fetchText(source.endpoint, 1, { source, requestState, includeMeta: true });
+            if (typeof fetched === 'string') {
+              body = fetched;
+            } else {
+              body = fetched.text;
+              finalUrl = clean(fetched.finalUrl || source.endpoint);
+              responseStatus = Number.isFinite(Number(fetched.status)) ? Number(fetched.status) : null;
+            }
           } catch (error) {
             const summary = summariseSourceError(source, error);
             const reason = classifyFetchFailure(summary);
@@ -760,6 +869,8 @@ async function main() {
               lastErrorCategory: localErrors[0]?.category || null,
               lastErrorMessage: localErrors[0]?.message || null,
               usedPlaywrightFallback,
+              finalUrl,
+              status: responseStatus,
               failureReasonCounts,
               discardReasons
             }
@@ -788,6 +899,8 @@ async function main() {
               lastErrorCategory: localErrors[0]?.category || null,
               lastErrorMessage: localErrors[0]?.message || null,
               usedPlaywrightFallback: false,
+              finalUrl: clean(source?.endpoint),
+              status: null,
               failureReasonCounts,
               discardReasons
             }
@@ -1017,6 +1130,11 @@ async function main() {
     sourceStats,
     alertChurn: buildAlertChurnRows(existing?.alerts || [], payload.alerts)
   };
+  const remediationSweep = buildSourceRemediationSweep({
+    generatedAt,
+    sourceErrors,
+    sourceStats
+  });
   const quarantinedEntries = buildQuarantinedSourceEntries(sources, nextSourceHealth);
   const quarantinedPayload = {
     generatedAt,
@@ -1042,6 +1160,13 @@ async function main() {
   await fs.writeFile(outputPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');
   await fs.writeFile(quarantinedSourcesPath, JSON.stringify(quarantinedPayload, null, 2) + '\n', 'utf8');
   await fs.writeFile(quarantinedSourcesReviewPath, renderQuarantinedSourcesHtml(generatedAt, quarantinedEntries), 'utf8');
+  await fs.writeFile(sourceRemediationSweepPath, JSON.stringify(remediationSweep, null, 2) + '\n', 'utf8');
+  await fs.writeFile(topSourceRemediationPath, JSON.stringify({
+    generatedFrom: remediationSweep.generatedFrom,
+    generatedAt: remediationSweep.generatedAt,
+    totalSourceErrors: remediationSweep.totalSourceErrors,
+    top20: remediationSweep.top20
+  }, null, 2) + '\n', 'utf8');
   console.log([
     'Feed build summary:',
     `eligible=${eligibleSources.length}`,
