@@ -1,0 +1,147 @@
+{
+  "sources": [
+    {
+      "id": "belgian-federal-police-news",
+      "provider": "Belgian Federal Police - News",
+      "endpoint": "https://www.politie.be/5998/en/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Belgian Federal Police reporting on terrorism arrests, raids and national security incidents."
+    },
+    {
+      "id": "czech-police-news",
+      "provider": "Police of the Czech Republic - News",
+      "endpoint": "https://www.policie.cz/clanek/news.aspx",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context."
+    },
+    {
+      "id": "dutch-police-rss-index",
+      "provider": "Politie.nl - RSS",
+      "endpoint": "https://www.politie.nl/rss",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch police RSS overview page for official national and regional police feed discovery."
+    },
+    {
+      "id": "ertzaintza-news",
+      "provider": "Ertzaintza - News",
+      "endpoint": "https://www.ertzaintza.euskadi.eus/lfr/eu/webertzaintza/noticias",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Basque police newsroom for regional security incidents and public-order operations."
+    },
+    {
+      "id": "finland-police-news",
+      "provider": "Finnish Police - News",
+      "endpoint": "https://poliisi.fi/en/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations."
+    },
+    {
+      "id": "german-bka-press",
+      "provider": "German BKA - Press Releases",
+      "endpoint": "https://www.bka.de/EN/Press/Listings/PressReleases/pressReleases_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "German Federal Criminal Police Office press releases on terrorism investigations and arrests."
+    },
+    {
+      "id": "german-bka-press-releases-de",
+      "provider": "BKA Germany - Press Releases",
+      "endpoint": "https://www.bka.de/DE/AktuelleInformationen/AktuelleMeldungen/Pressemeldungen/pressemitteilungen_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "German Federal Criminal Police Office press releases page in German for operational and security updates."
+    },
+    {
+      "id": "guardia-civil-news",
+      "provider": "Guardia Civil - News",
+      "endpoint": "https://www.guardiacivil.es/es/prensa/noticias/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Guardia Civil official news for terrorism, organised crime and border-security incident reporting."
+    },
+    {
+      "id": "mossos-news",
+      "provider": "Mossos d'Esquadra - News",
+      "endpoint": "https://mossos.gencat.cat/ca/actualitat/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Catalan police updates for Barcelona-area terrorism and public-order incidents."
+    },
+    {
+      "id": "paris-prefecture-police-press-releases",
+      "provider": "Paris Prefecture of Police - Press Releases",
+      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/actualites-et-presse/communiques-de-presse/communiques-de-presse",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Paris Prefecture of Police press releases page for official public-order, terrorism and security statements."
+    },
+    {
+      "id": "policia-nacional-news",
+      "provider": "Policia Nacional - Press",
+      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Spanish National Police press updates for terrorism arrests and major security operations."
+    },
+    {
+      "id": "romanian-police-news",
+      "provider": "Romanian Police - News",
+      "endpoint": "https://www.politiaromana.ro/en/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration."
+    },
+    {
+      "id": "sweden-police-news",
+      "provider": "Swedish Police - News",
+      "endpoint": "https://polisen.se/aktuellt/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Swedish Police updates for major incidents, terrorism arrests and public-safety operations."
+    }
+  ]
+}

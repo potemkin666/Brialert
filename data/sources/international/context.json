@@ -1,0 +1,330 @@
+{
+  "sources": [
+    {
+      "id": "acled-updates",
+      "provider": "ACLED a Updates and Analysis",
+      "endpoint": "https://acleddata.com/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "ACLED provides conflict event reporting and analysis; RSS varies by section, so the main site is used with keyword filtering."
+    },
+    {
+      "id": "aljazeera-news-rss",
+      "provider": "Al Jazeera English a Top Stories (RSS)",
+      "endpoint": "https://www.aljazeera.com/xml/rss/all.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Al Jazeera English RSS for global terrorism and conflict reporting used as corroborating international context."
+    },
+    {
+      "id": "ap-top-news",
+      "provider": "Associated Press a Top News",
+      "endpoint": "https://apnews.com/index.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "bbc-news-world",
+      "provider": "BBC News a World",
+      "endpoint": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "bbc-news-world-legacy",
+      "provider": "BBC News a World (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/world/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for world coverage breadth."
+    },
+    {
+      "id": "bellingcat",
+      "provider": "Bellingcat a Investigations",
+      "endpoint": "https://www.bellingcat.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "chatham-house-rss",
+      "provider": "Chatham House a Research & Commentary (RSS)",
+      "endpoint": "https://www.chathamhouse.org/publications.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House Royal Institute of International Affairs RSS for geopolitical security, terrorism and UK foreign policy research."
+    },
+    {
+      "id": "chathamhouse-events",
+      "provider": "Chatham House a Events (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/events.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House events feed for upcoming conferences and briefings on international security. Endpoint path is as provided."
+    },
+    {
+      "id": "chathamhouse-intl-security-feed",
+      "provider": "Chatham House a International Security Programme (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/83/feed.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House research programme feed (path/83, likely International Security). Endpoint path is as provided; verify against live feed."
+    },
+    {
+      "id": "chathamhouse-news-releases",
+      "provider": "Chatham House a News Releases (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/news-releases.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House press releases feed for authoritative think-tank commentary on international security. Endpoint path is as provided."
+    },
+    {
+      "id": "chathamhouse-whatsnew",
+      "provider": "Chatham House a What's New (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Chatham House (RIIA) latest content feed. Endpoint path is as provided; verify against live feed if response is unexpected."
+    },
+    {
+      "id": "counter-extremism-project-news",
+      "provider": "Counter Extremism Project a News",
+      "endpoint": "https://www.counterextremism.com/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CEP news on extremist group activity, terrorist threat actors, and counter-extremism legislative developments."
+    },
+    {
+      "id": "crisis-group",
+      "provider": "International Crisis Group a Research & Analysis",
+      "endpoint": "https://www.crisisgroup.org/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Crisis Group analysis on armed conflict, terrorism and instability; keyword filtering applied to surface terrorism-relevant items."
+    },
+    {
+      "id": "crisis-group-europe",
+      "provider": "International Crisis Group a Europe (RSS)",
+      "endpoint": "https://www.crisisgroup.org/latest-updates/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Crisis Group RSS used for European and international conflict analysis relevant to terrorism, fragile states and security crises."
+    },
+    {
+      "id": "global-initiative-news",
+      "provider": "Global Initiative Against Transnational Organized Crime a News",
+      "endpoint": "https://globalinitiative.net/news/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "GI-TOC news on organised crime networks, illicit trade and criminal-terrorist nexus for international context."
+    },
+    {
+      "id": "interpol-news-events",
+      "provider": "INTERPOL a News and Events",
+      "endpoint": "https://www.interpol.int/News-and-Events",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "INTERPOL does not consistently publish RSS; using the official news and events page."
+    },
+    {
+      "id": "just-security",
+      "provider": "Just Security a Law, Rights & National Security",
+      "endpoint": "https://www.justsecurity.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Just Security covers law, rights and national security including terrorism prosecutions and CT legislation; keyword filtering applied."
+    },
+    {
+      "id": "lawfare-blog",
+      "provider": "Lawfare a Blog (National Security Law & CT Policy)",
+      "endpoint": "https://www.lawfaremedia.org/feeds/all",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Lawfare covers national security law, counter-terrorism policy and intelligence oversight; keyword filtering applied to surface terrorism-relevant items."
+    },
+    {
+      "id": "long-war-journal",
+      "provider": "Long War Journal a News Feed",
+      "endpoint": "https://feeds.feedburner.com/LongWarJournal",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "Long War Journal RSS feed tracking militant ecosystem developments including al-Qaeda, Islamic State, Taliban, and affiliated groups."
+    },
+    {
+      "id": "nato-news-rss",
+      "provider": "NATO a News (RSS)",
+      "endpoint": "https://www.nato.int/cps/en/natohq/rss/news.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "occrp-news",
+      "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
+      "endpoint": "https://www.occrp.org/en/announcements.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
+    },
+    {
+      "id": "osce-press-releases",
+      "provider": "OSCE a Press Releases",
+      "endpoint": "https://www.osce.org/press-releases",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OSCE press releases are provided as web pages; using the press release index."
+    },
+    {
+      "id": "resolve-network-research",
+      "provider": "RESOLVE Network a Research",
+      "endpoint": "https://www.resolvenet.org/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "RESOLVE Network global research on violent extremism, community resilience and counter-terrorism effectiveness."
+    },
+    {
+      "id": "reuters-uk",
+      "provider": "Reuters a UK News",
+      "endpoint": "https://www.reuters.com/world/uk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Reuters does not provide broadly usable public RSS for consumer web content; using the UK news page and relying on keyword filtering."
+    },
+    {
+      "id": "rferl-security-news-rss",
+      "provider": "Radio Free Europe/Radio Liberty a Security (RSS)",
+      "endpoint": "https://www.rferl.org/api/ep_rss_all/iu/1",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "RFE/RL news on terrorism, extremism and security in Central Asia, Russia and the Middle East used for international context."
+    },
+    {
+      "id": "soufan-center-intelbrief",
+      "provider": "The Soufan Center a IntelBrief",
+      "endpoint": "https://thesoufancenter.org/category/intelbrief/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "No official RSS link advertised; using the IntelBrief category page and relying on keyword filtering."
+    },
+    {
+      "id": "tech-against-terrorism-podcast",
+      "provider": "Tech Against Terrorism - Podcast",
+      "endpoint": "https://podcast.techagainstterrorism.org/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Tech Against Terrorism podcast site for interviews and analysis on extremist content and digital threat response."
+    },
+    {
+      "id": "tony-blair-institute-news",
+      "provider": "Tony Blair Institute for Global Change a Publications",
+      "endpoint": "https://institute.global/insights",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "TBI publications on counter-extremism, technology and political violence used for strategic context."
+    },
+    {
+      "id": "unodc-news",
+      "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
+      "endpoint": "https://www.unodc.org/unodc/en/press/releases/latest.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "UNODC press releases on drug trafficking, organised crime, terrorism financing and international criminal operations."
+    },
+    {
+      "id": "war-on-the-rocks",
+      "provider": "War on the Rocks a National Security & CT Analysis",
+      "endpoint": "https://warontherocks.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "War on the Rocks publishes analysis on national security, military affairs and counter-terrorism; keyword filtering applied."
+    }
+  ]
+}

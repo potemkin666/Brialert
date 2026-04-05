@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "id": "gov-uk-fcdo-travel-advice",
+      "provider": "FCDO a Foreign Travel Advice Index",
+      "endpoint": "https://www.gov.uk/foreign-travel-advice",
+      "kind": "html",
+      "lane": "border",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "FCDO foreign travel advice index; used for terrorism-threat-level and travel restriction updates."
+    },
+    {
+      "id": "uk-border-force",
+      "provider": "Border Force (UK) a Announcements and Publications",
+      "endpoint": "https://www.gov.uk/government/organisations/border-force",
+      "kind": "html",
+      "lane": "border",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GOV.UK organization page is used; relies on keyword filtering for terrorism relevance."
+    },
+    {
+      "id": "uk-ukvi",
+      "provider": "UK Visas and Immigration a Announcements and Publications",
+      "endpoint": "https://www.gov.uk/government/organisations/uk-visas-and-immigration",
+      "kind": "html",
+      "lane": "border",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "GOV.UK organization page is used; relies on keyword filtering for terrorism relevance."
+    }
+  ]
+}

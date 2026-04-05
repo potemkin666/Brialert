@@ -27,13 +27,15 @@ jobs:
   validate-feed:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20.18.1'
           cache: 'npm'
@@ -56,6 +58,9 @@ jobs:
 
       - name: Build live alert feed
         run: npm run build:feeds
+
+      - name: Validate source remediation sweep artifact
+        run: test -f data/source-remediation-sweep.json && test -f data/top-20-source-remediation.json
 
       - name: Validate generated feed output
         run: npm run validate:live-feed-output

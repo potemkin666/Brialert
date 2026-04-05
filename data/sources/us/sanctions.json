@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "id": "us-treasury-ofac-press-releases",
+      "provider": "U.S. Treasury (OFAC) - Press Releases",
+      "endpoint": "https://ofac.treasury.gov/press-releases",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OFAC retired its public RSS feed in 2025; using the official press release index."
+    },
+    {
+      "id": "us-treasury-ofac-recent-actions",
+      "provider": "U.S. Treasury (OFAC) - Recent Actions",
+      "endpoint": "https://ofac.treasury.gov/recent-actions",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OFAC retired its public RSS feed in 2025; using the official Recent Actions page."
+    }
+  ]
+}

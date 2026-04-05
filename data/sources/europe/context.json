@@ -1,0 +1,180 @@
+{
+  "sources": [
+    {
+      "id": "clingendael-publications",
+      "provider": "Clingendael Institute a Publications",
+      "endpoint": "https://www.clingendael.org/publications",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch Clingendael Institute for strategic security and foreign policy analysis covering European terrorism and conflict."
+    },
+    {
+      "id": "dw-europe-rss",
+      "provider": "Deutsche Welle a Europe (RSS)",
+      "endpoint": "https://rss.dw.com/rdf/rss-en-eu",
+      "kind": "rss",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents."
+    },
+    {
+      "id": "ecfr-publications",
+      "provider": "European Council on Foreign Relations (ECFR) a Publications",
+      "endpoint": "https://ecfr.eu/publications/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "ECFR research and commentary on European security, terrorism, and foreign policy used as specialist context."
+    },
+    {
+      "id": "euronews-europe",
+      "provider": "Euronews a Europe",
+      "endpoint": "https://www.euronews.com/news/europe",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Euronews Europe page used for corroborating continent-wide context and follow-on reporting."
+    },
+    {
+      "id": "financial-times-world",
+      "provider": "Financial Times a World",
+      "endpoint": "https://www.ft.com/world",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Financial Times world coverage used as corroborating context rather than a trigger feed."
+    },
+    {
+      "id": "france24-europe-rss",
+      "provider": "France 24 a Europe (RSS)",
+      "endpoint": "https://www.france24.com/en/europe/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "France 24 Europe English RSS used as corroborating context for European terrorism and security incidents."
+    },
+    {
+      "id": "french-interior-ministry-news",
+      "provider": "French Ministry of the Interior - News",
+      "endpoint": "https://www.interieur.gouv.fr/actualites",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "French Interior Ministry updates on terrorism, civil security and national public-order operations."
+    },
+    {
+      "id": "icct-perspectives-on-terrorism",
+      "provider": "Perspectives on Terrorism (ICCT) a Journal",
+      "endpoint": "https://pt.icct.nl/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "Open-access journal front page used; RSS availability varies by platform."
+    },
+    {
+      "id": "icct-publications",
+      "provider": "International Centre for Counter-Terrorism (ICCT) - Publications",
+      "endpoint": "https://icct.nl/publications",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "ICCT does not publish a single stable RSS endpoint for all publications; using the publications listing page."
+    },
+    {
+      "id": "netherlands-nctv-news",
+      "provider": "Dutch NCTV - News",
+      "endpoint": "https://www.nctv.nl/actueel",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch National Coordinator for Security and Counterterrorism updates on threat posture and resilience."
+    },
+    {
+      "id": "norway-pst-news",
+      "provider": "Norwegian Police Security Service - News",
+      "endpoint": "https://www.pst.no/alle-artikler/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Norwegian PST reporting on terrorism threats, extremism and protective-security posture."
+    },
+    {
+      "id": "politico-europe",
+      "provider": "Politico Europe",
+      "endpoint": "https://www.politico.eu/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Politico Europe used as corroborating political-security context rather than live trigger input."
+    },
+    {
+      "id": "rte-ireland-news-rss",
+      "provider": "RTÉ News - Ireland (RSS)",
+      "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "RTÃ‰ Ireland RSS for Irish national security, dissident republican activity and cross-border incident corroboration."
+    },
+    {
+      "id": "switzerland-fedpol-news",
+      "provider": "Swiss fedpol - News",
+      "endpoint": "https://www.fedpol.admin.ch/fedpol/en/home/fedpol/aktuell.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Swiss federal police updates on terrorism investigations, security threats and protective operations."
+    },
+    {
+      "id": "telegraph-world-news",
+      "provider": "The Telegraph a World News",
+      "endpoint": "https://www.telegraph.co.uk/world-news/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Major media corroboration source for Europe and wider international terrorism-related coverage."
+    },
+    {
+      "id": "vox-pol-publications",
+      "provider": "VOX-Pol Network a Publications",
+      "endpoint": "https://www.voxpol.eu/publications/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "VOX-Pol academic network on violent online political extremism; EU-funded research on online terrorist content and radicalisation."
+    }
+  ]
+}

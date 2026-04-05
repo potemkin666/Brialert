@@ -1,0 +1,56 @@
+{
+  "sources": [
+    {
+      "id": "gnet-artificial-intelligence-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) a Artificial Intelligence (RSS)",
+      "endpoint": "https://gnet-research.org/tag/artificial-intelligence/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-radicalisation-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation (RSS)",
+      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "gnet-youth-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "tech-against-terrorism",
+      "provider": "Tech Against Terrorism a Blog",
+      "endpoint": "https://techagainstterrorism.org/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "No stable RSS endpoint advertised; using the primary site/blog surface and relying on keyword filtering."
+    },
+    {
+      "id": "tech-against-terrorism-home",
+      "provider": "Tech Against Terrorism - Home",
+      "endpoint": "https://techagainstterrorism.org/home",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Tech Against Terrorism homepage variant for platform safety, extremist content and online prevention context."
+    }
+  ]
+}

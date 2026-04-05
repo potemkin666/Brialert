@@ -1,0 +1,48 @@
+{
+  "sources": [
+    {
+      "id": "fatf-news",
+      "provider": "Financial Action Task Force (FATF) a News",
+      "endpoint": "https://www.fatf-gafi.org/en/publications.html",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "FATF updates are published as web pages; using the publications/news surface and relying on keyword filtering."
+    },
+    {
+      "id": "interpol-notices",
+      "provider": "INTERPOL a Notices",
+      "endpoint": "https://www.interpol.int/How-we-work/Notices",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "INTERPOL Notices page covering Red, Orange, and other notice types relevant to terrorism and serious crime."
+    },
+    {
+      "id": "unsc-1267-press-releases",
+      "provider": "UN Security Council - ISIL/Da'esh & Al-Qaeda Sanctions Committee Press Releases",
+      "endpoint": "https://main.un.org/securitycouncil/en/sanctions/1267/press-releases",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "UN sanctions committee press releases are presented as an HTML list; using the official listing page."
+    },
+    {
+      "id": "unsc-consolidated-list",
+      "provider": "UN Security Council - Consolidated Sanctions List Updates (RSS)",
+      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
+      "kind": "rss",
+      "lane": "sanctions",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Official UNSC RSS feed for updates to the consolidated sanctions list covering all UN sanctions regimes."
+    }
+  ]
+}

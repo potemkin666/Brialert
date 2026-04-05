@@ -1,0 +1,69 @@
+{
+  "sources": [
+    {
+      "id": "gov-uk-proscribed-terrorist-orgs",
+      "provider": "GOV.UK a Proscribed Terrorist Organisations",
+      "endpoint": "https://www.gov.uk/government/publications/proscribed-terror-groups-or-organisations--2",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Official UK proscribed organisations list; updated when new groups are added or removed."
+    },
+    {
+      "id": "hm-treasury-html",
+      "provider": "HM Treasury",
+      "endpoint": "https://www.gov.uk/government/organisations/hm-treasury",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "HM Treasury page for sanctions, terror-financing and economic security policy context."
+    },
+    {
+      "id": "ofsi-blog-home",
+      "provider": "OFSI - Blog",
+      "endpoint": "https://ofsi.blog.gov.uk/",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OFSI sanctions blog homepage for financial sanctions, enforcement and terror-financing-adjacent policy context."
+    },
+    {
+      "id": "otsi-blog-home",
+      "provider": "OTSI - Blog",
+      "endpoint": "https://otsi.blog.gov.uk/",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Office of Trade Sanctions Implementation blog for sanctions compliance and enforcement context."
+    },
+    {
+      "id": "uk-ofsi-blog",
+      "provider": "Office of Financial Sanctions Implementation (OFSI) a Blog",
+      "endpoint": "https://ofsi.blog.gov.uk/feed/",
+      "kind": "rss",
+      "lane": "sanctions",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "uk-sanctions-list",
+      "provider": "UK Sanctions List (FCDO) a Consolidated List (XML Service)",
+      "endpoint": "https://sanctionslist.fcdo.gov.uk/docs/UK-Sanctions-List.xml",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "This is a structured XML list (not RSS/Atom). Kept for reference; ingestion may require a dedicated parser."
+    }
+  ]
+}

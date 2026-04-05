@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "id": "london-resilience",
+      "provider": "London Resilience a Updates",
+      "endpoint": "https://www.london.gov.uk/about-us/organisations-we-work/london-resilience",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Updated to current London Resilience page path; no dedicated RSS appears to be published.",
+      "quarantined": true
+    }
+  ]
+}

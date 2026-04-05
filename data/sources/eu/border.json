@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "id": "euaa-news",
+      "provider": "EUAA (EU Agency for Asylum) a News",
+      "endpoint": "https://euaa.europa.eu/news-events",
+      "kind": "html",
+      "lane": "border",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EU Agency for Asylum news used for border, screening, and asylum context relevant to threat movement and documentation."
+    },
+    {
+      "id": "eulisa-news-events",
+      "provider": "eu-LISA - News and Events",
+      "endpoint": "https://www.eulisa.europa.eu/news-and-events",
+      "kind": "html",
+      "lane": "border",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "eu-LISA news and events page for EU large-scale justice, migration and border IT systems context."
+    },
+    {
+      "id": "frontex-news-releases",
+      "provider": "Frontex a News Releases",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
+      "kind": "html",
+      "lane": "border",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering."
+    }
+  ]
+}

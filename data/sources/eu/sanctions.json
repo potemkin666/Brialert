@@ -1,0 +1,15 @@
+{
+  "sources": [
+    {
+      "id": "eu-council-terrorism-sanctions",
+      "provider": "Council of the EU - Sanctions Against Terrorism",
+      "endpoint": "https://www.consilium.europa.eu/en/policies/sanctions-against-terrorism/",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Council of the EU policy page for sanctions against terrorism and terrorist entities."
+    }
+  ]
+}

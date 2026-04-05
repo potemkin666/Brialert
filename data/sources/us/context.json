@@ -1,0 +1,155 @@
+{
+  "sources": [
+    {
+      "id": "ctc-sentinel",
+      "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
+      "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CTC Sentinel is published as web pages; using the current issue/archive surface."
+    },
+    {
+      "id": "dhs-press-releases",
+      "provider": "US Department of Homeland Security - News",
+      "endpoint": "https://www.dhs.gov/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "DHS news on US homeland security threat assessments, border security and counter-terrorism operations for US partner context."
+    },
+    {
+      "id": "dni-press-releases",
+      "provider": "Office of the Director of National Intelligence - Press Releases",
+      "endpoint": "https://www.dni.gov/index.php/newsroom/press-releases",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ODNI press releases for US national intelligence assessments and threats of relevance to UK-US Five Eyes partnership."
+    },
+    {
+      "id": "doj-nsd-press-releases",
+      "provider": "U.S. Department of Justice - National Security Division Press Releases",
+      "endpoint": "https://www.justice.gov/nsd/press-releases",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "No consistently published RSS endpoint; using the NSD press release page and relying on keyword filtering."
+    },
+    {
+      "id": "fbi-national-press-releases",
+      "provider": "FBI - National Press Releases (RSS)",
+      "endpoint": "https://www.fbi.gov/feeds/national-press-releases/RSS",
+      "kind": "rss",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "fbi-stories",
+      "provider": "FBI - Stories (RSS)",
+      "endpoint": "https://www.fbi.gov/news/stories/RSS",
+      "kind": "rss",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "fbi-top-stories",
+      "provider": "FBI - Top Stories (RSS)",
+      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/RSS",
+      "kind": "rss",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "gw-program-extremism",
+      "provider": "George Washington University - Program on Extremism",
+      "endpoint": "https://extremism.gwu.edu/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "GWU Program on Extremism research on domestic and transnational terrorist movements, prosecution data and case studies."
+    },
+    {
+      "id": "nsa-cybersecurity-news",
+      "provider": "NSA - Cybersecurity Advisories & Guidance",
+      "endpoint": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "NSA press releases and cybersecurity advisories relevant to national security and state-sponsored threat actor activity."
+    },
+    {
+      "id": "rand-terrorism-topic",
+      "provider": "RAND - Terrorism Topic Updates",
+      "endpoint": "https://www.rand.org/topics/terrorism.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "RAND topic pages are HTML; using the terrorism topic index and relying on keyword filtering."
+    },
+    {
+      "id": "rewards-for-justice",
+      "provider": "U.S. Department of State - Rewards for Justice",
+      "endpoint": "https://rewardsforjustice.net/rewards/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "No RSS endpoint published; using the reward offers listing page."
+    },
+    {
+      "id": "start-baad-database",
+      "provider": "National Consortium for the Study of Terrorism (START) - Big Allied and Dangerous (BAAD) Database",
+      "endpoint": "https://www.start.umd.edu/baad/database/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "START BAAD database of designated terrorist organisations used for group identification context."
+    },
+    {
+      "id": "start-center-publications",
+      "provider": "START Center (UMD) - News & Publications",
+      "endpoint": "https://www.start.umd.edu/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "National Consortium for the Study of Terrorism (START) at University of Maryland publishes terrorism research and GTD data."
+    },
+    {
+      "id": "state-dept-terrorism",
+      "provider": "US State Department - Bureau of Counterterrorism",
+      "endpoint": "https://www.state.gov/bureaus-offices/under-secretary-for-civilian-security-democracy-and-human-rights/bureau-of-counterterrorism/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "US State Dept Bureau of Counterterrorism for Foreign Terrorist Organisation designations and US CT policy updates."
+    }
+  ]
+}

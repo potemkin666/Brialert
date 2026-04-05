@@ -1,0 +1,70 @@
+{
+  "sources": [
+    {
+      "id": "city-of-london-police-news",
+      "provider": "City of London Police a News",
+      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london/news/GetNewsRss/",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Replaced HTML listing with official City of London Police RSS feed for stable ingestion."
+    },
+    {
+      "id": "city-of-london-police-news-html",
+      "provider": "City of London Police - News",
+      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london-police/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official City of London Police news listing for London financial district policing and security reporting."
+    },
+    {
+      "id": "city-of-london-police-newsroom",
+      "provider": "City of London Police - Newsroom",
+      "endpoint": "https://news.cityoflondon.police.uk/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "City of London Police newsroom for Square Mile incidents, arrests and operational statements."
+    },
+    {
+      "id": "ct-policing-london",
+      "provider": "Counter Terrorism Policing London",
+      "endpoint": "https://www.counterterrorism.police.uk/counter-terrorism-policing-london/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Counter Terrorism Policing London page for local operational updates, campaigns and incident-related notices."
+    },
+    {
+      "id": "met-police-latest-news",
+      "provider": "Metropolitan Police - Latest News",
+      "endpoint": "https://news.met.police.uk/latest_news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Met Police latest news page for London operational updates, arrests, appeals and terrorism-linked incidents."
+    },
+    {
+      "id": "met-police-news",
+      "provider": "Metropolitan Police Service a News",
+      "endpoint": "https://news.met.police.uk/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "No public RSS endpoint found for the new Met news platform; using the news listing."
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "sources": [
+    {
+      "id": "french-gendarmerie-news",
+      "provider": "Gendarmerie Nationale - News",
+      "endpoint": "https://www.gendarmerie.interieur.gouv.fr/gendarmerie/actualites",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "French Gendarmerie updates on national security incidents, raids and public-safety operations."
+    },
+    {
+      "id": "french-police-nationale-news",
+      "provider": "Police Nationale - News",
+      "endpoint": "https://www.police-nationale.interieur.gouv.fr/actualites",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "French Police Nationale reporting for terrorism arrests, raids and major public-safety incidents."
+    },
+    {
+      "id": "ireland-gardai-press",
+      "provider": "An Garda Siochana - Press Releases",
+      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context."
+    },
+    {
+      "id": "netherlands-police-news",
+      "provider": "Dutch National Police - News",
+      "endpoint": "https://www.politie.nl/nieuws/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch National Police updates for terrorism-related arrests and operational incident reporting."
+    },
+    {
+      "id": "paris-police-prefecture-news",
+      "provider": "Prefecture de Police de Paris - News",
+      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/actualites",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Paris Police Prefecture news for capital-city operational incidents and public-order security context."
+    },
+    {
+      "id": "portugal-pj-news",
+      "provider": "Policia Judiciaria Portugal - News",
+      "endpoint": "https://www.policiajudiciaria.pt/?p=noticias",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Portuguese judicial police news on terrorism investigations, organised crime and arrests."
+    },
+    {
+      "id": "portugal-psp-news",
+      "provider": "Public Security Police Portugal - News",
+      "endpoint": "https://www.psp.pt/Pages/noticias.aspx",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Portuguese PSP updates for public-order, terror-related incidents and urban policing context."
+    }
+  ]
+}

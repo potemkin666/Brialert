@@ -797,6 +797,22 @@ test('normaliseSourcesPayload drops duplicate source IDs and keeps first occurre
   assert.equal(normalised[1].id, 'b');
 });
 
+test('normaliseSourcesPayload drops duplicate endpoints and keeps first occurrence', () => {
+  const payload = {
+    sources: [
+      { id: 'a', endpoint: 'https://example.test/a/', provider: 'A' },
+      { id: 'b', endpoint: 'https://example.test/a', provider: 'B' },
+      { id: 'c', endpoint: 'https://example.test/c', provider: 'C' }
+    ]
+  };
+
+  const normalised = normaliseSourcesPayload(payload);
+
+  assert.equal(normalised.length, 2);
+  assert.equal(normalised[0].id, 'a');
+  assert.equal(normalised[1].id, 'c');
+});
+
 test('source refresh cadence keeps incidents hourly and rotates lower-yield lanes', () => {
   const incidentsSource = {
     id: 'met-police-news',

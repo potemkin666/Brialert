@@ -1,0 +1,317 @@
+{
+  "sources": [
+    {
+      "id": "curia-press-rss-en",
+      "provider": "Court of Justice of the European Union - RSS (EN/FR)",
+      "endpoint": "https://curia.europa.eu/site/rss.jsp?lang=en&secondLang=fr",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official CURIA RSS feed for CJEU announcements and case-related updates in English and French."
+    },
+    {
+      "id": "eppo-news-node-7",
+      "provider": "European Public Prosecutor's Office - News and Media",
+      "endpoint": "https://www.eppo.europa.eu/en/node/7",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EPPO news and media surface for investigations, prosecutions and institutional statements."
+    },
+    {
+      "id": "eu-cellar-rss-atom",
+      "provider": "Publications Office of the European Union (CELLAR) a RSS/Atom Feeds",
+      "endpoint": "https://op.europa.eu/en/web/cellar/cellar-data/rss-and-atom-feeds",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Feed directory for EU Publications Office notifications; specific RSS/Atom endpoints are configured per the documentation."
+    },
+    {
+      "id": "eu-commission-counter-terrorism-measures-2026",
+      "provider": "European Commission - Counter Terrorism Measures 2026",
+      "endpoint": "https://commission.europa.eu/news-and-media/news/commission-proposes-new-measures-prevent-and-counter-terrorism-2026-02-26_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Specific European Commission announcement on new EU measures to prevent and counter terrorism."
+    },
+    {
+      "id": "eu-commission-home-affairs-topic",
+      "provider": "European Commission - Home Affairs",
+      "endpoint": "https://commission.europa.eu/topics/home-affairs_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "European Commission Home Affairs topic page for migration, internal security and terrorism-policy context."
+    },
+    {
+      "id": "eu-commission-presscorner-home",
+      "provider": "European Commission - Press Corner",
+      "endpoint": "https://ec.europa.eu/commission/presscorner/home/en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "European Commission Press Corner home for official releases, statements and security-related announcements."
+    },
+    {
+      "id": "eu-council-fight-against-terrorism",
+      "provider": "Council of the EU - Fight Against Terrorism",
+      "endpoint": "https://www.consilium.europa.eu/en/policies/fight-against-terrorism/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Council of the EU policy page covering the EU fight against terrorism."
+    },
+    {
+      "id": "eu-council-jha-meetings",
+      "provider": "Council of the European Union a Justice & Home Affairs Meetings (RSS)",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/meetings.ashx?cat=jha",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "eu-council-jha-register-rss",
+      "provider": "Council of the EU - Justice and Home Affairs Register RSS",
+      "endpoint": "https://www.consilium.europa.eu/en/register/rss/THMJHA.xml",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Council register RSS for justice and home affairs documentation."
+    },
+    {
+      "id": "eu-council-press-releases",
+      "provider": "Council of the European Union a Press Releases (RSS)",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "eu-council-press-releases-html",
+      "provider": "Council of the EU - Press Releases",
+      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Council of the EU press releases page for official announcements, JHA outcomes and sanctions statements."
+    },
+    {
+      "id": "eu-council-rss-index",
+      "provider": "Council of the EU - RSS Index",
+      "endpoint": "https://www.consilium.europa.eu/en/about-site/rss/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Council of the EU RSS index page for official feed discovery and source maintenance."
+    },
+    {
+      "id": "eu-ct-coordinator",
+      "provider": "EU Counter-Terrorism Coordinator a Council of the EU",
+      "endpoint": "https://www.consilium.europa.eu/en/policies/fight-against-terrorism/eu-counter-terrorism-coordinator/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "EU Counter-Terrorism Coordinator reports and briefings on EU-wide CT strategy and threat landscape."
+    },
+    {
+      "id": "eu-ejustice-news-rss",
+      "provider": "European e-Justice - News RSS",
+      "endpoint": "https://e-justice.europa.eu/rss/news_en",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "European e-Justice portal RSS feed for justice and legal system updates."
+    },
+    {
+      "id": "eu-eppo-news",
+      "provider": "European Public Prosecutor's Office a Press Releases",
+      "endpoint": "https://www.eppo.europa.eu/en/media/press-releases",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EPPO press releases on cross-border EU fraud and financial crime prosecutions including terrorist financing investigations."
+    },
+    {
+      "id": "eu-fra-rss",
+      "provider": "EU Agency for Fundamental Rights (FRA) a RSS",
+      "endpoint": "https://fra.europa.eu/en/content/rss",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "FRA provides RSS options from this page; using the RSS landing page when direct feed URLs vary by topic."
+    },
+    {
+      "id": "eu-home-affairs-news",
+      "provider": "European Commission a Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EU Commission Home Affairs news on counter-terrorism legislation, Schengen, and security union updates."
+    },
+    {
+      "id": "eu-home-affairs-rss",
+      "provider": "European Commission Home Affairs - News RSS",
+      "endpoint": "https://home-affairs.ec.europa.eu/news/rss_en",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EU Home Affairs RSS feed for internal security, migration and counter-terror policy updates."
+    },
+    {
+      "id": "eu-olaf-news",
+      "provider": "OLAF (EU Anti-Fraud Office) a News",
+      "endpoint": "https://anti-fraud.ec.europa.eu/media-corner/news_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OLAF news on EU anti-fraud investigations including smuggling, financial crime and illicit trade relevant to terrorist financing."
+    },
+    {
+      "id": "eu-security-union-strategy",
+      "provider": "European Commission a Security Union Strategy",
+      "endpoint": "https://home-affairs.ec.europa.eu/policies/internal-security_en",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "EU Commission Security Union policy page for counter-terrorism, serious crime, and internal security updates."
+    },
+    {
+      "id": "eucrim-counter-terrorism-agenda",
+      "provider": "eucrim - Commission Counter Terrorism Agenda",
+      "endpoint": "https://eucrim.eu/news/commission-counter-terrorism-agenda/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "eucrim article covering the European Commission counter-terrorism agenda."
+    },
+    {
+      "id": "eucrim-judicial-counter-terrorism-register",
+      "provider": "eucrim - Judicial Counter Terrorism Register",
+      "endpoint": "https://eucrim.eu/news/judicial-counter-terrorism-register/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "eucrim article on the judicial counter-terrorism register and EU judicial cooperation."
+    },
+    {
+      "id": "eurojust-publications",
+      "provider": "Eurojust a Publications (RSS)",
+      "endpoint": "https://www.eurojust.europa.eu/rss/publications.xml",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "eurojust-rss-feeds-page",
+      "provider": "Eurojust - RSS Feeds",
+      "endpoint": "https://www.eurojust.europa.eu/rss-feeds",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Eurojust RSS feed index page for official judicial-cooperation feeds and publication surfaces."
+    },
+    {
+      "id": "europarl-committee-libe",
+      "provider": "European Parliament a LIBE Committee (RSS)",
+      "endpoint": "https://www.europarl.europa.eu/rss/committee/libe/en.xml",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "europarl-committee-sede",
+      "provider": "European Parliament a SEDE Committee (RSS)",
+      "endpoint": "https://www.europarl.europa.eu/rss/committee/sede/en.xml",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "europarl-pressreleases-committees",
+      "provider": "European Parliament a Press Releases (Committees) (RSS)",
+      "endpoint": "https://www.europarl.europa.eu/rss/doc/press-releases-committees/en.xml",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "europol-tesat-report",
+      "provider": "Europol - TESAT Report",
+      "endpoint": "https://www.europol.europa.eu/publications-events/main-reports/tesat-report",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Europol Terrorism Situation and Trend Report page for structured EU terrorism assessment and annual trend context."
+    },
+    {
+      "id": "fra-rss",
+      "provider": "EU Agency for Fundamental Rights - RSS",
+      "endpoint": "https://fra.europa.eu/rss",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official FRA RSS feed for rights, justice and security-related updates."
+    }
+  ]
+}

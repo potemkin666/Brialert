@@ -1,0 +1,266 @@
+{
+  "sources": [
+    {
+      "id": "austria-interior-ministry-news",
+      "provider": "Austrian Interior Ministry - News",
+      "endpoint": "https://www.bmi.gv.at/news.aspx",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Austrian Interior Ministry updates on security incidents, border controls and counter-extremism."
+    },
+    {
+      "id": "austria-interior-ministry-rss-index",
+      "provider": "Austrian Interior Ministry - RSS Index",
+      "endpoint": "https://www.bmi.gv.at/rss_feed/start.aspx",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Austrian Interior Ministry RSS directory page for official feeds on policing, border security and public safety."
+    },
+    {
+      "id": "bdk-rss",
+      "provider": "Bund Deutscher Kriminalbeamter - RSS",
+      "endpoint": "https://www.bdk.de/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context."
+    },
+    {
+      "id": "belgium-crisis-centre-news",
+      "provider": "Belgian National Crisis Centre - News",
+      "endpoint": "https://crisiscenter.be/en/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context."
+    },
+    {
+      "id": "denmark-pet-news",
+      "provider": "Danish Security and Intelligence Service - News",
+      "endpoint": "https://pet.dk/nyheder",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "PET updates on Danish terrorism threats, extremism and national security alerts."
+    },
+    {
+      "id": "ecfr-feeds-index",
+      "provider": "ECFR - Feeds",
+      "endpoint": "https://ecfr.eu/feeds/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "ECFR feed index page for European foreign-policy and security research feed discovery."
+    },
+    {
+      "id": "enisa-news",
+      "provider": "ENISA (EU Cybersecurity Agency) a News",
+      "endpoint": "https://www.enisa.europa.eu/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ENISA news on EU cybersecurity threats, state-sponsored attacks and critical infrastructure security relevant to CT context."
+    },
+    {
+      "id": "enisa-rss-transition-page",
+      "provider": "ENISA - RSS Feeds Transition Notice",
+      "endpoint": "https://www.enisa.europa.eu/rss-feeds-discontinued-new-subscription-mechanism-coming-soon",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "ENISA notice page documenting RSS feed changes and subscription transition."
+    },
+    {
+      "id": "euiss-home",
+      "provider": "EU Institute for Security Studies",
+      "endpoint": "https://www.iss.europa.eu/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "European Union Institute for Security Studies homepage for defence, terrorism and strategic risk analysis."
+    },
+    {
+      "id": "euractiv-security-rss",
+      "provider": "Euractiv a Security & Defence (RSS)",
+      "endpoint": "https://www.euractiv.com/sections/security/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Euractiv security and defence section RSS for EU counter-terrorism policy, legislative and operational context."
+    },
+    {
+      "id": "eurojust-press-news-html",
+      "provider": "Eurojust - Press Releases and News",
+      "endpoint": "https://www.eurojust.europa.eu/media-and-events/press-releases-and-news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Eurojust press and news page for prosecutions, judicial cooperation and terrorism-case updates."
+    },
+    {
+      "id": "eurojust-press-releases",
+      "provider": "Eurojust a Press Releases (RSS)",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "europol-media-press",
+      "provider": "Europol a Media and Press",
+      "endpoint": "https://www.europol.europa.eu/media-press",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Europol media and press releases page; no dedicated RSS endpoint, using the listing page with keyword filtering."
+    },
+    {
+      "id": "europol-news-rss",
+      "provider": "Europol a Newsroom (RSS)",
+      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "europol-newsroom-html",
+      "provider": "Europol - Newsroom",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Europol newsroom page variant for press releases, operational updates and EU policing statements."
+    },
+    {
+      "id": "finland-supo-news",
+      "provider": "Finnish Security Intelligence Service - News",
+      "endpoint": "https://supo.fi/en/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Finnish Supo updates on terrorism, extremism and hostile-state security concerns."
+    },
+    {
+      "id": "german-bfv-news",
+      "provider": "German BfV - News",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "German domestic intelligence updates on extremism, terrorism and hostile-state activity."
+    },
+    {
+      "id": "german-interior-ministry-press",
+      "provider": "German Federal Ministry of the Interior - Press",
+      "endpoint": "https://www.bmi.bund.de/EN/press/press-releases/press-releases-node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "German Interior Ministry press releases on terrorism, border security and domestic threat posture."
+    },
+    {
+      "id": "icct-home",
+      "provider": "ICCT - Home",
+      "endpoint": "https://icct.nl/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "ICCT homepage for counter-terrorism analysis, publications and research updates."
+    },
+    {
+      "id": "nctv-english-rss",
+      "provider": "NCTV Netherlands - English RSS",
+      "endpoint": "https://english.nctv.nl/actueel/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "English NCTV RSS feed for Dutch threat posture, terrorism and national security updates."
+    },
+    {
+      "id": "paris-prefecture-police-rss-page",
+      "provider": "Paris Prefecture of Police - RSS",
+      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/presentation/les-directions-et-services/le-cabinet-du-prefet-de-police/service-de-la-communication/abonnez-vous-aux-flux-rss",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Paris Prefecture of Police RSS subscription page for official press and public-information feed discovery."
+    },
+    {
+      "id": "spain-interior-ministry-news",
+      "provider": "Spanish Ministry of the Interior - Press",
+      "endpoint": "https://www.interior.gob.es/opencms/en/prensa/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Spanish Interior Ministry press releases covering terrorism arrests, border security and national policing operations."
+    },
+    {
+      "id": "statewatch-news",
+      "provider": "Statewatch - News",
+      "endpoint": "https://www.statewatch.org/news/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Statewatch news page for civil-liberties, policing, borders and counter-terror policy scrutiny."
+    },
+    {
+      "id": "sweden-sapo-news",
+      "provider": "Swedish Security Service - News",
+      "endpoint": "https://www.sakerhetspolisen.se/ovriga-sidor/nyheter.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Sapo news on Swedish terror-threat developments, extremism and security operations."
+    }
+  ]
+}

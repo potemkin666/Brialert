@@ -1,0 +1,15 @@
+{
+  "sources": [
+    {
+      "id": "iom-news",
+      "provider": "IOM (International Organization for Migration) a News",
+      "endpoint": "https://www.iom.int/news",
+      "kind": "html",
+      "lane": "border",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "IOM migration and displacement news used for border security, migration pressure and population movement context."
+    }
+  ]
+}

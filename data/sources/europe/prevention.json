@@ -1,0 +1,125 @@
+{
+  "sources": [
+    {
+      "id": "bfv-de-english",
+      "provider": "BfV (Germany) a English Publications",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/press-releases/press-releases_node.html",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "German Federal Office for the Protection of the Constitution English press releases on extremism and terrorism threats."
+    },
+    {
+      "id": "dsn-at-english",
+      "provider": "DSN (Austria) a English Reports",
+      "endpoint": "https://www.dsn.gv.at/en/about-us/annual-reports/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Austrian Directorate of State Protection and Intelligence Service English annual reports on terrorism and extremism threats."
+    },
+    {
+      "id": "isd-global",
+      "provider": "Institute for Strategic Dialogue (ISD) a Articles & Reports",
+      "endpoint": "https://www.isdglobal.org/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "No stable RSS endpoint across sections; using the homepage and relying on keyword filtering."
+    },
+    {
+      "id": "nctv-nl-english",
+      "provider": "NCTV (Netherlands) a English News",
+      "endpoint": "https://english.nctv.nl/topics/terrorist-threat-assessment-netherlands",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Dutch National Coordinator for Security and Counterterrorism English terrorism threat assessment page."
+    },
+    {
+      "id": "nctv-nl-english-news",
+      "provider": "NCTV (Netherlands) a English News Updates",
+      "endpoint": "https://english.nctv.nl/news",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Dutch NCTV English news surface for counter-terrorism and security posture updates."
+    },
+    {
+      "id": "ocam-be-english",
+      "provider": "OCAM/CUTA (Belgium) a English News",
+      "endpoint": "https://www.ocam.be/en/newspublications",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Belgian Coordination Unit for Threat Assessment English publications and threat-level updates."
+    },
+    {
+      "id": "pet-dk-english",
+      "provider": "PET (Denmark) a English News",
+      "endpoint": "https://pet.dk/en/news/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Danish Police Intelligence Service English news for terrorism threat assessment and prevention context."
+    },
+    {
+      "id": "pst-no-english",
+      "provider": "PST (Norway) a English News",
+      "endpoint": "https://www.pst.no/en/news/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Norwegian Police Security Service English news for terrorism threat levels and counter-terrorism posture."
+    },
+    {
+      "id": "ran-network",
+      "provider": "Radicalisation Awareness Network (RAN) a Publications",
+      "endpoint": "https://www.radicalisationawarenessnetwork.eu/news-events/publications",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "EU Commission-funded RAN network publications on radicalisation prevention and counter-extremism approaches."
+    },
+    {
+      "id": "sapo-se-english",
+      "provider": "SAPO (Sweden) a English News",
+      "endpoint": "https://www.sakerhetspolisen.se/en/home/news-room/news.html",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Swedish Security Service English news room for terrorism threat assessment and counter-terrorism updates."
+    },
+    {
+      "id": "supo-fi-english",
+      "provider": "SUPO (Finland) a English Publications",
+      "endpoint": "https://supo.fi/en/publications",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Finnish Security Intelligence Service English publications on terrorism and national security threats."
+    }
+  ]
+}

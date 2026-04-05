@@ -1,0 +1,59 @@
+{
+  "sources": [
+    {
+      "id": "coe-counter-terrorism",
+      "provider": "Council of Europe a Counter-Terrorism",
+      "endpoint": "https://www.coe.int/en/web/counter-terrorism/news-updates",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Council of Europe Counter-Terrorism Committee (CDCT) news updates for European counter-terrorism legal framework context."
+    },
+    {
+      "id": "echr-key-judgments-rss",
+      "provider": "European Court of Human Rights - Key Judgments RSS",
+      "endpoint": "https://hudoc.echr.coe.int/app/transform/rss?length=20&library=echreng&query=%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28+contentsitename%3AECHR+AND+%28NOT+%28doctype%3DPR+OR+doctype%3DHFCOMOLD+OR+doctype%3DHECOMOLD%29%29+AND+%28%28importance%3D%221%22%29+OR+%28importance%3D%222%22%29+OR+%28importance%3D%223%22%29%29+AND+%28%28documentcollectionid%3D%22GRANDCHAMBER%22%29+OR+%28documentcollectionid%3D%22CHAMBER%22%29+OR+%28documentcollectionid%3D%22DECGRANDCHAMBER%22%29+OR+%28documentcollectionid%3D%22ADMISSIBILITY%22%29%29%29+XRANK%28cb%3D14%29+doctypebranch%3AGRANDCHAMBER%29+XRANK%28cb%3D13%29+doctypebranch%3ADECGRANDCHAMBER%29+XRANK%28cb%3D12%29+doctypebranch%3ACHAMBER%29+XRANK%28cb%3D11%29+doctypebranch%3AADMISSIBILITY%29+XRANK%28cb%3D10%29+doctypebranch%3ACOMMITTEE%29+XRANK%28cb%3D9%29+doctypebranch%3AADMISSIBILITYCOM%29+XRANK%28cb%3D8%29+doctypebranch%3ADECCOMMISSION%29+XRANK%28cb%3D7%29+doctypebranch%3ACOMMUNICATEDCASES%29+XRANK%28cb%3D6%29+doctypebranch%3ACLIN%29+XRANK%28cb%3D5%29+doctypebranch%3AADVISORYOPINIONS%29+XRANK%28cb%3D4%29+doctypebranch%3AREPORTS%29+XRANK%28cb%3D3%29+doctypebranch%3AEXECUTION%29+XRANK%28cb%3D2%29+doctypebranch%3AMERITS%29+XRANK%28cb%3D1%29+doctypebranch%3ASCREENINGPANEL%29+XRANK%28cb%3D4%29+importance%3A1%29+XRANK%28cb%3D3%29+importance%3A2%29+XRANK%28cb%3D2%29+importance%3A3%29+XRANK%28cb%3D1%29+importance%3A4%29+XRANK%28cb%3D2%29+languageisocode%3AENG%29+XRANK%28cb%3D1%29+languageisocode%3AFRE&rankingModelId=4180000c-8692-45ca-ad63-74bc4163871b&sort=kpdate+Descending&start=0",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official ECHR HUDOC RSS feed for significant judgments and admissibility decisions."
+    },
+    {
+      "id": "echr-press-releases-rss",
+      "provider": "European Court of Human Rights - Press Releases RSS",
+      "endpoint": "https://hudoc.echr.coe.int/app/transform/rss?length=20&library=echrengpress&query=contentsitename%3AECHR+AND+doctype%3DPR&rankingModelId=11111111-0000-0000-0000-000000000000&sort=kpdate+Descending&start=0",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official ECHR press release RSS feed from HUDOC."
+    },
+    {
+      "id": "french-justice-ministry-news",
+      "provider": "French Ministry of Justice - News",
+      "endpoint": "https://www.justice.gouv.fr/actualites",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "French Justice Ministry updates relevant to terrorism prosecutions, sentencing and prison-security policy."
+    },
+    {
+      "id": "netherlands-prosecution-news",
+      "provider": "Dutch Public Prosecution Service - News",
+      "endpoint": "https://www.om.nl/actueel/nieuws",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch prosecution updates on terrorism cases, charges and court proceedings."
+    }
+  ]
+}

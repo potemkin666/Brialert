@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "id": "gctf-news",
+      "provider": "Global Counterterrorism Forum (GCTF) a News",
+      "endpoint": "https://www.thegctf.org/News/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "No RSS endpoint published; using the official news page and relying on keyword filtering."
+    },
+    {
+      "id": "unoct-news",
+      "provider": "UN Office of Counter-Terrorism (UNOCT) - News",
+      "endpoint": "https://www.un.org/counterterrorism/news",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "UNOCT does not consistently publish RSS; using the official news page."
+    },
+    {
+      "id": "unsc-counter-terrorism-committee",
+      "provider": "UN Security Council - Counter-Terrorism Committee (CTC) Updates",
+      "endpoint": "https://www.un.org/securitycouncil/ctc/news",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "No consistent RSS endpoint; using the CTC news page and relying on keyword filtering."
+    }
+  ]
+}

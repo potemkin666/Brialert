@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "id": "london-assembly-press-releases",
+      "provider": "London Assembly a Press Releases",
+      "endpoint": "https://www.london.gov.uk/media-centre/london-assembly-press-releases/rss.xml",
+      "kind": "rss",
+      "lane": "oversight",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Replaced page endpoint with official City Hall London Assembly RSS feed."
+    },
+    {
+      "id": "mopac-html",
+      "provider": "Mayor's Office for Policing and Crime",
+      "endpoint": "https://www.london.gov.uk/programmes-strategies/mayors-office-policing-and-crime-mopac",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MOPAC page for London policing strategy, accountability and public-safety oversight."
+    }
+  ]
+}

@@ -63,6 +63,31 @@ export function parseSourceDate(rawDate) {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
+function jitteredBackoffMs(attempt, floor = 600) {
+  const base = Math.max(floor, 650 * Math.pow(2, Math.max(0, attempt - 1)));
+  const jitter = Math.floor(base * (0.12 + Math.random() * 0.32));
+  return base + jitter;
+}
+
+function parseRetryAfterMs(value) {
+  const seconds = Number(value);
+  if (Number.isFinite(seconds) && seconds > 0) return seconds * 1000;
+  const asDate = Date.parse(String(value || ''));
+  if (Number.isFinite(asDate)) {
+    const delta = asDate - Date.now();
+    if (delta > 0) return delta;
+  }
+  return null;
+}
+
+function endpointDomain(url) {
+  try {
+    return new URL(url).hostname.toLowerCase();
+  } catch {
+    return '';
+  }
+}
+
 export function normaliseLanguageTag(value) {
   return clean(value).toLowerCase().replace('_', '-');
 }
@@ -106,28 +131,66 @@ export async function fetchText(url, attempt = 1, options = {}) {
   const configuredMaxRetries = Number(source?.maxRetries);
   const timeoutMs = configuredTimeoutMs > 0 ? configuredTimeoutMs : DEFAULT_TIMEOUT_MS;
   const maxAttempts = configuredMaxRetries > 0 ? configuredMaxRetries : DEFAULT_MAX_RETRIES;
+  const endpoint = clean(url);
+  const domain = endpointDomain(endpoint);
+  const existingState = options?.requestState && typeof options.requestState === 'object'
+    ? options.requestState
+    : {};
+  const domainState = existingState.domainState && typeof existingState.domainState === 'object'
+    ? existingState.domainState
+    : {};
+  const conditionalHeaders = {};
+  const cacheKey = domain || endpoint;
+  const priorCache = existingState.conditionalCache?.[cacheKey];
+  if (priorCache?.etag) conditionalHeaders['if-none-match'] = clean(priorCache.etag);
+  if (priorCache?.lastModified) conditionalHeaders['if-modified-since'] = clean(priorCache.lastModified);
+  if (domain && domainState[domain]?.circuitOpenUntil && Date.now() < Number(domainState[domain].circuitOpenUntil || 0)) {
+    const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
+    throw new Error(`Circuit open for domain ${domain} until ${openUntil}`);
+  }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const response = await fetch(url, {
-      headers: mergedHeaders(source),
+      headers: {
+        ...mergedHeaders(source),
+        ...conditionalHeaders
+      },
       redirect: 'follow',
       signal: controller.signal
     });
+    const finalUrl = clean(response.url || url);
+    const etag = clean(response.headers.get('etag'));
+    const lastModified = clean(response.headers.get('last-modified'));
+    if (options?.requestState && cacheKey && (etag || lastModified)) {
+      if (!options.requestState.conditionalCache || typeof options.requestState.conditionalCache !== 'object') {
+        options.requestState.conditionalCache = {};
+      }
+      options.requestState.conditionalCache[cacheKey] = {
+        etag: etag || null,
+        lastModified: lastModified || null,
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    if (response.status === 304) {
+      throw new Error('HTTP 304');
+    }
 
     if (!response.ok) {
       if (RETRYABLE_STATUS_CODES.has(response.status) && attempt < maxAttempts) {
-        const retryAfterHeader = Number(response.headers.get('retry-after'));
-        const retryDelay = Number.isFinite(retryAfterHeader) && retryAfterHeader > 0
-          ? retryAfterHeader * 1000
-          : 1000 * Math.pow(2, attempt - 1);
+        const retryDelay = parseRetryAfterMs(response.headers.get('retry-after')) ?? jitteredBackoffMs(attempt);
 
         await sleep(retryDelay);
         return fetchText(url, attempt + 1, options);
       }
-
-      throw new Error(`HTTP ${response.status}`);
+      const error = new Error(`HTTP ${response.status}`);
+      error.__brialertMeta = {
+        status: response.status,
+        finalUrl
+      };
+      throw error;
     }
 
     const text = await response.text();
@@ -136,7 +199,20 @@ export async function fetchText(url, attempt = 1, options = {}) {
       throw new Error(`Blocked by ${blockedClass}`);
     }
 
-    return text;
+    const payload = {
+      text,
+      finalUrl,
+      status: response.status,
+      etag: etag || null,
+      lastModified: lastModified || null
+    };
+    if (domain && options?.requestState?.domainState && options.requestState.domainState[domain]) {
+      options.requestState.domainState[domain] = {
+        failures: 0,
+        circuitOpenUntil: 0
+      };
+    }
+    return options?.includeMeta ? payload : payload.text;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     const retryable =
@@ -144,11 +220,27 @@ export async function fetchText(url, attempt = 1, options = {}) {
       message.includes('aborted') ||
       message.includes('AbortError') ||
       message.includes('ECONNRESET') ||
-      message.includes('ETIMEDOUT');
+      message.includes('ETIMEDOUT') ||
+      message.includes('HTTP 304');
 
     if (retryable && attempt < maxAttempts) {
-      await sleep(1000 * Math.pow(2, attempt - 1));
+      await sleep(jitteredBackoffMs(attempt));
       return fetchText(url, attempt + 1, options);
+    }
+
+    if (domain && options?.requestState) {
+      if (!options.requestState.domainState || typeof options.requestState.domainState !== 'object') {
+        options.requestState.domainState = {};
+      }
+      const current = options.requestState.domainState[domain] && typeof options.requestState.domainState[domain] === 'object'
+        ? options.requestState.domainState[domain]
+        : { failures: 0, circuitOpenUntil: 0 };
+      const nextFailures = Number(current.failures || 0) + 1;
+      const shouldTrip = nextFailures >= 4 && /HTTP 429|HTTP 503|HTTP 504|timed out|AbortError|fetch failed|ETIMEDOUT/i.test(message);
+      options.requestState.domainState[domain] = {
+        failures: nextFailures,
+        circuitOpenUntil: shouldTrip ? Date.now() + (10 * 60 * 1000) : Number(current.circuitOpenUntil || 0)
+      };
     }
 
     throw error;
@@ -194,18 +286,22 @@ export async function readExisting() {
 
 export function summariseSourceError(source, error) {
   const message = error instanceof Error ? error.message : String(error);
+  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
   let category = 'unknown';
   if (/HTTP 404|HTTP 410/i.test(message)) category = 'dead-or-moved-url';
   else if (/HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
   else if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
+  else if (/HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(message)) category = 'moved-temporarily';
   else if (/HTTP \d{3}/i.test(message)) category = 'http-status-error';
   else if (/abort|timeout|timed out|ETIMEDOUT/i.test(message)) category = 'timeout';
-  else if (/fetch failed|ECONNRESET|ENOTFOUND/i.test(message)) category = 'network-failure';
+  else if (/fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(message)) category = 'network-failure';
   else if (/no items parsed|selector/i.test(message)) category = 'brittle-selectors-or-js-rendering';
   return {
     id: clean(source?.id) || 'unknown-source',
     provider: clean(source?.provider) || 'Unknown provider',
     endpoint: clean(source?.endpoint) || '',
+    finalUrl: clean(meta?.finalUrl || ''),
+    status: Number.isFinite(Number(meta?.status)) ? Number(meta.status) : null,
     message,
     category
   };
@@ -221,11 +317,19 @@ export function normaliseSourcesPayload(rawSources) {
     throw new Error('Expected sources.json to contain an array or { sources: [] }.');
   }
   const seen = new Set();
+  const seenEndpoints = new Set();
   const duplicates = [];
+  const duplicateEndpoints = [];
   const unique = [];
   for (const source of sources) {
     const id = clean(source?.id);
+    const endpointKey = normalisedEndpointKey(source?.endpoint);
     if (!id) {
+      if (endpointKey && seenEndpoints.has(endpointKey)) {
+        duplicateEndpoints.push(endpointKey);
+        continue;
+      }
+      if (endpointKey) seenEndpoints.add(endpointKey);
       unique.push(source);
       continue;
     }
@@ -233,12 +337,21 @@ export function normaliseSourcesPayload(rawSources) {
       duplicates.push(id);
       continue;
     }
+    if (endpointKey && seenEndpoints.has(endpointKey)) {
+      duplicateEndpoints.push(endpointKey);
+      continue;
+    }
     seen.add(id);
+    if (endpointKey) seenEndpoints.add(endpointKey);
     unique.push(source);
   }
   if (duplicates.length) {
     const uniqueDuplicates = [...new Set(duplicates)];
     console.warn(`Skipped ${duplicates.length} duplicate source entries across ${uniqueDuplicates.length} source id(s): ${uniqueDuplicates.join(', ')}`);
+  }
+  if (duplicateEndpoints.length) {
+    const uniqueEndpointDuplicates = [...new Set(duplicateEndpoints)];
+    console.warn(`Skipped ${duplicateEndpoints.length} duplicate source entries across ${uniqueEndpointDuplicates.length} normalized endpoint(s).`);
   }
   return unique;
 }

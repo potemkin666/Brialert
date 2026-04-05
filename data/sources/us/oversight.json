@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "id": "cisa-cybersecurity-advisories",
+      "provider": "CISA - Cybersecurity Alerts & Advisories",
+      "endpoint": "https://www.cisa.gov/news-events/cybersecurity-advisories",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "CISA's RSS support has been inconsistent; using the advisories index page."
+    },
+    {
+      "id": "us-house-homeland-security",
+      "provider": "US House Committee on Homeland Security - News",
+      "endpoint": "https://homeland.house.gov/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "us",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "US House Homeland Security Committee news on terrorism threats, border security and DHS oversight hearings."
+    }
+  ]
+}
