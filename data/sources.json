@@ -5040,6 +5040,105 @@
                         "isTrustedOfficial":  true,
                         "requiresKeywordMatch":  false,
                         "comment":  "Official Police.uk API outcome history for a single recorded crime."
+                    },
+                    {
+                        "id":  "west-midlands-community-alerts",
+                        "provider":  "WMNow - Community Alerts",
+                        "endpoint":  "https://www.wmnow.co.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Midlands community alert portal for policing and public-safety notices."
+                    },
+                    {
+                        "id":  "stay-in-the-know-home",
+                        "provider":  "Stay In The Know - Community Alerts",
+                        "endpoint":  "https://www.stayintheknow.co.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Community alert portal used by multiple UK policing areas for local warning and safety messaging."
+                    },
+                    {
+                        "id":  "stay-in-the-know-latest-alerts",
+                        "provider":  "Stay In The Know - Latest Alerts",
+                        "endpoint":  "https://www.stayintheknow.co.uk/Content/Pages/Latest-Alerts",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Latest public alerts listing from the Stay In The Know community messaging network."
+                    },
+                    {
+                        "id":  "cheshire-police-alert",
+                        "provider":  "Cheshire Police Alert",
+                        "endpoint":  "https://www.cheshirepolicealert.co.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Cheshire Police community alert portal for local safety messaging and policing notices."
+                    },
+                    {
+                        "id":  "my-community-alert",
+                        "provider":  "My Community Alert",
+                        "endpoint":  "https://www.mycommunityalert.co.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Regional community alert portal for safety notices, crime-prevention messaging and local policing updates."
+                    },
+                    {
+                        "id":  "west-yorkshire-community-alert",
+                        "provider":  "West Yorkshire Community Alert",
+                        "endpoint":  "https://www.wypcommunityalert.co.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "West Yorkshire Police community alert portal for local warning and prevention notices."
+                    },
+                    {
+                        "id":  "north-wales-community-alert",
+                        "provider":  "North Wales Community Alert",
+                        "endpoint":  "https://www.northwalescommunityalert.co.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "North Wales community alert portal for safety messaging and public alerts."
+                    },
+                    {
+                        "id":  "south-yorkshire-police-alerts",
+                        "provider":  "South Yorkshire Police Alerts",
+                        "endpoint":  "https://www.sypalerts.co.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "South Yorkshire Police community alert portal for neighbourhood and public-safety alerts."
+                    },
+                    {
+                        "id":  "devon-cornwall-alerts",
+                        "provider":  "Devon and Cornwall Alerts",
+                        "endpoint":  "https://alerts.dc.police.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Devon and Cornwall Police alerts portal for local warning, prevention and community messaging."
                     }
                 ]
 }
