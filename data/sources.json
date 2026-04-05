@@ -5231,13 +5231,21 @@
         {
             "id": "skwawkbox-feed",
             "provider": "Skwawkbox - Feed",
-            "endpoint": "https://www.thecanary.co/skwawkbox/feed/",
-            "kind": "rss",
+            "endpoint": "https://www.thecanary.co/skwawkbox/",
+            "kind": "playwright_html",
             "lane": "context",
             "region": "uk",
             "isTrustedOfficial": false,
             "requiresKeywordMatch": true,
-            "comment": "Commentary and political reporting feed kept keyword-gated as low-trust corroboration/context only."
+            "refreshEveryHours": 6,
+            "timeoutMs": 15000,
+            "selectors": [
+                "article a[href]",
+                "main a[href]",
+                "h2 a[href]",
+                "h3 a[href]"
+            ],
+            "comment": "Hostile/JS-prone source example for Playwright fallback; only runs when BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK=1."
         }
     ]
 }
