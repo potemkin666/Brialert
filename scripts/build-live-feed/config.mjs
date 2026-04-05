@@ -33,6 +33,13 @@ export const MAX_HTML_PARSING_THRESHOLD = MAX_HTML_CANDIDATES_PER_SOURCE * 2;
 export const MAX_HTML_PREFETCH_ITEMS = 12;
 export const MAX_FEED_PREFETCH_ITEMS = 8;
 export const MAX_HTML_SOURCES_PER_RUN = 24;
+export const MAX_PLAYWRIGHT_SOURCES_PER_RUN = 5;
+export const DEFAULT_PLAYWRIGHT_TIMEOUT_MS = 15000;
+export const DEFAULT_PLAYWRIGHT_PAGE_SETTLE_MS = 1200;
+export const MAX_PLAYWRIGHT_RAW_CANDIDATES = 60;
+export const PLAYWRIGHT_SCRAPER_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+export const MAX_PLAYWRIGHT_ITEM_SUMMARY_CHARS = 420;
+export const PLAYWRIGHT_FEATURE_FLAG = 'BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK';
 export const SOURCE_ITEM_LIMITS = Object.freeze({
   tabloid: 1,
   incidents: 6,
@@ -95,7 +102,7 @@ export function sourceRefreshEveryHours(source) {
 
   const byLane = DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE[source?.lane] || DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE.default;
   if (source?.lane === 'incidents') return 1;
-  if (source?.kind === 'html') return Math.max(byLane, 3);
+  if (source?.kind === 'html' || source?.kind === 'playwright_html') return Math.max(byLane, 3);
   return byLane;
 }
 

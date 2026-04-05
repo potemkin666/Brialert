@@ -4,6 +4,7 @@ import path from 'node:path';
 import { execFile as execFileCallback } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
+import { chromium } from 'playwright';
 import {
   AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD,
   AUTO_SKIP_EMPTY_THRESHOLD,
@@ -11,6 +12,7 @@ import {
   FEED_SOURCE_CONCURRENCY,
   HARD_SKIP_SOURCE_IDS,
   MAX_HTML_SOURCES_PER_RUN,
+  MAX_PLAYWRIGHT_SOURCES_PER_RUN,
   MAX_FAILING_SOURCES_TO_LOG,
   MAX_FEED_PREFETCH_ITEMS,
   MAX_SOURCE_ERRORS_TO_REPORT,
@@ -19,6 +21,7 @@ import {
   SOURCE_EMPTY_COOLDOWN_HOURS,
   SOURCE_FAILURE_COOLDOWN_HOURS,
   SOURCE_ITEM_LIMITS,
+  PLAYWRIGHT_FEATURE_FLAG,
   isMachineReadableSourceKind,
   shouldRefreshSourceThisRun,
   outputPath,
@@ -55,6 +58,7 @@ import {
   parseFeedItems,
   parseHtmlItems
 } from './build-live-feed/parsing.mjs';
+import { scrapePlaywrightHtmlItems } from './build-live-feed/playwright-scraper.mjs';
 import {
   clean,
   inferReliabilityProfile,
@@ -152,7 +156,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   }
 
   if ((stat?.errors || 0) > 0) {
-    const blockedFailure = source?.kind === 'html' && isBlockedFailureCategory(stat?.lastErrorCategory);
+    const blockedFailure = (source?.kind === 'html' || source?.kind === 'playwright_html') && isBlockedFailureCategory(stat?.lastErrorCategory);
     next.failedRuns += 1;
     next.consecutiveFailures += 1;
     next.consecutiveEmptyRuns = 0;
@@ -253,6 +257,7 @@ function sourceSchedulingPriority(source) {
   if (source?.lane === 'incidents') score += 15;
   if (source?.isTrustedOfficial) score += 10;
   if (source?.lane === 'prevention') score += 4;
+  if (source?.kind === 'playwright_html') score -= 2;
   return score;
 }
 
@@ -451,6 +456,7 @@ async function main() {
   const sourceErrors = [];
   const sourceStats = [];
   const autoDeferredSources = [];
+  const operationalDeferredSources = [];
   const eligibleSources = sources.filter((source) => {
     if (!sourceLooksEnglish(source)) return false;
     if (source?.quarantined) {
@@ -493,19 +499,55 @@ async function main() {
     .filter((entry) => entry.source?.kind === 'html')
     .slice(0, MAX_HTML_SOURCES_PER_RUN)
     .map((entry) => entry.source);
-  const scheduledSourceIds = new Set([...machineReadableScheduled, ...htmlScheduled].map((source) => source.id));
-  const scheduledSourcesFinal = [...machineReadableScheduled, ...htmlScheduled];
-  const htmlDeferredForBudget = scheduledSources.filter((source) => source?.kind === 'html' && !scheduledSourceIds.has(source.id));
+  const playwrightFlag = clean(process.env[PLAYWRIGHT_FEATURE_FLAG]).toLowerCase();
+  const playwrightEnabled = playwrightFlag === '1' || playwrightFlag === 'true';
+  const playwrightScheduled = playwrightEnabled
+    ? rankedScheduledSources
+      .filter((entry) => entry.source?.kind === 'playwright_html')
+      .slice(0, MAX_PLAYWRIGHT_SOURCES_PER_RUN)
+      .map((entry) => entry.source)
+    : [];
+  const scheduledSourceIds = new Set([...machineReadableScheduled, ...htmlScheduled, ...playwrightScheduled].map((source) => source.id));
+  const scheduledSourcesFinal = [...machineReadableScheduled, ...htmlScheduled, ...playwrightScheduled];
+  const htmlDeferredForBudget = scheduledSources.filter((source) =>
+    source?.kind === 'html' && !scheduledSourceIds.has(source.id)
+  );
   for (const source of htmlDeferredForBudget) {
-    autoDeferredSources.push({
+    operationalDeferredSources.push({
       id: source.id,
       provider: source.provider,
       reason: 'html-budget',
       until: null
     });
   }
-  const deferredSources = Math.max(0, eligibleSources.length - scheduledSources.length);
+  if (playwrightEnabled) {
+    const playwrightDeferredForBudget = scheduledSources.filter((source) =>
+      source?.kind === 'playwright_html' && !scheduledSourceIds.has(source.id)
+    );
+    for (const source of playwrightDeferredForBudget) {
+      operationalDeferredSources.push({
+        id: source.id,
+        provider: source.provider,
+        reason: 'playwright-budget',
+        until: null
+      });
+    }
+  }
+  if (!playwrightEnabled) {
+    for (const source of scheduledSources.filter((entry) => entry?.kind === 'playwright_html')) {
+      operationalDeferredSources.push({
+        id: source.id,
+        provider: source.provider,
+        reason: 'playwright-disabled',
+        until: null
+      });
+    }
+  }
+  const deferredSources = Math.max(0, eligibleSources.length - scheduledSourcesFinal.length);
 
+  const sharedPlaywrightBrowser = playwrightScheduled.length
+    ? await chromium.launch({ headless: true })
+    : null;
   const sourceResults = await mapWithConcurrency(
     scheduledSourcesFinal,
     FEED_SOURCE_CONCURRENCY,
@@ -521,17 +563,24 @@ async function main() {
 
       try {
         await sleep(sourceIndex * 60);
-        const body = await fetchText(source.endpoint, 1, { source });
-        const parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
-          ? parseFeedItems(source, body)
-          : parseHtmlItems(source, body);
+        let parsed = [];
+        let mode = 'fetch';
+        if (source.kind === 'playwright_html') {
+          mode = 'playwright';
+          parsed = await scrapePlaywrightHtmlItems(source, sharedPlaywrightBrowser);
+        } else {
+          const body = await fetchText(source.endpoint, 1, { source });
+          parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
+            ? parseFeedItems(source, body)
+            : parseHtmlItems(source, body);
+        }
         if (!parsed.length) {
           discardReasons.parseNoItems += 1;
           localErrors.push(summariseSourceError(source, new Error('No items parsed from source endpoint')));
         }
-        const preLimit = source.kind === 'html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
+        const preLimit = source.kind === 'html' || source.kind === 'playwright_html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
         const preLimited = parsed.slice(0, preLimit);
-        const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
+        const hydrated = source.kind === 'html' || source.kind === 'playwright_html' ? await enrichHtmlItems(source, preLimited) : preLimited;
         const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
         const itemLimit = reliabilityProfile === 'tabloid'
           ? SOURCE_ITEM_LIMITS.tabloid
@@ -574,6 +623,7 @@ async function main() {
             kept: kept.length,
             built: builtAlerts.length,
             errors: localErrors.length,
+            mode,
             lastErrorCategory: localErrors[0]?.category || null,
             lastErrorMessage: localErrors[0]?.message || null,
             discardReasons
@@ -598,6 +648,7 @@ async function main() {
             kept: 0,
             built: 0,
             errors: localErrors.length,
+            mode: source.kind === 'playwright_html' ? 'playwright' : 'fetch',
             lastErrorCategory: localErrors[0]?.category || null,
             lastErrorMessage: localErrors[0]?.message || null,
             discardReasons
@@ -606,6 +657,9 @@ async function main() {
       }
     }
   );
+  if (sharedPlaywrightBrowser) {
+    await sharedPlaywrightBrowser.close();
+  }
 
   let checked = 0;
   for (const result of sourceResults) {
@@ -626,6 +680,8 @@ async function main() {
   const droppedByFilter = sourceStats.reduce((sum, stat) => sum + (stat.discardReasons?.droppedByFilter || 0), 0);
   const droppedByItemCap = sourceStats.reduce((sum, stat) => sum + (stat.discardReasons?.droppedByItemCap || 0), 0);
   const droppedByBuildFailures = sourceStats.reduce((sum, stat) => sum + (stat.discardReasons?.buildFailures || 0), 0);
+  const fetchModeSources = sourceStats.filter((stat) => stat.mode !== 'playwright').length;
+  const playwrightModeSources = sourceStats.filter((stat) => stat.mode === 'playwright').length;
   const topFailingSources = sourceStats
     .filter((stat) => stat.errors > 0)
     .sort((a, b) => b.errors - a.errors)
@@ -645,6 +701,7 @@ async function main() {
   const buildWarning = [
     geoLookupFallbackNote,
     autoDeferredSources.length ? `Deferred ${autoDeferredSources.length} low-yield source(s) on health cooldown.` : null,
+    operationalDeferredSources.length ? `Deferred ${operationalDeferredSources.length} source(s) due to run budget or disabled Playwright fallback.` : null,
     preservedAlerts ? 'Build produced no fresh alerts; preserved previous alert set.' : null
   ].filter(Boolean).join(' | ') || null;
   const generatedAt = new Date().toISOString();
@@ -653,7 +710,8 @@ async function main() {
 
   for (const source of eligibleSources) {
     const priorEntry = sourceHealthEntry(previousHealth, source.id);
-    const deferred = autoDeferredSources.find((entry) => entry.id === source.id);
+    const deferred = autoDeferredSources.find((entry) => entry.id === source.id)
+      || operationalDeferredSources.find((entry) => entry.id === source.id);
     if (deferred) {
       nextSourceHealth[source.id] = {
         ...(priorEntry || {}),
@@ -704,7 +762,8 @@ async function main() {
       successfulRefresh: !preservedAlerts,
       usedFallback: preservedAlerts || Boolean(geoLookupFallbackNote),
       sourceHealth: nextSourceHealth,
-      autoDeferredSources
+      autoDeferredSources,
+      operationalDeferredSources
     })
   };
   const sqliteSnapshot = {
@@ -742,8 +801,9 @@ async function main() {
     'Feed build summary:',
     `eligible=${eligibleSources.length}`,
     `scheduled=${scheduledSourcesFinal.length}`,
-    `deferred=${deferredSources + htmlDeferredForBudget.length}`,
+    `deferred=${deferredSources}`,
     `cooldownDeferred=${autoDeferredSources.length}`,
+    `operationalDeferred=${operationalDeferredSources.length}`,
     `checked=${checked}`,
     `successfulWithAlerts=${successfulSources}`,
     `failed=${failedSources}`,
@@ -755,7 +815,9 @@ async function main() {
     `droppedByDedupe=${dedupeDropped}`,
     `droppedByFilter=${droppedByFilter}`,
     `droppedByItemCap=${droppedByItemCap}`,
-    `droppedByBuildFailures=${droppedByBuildFailures}`
+    `droppedByBuildFailures=${droppedByBuildFailures}`,
+    `fetchMode=${fetchModeSources}`,
+    `playwrightMode=${playwrightModeSources}`
   ].join(' | '));
   if (topFailingSources) {
     console.log(`Top failing sources by error count: ${topFailingSources}`);

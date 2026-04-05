@@ -317,7 +317,7 @@ test('health block carries source cooldown metadata for low-yield sources', () =
     generatedAt: '2026-04-05T09:00:00.000Z',
     checked: 18,
     sourceErrors: [],
-    buildWarning: 'Deferred 2 low-yield source(s) on health cooldown.',
+    buildWarning: 'Deferred 1 low-yield source(s) on health cooldown. | Deferred 2 source(s) due to run budget or disabled Playwright fallback.',
     successfulRefresh: true,
     usedFallback: false,
     autoDeferredSources: [
@@ -325,6 +325,18 @@ test('health block carries source cooldown metadata for low-yield sources', () =
         id: 'weak-context-source',
         reason: 'empty-cooldown',
         until: '2026-04-06T09:00:00.000Z'
+      }
+    ],
+    operationalDeferredSources: [
+      {
+        id: 'budgeted-html-source',
+        reason: 'html-budget',
+        until: null
+      },
+      {
+        id: 'playwright-source',
+        reason: 'playwright-disabled',
+        until: null
       }
     ],
     sourceHealth: {
@@ -338,6 +350,8 @@ test('health block carries source cooldown metadata for low-yield sources', () =
 
   assert.equal(health.autoDeferredSourceCount, 1);
   assert.equal(health.autoDeferredSources[0].id, 'weak-context-source');
+  assert.equal(health.operationalDeferredSourceCount, 2);
+  assert.equal(health.operationalDeferredSources[0].id, 'budgeted-html-source');
   assert.equal(health.sourceHealth['weak-context-source'].autoSkipReason, 'empty-cooldown');
 });
 
@@ -579,7 +593,7 @@ test('sources catalog passes structural and per-field validation', () => {
   assert.ok(Array.isArray(sources), 'sources should be an array');
   assert.ok(sources.length > 0, 'sources array should not be empty');
 
-  const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html']);
+  const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html', 'playwright_html']);
   const VALID_LANES = new Set(['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention']);
   const VALID_REGIONS = new Set(['uk', 'europe', 'london', 'eu', 'international', 'us']);
   const ids = new Set();

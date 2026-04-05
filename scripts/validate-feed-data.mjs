@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
 
-const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html']);
+const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html', 'playwright_html']);
 const VALID_LANES = new Set(['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention']);
 const VALID_REGIONS = new Set(['uk', 'europe', 'london', 'eu', 'international', 'us']);
 

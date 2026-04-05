@@ -16,6 +16,8 @@ jobs:
   build-live-feed:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
 
     steps:
       - name: Check out repository
@@ -31,6 +33,10 @@ jobs:
 
       - name: Install feed builder dependencies
         run: npm ci --no-audit --no-fund
+
+      - name: Install Playwright Chromium
+        if: ${{ env.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
+        run: npx playwright install chromium --with-deps
 
       - name: Validate feed data files
         run: npm run validate:feed-data
