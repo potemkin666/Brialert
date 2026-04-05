@@ -1117,13 +1117,13 @@
     {
       "id": "dsn-at-english",
       "provider": "DSN Austria news",
-      "endpoint": "https://www.dsn.gv.at/aktuelles",
+      "endpoint": "https://www.dsn.gv.at/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "News page of Austria's Directorate for State Security and Intelligence (DSN) providing updates and announcements (German language). No English version is available."
+      "comment": "Official DSN Austria homepage (German); no English-language DSN site or feed is available."
     },
     {
       "id": "isd-global",
@@ -2210,13 +2210,13 @@
     {
       "id": "moorfields-news",
       "provider": "Moorfields Eye Hospital NHS Foundation Trust a News",
-      "endpoint": "https://www.moorfields.nhs.uk/news",
+      "endpoint": "https://www.moorfields.nhs.uk/about-us/news-and-blogs/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Moorfields news used for central London specialist-hospital and emergency-system context."
+      "comment": "Moorfields official news and blogs listing for specialist-hospital and emergency-system context."
     },
     {
       "id": "nelft-news",
@@ -2780,13 +2780,13 @@
     {
       "id": "henry-jackson-society-news",
       "provider": "Henry Jackson Society a Publications",
-      "endpoint": "https://henryjacksonsociety.org/publications/",
-      "kind": "html",
+      "endpoint": "https://henryjacksonsociety.org/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "HJS publications on UK counter-terrorism policy, extremism, and foreign influence operations for contextual analysis."
+      "comment": "Official Henry Jackson Society WordPress RSS feed for publications, blog posts and media releases."
     },
     {
       "id": "hope-not-hate-home",
@@ -4555,13 +4555,13 @@
     {
       "id": "gov-uk-counter-extremism-commissioner",
       "provider": "Counter Extremism Commissioner a GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/independent-commissioner-for-counter-extremism",
-      "kind": "html",
+      "endpoint": "https://www.govwire.co.uk/rss/commission-for-countering-extremism",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Independent Counter Extremism Commissioner publications and reports, used for prevention posture context."
+      "comment": "GovWire RSS syndication feed for Commission for Countering Extremism updates and announcements."
     },
     {
       "id": "gov-uk-prevent-strategy",
