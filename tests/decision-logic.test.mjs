@@ -568,7 +568,7 @@ test('isTerrorRelevantIncident strips negated terrorism context before scoring',
 
 test('sources catalog passes structural and per-field validation', () => {
   const sourcesPath = path.join(__dirname, '..', 'data', 'sources.json');
-  const raw = fs.readFileSync(sourcesPath, 'utf8');
+  const raw = fs.readFileSync(sourcesPath, 'utf8').replace(/^\uFEFF/, '');
   const parsed = JSON.parse(raw);
   const sources = Array.isArray(parsed.sources) ? parsed.sources : parsed;
 
@@ -718,13 +718,17 @@ test('source refresh cadence keeps incidents hourly and rotates lower-yield lane
   };
   const fixedHour = new Date('2026-04-05T10:00:00.000Z');
   const nextHour = new Date('2026-04-05T11:00:00.000Z');
+  const thirdHour = new Date('2026-04-05T13:00:00.000Z');
 
   assert.equal(shouldRefreshSourceThisRun(incidentsSource, fixedHour), true);
   assert.equal(shouldRefreshSourceThisRun(incidentsSource, nextHour), true);
-  assert.notEqual(
-    shouldRefreshSourceThisRun(contextSource, fixedHour),
-    shouldRefreshSourceThisRun(contextSource, nextHour)
-  );
+  const contextAtFixedHour = shouldRefreshSourceThisRun(contextSource, fixedHour);
+  const contextAtNextHour = shouldRefreshSourceThisRun(contextSource, nextHour);
+  const contextAtThirdHour = shouldRefreshSourceThisRun(contextSource, thirdHour);
+
+  assert.equal(contextAtFixedHour, false);
+  assert.equal(contextAtNextHour, false);
+  assert.equal(contextAtThirdHour, true);
 });
 
 test('validate-live-feed-output script passes valid feed and fails invalid sourceCount', () => {
