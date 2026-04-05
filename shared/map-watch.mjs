@@ -3,9 +3,9 @@ const LONDON_BOUNDS = Object.freeze([
   [51.28, -0.52],
   [51.7, 0.24]
 ]);
-const INITIAL_LONDON_ZOOM = 11;
+const INITIAL_LONDON_ZOOM = 12;
 const WORLD_FALLBACK = Object.freeze({ center: [20, 10], zoom: 2 });
-const LONDON_CLUSTER_MAX_ZOOM = 11;
+const LONDON_CLUSTER_MAX_ZOOM = 12;
 const WORLD_CLUSTER_MAX_ZOOM = 7;
 
 function statusLine(mode, count) {
@@ -75,7 +75,7 @@ export function createMapController(config) {
     if (liveMap || !mapElement || typeof L === 'undefined') return;
     liveMap = L.map(mapElement, {
       center: LONDON_CENTER,
-      zoom: 10,
+      zoom: 11,
       minZoom: 2,
       maxZoom: 13,
       zoomControl: true,
@@ -156,9 +156,9 @@ export function createMapController(config) {
     if (!liveMap) return;
     if (mode === 'london') {
       if (points.length) {
-        liveMap.fitBounds(L.latLngBounds(points), { padding: [22, 22], maxZoom: 11 });
+        liveMap.fitBounds(L.latLngBounds(points), { padding: [22, 22], maxZoom: 12 });
       } else {
-        liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 10 });
+        liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 11 });
       }
       return;
     }
@@ -252,7 +252,7 @@ export function createMapController(config) {
       liveMap.setView(WORLD_FALLBACK.center, WORLD_FALLBACK.zoom);
       return;
     }
-    liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 10 });
+    liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 11 });
   }
 
   return {
