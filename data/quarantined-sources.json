@@ -1,7 +1,39 @@
 {
-  "generatedAt": "2026-04-05T14:37:36.069Z",
-  "count": 3,
+  "generatedAt": "2026-04-05T15:36:10.273Z",
+  "count": 5,
   "sources": [
+    {
+      "id": "police-scotland-news",
+      "provider": "Police Scotland a News",
+      "endpoint": "https://www.scotland.police.uk/whats-happening/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-05T15:36:10.273Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-05T15:36:10.273Z",
+      "lastCheckedAt": "2026-04-05T15:36:10.273Z"
+    },
+    {
+      "id": "police-scotland-whats-happening-news",
+      "provider": "Police Scotland - What's Happening News",
+      "endpoint": "https://www.scotland.police.uk/what-s-happening/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-05T15:36:10.273Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-05T15:36:10.273Z",
+      "lastCheckedAt": "2026-04-05T15:36:10.273Z"
+    },
     {
       "id": "npsa-national-protective-security-authority",
       "provider": "National Protective Security Authority (NPSA) a Updates",
