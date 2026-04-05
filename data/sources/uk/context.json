@@ -111,13 +111,13 @@
     {
       "id": "henry-jackson-society-news",
       "provider": "Henry Jackson Society a Publications",
-      "endpoint": "https://henryjacksonsociety.org/publications/",
-      "kind": "html",
+      "endpoint": "https://henryjacksonsociety.org/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "HJS publications on UK counter-terrorism policy, extremism, and foreign influence operations for contextual analysis."
+      "comment": "Official Henry Jackson Society WordPress RSS feed for publications, blog posts and media releases."
     },
     {
       "id": "hope-not-hate-home",

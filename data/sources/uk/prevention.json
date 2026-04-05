@@ -90,13 +90,13 @@
     {
       "id": "gov-uk-counter-extremism-commissioner",
       "provider": "Counter Extremism Commissioner a GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/independent-commissioner-for-counter-extremism",
-      "kind": "html",
+      "endpoint": "https://www.govwire.co.uk/rss/commission-for-countering-extremism",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Independent Counter Extremism Commissioner publications and reports, used for prevention posture context."
+      "comment": "GovWire RSS syndication feed for Commission for Countering Extremism updates and announcements."
     },
     {
       "id": "gov-uk-prevent-strategy",

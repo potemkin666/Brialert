@@ -14,13 +14,13 @@
     {
       "id": "dsn-at-english",
       "provider": "DSN Austria news",
-      "endpoint": "https://www.dsn.gv.at/aktuelles",
+      "endpoint": "https://www.dsn.gv.at/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "News page of Austria's Directorate for State Security and Intelligence (DSN) providing updates and announcements (German language). No English version is available."
+      "comment": "Official DSN Austria homepage (German); no English-language DSN site or feed is available."
     },
     {
       "id": "isd-global",

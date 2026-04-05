@@ -520,13 +520,13 @@
     {
       "id": "moorfields-news",
       "provider": "Moorfields Eye Hospital NHS Foundation Trust a News",
-      "endpoint": "https://www.moorfields.nhs.uk/news",
+      "endpoint": "https://www.moorfields.nhs.uk/about-us/news-and-blogs/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Moorfields news used for central London specialist-hospital and emergency-system context."
+      "comment": "Moorfields official news and blogs listing for specialist-hospital and emergency-system context."
     },
     {
       "id": "nelft-news",
