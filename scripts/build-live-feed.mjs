@@ -256,6 +256,26 @@ function sourceSchedulingPriority(source) {
   return score;
 }
 
+function stableHash(value) {
+  return clean(value)
+    .split('')
+    .reduce((sum, char, index) => sum + (char.charCodeAt(0) * (index + 1)), 0);
+}
+
+function rotateHtmlSchedule(entries, buildDate) {
+  if (!Array.isArray(entries) || entries.length <= 1) return Array.isArray(entries) ? entries : [];
+  const hourSlot = Math.floor(buildDate.getTime() / 3600000);
+  const weekSlot = Math.floor(hourSlot / 168);
+  return [...entries].sort((left, right) => {
+    const leftSeed = stableHash(`${left?.source?.id || ''}:${weekSlot}`);
+    const rightSeed = stableHash(`${right?.source?.id || ''}:${weekSlot}`);
+    const leftScore = (leftSeed + hourSlot) % entries.length;
+    const rightScore = (rightSeed + hourSlot) % entries.length;
+    if (leftScore !== rightScore) return leftScore - rightScore;
+    return (left?.index || 0) - (right?.index || 0);
+  });
+}
+
 function buildQuarantinedSourceEntries(sources, sourceHealth) {
   const healthMap = sourceHealth && typeof sourceHealth === 'object' ? sourceHealth : {};
   return (Array.isArray(sources) ? sources : [])
@@ -489,8 +509,18 @@ async function main() {
   const machineReadableScheduled = rankedScheduledSources
     .filter((entry) => isMachineReadableSourceKind(entry.source?.kind))
     .map((entry) => entry.source);
-  const htmlScheduled = rankedScheduledSources
-    .filter((entry) => entry.source?.kind === 'html')
+  const htmlPrioritySources = rankedScheduledSources.filter((entry) =>
+    entry.source?.kind === 'html' &&
+    (entry.source?.lane === 'incidents' || entry.source?.isTrustedOfficial)
+  );
+  const htmlRotatingPool = rotateHtmlSchedule(
+    rankedScheduledSources.filter((entry) =>
+      entry.source?.kind === 'html' &&
+      !htmlPrioritySources.some((priorityEntry) => priorityEntry.source?.id === entry.source?.id)
+    ),
+    buildDate
+  );
+  const htmlScheduled = [...htmlPrioritySources, ...htmlRotatingPool]
     .slice(0, MAX_HTML_SOURCES_PER_RUN)
     .map((entry) => entry.source);
   const scheduledSourceIds = new Set([...machineReadableScheduled, ...htmlScheduled].map((source) => source.id));

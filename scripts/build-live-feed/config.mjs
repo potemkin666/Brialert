@@ -32,7 +32,7 @@ export const MAX_FEED_CANDIDATES_PER_SOURCE = 10;
 export const MAX_HTML_PARSING_THRESHOLD = MAX_HTML_CANDIDATES_PER_SOURCE * 2;
 export const MAX_HTML_PREFETCH_ITEMS = 12;
 export const MAX_FEED_PREFETCH_ITEMS = 8;
-export const MAX_HTML_SOURCES_PER_RUN = 24;
+export const MAX_HTML_SOURCES_PER_RUN = 40;
 export const SOURCE_ITEM_LIMITS = Object.freeze({
   tabloid: 1,
   incidents: 6,
