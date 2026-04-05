@@ -4842,6 +4842,61 @@
                         "isTrustedOfficial":  true,
                         "requiresKeywordMatch":  true,
                         "comment":  "Police Ombudsman investigations page for current oversight cases involving policing conduct and accountability."
+                    },
+                    {
+                        "id":  "parliament-all-bills-rss",
+                        "provider":  "Parliament - All Bills RSS",
+                        "endpoint":  "https://bills.parliament.uk/rss/allbills.rss",
+                        "kind":  "rss",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "UK Parliament all bills RSS for legislative tracking, including security, justice and counter-terror bills."
+                    },
+                    {
+                        "id":  "parliament-public-bills-rss",
+                        "provider":  "Parliament - Public Bills RSS",
+                        "endpoint":  "https://bills.parliament.uk/rss/publicbills.rss",
+                        "kind":  "rss",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "UK Parliament public bills RSS for legislation with potential policing, justice and terrorism relevance."
+                    },
+                    {
+                        "id":  "parliament-private-bills-rss",
+                        "provider":  "Parliament - Private Bills RSS",
+                        "endpoint":  "https://bills.parliament.uk/rss/privatebills.rss",
+                        "kind":  "rss",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "UK Parliament private bills RSS for institutional and legislative oversight context."
+                    },
+                    {
+                        "id":  "lords-library-notes-rss",
+                        "provider":  "Lords Library Notes RSS",
+                        "endpoint":  "https://researchbriefings.parliament.uk/rssfeed/Lords%20Library%20notes",
+                        "kind":  "rss",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "House of Lords Library notes RSS for legislative and policy briefing materials."
+                    },
+                    {
+                        "id":  "lords-in-focus-rss",
+                        "provider":  "Lords In Focus RSS",
+                        "endpoint":  "https://researchbriefings.parliament.uk/rssfeed/Lords%20In%20Focus",
+                        "kind":  "rss",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "House of Lords In Focus RSS for topical parliamentary briefings and institutional context."
                     }
                 ]
 }
