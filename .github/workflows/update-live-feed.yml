@@ -71,6 +71,8 @@ jobs:
           git status --short > .debug-artifacts/git-status.txt || true
           git rev-parse HEAD > .debug-artifacts/head-sha.txt || true
           cp live-alerts.json .debug-artifacts/live-alerts.json 2>/dev/null || true
+          cp data/quarantined-sources.json .debug-artifacts/quarantined-sources.json 2>/dev/null || true
+          cp source-quarantine.html .debug-artifacts/source-quarantine.html 2>/dev/null || true
           cp data/brialert.sqlite .debug-artifacts/brialert.sqlite 2>/dev/null || true
           cp data/sources.json .debug-artifacts/sources.json 2>/dev/null || true
           cp data/geo-lookup.json .debug-artifacts/geo-lookup.json 2>/dev/null || true
@@ -90,6 +92,12 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add live-alerts.json
+          if [ -f data/quarantined-sources.json ]; then
+            git add data/quarantined-sources.json
+          fi
+          if [ -f source-quarantine.html ]; then
+            git add source-quarantine.html
+          fi
           if [ -f data/brialert.sqlite ]; then
             git add data/brialert.sqlite
           fi

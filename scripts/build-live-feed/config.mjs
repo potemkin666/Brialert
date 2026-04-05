@@ -11,6 +11,8 @@ export const sourceRequestsPath = path.join(repoRoot, 'data', 'source-requests.j
 export const geoLookupPath = path.join(repoRoot, 'data', 'geo-lookup.json');
 export const outputPath = path.join(repoRoot, 'live-alerts.json');
 export const sqlitePath = path.join(repoRoot, 'data', 'brialert.sqlite');
+export const quarantinedSourcesPath = path.join(repoRoot, 'data', 'quarantined-sources.json');
+export const quarantinedSourcesReviewPath = path.join(repoRoot, 'source-quarantine.html');
 
 export const parser = new XMLParser({
   ignoreAttributes: false,
@@ -59,6 +61,7 @@ export const SOURCE_FAILURE_COOLDOWN_HOURS = 24;
 export const SOURCE_EMPTY_COOLDOWN_HOURS = 24;
 export const AUTO_SKIP_FAILURE_THRESHOLD = 4;
 export const AUTO_SKIP_EMPTY_THRESHOLD = 6;
+export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = 2;
 export const HARD_SKIP_SOURCE_IDS = new Set([
   'globalsecurity-terror-news',
   'un-ctitf-news',

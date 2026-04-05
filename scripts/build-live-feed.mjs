@@ -5,6 +5,7 @@ import { execFile as execFileCallback } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import {
+  AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD,
   AUTO_SKIP_EMPTY_THRESHOLD,
   AUTO_SKIP_FAILURE_THRESHOLD,
   FEED_SOURCE_CONCURRENCY,
@@ -19,6 +20,8 @@ import {
   SOURCE_ITEM_LIMITS,
   shouldRefreshSourceThisRun,
   outputPath,
+  quarantinedSourcesPath,
+  quarantinedSourcesReviewPath,
   sqlitePath,
   sourcePath,
   sourceRequestsPath
@@ -72,8 +75,18 @@ function sourceHealthEntry(previousHealth, sourceId) {
   return entry && typeof entry === 'object' ? entry : null;
 }
 
+function isBlockedFailureCategory(category) {
+  return category === 'blocked-or-auth' || category === 'anti-bot-protection';
+}
+
 function sourceMayAutoCooldown(source, previousEntry, buildDate) {
   if (!previousEntry) return null;
+  if (previousEntry.quarantined) {
+    return {
+      reason: 'review-quarantine',
+      until: null
+    };
+  }
   const cooldownUntilMs = parseIsoMs(previousEntry.cooldownUntil);
   if (!cooldownUntilMs || buildDate.getTime() >= cooldownUntilMs) return null;
 
@@ -100,6 +113,7 @@ function sourceMayAutoCooldown(source, previousEntry, buildDate) {
 
 function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   const prior = previousEntry && typeof previousEntry === 'object' ? previousEntry : {};
+  const priorBlockedFailures = Number(prior.consecutiveBlockedFailures || 0);
   const next = {
     provider: source.provider,
     lane: source.lane,
@@ -111,26 +125,47 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     failedRuns: Number(prior.failedRuns || 0),
     consecutiveFailures: Number(prior.consecutiveFailures || 0),
     consecutiveEmptyRuns: Number(prior.consecutiveEmptyRuns || 0),
+    consecutiveBlockedFailures: priorBlockedFailures,
     lastSuccessfulAt: prior.lastSuccessfulAt || null,
     lastFailureAt: prior.lastFailureAt || null,
     lastEmptyAt: prior.lastEmptyAt || null,
+    lastErrorCategory: prior.lastErrorCategory || null,
+    lastErrorMessage: prior.lastErrorMessage || null,
     cooldownUntil: null,
-    autoSkipReason: null
+    autoSkipReason: null,
+    quarantined: Boolean(prior.quarantined),
+    quarantinedAt: prior.quarantinedAt || null,
+    quarantineReason: prior.quarantineReason || null
   };
 
   if ((stat?.built || 0) > 0) {
     next.successfulRuns += 1;
     next.consecutiveFailures = 0;
     next.consecutiveEmptyRuns = 0;
+    next.consecutiveBlockedFailures = 0;
+    next.lastErrorCategory = null;
+    next.lastErrorMessage = null;
     next.lastSuccessfulAt = generatedAt;
     return next;
   }
 
   if ((stat?.errors || 0) > 0) {
+    const blockedFailure = source?.kind === 'html' && isBlockedFailureCategory(stat?.lastErrorCategory);
     next.failedRuns += 1;
     next.consecutiveFailures += 1;
     next.consecutiveEmptyRuns = 0;
+    next.consecutiveBlockedFailures = blockedFailure ? priorBlockedFailures + 1 : 0;
     next.lastFailureAt = generatedAt;
+    next.lastErrorCategory = stat?.lastErrorCategory || null;
+    next.lastErrorMessage = stat?.lastErrorMessage || null;
+    if (!next.quarantined && blockedFailure && next.consecutiveBlockedFailures >= AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD) {
+      next.quarantined = true;
+      next.quarantinedAt = generatedAt;
+      next.quarantineReason = `Repeated ${stat.lastErrorCategory} failures on html source`;
+      next.autoSkipReason = 'review-quarantine';
+      next.cooldownUntil = null;
+      return next;
+    }
     if (next.consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
       next.cooldownUntil = new Date(Date.parse(generatedAt) + SOURCE_FAILURE_COOLDOWN_HOURS * 3600000).toISOString();
       next.autoSkipReason = 'failure-cooldown';
@@ -141,6 +176,9 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   next.emptyRuns += 1;
   next.consecutiveEmptyRuns += 1;
   next.consecutiveFailures = 0;
+  next.consecutiveBlockedFailures = 0;
+  next.lastErrorCategory = null;
+  next.lastErrorMessage = null;
   next.lastEmptyAt = generatedAt;
   if (!source.isTrustedOfficial && source.lane !== 'incidents' && next.consecutiveEmptyRuns >= AUTO_SKIP_EMPTY_THRESHOLD) {
     next.cooldownUntil = new Date(Date.parse(generatedAt) + SOURCE_EMPTY_COOLDOWN_HOURS * 3600000).toISOString();
@@ -200,6 +238,110 @@ function buildAlertChurnRows(previousAlerts, nextAlerts) {
   }
 
   return rows;
+}
+
+function buildQuarantinedSourceEntries(sources, sourceHealth) {
+  const healthMap = sourceHealth && typeof sourceHealth === 'object' ? sourceHealth : {};
+  return (Array.isArray(sources) ? sources : [])
+    .map((source) => {
+      const health = healthMap[source.id] && typeof healthMap[source.id] === 'object' ? healthMap[source.id] : {};
+      const manuallyQuarantined = Boolean(source?.quarantined);
+      const autoQuarantined = Boolean(health?.quarantined);
+      if (!manuallyQuarantined && !autoQuarantined) return null;
+      return {
+        id: clean(source?.id),
+        provider: clean(source?.provider),
+        endpoint: clean(source?.endpoint),
+        kind: clean(source?.kind),
+        lane: clean(source?.lane),
+        region: clean(source?.region),
+        status: manuallyQuarantined ? 'catalog-quarantined' : 'auto-quarantined',
+        reason: manuallyQuarantined
+          ? 'Marked quarantined in sources catalog'
+          : clean(health?.quarantineReason || health?.autoSkipReason || 'Needs review'),
+        quarantinedAt: clean(health?.quarantinedAt),
+        lastErrorCategory: clean(health?.lastErrorCategory),
+        lastErrorMessage: clean(health?.lastErrorMessage),
+        consecutiveBlockedFailures: Number(health?.consecutiveBlockedFailures || 0),
+        lastFailureAt: clean(health?.lastFailureAt),
+        lastCheckedAt: clean(health?.lastCheckedAt)
+      };
+    })
+    .filter(Boolean)
+    .sort((left, right) => {
+      const rightMs = parseIsoMs(right.quarantinedAt || right.lastFailureAt || right.lastCheckedAt);
+      const leftMs = parseIsoMs(left.quarantinedAt || left.lastFailureAt || left.lastCheckedAt);
+      return rightMs - leftMs;
+    });
+}
+
+function renderQuarantinedSourcesHtml(generatedAt, entries) {
+  const rows = entries.length
+    ? entries.map((entry) => `
+      <tr>
+        <td>${clean(entry.provider)}</td>
+        <td>${clean(entry.kind)} / ${clean(entry.lane)}</td>
+        <td>${clean(entry.region)}</td>
+        <td>${clean(entry.status)}</td>
+        <td>${clean(entry.reason)}</td>
+        <td>${clean(entry.lastErrorCategory || 'n/a')}</td>
+        <td>${clean(entry.consecutiveBlockedFailures || 0)}</td>
+        <td><a href="${clean(entry.endpoint)}" target="_blank" rel="noreferrer">${clean(entry.endpoint)}</a></td>
+      </tr>`).join('\n')
+    : '<tr><td colspan="8">No quarantined sources currently recorded.</td></tr>';
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brialert Source Quarantine Review</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font: 16px/1.5 system-ui, sans-serif; background: #0b1220; color: #e8eef9; }
+    main { max-width: 1200px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { margin: 0 0 8px; font-size: 32px; }
+    p { margin: 0 0 16px; color: #b9c6de; }
+    .card { background: rgba(19, 27, 45, 0.92); border: 1px solid rgba(112, 138, 179, 0.28); border-radius: 18px; padding: 18px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 980px; }
+    th, td { text-align: left; padding: 12px 10px; vertical-align: top; border-bottom: 1px solid rgba(112, 138, 179, 0.18); }
+    th { color: #9fb2d6; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+    a { color: #9fd0ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .pill { padding: 8px 12px; border-radius: 999px; background: rgba(159, 208, 255, 0.08); border: 1px solid rgba(159, 208, 255, 0.18); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Source Quarantine Review</h1>
+    <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run.</p>
+    <div class="meta">
+      <span class="pill">Generated: ${clean(generatedAt)}</span>
+      <span class="pill">Quarantined sources: ${entries.length}</span>
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Type</th>
+            <th>Region</th>
+            <th>Status</th>
+            <th>Reason</th>
+            <th>Last Error</th>
+            <th>Blocked Runs</th>
+            <th>Endpoint</th>
+          </tr>
+        </thead>
+        <tbody>${rows}
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>
+`;
 }
 
 async function syncBuilderSQLite(snapshot) {
@@ -388,6 +530,8 @@ async function main() {
             kept: kept.length,
             built: builtAlerts.length,
             errors: localErrors.length,
+            lastErrorCategory: localErrors[0]?.category || null,
+            lastErrorMessage: localErrors[0]?.message || null,
             discardReasons
           }
         };
@@ -410,6 +554,8 @@ async function main() {
             kept: 0,
             built: 0,
             errors: localErrors.length,
+            lastErrorCategory: localErrors[0]?.category || null,
+            lastErrorMessage: localErrors[0]?.message || null,
             discardReasons
           }
         };
@@ -470,6 +616,11 @@ async function main() {
         provider: source.provider,
         lane: source.lane,
         kind: source.kind,
+        quarantined: deferred.reason === 'review-quarantine' ? true : Boolean(priorEntry?.quarantined),
+        quarantinedAt: priorEntry?.quarantinedAt || null,
+        quarantineReason: deferred.reason === 'review-quarantine'
+          ? clean(priorEntry?.quarantineReason || 'Needs manual review')
+          : (priorEntry?.quarantineReason || null),
         autoSkipReason: deferred.reason,
         cooldownUntil: deferred.until,
         lastDeferredAt: generatedAt
@@ -518,6 +669,12 @@ async function main() {
     sourceStats,
     alertChurn: buildAlertChurnRows(existing?.alerts || [], payload.alerts)
   };
+  const quarantinedEntries = buildQuarantinedSourceEntries(sources, nextSourceHealth);
+  const quarantinedPayload = {
+    generatedAt,
+    count: quarantinedEntries.length,
+    sources: quarantinedEntries
+  };
 
   try {
     await syncBuilderSQLite(sqliteSnapshot);
@@ -535,6 +692,8 @@ async function main() {
   }
 
   await fs.writeFile(outputPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');
+  await fs.writeFile(quarantinedSourcesPath, JSON.stringify(quarantinedPayload, null, 2) + '\n', 'utf8');
+  await fs.writeFile(quarantinedSourcesReviewPath, renderQuarantinedSourcesHtml(generatedAt, quarantinedEntries), 'utf8');
   console.log([
     'Feed build summary:',
     `eligible=${eligibleSources.length}`,
@@ -548,6 +707,7 @@ async function main() {
     `preDedupe=${preDedupeCount}`,
     `postDedupe=${deduped.length}`,
     `stored=${payload.alertCount}`,
+    `quarantined=${quarantinedEntries.length}`,
     `droppedByDedupe=${dedupeDropped}`,
     `droppedByFilter=${droppedByFilter}`,
     `droppedByItemCap=${droppedByItemCap}`,
