@@ -31,6 +31,12 @@ export function supportingCardMarkup(alert) {
   const isQuarantine = Boolean(alert.needsHumanReview);
   const badgeLabel = isQuarantine ? 'Quarantine' : (laneLabels[alert.lane] || 'Context');
   const metaReason = isQuarantine ? quarantineReason(alert) : contextLabel(alert);
+  const timeMeta = String(alert.time || '').trim();
+  const metaParts = [
+    `<span>${escapeHtml(alert.source)}</span>`,
+    `<span>${escapeHtml(metaReason)}</span>`,
+    timeMeta ? `<span>${escapeHtml(timeMeta)}</span>` : ''
+  ].filter(Boolean).join('');
 
   return `
     <article class="supporting-card ${isQuarantine ? 'is-quarantine' : 'is-context'} actionable" data-supporting="${alert.id}">
@@ -39,11 +45,7 @@ export function supportingCardMarkup(alert) {
         <span class="supporting-badge ${isQuarantine ? 'is-quarantine' : 'is-context'}">${escapeHtml(badgeLabel)}</span>
       </div>
       <p>${escapeHtml(alert.summary)}</p>
-      <div class="meta-row">
-        <span>${escapeHtml(alert.source)}</span>
-        <span>${escapeHtml(metaReason)}</span>
-        <span>${escapeHtml(alert.time)}</span>
-      </div>
+      <div class="meta-row">${metaParts}</div>
     </article>`;
 }
 

@@ -63,17 +63,19 @@ export function renderPriority({ state, elements, view, modalController }) {
 
   const liveCandidate = isLiveIncidentCandidate(alert);
   const matches = keywordMatches(alert);
+  const timeMeta = String(alert.time || '').trim();
+  const priorityMetaParts = [
+    `<span>${escapeHtml(alert.source)}</span>`,
+    `<span>${matches.length ? `${matches.length} keyword hits` : 'No incident keyword hit'}</span>`,
+    timeMeta ? `<span>${escapeHtml(timeMeta)}</span>` : ''
+  ].filter(Boolean).join('');
   elements.priorityCard.classList.toggle('context-priority', !liveCandidate);
   elements.priorityCard.innerHTML = `
     <div class="eyebrow">${liveCandidate ? 'Live Terror Incident Trigger' : 'Context Item'}</div>
     <h2>${escapeHtml(alert.title)}</h2>
     <p class="muted">${escapeHtml(laneLabels[alert.lane])} | ${escapeHtml(alert.location)} | ${escapeHtml(alert.status)}</p>
     <p>${escapeHtml(alert.summary)}</p>
-    <div class="meta-row">
-      <span>${escapeHtml(alert.source)}</span>
-      <span>${matches.length ? `${matches.length} keyword hits` : 'No incident keyword hit'}</span>
-      <span>${escapeHtml(alert.time)}</span>
-    </div>`;
+    <div class="meta-row">${priorityMetaParts}</div>`;
   elements.priorityCard.onclick = () => modalController.openDetail(alert);
 }
 
@@ -95,8 +97,10 @@ export function renderBriefingMode({ state, elements, view, modalController }) {
   }
 
   const summaryText = effectiveSummary(alert);
+  const briefingTime = String(alert.time || '').trim();
+  const briefingMeta = [alert.location, briefingTime, alert.source].filter((value) => String(value || '').trim()).join(' | ');
   elements.briefingModeTitle.textContent = alert.title;
-  elements.briefingModeMeta.textContent = `${alert.location} | ${alert.time} | ${alert.source}`;
+  elements.briefingModeMeta.textContent = briefingMeta;
   elements.briefingModeSummary.textContent = summaryText;
   elements.briefingModeCopy.disabled = false;
   elements.briefingModeCopy.dataset.briefing = buildBriefing(alert, summaryText);
