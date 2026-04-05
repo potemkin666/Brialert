@@ -506,6 +506,12 @@ export function buildBriefing(alert, summaryText) {
   ].flat().filter(Boolean).join('\n');
 }
 
+const UNCONFIRMED_SOURCE_DATE = 'source date unconfirmed';
+
+function isUnconfirmedSourceDate(value) {
+  return clean(value).toLowerCase() === UNCONFIRMED_SOURCE_DATE;
+}
+
 export function normaliseAlert(alert, index, geoLookup = []) {
   const geoPoint = inferGeoPoint(alert, geoLookup);
   const lane = ['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention'].includes(alert.lane) ? alert.lane : 'incidents';
@@ -514,8 +520,8 @@ export function normaliseAlert(alert, index, geoLookup = []) {
   const incidentTrack = normaliseIncidentTrack(alert.incidentTrack);
   const happenedWhenRaw = plainText(alert.happenedWhen);
   const timeRaw = plainText(alert.time);
-  const happenedWhen = clean(happenedWhenRaw).toLowerCase() === 'source date unconfirmed' ? '' : happenedWhenRaw;
-  const time = clean(timeRaw).toLowerCase() === 'source date unconfirmed' ? '' : timeRaw;
+  const happenedWhen = isUnconfirmedSourceDate(happenedWhenRaw) ? '' : happenedWhenRaw;
+  const time = isUnconfirmedSourceDate(timeRaw) ? '' : timeRaw;
   return {
     id: clean(alert.id) || `live-${index}`,
     title: plainText(alert.title) || 'Untitled source item',
@@ -534,7 +540,7 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     peopleInvolved: Array.isArray(alert.peopleInvolved) ? alert.peopleInvolved.map(plainText).filter(Boolean) : [],
     source: plainText(alert.source) || 'Unknown source',
     sourceUrl: clean(alert.sourceUrl) || '#',
-    time: time || happenedWhen,
+    time: time || happenedWhen || 'Now',
     lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? (alert.region === 'uk' ? 54.5 : 54)),
     lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? (alert.region === 'uk' ? -2.5 : 15)),
     major: !!alert.major,

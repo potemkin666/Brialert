@@ -98,7 +98,7 @@ export function renderBriefingMode({ state, elements, view, modalController }) {
 
   const summaryText = effectiveSummary(alert);
   const briefingTime = String(alert.time || '').trim();
-  const briefingMeta = [alert.location, briefingTime, alert.source].filter((value) => String(value || '').trim()).join(' | ');
+  const briefingMeta = [alert.location, briefingTime, alert.source].map((value) => String(value || '').trim()).filter(Boolean).join(' | ');
   elements.briefingModeTitle.textContent = alert.title;
   elements.briefingModeMeta.textContent = briefingMeta;
   elements.briefingModeSummary.textContent = summaryText;
