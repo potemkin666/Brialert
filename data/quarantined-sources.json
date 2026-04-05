@@ -1,7 +1,39 @@
 {
-  "generatedAt": "2026-04-05T11:33:59.976Z",
-  "count": 1,
+  "generatedAt": "2026-04-05T13:02:51.966Z",
+  "count": 3,
   "sources": [
+    {
+      "id": "npsa-national-protective-security-authority",
+      "provider": "National Protective Security Authority (NPSA) a Updates",
+      "endpoint": "https://www.npsa.gov.uk/news",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-05T13:02:51.966Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-05T13:02:51.966Z",
+      "lastCheckedAt": "2026-04-05T13:02:51.966Z"
+    },
+    {
+      "id": "gchq-counter-terrorism",
+      "provider": "GCHQ a Counter-Terrorism",
+      "endpoint": "https://www.gchq.gov.uk/section/mission/counter-terrorism",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-05T13:02:51.966Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-05T13:02:51.966Z",
+      "lastCheckedAt": "2026-04-05T13:02:51.966Z"
+    },
     {
       "id": "london-resilience",
       "provider": "London Resilience a Updates",
