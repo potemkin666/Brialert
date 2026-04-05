@@ -3918,6 +3918,160 @@
                         "isTrustedOfficial":  false,
                         "requiresKeywordMatch":  true,
                         "comment":  "BBC London RSS feed for London incidents and corroborating public reporting."
+                    },
+                    {
+                        "id":  "npcc-releases",
+                        "provider":  "National Police Chiefs' Council - Releases",
+                        "endpoint":  "https://news.npcc.police.uk/releases/",
+                        "kind":  "html",
+                        "lane":  "context",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "NPCC releases page for national policing statements, operations and security posture updates."
+                    },
+                    {
+                        "id":  "npsa-blog",
+                        "provider":  "NPSA - Blog",
+                        "endpoint":  "https://www.npsa.gov.uk/blog",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "NPSA blog page for protective-security guidance, resilience commentary and threat-aware advice."
+                    },
+                    {
+                        "id":  "npsa-blog-news",
+                        "provider":  "NPSA - Blog News",
+                        "endpoint":  "https://www.npsa.gov.uk/blog/news",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "NPSA blog news listing for protective-security, venue hardening and public-safety updates."
+                    },
+                    {
+                        "id":  "report-fraud-home",
+                        "provider":  "Report Fraud",
+                        "endpoint":  "https://www.reportfraud.police.uk/",
+                        "kind":  "html",
+                        "lane":  "context",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Official reporting portal for fraud and cyber-enabled crime with public guidance and campaign context."
+                    },
+                    {
+                        "id":  "report-fraud-newsroom",
+                        "provider":  "Report Fraud - Newsroom",
+                        "endpoint":  "https://www.reportfraud.police.uk/collection/newsroom/",
+                        "kind":  "html",
+                        "lane":  "context",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Report Fraud newsroom page for public-fraud warnings, campaign notices and cyber/fraud reporting updates."
+                    },
+                    {
+                        "id":  "city-of-london-police-fraud-reporting",
+                        "provider":  "City of London Police - Fraud Reporting",
+                        "endpoint":  "https://www.cityoflondon.police.uk/ro/report/fo/v1/fraud/",
+                        "kind":  "html",
+                        "lane":  "context",
+                        "region":  "london",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "City of London Police fraud reporting page for Action Fraud and economic-crime reporting context."
+                    },
+                    {
+                        "id":  "home-office-media-blog",
+                        "provider":  "Home Office Media Blog",
+                        "endpoint":  "https://homeofficemedia.blog.gov.uk/",
+                        "kind":  "html",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Home Office media blog for government statements on immigration, policing, security and terrorism policy."
+                    },
+                    {
+                        "id":  "extremism-commission-blog",
+                        "provider":  "Commission for Countering Extremism - Blog",
+                        "endpoint":  "https://extremismcommission.blog.gov.uk/",
+                        "kind":  "html",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Commission for Countering Extremism blog for extremism policy, research and prevention commentary."
+                    },
+                    {
+                        "id":  "ofsi-blog-home",
+                        "provider":  "OFSI - Blog",
+                        "endpoint":  "https://ofsi.blog.gov.uk/",
+                        "kind":  "html",
+                        "lane":  "sanctions",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "OFSI sanctions blog homepage for financial sanctions, enforcement and terror-financing-adjacent policy context."
+                    },
+                    {
+                        "id":  "otsi-blog-home",
+                        "provider":  "OTSI - Blog",
+                        "endpoint":  "https://otsi.blog.gov.uk/",
+                        "kind":  "html",
+                        "lane":  "sanctions",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Office of Trade Sanctions Implementation blog for sanctions compliance and enforcement context."
+                    },
+                    {
+                        "id":  "gov-uk-terrorism-national-emergency",
+                        "provider":  "GOV.UK - Terrorism National Emergency",
+                        "endpoint":  "https://www.gov.uk/terrorism-national-emergency",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  false,
+                        "comment":  "Official GOV.UK public guidance page for responding to a terrorism national emergency."
+                    },
+                    {
+                        "id":  "gov-uk-report-terrorism",
+                        "provider":  "GOV.UK - Report Terrorism",
+                        "endpoint":  "https://www.gov.uk/report-terrorism",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  false,
+                        "comment":  "Official GOV.UK page for reporting terrorism and suspicious activity."
+                    },
+                    {
+                        "id":  "act-campaign",
+                        "provider":  "ACT Awareness Campaign",
+                        "endpoint":  "https://act.campaign.gov.uk/",
+                        "kind":  "html",
+                        "lane":  "prevention",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  false,
+                        "comment":  "Action Counters Terrorism public-awareness campaign for reporting suspicious behaviour and preparedness."
+                    },
+                    {
+                        "id":  "gov-uk-news-and-communications-atom",
+                        "provider":  "GOV.UK - News and Communications Atom",
+                        "endpoint":  "https://www.gov.uk/search/news-and-communications.atom",
+                        "kind":  "rss",
+                        "lane":  "oversight",
+                        "region":  "uk",
+                        "isTrustedOfficial":  true,
+                        "requiresKeywordMatch":  true,
+                        "comment":  "Broad GOV.UK news and communications Atom feed for official UK announcements with keyword gating."
                     }
                 ]
 }
