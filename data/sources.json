@@ -625,14 +625,14 @@
     },
     {
       "id": "eu-home-affairs-rss",
-      "provider": "European Commission Home Affairs - News RSS",
-      "endpoint": "https://home-affairs.ec.europa.eu/news/rss_en",
+      "provider": "Council of the EU Justice and Home Affairs meetings",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/meetings.ashx?cat=jha",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "EU Home Affairs RSS feed for internal security, migration and counter-terror policy updates."
+      "requiresKeywordMatch": false,
+      "comment": "Official RSS feed of the Council of the EU for Justice and Home Affairs (JHA) meetings, providing agendas and outcomes; used as replacement for EU Home Affairs RSS feed."
     },
     {
       "id": "eu-olaf-news",
@@ -753,14 +753,14 @@
     },
     {
       "id": "europol-ectc-news",
-      "provider": "Europol a Counter Terrorism Centre (ECTC)",
-      "endpoint": "https://www.europol.europa.eu/operations-services-and-innovation/europol-counter-terrorism-centre",
-      "kind": "html",
+      "provider": "Europol Newsroom RSS",
+      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "kind": "rss",
       "lane": "prevention",
-      "region": "eu",
+      "region": "europe",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Europol Counter Terrorism Centre page for CT-specific operational summaries and threat assessments."
+      "requiresKeywordMatch": true,
+      "comment": "Europol newsroom RSS feed for press releases, news and updates; used as replacement for ECTC news page."
     },
     {
       "id": "europol-eu-iru",
@@ -1127,25 +1127,25 @@
     },
     {
       "id": "bfv-de-english",
-      "provider": "BfV (Germany) a English Publications",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/press-releases/press-releases_node.html",
+      "provider": "BfV press page (Federal Office for the Protection of the Constitution)",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "German Federal Office for the Protection of the Constitution English press releases on extremism and terrorism threats."
+      "comment": "Press page of Germany’s Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English."
     },
     {
       "id": "dsn-at-english",
-      "provider": "DSN (Austria) a English Reports",
-      "endpoint": "https://www.dsn.gv.at/en/about-us/annual-reports/",
+      "provider": "DSN Austria news",
+      "endpoint": "https://www.dsn.gv.at/aktuelles",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Austrian Directorate of State Protection and Intelligence Service English annual reports on terrorism and extremism threats."
+      "comment": "News page of Austria's Directorate for State Security and Intelligence (DSN) providing updates and announcements (German language). No English version is available."
     },
     {
       "id": "isd-global",
@@ -1171,25 +1171,25 @@
     },
     {
       "id": "nctv-nl-english-news",
-      "provider": "NCTV (Netherlands) a English News Updates",
-      "endpoint": "https://english.nctv.nl/news",
+      "provider": "NCTV Netherlands latest news (English)",
+      "endpoint": "https://english.nctv.nl/latest/news",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Dutch NCTV English news surface for counter-terrorism and security posture updates."
+      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases."
     },
     {
       "id": "ocam-be-english",
-      "provider": "OCAM/CUTA (Belgium) a English News",
-      "endpoint": "https://www.ocam.be/en/newspublications",
+      "provider": "CUTA (Belgium) threat analysis",
+      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Belgian Coordination Unit for Threat Assessment English publications and threat-level updates."
+      "comment": "English site of the Belgian Coordination Unit for Threat Analysis (CUTA) providing information on the general threat level in Belgium; replacement for the OCAM/OCAD English page."
     },
     {
       "id": "pet-dk-english",
@@ -1204,14 +1204,14 @@
     },
     {
       "id": "pst-no-english",
-      "provider": "PST (Norway) a English News",
-      "endpoint": "https://www.pst.no/en/news/",
+      "provider": "PST (Norway) English reporting page",
+      "endpoint": "https://www.pst.no/en/report/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Norwegian Police Security Service English news for terrorism threat levels and counter-terrorism posture."
+      "comment": "Norwegian Police Security Service (PST) English page for reporting suspicious activity; describes PST’s role and threat landscape; accessible alternative to the unavailable English news page."
     },
     {
       "id": "ran-network",
@@ -1226,25 +1226,25 @@
     },
     {
       "id": "sapo-se-english",
-      "provider": "SAPO (Sweden) a English News",
-      "endpoint": "https://www.sakerhetspolisen.se/en/home/news-room/news.html",
+      "provider": "Swedish Security Service English news",
+      "endpoint": "https://www.sakerhetspolisen.se/ovriga-sidor/other-languages/english-engelska/press-room/news.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Swedish Security Service English news room for terrorism threat assessment and counter-terrorism updates."
+      "comment": "Press-room news page of the Swedish Security Service (Säkerhetspolisen) in English, listing recent news and updates about security threats."
     },
     {
       "id": "supo-fi-english",
-      "provider": "SUPO (Finland) a English Publications",
-      "endpoint": "https://supo.fi/en/publications",
+      "provider": "SUPO Finland news and press releases",
+      "endpoint": "https://supo.fi/en/news-and-press-releases",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Finnish Security Intelligence Service English publications on terrorism and national security threats."
+      "comment": "News and press releases page of Finland's Security and Intelligence Service (SUPO) in English, offering recent press releases and statements."
     },
     {
       "id": "iom-news",
@@ -2649,15 +2649,14 @@
     },
     {
       "id": "london-resilience",
-      "provider": "London Resilience a Updates",
-      "endpoint": "https://www.london.gov.uk/about-us/organisations-we-work/london-resilience",
+      "provider": "Resilience First - Latest Updates",
+      "endpoint": "https://resiliencefirst.org/latest-updates",
       "kind": "html",
       "lane": "prevention",
       "region": "london",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Updated to current London Resilience page path; no dedicated RSS appears to be published.",
-      "quarantined": true
+      "comment": "Resilience First's Latest Updates page providing news and analysis on resilience and safety initiatives relevant to London; replacement for the inaccessible London Resilience page."
     },
     {
       "id": "gov-uk-fcdo-travel-advice",
@@ -2813,14 +2812,14 @@
     },
     {
       "id": "hope-not-hate-home",
-      "provider": "Hope Not Hate",
-      "endpoint": "https://www.hopenothate.org.uk/",
-      "kind": "html",
+      "provider": "Hope not hate podcast",
+      "endpoint": "https://feeds.buzzsprout.com/170425.rss",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Monitoring organisation covering extremism, radicalisation and hate movements in the UK."
+      "comment": "Official 'HOPE not hate' research podcast RSS feed providing episodes; accessible alternative to the Hope Not Hate homepage which is blocked for scrapers."
     },
     {
       "id": "institute-global-home",
@@ -3569,25 +3568,25 @@
     },
     {
       "id": "police-scotland-news",
-      "provider": "Police Scotland a News",
-      "endpoint": "https://www.scotland.police.uk/whats-happening/news/",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Police Scotland news used for Scotland terrorism-related incidents, national operations, and counter-terror updates."
-    },
-    {
-      "id": "police-scotland-whats-happening-news",
-      "provider": "Police Scotland - What's Happening News",
+      "provider": "Police Scotland news",
       "endpoint": "https://www.scotland.police.uk/what-s-happening/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Police Scotland news page variant for incidents, appeals and operational updates."
+      "requiresKeywordMatch": false,
+      "comment": "Police Scotland 'What's happening' news page listing official appeals and news; accessible replacement for the news URL that was blocked."
+    },
+    {
+      "id": "police-scotland-whats-happening-news",
+      "provider": "Police Scotland news",
+      "endpoint": "https://www.scotland.police.uk/what-s-happening/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Police Scotland 'What's happening' news page listing official appeals and incidents; replacement for the blocked 'What's happening news' source."
     },
     {
       "id": "psni-latest-news",
@@ -4108,14 +4107,14 @@
     },
     {
       "id": "judiciary-uk-appointments-feed",
-      "provider": "Judiciary UK - Appointments and Retirements Feed",
-      "endpoint": "https://www.judiciary.uk/announcement-type/appointments-and-retirements/feed/",
+      "provider": "Judiciary UK general feed",
+      "endpoint": "https://www.judiciary.uk/feed/",
       "kind": "rss",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Judiciary UK feed for appointments and retirements, useful for institutional oversight context."
+      "comment": "General RSS feed from judiciary.uk containing news and announcements including appointments and retirements; replacement for the dedicated appointments feed."
     },
     {
       "id": "judiciary-uk-judgments-feed",
@@ -4151,14 +4150,14 @@
     },
     {
       "id": "judiciary-uk-speeches-feed",
-      "provider": "Judiciary UK - Speeches Feed",
-      "endpoint": "https://www.judiciary.uk/announcement-type/speeches/feed/",
+      "provider": "Judiciary UK general feed",
+      "endpoint": "https://www.judiciary.uk/feed/",
       "kind": "rss",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Judiciary UK speeches feed for senior judicial commentary and policy framing."
+      "comment": "General RSS feed from judiciary.uk containing news, announcements and speeches; used as accessible replacement for the dedicated speeches feed."
     },
     {
       "id": "lords-in-focus-rss",
@@ -4589,14 +4588,14 @@
     },
     {
       "id": "gchq-counter-terrorism",
-      "provider": "GCHQ a Counter-Terrorism",
-      "endpoint": "https://www.gchq.gov.uk/section/mission/counter-terrorism",
-      "kind": "html",
+      "provider": "NCSC All Feed",
+      "endpoint": "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "GCHQ mission page used as official counter-terrorism context and prevention source."
+      "comment": "Comprehensive RSS feed from the National Cyber Security Centre (NCSC) including news, guidance and advisories; serves as accessible alternative to GCHQ Counter-Terrorism mission page."
     },
     {
       "id": "gnet-research",
@@ -4632,14 +4631,14 @@
     },
     {
       "id": "gov-uk-prevent-strategy",
-      "provider": "GOV.UK a Prevent Strategy and Guidance",
-      "endpoint": "https://www.gov.uk/government/collections/revised-prevent-duty-guidance",
+      "provider": "UK Home Office - Prevent duty guidance",
+      "endpoint": "https://www.gov.uk/government/publications/prevent-duty-guidance",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "GOV.UK Prevent strategy collection; authoritative source for UK prevent duty and Channel programme updates."
+      "comment": "UK Home Office's official Prevent duty guidance page, outlining the government's strategy and statutory obligations for authorities; includes updates to the Prevent strategy."
     },
     {
       "id": "gov-uk-report-terrorism",
@@ -4763,14 +4762,14 @@
     },
     {
       "id": "npsa-national-protective-security-authority",
-      "provider": "National Protective Security Authority (NPSA) a Updates",
-      "endpoint": "https://www.npsa.gov.uk/news",
-      "kind": "html",
+      "provider": "NPSA - Activity on GOV.UK",
+      "endpoint": "https://www.gov.uk/government/organisations/national-protective-security-authority.atom",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Moved from homepage to dedicated NPSA news listing to reduce parse fragility and improve relevance."
+      "comment": "Official GOV.UK Atom feed for the National Protective Security Authority (NPSA), providing news and updates."
     },
     {
       "id": "protectuk",

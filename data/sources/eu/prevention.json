@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "europol-ectc-news",
-      "provider": "Europol a Counter Terrorism Centre (ECTC)",
-      "endpoint": "https://www.europol.europa.eu/operations-services-and-innovation/europol-counter-terrorism-centre",
-      "kind": "html",
+      "provider": "Europol Newsroom RSS",
+      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "kind": "rss",
       "lane": "prevention",
-      "region": "eu",
+      "region": "europe",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Europol Counter Terrorism Centre page for CT-specific operational summaries and threat assessments."
+      "requiresKeywordMatch": true,
+      "comment": "Europol newsroom RSS feed for press releases, news and updates; used as replacement for ECTC news page."
     },
     {
       "id": "europol-eu-iru",

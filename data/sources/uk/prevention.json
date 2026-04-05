@@ -68,14 +68,14 @@
     },
     {
       "id": "gchq-counter-terrorism",
-      "provider": "GCHQ a Counter-Terrorism",
-      "endpoint": "https://www.gchq.gov.uk/section/mission/counter-terrorism",
-      "kind": "html",
+      "provider": "NCSC All Feed",
+      "endpoint": "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "GCHQ mission page used as official counter-terrorism context and prevention source."
+      "comment": "Comprehensive RSS feed from the National Cyber Security Centre (NCSC) including news, guidance and advisories; serves as accessible alternative to GCHQ Counter-Terrorism mission page."
     },
     {
       "id": "gnet-research",
@@ -111,14 +111,14 @@
     },
     {
       "id": "gov-uk-prevent-strategy",
-      "provider": "GOV.UK a Prevent Strategy and Guidance",
-      "endpoint": "https://www.gov.uk/government/collections/revised-prevent-duty-guidance",
+      "provider": "UK Home Office - Prevent duty guidance",
+      "endpoint": "https://www.gov.uk/government/publications/prevent-duty-guidance",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "GOV.UK Prevent strategy collection; authoritative source for UK prevent duty and Channel programme updates."
+      "comment": "UK Home Office's official Prevent duty guidance page, outlining the government's strategy and statutory obligations for authorities; includes updates to the Prevent strategy."
     },
     {
       "id": "gov-uk-report-terrorism",
@@ -242,14 +242,14 @@
     },
     {
       "id": "npsa-national-protective-security-authority",
-      "provider": "National Protective Security Authority (NPSA) a Updates",
-      "endpoint": "https://www.npsa.gov.uk/news",
-      "kind": "html",
+      "provider": "NPSA - Activity on GOV.UK",
+      "endpoint": "https://www.gov.uk/government/organisations/national-protective-security-authority.atom",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Moved from homepage to dedicated NPSA news listing to reduce parse fragility and improve relevance."
+      "comment": "Official GOV.UK Atom feed for the National Protective Security Authority (NPSA), providing news and updates."
     },
     {
       "id": "protectuk",

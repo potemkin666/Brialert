@@ -121,14 +121,14 @@
     },
     {
       "id": "hope-not-hate-home",
-      "provider": "Hope Not Hate",
-      "endpoint": "https://www.hopenothate.org.uk/",
-      "kind": "html",
+      "provider": "Hope not hate podcast",
+      "endpoint": "https://feeds.buzzsprout.com/170425.rss",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Monitoring organisation covering extremism, radicalisation and hate movements in the UK."
+      "comment": "Official 'HOPE not hate' research podcast RSS feed providing episodes; accessible alternative to the Hope Not Hate homepage which is blocked for scrapers."
     },
     {
       "id": "institute-global-home",

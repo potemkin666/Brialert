@@ -497,25 +497,25 @@
     },
     {
       "id": "police-scotland-news",
-      "provider": "Police Scotland a News",
-      "endpoint": "https://www.scotland.police.uk/whats-happening/news/",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Police Scotland news used for Scotland terrorism-related incidents, national operations, and counter-terror updates."
-    },
-    {
-      "id": "police-scotland-whats-happening-news",
-      "provider": "Police Scotland - What's Happening News",
+      "provider": "Police Scotland news",
       "endpoint": "https://www.scotland.police.uk/what-s-happening/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Police Scotland news page variant for incidents, appeals and operational updates."
+      "requiresKeywordMatch": false,
+      "comment": "Police Scotland 'What's happening' news page listing official appeals and news; accessible replacement for the news URL that was blocked."
+    },
+    {
+      "id": "police-scotland-whats-happening-news",
+      "provider": "Police Scotland news",
+      "endpoint": "https://www.scotland.police.uk/what-s-happening/news/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Police Scotland 'What's happening' news page listing official appeals and incidents; replacement for the blocked 'What's happening news' source."
     },
     {
       "id": "psni-latest-news",

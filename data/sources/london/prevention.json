@@ -2,15 +2,14 @@
   "sources": [
     {
       "id": "london-resilience",
-      "provider": "London Resilience a Updates",
-      "endpoint": "https://www.london.gov.uk/about-us/organisations-we-work/london-resilience",
+      "provider": "Resilience First - Latest Updates",
+      "endpoint": "https://resiliencefirst.org/latest-updates",
       "kind": "html",
       "lane": "prevention",
       "region": "london",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Updated to current London Resilience page path; no dedicated RSS appears to be published.",
-      "quarantined": true
+      "comment": "Resilience First's Latest Updates page providing news and analysis on resilience and safety initiatives relevant to London; replacement for the inaccessible London Resilience page."
     }
   ]
 }

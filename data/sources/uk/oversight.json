@@ -277,14 +277,14 @@
     },
     {
       "id": "judiciary-uk-appointments-feed",
-      "provider": "Judiciary UK - Appointments and Retirements Feed",
-      "endpoint": "https://www.judiciary.uk/announcement-type/appointments-and-retirements/feed/",
+      "provider": "Judiciary UK general feed",
+      "endpoint": "https://www.judiciary.uk/feed/",
       "kind": "rss",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Judiciary UK feed for appointments and retirements, useful for institutional oversight context."
+      "comment": "General RSS feed from judiciary.uk containing news and announcements including appointments and retirements; replacement for the dedicated appointments feed."
     },
     {
       "id": "judiciary-uk-judgments-feed",
@@ -320,14 +320,14 @@
     },
     {
       "id": "judiciary-uk-speeches-feed",
-      "provider": "Judiciary UK - Speeches Feed",
-      "endpoint": "https://www.judiciary.uk/announcement-type/speeches/feed/",
+      "provider": "Judiciary UK general feed",
+      "endpoint": "https://www.judiciary.uk/feed/",
       "kind": "rss",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Judiciary UK speeches feed for senior judicial commentary and policy framing."
+      "comment": "General RSS feed from judiciary.uk containing news, announcements and speeches; used as accessible replacement for the dedicated speeches feed."
     },
     {
       "id": "lords-in-focus-rss",

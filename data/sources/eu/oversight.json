@@ -187,14 +187,14 @@
     },
     {
       "id": "eu-home-affairs-rss",
-      "provider": "European Commission Home Affairs - News RSS",
-      "endpoint": "https://home-affairs.ec.europa.eu/news/rss_en",
+      "provider": "Council of the EU Justice and Home Affairs meetings",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/meetings.ashx?cat=jha",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "EU Home Affairs RSS feed for internal security, migration and counter-terror policy updates."
+      "requiresKeywordMatch": false,
+      "comment": "Official RSS feed of the Council of the EU for Justice and Home Affairs (JHA) meetings, providing agendas and outcomes; used as replacement for EU Home Affairs RSS feed."
     },
     {
       "id": "eu-olaf-news",

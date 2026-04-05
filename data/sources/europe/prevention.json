@@ -2,25 +2,25 @@
   "sources": [
     {
       "id": "bfv-de-english",
-      "provider": "BfV (Germany) a English Publications",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/press-releases/press-releases_node.html",
+      "provider": "BfV press page (Federal Office for the Protection of the Constitution)",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "German Federal Office for the Protection of the Constitution English press releases on extremism and terrorism threats."
+      "comment": "Press page of Germany’s Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English."
     },
     {
       "id": "dsn-at-english",
-      "provider": "DSN (Austria) a English Reports",
-      "endpoint": "https://www.dsn.gv.at/en/about-us/annual-reports/",
+      "provider": "DSN Austria news",
+      "endpoint": "https://www.dsn.gv.at/aktuelles",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Austrian Directorate of State Protection and Intelligence Service English annual reports on terrorism and extremism threats."
+      "comment": "News page of Austria's Directorate for State Security and Intelligence (DSN) providing updates and announcements (German language). No English version is available."
     },
     {
       "id": "isd-global",
@@ -46,25 +46,25 @@
     },
     {
       "id": "nctv-nl-english-news",
-      "provider": "NCTV (Netherlands) a English News Updates",
-      "endpoint": "https://english.nctv.nl/news",
+      "provider": "NCTV Netherlands latest news (English)",
+      "endpoint": "https://english.nctv.nl/latest/news",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Dutch NCTV English news surface for counter-terrorism and security posture updates."
+      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases."
     },
     {
       "id": "ocam-be-english",
-      "provider": "OCAM/CUTA (Belgium) a English News",
-      "endpoint": "https://www.ocam.be/en/newspublications",
+      "provider": "CUTA (Belgium) threat analysis",
+      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Belgian Coordination Unit for Threat Assessment English publications and threat-level updates."
+      "comment": "English site of the Belgian Coordination Unit for Threat Analysis (CUTA) providing information on the general threat level in Belgium; replacement for the OCAM/OCAD English page."
     },
     {
       "id": "pet-dk-english",
@@ -79,14 +79,14 @@
     },
     {
       "id": "pst-no-english",
-      "provider": "PST (Norway) a English News",
-      "endpoint": "https://www.pst.no/en/news/",
+      "provider": "PST (Norway) English reporting page",
+      "endpoint": "https://www.pst.no/en/report/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Norwegian Police Security Service English news for terrorism threat levels and counter-terrorism posture."
+      "comment": "Norwegian Police Security Service (PST) English page for reporting suspicious activity; describes PST’s role and threat landscape; accessible alternative to the unavailable English news page."
     },
     {
       "id": "ran-network",
@@ -101,25 +101,25 @@
     },
     {
       "id": "sapo-se-english",
-      "provider": "SAPO (Sweden) a English News",
-      "endpoint": "https://www.sakerhetspolisen.se/en/home/news-room/news.html",
+      "provider": "Swedish Security Service English news",
+      "endpoint": "https://www.sakerhetspolisen.se/ovriga-sidor/other-languages/english-engelska/press-room/news.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Swedish Security Service English news room for terrorism threat assessment and counter-terrorism updates."
+      "comment": "Press-room news page of the Swedish Security Service (Säkerhetspolisen) in English, listing recent news and updates about security threats."
     },
     {
       "id": "supo-fi-english",
-      "provider": "SUPO (Finland) a English Publications",
-      "endpoint": "https://supo.fi/en/publications",
+      "provider": "SUPO Finland news and press releases",
+      "endpoint": "https://supo.fi/en/news-and-press-releases",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Finnish Security Intelligence Service English publications on terrorism and national security threats."
+      "comment": "News and press releases page of Finland's Security and Intelligence Service (SUPO) in English, offering recent press releases and statements."
     }
   ]
 }
