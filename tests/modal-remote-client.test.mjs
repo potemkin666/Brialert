@@ -94,3 +94,21 @@ test('requestRemoteLongBrief extracts brief from OpenAI responses payload shape'
     globalThis.fetch = previousFetch;
   }
 });
+
+test('requestRemoteLongBrief works when AbortController is unavailable', async () => {
+  const previousFetch = globalThis.fetch;
+  const previousAbortController = globalThis.AbortController;
+  globalThis.AbortController = undefined;
+  globalThis.fetch = async () => ({
+    ok: true,
+    json: async () => ({ brief: 'legacy runtime brief' })
+  });
+
+  try {
+    const result = await requestRemoteLongBrief([{ headline: 'one' }]);
+    assert.equal(result, 'legacy runtime brief');
+  } finally {
+    globalThis.fetch = previousFetch;
+    globalThis.AbortController = previousAbortController;
+  }
+});

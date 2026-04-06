@@ -36,8 +36,14 @@ export function createModalRuntime(elements, options = {}) {
       modalController.setExpandedBrief(brief);
     } catch (error) {
       console.error('Remote long brief generation failed, falling back to local generator:', error);
-      setLongBriefFallbackNotice('Vercel agent failed. Using local agent fallback.');
-      modalController.setExpandedBrief(buildLocalLongBriefFn(alert));
+      try {
+        const fallbackBrief = buildLocalLongBriefFn(alert);
+        modalController.setExpandedBrief(fallbackBrief);
+        setLongBriefFallbackNotice('Vercel agent unavailable. Long brief generated locally on your device.');
+      } catch (fallbackError) {
+        console.error('Local long brief fallback failed:', fallbackError);
+        setLongBriefFallbackNotice('Long brief generation failed. Please retry.');
+      }
     } finally {
       elements.generateExpandedBrief.disabled = false;
     }

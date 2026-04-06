@@ -51,7 +51,7 @@ test('createModalRuntime uses local fallback and shows warning when remote gener
   assert.equal(localFallbackCalls, 1);
   assert.equal(setExpandedBriefValue, 'local brief');
   assert.equal(elements.longBriefFallbackNotice.hidden, false);
-  assert.equal(elements.longBriefFallbackNotice.textContent, 'Vercel agent failed. Using local agent fallback.');
+  assert.equal(elements.longBriefFallbackNotice.textContent, 'Vercel agent unavailable. Long brief generated locally on your device.');
 });
 
 test('createModalRuntime clears warning and uses remote brief when remote generation succeeds', async () => {
@@ -80,4 +80,34 @@ test('createModalRuntime clears warning and uses remote brief when remote genera
   assert.equal(setExpandedBriefValue, 'remote brief');
   assert.equal(elements.longBriefFallbackNotice.hidden, true);
   assert.equal(elements.longBriefFallbackNotice.textContent, '');
+});
+
+test('createModalRuntime keeps user-facing error when both remote and local long brief generation fail', async () => {
+  const alert = { title: 'Alert' };
+  const elements = createTestElements();
+  let setExpandedBriefCalls = 0;
+
+  const modalController = {
+    ...createTestController(alert),
+    setExpandedBrief() {
+      setExpandedBriefCalls += 1;
+    }
+  };
+
+  const runtime = createModalRuntime(elements, {
+    modalController,
+    requestRemoteLongBrief: async () => {
+      throw new Error('remote down');
+    },
+    buildLocalLongBrief: () => {
+      throw new Error('local failed');
+    },
+    mapAlertToLongBriefPayload: () => ({})
+  });
+
+  await runtime.generateLongBrief();
+
+  assert.equal(setExpandedBriefCalls, 0);
+  assert.equal(elements.longBriefFallbackNotice.hidden, false);
+  assert.equal(elements.longBriefFallbackNotice.textContent, 'Long brief generation failed. Please retry.');
 });

@@ -47,6 +47,42 @@ async function readRemoteBriefPayload(response) {
   return '';
 }
 
+function createAbortController() {
+  if (typeof globalThis.AbortController !== 'function') return null;
+  return new globalThis.AbortController();
+}
+
+async function fetchWithTimeout(apiUrl, payload) {
+  const controller = createAbortController();
+  let timeout = null;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeout = setTimeout(() => {
+      if (controller) {
+        try {
+          controller.abort();
+        } catch {
+          // ignore abort errors
+        }
+      }
+      reject(new Error('Request timeout'));
+    }, LONG_BRIEF_TIMEOUT_MS);
+  });
+
+  try {
+    return await Promise.race([
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller ? controller.signal : undefined,
+        body: JSON.stringify(payload)
+      }),
+      timeoutPromise
+    ]);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export async function requestRemoteLongBrief(payloadAttempts) {
   const apiUrls = resolveLongBriefApiUrls();
   const allErrors = [];
@@ -56,15 +92,8 @@ export async function requestRemoteLongBrief(payloadAttempts) {
     const payloadErrors = [];
     for (let index = 0; index < apiUrls.length; index += 1) {
       const apiUrl = apiUrls[index];
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), LONG_BRIEF_TIMEOUT_MS);
       try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          signal: controller.signal,
-          body: JSON.stringify(payload)
-        });
+        const response = await fetchWithTimeout(apiUrl, payload);
         if (!response.ok) {
           const error = new Error(`HTTP ${response.status}`);
           error.retryable = !TERMINAL_HTTP_STATUSES.has(response.status);
@@ -81,8 +110,6 @@ export async function requestRemoteLongBrief(payloadAttempts) {
         if (error?.retryable === false) {
           currentPayloadHasTerminalError = true;
         }
-      } finally {
-        clearTimeout(timeout);
       }
     }
     if (currentPayloadHasTerminalError) {
