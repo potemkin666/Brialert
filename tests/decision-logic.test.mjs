@@ -34,7 +34,6 @@ import {
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
 import { normaliseSourcesPayload } from '../scripts/build-live-feed/io.mjs';
 import {
-  AUTO_QUARANTINE_DEAD_URL_THRESHOLD,
   CONTROL_MAX_HTML_SOURCES_PER_RUN,
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
@@ -938,8 +937,13 @@ test('default fetch/runtime tuning constants remain stable', () => {
   assert.equal(MAX_FEED_PREFETCH_ITEMS, 8);
 });
 
-test('dead-url quarantine threshold defaults to two consecutive failures', () => {
-  assert.equal(AUTO_QUARANTINE_DEAD_URL_THRESHOLD, 2);
+test('source error summary classifies HTTP 404 separately for direct quarantine routing', async () => {
+  const { summariseSourceError } = await import('../scripts/build-live-feed/io.mjs');
+  const summary = summariseSourceError(
+    { id: 'test-source', provider: 'Test provider', endpoint: 'https://example.test/feed' },
+    new Error('HTTP 404')
+  );
+  assert.equal(summary.category, 'not-found-404');
 });
 
 test('validate-live-feed-output script passes valid feed and fails invalid sourceCount', () => {
