@@ -11,6 +11,19 @@ import {
 } from './config.mjs';
 import { clean } from '../../shared/taxonomy.mjs';
 
+const MAX_RETRY_AFTER_MS = 60 * 60 * 1000;
+const RESERVED_HEADER_KEYS = new Set([
+  'user-agent',
+  'accept',
+  'accept-language',
+  'cache-control',
+  'accept-encoding',
+  'upgrade-insecure-requests',
+  'sec-fetch-site',
+  'sec-fetch-mode',
+  'sec-fetch-dest'
+]);
+
 export function stripBom(text) {
   return typeof text === 'string' ? text.replace(/^\uFEFF/, '') : text;
 }
@@ -74,10 +87,10 @@ function jitteredBackoffMs(attempt, floor = 600) {
 function parseRetryAfterMs(value) {
   if (!value) return null;
   const seconds = Number(value);
-  if (Number.isFinite(seconds) && seconds > 0) return Math.min(seconds * 1000, 60 * 60 * 1000);
+  if (Number.isFinite(seconds) && seconds > 0) return Math.min(seconds * 1000, MAX_RETRY_AFTER_MS);
   const asDate = Date.parse(String(value || ''));
   if (Number.isFinite(asDate)) {
-    const delta = Math.min((asDate - Date.now()), 60 * 60 * 1000);
+    const delta = Math.min((asDate - Date.now()), MAX_RETRY_AFTER_MS);
     if (delta > 0) return delta;
   }
   return null;
@@ -104,7 +117,7 @@ function mergedHeaders(source = null) {
   const userHeaders = source?.headers && typeof source.headers === 'object' ? source.headers : {};
   const customHeaders = Object.fromEntries(
     Object.entries(userHeaders)
-      .filter(([key]) => !['user-agent', 'accept', 'accept-language', 'cache-control', 'accept-encoding', 'upgrade-insecure-requests', 'sec-fetch-site', 'sec-fetch-mode', 'sec-fetch-dest'].includes(String(key).toLowerCase()))
+      .filter(([key]) => !RESERVED_HEADER_KEYS.has(String(key).toLowerCase()))
       .map(([key, value]) => [String(key).toLowerCase(), clean(value)])
       .filter(([, value]) => Boolean(value))
   );
