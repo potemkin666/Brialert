@@ -5,30 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Brialert Source Quarantine Review</title>
   <style>
-    :root { color-scheme: dark; }
-    body { margin: 0; font: 16px/1.5 system-ui, sans-serif; background: #0b1220; color: #e8eef9; }
-    main { max-width: 1200px; margin: 0 auto; padding: 32px 20px 48px; }
-    h1 { margin: 0 0 8px; font-size: 32px; }
-    p { margin: 0 0 16px; color: #b9c6de; }
-    .card { background: rgba(19, 27, 45, 0.92); border: 1px solid rgba(112, 138, 179, 0.28); border-radius: 18px; padding: 18px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 1180px; }
-    th, td { text-align: left; padding: 12px 10px; vertical-align: top; border-bottom: 1px solid rgba(112, 138, 179, 0.18); }
-    th { color: #9fb2d6; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
-    a { color: #9fd0ff; text-decoration: none; }
+    :root {
+      color-scheme: dark;
+      --bg: #070d1a;
+      --panel: rgba(19, 27, 45, 0.94);
+      --panel-border: rgba(127, 156, 203, 0.26);
+      --text: #e8eef9;
+      --muted: #b9c6de;
+      --pill-bg: rgba(159, 208, 255, 0.09);
+      --pill-border: rgba(159, 208, 255, 0.2);
+      --danger: #ffb4b4;
+      --ok: #9ff5bc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 15px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(circle at 12% -10%, #122445, #070d1a 48%);
+      color: var(--text);
+    }
+    main { max-width: 1480px; margin: 0 auto; padding: 28px 16px 42px; }
+    h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 34px); line-height: 1.15; }
+    p { margin: 0 0 18px; color: var(--muted); max-width: 1050px; }
+    .meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+    .pill {
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: #d8e7ff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .pill.warn {
+      background: rgba(255, 196, 122, 0.13);
+      border-color: rgba(255, 196, 122, 0.33);
+      color: #ffdda8;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.24);
+    }
+    .table-scroll { overflow: auto; max-height: calc(100vh - 220px); }
+    table { width: 100%; border-collapse: collapse; min-width: 1220px; }
+    th, td { text-align: left; padding: 10px 10px; vertical-align: top; border-bottom: 1px solid rgba(112, 138, 179, 0.14); }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #12203a;
+      color: #aac0e7;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    td { font-size: 14px; }
+    a { color: #9fd0ff; text-decoration: none; word-break: break-all; }
     a:hover { text-decoration: underline; }
-    .meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-    .pill { padding: 8px 12px; border-radius: 999px; background: rgba(159, 208, 255, 0.08); border: 1px solid rgba(159, 208, 255, 0.18); }
-    .url-input { width: 100%; min-width: 240px; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(112, 138, 179, 0.28); background: rgba(8, 13, 24, 0.72); color: #e8eef9; font: inherit; }
+    .action { display: grid; gap: 8px; min-width: 290px; }
+    .url-input {
+      width: 100%;
+      min-width: 240px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      border: 1px solid rgba(112, 138, 179, 0.3);
+      background: rgba(8, 13, 24, 0.76);
+      color: var(--text);
+      font: inherit;
+    }
     .url-input::placeholder { color: #8ea2c7; }
-    .url-input:focus { outline: none; border-color: rgba(159, 208, 255, 0.48); box-shadow: 0 0 0 3px rgba(159, 208, 255, 0.12); }
-    .action { display: grid; gap: 10px; min-width: 280px; }
-    .action button { border: 0; border-radius: 12px; padding: 10px 12px; font: inherit; font-weight: 700; color: #09101c; background: #9fd0ff; cursor: pointer; }
+    .url-input:focus { outline: none; border-color: rgba(159, 208, 255, 0.5); box-shadow: 0 0 0 3px rgba(159, 208, 255, 0.12); }
+    .action button {
+      border: 0;
+      border-radius: 10px;
+      padding: 9px 10px;
+      font: inherit;
+      font-weight: 700;
+      color: #09101c;
+      background: #9fd0ff;
+      cursor: pointer;
+    }
     .action button:hover { filter: brightness(1.04); }
     .action button:disabled { cursor: wait; opacity: 0.72; }
-    .status-note { min-height: 20px; color: #9fb2d6; font-size: 13px; }
-    .status-note.error { color: #ffb4b4; }
-    .status-note.success { color: #9ff5bc; }
-    .empty { padding: 18px 10px; color: #b9c6de; }
+    .helper-note, .status-note { min-height: 18px; font-size: 12px; }
+    .helper-note { color: #8ea3c8; }
+    .status-note { color: #9fb2d6; }
+    .status-note.error { color: var(--danger); }
+    .status-note.success { color: var(--ok); }
+    .empty { padding: 18px 10px; color: var(--muted); }
+    .endpoint-copy { color: #d6e5ff; font-weight: 600; }
+    @media (max-width: 760px) {
+      main { padding: 18px 10px 26px; }
+      .card { border-radius: 12px; }
+      .table-scroll { max-height: calc(100vh - 160px); }
+    }
   </style>
 </head>
 <body>
@@ -41,6 +115,7 @@
       <span class="pill">SLA: review within 48h</span>
     </div>
     <div class="card">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -61,13 +136,17 @@
           <tr><td colspan="11" class="empty">Loading quarantined sources...</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </main>
   <script>
     const API_BASE = 'https://brialertbackend.vercel.app';
+    const LOCAL_DATA_URL = 'data/quarantined-sources.json';
     const body = document.getElementById('quarantine-body');
     const meta = document.getElementById('meta');
     let currentEntries = [];
+    let currentDataMode = 'api';
+    const readOnlyMode = false;
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -81,7 +160,11 @@
     function renderMeta(payload) {
       meta.innerHTML = [
         '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '2026-04-06T17:04:11.606Z') + '</span>',
-        '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>'
+        '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
+        '<span class="pill">SLA: review within 48h</span>',
+        '<span class="pill' + (currentDataMode === 'snapshot' ? ' warn' : '') + '">' +
+          (currentDataMode === 'snapshot' ? 'Data mode: static snapshot (restore API may fail)' : 'Data mode: live API') +
+        '</span>'
       ].join('');
     }
 
@@ -103,9 +186,9 @@
         '<td><a href="' + escapeHtml(entry.endpoint) + '" target="_blank" rel="noreferrer">' + escapeHtml(entry.endpoint) + '</a></td>' +
         '<td><div class="action">' +
           '<input class="url-input" type="url" inputmode="url" placeholder="Suggest new URL" value="' + escapeHtml(entry.replacementSuggestion || '') + '" aria-label="Suggest new URL for ' + escapeHtml(entry.provider) + '">' +
-          '<button type="button" data-action="restore">Add new URL</button>' +
-          '<div class="status-note">If prefilled, suggestion is auto-detected and must be verified.</div>' +
-          '<div class="status-note" aria-live="polite"></div>' +
+          '<button type="button" data-action="restore" ' + (readOnlyMode ? 'disabled' : '') + '>Add new URL</button>' +
+          '<div class="helper-note">If prefilled, suggestion is auto-detected and must be verified.</div>' +
+          '<div class="status-note status-feedback" aria-live="polite"></div>' +
         '</div></td>' +
       '</tr>';
     }
@@ -118,19 +201,41 @@
       body.innerHTML = currentEntries.map(rowMarkup).join('');
     }
 
+    function explainError(error) {
+      const message = error instanceof Error ? error.message : String(error);
+      if (/bad credentials/i.test(message)) {
+        return 'Quarantine backend authentication failed (Bad credentials). Review is still available from local snapshot data.';
+      }
+      return message;
+    }
+
+    async function fetchPayload(url, fallbackError) {
+      const response = await fetch(url, { cache: 'no-store' });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload && payload.detail ? payload.detail : fallbackError);
+      }
+      return payload;
+    }
+
     async function loadEntries() {
       emptyState('Loading quarantined sources...');
       try {
-        const response = await fetch(API_BASE + '/api/quarantined-sources');
-        const payload = await response.json();
-        if (!response.ok) {
-          throw new Error(payload && payload.detail ? payload.detail : 'Failed to load quarantined sources.');
+        let payload;
+        try {
+          payload = await fetchPayload(API_BASE + '/api/quarantined-sources', 'Failed to load quarantined sources.');
+          currentDataMode = 'api';
+        } catch (primaryError) {
+          payload = await fetchPayload(LOCAL_DATA_URL, 'Failed to load local quarantine snapshot.');
+          currentDataMode = 'snapshot';
+          const warning = explainError(primaryError);
+          emptyState('Live quarantine API unavailable. Falling back to local snapshot. Details: ' + warning);
         }
         currentEntries = Array.isArray(payload.sources) ? payload.sources : [];
         renderMeta(payload);
-        renderRows();
+        if (currentEntries.length) renderRows();
       } catch (error) {
-        emptyState(error instanceof Error ? error.message : String(error));
+        emptyState(explainError(error));
       }
     }
 
@@ -141,7 +246,7 @@
       if (!row) return;
       const sourceId = row.getAttribute('data-source-id');
       const input = row.querySelector('.url-input');
-      const note = row.querySelector('.status-note');
+      const note = row.querySelector('.status-feedback');
       const url = input && input.value ? input.value.trim() : '';
       if (!url) {
         note.textContent = 'Paste a replacement URL first.';
@@ -164,10 +269,8 @@
             url
           })
         });
-        const payload = await response.json();
-        if (!response.ok) {
-          throw new Error(payload && payload.detail ? payload.detail : 'Failed to restore source.');
-        }
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(payload && payload.detail ? payload.detail : 'Failed to restore source.');
         note.textContent = payload.detail || 'Source restored.';
         note.className = 'status-note success';
       currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
@@ -176,7 +279,7 @@
           renderRows();
         }, 250);
       } catch (error) {
-        note.textContent = error instanceof Error ? error.message : String(error);
+        note.textContent = explainError(error);
         note.className = 'status-note error';
         button.disabled = false;
       }
