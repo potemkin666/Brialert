@@ -1,4 +1,4 @@
-import { watchLayerLabels, albertQuotes, defaultNotes } from '../../shared/ui-data.mjs';
+import { albertQuotes, defaultNotes } from '../../shared/ui-data.mjs';
 import {
   normaliseAlert,
   sortAlertsByFreshness
@@ -117,7 +117,7 @@ function createElements() {
 }
 
 export function initialiseApp() {
-  const state = createState(watchLayerLabels);
+  const state = createState();
   const feedDeps = {
     sortAlertsByFreshness
   };

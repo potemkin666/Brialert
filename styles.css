@@ -309,10 +309,6 @@ h1 {
   margin: 16px 0;
 }
 
-.lane-filters {
-  margin-top: 0;
-}
-
 .filter,
 .severity,
 .star-button,
@@ -522,48 +518,6 @@ h1 {
   margin-top: 16px;
 }
 
-.hero-health {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(72, 187, 120, 0.35);
-  background: rgba(17, 24, 39, 0.42);
-}
-
-.hero-health.hidden {
-  display: none;
-}
-
-.hero-health-stale {
-  border-color: rgba(229, 62, 62, 0.45);
-  background: rgba(120, 18, 18, 0.24);
-}
-
-.hero-health-label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #b9f5cc;
-}
-
-.hero-health-stale .hero-health-label {
-  color: #ffd0d0;
-}
-
-.hero-health-meta {
-  font-size: 12px;
-  color: rgba(246, 247, 251, 0.82);
-  background: transparent;
-  padding: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  white-space: normal;
-}
-
 .briefing-panel {
   margin: 16px 0;
   padding: 16px;
@@ -692,6 +646,22 @@ h1 {
 
 .metric strong {
   font-size: 14px;
+}
+
+.hero-update-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(246, 247, 251, 0.72);
+  text-decoration: underline;
+  text-decoration-color: rgba(246, 247, 251, 0.35);
+  text-underline-offset: 2px;
+}
+
+.hero-update-link:hover,
+.hero-update-link:focus-visible {
+  color: rgba(246, 247, 251, 0.92);
+  text-decoration-color: rgba(246, 247, 251, 0.72);
 }
 
 .severity-critical {
@@ -886,96 +856,6 @@ h1 {
   .map-motion-overlay {
     display: none;
   }
-}
-
-.map-timeline-panel {
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.map-timeline-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.map-posture-toggle {
-  min-height: 42px;
-  padding: 10px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.map-posture-toggle.active,
-.map-timeline-toggle.active {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(238, 241, 247, 0.92));
-  color: #111827;
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
-.map-timeline-toggle {
-  min-height: 42px;
-  min-width: 74px;
-  padding: 10px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.map-layer-panel {
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.map-layer-toggles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.map-layer-toggle {
-  min-height: 46px;
-  padding: 12px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.15;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.map-layer-toggle.active {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(238, 241, 247, 0.92));
-  color: #111827;
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
-.map-layer-toggle[data-watch-layer="embassy"] {
-  background: linear-gradient(180deg, rgba(54, 79, 126, 0.30), rgba(23, 33, 58, 0.34));
-}
-
-.map-layer-toggle[data-watch-layer="embassy"].active {
-  background: linear-gradient(180deg, rgba(205, 224, 255, 0.98), rgba(177, 209, 255, 0.92));
-  color: #10213f;
 }
 
 .map-chip {
@@ -1924,9 +1804,7 @@ body.device-iphone {
 }
 
 .device-iphone .tabbar,
-.device-iphone .filters,
-.device-iphone .map-layer-toggles,
-.device-iphone .map-timeline-filters {
+.device-iphone .filters {
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
@@ -1936,17 +1814,12 @@ body.device-iphone {
 }
 
 .device-iphone .tabbar::-webkit-scrollbar,
-.device-iphone .filters::-webkit-scrollbar,
-.device-iphone .map-layer-toggles::-webkit-scrollbar,
-.device-iphone .map-timeline-filters::-webkit-scrollbar {
+.device-iphone .filters::-webkit-scrollbar {
   display: none;
 }
 
 .device-iphone .tab,
 .device-iphone .filter,
-.device-iphone .map-layer-toggle,
-.device-iphone .map-posture-toggle,
-.device-iphone .map-timeline-toggle,
 .device-iphone .map-chip,
 .device-iphone .map-mode-tab {
   flex: 0 0 auto;
@@ -2089,23 +1962,6 @@ body.device-iphone {
     flex-direction: column;
   }
 
-  .map-timeline-filters {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .map-timeline-filters::-webkit-scrollbar {
-    display: none;
-  }
-
-  .map-layer-panel .section-heading {
-    gap: 8px;
-  }
-
   .map-controls {
     width: 100%;
     justify-content: space-between;
@@ -2140,8 +1996,7 @@ body.device-iphone {
   }
 
   .tabbar,
-  .filters,
-  .map-layer-toggles {
+  .filters {
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -2151,8 +2006,7 @@ body.device-iphone {
   }
 
   .tabbar::-webkit-scrollbar,
-  .filters::-webkit-scrollbar,
-  .map-layer-toggles::-webkit-scrollbar {
+  .filters::-webkit-scrollbar {
     display: none;
   }
 
@@ -2287,9 +2141,7 @@ body.device-iphone {
   }
 
   .tabbar,
-  .filters,
-  .map-timeline-filters,
-  .map-layer-toggles {
+  .filters {
     display: grid;
     gap: 8px;
     overflow: visible;
@@ -2304,27 +2156,9 @@ body.device-iphone {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .lane-filters {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .lane-filters .filter:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .map-timeline-filters {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .map-layer-toggles {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .tab,
   .filter,
   .map-mode-tab,
-  .map-layer-toggle,
-  .map-timeline-toggle,
   .map-control,
   .primary-button,
   .secondary-button,
@@ -2342,8 +2176,6 @@ body.device-iphone {
 
   .tabbar,
   .filters,
-  .map-layer-toggles,
-  .map-timeline-filters,
   .map-controls,
   .modal-actions,
   .detail-actions {

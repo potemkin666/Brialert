@@ -15,15 +15,13 @@ export const SUPPORTING_LOAD_STEP = 16;
 export const MAP_INIT_IDLE_TIMEOUT_MS = 1500;
 export const MAP_INIT_FALLBACK_DELAY_MS = 300;
 
-export function createState(watchLayerLabels) {
+export function createState() {
   return {
     alerts: [],
     searchQuery: '',
     activeRegion: 'all',
     activeLane: 'all',
     mapViewMode: 'london',
-    mapTimelineWindow: '24h',
-    activeWatchLayers: new Set(Object.keys(watchLayerLabels)),
     watched: new Set(),
     lastBrowserPollAt: new Date(),
     liveFeedGeneratedAt: null,
