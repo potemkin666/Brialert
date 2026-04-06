@@ -33,6 +33,9 @@ function envInt(name, fallback, minimum = 0) {
 
 export const DEFAULT_TIMEOUT_MS = envInt('BRIALERT_FETCH_TIMEOUT_MS', 12000, 1000);
 export const DEFAULT_MAX_RETRIES = envInt('BRIALERT_FETCH_MAX_RETRIES', 3, 1);
+export const DEFAULT_FETCH_STAGGER_MS = envInt('BRIALERT_FETCH_STAGGER_MS', 60, 0);
+export const MAX_FETCH_STAGGER_JITTER_MS = envInt('BRIALERT_FETCH_STAGGER_JITTER_MS', 90, 0);
+export const BACKOFF_CAP_MS = envInt('BRIALERT_FETCH_BACKOFF_CAP_MS', 16000, 1000);
 export const MAX_SOURCE_ERRORS_TO_REPORT = 25;
 export const FEED_SOURCE_CONCURRENCY = envInt('BRIALERT_FEED_SOURCE_CONCURRENCY', 4, 1);
 export const HTML_HYDRATION_CONCURRENCY = 3;
@@ -61,6 +64,7 @@ export const PLAYWRIGHT_FALLBACK_MAX_ATTEMPTS_PER_RUN = Math.max(
     ? Math.floor(Number(process.env.BRIALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
     : 2
 );
+export const PLAYWRIGHT_FALLBACK_AGGRESSIVE = clean(process.env.BRIALERT_PLAYWRIGHT_AGGRESSIVE).toLowerCase() === 'true';
 export const PLAYWRIGHT_FALLBACK_TIMEOUT_MS = Math.max(
   5000,
   Number.isFinite(Number(process.env.BRIALERT_PLAYWRIGHT_TIMEOUT_MS))
@@ -111,6 +115,12 @@ export const STALE_AFTER_MINUTES = 75;
 export const SOURCE_TIMEZONE = 'Europe/London';
 export const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
 export const FEED_BOT_USER_AGENT = 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)';
+export const FEED_BOT_USER_AGENTS = Object.freeze([
+  FEED_BOT_USER_AGENT,
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'
+]);
 export const DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE = Object.freeze({
   incidents: 1,
   context: 2,
@@ -158,6 +168,14 @@ function deterministicSourceHash(value) {
 
 export function sourceDeterministicHash(value) {
   return deterministicSourceHash(value);
+}
+
+export function sourceUserAgent(source) {
+  const explicit = clean(source?.headers?.['user-agent']);
+  if (explicit) return explicit;
+  const sourceKey = clean(source?.id || source?.endpoint || source?.provider);
+  const index = sourceKey ? sourceDeterministicHash(sourceKey) % FEED_BOT_USER_AGENTS.length : 0;
+  return FEED_BOT_USER_AGENTS[index] || FEED_BOT_USER_AGENT;
 }
 
 export function sourceRefreshEveryHours(source) {

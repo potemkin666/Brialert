@@ -11,6 +11,7 @@ import {
   AUTO_SKIP_EMPTY_THRESHOLD,
   AUTO_SKIP_FAILURE_THRESHOLD,
   CONTROL_MAX_HTML_SOURCES_PER_RUN,
+  DEFAULT_FETCH_STAGGER_MS,
   FEED_SOURCE_CONCURRENCY,
   GUARDRAIL_MAX_FAILED_SOURCE_RATE,
   GUARDRAIL_MAX_RUNTIME_MS,
@@ -22,8 +23,10 @@ import {
   MAX_FEED_PREFETCH_ITEMS,
   MAX_SOURCE_ERRORS_TO_REPORT,
   MAX_HTML_PREFETCH_ITEMS,
+  MAX_FETCH_STAGGER_JITTER_MS,
   MAX_STORED_ALERTS,
   PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS,
+  PLAYWRIGHT_FALLBACK_AGGRESSIVE,
   PLAYWRIGHT_FALLBACK_MAX_ATTEMPTS_PER_RUN,
   PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
   FAIL_ON_GUARDRAIL_VIOLATION,
@@ -417,11 +420,11 @@ function classifyFetchFailure(summary) {
 
 function shouldTryPlaywrightFallback(source, summary, playwrightBudget) {
   if (!source || source.kind !== 'html') return false;
-  if (!PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS.has(source.id)) return false;
   if (!summary) return false;
   if ((playwrightBudget?.attempts || 0) >= (playwrightBudget?.maxAttempts || 0)) return false;
   const reason = classifyFetchFailure(summary);
-  return reason === 'bot-block';
+  if (reason !== 'bot-block') return false;
+  return PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS.has(source.id) || PLAYWRIGHT_FALLBACK_AGGRESSIVE;
 }
 
 function buildQuarantinedSourceEntries(sources, sourceHealth) {
@@ -918,7 +921,11 @@ async function main() {
         };
 
         try {
-          await sleep((sourceAttemptOffset + sourceIndex) * 60);
+          const baseDelay = (sourceAttemptOffset + sourceIndex) * DEFAULT_FETCH_STAGGER_MS;
+          const jitter = MAX_FETCH_STAGGER_JITTER_MS > 0
+            ? Math.floor(Math.random() * (MAX_FETCH_STAGGER_JITTER_MS + 1))
+            : 0;
+          await sleep(baseDelay + jitter);
           let body;
           let usedPlaywrightFallback = false;
           let finalUrl = clean(source?.endpoint);
