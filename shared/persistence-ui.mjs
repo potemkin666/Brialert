@@ -1,4 +1,4 @@
-import { debugLog } from './logger.mjs';
+import { reportBackgroundError } from './logger.mjs';
 
 export function loadSet(key) {
   try {
@@ -6,7 +6,7 @@ export function loadSet(key) {
     const parsed = JSON.parse(raw || '[]');
     return new Set(Array.isArray(parsed) ? parsed.filter(Boolean) : []);
   } catch (error) {
-    debugLog('persistence', `loadSet failed for ${key}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('persistence', `loadSet failed for ${key}`, error, { key, operation: 'loadSet' });
     return new Set();
   }
 }
@@ -14,8 +14,10 @@ export function loadSet(key) {
 export function saveSet(key, values) {
   try {
     localStorage.setItem(key, JSON.stringify([...values]));
+    return true;
   } catch (error) {
-    debugLog('persistence', `saveSet failed for ${key}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('persistence', `saveSet failed for ${key}`, error, { key, operation: 'saveSet' });
+    return false;
   }
 }
 
@@ -25,7 +27,7 @@ export function loadArray(key, fallback = []) {
     const parsed = JSON.parse(raw || 'null');
     if (Array.isArray(parsed) && parsed.length) return parsed;
   } catch (error) {
-    debugLog('persistence', `loadArray failed for ${key}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('persistence', `loadArray failed for ${key}`, error, { key, operation: 'loadArray' });
   }
   return Array.isArray(fallback) ? [...fallback] : [];
 }
@@ -33,8 +35,10 @@ export function loadArray(key, fallback = []) {
 export function saveArray(key, values) {
   try {
     localStorage.setItem(key, JSON.stringify(values));
+    return true;
   } catch (error) {
-    debugLog('persistence', `saveArray failed for ${key}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('persistence', `saveArray failed for ${key}`, error, { key, operation: 'saveArray' });
+    return false;
   }
 }
 
@@ -42,7 +46,7 @@ export function loadBoolean(key) {
   try {
     return localStorage.getItem(key) === 'true';
   } catch (error) {
-    debugLog('persistence', `loadBoolean failed for ${key}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('persistence', `loadBoolean failed for ${key}`, error, { key, operation: 'loadBoolean' });
     return false;
   }
 }
@@ -50,8 +54,10 @@ export function loadBoolean(key) {
 export function saveBoolean(key, value) {
   try {
     localStorage.setItem(key, String(value));
+    return true;
   } catch (error) {
-    debugLog('persistence', `saveBoolean failed for ${key}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('persistence', `saveBoolean failed for ${key}`, error, { key, operation: 'saveBoolean' });
+    return false;
   }
 }
 

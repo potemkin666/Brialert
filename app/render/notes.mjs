@@ -2,19 +2,10 @@ import { matchesAlertSearch } from '../../shared/feed-controller.mjs';
 import { watchlistCardMarkup } from '../components/cards.mjs';
 
 function noteMatchesSearch(note, query) {
-  const terms = String(query || '')
-    .trim()
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean);
-  if (!terms.length) return true;
-
-  const haystack = [note?.title, note?.body]
-    .filter((value) => typeof value === 'string' && value.trim())
-    .join(' ')
-    .toLowerCase();
-
-  return terms.every((term) => haystack.includes(term));
+  return matchesAlertSearch({
+    title: note?.title,
+    summary: note?.body
+  }, query);
 }
 
 export function addSourceRequest(requests, link, now = new Date()) {

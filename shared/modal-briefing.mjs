@@ -1,4 +1,5 @@
 import { regionLabel } from './alert-view-model.mjs';
+import { reportBackgroundError } from './logger.mjs';
 
 export function createModalController(elements, deps) {
   const {
@@ -92,7 +93,8 @@ export function createModalController(elements, deps) {
     try {
       await navigator.clipboard.writeText(text);
       button.textContent = 'Copied';
-    } catch {
+    } catch (error) {
+      reportBackgroundError('modal', 'Clipboard copy failed', error, { operation: 'copyTextToButton' });
       button.textContent = 'Copy failed';
     }
     setTimeout(() => {

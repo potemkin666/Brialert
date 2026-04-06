@@ -1,3 +1,5 @@
+import { reportBackgroundError } from '../../shared/logger.mjs';
+
 function clean(value) {
   return String(value || '').trim();
 }
@@ -40,7 +42,8 @@ export async function syncSourceRequests(state, apiUrl, onAfterLoad) {
     const payload = await response.json();
     const requests = Array.isArray(payload?.requests) ? payload.requests : [];
     state.sourceRequests = mergeRequests(state.sourceRequests, requests);
-  } catch {
+  } catch (error) {
+    reportBackgroundError('source-requests', `syncSourceRequests failed for ${apiUrl}`, error, { apiUrl, operation: 'syncSourceRequests' });
     state.sourceRequests = sortNewestFirst(state.sourceRequests);
   }
 
@@ -54,7 +57,13 @@ export async function submitSourceRequest(state, { apiUrl, url, regionHint }) {
     body: JSON.stringify({ url, regionHint })
   });
 
-  const payload = await response.json().catch(() => ({}));
+  const payload = await response.json().catch((error) => {
+    reportBackgroundError('source-requests', `submitSourceRequest response parsing failed for ${apiUrl}`, error, {
+      apiUrl,
+      operation: 'submitSourceRequest.parseResponse'
+    });
+    return {};
+  });
   if (!response.ok) {
     throw new Error(clean(payload?.detail) || `HTTP ${response.status}`);
   }

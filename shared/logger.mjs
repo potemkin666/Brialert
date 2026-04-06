@@ -12,3 +12,21 @@ export function debugLog(scope, message, detail = null) {
   const suffix = detail ? ` | ${String(detail)}` : '';
   console.debug(`[${scope}] ${message}${suffix}`);
 }
+
+function diagnosticsHook() {
+  return typeof globalThis?.BRIALERT_DIAGNOSTICS_HOOK === 'function'
+    ? globalThis.BRIALERT_DIAGNOSTICS_HOOK
+    : null;
+}
+
+export function reportBackgroundError(scope, message, error = null, context = null) {
+  const detail = error instanceof Error ? error.message : (error ? String(error) : '');
+  debugLog(scope, message, detail || null);
+  const hook = diagnosticsHook();
+  if (!hook) return;
+  try {
+    hook({ scope, message, detail, context });
+  } catch {
+    // Keep diagnostics non-intrusive and never break UI behavior.
+  }
+}

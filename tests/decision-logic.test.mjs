@@ -6,7 +6,16 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
+import {
+  coerceLiveFeedPayload,
+  deriveFeedHealthStatus,
+  deriveView,
+  loadLiveFeed,
+  matchesAlertSearch,
+  normaliseRenderState
+} from '../shared/feed-controller.mjs';
+import { loadArray, loadBoolean, loadSet, saveArray, saveBoolean, saveSet } from '../shared/persistence-ui.mjs';
+import { reportBackgroundError } from '../shared/logger.mjs';
 import {
   discardReasonForItem,
   recencyOkay,
@@ -48,7 +57,7 @@ import {
 import { renderHero, renderSupporting } from '../app/render/live.mjs';
 import { filteredMapView } from '../app/render/map.mjs';
 import { addSourceRequest } from '../app/render/notes.mjs';
-import { escapeHtml } from '../app/utils/text.mjs';
+import { cleanTextBlock, escapeHtml, splitLongBriefSentences } from '../app/utils/text.mjs';
 import { formatAgeFromDate, formatRequestedAtLabel, formatTimeHm } from '../shared/time-format.mjs';
 import {
   INITIAL_RESPONDER_VISIBLE,
@@ -519,6 +528,59 @@ test('live feed coercion rejects alertCount lower than alerts length', () => {
       ]
     });
   }, /alertCount cannot be lower than alerts array length/);
+});
+
+test('live feed coercion normalises health payload shape', () => {
+  const payload = coerceLiveFeedPayload({
+    generatedAt: '2026-04-04T10:00:00.000Z',
+    sourceCount: 2,
+    alerts: [],
+    health: {
+      staleAfterMinutes: '25',
+      lastSuccessfulRefreshTime: '2026-04-04T09:55:00.000Z',
+      lastSuccessfulRunId: 123,
+      lastSuccessfulSourceCount: '18',
+      hasWarnings: 1,
+      usedFallback: 0,
+      sourceRunStats: { totalConfiguredSources: '5', sourcesCheckedThisRun: '4' }
+    }
+  });
+
+  assert.deepEqual(payload.health, {
+    staleAfterMinutes: 25,
+    lastSuccessfulRefreshTime: '2026-04-04T09:55:00.000Z',
+    lastSuccessfulRunId: null,
+    lastSuccessfulSourceCount: 18,
+    hasWarnings: true,
+    usedFallback: false,
+    sourceRunStats: {
+      totalConfiguredSources: 5,
+      sourcesCheckedThisRun: 4,
+      sourcesUpdatedThisRun: 0,
+      sourcesFailedThisRun: 0,
+      sourcesUnchangedThisRun: 0
+    }
+  });
+});
+
+test('normaliseRenderState enforces default UI shape contracts', () => {
+  const state = normaliseRenderState({
+    alerts: null,
+    watched: [],
+    feedVisibleCount: 0,
+    supportingVisibleCount: undefined,
+    liveFeedGeneratedAt: 'not-a-date',
+    liveFeedFetchError: { message: 404, at: 123 },
+    liveFeedHealth: { lastSuccessfulSourceCount: '7' }
+  });
+
+  assert.deepEqual(state.alerts, []);
+  assert.equal(state.watched instanceof Set, true);
+  assert.equal(state.feedVisibleCount, 1);
+  assert.equal(state.supportingVisibleCount, 1);
+  assert.equal(state.liveFeedGeneratedAt, null);
+  assert.deepEqual(state.liveFeedFetchError, { message: '404', at: '123' });
+  assert.equal(state.liveFeedHealth?.lastSuccessfulSourceCount, 7);
 });
 
 test('loadLiveFeed accepts empty renderable payload and clears alerts into standby', async () => {
@@ -1300,6 +1362,54 @@ test('addSourceRequest rejects invalid and duplicate links', () => {
   assert.equal(requests.length, 1);
 });
 
+test('matchesAlertSearch applies tokenized AND matching across alert fields', () => {
+  const alert = {
+    title: 'Counter terror update',
+    summary: 'Police disrupted plot in London',
+    source: 'Met Police'
+  };
+  assert.equal(matchesAlertSearch(alert, 'counter london'), true);
+  assert.equal(matchesAlertSearch(alert, 'counter paris'), false);
+});
+
+test('persistence save helpers return false when localStorage write fails', () => {
+  const previousLocalStorage = globalThis.localStorage;
+  globalThis.localStorage = {
+    setItem() {
+      throw new Error('quota exceeded');
+    },
+    getItem() {
+      return null;
+    }
+  };
+
+  try {
+    assert.equal(saveSet('k1', new Set(['a'])), false);
+    assert.equal(saveArray('k2', ['a']), false);
+    assert.equal(saveBoolean('k3', true), false);
+  } finally {
+    globalThis.localStorage = previousLocalStorage;
+  }
+});
+
+test('persistence load helpers preserve fallbacks when localStorage read fails', () => {
+  const previousLocalStorage = globalThis.localStorage;
+  globalThis.localStorage = {
+    setItem() {},
+    getItem() {
+      throw new Error('storage unavailable');
+    }
+  };
+
+  try {
+    assert.deepEqual([...loadSet('k1')], []);
+    assert.deepEqual(loadArray('k2', ['x']), ['x']);
+    assert.equal(loadBoolean('k3'), false);
+  } finally {
+    globalThis.localStorage = previousLocalStorage;
+  }
+});
+
 test('shared time-format helpers keep fallback and formatted output contracts', () => {
   assert.equal(formatAgeFromDate(''), 'age unknown');
   assert.equal(formatTimeHm(''), '');
@@ -1315,4 +1425,31 @@ test('escapeHtml consistently encodes HTML-sensitive characters', () => {
     escapeHtml(`<a href="x&y">'quote'</a>`),
     '&lt;a href=&quot;x&amp;y&quot;&gt;&#39;quote&#39;&lt;/a&gt;'
   );
+});
+
+test('cleanTextBlock removes noise and normalizes whitespace', () => {
+  const text = '  Breaking   update  Advertisement  Did you know with a Digital Subscription read more';
+  assert.equal(cleanTextBlock(text), 'Breaking update');
+});
+
+test('splitLongBriefSentences deduplicates cleaned sentence blocks', () => {
+  const result = splitLongBriefSentences('Alpha. Beta! Alpha.   ');
+  assert.deepEqual(result, ['Alpha.', 'Beta!']);
+});
+
+test('reportBackgroundError invokes diagnostics hook when present', () => {
+  const previousHook = globalThis.BRIALERT_DIAGNOSTICS_HOOK;
+  const calls = [];
+  globalThis.BRIALERT_DIAGNOSTICS_HOOK = (payload) => calls.push(payload);
+  try {
+    reportBackgroundError('test', 'background task failed', new Error('boom'), { step: 1 });
+  } finally {
+    globalThis.BRIALERT_DIAGNOSTICS_HOOK = previousHook;
+  }
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].scope, 'test');
+  assert.equal(calls[0].message, 'background task failed');
+  assert.equal(calls[0].detail, 'boom');
+  assert.deepEqual(calls[0].context, { step: 1 });
 });

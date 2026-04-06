@@ -1,6 +1,6 @@
 import { isLondonAlert } from './alert-view-model.mjs';
 import { LANE_ALL, MAP_VIEW_MODES, QUEUE_BUCKETS } from './ui-constants.mjs';
-import { debugLog } from './logger.mjs';
+import { reportBackgroundError } from './logger.mjs';
 
 function searchTerms(query) {
   return String(query || '')
@@ -8,6 +8,70 @@ function searchTerms(query) {
     .toLowerCase()
     .split(/\s+/)
     .filter(Boolean);
+}
+
+function normaliseHealthSnapshot(health) {
+  if (!health || typeof health !== 'object') return null;
+  const staleAfterMinutes = Number(health.staleAfterMinutes);
+  const lastSuccessfulSourceCount = Number(health.lastSuccessfulSourceCount);
+  const sourceRunStats = health.sourceRunStats && typeof health.sourceRunStats === 'object'
+    ? health.sourceRunStats
+    : {};
+  return {
+    staleAfterMinutes: Number.isFinite(staleAfterMinutes) && staleAfterMinutes > 0 ? staleAfterMinutes : null,
+    lastSuccessfulRefreshTime: typeof health.lastSuccessfulRefreshTime === 'string' ? health.lastSuccessfulRefreshTime : null,
+    lastSuccessfulRunId: typeof health.lastSuccessfulRunId === 'string' ? health.lastSuccessfulRunId : null,
+    lastSuccessfulSourceCount: Number.isFinite(lastSuccessfulSourceCount) && lastSuccessfulSourceCount >= 0
+      ? lastSuccessfulSourceCount
+      : 0,
+    hasWarnings: Boolean(health.hasWarnings),
+    usedFallback: Boolean(health.usedFallback),
+    sourceRunStats: {
+      totalConfiguredSources: Number(sourceRunStats.totalConfiguredSources || 0),
+      sourcesCheckedThisRun: Number(sourceRunStats.sourcesCheckedThisRun || 0),
+      sourcesUpdatedThisRun: Number(sourceRunStats.sourcesUpdatedThisRun || 0),
+      sourcesFailedThisRun: Number(sourceRunStats.sourcesFailedThisRun || 0),
+      sourcesUnchangedThisRun: Number(sourceRunStats.sourcesUnchangedThisRun || 0)
+    }
+  };
+}
+
+export function normaliseRenderState(state) {
+  const next = state && typeof state === 'object' ? state : {};
+  const watched = next.watched instanceof Set ? next.watched : new Set();
+  return {
+    ...next,
+    alerts: Array.isArray(next.alerts) ? next.alerts : [],
+    searchQuery: String(next.searchQuery || ''),
+    activeRegion: String(next.activeRegion || LANE_ALL),
+    activeLane: String(next.activeLane || LANE_ALL),
+    mapViewMode: String(next.mapViewMode || MAP_VIEW_MODES.london),
+    watched,
+    notes: Array.isArray(next.notes) ? next.notes : [],
+    sourceRequests: Array.isArray(next.sourceRequests) ? next.sourceRequests : [],
+    feedVisibleCount: Math.max(1, Number(next.feedVisibleCount || 0)),
+    supportingVisibleCount: Math.max(1, Number(next.supportingVisibleCount || 0)),
+    liveSourceCount: Number.isFinite(Number(next.liveSourceCount)) ? Number(next.liveSourceCount) : 0,
+    liveFetchedAlertCount: Number.isFinite(Number(next.liveFetchedAlertCount)) ? Number(next.liveFetchedAlertCount) : 0,
+    liveFeedGeneratedAt: next.liveFeedGeneratedAt instanceof Date ? next.liveFeedGeneratedAt : null,
+    liveFeedHealth: normaliseHealthSnapshot(next.liveFeedHealth),
+    liveSourceRunStats: next.liveSourceRunStats && typeof next.liveSourceRunStats === 'object'
+      ? {
+          totalConfiguredSources: Number(next.liveSourceRunStats.totalConfiguredSources || 0),
+          sourcesCheckedThisRun: Number(next.liveSourceRunStats.sourcesCheckedThisRun || 0),
+          sourcesUpdatedThisRun: Number(next.liveSourceRunStats.sourcesUpdatedThisRun || 0),
+          sourcesFailedThisRun: Number(next.liveSourceRunStats.sourcesFailedThisRun || 0),
+          sourcesUnchangedThisRun: Number(next.liveSourceRunStats.sourcesUnchangedThisRun || 0),
+          lastSuccessfulGlobalBuild: next.liveSourceRunStats.lastSuccessfulGlobalBuild || null
+        }
+      : null,
+    liveFeedFetchError: next.liveFeedFetchError && typeof next.liveFeedFetchError === 'object'
+      ? {
+          message: String(next.liveFeedFetchError.message || ''),
+          at: String(next.liveFeedFetchError.at || '')
+        }
+      : null
+  };
 }
 
 function alertSearchText(alert) {
@@ -52,7 +116,8 @@ export function filteredAlerts(state) {
 }
 
 export function deriveView(state, deps) {
-  const filtered = filteredAlerts(state);
+  const normalisedState = normaliseRenderState(state);
+  const filtered = filteredAlerts(normalisedState);
   const responder = deps.sortAlertsByFreshness(filtered.filter((alert) => {
     const queueBucket = String(alert?.queueBucket || '').toLowerCase();
     return queueBucket === QUEUE_BUCKETS.responder;
@@ -79,7 +144,7 @@ export function deriveFeedHealthStatus({
   now = Date.now(),
   defaultStaleAfterMinutes = 22
 }) {
-  const feedHealth = health && typeof health === 'object' ? health : {};
+  const feedHealth = normaliseHealthSnapshot(health) || {};
   const staleAfterMinutes = Number(feedHealth.staleAfterMinutes || defaultStaleAfterMinutes);
   const lastRefresh = feedHealth.lastSuccessfulRefreshTime
     ? new Date(feedHealth.lastSuccessfulRefreshTime)
@@ -108,7 +173,7 @@ export async function loadGeoLookup(state, url) {
     const data = await response.json();
     state.geoLookup = Array.isArray(data) ? data : [];
   } catch (error) {
-    debugLog('feed', `loadGeoLookup failed for ${url}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('feed', `loadGeoLookup failed for ${url}`, error, { url, operation: 'loadGeoLookup' });
     state.geoLookup = [];
   }
 }
@@ -120,7 +185,7 @@ export async function loadWatchGeography(state, url) {
     const data = await response.json();
     state.watchGeographySites = Array.isArray(data) ? data : [];
   } catch (error) {
-    debugLog('feed', `loadWatchGeography failed for ${url}`, error instanceof Error ? error.message : String(error));
+    reportBackgroundError('feed', `loadWatchGeography failed for ${url}`, error, { url, operation: 'loadWatchGeography' });
     state.watchGeographySites = [];
   }
 }
@@ -163,7 +228,7 @@ export function coerceLiveFeedPayload(raw) {
     fetchedAlertCount,
     generatedAt,
     sourceCount,
-    health: payload && typeof payload.health === 'object' && payload.health ? payload.health : null
+    health: normaliseHealthSnapshot(payload.health)
   };
 }
 

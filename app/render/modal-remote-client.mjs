@@ -1,3 +1,5 @@
+import { reportBackgroundError } from '../../shared/logger.mjs';
+
 const LONG_BRIEF_API_URLS = [
   'https://brialertbackend.vercel.app/api/generate-brief'
 ];
@@ -8,7 +10,11 @@ function isSafeAbsoluteHttpUrl(value) {
     const parsed = new URL(String(value || '').trim());
     if (!/^https?:$/.test(parsed.protocol)) return false;
     return Boolean(parsed.hostname);
-  } catch {
+  } catch (error) {
+    reportBackgroundError('modal', 'isSafeAbsoluteHttpUrl failed to parse candidate URL', error, {
+      operation: 'isSafeAbsoluteHttpUrl',
+      value: String(value || '')
+    });
     return false;
   }
 }
