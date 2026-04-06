@@ -933,6 +933,7 @@ async function syncBuilderSQLite(snapshot) {
 
 async function main() {
   const runStartedAtMs = Date.now();
+  const CONTINUATION_RUNTIME_HEADROOM_MS = 20_000;
   const buildDate = new Date();
   const existing = await readExisting();
   const geoLookupFallbackNote = await safeLoadGeoLookup(existing);
@@ -1284,6 +1285,10 @@ async function main() {
     successfulSourcesFound < TARGET_SUCCESSFUL_SOURCES_PER_RUN
     && continuationCandidates.length
   ) {
+    const elapsed = Date.now() - runStartedAtMs;
+    if (elapsed >= Math.max(0, GUARDRAIL_MAX_RUNTIME_MS - CONTINUATION_RUNTIME_HEADROOM_MS)) {
+      break;
+    }
     const remainingNeeded = TARGET_SUCCESSFUL_SOURCES_PER_RUN - successfulSourcesFound;
     // Oversample remaining candidates because many source attempts fail or return zero built alerts.
     const nextBatchSize = Math.min(
