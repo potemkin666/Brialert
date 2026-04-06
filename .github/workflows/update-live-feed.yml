@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-live-feed:
@@ -104,6 +104,9 @@ jobs:
           if-no-files-found: warn
 
       - name: Commit refreshed feed data
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        permissions:
+          contents: write
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
