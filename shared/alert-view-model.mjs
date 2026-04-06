@@ -505,6 +505,17 @@ function isUnconfirmedSourceDate(value) {
   return clean(value).toLowerCase() === UNCONFIRMED_SOURCE_DATE;
 }
 
+function fallbackAbsoluteTime(publishedAt) {
+  const stamp = new Date(clean(publishedAt));
+  if (Number.isNaN(stamp.getTime())) return '';
+  const day = String(stamp.getUTCDate());
+  const month = stamp.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+  const year = stamp.getUTCFullYear();
+  const hours = String(stamp.getUTCHours()).padStart(2, '0');
+  const minutes = String(stamp.getUTCMinutes()).padStart(2, '0');
+  return `${day} ${month} ${year}, ${hours}:${minutes}`;
+}
+
 export function normaliseAlert(alert, index, geoLookup = []) {
   const geoPoint = inferGeoPoint(alert, geoLookup);
   const lane = LANE_KEYS.includes(alert.lane) ? alert.lane : DEFAULT_LANE;
@@ -538,7 +549,7 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     peopleInvolved: Array.isArray(alert.peopleInvolved) ? alert.peopleInvolved.map(plainText).filter(Boolean) : [],
     source: plainText(alert.source) || 'Unknown source',
     sourceUrl: clean(alert.sourceUrl) || '#',
-    time: time || happenedWhen || 'Now',
+    time: time || happenedWhen || fallbackAbsoluteTime(alert.publishedAt) || 'unknown',
     lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? (alert.region === 'uk' ? 54.5 : 54)),
     lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? (alert.region === 'uk' ? -2.5 : 15)),
     major: !!alert.major,
