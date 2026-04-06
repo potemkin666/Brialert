@@ -66,3 +66,35 @@ test('requestRemoteLongBrief retries payload attempts for transient errors', asy
     globalThis.fetch = previousFetch;
   }
 });
+
+test('requestRemoteLongBrief accepts plain text success responses', async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: true,
+    text: async () => 'plain text brief output'
+  });
+
+  try {
+    const result = await requestRemoteLongBrief([{ headline: 'one' }]);
+    assert.equal(result, 'plain text brief output');
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
+
+test('requestRemoteLongBrief extracts brief from OpenAI responses payload shape', async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: true,
+    text: async () => JSON.stringify({
+      output: [{ content: [{ text: 'structured output brief' }] }]
+    })
+  });
+
+  try {
+    const result = await requestRemoteLongBrief([{ headline: 'one' }]);
+    assert.equal(result, 'structured output brief');
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});

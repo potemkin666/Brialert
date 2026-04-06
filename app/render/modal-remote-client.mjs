@@ -10,12 +10,16 @@ function resolveLongBriefApiUrls() {
 }
 
 function extractRemoteBrief(responseData) {
+  if (typeof responseData === 'string') return responseData.trim();
+
   const directBrief = String(
     responseData?.brief
     ?? responseData?.longBrief
     ?? responseData?.text
     ?? responseData?.output_text
     ?? responseData?.content
+    ?? responseData?.output?.[0]?.content?.[0]?.text
+    ?? responseData?.response?.output_text
     ?? responseData?.data?.brief
     ?? ''
   ).trim();
@@ -26,6 +30,22 @@ function extractRemoteBrief(responseData) {
     ?? responseData?.choices?.[0]?.text
     ?? ''
   ).trim();
+}
+
+async function readRemoteBriefPayload(response) {
+  if (typeof response?.text === 'function') {
+    const responseText = await response.text();
+    if (!responseText) return '';
+    try {
+      return JSON.parse(responseText);
+    } catch {
+      return responseText;
+    }
+  }
+  if (typeof response?.json === 'function') {
+    return response.json();
+  }
+  return '';
 }
 
 export async function requestRemoteLongBrief(payloadAttempts) {
@@ -51,7 +71,7 @@ export async function requestRemoteLongBrief(payloadAttempts) {
           error.retryable = !TERMINAL_HTTP_STATUSES.has(response.status);
           throw error;
         }
-        const brief = extractRemoteBrief(await response.json());
+        const brief = extractRemoteBrief(await readRemoteBriefPayload(response));
         if (!brief) throw new Error('Invalid brief response');
         return brief;
       } catch (error) {
