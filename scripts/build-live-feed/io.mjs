@@ -179,8 +179,8 @@ export async function fetchText(url, attempt = 1, options = {}) {
   const cacheKey = domain || endpoint;
   const disableConditional = source?.disableConditionalHeaders === true || source?.kind === 'html';
   const priorCache = disableConditional ? null : existingState.conditionalCache?.[cacheKey];
-  if (!disableConditional && priorCache?.etag) conditionalHeaders['if-none-match'] = clean(priorCache.etag);
-  if (!disableConditional && priorCache?.lastModified) conditionalHeaders['if-modified-since'] = clean(priorCache.lastModified);
+  if (priorCache?.etag) conditionalHeaders['if-none-match'] = clean(priorCache.etag);
+  if (priorCache?.lastModified) conditionalHeaders['if-modified-since'] = clean(priorCache.lastModified);
   if (domain && domainState[domain]?.circuitOpenUntil && Date.now() < Number(domainState[domain].circuitOpenUntil || 0)) {
     const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
     throw new Error(`Circuit open for domain ${domain} until ${openUntil}`);
