@@ -197,6 +197,12 @@ export function recencyOkay(source, rawDate) {
   return ageDays <= 45;
 }
 
+function hasReliableSourceDate(rawDate) {
+  if (!rawDate) return false;
+  const parsed = new Date(rawDate);
+  return !Number.isNaN(parsed.getTime());
+}
+
 function providerHeadlineTokens(value) {
   const stopwords = new Set([
     'news', 'latest', 'update', 'updates', 'press', 'release', 'releases',
@@ -284,7 +290,7 @@ function shouldKeepPeopleInvolved(reliabilityProfile, confidenceScore, needsHuma
   return false;
 }
 
-export function shouldKeepItem(source, item) {
+export function discardReasonForItem(source, item) {
   const sourceTier = inferSourceTier(source);
   const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
   const text = `${item.title} ${item.summary} ${item.sourceExtract || ''}`;
@@ -293,23 +299,29 @@ export function shouldKeepItem(source, item) {
   const terrorHits = matchesKeywords(text, terrorismKeywords);
   const terrorRelevant = isTerrorRelevantIncident(source, item);
 
-  if (item.language && !isEnglishLanguage(item.language)) return false;
-  if (looksLikeProviderHeadline(source, item)) return false;
-  if (source.lane === 'incidents' && ['feature', 'recognition'].includes(eventType)) return false;
-  if (!item.published && source.lane === 'incidents' && !source.isTrustedOfficial) return false;
-  if (!recencyOkay(source, item.published)) return false;
-  if (source.lane === 'incidents' && !terrorRelevant) return false;
+  if (item.language && !isEnglishLanguage(item.language)) return 'non-english';
+  if (looksLikeProviderHeadline(source, item)) return 'provider-headline';
+  if (source.lane === 'incidents' && ['feature', 'recognition'].includes(eventType)) return 'non-incident-event';
+  if (!recencyOkay(source, item.published)) {
+    return hasReliableSourceDate(item.published) ? 'stale-date' : 'missing-or-invalid-date';
+  }
+  if (source.lane === 'incidents' && !terrorRelevant) return 'not-terror-relevant';
   if (source.lane === 'context' && !source.isTrustedOfficial) {
     const requiredTerrorHits = reliabilityProfile === 'tabloid' ? 2 : 1;
-    if (terrorHits.length < requiredTerrorHits) return false;
+    if (terrorHits.length < requiredTerrorHits) return 'insufficient-terror-hits';
   }
   if (reliabilityProfile === 'tabloid') {
     const titleTerrorHits = matchesKeywords(item.title || '', terrorismKeywords);
-    if (titleTerrorHits.length < 1) return false;
-    if (terrorHits.length < 2) return false;
-    if (incidentHits.length < 3) return false;
+    if (titleTerrorHits.length < 1) return 'tabloid-title-miss';
+    if (terrorHits.length < 2) return 'tabloid-terror-hit-miss';
+    if (incidentHits.length < 3) return 'tabloid-incident-hit-miss';
   }
-  return source.requiresKeywordMatch ? incidentHits.length > 0 : true;
+  if (source.requiresKeywordMatch && incidentHits.length === 0) return 'keyword-match-required';
+  return null;
+}
+
+export function shouldKeepItem(source, item) {
+  return discardReasonForItem(source, item) === null;
 }
 
 export function buildAlert(source, item, idx) {

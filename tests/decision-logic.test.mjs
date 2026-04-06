@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
 import {
+  discardReasonForItem,
   recencyOkay,
   shouldKeepItem,
   retentionScoreFor,
@@ -763,6 +764,30 @@ test('recencyOkay enforces reliable and lane-bounded recency', () => {
     recencyOkay(incidentsSource, new Date(Date.now() - (8 * 24 * 60 * 60 * 1000)).toISOString()),
     false
   );
+});
+
+test('discardReasonForItem marks missing/invalid date drops explicitly', () => {
+  const source = {
+    lane: 'context',
+    provider: 'Official context source',
+    isTrustedOfficial: true,
+    requiresKeywordMatch: false
+  };
+
+  const missingDateItem = {
+    title: 'Counter-terror briefing update',
+    summary: 'Official update on terrorism prevention posture.',
+    sourceExtract: 'Policy and operational context update.',
+    published: null
+  };
+
+  const invalidDateItem = {
+    ...missingDateItem,
+    published: 'not-a-date'
+  };
+
+  assert.equal(discardReasonForItem(source, missingDateItem), 'missing-or-invalid-date');
+  assert.equal(discardReasonForItem(source, invalidDateItem), 'missing-or-invalid-date');
 });
 
 test("renderHero shows requested fallback copy when live pull hasn't happened yet", () => {

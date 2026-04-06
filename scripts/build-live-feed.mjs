@@ -46,9 +46,9 @@ import {
 } from './build-live-feed/config.mjs';
 import {
   buildAlert,
+  discardReasonForItem,
   dedupeAndSortAlerts,
-  selectStoredAlerts,
-  shouldKeepItem
+  selectStoredAlerts
 } from './build-live-feed/alerts.mjs';
 import {
   geoLookupSnapshot,
@@ -775,6 +775,7 @@ async function main() {
         const discardReasons = {
           parseNoItems: 0,
           droppedByFilter: 0,
+          droppedByMissingOrInvalidDate: 0,
           droppedByItemCap: 0,
           buildFailures: 0
         };
@@ -830,7 +831,11 @@ async function main() {
             : SOURCE_ITEM_LIMITS[source.lane] || SOURCE_ITEM_LIMITS.default;
           const filtered = hydrated.filter((item) => {
             try {
-              return shouldKeepItem(source, item);
+              const discardReason = discardReasonForItem(source, item);
+              if (discardReason === 'missing-or-invalid-date') {
+                discardReasons.droppedByMissingOrInvalidDate += 1;
+              }
+              return discardReason === null;
             } catch (error) {
               localErrors.push(summariseSourceError(source, error));
               console.error(`Source item filter failed: ${source.id} - ${error instanceof Error ? error.message : String(error)}`);
@@ -956,6 +961,7 @@ async function main() {
   const failedSources = sourceStats.filter((stat) => stat.built === 0 && stat.errors > 0).length;
   const emptySources = sourceStats.filter((stat) => stat.built === 0 && stat.errors === 0).length;
   const droppedByFilter = sourceStats.reduce((sum, stat) => sum + (stat.discardReasons?.droppedByFilter || 0), 0);
+  const droppedByMissingOrInvalidDate = sourceStats.reduce((sum, stat) => sum + (stat.discardReasons?.droppedByMissingOrInvalidDate || 0), 0);
   const droppedByItemCap = sourceStats.reduce((sum, stat) => sum + (stat.discardReasons?.droppedByItemCap || 0), 0);
   const droppedByBuildFailures = sourceStats.reduce((sum, stat) => sum + (stat.discardReasons?.buildFailures || 0), 0);
   const topFailingSources = sourceStats
@@ -1185,6 +1191,7 @@ async function main() {
     `quarantined=${quarantinedEntries.length}`,
     `droppedByDedupe=${dedupeDropped}`,
     `droppedByFilter=${droppedByFilter}`,
+    `droppedByMissingOrInvalidDate=${droppedByMissingOrInvalidDate}`,
     `droppedByItemCap=${droppedByItemCap}`,
     `droppedByBuildFailures=${droppedByBuildFailures}`
   ].join(' | '));
