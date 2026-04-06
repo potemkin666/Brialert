@@ -110,8 +110,8 @@
     <h1>Source Quarantine Review</h1>
     <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run. Suggest a replacement URL and Brialert will restore it into the normal source catalog for the next run.</p>
     <div class="meta" id="meta">
-      <span class="pill">Generated: 2026-04-06T17:59:08.402Z</span>
-      <span class="pill">Quarantined sources: 109</span>
+      <span class="pill">Generated: 2026-04-06T19:13:04.758Z</span>
+      <span class="pill">Quarantined sources: 112</span>
       <span class="pill">SLA: review within 48h</span>
     </div>
     <div class="card">
@@ -159,7 +159,7 @@
 
     function renderMeta(payload) {
       meta.innerHTML = [
-        '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '2026-04-06T17:59:08.402Z') + '</span>',
+        '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '2026-04-06T19:13:04.758Z') + '</span>',
         '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
         '<span class="pill">SLA: review within 48h</span>',
         '<span class="pill' + (currentDataMode === 'snapshot' ? ' warn' : '') + '">' +
