@@ -147,7 +147,8 @@
     const meta = document.getElementById('meta');
     let currentEntries = [];
     let currentDataMode = 'api';
-    const SNAPSHOT_RESTORE_DISABLED_NOTE = 'Restore is temporarily unavailable while backend authentication is failing. Please retry once live API access is restored.';
+    const RESTORE_QUEUE_STORAGE_KEY = 'brialert:quarantine-restore-queue:v1';
+    const TERMINAL_RESTORE_STATUS_CODES = new Set([400, 404, 409, 410, 422]);
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -159,12 +160,16 @@
     }
 
     function renderMeta(payload) {
+      const queuedCount = loadRestoreQueue().length;
       meta.innerHTML = [
         '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '2026-04-06T19:13:04.758Z') + '</span>',
         '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
         '<span class="pill">SLA: review within 48h</span>',
         '<span class="pill' + (currentDataMode === 'snapshot' ? ' warn' : '') + '">' +
           (currentDataMode === 'snapshot' ? 'Data mode: static snapshot (restore API may fail)' : 'Data mode: live API') +
+        '</span>',
+        '<span class="pill' + (queuedCount ? ' warn' : '') + '">' +
+          (queuedCount ? ('Queued restores: ' + escapeHtml(queuedCount)) : 'Queued restores: 0') +
         '</span>'
       ].join('');
     }
@@ -200,20 +205,6 @@
         return;
       }
       body.innerHTML = currentEntries.map(rowMarkup).join('');
-      if (currentDataMode === 'snapshot') {
-        for (const row of body.querySelectorAll('tr[data-source-id]')) {
-          const button = row.querySelector('button[data-action="restore"]');
-          const note = row.querySelector('.status-feedback');
-          if (button) {
-            button.disabled = true;
-            button.title = SNAPSHOT_RESTORE_DISABLED_NOTE;
-          }
-          if (note) {
-            note.textContent = SNAPSHOT_RESTORE_DISABLED_NOTE;
-            note.className = 'status-note error';
-          }
-        }
-      }
     }
 
     function serializeError(error) {
@@ -232,7 +223,9 @@
       const response = await fetch(url, { cache: 'no-store' });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(payload && payload.detail ? payload.detail : fallbackError);
+        const error = new Error(payload && payload.detail ? payload.detail : fallbackError);
+        error.status = response.status;
+        throw error;
       }
       return payload;
     }
@@ -247,9 +240,91 @@
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(payload && payload.detail ? payload.detail : fallbackError);
+        const error = new Error(payload && payload.detail ? payload.detail : fallbackError);
+        error.status = response.status;
+        throw error;
       }
       return payload;
+    }
+
+    function loadRestoreQueue() {
+      try {
+        const raw = localStorage.getItem(RESTORE_QUEUE_STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        return parsed
+          .map((item) => ({
+            sourceId: String(item?.sourceId || ''),
+            url: String(item?.url || '').trim(),
+            queuedAt: String(item?.queuedAt || '')
+          }))
+          .filter((item) => item.sourceId && item.url);
+      } catch {
+        return [];
+      }
+    }
+
+    function saveRestoreQueue(queue) {
+      try {
+        localStorage.setItem(RESTORE_QUEUE_STORAGE_KEY, JSON.stringify(queue));
+      } catch {
+        // ignore storage failures
+      }
+    }
+
+    function upsertRestoreQueueItem(sourceId, url) {
+      const queue = loadRestoreQueue();
+      const next = queue.filter((item) => item.sourceId !== sourceId);
+      next.push({ sourceId, url, queuedAt: new Date().toISOString() });
+      saveRestoreQueue(next);
+    }
+
+    function removeRestoreQueueItem(sourceId) {
+      const queue = loadRestoreQueue();
+      const next = queue.filter((item) => item.sourceId !== sourceId);
+      if (next.length !== queue.length) {
+        saveRestoreQueue(next);
+      }
+    }
+
+    function shouldRetryRestore(error) {
+      const status = Number(error && error.status);
+      if (!Number.isFinite(status)) return true;
+      return !TERMINAL_RESTORE_STATUS_CODES.has(status);
+    }
+
+    async function flushRestoreQueue() {
+      const queue = loadRestoreQueue();
+      if (!queue.length) return;
+      const remaining = [];
+      for (const item of queue) {
+        try {
+          await postPayload(
+            API_BASE + '/api/release-quarantined-source',
+            { sourceId: item.sourceId, url: item.url },
+            'Failed to restore queued source.'
+          );
+          currentEntries = currentEntries.filter((entry) => entry.id !== item.sourceId);
+        } catch (error) {
+          if (shouldRetryRestore(error)) {
+            remaining.push(item);
+          }
+        }
+      }
+      saveRestoreQueue(remaining);
+    }
+
+    function normalizeReplacementUrl(candidateUrl) {
+      const url = String(candidateUrl || '').trim();
+      if (!url) return '';
+      try {
+        const parsed = new URL(url);
+        if (!/^https?:$/.test(parsed.protocol)) return '';
+        return parsed.toString();
+      } catch {
+        return '';
+      }
     }
 
     async function loadEntries() {
@@ -267,6 +342,7 @@
           currentDataMode = 'snapshot';
         }
         currentEntries = Array.isArray(payload.sources) ? payload.sources : [];
+        await flushRestoreQueue();
         renderMeta(payload);
         renderRows();
       } catch (error) {
@@ -282,14 +358,9 @@
       const sourceId = row.getAttribute('data-source-id');
       const input = row.querySelector('.url-input');
       const note = row.querySelector('.status-feedback');
-      const url = input && input.value ? input.value.trim() : '';
+      const url = normalizeReplacementUrl(input && input.value ? input.value : '');
       if (!url) {
-        note.textContent = 'Paste a replacement URL first.';
-        note.className = 'status-note error';
-        return;
-      }
-      if (currentDataMode === 'snapshot') {
-        note.textContent = SNAPSHOT_RESTORE_DISABLED_NOTE;
+        note.textContent = 'Paste a valid http(s) replacement URL first.';
         note.className = 'status-note error';
         return;
       }
@@ -304,16 +375,24 @@
           { sourceId, url },
           'Failed to restore source.'
         );
+        removeRestoreQueueItem(sourceId);
         note.textContent = payload.detail || 'Source restored.';
         note.className = 'status-note success';
-      currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
-      renderMeta({ generatedAt: new Date().toISOString() });
+        currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
+        renderMeta({ generatedAt: new Date().toISOString() });
         setTimeout(() => {
           renderRows();
         }, 250);
       } catch (error) {
-        note.textContent = explainError(error);
-        note.className = 'status-note error';
+        if (shouldRetryRestore(error)) {
+          upsertRestoreQueueItem(sourceId, url);
+          note.textContent = 'Restore API unavailable. Saved locally and will auto-retry.';
+          note.className = 'status-note';
+          renderMeta({ generatedAt: new Date().toISOString() });
+        } else {
+          note.textContent = explainError(error);
+          note.className = 'status-note error';
+        }
         button.disabled = false;
       }
     });
