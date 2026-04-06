@@ -182,7 +182,7 @@ export function bindEvents({
       await refreshFeedNow();
     } finally {
       elements.heroRefresh.disabled = false;
-      elements.heroRefresh.textContent = originalText || 'Refresh feed';
+      elements.heroRefresh.textContent = originalText;
     }
   });
 }
