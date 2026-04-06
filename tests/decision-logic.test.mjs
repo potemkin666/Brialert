@@ -1053,6 +1053,39 @@ test('source error summary classifies HTTP 304 as unchanged', async () => {
   assert.equal(summary.category, 'unchanged-304');
 });
 
+test('source error summary prefers structured errorCode over brittle message matching', async () => {
+  const { summariseSourceError } = await import('../scripts/build-live-feed/io.mjs');
+  const error = new Error('mystery parser crash without selector words');
+  error.__brialertMeta = { errorCode: 'PARSER_SELECTOR_OR_JS_RENDERING' };
+  const summary = summariseSourceError(
+    { id: 'test-source', provider: 'Test provider', endpoint: 'https://example.test/feed' },
+    error
+  );
+  assert.equal(summary.errorCode, 'PARSER_SELECTOR_OR_JS_RENDERING');
+  assert.equal(summary.category, 'brittle-selectors-or-js-rendering');
+});
+
+test('source error summary maps structured blocked and timeout codes centrally', async () => {
+  const { summariseSourceError } = await import('../scripts/build-live-feed/io.mjs');
+  const blockedError = new Error('opaque blocked page');
+  blockedError.__brialertMeta = { errorCode: 'BLOCKED_ACCESS_PAGE' };
+  const blockedSummary = summariseSourceError(
+    { id: 'test-source', provider: 'Test provider', endpoint: 'https://example.test/feed' },
+    blockedError
+  );
+  assert.equal(blockedSummary.category, 'blocked-or-auth');
+  assert.equal(blockedSummary.errorCode, 'BLOCKED_ACCESS_PAGE');
+
+  const timeoutError = new Error('upstream timeout');
+  timeoutError.__brialertMeta = { errorCode: 'FETCH_TIMEOUT' };
+  const timeoutSummary = summariseSourceError(
+    { id: 'test-source', provider: 'Test provider', endpoint: 'https://example.test/feed' },
+    timeoutError
+  );
+  assert.equal(timeoutSummary.category, 'timeout');
+  assert.equal(timeoutSummary.errorCode, 'FETCH_TIMEOUT');
+});
+
 test('validate-live-feed-output script passes valid feed and fails invalid sourceCount', () => {
   const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'brialert-live-feed-'));
   const scriptsDir = path.join(tmpRoot, 'scripts');

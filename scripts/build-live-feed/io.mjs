@@ -25,6 +25,52 @@ const RESERVED_HEADER_KEYS = new Set([
 ]);
 const BOT_BLOCK_PATTERN = /anti-bot|captcha|cloudflare|javascript and cookies|security check|verify you are human|bot detected/i;
 const CIRCUIT_TRIP_PATTERN = /HTTP 429|HTTP 503|HTTP 504|timed out|AbortError|fetch failed|ETIMEDOUT|anti-bot|captcha|cloudflare/i;
+export const ERROR_CODE = Object.freeze({
+  HTTP_304_EMPTY_CACHE: 'HTTP_304_EMPTY_CACHE',
+  HTTP_NOT_FOUND_404: 'HTTP_NOT_FOUND_404',
+  HTTP_GONE_410: 'HTTP_GONE_410',
+  HTTP_REDIRECT_3XX: 'HTTP_REDIRECT_3XX',
+  HTTP_BLOCKED_OR_AUTH: 'HTTP_BLOCKED_OR_AUTH',
+  HTTP_STATUS_ERROR: 'HTTP_STATUS_ERROR',
+  BLOCKED_ANTI_BOT: 'BLOCKED_ANTI_BOT',
+  BLOCKED_ACCESS_PAGE: 'BLOCKED_ACCESS_PAGE',
+  FETCH_TIMEOUT: 'FETCH_TIMEOUT',
+  FETCH_NETWORK_FAILURE: 'FETCH_NETWORK_FAILURE',
+  NETWORK_CIRCUIT_OPEN: 'NETWORK_CIRCUIT_OPEN',
+  PLAYWRIGHT_UNAVAILABLE: 'PLAYWRIGHT_UNAVAILABLE',
+  PARSER_SELECTOR_OR_JS_RENDERING: 'PARSER_SELECTOR_OR_JS_RENDERING'
+});
+const ERROR_CODE_VALUES = new Set(Object.values(ERROR_CODE));
+const ERROR_CODE_TO_CATEGORY = Object.freeze({
+  [ERROR_CODE.HTTP_304_EMPTY_CACHE]: 'http-status-error',
+  [ERROR_CODE.HTTP_NOT_FOUND_404]: 'not-found-404',
+  [ERROR_CODE.HTTP_GONE_410]: 'dead-or-moved-url',
+  [ERROR_CODE.HTTP_BLOCKED_OR_AUTH]: 'blocked-or-auth',
+  [ERROR_CODE.BLOCKED_ACCESS_PAGE]: 'blocked-or-auth',
+  [ERROR_CODE.BLOCKED_ANTI_BOT]: 'anti-bot-protection',
+  [ERROR_CODE.HTTP_STATUS_ERROR]: 'http-status-error',
+  [ERROR_CODE.HTTP_REDIRECT_3XX]: 'moved-temporarily',
+  [ERROR_CODE.FETCH_TIMEOUT]: 'timeout',
+  [ERROR_CODE.FETCH_NETWORK_FAILURE]: 'network-failure',
+  [ERROR_CODE.NETWORK_CIRCUIT_OPEN]: 'network-failure',
+  [ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING]: 'brittle-selectors-or-js-rendering'
+});
+
+function createBrialertError(message, meta = {}) {
+  const error = new Error(message);
+  error.__brialertMeta = {
+    ...(meta && typeof meta === 'object' ? meta : {})
+  };
+  return error;
+}
+
+function safeErrorMeta(error) {
+  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
+  if (!meta || typeof meta !== 'object' || Array.isArray(meta)) return null;
+  const proto = Object.getPrototypeOf(meta);
+  if (proto !== Object.prototype && proto !== null) return null;
+  return meta;
+}
 
 export function stripBom(text) {
   return typeof text === 'string' ? text.replace(/^\uFEFF/, '') : text;
@@ -137,9 +183,13 @@ function mergedHeaders(source = null) {
   };
 }
 
+/**
+ * Returns null when no block is detected, otherwise
+ * returns an object: { message: string, code: ERROR_CODE }.
+ */
 function classifyBodyBlock(text = '') {
   const lower = String(text).toLowerCase();
-  if (!lower) return '';
+  if (!lower) return null;
   if (
     lower.includes('attention required') ||
     lower.includes('cloudflare') ||
@@ -154,13 +204,13 @@ function classifyBodyBlock(text = '') {
     lower.includes('suspicious activity') ||
     lower.includes('bot detected') ||
     lower.includes('please enable javascript')
-  ) return 'anti-bot protection';
+  ) return { message: 'anti-bot protection', code: ERROR_CODE.BLOCKED_ANTI_BOT };
   if (
     lower.includes('access denied') ||
     lower.includes('request blocked') ||
     lower.includes('forbidden')
-  ) return 'blocked access page';
-  return '';
+  ) return { message: 'blocked access page', code: ERROR_CODE.BLOCKED_ACCESS_PAGE };
+  return null;
 }
 
 export async function fetchText(url, attempt = 1, options = {}) {
@@ -185,7 +235,10 @@ export async function fetchText(url, attempt = 1, options = {}) {
   if (priorCache?.lastModified) conditionalHeaders['if-modified-since'] = clean(priorCache.lastModified);
   if (domain && domainState[domain]?.circuitOpenUntil && Date.now() < Number(domainState[domain].circuitOpenUntil || 0)) {
     const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
-    throw new Error(`Circuit open for domain ${domain} until ${openUntil}`);
+    throw createBrialertError(`Circuit open for domain ${domain} until ${openUntil}`, {
+      errorCode: ERROR_CODE.NETWORK_CIRCUIT_OPEN,
+      finalUrl: endpoint
+    });
   }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -207,12 +260,11 @@ export async function fetchText(url, attempt = 1, options = {}) {
     if (response.status === 304) {
       const cachedText = typeof priorCache?.text === 'string' ? priorCache.text : '';
       if (!cachedText) {
-        const error = new Error('HTTP 304 with empty cache');
-        error.__brialertMeta = {
+        throw createBrialertError('HTTP 304 with empty cache', {
+          errorCode: ERROR_CODE.HTTP_304_EMPTY_CACHE,
           status: response.status,
           finalUrl
-        };
-        throw error;
+        });
       }
       if (!disableConditional && options?.requestState && cacheKey) {
         if (!options.requestState.conditionalCache || typeof options.requestState.conditionalCache !== 'object') {
@@ -248,18 +300,28 @@ export async function fetchText(url, attempt = 1, options = {}) {
         await sleep(retryDelay);
         return fetchText(url, attempt + 1, options);
       }
-      const error = new Error(`HTTP ${response.status}`);
-      error.__brialertMeta = {
+      const errorCode = response.status === 404
+        ? ERROR_CODE.HTTP_NOT_FOUND_404
+        : response.status === 410
+          ? ERROR_CODE.HTTP_GONE_410
+          : (response.status === 401 || response.status === 403)
+            ? ERROR_CODE.HTTP_BLOCKED_OR_AUTH
+            : ERROR_CODE.HTTP_STATUS_ERROR;
+      throw createBrialertError(`HTTP ${response.status}`, {
+        errorCode,
         status: response.status,
         finalUrl
-      };
-      throw error;
+      });
     }
 
     const text = await response.text();
     const blockedClass = classifyBodyBlock(text);
     if (blockedClass) {
-      throw new Error(`Blocked by ${blockedClass}`);
+      throw createBrialertError(`Blocked by ${blockedClass.message}`, {
+        errorCode: blockedClass.code,
+        status: response.status,
+        finalUrl
+      });
     }
 
     const payload = {
@@ -289,6 +351,14 @@ export async function fetchText(url, attempt = 1, options = {}) {
     return options?.includeMeta ? payload : payload.text;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
+    const existingMeta = safeErrorMeta(error);
+    const derivedErrorCode = resolveErrorCode(existingMeta, message);
+    if (error && typeof error === 'object' && derivedErrorCode && (!existingMeta || !existingMeta.errorCode)) {
+      error.__brialertMeta = {
+        ...(existingMeta && typeof existingMeta === 'object' ? existingMeta : {}),
+        errorCode: derivedErrorCode
+      };
+    }
     const retryable =
       message.includes('fetch failed') ||
       message.includes('aborted') ||
@@ -327,7 +397,9 @@ export async function fetchTextWithPlaywright(url, options = {}) {
   const timeoutMs = Math.max(5000, Number(options?.timeoutMs || DEFAULT_TIMEOUT_MS));
   const playwright = await import('playwright').catch(() => null);
   if (!playwright?.chromium) {
-    throw new Error('Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback');
+    throw createBrialertError('Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback', {
+      errorCode: ERROR_CODE.PLAYWRIGHT_UNAVAILABLE
+    });
   }
   const browser = await playwright.chromium.launch({ headless: true });
   try {
@@ -343,7 +415,10 @@ export async function fetchTextWithPlaywright(url, options = {}) {
     const html = await page.content();
     const blockedClass = classifyBodyBlock(html);
     if (blockedClass) {
-      throw new Error(`Blocked by ${blockedClass}`);
+      throw createBrialertError(`Blocked by ${blockedClass.message}`, {
+        errorCode: blockedClass.code,
+        finalUrl: clean(page.url() || url)
+      });
     }
     return html;
   } finally {
@@ -361,19 +436,17 @@ export async function readExisting() {
 
 export function summariseSourceError(source, error) {
   const message = error instanceof Error ? error.message : String(error);
-  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
-  let category = 'unknown';
-  if (/HTTP 304 with empty cache/i.test(message)) category = 'http-status-error';
-  else if (/HTTP 304/i.test(message)) category = 'unchanged-304';
-  else if (/HTTP 404/i.test(message)) category = 'not-found-404';
-  else if (/HTTP 410/i.test(message)) category = 'dead-or-moved-url';
-  else if (/HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
-  else if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
-  else if (/HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(message)) category = 'moved-temporarily';
-  else if (/HTTP \d{3}/i.test(message)) category = 'http-status-error';
-  else if (/abort|timeout|timed out|ETIMEDOUT/i.test(message)) category = 'timeout';
-  else if (/fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(message)) category = 'network-failure';
-  else if (/no items parsed|selector/i.test(message)) category = 'brittle-selectors-or-js-rendering';
+  const meta = safeErrorMeta(error);
+  const resolvedErrorCode = resolveErrorCode(meta, message);
+  let category = resolvedErrorCode ? (ERROR_CODE_TO_CATEGORY[resolvedErrorCode] || 'unknown') : 'unknown';
+  if (category === 'unknown' && /HTTP 304/i.test(message)) category = 'unchanged-304';
+  else if (category === 'unknown' && /HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(message)) category = 'moved-temporarily';
+  else if (category === 'unknown' && /HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
+  else if (category === 'unknown' && /anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
+  else if (category === 'unknown' && /HTTP \d{3}/i.test(message)) category = 'http-status-error';
+  else if (category === 'unknown' && /abort|timeout|timed out|ETIMEDOUT/i.test(message)) category = 'timeout';
+  else if (category === 'unknown' && /fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(message)) category = 'network-failure';
+  else if (category === 'unknown' && /no items parsed|selector/i.test(message)) category = 'brittle-selectors-or-js-rendering';
   return {
     id: clean(source?.id) || 'unknown-source',
     provider: clean(source?.provider) || 'Unknown provider',
@@ -381,8 +454,33 @@ export function summariseSourceError(source, error) {
     finalUrl: clean(meta?.finalUrl || ''),
     status: Number.isFinite(Number(meta?.status)) ? Number(meta.status) : null,
     message,
+    errorCode: resolvedErrorCode || '',
     category
   };
+}
+
+function resolveErrorCode(meta, message) {
+  const explicitCode = typeof meta?.errorCode === 'string' ? meta.errorCode : '';
+  if (explicitCode && ERROR_CODE_VALUES.has(explicitCode)) return explicitCode;
+  const status = Number(meta?.status);
+  if (Number.isFinite(status)) {
+    if (status === 404) return ERROR_CODE.HTTP_NOT_FOUND_404;
+    if (status === 410) return ERROR_CODE.HTTP_GONE_410;
+    if (status === 401 || status === 403) return ERROR_CODE.HTTP_BLOCKED_OR_AUTH;
+    if ([301, 302, 307, 308].includes(status)) return ERROR_CODE.HTTP_REDIRECT_3XX;
+    return ERROR_CODE.HTTP_STATUS_ERROR;
+  }
+  const text = String(message || '');
+  if (/HTTP 304 with empty cache/i.test(text)) return ERROR_CODE.HTTP_304_EMPTY_CACHE;
+  if (/HTTP 404/i.test(text)) return ERROR_CODE.HTTP_NOT_FOUND_404;
+  if (/HTTP 410/i.test(text)) return ERROR_CODE.HTTP_GONE_410;
+  if (/HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(text)) return ERROR_CODE.HTTP_REDIRECT_3XX;
+  if (/HTTP 403|HTTP 401|access denied|blocked/i.test(text)) return ERROR_CODE.HTTP_BLOCKED_OR_AUTH;
+  if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(text)) return ERROR_CODE.BLOCKED_ANTI_BOT;
+  if (/abort|timeout|timed out|ETIMEDOUT/i.test(text)) return ERROR_CODE.FETCH_TIMEOUT;
+  if (/fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(text)) return ERROR_CODE.FETCH_NETWORK_FAILURE;
+  if (/no items parsed|selector/i.test(text)) return ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING;
+  return '';
 }
 
 export function normaliseSourcesPayload(rawSources) {
