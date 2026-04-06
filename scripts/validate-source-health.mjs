@@ -47,13 +47,11 @@ async function loadLondonHtmlSources() {
   const raw = stripBom(await fs.readFile(sourcesPath, 'utf8'));
   const parsed = JSON.parse(raw);
   const sources = Array.isArray(parsed?.sources) ? parsed.sources : [];
-  const londonHtml = sources.filter((source) =>
-    source &&
-    source.region === 'london' &&
-    source.kind === 'html'
-  );
-  if (SCOPE !== 'critical') return londonHtml;
-  return londonHtml.filter((source) => source.lane === 'incidents' || CRITICAL_IDS.has(source.id));
+  return sources.filter((source) => {
+    if (!source || source.region !== 'london' || source.kind !== 'html') return false;
+    if (SCOPE !== 'critical') return true;
+    return source.lane === 'incidents' || CRITICAL_IDS.has(source.id);
+  });
 }
 
 async function readSample(response) {

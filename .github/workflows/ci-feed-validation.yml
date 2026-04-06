@@ -23,6 +23,9 @@ on:
       - '.github/workflows/**'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   validate-feed:
     runs-on: ubuntu-latest
@@ -112,11 +115,11 @@ jobs:
           cp live-alerts.json .ci-artifacts/live-alerts.json 2>/dev/null || true
           cp data/source-remediation-sweep.json .ci-artifacts/source-remediation-sweep.json 2>/dev/null || true
           cp data/top-20-source-remediation.json .ci-artifacts/top-20-source-remediation.json 2>/dev/null || true
-          node -e "const fs=require('fs');const p='live-alerts.json';if(!fs.existsSync(p)){process.exit(0)}const payload=JSON.parse(fs.readFileSync(p,'utf8'));const m=payload.runMetrics||{};const out={generatedAt:payload.generatedAt,sourceCount:payload.sourceCount,alertCount:payload.alertCount,runDurationMs:m.runDurationMs||null,coverage:m.coverage||null,failureReasons:m.failureReasons||{},guardrails:m.guardrails||{},buildWarning:payload.buildWarning||null};fs.writeFileSync('.ci-artifacts/feed-smoke-summary.json',JSON.stringify(out,null,2)+'\n');"
+          node ./scripts/ci/generate-feed-smoke-summary.mjs live-alerts.json .ci-artifacts/feed-smoke-summary.json
 
       - name: Enforce CI smoke runtime budget
         run: |
-          node -e "const fs=require('fs');const payload=JSON.parse(fs.readFileSync('live-alerts.json','utf8'));const d=Number(payload?.runMetrics?.runDurationMs||0);const max=420000;if(!Number.isFinite(d)||d<=0){throw new Error('Missing runDurationMs in live-alerts.json runMetrics')}if(d>max){throw new Error('CI smoke runtime budget exceeded: '+d+'ms > '+max+'ms')}console.log('CI smoke runtime budget OK: '+d+'ms <= '+max+'ms')"
+          node ./scripts/ci/enforce-runtime-budget.mjs live-alerts.json "$BRIALERT_GUARDRAIL_MAX_RUNTIME_MS"
 
       - name: Upload feed smoke artifact
         if: always()

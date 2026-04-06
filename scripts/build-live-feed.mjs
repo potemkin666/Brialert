@@ -1126,7 +1126,7 @@ async function main() {
   if (failedRate > GUARDRAIL_MAX_FAILED_SOURCE_RATE) guardrailViolations.push('failure-rate-exceeded');
   if (successfulSources < GUARDRAIL_MIN_SUCCESSFUL_SOURCES) guardrailViolations.push('successful-source-floor-breached');
   const guardrailMessage = guardrailViolations.length
-    ? `Guardrails breached: ${guardrailViolations.join(', ')} (runtime=${runDurationMs}ms, failedRate=${Number(failedRate.toFixed(3))}, successfulSources=${successfulSources})`
+    ? `Guardrails breached: ${guardrailViolations.join(', ')} (runtime=${runDurationMs}ms, failedRate=${failedRate.toFixed(3)}, successfulSources=${successfulSources})`
     : null;
   const buildWarning = [
     geoLookupFallbackNote,

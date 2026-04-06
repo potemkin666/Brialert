@@ -25,7 +25,9 @@ export const parser = new XMLParser({
 });
 
 function envInt(name, fallback, minimum = 0) {
-  const parsed = Math.floor(Number(process.env[name]));
+  const raw = process.env[name];
+  if (raw == null || String(raw).trim() === '') return fallback;
+  const parsed = Math.floor(Number(raw));
   return Number.isFinite(parsed) && parsed >= minimum ? parsed : fallback;
 }
 
