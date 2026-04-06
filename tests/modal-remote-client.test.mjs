@@ -22,6 +22,32 @@ test('requestRemoteLongBrief stops retrying on terminal HTTP statuses like 501',
   }
 });
 
+test('requestRemoteLongBrief falls back to backend URL when same-origin route is terminal', async () => {
+  const previousFetch = globalThis.fetch;
+  const calledUrls = [];
+  globalThis.fetch = async (url) => {
+    calledUrls.push(url);
+    if (url === '/api/generate-brief') {
+      return { ok: false, status: 404 };
+    }
+    return {
+      ok: true,
+      json: async () => ({ brief: 'fallback brief' })
+    };
+  };
+
+  try {
+    const result = await requestRemoteLongBrief([{ headline: 'one' }, { headline: 'two' }]);
+    assert.equal(result, 'fallback brief');
+    assert.deepEqual(calledUrls, [
+      '/api/generate-brief',
+      'https://brialertbackend.vercel.app/api/generate-brief'
+    ]);
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
+
 test('requestRemoteLongBrief retries payload attempts for transient errors', async () => {
   const previousFetch = globalThis.fetch;
   let calls = 0;

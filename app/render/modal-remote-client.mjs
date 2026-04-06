@@ -1,5 +1,6 @@
 const LONG_BRIEF_API_URLS = [
-  '/api/generate-brief'
+  '/api/generate-brief',
+  'https://brialertbackend.vercel.app/api/generate-brief'
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 const TERMINAL_HTTP_STATUSES = new Set([400, 401, 403, 404, 405, 410, 501]);
@@ -32,7 +33,9 @@ export async function requestRemoteLongBrief(payloadAttempts) {
   const errors = [];
 
   for (const payload of payloadAttempts) {
-    for (const apiUrl of apiUrls) {
+    let terminalErrorSeen = false;
+    for (let index = 0; index < apiUrls.length; index += 1) {
+      const apiUrl = apiUrls[index];
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), LONG_BRIEF_TIMEOUT_MS);
       try {
@@ -54,11 +57,14 @@ export async function requestRemoteLongBrief(payloadAttempts) {
         const detail = error instanceof Error ? error.message : String(error);
         errors.push(`${apiUrl}: ${detail}`);
         if (error?.retryable === false) {
-          throw new Error(`Long brief generation failed with terminal error: ${errors.join(' | ')}`);
+          terminalErrorSeen = true;
         }
       } finally {
         clearTimeout(timeout);
       }
+    }
+    if (terminalErrorSeen) {
+      throw new Error(`Long brief generation failed with terminal error: ${errors.join(' | ')}`);
     }
   }
 
