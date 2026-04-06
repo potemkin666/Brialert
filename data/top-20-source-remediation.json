@@ -1,12 +1,12 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-06T12:11:54.469Z",
-  "totalSourceErrors": 78,
+  "generatedAt": "2026-04-06T13:27:14.171Z",
+  "totalSourceErrors": 23,
   "top20": [
     {
-      "id": "counter-extremism-project-news",
-      "provider": "Counter Extremism Project a News",
-      "endpoint": "https://www.counterextremism.com/news",
+      "id": "belgium-crisis-centre-news",
+      "provider": "Belgian National Crisis Centre - News",
+      "endpoint": "https://crisiscenter.be/en/news",
       "finalUrl": "",
       "category": "dead-or-moved-url",
       "message": "HTTP 404",
@@ -19,30 +19,6 @@
       "id": "eu-ct-coordinator",
       "provider": "EU Counter-Terrorism Coordinator a Council of the EU",
       "endpoint": "https://www.consilium.europa.eu/en/policies/fight-against-terrorism/eu-counter-terrorism-coordinator/",
-      "finalUrl": "",
-      "category": "dead-or-moved-url",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 4,
-      "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
-      "id": "euractiv-security-rss",
-      "provider": "Euractiv a Security & Defence (RSS)",
-      "endpoint": "https://www.euractiv.com/sections/security/feed/",
-      "finalUrl": "",
-      "category": "dead-or-moved-url",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 4,
-      "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
-      "id": "finland-supo-news",
-      "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/news",
       "finalUrl": "",
       "category": "dead-or-moved-url",
       "message": "HTTP 404",
@@ -100,57 +76,9 @@
       "replacementCandidate": ""
     },
     {
-      "id": "mayor-of-london-press-releases",
-      "provider": "Mayor of London a Press Releases",
-      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases/rss.xml",
-      "finalUrl": "",
-      "category": "dead-or-moved-url",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 4,
-      "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
       "id": "nhs-london-sel-news",
       "provider": "NHS South East London a News",
       "endpoint": "https://www.selondonics.org/latest-news/",
-      "finalUrl": "",
-      "category": "dead-or-moved-url",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 4,
-      "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
-      "id": "occrp-news",
-      "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en/announcements.rss",
-      "finalUrl": "",
-      "category": "dead-or-moved-url",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 4,
-      "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
-      "id": "rferl-security-news-rss",
-      "provider": "Radio Free Europe/Radio Liberty a Security (RSS)",
-      "endpoint": "https://www.rferl.org/api/ep_rss_all/iu/1",
-      "finalUrl": "",
-      "category": "dead-or-moved-url",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 4,
-      "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
-      "id": "rte-ireland-news-rss",
-      "provider": "RTÉ News - Ireland (RSS)",
-      "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
       "finalUrl": "",
       "category": "dead-or-moved-url",
       "message": "HTTP 404",
@@ -172,18 +100,6 @@
       "replacementCandidate": ""
     },
     {
-      "id": "switzerland-fedpol-news",
-      "provider": "Swiss fedpol - News",
-      "endpoint": "https://www.fedpol.admin.ch/fedpol/en/home/fedpol/aktuell.html",
-      "finalUrl": "",
-      "category": "dead-or-moved-url",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 4,
-      "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
       "id": "unodc-news",
       "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
       "endpoint": "https://www.unodc.org/unodc/en/press/releases/latest.html",
@@ -193,30 +109,6 @@
       "status": 404,
       "rankScore": 4,
       "suggestedAction": "replace endpoint with current feed/listing URL",
-      "replacementCandidate": ""
-    },
-    {
-      "id": "barking-dagenham-council-news",
-      "provider": "Barking and Dagenham Council a News",
-      "endpoint": "https://www.lbbd.gov.uk/news",
-      "finalUrl": "",
-      "category": "blocked-or-auth",
-      "message": "HTTP 403",
-      "status": 403,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": ""
-    },
-    {
-      "id": "bellingcat",
-      "provider": "Bellingcat a Investigations",
-      "endpoint": "https://www.bellingcat.com/feed/",
-      "finalUrl": "",
-      "category": "blocked-or-auth",
-      "message": "Blocked by anti-bot protection",
-      "status": 0,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
       "replacementCandidate": ""
     },
     {
@@ -232,15 +124,123 @@
       "replacementCandidate": ""
     },
     {
-      "id": "chatham-house-home",
-      "provider": "Chatham House",
-      "endpoint": "https://www.chathamhouse.org/",
+      "id": "curia-press-rss-en",
+      "provider": "Court of Justice of the European Union - RSS (EN/FR)",
+      "endpoint": "https://curia.europa.eu/site/rss.jsp?lang=en&second. Lang=fr",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "ecfr-publications",
+      "provider": "European Council on Foreign Relations (ECFR) a Publications",
+      "endpoint": "https://ecfr.eu/publications/",
       "finalUrl": "",
       "category": "blocked-or-auth",
       "message": "Blocked by anti-bot protection",
       "status": 0,
       "rankScore": 2,
       "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "europol-newsroom-html",
+      "provider": "Europol - Newsroom",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
+      "finalUrl": "",
+      "category": "brittle-selectors-or-js-rendering",
+      "message": "No items parsed from source endpoint",
+      "status": 200,
+      "rankScore": 2,
+      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "hammersmith-fulham-news",
+      "provider": "Hammersmith and Fulham Council a News",
+      "endpoint": "https://www.lbhf.gov.uk/news",
+      "finalUrl": "",
+      "category": "brittle-selectors-or-js-rendering",
+      "message": "No items parsed from source endpoint",
+      "status": 202,
+      "rankScore": 2,
+      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "skwawkbox",
+      "provider": "Skwawkbox",
+      "endpoint": "https://www.thecanary.co/skwawkbox/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "message": "Blocked by anti-bot protection",
+      "status": 0,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "west-yorkshire-police-missing-rss",
+      "provider": "West Yorkshire Police - Missing Feed",
+      "endpoint": "https://www.westyorkshire.police.uk/news/missing/feed",
+      "finalUrl": "",
+      "category": "brittle-selectors-or-js-rendering",
+      "message": "No items parsed from source endpoint",
+      "status": 200,
+      "rankScore": 2,
+      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "eu-council-press-releases-html",
+      "provider": "Council of the EU - Press Releases",
+      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 304",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "gnet-research",
+      "provider": "Global Network on Extremism & Technology (GNET) a Main Feed",
+      "endpoint": "https://gnet-research.org/feed/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 304",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "judiciary-uk-announcements-feed",
+      "provider": "Judiciary UK - Announcements Feed",
+      "endpoint": "https://www.judiciary.uk/announcements/feed/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 304",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": ""
+    },
+    {
+      "id": "judiciary-uk-judgments-feed",
+      "provider": "Judiciary UK - Judgments Feed",
+      "endpoint": "https://www.judiciary.uk/judgments/feed/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 304",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
       "replacementCandidate": ""
     }
   ]
