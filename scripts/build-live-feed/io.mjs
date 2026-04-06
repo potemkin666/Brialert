@@ -41,6 +41,20 @@ export const ERROR_CODE = Object.freeze({
   PARSER_SELECTOR_OR_JS_RENDERING: 'PARSER_SELECTOR_OR_JS_RENDERING'
 });
 const ERROR_CODE_VALUES = new Set(Object.values(ERROR_CODE));
+const ERROR_CODE_TO_CATEGORY = Object.freeze({
+  [ERROR_CODE.HTTP_304_EMPTY_CACHE]: 'http-status-error',
+  [ERROR_CODE.HTTP_NOT_FOUND_404]: 'not-found-404',
+  [ERROR_CODE.HTTP_GONE_410]: 'dead-or-moved-url',
+  [ERROR_CODE.HTTP_BLOCKED_OR_AUTH]: 'blocked-or-auth',
+  [ERROR_CODE.BLOCKED_ACCESS_PAGE]: 'blocked-or-auth',
+  [ERROR_CODE.BLOCKED_ANTI_BOT]: 'anti-bot-protection',
+  [ERROR_CODE.HTTP_STATUS_ERROR]: 'http-status-error',
+  [ERROR_CODE.HTTP_REDIRECT_3XX]: 'moved-temporarily',
+  [ERROR_CODE.FETCH_TIMEOUT]: 'timeout',
+  [ERROR_CODE.FETCH_NETWORK_FAILURE]: 'network-failure',
+  [ERROR_CODE.NETWORK_CIRCUIT_OPEN]: 'network-failure',
+  [ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING]: 'brittle-selectors-or-js-rendering'
+});
 
 function createBrialertError(message, meta = {}) {
   const error = new Error(message);
@@ -48,6 +62,14 @@ function createBrialertError(message, meta = {}) {
     ...(meta && typeof meta === 'object' ? meta : {})
   };
   return error;
+}
+
+function safeErrorMeta(error) {
+  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
+  if (!meta || typeof meta !== 'object' || Array.isArray(meta)) return null;
+  const proto = Object.getPrototypeOf(meta);
+  if (proto !== Object.prototype && proto !== null) return null;
+  return meta;
 }
 
 export function stripBom(text) {
@@ -329,7 +351,7 @@ export async function fetchText(url, attempt = 1, options = {}) {
     return options?.includeMeta ? payload : payload.text;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    const existingMeta = error && typeof error === 'object' ? error.__brialertMeta : null;
+    const existingMeta = safeErrorMeta(error);
     const derivedErrorCode = resolveErrorCode(existingMeta, message);
     if (error && typeof error === 'object' && derivedErrorCode && (!existingMeta || !existingMeta.errorCode)) {
       error.__brialertMeta = {
@@ -414,27 +436,17 @@ export async function readExisting() {
 
 export function summariseSourceError(source, error) {
   const message = error instanceof Error ? error.message : String(error);
-  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
+  const meta = safeErrorMeta(error);
   const resolvedErrorCode = resolveErrorCode(meta, message);
-  let category = 'unknown';
-  if (resolvedErrorCode === ERROR_CODE.HTTP_304_EMPTY_CACHE) category = 'http-status-error';
-  else if (resolvedErrorCode === ERROR_CODE.HTTP_NOT_FOUND_404) category = 'not-found-404';
-  else if (resolvedErrorCode === ERROR_CODE.HTTP_GONE_410) category = 'dead-or-moved-url';
-  else if (resolvedErrorCode === ERROR_CODE.HTTP_BLOCKED_OR_AUTH || resolvedErrorCode === ERROR_CODE.BLOCKED_ACCESS_PAGE) category = 'blocked-or-auth';
-  else if (resolvedErrorCode === ERROR_CODE.BLOCKED_ANTI_BOT) category = 'anti-bot-protection';
-  else if (resolvedErrorCode === ERROR_CODE.HTTP_STATUS_ERROR) category = 'http-status-error';
-  else if (resolvedErrorCode === ERROR_CODE.FETCH_TIMEOUT) category = 'timeout';
-  else if (resolvedErrorCode === ERROR_CODE.FETCH_NETWORK_FAILURE || resolvedErrorCode === ERROR_CODE.NETWORK_CIRCUIT_OPEN) category = 'network-failure';
-  else if (resolvedErrorCode === ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING) category = 'brittle-selectors-or-js-rendering';
-  else if (/HTTP 304/i.test(message)) category = 'unchanged-304';
-  else if (resolvedErrorCode === ERROR_CODE.HTTP_REDIRECT_3XX) category = 'moved-temporarily';
-  else if (/HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(message)) category = 'moved-temporarily';
-  else if (/HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
-  else if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
-  else if (/HTTP \d{3}/i.test(message)) category = 'http-status-error';
-  else if (/abort|timeout|timed out|ETIMEDOUT/i.test(message)) category = 'timeout';
-  else if (/fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(message)) category = 'network-failure';
-  else if (/no items parsed|selector/i.test(message)) category = 'brittle-selectors-or-js-rendering';
+  let category = resolvedErrorCode ? (ERROR_CODE_TO_CATEGORY[resolvedErrorCode] || 'unknown') : 'unknown';
+  if (category === 'unknown' && /HTTP 304/i.test(message)) category = 'unchanged-304';
+  else if (category === 'unknown' && /HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(message)) category = 'moved-temporarily';
+  else if (category === 'unknown' && /HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
+  else if (category === 'unknown' && /anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
+  else if (category === 'unknown' && /HTTP \d{3}/i.test(message)) category = 'http-status-error';
+  else if (category === 'unknown' && /abort|timeout|timed out|ETIMEDOUT/i.test(message)) category = 'timeout';
+  else if (category === 'unknown' && /fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(message)) category = 'network-failure';
+  else if (category === 'unknown' && /no items parsed|selector/i.test(message)) category = 'brittle-selectors-or-js-rendering';
   return {
     id: clean(source?.id) || 'unknown-source',
     provider: clean(source?.provider) || 'Unknown provider',
