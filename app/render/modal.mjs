@@ -11,8 +11,7 @@ import { createModalController } from '../../shared/modal-briefing.mjs';
 import { cleanTextBlock, splitLongBriefSentences } from '../utils/text.mjs';
 
 const LONG_BRIEF_API_URLS = [
-  'https://brialertbackend.vercel.app/api/generate-brief',
-  'https://brialertbackend.vercel.app/api/generateBrief'
+  'https://brialertbackend.vercel.app/api/generate-brief'
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 const LONG_BRIEF_MAX_SOURCE_EXTRACT_CHARS = 8_000;
