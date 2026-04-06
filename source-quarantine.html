@@ -147,6 +147,7 @@
     const meta = document.getElementById('meta');
     let currentEntries = [];
     let currentDataMode = 'api';
+    const SNAPSHOT_RESTORE_DISABLED_NOTE = 'Restore is temporarily unavailable while backend authentication is failing. Please retry once live API access is restored.';
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -199,6 +200,20 @@
         return;
       }
       body.innerHTML = currentEntries.map(rowMarkup).join('');
+      if (currentDataMode === 'snapshot') {
+        for (const row of body.querySelectorAll('tr[data-source-id]')) {
+          const button = row.querySelector('button[data-action="restore"]');
+          const note = row.querySelector('.status-feedback');
+          if (button) {
+            button.disabled = true;
+            button.title = SNAPSHOT_RESTORE_DISABLED_NOTE;
+          }
+          if (note) {
+            note.textContent = SNAPSHOT_RESTORE_DISABLED_NOTE;
+            note.className = 'status-note error';
+          }
+        }
+      }
     }
 
     function serializeError(error) {
@@ -270,6 +285,11 @@
       const url = input && input.value ? input.value.trim() : '';
       if (!url) {
         note.textContent = 'Paste a replacement URL first.';
+        note.className = 'status-note error';
+        return;
+      }
+      if (currentDataMode === 'snapshot') {
+        note.textContent = SNAPSHOT_RESTORE_DISABLED_NOTE;
         note.className = 'status-note error';
         return;
       }
