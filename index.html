@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content, shrink-to-fit=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com; img-src 'self' data:; connect-src 'self'; font-src 'self' https://unpkg.com data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com; img-src 'self' data: https://*.basemaps.cartocdn.com; connect-src 'self' https://brialertbackend.vercel.app; font-src 'self' https://unpkg.com data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <title>Brialert</title>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#070914">
@@ -219,6 +219,7 @@
           <pre id="modal-briefing"></pre>
         </div>
         <div class="summary-panel" id="expanded-brief-panel" hidden>
+          <p class="long-brief-fallback-notice" id="long-brief-fallback-notice" hidden aria-live="assertive"></p>
           <div class="section-heading">
             <div>
               <span class="detail-label">Generate Long Brief</span>

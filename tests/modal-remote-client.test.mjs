@@ -16,31 +16,27 @@ test('requestRemoteLongBrief stops retrying on terminal HTTP statuses like 501',
       requestRemoteLongBrief([{ headline: 'one' }, { headline: 'two' }]),
       /Long brief generation failed/
     );
-    assert.equal(calls, 2);
+    assert.equal(calls, 1);
   } finally {
     globalThis.fetch = previousFetch;
   }
 });
 
-test('requestRemoteLongBrief falls back to backend URL when same-origin route is terminal', async () => {
+test('requestRemoteLongBrief uses Vercel backend URL as the primary endpoint', async () => {
   const previousFetch = globalThis.fetch;
   const calledUrls = [];
   globalThis.fetch = async (url) => {
     calledUrls.push(url);
-    if (url === '/api/generate-brief') {
-      return { ok: false, status: 404 };
-    }
     return {
       ok: true,
-      json: async () => ({ brief: 'fallback brief' })
+      json: async () => ({ brief: 'remote brief' })
     };
   };
 
   try {
-    const result = await requestRemoteLongBrief([{ headline: 'one' }, { headline: 'two' }]);
-    assert.equal(result, 'fallback brief');
+    const result = await requestRemoteLongBrief([{ headline: 'one' }]);
+    assert.equal(result, 'remote brief');
     assert.deepEqual(calledUrls, [
-      '/api/generate-brief',
       'https://brialertbackend.vercel.app/api/generate-brief'
     ]);
   } finally {
@@ -61,7 +57,7 @@ test('requestRemoteLongBrief retries payload attempts for transient errors', asy
       requestRemoteLongBrief([{ headline: 'one' }, { headline: 'two' }]),
       /Long brief generation failed/
     );
-    assert.equal(calls, 4);
+    assert.equal(calls, 2);
   } finally {
     globalThis.fetch = previousFetch;
   }

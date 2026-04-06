@@ -29,6 +29,7 @@ export function createModalUiController(elements, options = {}) {
     modalLink: elements.modalLink,
     copyBriefing: elements.copyBriefing,
     expandedBriefPanel: elements.expandedBriefPanel,
+    longBriefFallbackNotice: elements.longBriefFallbackNotice,
     modalExpandedBrief: elements.modalExpandedBrief,
     generateExpandedBrief: elements.generateExpandedBrief,
     copyExpandedBrief: elements.copyExpandedBrief

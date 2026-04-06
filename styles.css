@@ -1561,6 +1561,18 @@ h1 {
   color: var(--muted);
 }
 
+.long-brief-fallback-notice {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(213, 61, 47, 0.7);
+  background: rgba(213, 61, 47, 0.15);
+  color: #ff7f74;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
 .scene-clock-grid {
   display: grid;
   gap: 10px;

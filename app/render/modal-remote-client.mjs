@@ -1,5 +1,4 @@
 const LONG_BRIEF_API_URLS = [
-  '/api/generate-brief',
   'https://brialertbackend.vercel.app/api/generate-brief'
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;

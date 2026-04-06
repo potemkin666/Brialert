@@ -22,6 +22,7 @@ export function createModalController(elements, deps) {
     modalLink,
     copyBriefing,
     expandedBriefPanel,
+    longBriefFallbackNotice,
     modalExpandedBrief,
     generateExpandedBrief,
     copyExpandedBrief
@@ -68,6 +69,10 @@ export function createModalController(elements, deps) {
       modalExpandedBrief.textContent = 'Press Generate Long Brief to create a longer AI-written factual brief from the captured source text.';
     }
     if (expandedBriefPanel) expandedBriefPanel.hidden = false;
+    if (longBriefFallbackNotice) {
+      longBriefFallbackNotice.textContent = '';
+      longBriefFallbackNotice.hidden = true;
+    }
     if (generateExpandedBrief) {
       generateExpandedBrief.disabled = false;
       generateExpandedBrief.textContent = 'Generate Long Brief';

@@ -53,6 +53,7 @@ export function createElements() {
     modalLink: document.getElementById('modal-link'),
     modalWatchToggle: document.getElementById('modal-watch-toggle'),
     expandedBriefPanel: document.getElementById('expanded-brief-panel'),
+    longBriefFallbackNotice: document.getElementById('long-brief-fallback-notice'),
     modalExpandedBrief: document.getElementById('modal-expanded-brief'),
     generateExpandedBrief: document.getElementById('generate-expanded-brief'),
     copyExpandedBrief: document.getElementById('copy-expanded-brief'),
