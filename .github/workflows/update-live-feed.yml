@@ -55,6 +55,19 @@ jobs:
       - name: Validate generated feed output
         run: npm run validate:live-feed-output
 
+      - name: Upload generated feed files
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-feed-output
+          path: |
+            live-alerts.json
+            data/quarantined-sources.json
+            source-quarantine.html
+            data/source-remediation-sweep.json
+            data/top-20-source-remediation.json
+            data/brialert.sqlite
+          if-no-files-found: ignore
+
       - name: Show build output
         if: always()
         run: |
@@ -103,10 +116,26 @@ jobs:
           path: .debug-artifacts
           if-no-files-found: warn
 
+  commit-live-feed:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: build-live-feed
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Download generated feed files
+        uses: actions/download-artifact@v4
+        with:
+          name: live-feed-output
+          path: .
+
       - name: Commit refreshed feed data
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        permissions:
-          contents: write
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
