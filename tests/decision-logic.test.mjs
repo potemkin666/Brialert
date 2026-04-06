@@ -8,6 +8,9 @@ import { fileURLToPath } from 'node:url';
 
 import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
 import {
+  discardReasonForItem,
+  recencyOkay,
+  shouldKeepItem,
   retentionScoreFor,
   selectStoredAlerts
 } from '../scripts/build-live-feed/alerts.mjs';
@@ -711,6 +714,80 @@ test('stored alert selection keeps live incidents and fresh official corroborati
   assert.deepEqual(selected.map((alert) => alert.id), ['live-1', 'context-1']);
   assert.ok(retentionScoreFor(liveIncident) > retentionScoreFor(staleWeakContext));
   assert.ok(retentionScoreFor(freshOfficialContext) > retentionScoreFor(staleWeakContext));
+});
+
+test('shouldKeepItem rejects items without a reliable publish date', () => {
+  const source = {
+    lane: 'context',
+    provider: 'Official context source',
+    isTrustedOfficial: true,
+    requiresKeywordMatch: false
+  };
+
+  const missingDateItem = {
+    title: 'Context update on terrorism legislation',
+    summary: 'Official review update mentions terrorism safeguards.',
+    sourceExtract: 'Terrorism safeguards and legal review details.',
+    published: null
+  };
+
+  const invalidDateItem = {
+    title: 'Context update on terrorism legislation',
+    summary: 'Official review update mentions terrorism safeguards.',
+    sourceExtract: 'Terrorism safeguards and legal review details.',
+    published: 'not-a-date'
+  };
+
+  assert.equal(shouldKeepItem(source, missingDateItem), false);
+  assert.equal(shouldKeepItem(source, invalidDateItem), false);
+});
+
+test('recencyOkay enforces reliable and lane-bounded recency', () => {
+  const contextSource = { lane: 'context' };
+  const incidentsSource = { lane: 'incidents' };
+
+  assert.equal(recencyOkay(contextSource, null), false);
+  assert.equal(recencyOkay(contextSource, 'not-a-date'), false);
+  assert.equal(
+    recencyOkay(contextSource, new Date(Date.now() - (9 * 24 * 60 * 60 * 1000)).toISOString()),
+    true
+  );
+  assert.equal(
+    recencyOkay(contextSource, new Date(Date.now() - (11 * 24 * 60 * 60 * 1000)).toISOString()),
+    false
+  );
+  assert.equal(
+    recencyOkay(incidentsSource, new Date(Date.now() - (6 * 24 * 60 * 60 * 1000)).toISOString()),
+    true
+  );
+  assert.equal(
+    recencyOkay(incidentsSource, new Date(Date.now() - (8 * 24 * 60 * 60 * 1000)).toISOString()),
+    false
+  );
+});
+
+test('discardReasonForItem marks missing/invalid date drops explicitly', () => {
+  const source = {
+    lane: 'context',
+    provider: 'Official context source',
+    isTrustedOfficial: true,
+    requiresKeywordMatch: false
+  };
+
+  const missingDateItem = {
+    title: 'Counter-terror briefing update',
+    summary: 'Official update on terrorism prevention posture.',
+    sourceExtract: 'Policy and operational context update.',
+    published: null
+  };
+
+  const invalidDateItem = {
+    ...missingDateItem,
+    published: 'not-a-date'
+  };
+
+  assert.equal(discardReasonForItem(source, missingDateItem), 'missing-or-invalid-date');
+  assert.equal(discardReasonForItem(source, invalidDateItem), 'missing-or-invalid-date');
 });
 
 test("renderHero shows requested fallback copy when live pull hasn't happened yet", () => {

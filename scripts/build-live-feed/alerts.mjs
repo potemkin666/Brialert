@@ -22,7 +22,9 @@ import { severityRank, SOURCE_TIMEZONE, titleCase } from './config.mjs';
 import { geoFor, inferLocation } from './geo.mjs';
 import { isEnglishLanguage, parseSourceDate } from './io.mjs';
 
-const now = new Date();
+function currentTimeMs() {
+  return Date.now();
+}
 
 function sourceTierRankValue(sourceTier) {
   if (sourceTier === 'trigger') return 4;
@@ -41,7 +43,7 @@ function incidentTrackRankValue(incidentTrack) {
 function ageHoursForAlert(alert) {
   const published = parseSourceDate(alert?.publishedAt);
   if (!published) return Infinity;
-  return Math.max(0, (now.getTime() - published.getTime()) / 3600000);
+  return Math.max(0, (currentTimeMs() - published.getTime()) / 3600000);
 }
 
 function reliabilityWeight(profile) {
@@ -85,7 +87,7 @@ function formatDisplayDate(rawDate) {
 }
 
 function freshUntilFor(source, publishedIso, severity, incidentTrack) {
-  const published = parseSourceDate(publishedIso) || now;
+  const published = parseSourceDate(publishedIso) || new Date(currentTimeMs());
   const hoursByLane = {
     incidents: incidentTrack === 'live' ? (severity === 'critical' ? 24 : severity === 'high' ? 48 : 84) : 24 * 14,
     context: 24 * 4,
@@ -121,7 +123,7 @@ function priorityScoreFor(source, severity, keywordHits, publishedIso, incidentT
   score += reliabilityWeight(reliabilityProfile);
   score += Math.min(keywordHits.length, 5) * 0.6;
   if (publishedIso) {
-    const ageHours = Math.max(0, (now.getTime() - new Date(publishedIso).getTime()) / 3600000);
+    const ageHours = Math.max(0, (currentTimeMs() - new Date(publishedIso).getTime()) / 3600000);
     if (source.lane === 'incidents') {
       if (incidentTrack === 'live') {
         if (ageHours <= 2) score += 6;
@@ -167,7 +169,7 @@ function needsHumanReviewFor(source, severity, keywordHits, publishedIso, reliab
 
 function freshnessBucket(source, publishedIso) {
   if (!publishedIso) return source.lane === 'incidents' ? 0 : 1;
-  const ageHours = Math.max(0, (now.getTime() - new Date(publishedIso).getTime()) / 3600000);
+  const ageHours = Math.max(0, (currentTimeMs() - new Date(publishedIso).getTime()) / 3600000);
   if (source.lane === 'incidents') {
     if (ageHours <= 2) return 5;
     if (ageHours <= 6) return 4;
@@ -182,17 +184,23 @@ function freshnessBucket(source, publishedIso) {
   return 0;
 }
 
-function recencyOkay(source, rawDate) {
-  if (!rawDate) return true;
+export function recencyOkay(source, rawDate) {
+  if (!rawDate) return false;
   const parsed = new Date(rawDate);
-  if (Number.isNaN(parsed.getTime())) return true;
-  const ageDays = (now.getTime() - parsed.getTime()) / 86400000;
+  if (Number.isNaN(parsed.getTime())) return false;
+  const ageDays = (currentTimeMs() - parsed.getTime()) / 86400000;
   if (source.lane === 'incidents') return ageDays <= 7;
   if (source.lane === 'context') return ageDays <= 10;
   if (source.lane === 'border') return ageDays <= 14;
   if (source.lane === 'sanctions') return ageDays <= 21;
   if (source.lane === 'oversight' || source.lane === 'prevention') return ageDays <= 30;
   return ageDays <= 45;
+}
+
+function hasReliableSourceDate(rawDate) {
+  if (!rawDate) return false;
+  const parsed = new Date(rawDate);
+  return !Number.isNaN(parsed.getTime());
 }
 
 function providerHeadlineTokens(value) {
@@ -282,7 +290,7 @@ function shouldKeepPeopleInvolved(reliabilityProfile, confidenceScore, needsHuma
   return false;
 }
 
-export function shouldKeepItem(source, item) {
+export function discardReasonForItem(source, item) {
   const sourceTier = inferSourceTier(source);
   const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
   const text = `${item.title} ${item.summary} ${item.sourceExtract || ''}`;
@@ -291,23 +299,29 @@ export function shouldKeepItem(source, item) {
   const terrorHits = matchesKeywords(text, terrorismKeywords);
   const terrorRelevant = isTerrorRelevantIncident(source, item);
 
-  if (item.language && !isEnglishLanguage(item.language)) return false;
-  if (looksLikeProviderHeadline(source, item)) return false;
-  if (source.lane === 'incidents' && ['feature', 'recognition'].includes(eventType)) return false;
-  if (!item.published && source.lane === 'incidents' && !source.isTrustedOfficial) return false;
-  if (!recencyOkay(source, item.published)) return false;
-  if (source.lane === 'incidents' && !terrorRelevant) return false;
+  if (item.language && !isEnglishLanguage(item.language)) return 'non-english';
+  if (looksLikeProviderHeadline(source, item)) return 'provider-headline';
+  if (source.lane === 'incidents' && ['feature', 'recognition'].includes(eventType)) return 'non-incident-event';
+  if (!recencyOkay(source, item.published)) {
+    return hasReliableSourceDate(item.published) ? 'stale-date' : 'missing-or-invalid-date';
+  }
+  if (source.lane === 'incidents' && !terrorRelevant) return 'not-terror-relevant';
   if (source.lane === 'context' && !source.isTrustedOfficial) {
     const requiredTerrorHits = reliabilityProfile === 'tabloid' ? 2 : 1;
-    if (terrorHits.length < requiredTerrorHits) return false;
+    if (terrorHits.length < requiredTerrorHits) return 'insufficient-terror-hits';
   }
   if (reliabilityProfile === 'tabloid') {
     const titleTerrorHits = matchesKeywords(item.title || '', terrorismKeywords);
-    if (titleTerrorHits.length < 1) return false;
-    if (terrorHits.length < 2) return false;
-    if (incidentHits.length < 3) return false;
+    if (titleTerrorHits.length < 1) return 'tabloid-title-miss';
+    if (terrorHits.length < 2) return 'tabloid-terror-hit-miss';
+    if (incidentHits.length < 3) return 'tabloid-incident-hit-miss';
   }
-  return source.requiresKeywordMatch ? incidentHits.length > 0 : true;
+  if (source.requiresKeywordMatch && incidentHits.length === 0) return 'keyword-match-required';
+  return null;
+}
+
+export function shouldKeepItem(source, item) {
+  return discardReasonForItem(source, item) === null;
 }
 
 export function buildAlert(source, item, idx) {
