@@ -154,10 +154,12 @@ export function coerceLiveFeedPayload(raw) {
     throw new Error('Live feed payload alertCount cannot be lower than alerts array length.');
   }
 
-  const normalizedAlerts = alerts.map((alert) => (alert && typeof alert === 'object' ? alert : {}));
+  if (alerts.some((alert) => !alert || typeof alert !== 'object')) {
+    throw new Error('Live feed payload contains malformed alert entries.');
+  }
 
   return {
-    alerts: normalizedAlerts,
+    alerts,
     fetchedAlertCount,
     generatedAt,
     sourceCount,

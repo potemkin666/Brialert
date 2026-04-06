@@ -3,10 +3,11 @@ export function parseValidDate(value) {
   return Number.isNaN(stamp.getTime()) ? null : stamp;
 }
 
-export function formatAgeFromDate(dateLike, nowMs = Date.now()) {
+export function formatAgeFromDate(dateLike, nowMs) {
   const stamp = parseValidDate(dateLike);
   if (!stamp) return 'age unknown';
-  const diffMinutes = Math.max(0, Math.round((nowMs - stamp.getTime()) / 60000));
+  const effectiveNowMs = Number.isFinite(nowMs) ? nowMs : Date.now();
+  const diffMinutes = Math.max(0, Math.round((effectiveNowMs - stamp.getTime()) / 60000));
   if (diffMinutes < 1) return 'just now';
   if (diffMinutes < 60) return `${diffMinutes}m ago`;
   const hours = Math.floor(diffMinutes / 60);

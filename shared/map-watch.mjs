@@ -1,3 +1,6 @@
+import { escapeHtml } from '../app/utils/text.mjs';
+import { MAP_VIEW_MODES } from './ui-constants.mjs';
+
 const LONDON_CENTER = Object.freeze([51.5074, -0.1278]);
 const LONDON_BOUNDS = Object.freeze([
   [51.28, -0.52],
@@ -254,5 +257,3 @@ export function createMapController(config) {
     resetView
   };
 }
-import { escapeHtml } from '../app/utils/text.mjs';
-import { MAP_VIEW_MODES } from './ui-constants.mjs';
