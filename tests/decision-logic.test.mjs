@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
 import {
+  shouldKeepItem,
   retentionScoreFor,
   selectStoredAlerts
 } from '../scripts/build-live-feed/alerts.mjs';
@@ -711,6 +712,32 @@ test('stored alert selection keeps live incidents and fresh official corroborati
   assert.deepEqual(selected.map((alert) => alert.id), ['live-1', 'context-1']);
   assert.ok(retentionScoreFor(liveIncident) > retentionScoreFor(staleWeakContext));
   assert.ok(retentionScoreFor(freshOfficialContext) > retentionScoreFor(staleWeakContext));
+});
+
+test('shouldKeepItem rejects items without a reliable publish date', () => {
+  const source = {
+    lane: 'context',
+    provider: 'Official context source',
+    isTrustedOfficial: true,
+    requiresKeywordMatch: false
+  };
+
+  const missingDateItem = {
+    title: 'Context update on terrorism legislation',
+    summary: 'Official review update mentions terrorism safeguards.',
+    sourceExtract: 'Terrorism safeguards and legal review details.',
+    published: null
+  };
+
+  const invalidDateItem = {
+    title: 'Context update on terrorism legislation',
+    summary: 'Official review update mentions terrorism safeguards.',
+    sourceExtract: 'Terrorism safeguards and legal review details.',
+    published: 'not-a-date'
+  };
+
+  assert.equal(shouldKeepItem(source, missingDateItem), false);
+  assert.equal(shouldKeepItem(source, invalidDateItem), false);
 });
 
 test("renderHero shows requested fallback copy when live pull hasn't happened yet", () => {

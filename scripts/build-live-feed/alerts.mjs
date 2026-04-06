@@ -22,7 +22,9 @@ import { severityRank, SOURCE_TIMEZONE, titleCase } from './config.mjs';
 import { geoFor, inferLocation } from './geo.mjs';
 import { isEnglishLanguage, parseSourceDate } from './io.mjs';
 
-const now = new Date();
+function currentTimeMs() {
+  return Date.now();
+}
 
 function sourceTierRankValue(sourceTier) {
   if (sourceTier === 'trigger') return 4;
@@ -41,7 +43,7 @@ function incidentTrackRankValue(incidentTrack) {
 function ageHoursForAlert(alert) {
   const published = parseSourceDate(alert?.publishedAt);
   if (!published) return Infinity;
-  return Math.max(0, (now.getTime() - published.getTime()) / 3600000);
+  return Math.max(0, (currentTimeMs() - published.getTime()) / 3600000);
 }
 
 function reliabilityWeight(profile) {
@@ -85,7 +87,7 @@ function formatDisplayDate(rawDate) {
 }
 
 function freshUntilFor(source, publishedIso, severity, incidentTrack) {
-  const published = parseSourceDate(publishedIso) || now;
+  const published = parseSourceDate(publishedIso) || new Date(currentTimeMs());
   const hoursByLane = {
     incidents: incidentTrack === 'live' ? (severity === 'critical' ? 24 : severity === 'high' ? 48 : 84) : 24 * 14,
     context: 24 * 4,
@@ -121,7 +123,7 @@ function priorityScoreFor(source, severity, keywordHits, publishedIso, incidentT
   score += reliabilityWeight(reliabilityProfile);
   score += Math.min(keywordHits.length, 5) * 0.6;
   if (publishedIso) {
-    const ageHours = Math.max(0, (now.getTime() - new Date(publishedIso).getTime()) / 3600000);
+    const ageHours = Math.max(0, (currentTimeMs() - new Date(publishedIso).getTime()) / 3600000);
     if (source.lane === 'incidents') {
       if (incidentTrack === 'live') {
         if (ageHours <= 2) score += 6;
@@ -167,7 +169,7 @@ function needsHumanReviewFor(source, severity, keywordHits, publishedIso, reliab
 
 function freshnessBucket(source, publishedIso) {
   if (!publishedIso) return source.lane === 'incidents' ? 0 : 1;
-  const ageHours = Math.max(0, (now.getTime() - new Date(publishedIso).getTime()) / 3600000);
+  const ageHours = Math.max(0, (currentTimeMs() - new Date(publishedIso).getTime()) / 3600000);
   if (source.lane === 'incidents') {
     if (ageHours <= 2) return 5;
     if (ageHours <= 6) return 4;
@@ -183,10 +185,10 @@ function freshnessBucket(source, publishedIso) {
 }
 
 function recencyOkay(source, rawDate) {
-  if (!rawDate) return true;
+  if (!rawDate) return false;
   const parsed = new Date(rawDate);
-  if (Number.isNaN(parsed.getTime())) return true;
-  const ageDays = (now.getTime() - parsed.getTime()) / 86400000;
+  if (Number.isNaN(parsed.getTime())) return false;
+  const ageDays = (currentTimeMs() - parsed.getTime()) / 86400000;
   if (source.lane === 'incidents') return ageDays <= 7;
   if (source.lane === 'context') return ageDays <= 10;
   if (source.lane === 'border') return ageDays <= 14;
