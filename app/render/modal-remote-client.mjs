@@ -33,13 +33,19 @@ function extractRemoteBrief(responseData) {
 }
 
 async function readRemoteBriefPayload(response) {
-  const responseText = await response.text();
-  if (!responseText) return '';
-  try {
-    return JSON.parse(responseText);
-  } catch {
-    return responseText;
+  if (typeof response?.text === 'function') {
+    const responseText = await response.text();
+    if (!responseText) return '';
+    try {
+      return JSON.parse(responseText);
+    } catch {
+      return responseText;
+    }
   }
+  if (typeof response?.json === 'function') {
+    return response.json();
+  }
+  return '';
 }
 
 export async function requestRemoteLongBrief(payloadAttempts) {
