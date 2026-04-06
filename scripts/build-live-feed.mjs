@@ -69,6 +69,7 @@ import {
   normaliseSourceRequestsPayload,
   sleep,
   summariseSourceError,
+  ERROR_CODE,
   fetchText,
   fetchTextWithPlaywright
 } from './build-live-feed/io.mjs';
@@ -418,7 +419,7 @@ function buildFetchError(message, category) {
   error.__brialertCategory = category;
   error.__brialertMeta = {
     errorCode: category === 'brittle-selectors-or-js-rendering'
-      ? 'PARSER_SELECTOR_OR_JS_RENDERING'
+      ? ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING
       : ''
   };
   return error;

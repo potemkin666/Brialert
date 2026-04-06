@@ -25,10 +25,11 @@ const RESERVED_HEADER_KEYS = new Set([
 ]);
 const BOT_BLOCK_PATTERN = /anti-bot|captcha|cloudflare|javascript and cookies|security check|verify you are human|bot detected/i;
 const CIRCUIT_TRIP_PATTERN = /HTTP 429|HTTP 503|HTTP 504|timed out|AbortError|fetch failed|ETIMEDOUT|anti-bot|captcha|cloudflare/i;
-const ERROR_CODE = Object.freeze({
+export const ERROR_CODE = Object.freeze({
   HTTP_304_EMPTY_CACHE: 'HTTP_304_EMPTY_CACHE',
   HTTP_NOT_FOUND_404: 'HTTP_NOT_FOUND_404',
   HTTP_GONE_410: 'HTTP_GONE_410',
+  HTTP_REDIRECT_3XX: 'HTTP_REDIRECT_3XX',
   HTTP_BLOCKED_OR_AUTH: 'HTTP_BLOCKED_OR_AUTH',
   HTTP_STATUS_ERROR: 'HTTP_STATUS_ERROR',
   BLOCKED_ANTI_BOT: 'BLOCKED_ANTI_BOT',
@@ -39,6 +40,7 @@ const ERROR_CODE = Object.freeze({
   PLAYWRIGHT_UNAVAILABLE: 'PLAYWRIGHT_UNAVAILABLE',
   PARSER_SELECTOR_OR_JS_RENDERING: 'PARSER_SELECTOR_OR_JS_RENDERING'
 });
+const ERROR_CODE_VALUES = new Set(Object.values(ERROR_CODE));
 
 function createBrialertError(message, meta = {}) {
   const error = new Error(message);
@@ -159,6 +161,10 @@ function mergedHeaders(source = null) {
   };
 }
 
+/**
+ * Returns null when no block is detected, otherwise
+ * returns an object: { message: string, code: ERROR_CODE }.
+ */
 function classifyBodyBlock(text = '') {
   const lower = String(text).toLowerCase();
   if (!lower) return null;
@@ -323,14 +329,8 @@ export async function fetchText(url, attempt = 1, options = {}) {
     return options?.includeMeta ? payload : payload.text;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    const lowerMessage = message.toLowerCase();
     const existingMeta = error && typeof error === 'object' ? error.__brialertMeta : null;
-    const derivedErrorCode = existingMeta?.errorCode
-      || (message.includes('AbortError') || lowerMessage.includes('timed out') || lowerMessage.includes('etimedout')
-        ? ERROR_CODE.FETCH_TIMEOUT
-        : (lowerMessage.includes('fetch failed') || lowerMessage.includes('econnreset') || lowerMessage.includes('enotfound')
-          ? ERROR_CODE.FETCH_NETWORK_FAILURE
-          : null));
+    const derivedErrorCode = resolveErrorCode(existingMeta, message);
     if (error && typeof error === 'object' && derivedErrorCode && (!existingMeta || !existingMeta.errorCode)) {
       error.__brialertMeta = {
         ...(existingMeta && typeof existingMeta === 'object' ? existingMeta : {}),
@@ -427,6 +427,7 @@ export function summariseSourceError(source, error) {
   else if (resolvedErrorCode === ERROR_CODE.FETCH_NETWORK_FAILURE || resolvedErrorCode === ERROR_CODE.NETWORK_CIRCUIT_OPEN) category = 'network-failure';
   else if (resolvedErrorCode === ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING) category = 'brittle-selectors-or-js-rendering';
   else if (/HTTP 304/i.test(message)) category = 'unchanged-304';
+  else if (resolvedErrorCode === ERROR_CODE.HTTP_REDIRECT_3XX) category = 'moved-temporarily';
   else if (/HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(message)) category = 'moved-temporarily';
   else if (/HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
   else if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
@@ -447,19 +448,21 @@ export function summariseSourceError(source, error) {
 }
 
 function resolveErrorCode(meta, message) {
-  const explicitCode = clean(meta?.errorCode);
-  if (explicitCode) return explicitCode;
+  const explicitCode = typeof meta?.errorCode === 'string' ? meta.errorCode : '';
+  if (explicitCode && ERROR_CODE_VALUES.has(explicitCode)) return explicitCode;
   const status = Number(meta?.status);
   if (Number.isFinite(status)) {
     if (status === 404) return ERROR_CODE.HTTP_NOT_FOUND_404;
     if (status === 410) return ERROR_CODE.HTTP_GONE_410;
     if (status === 401 || status === 403) return ERROR_CODE.HTTP_BLOCKED_OR_AUTH;
+    if ([301, 302, 307, 308].includes(status)) return ERROR_CODE.HTTP_REDIRECT_3XX;
     return ERROR_CODE.HTTP_STATUS_ERROR;
   }
   const text = String(message || '');
   if (/HTTP 304 with empty cache/i.test(text)) return ERROR_CODE.HTTP_304_EMPTY_CACHE;
   if (/HTTP 404/i.test(text)) return ERROR_CODE.HTTP_NOT_FOUND_404;
   if (/HTTP 410/i.test(text)) return ERROR_CODE.HTTP_GONE_410;
+  if (/HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(text)) return ERROR_CODE.HTTP_REDIRECT_3XX;
   if (/HTTP 403|HTTP 401|access denied|blocked/i.test(text)) return ERROR_CODE.HTTP_BLOCKED_OR_AUTH;
   if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(text)) return ERROR_CODE.BLOCKED_ANTI_BOT;
   if (/abort|timeout|timed out|ETIMEDOUT/i.test(text)) return ERROR_CODE.FETCH_TIMEOUT;
