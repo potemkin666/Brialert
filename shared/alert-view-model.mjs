@@ -508,7 +508,7 @@ function isUnconfirmedSourceDate(value) {
 function fallbackAbsoluteTime(publishedAt) {
   const stamp = new Date(clean(publishedAt));
   if (Number.isNaN(stamp.getTime())) return '';
-  const day = String(stamp.getUTCDate()).padStart(2, '0');
+  const day = String(stamp.getUTCDate());
   const month = stamp.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
   const year = stamp.getUTCFullYear();
   const hours = String(stamp.getUTCHours()).padStart(2, '0');
