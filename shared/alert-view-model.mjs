@@ -6,19 +6,11 @@ import {
   normaliseIncidentTrack
 } from './taxonomy.mjs';
 import { laneLabels } from './ui-data.mjs';
+import { formatAgeFromDate } from './time-format.mjs';
+import { DEFAULT_LANE, LANE_KEYS, STATUS_LABELS } from './ui-constants.mjs';
 
 export function formatAgeFrom(dateLike) {
-  if (!dateLike) return 'age unknown';
-  const stamp = dateLike instanceof Date ? dateLike : new Date(dateLike);
-  if (Number.isNaN(stamp.getTime())) return 'age unknown';
-  const diffMinutes = Math.max(0, Math.round((Date.now() - stamp.getTime()) / 60000));
-  if (diffMinutes < 1) return 'just now';
-  if (diffMinutes < 60) return `${diffMinutes}m ago`;
-  const hours = Math.floor(diffMinutes / 60);
-  const minutes = diffMinutes % 60;
-  if (hours < 24) return minutes ? `${hours}h ${minutes}m ago` : `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return formatAgeFromDate(dateLike);
 }
 
 export function severityLabel(severity) {
@@ -515,7 +507,7 @@ function isUnconfirmedSourceDate(value) {
 
 export function normaliseAlert(alert, index, geoLookup = []) {
   const geoPoint = inferGeoPoint(alert, geoLookup);
-  const lane = ['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention'].includes(alert.lane) ? alert.lane : 'incidents';
+  const lane = LANE_KEYS.includes(alert.lane) ? alert.lane : DEFAULT_LANE;
   const sourceTier = normaliseSourceTier(alert.sourceTier);
   const reliabilityProfile = normaliseReliabilityProfile(alert.reliabilityProfile);
   const incidentTrack = normaliseIncidentTrack(alert.incidentTrack);
@@ -535,11 +527,11 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     region,
     lane,
     severity: ['critical', 'high', 'elevated', 'moderate'].includes(alert.severity) ? alert.severity : 'moderate',
-    status: plainText(alert.status) || 'Update',
+    status: plainText(alert.status) || STATUS_LABELS.update,
     actor: plainText(alert.actor) || plainText(alert.source),
     subject: plainText(alert.subject) || plainText(alert.source),
     happenedWhen: happenedWhen || time,
-    confidence: plainText(alert.confidence) || 'Source update',
+    confidence: plainText(alert.confidence) || STATUS_LABELS.sourceUpdate,
     summary: plainText(alert.summary) || plainText(alert.title),
     aiSummary: plainText(alert.aiSummary) || plainText(alert.summary) || plainText(alert.title),
     sourceExtract: plainText(alert.sourceExtract),

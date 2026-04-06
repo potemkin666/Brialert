@@ -48,6 +48,8 @@ import {
 import { renderHero, renderSupporting } from '../app/render/live.mjs';
 import { filteredMapView } from '../app/render/map.mjs';
 import { addSourceRequest } from '../app/render/notes.mjs';
+import { escapeHtml } from '../app/utils/text.mjs';
+import { formatAgeFromDate, formatRequestedAtLabel, formatTimeHm } from '../shared/time-format.mjs';
 import {
   INITIAL_RESPONDER_VISIBLE,
   INITIAL_SUPPORTING_VISIBLE,
@@ -1296,4 +1298,21 @@ test('addSourceRequest rejects invalid and duplicate links', () => {
   assert.equal(duplicate.ok, false);
   assert.equal(duplicate.message, 'That source link has already been requested.');
   assert.equal(requests.length, 1);
+});
+
+test('shared time-format helpers keep fallback and formatted output contracts', () => {
+  assert.equal(formatAgeFromDate(''), 'age unknown');
+  assert.equal(formatTimeHm(''), '');
+  assert.equal(formatRequestedAtLabel(''), 'Requested just now');
+
+  const iso = '2026-04-04T12:00:00.000Z';
+  assert.match(formatTimeHm(iso), /^\d{2}:\d{2}/);
+  assert.match(formatRequestedAtLabel(iso), /^Requested /);
+});
+
+test('escapeHtml consistently encodes HTML-sensitive characters', () => {
+  assert.equal(
+    escapeHtml(`<a href="x&y">'quote'</a>`),
+    '&lt;a href=&quot;x&amp;y&quot;&gt;&#39;quote&#39;&lt;/a&gt;'
+  );
 });

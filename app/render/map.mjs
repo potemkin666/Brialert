@@ -1,12 +1,9 @@
 import { isLondonAlert } from '../../shared/alert-view-model.mjs';
-import { matchesAlertSearch } from '../../shared/feed-controller.mjs';
+import { MAP_VIEW_MODES } from '../../shared/ui-constants.mjs';
 
 export function filteredMapView(state, view) {
-  const base = view.filtered.filter((alert) =>
-    (state.activeLane === 'all' || alert.lane === state.activeLane) &&
-    matchesAlertSearch(alert, state.searchQuery)
-  );
-  const isLondonMode = state.mapViewMode === 'london';
+  const base = view.filtered;
+  const isLondonMode = state.mapViewMode === MAP_VIEW_MODES.london;
   const filtered = isLondonMode
     ? base.filter((alert) => isLondonAlert(alert))
     : base;

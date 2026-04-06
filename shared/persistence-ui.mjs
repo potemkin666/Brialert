@@ -1,9 +1,12 @@
+import { debugLog } from './logger.mjs';
+
 export function loadSet(key) {
   try {
     const raw = localStorage.getItem(key);
     const parsed = JSON.parse(raw || '[]');
     return new Set(Array.isArray(parsed) ? parsed.filter(Boolean) : []);
-  } catch {
+  } catch (error) {
+    debugLog('persistence', `loadSet failed for ${key}`, error instanceof Error ? error.message : String(error));
     return new Set();
   }
 }
@@ -11,7 +14,9 @@ export function loadSet(key) {
 export function saveSet(key, values) {
   try {
     localStorage.setItem(key, JSON.stringify([...values]));
-  } catch {}
+  } catch (error) {
+    debugLog('persistence', `saveSet failed for ${key}`, error instanceof Error ? error.message : String(error));
+  }
 }
 
 export function loadArray(key, fallback = []) {
@@ -19,20 +24,25 @@ export function loadArray(key, fallback = []) {
     const raw = localStorage.getItem(key);
     const parsed = JSON.parse(raw || 'null');
     if (Array.isArray(parsed) && parsed.length) return parsed;
-  } catch {}
+  } catch (error) {
+    debugLog('persistence', `loadArray failed for ${key}`, error instanceof Error ? error.message : String(error));
+  }
   return Array.isArray(fallback) ? [...fallback] : [];
 }
 
 export function saveArray(key, values) {
   try {
     localStorage.setItem(key, JSON.stringify(values));
-  } catch {}
+  } catch (error) {
+    debugLog('persistence', `saveArray failed for ${key}`, error instanceof Error ? error.message : String(error));
+  }
 }
 
 export function loadBoolean(key) {
   try {
     return localStorage.getItem(key) === 'true';
-  } catch {
+  } catch (error) {
+    debugLog('persistence', `loadBoolean failed for ${key}`, error instanceof Error ? error.message : String(error));
     return false;
   }
 }
@@ -40,7 +50,9 @@ export function loadBoolean(key) {
 export function saveBoolean(key, value) {
   try {
     localStorage.setItem(key, String(value));
-  } catch {}
+  } catch (error) {
+    debugLog('persistence', `saveBoolean failed for ${key}`, error instanceof Error ? error.message : String(error));
+  }
 }
 
 export function nextAlbertQuote(quotes, currentIndex) {

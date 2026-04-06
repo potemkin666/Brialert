@@ -1,3 +1,6 @@
+import { escapeHtml } from '../app/utils/text.mjs';
+import { MAP_VIEW_MODES } from './ui-constants.mjs';
+
 const LONDON_CENTER = Object.freeze([51.5074, -0.1278]);
 const LONDON_BOUNDS = Object.freeze([
   [51.28, -0.52],
@@ -11,7 +14,7 @@ const WORLD_CLUSTER_MAX_ZOOM = 7;
 function statusLine(mode, count) {
   if (count <= 0) return 'No alerts in current view';
   const countLabel = `${count} alert${count === 1 ? '' : 's'}`;
-  if (mode === 'london') return `${countLabel} in London`;
+  if (mode === MAP_VIEW_MODES.london) return `${countLabel} in London`;
   return `${countLabel} in last 24h`;
 }
 
@@ -19,15 +22,6 @@ function severityClass(alert) {
   const severity = String(alert?.severity || '').toLowerCase();
   if (severity === 'critical' || severity === 'high' || severity === 'elevated') return severity;
   return 'moderate';
-}
-
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 }
 
 function markerPopup(alert) {
@@ -66,7 +60,7 @@ export function createMapController(config) {
   let liveMap = null;
   let layers = [];
   let lastSignature = '';
-  let lastMode = 'london';
+  let lastMode = MAP_VIEW_MODES.london;
   let lastState = null;
   let lastView = null;
   let hasInitialLondonFrame = false;
@@ -175,7 +169,7 @@ export function createMapController(config) {
     if (!liveMap) return;
     lastState = state;
     lastView = view;
-    const mode = state.mapViewMode === 'world' ? 'world' : 'london';
+    const mode = state.mapViewMode === MAP_VIEW_MODES.world ? MAP_VIEW_MODES.world : MAP_VIEW_MODES.london;
     const items = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
     const signature = `${mode}:${liveMap.getZoom()}:${items.map((item) => `${item.id}:${item.lat.toFixed(3)},${item.lng.toFixed(3)}`).join('|')}`;
     if (!forceFit && signature === lastSignature) return;
@@ -214,7 +208,7 @@ export function createMapController(config) {
       clusterMarker.on('click', () => {
         liveMap.fitBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
           padding: [26, 26],
-          maxZoom: Math.min((liveMap.getZoom() || 3) + 2, mode === 'london' ? LONDON_CLUSTER_MAX_ZOOM : WORLD_CLUSTER_MAX_ZOOM)
+          maxZoom: Math.min((liveMap.getZoom() || 3) + 2, mode === MAP_VIEW_MODES.london ? LONDON_CLUSTER_MAX_ZOOM : WORLD_CLUSTER_MAX_ZOOM)
         });
       });
       clusterMarker.addTo(liveMap);
@@ -224,7 +218,7 @@ export function createMapController(config) {
 
     if (mapStatusLine) mapStatusLine.textContent = statusLine(mode, items.length);
     if (mapEmptyState) mapEmptyState.classList.toggle('hidden', items.length > 0);
-    if (forceFit && mode === 'london' && !hasInitialLondonFrame) {
+    if (forceFit && mode === MAP_VIEW_MODES.london && !hasInitialLondonFrame) {
       hasInitialLondonFrame = true;
       liveMap.setView(LONDON_CENTER, INITIAL_LONDON_ZOOM);
       requestAnimationFrame(() => liveMap.invalidateSize());
@@ -248,7 +242,7 @@ export function createMapController(config) {
 
   function resetView() {
     if (!liveMap) return;
-    if (lastMode === 'world') {
+    if (lastMode === MAP_VIEW_MODES.world) {
       liveMap.setView(WORLD_FALLBACK.center, WORLD_FALLBACK.zoom);
       return;
     }

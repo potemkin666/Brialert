@@ -1,4 +1,6 @@
 import { isLondonAlert } from './alert-view-model.mjs';
+import { LANE_ALL, MAP_VIEW_MODES, QUEUE_BUCKETS } from './ui-constants.mjs';
+import { debugLog } from './logger.mjs';
 
 function searchTerms(query) {
   return String(query || '')
@@ -43,8 +45,8 @@ export function matchesAlertSearch(alert, query) {
 
 export function filteredAlerts(state) {
   return state.alerts.filter((alert) =>
-    (state.activeRegion === 'all' || (state.activeRegion === 'london' ? isLondonAlert(alert) : alert.region === state.activeRegion)) &&
-    (state.activeLane === 'all' || alert.lane === state.activeLane) &&
+    (state.activeRegion === LANE_ALL || (state.activeRegion === MAP_VIEW_MODES.london ? isLondonAlert(alert) : alert.region === state.activeRegion)) &&
+    (state.activeLane === LANE_ALL || alert.lane === state.activeLane) &&
     matchesAlertSearch(alert, state.searchQuery)
   );
 }
@@ -53,15 +55,16 @@ export function deriveView(state, deps) {
   const filtered = filteredAlerts(state);
   const responder = deps.sortAlertsByFreshness(filtered.filter((alert) => {
     const queueBucket = String(alert?.queueBucket || '').toLowerCase();
-    return queueBucket === 'responder';
+    return queueBucket === QUEUE_BUCKETS.responder;
   }));
   const quarantine = deps.sortAlertsByFreshness(filtered.filter((alert) => {
     const queueBucket = String(alert?.queueBucket || '').toLowerCase();
-    return queueBucket === 'quarantine';
+    return queueBucket === QUEUE_BUCKETS.quarantine;
   }));
   const context = deps.sortAlertsByFreshness(filtered.filter((alert) => {
     const queueBucket = String(alert?.queueBucket || '').toLowerCase();
-    return queueBucket === '' || (queueBucket !== 'responder' && queueBucket !== 'quarantine');
+    return queueBucket === ''
+      || (queueBucket !== QUEUE_BUCKETS.responder && queueBucket !== QUEUE_BUCKETS.quarantine);
   }));
   const topPriority = responder[0] || context[0] || null;
 
@@ -104,7 +107,8 @@ export async function loadGeoLookup(state, url) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     state.geoLookup = Array.isArray(data) ? data : [];
-  } catch {
+  } catch (error) {
+    debugLog('feed', `loadGeoLookup failed for ${url}`, error instanceof Error ? error.message : String(error));
     state.geoLookup = [];
   }
 }
@@ -115,7 +119,8 @@ export async function loadWatchGeography(state, url) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     state.watchGeographySites = Array.isArray(data) ? data : [];
-  } catch {
+  } catch (error) {
+    debugLog('feed', `loadWatchGeography failed for ${url}`, error instanceof Error ? error.message : String(error));
     state.watchGeographySites = [];
   }
 }
@@ -147,6 +152,10 @@ export function coerceLiveFeedPayload(raw) {
 
   if (fetchedAlertCount < alerts.length) {
     throw new Error('Live feed payload alertCount cannot be lower than alerts array length.');
+  }
+
+  if (alerts.some((alert) => !alert || typeof alert !== 'object')) {
+    throw new Error('Live feed payload contains malformed alert entries.');
   }
 
   return {

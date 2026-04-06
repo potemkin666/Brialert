@@ -1,16 +1,5 @@
 import { escapeHtml } from '../utils/text.mjs';
-
-function formatRequestedAt(value) {
-  const stamp = new Date(value || '');
-  if (Number.isNaN(stamp.getTime())) return 'Requested just now';
-  return `Requested ${stamp.toLocaleString([], {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })}`;
-}
+import { formatRequestedAtLabel } from '../../shared/time-format.mjs';
 
 function requestMatchesSearch(request, query) {
   const terms = String(query || '')
@@ -42,7 +31,7 @@ function sourceRequestCardMarkup(request) {
       <strong>${escapeHtml(request?.provider || request?.endpoint || 'Requested source')}</strong>
       <p>${escapeHtml(request?.endpoint || '')}</p>
       <div class="meta-row">
-        <span>${escapeHtml(formatRequestedAt(request?.requestedAt))}</span>
+        <span>${escapeHtml(formatRequestedAtLabel(request?.requestedAt))}</span>
         <span>${escapeHtml(validationLabel)}</span>
       </div>
     </article>`;
