@@ -1,7 +1,39 @@
 {
-  "generatedAt": "2026-04-06T07:49:39.939Z",
-  "count": 18,
+  "generatedAt": "2026-04-06T09:17:50.585Z",
+  "count": 20,
   "sources": [
+    {
+      "id": "frontex-news-releases",
+      "provider": "Frontex a News Releases",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
+      "kind": "html",
+      "lane": "border",
+      "region": "eu",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-06T09:17:50.585Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-06T09:17:50.585Z",
+      "lastCheckedAt": "2026-04-06T09:17:50.585Z"
+    },
+    {
+      "id": "netherlands-prosecution-news",
+      "provider": "Dutch Public Prosecution Service - News",
+      "endpoint": "https://www.om.nl/actueel/nieuws",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "europe",
+      "status": "auto-quarantined",
+      "reason": "Repeated blocked-or-auth failures on html source",
+      "quarantinedAt": "2026-04-06T09:17:50.585Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "Blocked by blocked access page",
+      "consecutiveBlockedFailures": 2,
+      "lastFailureAt": "2026-04-06T09:17:50.585Z",
+      "lastCheckedAt": "2026-04-06T09:17:50.585Z"
+    },
     {
       "id": "french-interior-ministry-news",
       "provider": "French Ministry of the Interior - News",
