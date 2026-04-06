@@ -1,35 +1,10 @@
-import { reportBackgroundError } from '../../shared/logger.mjs';
-
 const LONG_BRIEF_API_URLS = [
-  'https://brialertbackend.vercel.app/api/generate-brief'
+  '/api/generate-brief'
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 
-function isSafeAbsoluteHttpUrl(value) {
-  try {
-    const parsed = new URL(String(value || '').trim());
-    if (!/^https?:$/.test(parsed.protocol)) return false;
-    return Boolean(parsed.hostname);
-  } catch (error) {
-    reportBackgroundError('modal', 'isSafeAbsoluteHttpUrl failed to parse candidate URL', error, {
-      operation: 'isSafeAbsoluteHttpUrl',
-      value: String(value || '')
-    });
-    return false;
-  }
-}
-
 function resolveLongBriefApiUrls() {
-  const runtimeUrls = Array.isArray(globalThis?.BRIALERT_LONG_BRIEF_API_URLS)
-    ? globalThis.BRIALERT_LONG_BRIEF_API_URLS
-    : [];
-  const runtimeUrl = String(globalThis?.BRIALERT_LONG_BRIEF_API_URL || '').trim();
-  const allCandidates = [
-    ...runtimeUrls.map((value) => String(value || '').trim()).filter(Boolean),
-    runtimeUrl,
-    ...LONG_BRIEF_API_URLS
-  ].filter(Boolean);
-  return [...new Set(allCandidates.filter(isSafeAbsoluteHttpUrl))];
+  return [...LONG_BRIEF_API_URLS];
 }
 
 function extractRemoteBrief(responseData) {
