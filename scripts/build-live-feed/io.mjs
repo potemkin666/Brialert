@@ -23,6 +23,8 @@ const RESERVED_HEADER_KEYS = new Set([
   'sec-fetch-mode',
   'sec-fetch-dest'
 ]);
+const BOT_BLOCK_PATTERN = /anti-bot|captcha|cloudflare|javascript and cookies|security check|verify you are human|bot detected/i;
+const CIRCUIT_TRIP_PATTERN = /HTTP 429|HTTP 503|HTTP 504|timed out|AbortError|fetch failed|ETIMEDOUT|anti-bot|captcha|cloudflare/i;
 
 export function stripBom(text) {
   return typeof text === 'string' ? text.replace(/^\uFEFF/, '') : text;
@@ -195,6 +197,7 @@ export async function fetchText(url, attempt = 1, options = {}) {
         ...conditionalHeaders
       },
       redirect: 'follow',
+      // Intentionally avoid ambient cookies/session state to reduce auth-gated/geo/session bot challenges.
       credentials: 'omit',
       signal: controller.signal
     });
@@ -274,8 +277,8 @@ export async function fetchText(url, attempt = 1, options = {}) {
         ? options.requestState.domainState[domain]
         : { failures: 0, circuitOpenUntil: 0 };
       const nextFailures = Number(current.failures || 0) + 1;
-      const isBotBlock = /anti-bot|captcha|cloudflare|javascript and cookies|security check|verify you are human|bot detected/i.test(message);
-      const shouldTrip = nextFailures >= (isBotBlock ? 6 : 4) && /HTTP 429|HTTP 503|HTTP 504|timed out|AbortError|fetch failed|ETIMEDOUT|anti-bot|captcha|cloudflare/i.test(message);
+      const isBotBlock = BOT_BLOCK_PATTERN.test(message);
+      const shouldTrip = nextFailures >= (isBotBlock ? 6 : 4) && CIRCUIT_TRIP_PATTERN.test(message);
       options.requestState.domainState[domain] = {
         failures: nextFailures,
         circuitOpenUntil: shouldTrip ? Date.now() + ((isBotBlock ? 5 : 10) * 60 * 1000) : Number(current.circuitOpenUntil || 0)
