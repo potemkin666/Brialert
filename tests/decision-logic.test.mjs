@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 import { coerceLiveFeedPayload, deriveFeedHealthStatus, deriveView, loadLiveFeed } from '../shared/feed-controller.mjs';
 import {
+  recencyOkay,
   shouldKeepItem,
   retentionScoreFor,
   selectStoredAlerts
@@ -738,6 +739,30 @@ test('shouldKeepItem rejects items without a reliable publish date', () => {
 
   assert.equal(shouldKeepItem(source, missingDateItem), false);
   assert.equal(shouldKeepItem(source, invalidDateItem), false);
+});
+
+test('recencyOkay enforces reliable and lane-bounded recency', () => {
+  const contextSource = { lane: 'context' };
+  const incidentsSource = { lane: 'incidents' };
+
+  assert.equal(recencyOkay(contextSource, null), false);
+  assert.equal(recencyOkay(contextSource, 'not-a-date'), false);
+  assert.equal(
+    recencyOkay(contextSource, new Date(Date.now() - (9 * 24 * 60 * 60 * 1000)).toISOString()),
+    true
+  );
+  assert.equal(
+    recencyOkay(contextSource, new Date(Date.now() - (11 * 24 * 60 * 60 * 1000)).toISOString()),
+    false
+  );
+  assert.equal(
+    recencyOkay(incidentsSource, new Date(Date.now() - (6 * 24 * 60 * 60 * 1000)).toISOString()),
+    true
+  );
+  assert.equal(
+    recencyOkay(incidentsSource, new Date(Date.now() - (8 * 24 * 60 * 60 * 1000)).toISOString()),
+    false
+  );
 });
 
 test("renderHero shows requested fallback copy when live pull hasn't happened yet", () => {

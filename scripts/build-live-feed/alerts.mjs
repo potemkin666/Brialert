@@ -184,7 +184,7 @@ function freshnessBucket(source, publishedIso) {
   return 0;
 }
 
-function recencyOkay(source, rawDate) {
+export function recencyOkay(source, rawDate) {
   if (!rawDate) return false;
   const parsed = new Date(rawDate);
   if (Number.isNaN(parsed.getTime())) return false;
