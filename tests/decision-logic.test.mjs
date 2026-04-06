@@ -177,6 +177,40 @@ test('quarantine routing catches weak secondary incident-like items', () => {
   assert.equal(view.quarantine[0].id, 'alert-2');
 });
 
+test('normaliseAlert falls back to absolute published time when explicit time is missing', () => {
+  const alert = normaliseAlert({
+    id: 'alert-fallback-time',
+    title: 'Fallback time test',
+    location: 'London',
+    region: 'uk',
+    lane: 'context',
+    summary: 'No explicit happenedWhen/time provided.',
+    source: 'Test Source',
+    publishedAt: '2026-03-31T13:00:00.000Z',
+    happenedWhen: '',
+    time: ''
+  }, 0, []);
+
+  assert.equal(alert.time, '31 Mar 2026, 13:00');
+});
+
+test('normaliseAlert uses unknown when no reliable time fields are available', () => {
+  const alert = normaliseAlert({
+    id: 'alert-unknown-time',
+    title: 'Unknown time test',
+    location: 'London',
+    region: 'uk',
+    lane: 'context',
+    summary: 'No timestamp fields provided.',
+    source: 'Test Source',
+    publishedAt: '',
+    happenedWhen: '',
+    time: ''
+  }, 0, []);
+
+  assert.equal(alert.time, 'unknown');
+});
+
 test('fusion id stays stable across near-duplicate source variants', () => {
   const a = fusedIncidentIdFor({
     title: 'Police disrupt terror plot in Paris after explosive device found',
