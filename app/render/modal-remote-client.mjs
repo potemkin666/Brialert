@@ -54,7 +54,7 @@ export async function requestRemoteLongBrief(payloadAttempts) {
         const detail = error instanceof Error ? error.message : String(error);
         errors.push(`${apiUrl}: ${detail}`);
         if (error?.retryable === false) {
-          throw new Error(`Long brief generation failed (non-retryable): ${errors.join(' | ')}`);
+          throw new Error(`Long brief generation failed with terminal error: ${errors.join(' | ')}`);
         }
       } finally {
         clearTimeout(timeout);
