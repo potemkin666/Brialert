@@ -440,20 +440,6 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
 }
 
 function renderQuarantinedSourcesHtml(generatedAt, entries) {
-  const rows = entries.length
-    ? entries.map((entry) => `
-      <tr>
-        <td>${clean(entry.provider)}</td>
-        <td>${clean(entry.kind)} / ${clean(entry.lane)}</td>
-        <td>${clean(entry.region)}</td>
-        <td>${clean(entry.status)}</td>
-        <td>${clean(entry.reason)}</td>
-        <td>${clean(entry.lastErrorCategory || 'n/a')}</td>
-        <td>${clean(entry.consecutiveBlockedFailures || 0)}</td>
-        <td><a href="${clean(entry.endpoint)}" target="_blank" rel="noreferrer">${clean(entry.endpoint)}</a></td>
-      </tr>`).join('\n')
-    : '<tr><td colspan="8">No quarantined sources currently recorded.</td></tr>';
-
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -467,20 +453,31 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     h1 { margin: 0 0 8px; font-size: 32px; }
     p { margin: 0 0 16px; color: #b9c6de; }
     .card { background: rgba(19, 27, 45, 0.92); border: 1px solid rgba(112, 138, 179, 0.28); border-radius: 18px; padding: 18px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 980px; }
+    table { width: 100%; border-collapse: collapse; min-width: 1180px; }
     th, td { text-align: left; padding: 12px 10px; vertical-align: top; border-bottom: 1px solid rgba(112, 138, 179, 0.18); }
     th { color: #9fb2d6; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
     a { color: #9fd0ff; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
     .pill { padding: 8px 12px; border-radius: 999px; background: rgba(159, 208, 255, 0.08); border: 1px solid rgba(159, 208, 255, 0.18); }
+    .url-input { width: 100%; min-width: 240px; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(112, 138, 179, 0.28); background: rgba(8, 13, 24, 0.72); color: #e8eef9; font: inherit; }
+    .url-input::placeholder { color: #8ea2c7; }
+    .url-input:focus { outline: none; border-color: rgba(159, 208, 255, 0.48); box-shadow: 0 0 0 3px rgba(159, 208, 255, 0.12); }
+    .action { display: grid; gap: 10px; min-width: 280px; }
+    .action button { border: 0; border-radius: 12px; padding: 10px 12px; font: inherit; font-weight: 700; color: #09101c; background: #9fd0ff; cursor: pointer; }
+    .action button:hover { filter: brightness(1.04); }
+    .action button:disabled { cursor: wait; opacity: 0.72; }
+    .status-note { min-height: 20px; color: #9fb2d6; font-size: 13px; }
+    .status-note.error { color: #ffb4b4; }
+    .status-note.success { color: #9ff5bc; }
+    .empty { padding: 18px 10px; color: #b9c6de; }
   </style>
 </head>
 <body>
   <main>
     <h1>Source Quarantine Review</h1>
-    <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run.</p>
-    <div class="meta">
+    <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run. Suggest a replacement URL and Brialert will restore it into the normal source catalog for the next run.</p>
+    <div class="meta" id="meta">
       <span class="pill">Generated: ${clean(generatedAt)}</span>
       <span class="pill">Quarantined sources: ${entries.length}</span>
     </div>
@@ -496,13 +493,133 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
             <th>Last Error</th>
             <th>Blocked Runs</th>
             <th>Endpoint</th>
+            <th>Restore</th>
           </tr>
         </thead>
-        <tbody>${rows}
+        <tbody id="quarantine-body">
+          <tr><td colspan="9" class="empty">Loading quarantined sources...</td></tr>
         </tbody>
       </table>
     </div>
   </main>
+  <script>
+    const API_BASE = 'https://brialertbackend.vercel.app';
+    const body = document.getElementById('quarantine-body');
+    const meta = document.getElementById('meta');
+    let currentEntries = [];
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderMeta(payload) {
+      meta.innerHTML = [
+        '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '${clean(generatedAt)}') + '</span>',
+        '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>'
+      ].join('');
+    }
+
+    function emptyState(message) {
+      body.innerHTML = '<tr><td colspan="9" class="empty">' + escapeHtml(message) + '</td></tr>';
+    }
+
+    function rowMarkup(entry) {
+      return '<tr data-source-id="' + escapeHtml(entry.id) + '">' +
+        '<td>' + escapeHtml(entry.provider) + '</td>' +
+        '<td>' + escapeHtml(entry.kind) + ' / ' + escapeHtml(entry.lane) + '</td>' +
+        '<td>' + escapeHtml(entry.region) + '</td>' +
+        '<td>' + escapeHtml(entry.status) + '</td>' +
+        '<td>' + escapeHtml(entry.reason) + '</td>' +
+        '<td>' + escapeHtml(entry.lastErrorCategory || 'n/a') + '</td>' +
+        '<td>' + escapeHtml(entry.consecutiveBlockedFailures || 0) + '</td>' +
+        '<td><a href="' + escapeHtml(entry.endpoint) + '" target="_blank" rel="noreferrer">' + escapeHtml(entry.endpoint) + '</a></td>' +
+        '<td><div class="action">' +
+          '<input class="url-input" type="url" inputmode="url" placeholder="Suggest new URL" aria-label="Suggest new URL for ' + escapeHtml(entry.provider) + '">' +
+          '<button type="button" data-action="restore">Add new URL</button>' +
+          '<div class="status-note" aria-live="polite"></div>' +
+        '</div></td>' +
+      '</tr>';
+    }
+
+    function renderRows() {
+      if (!currentEntries.length) {
+        emptyState('No quarantined sources currently recorded.');
+        return;
+      }
+      body.innerHTML = currentEntries.map(rowMarkup).join('');
+    }
+
+    async function loadEntries() {
+      emptyState('Loading quarantined sources...');
+      try {
+        const response = await fetch(API_BASE + '/api/quarantined-sources');
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload && payload.detail ? payload.detail : 'Failed to load quarantined sources.');
+        }
+        currentEntries = Array.isArray(payload.sources) ? payload.sources : [];
+        renderMeta(payload);
+        renderRows();
+      } catch (error) {
+        emptyState(error instanceof Error ? error.message : String(error));
+      }
+    }
+
+    body.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-action="restore"]');
+      if (!button) return;
+      const row = button.closest('tr[data-source-id]');
+      if (!row) return;
+      const sourceId = row.getAttribute('data-source-id');
+      const input = row.querySelector('.url-input');
+      const note = row.querySelector('.status-note');
+      const url = input && input.value ? input.value.trim() : '';
+      if (!url) {
+        note.textContent = 'Paste a replacement URL first.';
+        note.className = 'status-note error';
+        return;
+      }
+
+      button.disabled = true;
+      note.textContent = 'Validating and restoring source...';
+      note.className = 'status-note';
+
+      try {
+        const response = await fetch(API_BASE + '/api/release-quarantined-source', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            sourceId,
+            url
+          })
+        });
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload && payload.detail ? payload.detail : 'Failed to restore source.');
+        }
+        note.textContent = payload.detail || 'Source restored.';
+        note.className = 'status-note success';
+        currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
+        renderMeta({ generatedAt: new Date().toISOString() });
+        setTimeout(() => {
+          renderRows();
+        }, 250);
+      } catch (error) {
+        note.textContent = error instanceof Error ? error.message : String(error);
+        note.className = 'status-note error';
+        button.disabled = false;
+      }
+    });
+
+    loadEntries();
+  </script>
 </body>
 </html>
 `;
