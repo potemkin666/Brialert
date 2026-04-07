@@ -150,8 +150,10 @@
     const SNAPSHOT_RESTORE_QUEUE_NOTE = 'Live API is temporarily unavailable. Submissions will be queued and auto-retried when API access is restored.';
     const RESTORE_QUEUED_NOTE = 'Queued for restore and will auto-retry once live API access is restored.';
     const PENDING_RESTORES_STORAGE_KEY = 'brialert-pending-source-restores';
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+    // Keep retries bounded so stale entries do not stay queued forever.
     const MAX_PENDING_RESTORE_ATTEMPTS = 20;
-    const MAX_PENDING_RESTORE_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+    const MAX_PENDING_RESTORE_AGE_MS = 7 * ONE_DAY_MS;
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -283,12 +285,12 @@
       const now = Date.now();
       const retryableQueue = [];
       for (const entry of queue) {
-        const attempts = Number(entry && entry.attempts) || 0;
-        const queuedAtMs = Date.parse(entry && entry.queuedAt ? entry.queuedAt : '');
+        const attempts = Number(entry?.attempts) || 0;
+        const queuedAtMs = Date.parse(entry?.queuedAt ? entry.queuedAt : '');
         const ageMs = Number.isFinite(queuedAtMs) ? now - queuedAtMs : 0;
         if (attempts >= MAX_PENDING_RESTORE_ATTEMPTS || ageMs > MAX_PENDING_RESTORE_AGE_MS) {
           console.warn('Dropping stale queued source restore request.', {
-            sourceId: entry && entry.sourceId ? entry.sourceId : 'unknown',
+            sourceId: entry?.sourceId ? entry.sourceId : 'unknown',
             attempts,
             ageMs
           });
