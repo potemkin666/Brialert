@@ -1,4 +1,5 @@
 const GITHUB_API_BASE = 'https://api.github.com';
+const MAX_COMMIT_RETRIES = 3;
 
 export class ApiError extends Error {
   constructor(code, message, status = 400) {
@@ -239,7 +240,7 @@ export async function listSourceShardPaths(config) {
 }
 
 export async function commitJsonFilesAtomically(config, updatesByPath, message) {
-  for (let attempt = 0; attempt < 3; attempt++) {
+  for (let attempt = 0; attempt < MAX_COMMIT_RETRIES; attempt++) {
     const headSha = await getBranchHead(config);
     const headCommit = await getCommit(config, headSha);
     const baseTreeSha = headCommit?.tree?.sha;

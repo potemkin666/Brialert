@@ -159,6 +159,7 @@
   </main>
   <div id="toast" class="toast" aria-live="polite"></div>
   <script>
+    // Optional override injected by hosting/runtime to target a dedicated Vercel API origin.
     const API_BASE = String(globalThis.BRIALERT_API_BASE || '').replace(/\/$/, '');
     const LIVE_QUARANTINE_URL = API_BASE ? API_BASE + '/api/quarantined-sources' : '/api/quarantined-sources';
     const RESTORE_SOURCE_URL = API_BASE ? API_BASE + '/api/restore-source' : '/api/restore-source';
