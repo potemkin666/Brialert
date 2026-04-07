@@ -7,7 +7,12 @@ import { reportBackgroundError } from '../../shared/logger.mjs';
 
 const LIVE_FEED_TRIGGER_API_BASES = [
   'https://brialertbackend.vercel.app',
-  typeof window !== 'undefined' && window.location?.origin ? window.location.origin : null
+  (() => {
+    const origin = typeof window !== 'undefined' && typeof window.location?.origin === 'string'
+      ? window.location.origin.trim()
+      : '';
+    return origin.length > 0 ? origin : null;
+  })()
 ].filter(Boolean);
 const LIVE_FEED_TRIGGER_API_PATHS = [
   '/api/trigger-live-feed',
