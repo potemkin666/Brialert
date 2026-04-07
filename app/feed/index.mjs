@@ -68,9 +68,7 @@ export async function triggerLiveFeedRun() {
       failures.push(`${apiUrl}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
-  const message = failures.length
-    ? `Unable to trigger live-feed run. ${failures.join(' | ')}`
-    : 'Unable to trigger live-feed run.';
+  const message = `Unable to trigger live-feed run. ${failures.join(' | ')}`;
   reportBackgroundError('feed', message, new Error(message), { operation: 'triggerLiveFeedRun' });
   throw new Error(message);
 }

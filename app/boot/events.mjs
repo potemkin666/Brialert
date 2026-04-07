@@ -191,7 +191,7 @@ export function bindEvents({
       elements.heroRefresh.textContent = triggerError ? 'Refreshing feed...' : 'Run queued. Refreshing...';
       await refreshFeedNow();
       if (triggerError && elements.heroUpdated) {
-        elements.heroUpdated.textContent = `Refresh run was not queued automatically (${triggerError}). Showing latest published feed.`;
+        elements.heroUpdated.textContent = 'Automatic run trigger is unavailable right now. Showing latest published feed.';
       }
     } finally {
       elements.heroRefresh.disabled = false;
