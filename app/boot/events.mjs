@@ -179,21 +179,39 @@ export function bindEvents({
     const originalText = elements.heroRefresh.textContent;
     elements.heroRefresh.disabled = true;
     elements.heroRefresh.textContent = 'Queuing run...';
-    let triggerError = null;
+    state.manualRefreshTriggerStatus = {
+      state: 'pending',
+      message: null,
+      at: new Date().toISOString(),
+      apiUrl: null
+    };
+    rendering.renderAll();
     try {
       try {
-        await triggerLiveFeedRun();
+        const triggerResult = await triggerLiveFeedRun();
+        state.manualRefreshTriggerStatus = {
+          state: 'success',
+          message: triggerResult?.payload?.detail || 'Feed refresh queued.',
+          at: new Date().toISOString(),
+          apiUrl: triggerResult?.apiUrl || null
+        };
       } catch (error) {
-        triggerError = error instanceof Error ? error.message : String(error);
+        state.manualRefreshTriggerStatus = {
+          state: 'error',
+          message: error instanceof Error ? error.message : String(error),
+          at: new Date().toISOString(),
+          apiUrl: null
+        };
       }
-      elements.heroRefresh.textContent = triggerError ? 'Refreshing feed...' : 'Run queued. Refreshing...';
+      rendering.renderAll();
+      elements.heroRefresh.textContent = state.manualRefreshTriggerStatus.state === 'error'
+        ? 'Refreshing feed...'
+        : 'Run queued. Refreshing...';
       await refreshFeedNow();
-      if (triggerError && elements.heroUpdated) {
-        elements.heroUpdated.textContent = 'Feed refreshed. Automatic update triggering failed; latest updates may be delayed. Please try again later.';
-      }
     } finally {
       elements.heroRefresh.disabled = false;
       elements.heroRefresh.textContent = originalText;
+      rendering.renderAll();
     }
   });
 }

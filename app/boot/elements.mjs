@@ -15,6 +15,7 @@ export function createElements() {
     heroSearch: document.getElementById('hero-search'),
     heroUpdated: document.getElementById('hero-updated'),
     heroRefresh: document.getElementById('hero-refresh'),
+    heroStatus: document.getElementById('hero-status'),
     mapElement: document.getElementById('leaflet-map'),
     mapPanelSurface: document.getElementById('map-panel-surface'),
     mapStatusLine: document.getElementById('map-status-line'),

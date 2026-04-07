@@ -70,7 +70,34 @@ export function normaliseRenderState(state) {
           message: String(next.liveFeedFetchError.message || ''),
           at: String(next.liveFeedFetchError.at || '')
         }
-      : null
+      : null,
+    liveFeedFetchState: ['idle', 'loading', 'success', 'error'].includes(String(next.liveFeedFetchState || ''))
+      ? String(next.liveFeedFetchState)
+      : 'idle',
+    liveFeedLastAttemptAt: typeof next.liveFeedLastAttemptAt === 'string'
+      ? next.liveFeedLastAttemptAt
+      : null,
+    manualRefreshTriggerStatus: next.manualRefreshTriggerStatus && typeof next.manualRefreshTriggerStatus === 'object'
+      ? {
+          state: ['idle', 'pending', 'success', 'error'].includes(String(next.manualRefreshTriggerStatus.state || ''))
+            ? String(next.manualRefreshTriggerStatus.state)
+            : 'idle',
+          message: next.manualRefreshTriggerStatus.message
+            ? String(next.manualRefreshTriggerStatus.message)
+            : null,
+          at: next.manualRefreshTriggerStatus.at
+            ? String(next.manualRefreshTriggerStatus.at)
+            : null,
+          apiUrl: next.manualRefreshTriggerStatus.apiUrl
+            ? String(next.manualRefreshTriggerStatus.apiUrl)
+            : null
+        }
+      : {
+          state: 'idle',
+          message: null,
+          at: null,
+          apiUrl: null
+        }
   };
 }
 
@@ -234,6 +261,10 @@ export function coerceLiveFeedPayload(raw) {
 
 export async function loadLiveFeed(state, options) {
   const { liveFeedUrl, normaliseAlert, onAfterLoad } = options;
+  const startedAtIso = new Date().toISOString();
+  console.info(`[feed] Fetch start: ${liveFeedUrl}`);
+  state.liveFeedFetchState = 'loading';
+  state.liveFeedLastAttemptAt = startedAtIso;
   const previousAlerts = state.alerts;
   const previousGeneratedAt = state.liveFeedGeneratedAt;
   const previousSourceCount = state.liveSourceCount;
@@ -263,17 +294,21 @@ export async function loadLiveFeed(state, options) {
       sourcesUnchangedThisRun: Number(runStats.sourcesUnchangedThisRun || 0),
       lastSuccessfulGlobalBuild: data.health?.lastSuccessfulRefreshTime || null
     };
+    state.liveFeedFetchState = 'success';
     state.liveFeedFetchError = null;
+    console.info(`[feed] Fetch success: generatedAt=${data.generatedAt} alerts=${state.alerts.length}/${data.fetchedAlertCount}`);
   } catch (error) {
     state.alerts = previousAlerts;
     state.liveFeedGeneratedAt = previousGeneratedAt;
     state.liveSourceCount = previousSourceCount;
     state.liveFetchedAlertCount = previousFetchedAlertCount;
     state.liveFeedHealth = previousHealth;
+    state.liveFeedFetchState = 'error';
     state.liveFeedFetchError = {
       message: error instanceof Error ? error.message : String(error),
       at: new Date().toISOString()
     };
+    console.error(`[feed] Fetch failed: ${liveFeedUrl}`, error);
   }
   state.lastBrowserPollAt = new Date();
   if (typeof onAfterLoad === 'function') onAfterLoad();

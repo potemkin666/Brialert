@@ -40,6 +40,15 @@ function supportingItems(view) {
   return [...view.context, ...view.quarantine].sort((left, right) => alertTimeMs(right) - alertTimeMs(left));
 }
 
+function formatStatusTime(value) {
+  const parsed = parseValidDate(value);
+  return parsed ? formatTimeHm(parsed) : 'unknown';
+}
+
+function trimTrailingPeriod(value) {
+  return String(value || '').trim().replace(/\.+$/, '');
+}
+
 export function renderPriority({ state, elements, view, modalController }) {
   const alert = view.topPriority;
   if (!alert) {
@@ -187,6 +196,34 @@ export function renderHero({ state, elements }) {
     ? `last good ${formatTimeHm(lastBuildDate)}`
     : 'last good unknown';
   elements.heroUpdated.textContent = hasValidStamp
-    ? `${formatTimeHm(stamp)} | ${sourceRunText} | ${lastBuildText} | ${articleCountText}`
+    ? `Feed updated at ${formatTimeHm(stamp)} | ${sourceRunText} | ${lastBuildText} | ${articleCountText}`
     : 'Waiting for first live update';
+
+  if (!elements.heroStatus) return;
+  const fetchState = state.liveFeedFetchState || 'idle';
+  const fetchError = state.liveFeedFetchError?.message ? String(state.liveFeedFetchError.message) : null;
+  const fetchFailureAt = state.liveFeedFetchError?.at || state.liveFeedLastAttemptAt;
+  const triggerStatus = state.manualRefreshTriggerStatus || {};
+  let fetchStatusText = 'Feed fetch: idle.';
+  if (fetchState === 'loading') {
+    fetchStatusText = `Feed fetch: in progress (${formatStatusTime(state.liveFeedLastAttemptAt)}).`;
+  } else if (fetchState === 'success') {
+    fetchStatusText = `Feed fetch: success (${formatStatusTime(state.liveFeedLastAttemptAt)}).`;
+  } else if (fetchState === 'error') {
+    fetchStatusText = `Feed fetch: failed (${formatStatusTime(fetchFailureAt)})${fetchError ? ` - ${fetchError}.` : '.'}`;
+    if (hasValidStamp) {
+      fetchStatusText += ` Showing last successful feed from ${formatTimeHm(stamp)}.`;
+    }
+  }
+
+  let triggerStatusText = 'Manual trigger: not attempted.';
+  if (triggerStatus.state === 'pending') {
+    triggerStatusText = 'Manual trigger: queuing run...';
+  } else if (triggerStatus.state === 'success') {
+    triggerStatusText = `Manual trigger: queued (${formatStatusTime(triggerStatus.at)})${triggerStatus.apiUrl ? ` via ${triggerStatus.apiUrl}.` : '.'}`;
+  } else if (triggerStatus.state === 'error') {
+    const triggerMessage = trimTrailingPeriod(triggerStatus.message);
+    triggerStatusText = `Manual trigger: failed (${formatStatusTime(triggerStatus.at)})${triggerMessage ? ` - ${triggerMessage}.` : '.'}`;
+  }
+  elements.heroStatus.textContent = `${fetchStatusText} ${triggerStatusText}`;
 }

@@ -615,6 +615,14 @@ test('normaliseRenderState enforces default UI shape contracts', () => {
   assert.equal(state.liveFeedGeneratedAt, null);
   assert.deepEqual(state.liveFeedFetchError, { message: '404', at: '123' });
   assert.equal(state.liveFeedHealth?.lastSuccessfulSourceCount, 7);
+  assert.equal(state.liveFeedFetchState, 'idle');
+  assert.equal(state.liveFeedLastAttemptAt, null);
+  assert.deepEqual(state.manualRefreshTriggerStatus, {
+    state: 'idle',
+    message: null,
+    at: null,
+    apiUrl: null
+  });
 });
 
 test('loadLiveFeed accepts empty renderable payload and clears alerts into standby', async () => {
@@ -972,12 +980,14 @@ test("renderHero shows requested fallback copy when live pull hasn't happened ye
   };
   const elements = {
     heroSearch: { value: '' },
-    heroUpdated: { textContent: '' }
+    heroUpdated: { textContent: '' },
+    heroStatus: { textContent: '' }
   };
 
   renderHero({ state, elements });
 
   assert.equal(elements.heroUpdated.textContent, 'Waiting for first live update');
+  assert.equal(elements.heroStatus.textContent, 'Feed fetch: idle. Manual trigger: not attempted.');
 });
 
 test('renderHero uses last successful source count when current source count is zero', () => {
@@ -992,16 +1002,20 @@ test('renderHero uses last successful source count when current source count is 
     alerts: [],
     liveFeedHealth: {
       lastSuccessfulSourceCount: 118
-    }
+    },
+    liveFeedFetchState: 'success',
+    liveFeedLastAttemptAt: '2026-04-04T08:03:00.000Z'
   };
   const elements = {
     heroSearch: { value: '' },
-    heroUpdated: { textContent: '' }
+    heroUpdated: { textContent: '' },
+    heroStatus: { textContent: '' }
   };
 
   renderHero({ state, elements });
 
   assert.match(elements.heroUpdated.textContent, /\| 118 sources \| last good unknown \| 0 articles$/);
+  assert.match(elements.heroStatus.textContent, /^Feed fetch: success \(.+\)\. Manual trigger: not attempted\.$/);
 });
 
 test('renderHero reports rendered vs fetched article totals when they differ', () => {
@@ -1014,16 +1028,24 @@ test('renderHero reports rendered vs fetched article totals when they differ', (
     liveSourceCount: 41,
     liveFetchedAlertCount: 41,
     alerts: Array.from({ length: 14 }, (_, index) => makeAlert({ id: `alert-${index}` })),
-    liveFeedHealth: null
+    liveFeedHealth: null,
+    liveFeedFetchState: 'error',
+    liveFeedLastAttemptAt: '2026-04-04T08:05:00.000Z',
+    liveFeedFetchError: {
+      message: 'HTTP 503',
+      at: '2026-04-04T08:05:00.000Z'
+    }
   };
   const elements = {
     heroSearch: { value: '' },
-    heroUpdated: { textContent: '' }
+    heroUpdated: { textContent: '' },
+    heroStatus: { textContent: '' }
   };
 
   renderHero({ state, elements });
 
   assert.match(elements.heroUpdated.textContent, /\| 41 sources \| last good unknown \| Showing 14 of 41 articles$/);
+  assert.match(elements.heroStatus.textContent, /^Feed fetch: failed \(.+\) - HTTP 503\. Showing last successful feed from .+ Manual trigger: not attempted\.$/);
 });
 
 test('renderHero shows configured/checked/updated/failed counters and last successful build', () => {
@@ -1046,16 +1068,24 @@ test('renderHero shows configured/checked/updated/failed counters and last succe
       sourcesFailedThisRun: 4,
       sourcesUnchangedThisRun: 8,
       lastSuccessfulGlobalBuild: '2026-04-04T07:55:00.000Z'
+    },
+    manualRefreshTriggerStatus: {
+      state: 'error',
+      message: 'Unable to trigger live-feed run automatically.',
+      at: '2026-04-04T08:01:00.000Z',
+      apiUrl: null
     }
   };
   const elements = {
     heroSearch: { value: '' },
-    heroUpdated: { textContent: '' }
+    heroUpdated: { textContent: '' },
+    heroStatus: { textContent: '' }
   };
 
   renderHero({ state, elements });
 
   assert.match(elements.heroUpdated.textContent, /\| cfg 240 \| chk 52 \| upd 11 \| fail 4 \| last good /);
+  assert.match(elements.heroStatus.textContent, /^Feed fetch: idle\. Manual trigger: failed \(.+\) - Unable to trigger live-feed run automatically\.$/);
 });
 
 test('normaliseSourcesPayload drops duplicate source IDs and keeps first occurrence', () => {

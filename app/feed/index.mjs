@@ -79,10 +79,13 @@ export function refreshLiveFeedNow(state, liveFeedUrl, normaliseAlert, onAfterLo
 export async function triggerLiveFeedRun() {
   const failures = [];
   for (const apiUrl of LIVE_FEED_TRIGGER_API_URLS) {
+    console.info(`[feed] Trigger start: ${apiUrl}`);
     try {
       const payload = await triggerFeedRunVia(apiUrl);
+      console.info(`[feed] Trigger success: ${apiUrl}`);
       return { apiUrl, payload };
     } catch (error) {
+      console.warn(`[feed] Trigger failed: ${apiUrl}`, error);
       failures.push(`${apiUrl}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }

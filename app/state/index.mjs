@@ -30,6 +30,14 @@ export function createState() {
     liveFetchedAlertCount: 0,
     liveFeedHealth: null,
     liveFeedFetchError: null,
+    liveFeedFetchState: 'idle',
+    liveFeedLastAttemptAt: null,
+    manualRefreshTriggerStatus: {
+      state: 'idle',
+      message: null,
+      at: null,
+      apiUrl: null
+    },
     userLocationLabel: null,
     albertIndex: -1,
     notes: [],
