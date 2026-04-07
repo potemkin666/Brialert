@@ -3,6 +3,29 @@ import {
   loadLiveFeed,
   loadWatchGeography
 } from '../../shared/feed-controller.mjs';
+import { reportBackgroundError } from '../../shared/logger.mjs';
+
+const LIVE_FEED_TRIGGER_API_URLS = [
+  'https://brialertbackend.vercel.app/api/trigger-live-feed',
+  'https://brialertbackend.vercel.app/api/trigger-feed-refresh',
+  '/api/trigger-live-feed',
+  '/api/trigger-feed-refresh'
+];
+
+async function triggerFeedRunVia(url) {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ source: 'hero-refresh-button' })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = new Error(String(payload?.detail || `HTTP ${response.status}`));
+    error.status = response.status;
+    throw error;
+  }
+  return payload;
+}
 
 export function loadInitialResources(state, urls, normaliseAlert, onAfterLoad) {
   Promise.allSettled([
@@ -33,4 +56,21 @@ export function refreshLiveFeedNow(state, liveFeedUrl, normaliseAlert, onAfterLo
     normaliseAlert,
     onAfterLoad
   });
+}
+
+export async function triggerLiveFeedRun() {
+  const failures = [];
+  for (const apiUrl of LIVE_FEED_TRIGGER_API_URLS) {
+    try {
+      const payload = await triggerFeedRunVia(apiUrl);
+      return { apiUrl, payload };
+    } catch (error) {
+      failures.push(`${apiUrl}: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+  const message = failures.length
+    ? `Unable to trigger live-feed run. ${failures.join(' | ')}`
+    : 'Unable to trigger live-feed run.';
+  reportBackgroundError('feed', message, new Error(message), { operation: 'triggerLiveFeedRun' });
+  throw new Error(message);
 }

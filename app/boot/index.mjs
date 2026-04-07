@@ -36,6 +36,7 @@ import * as actions from './actions.mjs';
 import { bootstrapMap, refreshFeed, startRuntimeLifecycle } from './startup.mjs';
 import { filteredMapView } from '../render/map.mjs';
 import { renderSourceRequests } from '../render/source-requests.mjs';
+import { triggerLiveFeedRun } from '../feed/index.mjs';
 
 export function initialiseApp() {
   const state = createState();
@@ -123,6 +124,7 @@ export function initialiseApp() {
     actions,
     rendering,
     setActiveTab,
+    triggerLiveFeedRun,
     refreshFeedNow: () => refreshFeed({
       state,
       liveFeedUrl: LIVE_FEED_URL,

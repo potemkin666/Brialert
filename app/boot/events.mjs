@@ -20,6 +20,7 @@ export function bindEvents({
   actions,
   rendering,
   setActiveTab,
+  triggerLiveFeedRun,
   refreshFeedNow
 }) {
   let resizeTimer = null;
@@ -177,9 +178,21 @@ export function bindEvents({
     if (elements.heroRefresh.disabled) return;
     const originalText = elements.heroRefresh.textContent;
     elements.heroRefresh.disabled = true;
-    elements.heroRefresh.textContent = 'Refreshing...';
+    elements.heroRefresh.textContent = 'Queueing run...';
+    let triggerError = null;
     try {
+      if (typeof triggerLiveFeedRun === 'function') {
+        try {
+          await triggerLiveFeedRun();
+        } catch (error) {
+          triggerError = error instanceof Error ? error.message : String(error);
+        }
+      }
+      elements.heroRefresh.textContent = triggerError ? 'Refreshing feed...' : 'Run queued. Refreshing...';
       await refreshFeedNow();
+      if (triggerError && elements.heroUpdated) {
+        elements.heroUpdated.textContent = `Refresh run was not queued automatically (${triggerError}). Showing latest published feed.`;
+      }
     } finally {
       elements.heroRefresh.disabled = false;
       elements.heroRefresh.textContent = originalText;
