@@ -1571,10 +1571,16 @@ async function main() {
 
   const currentComparable = JSON.stringify(existing?.alerts || []);
   const nextComparable = JSON.stringify(payload.alerts);
+  const hasExistingAlertsSnapshot = Array.isArray(existing?.alerts);
+  const existingRuntimeMs = Number(existing?.runMetrics?.runDurationMs || 0);
 
-  if (currentComparable === nextComparable && !sourceErrors.length && !geoLookupFallbackNote) {
-    console.log('No alert changes detected.');
-    return;
+  if (hasExistingAlertsSnapshot && currentComparable === nextComparable && !sourceErrors.length && !geoLookupFallbackNote) {
+    if (Number.isFinite(existingRuntimeMs) && existingRuntimeMs > GUARDRAIL_MAX_RUNTIME_MS) {
+      console.log(`No alert changes detected, refreshing feed metadata because previous runDurationMs=${existingRuntimeMs} exceeds guardrail=${GUARDRAIL_MAX_RUNTIME_MS}.`);
+    } else {
+      console.log('No alert changes detected.');
+      return;
+    }
   }
 
   await fs.writeFile(outputPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');

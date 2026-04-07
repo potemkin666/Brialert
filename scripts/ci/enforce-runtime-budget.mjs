@@ -9,13 +9,15 @@ if (!fs.existsSync(payloadPath)) {
 
 const payload = JSON.parse(fs.readFileSync(payloadPath, 'utf8'));
 const runDurationMs = Number(payload?.runMetrics?.runDurationMs || 0);
+const generatedAt = typeof payload?.generatedAt === 'string' ? payload.generatedAt : null;
 
 if (!Number.isFinite(runDurationMs) || runDurationMs <= 0) {
   throw new Error('Missing runDurationMs in live-alerts.json runMetrics');
 }
 
 if (runDurationMs > maxRuntimeMs) {
-  throw new Error(`CI smoke runtime budget exceeded: ${runDurationMs}ms > ${maxRuntimeMs}ms`);
+  const generatedAtHint = generatedAt ? ` (generatedAt=${generatedAt})` : '';
+  throw new Error(`CI smoke runtime budget exceeded: ${runDurationMs}ms > ${maxRuntimeMs}ms${generatedAtHint}. live-alerts.json may be stale from a previous build.`);
 }
 
 console.log(`CI smoke runtime budget OK: ${runDurationMs}ms <= ${maxRuntimeMs}ms`);
