@@ -672,10 +672,6 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       const raw = String(value || '').trim();
       return raw ? raw.replace(/\\/$/, '') : '';
     }
-    function currentOriginBase() {
-      if (typeof window === 'undefined' || !window.location) return '';
-      return normaliseApiBase(window.location.origin);
-    }
     function uniqueValues(values) {
       const seen = new Set();
       const result = [];
@@ -688,7 +684,6 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
     const API_BASE_CANDIDATES = uniqueValues([
       normaliseApiBase(globalThis.BRIALERT_API_BASE),
-      currentOriginBase(),
       normaliseApiBase(DEFAULT_WRITE_API_BASE)
     ]);
     let apiBase = API_BASE_CANDIDATES[0] || '';
@@ -811,14 +806,50 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       return message;
     }
 
-    function isAbsoluteHttpUrl(value) {
-      // Keep client-side validation aligned with backend rules in /api/restore-source.
+    function normaliseAbsoluteHttpUrl(value) {
+      const trimmed = String(value || '').trim();
+      if (!trimmed) return '';
       try {
-        const parsed = new URL(value);
-        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+        const parsed = new URL(trimmed);
+        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return '';
+        return parsed.toString();
       } catch {
-        return false;
+        return '';
       }
+    }
+
+    function sanitiseReplacementUrlInput(value) {
+      const direct = normaliseAbsoluteHttpUrl(value);
+      if (direct) return direct;
+      const trimmed = String(value || '').trim();
+      if (!trimmed) return '';
+      const duplicatedUrlMatch = trimmed.match(/^(https?:\\/\\/\\S+?)(https?:\\/\\/\\S+)$/i);
+      if (!duplicatedUrlMatch) return '';
+      const firstCandidate = normaliseAbsoluteHttpUrl(duplicatedUrlMatch[1]);
+      const secondCandidate = normaliseAbsoluteHttpUrl(duplicatedUrlMatch[2]);
+      if (!firstCandidate || !secondCandidate) return '';
+      return firstCandidate.toLowerCase() === secondCandidate.toLowerCase() ? firstCandidate : '';
+    }
+
+    function syncUrlInputState(input) {
+      if (!input) return '';
+      const raw = String(input.value || '').trim();
+      if (!raw) {
+        input.setCustomValidity('');
+        return '';
+      }
+      const cleaned = sanitiseReplacementUrlInput(raw);
+      if (cleaned) {
+        if (input.value !== cleaned) input.value = cleaned;
+        input.setCustomValidity('');
+        return cleaned;
+      }
+      const hasMultipleAbsoluteUrls = /https?:\\/\\/\\S*https?:\\/\\//i.test(raw);
+      input.setCustomValidity(hasMultipleAbsoluteUrls
+        ? 'Paste only one absolute URL.'
+        : 'Use a valid absolute http/https URL.'
+      );
+      return '';
     }
 
     function showToast(message) {
@@ -995,16 +1026,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       const sourceId = row.getAttribute('data-source-id');
       const input = row.querySelector('.url-input');
       const note = row.querySelector('.status-feedback');
-      const url = input && input.value ? input.value.trim() : '';
+      const url = syncUrlInputState(input);
 
       if (!url) {
-        note.textContent = 'Paste a replacement URL first.';
+        note.textContent = input && String(input.value || '').trim()
+          ? 'Use a valid absolute http/https URL (single URL only).'
+          : 'Paste a replacement URL first.';
         note.className = 'status-note error';
-        return;
-      }
-      if (!isAbsoluteHttpUrl(url)) {
-        note.textContent = 'Use a valid absolute http/https URL.';
-        note.className = 'status-note error';
+        if (input && typeof input.reportValidity === 'function') {
+          input.reportValidity();
+        }
         return;
       }
 
@@ -1074,6 +1105,12 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       event.preventDefault();
       await restoreSourceRow(row);
     });
+
+    body.addEventListener('blur', (event) => {
+      const input = event.target.closest('.url-input');
+      if (!input) return;
+      syncUrlInputState(input);
+    }, true);
 
     loadEntries();
   </script>
