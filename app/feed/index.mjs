@@ -88,7 +88,7 @@ export async function triggerLiveFeedRun() {
   }
   const previewFailures = failures.slice(0, MAX_FAILURE_PREVIEW_COUNT).join(' | ');
   const extraCount = Math.max(0, failures.length - MAX_FAILURE_PREVIEW_COUNT);
-  const message = `Unable to trigger live-feed run. ${previewFailures}${extraCount ? ` | +${extraCount} more failures` : ''}`;
-  reportBackgroundError('feed', message, new Error(message), { operation: 'triggerLiveFeedRun' });
-  throw new Error(message);
+  const technicalMessage = `Unable to trigger live-feed run. ${previewFailures}${extraCount ? ` | +${extraCount} more failures` : ''}`;
+  reportBackgroundError('feed', technicalMessage, new Error(technicalMessage), { operation: 'triggerLiveFeedRun' });
+  throw new Error('Unable to trigger live-feed run automatically.');
 }
