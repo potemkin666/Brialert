@@ -217,7 +217,7 @@
           }
           if (note) {
             note.textContent = SNAPSHOT_RESTORE_QUEUE_NOTE;
-            note.className = 'status-note';
+            note.className = 'status-note status-feedback';
           }
         }
       }
@@ -387,18 +387,18 @@
       const button = row.querySelector('button[data-action="restore"]');
       const sourceId = row.getAttribute('data-source-id');
       const input = row.querySelector('.url-input');
-      const note = row.querySelector('.status-feedback');
+      const note = row.querySelector('.status-feedback, .status-note');
       if (!sourceId || !input || !note) return;
       const url = input && input.value ? input.value.trim() : '';
       if (!url) {
         note.textContent = 'Paste a replacement URL first.';
-        note.className = 'status-note error';
+        note.className = 'status-note status-feedback error';
         return;
       }
       if (currentDataMode === 'snapshot') {
         queueRestore(sourceId, url);
         note.textContent = RESTORE_QUEUED_NOTE;
-        note.className = 'status-note success';
+        note.className = 'status-note status-feedback success';
         removeFromQuarantineList(sourceId);
         return;
       }
@@ -407,7 +407,7 @@
         button.disabled = true;
       }
       note.textContent = 'Validating and restoring source...';
-      note.className = 'status-note';
+      note.className = 'status-note status-feedback';
 
       try {
         const payload = await postPayload(
@@ -417,17 +417,17 @@
         );
         dequeueRestore(sourceId);
         note.textContent = payload.detail || 'Source restored.';
-        note.className = 'status-note success';
+        note.className = 'status-note status-feedback success';
         removeFromQuarantineList(sourceId);
       } catch (error) {
         if (isRestoreApiUnavailableError(error)) {
           queueRestore(sourceId, url);
           note.textContent = RESTORE_QUEUED_NOTE;
-          note.className = 'status-note success';
+          note.className = 'status-note status-feedback success';
           removeFromQuarantineList(sourceId);
         } else {
           note.textContent = explainError(error);
-          note.className = 'status-note error';
+          note.className = 'status-note status-feedback error';
         }
         if (button) {
           button.disabled = false;
