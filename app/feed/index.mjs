@@ -6,7 +6,7 @@ import {
 import { reportBackgroundError } from '../../shared/logger.mjs';
 
 function currentOriginBase() {
-  if (typeof window === 'undefined' || typeof window.location?.origin !== 'string') return null;
+  if (typeof window === 'undefined' || !window.location || typeof window.location.origin !== 'string') return null;
   const origin = window.location.origin.trim();
   return origin.length > 0 ? origin : null;
 }
