@@ -189,7 +189,7 @@ export function bindEvents({
       elements.heroRefresh.textContent = triggerError ? 'Refreshing feed...' : 'Run queued. Refreshing...';
       await refreshFeedNow();
       if (triggerError && elements.heroUpdated) {
-        elements.heroUpdated.textContent = 'Feed refreshed. Latest updates will appear once the triggered workflow completes.';
+        elements.heroUpdated.textContent = 'Feed refreshed with current data. Workflow trigger failed, so updates may be delayed.';
       }
     } finally {
       elements.heroRefresh.disabled = false;
