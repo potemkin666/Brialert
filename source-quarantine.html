@@ -285,7 +285,7 @@
       const url = input && input.value ? input.value.trim() : '';
       if (!url) {
         note.textContent = 'Paste a replacement URL first.';
-        note.className = 'status-note error';
+        note.className = 'status-note status-feedback error';
         return;
       }
       if (currentDataMode === 'snapshot') {
@@ -296,7 +296,7 @@
 
       button.disabled = true;
       note.textContent = 'Validating and restoring source...';
-      note.className = 'status-note';
+      note.className = 'status-note status-feedback';
 
       try {
         const payload = await postPayload(
