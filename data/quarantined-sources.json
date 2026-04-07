@@ -1,26 +1,7 @@
 {
-  "generatedAt": "2026-04-07T07:00:44.566Z",
-  "count": 178,
+  "generatedAt": "2026-04-07T11:11:10.131Z",
+  "count": 177,
   "sources": [
-    {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
-    },
     {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
@@ -30,15 +11,15 @@
       "region": "eu",
       "status": "auto-quarantined",
       "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "ertzaintza-news",
@@ -49,15 +30,15 @@
       "region": "eu",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "romanian-police-news",
@@ -68,15 +49,15 @@
       "region": "eu",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "netherlands-nctv-news",
@@ -87,15 +68,15 @@
       "region": "europe",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "Blocked by blocked access page",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "french-gendarmerie-news",
@@ -106,15 +87,15 @@
       "region": "europe",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "french-police-nationale-news",
@@ -125,15 +106,15 @@
       "region": "europe",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "ireland-gardai-press",
@@ -144,15 +125,15 @@
       "region": "europe",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "chatham-house-rss",
@@ -163,15 +144,15 @@
       "region": "international",
       "status": "auto-quarantined",
       "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "heathrow-media-centre",
@@ -182,15 +163,15 @@
       "region": "london",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "port-of-london-authority-news",
@@ -201,15 +182,15 @@
       "region": "london",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "city-of-london-police-news-html",
@@ -220,15 +201,15 @@
       "region": "london",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "mi5-news-rss-direct",
@@ -239,15 +220,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "national-crime-agency-news",
@@ -258,15 +239,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "bedfordshire-police-news",
@@ -277,15 +258,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "bedfordshire-police-news-search",
@@ -296,15 +277,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "btp-british-transport-police-news-html",
@@ -315,15 +296,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "cambridgeshire-police-news-search",
@@ -334,15 +315,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "cheshire-police-news",
@@ -353,15 +334,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "cleveland-police-news",
@@ -372,15 +353,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "cps-news-centre",
@@ -391,15 +372,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "ct-policing-north-west",
@@ -410,15 +391,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "ct-policing-uk-latest-news",
@@ -429,15 +410,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "cumbria-police-news",
@@ -448,15 +429,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "derbyshire-police-news",
@@ -467,15 +448,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "devon-and-cornwall-police-newsroom",
@@ -486,15 +467,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "devon-cornwall-police-news",
@@ -505,15 +486,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "dorset-police-news",
@@ -524,15 +505,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "dorset-police-newsroom",
@@ -543,15 +524,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "durham-constabulary-news",
@@ -562,15 +543,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "durham-police-durham-news",
@@ -581,15 +562,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "dyfed-powys-police-news",
@@ -600,15 +581,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "essex-police-news-html",
@@ -619,15 +600,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "gloucestershire-police-news",
@@ -638,15 +619,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "gmp-news",
@@ -657,15 +638,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "greater-manchester-police-news",
@@ -676,15 +657,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "gwent-police-news",
@@ -695,15 +676,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "hampshire-police-news",
@@ -714,15 +695,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "hertfordshire-police-news",
@@ -733,15 +714,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "humberside-police-news-search",
@@ -752,15 +733,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "kent-police-news-html",
@@ -771,15 +752,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "lancashire-constabulary-news",
@@ -790,15 +771,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "leicestershire-police-news",
@@ -809,15 +790,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "lincolnshire-police-news",
@@ -828,15 +809,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "merseyside-police-news",
@@ -847,15 +828,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "merseyside-police-news-html",
@@ -866,15 +847,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "norfolk-constabulary-news",
@@ -885,15 +866,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "north-wales-police-news",
@@ -904,15 +885,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "north-yorkshire-police-news-html",
@@ -923,15 +904,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "northamptonshire-police-news-html",
@@ -942,15 +923,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "northumbria-police-northumbria-news",
@@ -961,15 +942,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "nottinghamshire-police-news",
@@ -980,15 +961,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "nottinghamshire-police-nottinghamshire-news",
@@ -999,15 +980,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "south-wales-police-news",
@@ -1018,15 +999,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "south-yorkshire-police-news",
@@ -1037,15 +1018,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "staffordshire-police-news",
@@ -1056,15 +1037,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "staffordshire-police-staffordshire-news",
@@ -1075,15 +1056,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "suffolk-constabulary-news",
@@ -1094,15 +1075,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "surrey-police-news",
@@ -1113,15 +1094,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "sussex-police-news",
@@ -1132,15 +1113,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "thames-valley-police-news",
@@ -1151,15 +1132,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "thames-valley-police-news-html",
@@ -1170,15 +1151,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "warwickshire-police-news",
@@ -1189,15 +1170,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "west-mercia-police-news-html",
@@ -1208,15 +1189,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "west-midlands-police-news",
@@ -1227,15 +1208,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "wiltshire-police-news",
@@ -1246,15 +1227,15 @@
       "region": "uk",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T07:00:44.566Z",
+      "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T07:00:44.566Z",
-      "lastFailureAt": "2026-04-07T07:00:44.566Z",
-      "lastCheckedAt": "2026-04-07T07:00:44.566Z"
+      "reviewBy": "2026-04-09T11:11:10.131Z",
+      "lastFailureAt": "2026-04-07T11:11:10.131Z",
+      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
     },
     {
       "id": "finland-supo-news",

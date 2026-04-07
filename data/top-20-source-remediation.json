@@ -1,24 +1,8 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-07T07:00:44.566Z",
+  "generatedAt": "2026-04-07T11:11:10.131Z",
   "totalSourceErrors": 108,
   "top20": [
-    {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
     {
       "id": "chatham-house-rss",
       "provider": "Chatham House a Research & Commentary (RSS)",
@@ -311,6 +295,22 @@
       "id": "city-of-london-police-news-html",
       "provider": "City of London Police - News",
       "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london-police/news/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "incidents",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "cleveland-police-news",
+      "provider": "Cleveland Police - News",
+      "endpoint": "https://www.cleveland.police.uk/news/cleveland/news/",
       "finalUrl": "",
       "category": "blocked-or-auth",
       "message": "HTTP 403",

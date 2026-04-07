@@ -1,40 +1,24 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-07T07:00:44.566Z",
+  "generatedAt": "2026-04-07T11:11:10.131Z",
   "totalSourceErrors": 108,
   "byCategory": {
-    "not-found-404": 3,
+    "not-found-404": 2,
     "moved-temporarily": 6,
-    "blocked-or-auth": 63,
+    "blocked-or-auth": 64,
     "brittle-selectors-or-js-rendering": 16,
     "anti-bot-protection": 11,
     "network-failure": 8,
     "unknown": 1
   },
   "byKind": {
-    "html": 83,
-    "rss": 24,
+    "rss": 25,
+    "html": 82,
     "json": 1
   },
-  "machineReadableErrorCount": 25,
-  "htmlErrorCount": 83,
+  "machineReadableErrorCount": 26,
+  "htmlErrorCount": 82,
   "top20": [
-    {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
     {
       "id": "chatham-house-rss",
       "provider": "Chatham House a Research & Commentary (RSS)",
@@ -338,25 +322,25 @@
       "sourceLane": "incidents",
       "sourceRegion": "",
       "isMachineReadable": false
+    },
+    {
+      "id": "cleveland-police-news",
+      "provider": "Cleveland Police - News",
+      "endpoint": "https://www.cleveland.police.uk/news/cleveland/news/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "incidents",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ],
   "sources": [
-    {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
     {
       "id": "chatham-house-rss",
       "provider": "Chatham House a Research & Commentary (RSS)",
@@ -1039,6 +1023,22 @@
       "status": 200,
       "rankScore": 2,
       "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "fbi-stories",
+      "provider": "FBI - Stories (RSS)",
+      "endpoint": "https://www.fbi.gov/news/stories/RSS",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
       "replacementCandidate": "",
       "sourceKind": "rss",
       "sourceLane": "context",
@@ -1926,6 +1926,22 @@
       "isMachineReadable": false
     },
     {
+      "id": "belgium-crisis-centre-news",
+      "provider": "Belgian National Crisis Centre - News",
+      "endpoint": "https://crisiscenter.be/en/news",
+      "finalUrl": "",
+      "category": "network-failure",
+      "message": "fetch failed",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
       "id": "city-of-london-police-newsroom",
       "provider": "City of London Police - Newsroom",
       "endpoint": "https://news.cityoflondon.police.uk/",
@@ -1954,22 +1970,6 @@
       "replacementCandidate": "",
       "sourceKind": "html",
       "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "french-justice-ministry-news",
-      "provider": "French Ministry of Justice - News",
-      "endpoint": "https://www.justice.gouv.fr/actualites",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "oversight",
       "sourceRegion": "",
       "isMachineReadable": false
     },
