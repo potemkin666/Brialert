@@ -147,6 +147,7 @@
     const meta = document.getElementById('meta');
     let currentEntries = [];
     let currentDataMode = 'api';
+    let currentGeneratedAt = '2026-04-07T07:00:44.566Z';
     const SNAPSHOT_RESTORE_QUEUE_NOTE = 'Live API is temporarily unavailable. Submissions will be queued and auto-retried when API access is restored.';
     const RESTORE_QUEUED_NOTE = 'Queued for restore and will auto-retry once live API access is restored.';
     const PENDING_RESTORES_STORAGE_KEY = 'brialert-pending-source-restores';
@@ -165,8 +166,9 @@
     }
 
     function renderMeta(payload) {
+      currentGeneratedAt = payload && payload.generatedAt ? payload.generatedAt : currentGeneratedAt;
       meta.innerHTML = [
-        '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '2026-04-07T07:00:44.566Z') + '</span>',
+        '<span class="pill">Generated: ' + escapeHtml(currentGeneratedAt) + '</span>',
         '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
         '<span class="pill">SLA: review within 48h</span>',
         '<span class="pill' + (currentDataMode === 'snapshot' ? ' warn' : '') + '">' +
@@ -377,7 +379,7 @@
 
     function removeFromQuarantineList(sourceId) {
       currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
-      renderMeta({ generatedAt: new Date().toISOString() });
+      renderMeta({});
       renderRows();
     }
 
