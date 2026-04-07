@@ -385,10 +385,10 @@
 
     async function submitRestoreForRow(row) {
       const button = row.querySelector('button[data-action="restore"]');
-      if (!button) return;
       const sourceId = row.getAttribute('data-source-id');
       const input = row.querySelector('.url-input');
       const note = row.querySelector('.status-feedback');
+      if (!sourceId || !input || !note) return;
       const url = input && input.value ? input.value.trim() : '';
       if (!url) {
         note.textContent = 'Paste a replacement URL first.';
@@ -403,7 +403,9 @@
         return;
       }
 
-      button.disabled = true;
+      if (button) {
+        button.disabled = true;
+      }
       note.textContent = 'Validating and restoring source...';
       note.className = 'status-note';
 
@@ -427,7 +429,9 @@
           note.textContent = explainError(error);
           note.className = 'status-note error';
         }
-        button.disabled = false;
+        if (button) {
+          button.disabled = false;
+        }
       }
     }
 
