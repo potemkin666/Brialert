@@ -667,11 +667,37 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
   </main>
   <div id="toast" class="toast" aria-live="polite"></div>
   <script>
-    const WRITE_API_BASE = 'https://brialertbackend.vercel.app';
-    // Optional override injected by hosting/runtime to target a dedicated API origin.
-    const API_BASE = String(globalThis.BRIALERT_API_BASE || WRITE_API_BASE).replace(/\\/$/, '');
-    const LIVE_QUARANTINE_URL = API_BASE + '/api/quarantined-sources';
-    const RESTORE_SOURCE_URL = API_BASE + '/api/restore-source';
+    const DEFAULT_WRITE_API_BASE = 'https://brialertbackend.vercel.app';
+    function normaliseApiBase(value) {
+      const raw = String(value || '').trim();
+      return raw ? raw.replace(/\\/$/, '') : '';
+    }
+    function currentOriginBase() {
+      if (typeof window === 'undefined' || !window.location) return '';
+      return normaliseApiBase(window.location.origin);
+    }
+    function uniqueValues(values) {
+      const seen = new Set();
+      const result = [];
+      for (const value of values) {
+        if (!value || seen.has(value)) continue;
+        seen.add(value);
+        result.push(value);
+      }
+      return result;
+    }
+    const API_BASE_CANDIDATES = uniqueValues([
+      normaliseApiBase(globalThis.BRIALERT_API_BASE),
+      currentOriginBase(),
+      normaliseApiBase(DEFAULT_WRITE_API_BASE)
+    ]);
+    let apiBase = API_BASE_CANDIDATES[0] || '';
+    function quarantineUrlFor(base) {
+      return base ? base + '/api/quarantined-sources' : '';
+    }
+    function restoreUrlFor(base) {
+      return base ? base + '/api/restore-source' : '';
+    }
     const LOCAL_DATA_URL = 'data/quarantined-sources.json';
     const body = document.getElementById('quarantine-body');
     const meta = document.getElementById('meta');
@@ -874,6 +900,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
 
     async function probeRestoreApi() {
+      const restoreUrl = restoreUrlFor(apiBase);
+      if (!restoreUrl) {
+        return {
+          reachable: false,
+          reason: 'no-api-base'
+        };
+      }
       const attempts = [
         { method: 'OPTIONS', note: 'preferred probe for POST-only routes' },
         { method: 'GET', note: 'fallback probe for hosts that reject OPTIONS' }
@@ -883,7 +916,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       for (const attempt of attempts) {
         try {
           const response = await fetchWithTimeout(
-            RESTORE_SOURCE_URL,
+            restoreUrl,
             {
               method: attempt.method,
               cache: 'no-store'
@@ -917,7 +950,11 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
 
     async function restoreSource(sourceId, replacementUrl) {
-      const response = await fetch(RESTORE_SOURCE_URL, {
+      const restoreUrl = restoreUrlFor(apiBase);
+      if (!restoreUrl) {
+        throw new Error('No restore API base is configured.');
+      }
+      const response = await fetch(restoreUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -932,6 +969,25 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         throw new Error(data.message || 'Restore failed');
       }
       return data.restoredSource;
+    }
+
+    async function fetchLivePayloadWithFailover() {
+      const failures = [];
+      for (const candidateBase of API_BASE_CANDIDATES) {
+        apiBase = candidateBase;
+        try {
+          return await fetchPayload(
+            quarantineUrlFor(apiBase),
+            'Failed to load quarantined sources.'
+          );
+        } catch (error) {
+          failures.push(candidateBase + ': ' + serializeError(error));
+        }
+      }
+      if (!failures.length) {
+        throw new Error('No live quarantine API base is configured.');
+      }
+      throw new Error('Failed to load live quarantine API from all configured backends. ' + failures.join(' | '));
     }
 
     async function restoreSourceRow(row) {
@@ -979,7 +1035,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       try {
         let payload;
         try {
-          payload = await fetchPayload(LIVE_QUARANTINE_URL, 'Failed to load quarantined sources.');
+          payload = await fetchLivePayloadWithFailover();
           currentDataMode = 'live';
           const probe = await probeRestoreApi();
           restoreEnabled = probe.reachable;

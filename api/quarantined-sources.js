@@ -1,5 +1,11 @@
 import { ApiError, loadJsonFile } from './_lib/github-persistence.js';
 
+function setCorsHeaders(response) {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+}
+
 function sendError(response, error) {
   const status = error instanceof ApiError ? error.status : 500;
   const code = error instanceof ApiError ? error.code : 'persistence-failure';
@@ -12,8 +18,13 @@ function sendError(response, error) {
 }
 
 export default async function handler(request, response) {
+  setCorsHeaders(response);
+  if (request.method === 'OPTIONS') {
+    response.setHeader('Allow', 'GET,OPTIONS');
+    return response.status(204).end();
+  }
   if (request.method !== 'GET') {
-    response.setHeader('Allow', 'GET');
+    response.setHeader('Allow', 'GET,OPTIONS');
     return response.status(405).json({
       ok: false,
       error: 'method-not-allowed',
