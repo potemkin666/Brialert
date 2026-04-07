@@ -228,6 +228,11 @@
       return message;
     }
 
+    function isRestoreApiUnavailableError(error) {
+      const message = serializeError(error);
+      return /bad credentials|failed to fetch|network/i.test(message);
+    }
+
     function loadPendingRestores() {
       try {
         const raw = window.localStorage.getItem(PENDING_RESTORES_STORAGE_KEY);
@@ -276,18 +281,14 @@
     async function flushQueuedRestores() {
       const queue = loadPendingRestores();
       if (!queue.length) return;
-      const remaining = [];
-      for (const entry of queue) {
-        try {
-          await postPayload(
-            API_BASE + '/api/release-quarantined-source',
-            { sourceId: entry.sourceId, url: entry.url },
-            'Failed to restore source.'
-          );
-        } catch (_error) {
-          remaining.push(entry);
-        }
-      }
+      const outcomes = await Promise.allSettled(queue.map((entry) =>
+        postPayload(
+          API_BASE + '/api/release-quarantined-source',
+          { sourceId: entry.sourceId, url: entry.url },
+          'Failed to restore source.'
+        )
+      ));
+      const remaining = queue.filter((_entry, index) => outcomes[index].status !== 'fulfilled');
       savePendingRestores(remaining);
     }
 
@@ -380,7 +381,7 @@
           renderRows();
         }, 250);
       } catch (error) {
-        if (/bad credentials|failed to fetch|network/i.test(serializeError(error))) {
+        if (isRestoreApiUnavailableError(error)) {
           queueRestore(sourceId, url);
           note.textContent = 'Restore API unavailable. Request queued and will auto-retry later.';
           note.className = 'status-note success';
