@@ -178,15 +178,13 @@ export function bindEvents({
     if (elements.heroRefresh.disabled) return;
     const originalText = elements.heroRefresh.textContent;
     elements.heroRefresh.disabled = true;
-    elements.heroRefresh.textContent = 'Queueing run...';
+    elements.heroRefresh.textContent = 'Queuing run...';
     let triggerError = null;
     try {
-      if (typeof triggerLiveFeedRun === 'function') {
-        try {
-          await triggerLiveFeedRun();
-        } catch (error) {
-          triggerError = error instanceof Error ? error.message : String(error);
-        }
+      try {
+        await triggerLiveFeedRun();
+      } catch (error) {
+        triggerError = error instanceof Error ? error.message : String(error);
       }
       elements.heroRefresh.textContent = triggerError ? 'Refreshing feed...' : 'Run queued. Refreshing...';
       await refreshFeedNow();
