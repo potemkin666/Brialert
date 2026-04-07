@@ -681,6 +681,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     let restoreEnabled = true;
     const READ_ONLY_NOTE = 'Restore is unavailable in read-only mode because the backend write API is not reachable.';
     const TOAST_DURATION_MS = 1900;
+    const LOAD_FETCH_TIMEOUT_MS = 12000;
+    const PROBE_FETCH_TIMEOUT_MS = 5000;
     let toastTimer = null;
 
     function escapeHtml(value) {
@@ -803,8 +805,42 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       }, TOAST_DURATION_MS);
     }
 
+    async function fetchWithTimeout(url, options, timeoutMs, timeoutLabel) {
+      if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
+        return fetch(url, options);
+      }
+      if (typeof AbortController !== 'function') {
+        return Promise.race([
+          fetch(url, options),
+          new Promise((_, reject) => {
+            setTimeout(() => reject(new Error(timeoutLabel + ' timed out after ' + timeoutMs + 'ms.')), timeoutMs);
+          })
+        ]);
+      }
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        return await fetch(url, {
+          ...options,
+          signal: controller.signal
+        });
+      } catch (error) {
+        if (error && error.name === 'AbortError') {
+          throw new Error(timeoutLabel + ' timed out after ' + timeoutMs + 'ms.');
+        }
+        throw error;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
     async function fetchPayload(url, fallbackError) {
-      const response = await fetch(url, { cache: 'no-store' });
+      const response = await fetchWithTimeout(
+        url,
+        { cache: 'no-store' },
+        LOAD_FETCH_TIMEOUT_MS,
+        'Quarantine data request'
+      );
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
         throw new Error(payload && (payload.message || payload.detail) ? (payload.message || payload.detail) : fallbackError);
@@ -827,17 +863,57 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       return payload;
     }
 
+    function classifyProbeStatus(status) {
+      // A concrete HTTP response means the backend origin is reachable.
+      // 404 is treated as missing route (write API unavailable for restore).
+      if (status === 404) return { reachable: false, reason: 'missing-route' };
+      if (status >= 400 && status <= 499) return { reachable: true, reason: 'method-or-validation-or-auth' };
+      if (status >= 200 && status <= 399) return { reachable: true, reason: 'ok' };
+      if (status >= 500 && status <= 599) return { reachable: true, reason: 'backend-server-error' };
+      return { reachable: false, reason: 'unexpected-status' };
+    }
+
     async function probeRestoreApi() {
-      try {
-        const response = await fetch(RESTORE_SOURCE_URL, {
-          method: 'GET',
-          cache: 'no-store'
-        });
-        // 400/405/415 still prove the endpoint is reachable; they only reflect request method/body constraints.
-        return response.ok || response.status === 400 || response.status === 405 || response.status === 415;
-      } catch {
-        return false;
+      const attempts = [
+        { method: 'OPTIONS', note: 'preferred probe for POST-only routes' },
+        { method: 'GET', note: 'fallback probe for hosts that reject OPTIONS' }
+      ];
+      let lastUnreachableReason = 'probe-not-run';
+
+      for (const attempt of attempts) {
+        try {
+          const response = await fetchWithTimeout(
+            RESTORE_SOURCE_URL,
+            {
+              method: attempt.method,
+              cache: 'no-store'
+            },
+            PROBE_FETCH_TIMEOUT_MS,
+            'Restore API probe (' + attempt.method + ')'
+          );
+          const classification = classifyProbeStatus(response.status);
+          if (classification.reachable) {
+            return {
+              reachable: true,
+              method: attempt.method,
+              status: response.status,
+              reason: classification.reason
+            };
+          }
+          lastUnreachableReason = attempt.method + ' (' + attempt.note + ') returned status ' + response.status + ' (' + classification.reason + ')';
+        } catch (error) {
+          const message = serializeError(error);
+          const normalized = /failed to fetch|networkerror|load failed|cors/i.test(message)
+            ? 'network-or-cors'
+            : 'fetch-failure';
+          lastUnreachableReason = attempt.method + ' (' + attempt.note + ') ' + normalized + ': ' + message;
+        }
       }
+
+      return {
+        reachable: false,
+        reason: lastUnreachableReason
+      };
     }
 
     async function restoreSource(sourceId, replacementUrl) {
@@ -905,7 +981,11 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         try {
           payload = await fetchPayload(LIVE_QUARANTINE_URL, 'Failed to load quarantined sources.');
           currentDataMode = 'live';
-          restoreEnabled = await probeRestoreApi();
+          const probe = await probeRestoreApi();
+          restoreEnabled = probe.reachable;
+          if (!probe.reachable) {
+            console.warn('Restore API probe marked backend as unreachable; keeping quarantine UI in live read-only mode.', probe);
+          }
         } catch (primaryError) {
           console.warn('Failed to load live quarantine API; falling back to static snapshot in read-only mode.', {
             error: serializeError(primaryError)
