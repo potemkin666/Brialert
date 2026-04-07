@@ -189,7 +189,7 @@ export function bindEvents({
       elements.heroRefresh.textContent = triggerError ? 'Refreshing feed...' : 'Run queued. Refreshing...';
       await refreshFeedNow();
       if (triggerError && elements.heroUpdated) {
-        elements.heroUpdated.textContent = 'Feed refreshed. Live updates may be delayed due to trigger failure.';
+        elements.heroUpdated.textContent = 'Feed refreshed. Automatic update triggering failed, so new updates may be delayed.';
       }
     } finally {
       elements.heroRefresh.disabled = false;

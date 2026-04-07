@@ -6,7 +6,7 @@ import {
 import { reportBackgroundError } from '../../shared/logger.mjs';
 
 function currentOriginBase() {
-  if (typeof window === 'undefined' || !window.location || typeof window.location.origin !== 'string') return null;
+  if (typeof window === 'undefined' || !window.location) return null;
   const origin = window.location.origin.trim();
   return origin.length > 0 ? origin : null;
 }
@@ -24,12 +24,19 @@ const LIVE_FEED_TRIGGER_API_URLS = LIVE_FEED_TRIGGER_API_BASES
   .flatMap((base) => LIVE_FEED_TRIGGER_API_PATHS.map((path) => `${base}${path}`));
 
 async function triggerFeedRunVia(url) {
+  let payload = {};
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ source: 'hero-refresh-button' })
   });
-  const payload = await response.json().catch(() => ({}));
+  payload = await response.json().catch((error) => {
+    reportBackgroundError('feed', `Failed to parse trigger response from ${url}`, error, {
+      operation: 'triggerFeedRunVia.parseResponse',
+      url
+    });
+    return {};
+  });
   if (!response.ok) {
     const error = new Error(String(payload?.detail || `HTTP ${response.status}`));
     error.status = response.status;
@@ -81,7 +88,7 @@ export async function triggerLiveFeedRun() {
   }
   const previewFailures = failures.slice(0, MAX_FAILURE_PREVIEW_COUNT).join(' | ');
   const extraCount = Math.max(0, failures.length - MAX_FAILURE_PREVIEW_COUNT);
-  const message = `Unable to trigger live-feed run. ${previewFailures}${extraCount ? ` | +${extraCount} more` : ''}`;
+  const message = `Unable to trigger live-feed run. ${previewFailures}${extraCount ? ` | +${extraCount} more failures` : ''}`;
   reportBackgroundError('feed', message, new Error(message), { operation: 'triggerLiveFeedRun' });
   throw new Error(message);
 }
