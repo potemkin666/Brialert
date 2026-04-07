@@ -587,6 +587,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
     .url-input::placeholder { color: #8ea2c7; }
     .url-input:focus { outline: none; border-color: rgba(159, 208, 255, 0.5); box-shadow: 0 0 0 3px rgba(159, 208, 255, 0.12); }
+    .url-input:disabled { opacity: 0.75; cursor: wait; }
     .action button {
       border: 0;
       border-radius: 10px;
@@ -606,6 +607,23 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     .status-note.success { color: var(--ok); }
     .empty { padding: 18px 10px; color: var(--muted); }
     .endpoint-copy { color: #d6e5ff; font-weight: 600; }
+    .toast {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(8, 21, 33, 0.96);
+      border: 1px solid rgba(159, 208, 255, 0.45);
+      color: #d8ecff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .16s ease, transform .16s ease;
+      pointer-events: none;
+    }
+    .toast.visible { opacity: 1; transform: translateY(0); }
     @media (max-width: 760px) {
       main { padding: 18px 10px 26px; }
       .card { border-radius: 12px; }
@@ -647,15 +665,22 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       </div>
     </div>
   </main>
+  <div id="toast" class="toast" aria-live="polite"></div>
   <script>
-    const API_BASE = 'https://brialertbackend.vercel.app';
-    // Fallback to committed snapshot when backend API auth/network fails.
+    // Optional override injected by hosting/runtime to target a dedicated Vercel API origin.
+    const API_BASE = String(globalThis.BRIALERT_API_BASE || '').replace(/\/$/, '');
+    const LIVE_QUARANTINE_URL = API_BASE ? API_BASE + '/api/quarantined-sources' : '/api/quarantined-sources';
+    const RESTORE_SOURCE_URL = API_BASE ? API_BASE + '/api/restore-source' : '/api/restore-source';
     const LOCAL_DATA_URL = 'data/quarantined-sources.json';
     const body = document.getElementById('quarantine-body');
     const meta = document.getElementById('meta');
+    const toast = document.getElementById('toast');
     let currentEntries = [];
-    let currentDataMode = 'api';
-    const SNAPSHOT_RESTORE_DISABLED_NOTE = 'Restore is temporarily unavailable while backend authentication is failing. Please retry once live API access is restored.';
+    let currentDataMode = 'live';
+    let restoreEnabled = true;
+    const READ_ONLY_NOTE = 'Restore is unavailable in read-only mode because the backend write API is not reachable.';
+    const TOAST_DURATION_MS = 1900;
+    let toastTimer = null;
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -667,12 +692,17 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
 
     function renderMeta(payload) {
+      const modeLabel = currentDataMode === 'snapshot'
+        ? 'Data mode: static snapshot (read-only)'
+        : restoreEnabled
+          ? 'Data mode: live API (restore enabled)'
+          : 'Data mode: live read-only (restore unavailable)';
       meta.innerHTML = [
         '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '${clean(generatedAt)}') + '</span>',
         '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
         '<span class="pill">SLA: review within 48h</span>',
-        '<span class="pill' + (currentDataMode === 'snapshot' ? ' warn' : '') + '">' +
-          (currentDataMode === 'snapshot' ? 'Data mode: static snapshot (restore API may fail)' : 'Data mode: live API') +
+        '<span class="pill' + (!restoreEnabled ? ' warn' : '') + '">' +
+          modeLabel +
         '</span>'
       ].join('');
     }
@@ -695,11 +725,23 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         '<td><a href="' + escapeHtml(entry.endpoint) + '" target="_blank" rel="noreferrer">' + escapeHtml(entry.endpoint) + '</a></td>' +
         '<td><div class="action">' +
           '<input class="url-input" type="url" inputmode="url" placeholder="Suggest new URL" value="' + escapeHtml(entry.replacementSuggestion || '') + '" aria-label="Suggest new URL for ' + escapeHtml(entry.provider) + '">' +
-          '<button type="button" data-action="restore">Add new URL</button>' +
+          '<button type="button" data-action="restore">Restore source</button>' +
           '<div class="helper-note">If prefilled, suggestion is auto-detected and must be verified.</div>' +
           '<div class="status-note status-feedback" aria-live="polite"></div>' +
         '</div></td>' +
       '</tr>';
+    }
+
+    function setRowBusy(row, isBusy) {
+      const button = row.querySelector('button[data-action="restore"]');
+      const input = row.querySelector('.url-input');
+      if (button) {
+        button.disabled = isBusy || !restoreEnabled;
+        button.textContent = isBusy ? 'Restoring...' : 'Restore source';
+      }
+      if (input) {
+        input.disabled = isBusy || !restoreEnabled;
+      }
     }
 
     function renderRows() {
@@ -708,16 +750,20 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         return;
       }
       body.innerHTML = currentEntries.map(rowMarkup).join('');
-      if (currentDataMode === 'snapshot') {
+      if (!restoreEnabled) {
         for (const row of body.querySelectorAll('tr[data-source-id]')) {
           const button = row.querySelector('button[data-action="restore"]');
+          const input = row.querySelector('.url-input');
           const note = row.querySelector('.status-feedback');
           if (button) {
             button.disabled = true;
-            button.title = SNAPSHOT_RESTORE_DISABLED_NOTE;
+            button.title = READ_ONLY_NOTE;
+          }
+          if (input) {
+            input.disabled = true;
           }
           if (note) {
-            note.textContent = SNAPSHOT_RESTORE_DISABLED_NOTE;
+            note.textContent = READ_ONLY_NOTE;
             note.className = 'status-note error';
           }
         }
@@ -736,11 +782,31 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       return message;
     }
 
+    function isAbsoluteHttpUrl(value) {
+      // Keep client-side validation aligned with backend rules in /api/restore-source.
+      try {
+        const parsed = new URL(value);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      } catch {
+        return false;
+      }
+    }
+
+    function showToast(message) {
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('visible');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('visible');
+      }, TOAST_DURATION_MS);
+    }
+
     async function fetchPayload(url, fallbackError) {
       const response = await fetch(url, { cache: 'no-store' });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(payload && payload.detail ? payload.detail : fallbackError);
+        throw new Error(payload && (payload.message || payload.detail) ? (payload.message || payload.detail) : fallbackError);
       }
       return payload;
     }
@@ -755,9 +821,56 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(payload && payload.detail ? payload.detail : fallbackError);
+        throw new Error(payload && (payload.message || payload.detail) ? (payload.message || payload.detail) : fallbackError);
       }
       return payload;
+    }
+
+    async function restoreSourceRow(row) {
+      if (!row || !restoreEnabled || row.dataset.restoring === 'true') return;
+      const sourceId = row.getAttribute('data-source-id');
+      const input = row.querySelector('.url-input');
+      const note = row.querySelector('.status-feedback');
+      const url = input && input.value ? input.value.trim() : '';
+
+      if (!url) {
+        note.textContent = 'Paste a replacement URL first.';
+        note.className = 'status-note error';
+        return;
+      }
+      if (!isAbsoluteHttpUrl(url)) {
+        note.textContent = 'Use a valid absolute http/https URL.';
+        note.className = 'status-note error';
+        return;
+      }
+
+      row.dataset.restoring = 'true';
+      setRowBusy(row, true);
+      note.textContent = 'Restoring source...';
+      note.className = 'status-note';
+
+      try {
+        const payload = await postPayload(
+          RESTORE_SOURCE_URL,
+          { sourceId, replacementUrl: url },
+          'Failed to restore source.'
+        );
+        if (!payload || payload.ok === false) {
+          throw new Error(payload && payload.message ? payload.message : 'Failed to restore source.');
+        }
+        currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
+        renderMeta({ generatedAt: new Date().toISOString() });
+        row.remove();
+        if (!body.querySelector('tr[data-source-id]')) {
+          emptyState('No quarantined sources currently recorded.');
+        }
+        showToast(payload.message || 'Source restored.');
+      } catch (error) {
+        note.textContent = explainError(error);
+        note.className = 'status-note error';
+        row.dataset.restoring = 'false';
+        setRowBusy(row, false);
+      }
     }
 
     async function loadEntries() {
@@ -765,14 +878,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       try {
         let payload;
         try {
-          payload = await fetchPayload(API_BASE + '/api/quarantined-sources', 'Failed to load quarantined sources.');
-          currentDataMode = 'api';
+          payload = await fetchPayload(LIVE_QUARANTINE_URL, 'Failed to load quarantined sources.');
+          currentDataMode = 'live';
+          restoreEnabled = payload.restoreAvailable !== false;
         } catch (primaryError) {
-          console.warn('Failed to load live quarantine API, using local snapshot.', {
+          console.warn('Failed to load live quarantine API; falling back to static snapshot in read-only mode.', {
             error: serializeError(primaryError)
           });
           payload = await fetchPayload(LOCAL_DATA_URL, 'Failed to load local quarantine snapshot.');
           currentDataMode = 'snapshot';
+          restoreEnabled = false;
         }
         currentEntries = Array.isArray(payload.sources) ? payload.sources : [];
         renderMeta(payload);
@@ -787,43 +902,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       if (!button) return;
       const row = button.closest('tr[data-source-id]');
       if (!row) return;
-      const sourceId = row.getAttribute('data-source-id');
-      const input = row.querySelector('.url-input');
-      const note = row.querySelector('.status-feedback');
-      const url = input && input.value ? input.value.trim() : '';
-      if (!url) {
-        note.textContent = 'Paste a replacement URL first.';
-        note.className = 'status-note error';
-        return;
-      }
-      if (currentDataMode === 'snapshot') {
-        note.textContent = SNAPSHOT_RESTORE_DISABLED_NOTE;
-        note.className = 'status-note error';
-        return;
-      }
+      await restoreSourceRow(row);
+    });
 
-      button.disabled = true;
-      note.textContent = 'Validating and restoring source...';
-      note.className = 'status-note';
-
-      try {
-        const payload = await postPayload(
-          API_BASE + '/api/release-quarantined-source',
-          { sourceId, url },
-          'Failed to restore source.'
-        );
-        note.textContent = payload.detail || 'Source restored.';
-        note.className = 'status-note success';
-      currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
-      renderMeta({ generatedAt: new Date().toISOString() });
-        setTimeout(() => {
-          renderRows();
-        }, 250);
-      } catch (error) {
-        note.textContent = explainError(error);
-        note.className = 'status-note error';
-        button.disabled = false;
-      }
+    body.addEventListener('keydown', async (event) => {
+      const input = event.target.closest('.url-input');
+      if (!input || event.key !== 'Enter') return;
+      const row = input.closest('tr[data-source-id]');
+      if (!row) return;
+      event.preventDefault();
+      await restoreSourceRow(row);
     });
 
     loadEntries();
