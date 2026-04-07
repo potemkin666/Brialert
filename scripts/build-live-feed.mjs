@@ -681,6 +681,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     let restoreEnabled = true;
     const READ_ONLY_NOTE = 'Restore is unavailable in read-only mode because the backend write API is not reachable.';
     const TOAST_DURATION_MS = 1900;
+    const LOAD_FETCH_TIMEOUT_MS = 12000;
+    const PROBE_FETCH_TIMEOUT_MS = 5000;
     let toastTimer = null;
 
     function escapeHtml(value) {
@@ -803,8 +805,42 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       }, TOAST_DURATION_MS);
     }
 
+    async function fetchWithTimeout(url, options, timeoutMs, timeoutLabel) {
+      if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
+        return fetch(url, options);
+      }
+      if (typeof AbortController !== 'function') {
+        return Promise.race([
+          fetch(url, options),
+          new Promise((_, reject) => {
+            setTimeout(() => reject(new Error(timeoutLabel + ' timed out after ' + timeoutMs + 'ms.')), timeoutMs);
+          })
+        ]);
+      }
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        return await fetch(url, {
+          ...options,
+          signal: controller.signal
+        });
+      } catch (error) {
+        if (error && error.name === 'AbortError') {
+          throw new Error(timeoutLabel + ' timed out after ' + timeoutMs + 'ms.');
+        }
+        throw error;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
     async function fetchPayload(url, fallbackError) {
-      const response = await fetch(url, { cache: 'no-store' });
+      const response = await fetchWithTimeout(
+        url,
+        { cache: 'no-store' },
+        LOAD_FETCH_TIMEOUT_MS,
+        'Quarantine data request'
+      );
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
         throw new Error(payload && (payload.message || payload.detail) ? (payload.message || payload.detail) : fallbackError);
@@ -846,10 +882,15 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
 
       for (const attempt of attempts) {
         try {
-          const response = await fetch(RESTORE_SOURCE_URL, {
-            method: attempt.method,
-            cache: 'no-store'
-          });
+          const response = await fetchWithTimeout(
+            RESTORE_SOURCE_URL,
+            {
+              method: attempt.method,
+              cache: 'no-store'
+            },
+            PROBE_FETCH_TIMEOUT_MS,
+            'Restore API probe (' + attempt.method + ')'
+          );
           const classification = classifyProbeStatus(response.status);
           if (classification.reachable) {
             return {
