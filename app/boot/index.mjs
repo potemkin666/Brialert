@@ -33,7 +33,7 @@ import { createElements } from './elements.mjs';
 import { createRenderingCoordinator } from './rendering.mjs';
 import { bindEvents } from './events.mjs';
 import * as actions from './actions.mjs';
-import { bootstrapMap, startRuntimeLifecycle, startUserLocationDetection } from './startup.mjs';
+import { bootstrapMap, refreshFeed, startRuntimeLifecycle } from './startup.mjs';
 import { filteredMapView } from '../render/map.mjs';
 import { renderSourceRequests } from '../render/source-requests.mjs';
 
@@ -122,7 +122,14 @@ export function initialiseApp() {
     sourceRequestApiUrl: SOURCE_REQUEST_API_URL,
     actions,
     rendering,
-    setActiveTab
+    setActiveTab,
+    refreshFeedNow: () => refreshFeed({
+      state,
+      liveFeedUrl: LIVE_FEED_URL,
+      normaliseAlert,
+      invalidateDerivedView: rendering.invalidateDerivedView,
+      renderAll: rendering.renderAll
+    })
   });
 
   applyDeviceProfile();
@@ -140,7 +147,6 @@ export function initialiseApp() {
   refreshAlbertQuote();
   applyBriefingMode();
   rendering.renderAll();
-  startUserLocationDetection(state, elements);
 
   startRuntimeLifecycle({
     state,

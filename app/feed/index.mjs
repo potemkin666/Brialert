@@ -26,3 +26,11 @@ export function startFeedPolling(state, pollIntervalMs, liveFeedUrl, normaliseAl
     });
   }, pollIntervalMs);
 }
+
+export function refreshLiveFeedNow(state, liveFeedUrl, normaliseAlert, onAfterLoad) {
+  return loadLiveFeed(state, {
+    liveFeedUrl,
+    normaliseAlert,
+    onAfterLoad
+  });
+}

@@ -664,6 +664,11 @@ h1 {
   text-decoration-color: rgba(246, 247, 251, 0.72);
 }
 
+.hero-refresh-button {
+  margin-top: 10px;
+  width: 100%;
+}
+
 .severity-critical {
   background: rgba(213, 61, 47, 0.22);
 }

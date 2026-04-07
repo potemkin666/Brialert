@@ -1,7 +1,5 @@
-import { loadInitialResources, startFeedPolling } from '../feed/index.mjs';
+import { loadInitialResources, refreshLiveFeedNow, startFeedPolling } from '../feed/index.mjs';
 import { syncSourceRequests } from '../feed/source-requests.mjs';
-import { renderHero } from '../render/live.mjs';
-import { renderSourceRequests } from '../render/source-requests.mjs';
 
 export function bootstrapMap(mapController, { idleTimeoutMs, fallbackDelayMs }) {
   if (window.requestIdleCallback) {
@@ -46,14 +44,15 @@ export function startRuntimeLifecycle({
   });
 }
 
-export function startUserLocationDetection(state, elements) {
-  return import('../utils/location.mjs').then(({ detectUserLocationLabel }) =>
-    detectUserLocationLabel().then((label) => {
-      if (!label) return;
-      state.userLocationLabel = label;
-      renderHero({ state, elements });
-    }).catch((error) => {
-      console.warn('Location detection skipped:', error instanceof Error ? error.message : String(error));
-    })
-  );
+export function refreshFeed({
+  state,
+  liveFeedUrl,
+  normaliseAlert,
+  invalidateDerivedView,
+  renderAll
+}) {
+  return refreshLiveFeedNow(state, liveFeedUrl, normaliseAlert, () => {
+    invalidateDerivedView();
+    renderAll();
+  });
 }

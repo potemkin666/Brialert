@@ -19,7 +19,8 @@ export function bindEvents({
   sourceRequestApiUrl,
   actions,
   rendering,
-  setActiveTab
+  setActiveTab,
+  refreshFeedNow
 }) {
   let resizeTimer = null;
   let searchTimer = null;
@@ -171,4 +172,17 @@ export function bindEvents({
       resizeTimer = setTimeout(() => mapController.invalidateSize(), 120);
     });
   }
+
+  elements.heroRefresh?.addEventListener('click', async () => {
+    if (elements.heroRefresh.disabled) return;
+    const originalText = elements.heroRefresh.textContent;
+    elements.heroRefresh.disabled = true;
+    elements.heroRefresh.textContent = 'Refreshing...';
+    try {
+      await refreshFeedNow();
+    } finally {
+      elements.heroRefresh.disabled = false;
+      elements.heroRefresh.textContent = originalText;
+    }
+  });
 }
