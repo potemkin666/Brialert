@@ -117,7 +117,6 @@ jobs:
           if-no-files-found: warn
 
   commit-live-feed:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: build-live-feed
     runs-on: ubuntu-latest
     permissions:
@@ -167,3 +166,61 @@ jobs:
           git fetch origin main
           git pull --rebase origin main
           git push
+
+  verify-live-feed-freshness:
+    needs: commit-live-feed
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      LIVE_FEED_MAX_AGE_MINUTES: '180'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20.18.1'
+
+      - name: Fail if live feed in main is stale
+        run: |
+          git fetch origin main
+          node <<'NODE'
+          const { execSync } = require('node:child_process');
+
+          const raw = execSync('git show origin/main:live-alerts.json', { encoding: 'utf8' });
+          const payload = JSON.parse(raw);
+          const generatedAt = payload?.generatedAt;
+
+          if (typeof generatedAt !== 'string' || generatedAt.trim().length === 0) {
+            console.error('live-alerts.json in main is missing generatedAt.');
+            process.exit(1);
+          }
+
+          const generatedAtMs = Date.parse(generatedAt);
+          if (!Number.isFinite(generatedAtMs)) {
+            console.error(`live-alerts.json generatedAt is invalid: ${generatedAt}`);
+            process.exit(1);
+          }
+
+          const nowMs = Date.now();
+          const ageMinutes = (nowMs - generatedAtMs) / 60000;
+          const maxAgeMinutes = Number.parseFloat(process.env.LIVE_FEED_MAX_AGE_MINUTES ?? '180');
+
+          console.log(`main/live-alerts.json generatedAt: ${generatedAt}`);
+          console.log(`Current age (minutes): ${ageMinutes.toFixed(2)} (max allowed: ${maxAgeMinutes})`);
+
+          if (!Number.isFinite(maxAgeMinutes) || maxAgeMinutes <= 0) {
+            console.error(`LIVE_FEED_MAX_AGE_MINUTES must be a positive number, got: ${process.env.LIVE_FEED_MAX_AGE_MINUTES}`);
+            process.exit(1);
+          }
+
+          if (ageMinutes > maxAgeMinutes) {
+            console.error(`Feed is stale: age ${ageMinutes.toFixed(2)} minutes is greater than ${maxAgeMinutes}.`);
+            process.exit(1);
+          }
+          NODE
