@@ -833,7 +833,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
           method: 'GET',
           cache: 'no-store'
         });
-        return response.status > 0;
+        // 400/405/415 still prove the endpoint is reachable; they only reflect request method/body constraints.
+        return response.ok || response.status === 400 || response.status === 405 || response.status === 415;
       } catch {
         return false;
       }
