@@ -669,7 +669,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
   <script>
     const WRITE_API_BASE = 'https://brialertbackend.vercel.app';
     // Optional override injected by hosting/runtime to target a dedicated API origin.
-    const API_BASE = String(globalThis.BRIALERT_API_BASE || WRITE_API_BASE).replace(/\/$/, '');
+    const API_BASE = String(globalThis.BRIALERT_API_BASE || WRITE_API_BASE).replace(/\\/$/, '');
     const LIVE_QUARANTINE_URL = API_BASE + '/api/quarantined-sources';
     const RESTORE_SOURCE_URL = API_BASE + '/api/restore-source';
     const LOCAL_DATA_URL = 'data/quarantined-sources.json';
