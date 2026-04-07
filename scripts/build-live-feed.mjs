@@ -859,13 +859,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
               reason: classification.reason
             };
           }
-          lastUnreachableReason = `${attempt.method} returned status ${response.status} (${classification.reason})`;
+          lastUnreachableReason = attempt.method + ' (' + attempt.note + ') returned status ' + response.status + ' (' + classification.reason + ')';
         } catch (error) {
           const message = serializeError(error);
           const normalized = /failed to fetch|networkerror|load failed|cors/i.test(message)
             ? 'network-or-cors'
             : 'fetch-failure';
-          lastUnreachableReason = `${attempt.method} ${normalized}: ${message}`;
+          lastUnreachableReason = attempt.method + ' (' + attempt.note + ') ' + normalized + ': ' + message;
         }
       }
 
