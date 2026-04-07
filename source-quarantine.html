@@ -375,11 +375,17 @@
       }
     }
 
-    body.addEventListener('click', async (event) => {
-      const button = event.target.closest('button[data-action="restore"]');
+    function removeFromQuarantineList(sourceId) {
+      currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
+      renderMeta({ generatedAt: new Date().toISOString() });
+      setTimeout(() => {
+        renderRows();
+      }, 250);
+    }
+
+    async function submitRestoreForRow(row) {
+      const button = row.querySelector('button[data-action="restore"]');
       if (!button) return;
-      const row = button.closest('tr[data-source-id]');
-      if (!row) return;
       const sourceId = row.getAttribute('data-source-id');
       const input = row.querySelector('.url-input');
       const note = row.querySelector('.status-feedback');
@@ -393,6 +399,7 @@
         queueRestore(sourceId, url);
         note.textContent = RESTORE_QUEUED_NOTE;
         note.className = 'status-note success';
+        removeFromQuarantineList(sourceId);
         return;
       }
 
@@ -409,22 +416,37 @@
         dequeueRestore(sourceId);
         note.textContent = payload.detail || 'Source restored.';
         note.className = 'status-note success';
-      currentEntries = currentEntries.filter((entry) => entry.id !== sourceId);
-      renderMeta({ generatedAt: new Date().toISOString() });
-        setTimeout(() => {
-          renderRows();
-        }, 250);
+        removeFromQuarantineList(sourceId);
       } catch (error) {
         if (isRestoreApiUnavailableError(error)) {
           queueRestore(sourceId, url);
           note.textContent = RESTORE_QUEUED_NOTE;
           note.className = 'status-note success';
+          removeFromQuarantineList(sourceId);
         } else {
           note.textContent = explainError(error);
           note.className = 'status-note error';
         }
         button.disabled = false;
       }
+    }
+
+    body.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-action="restore"]');
+      if (!button) return;
+      const row = button.closest('tr[data-source-id]');
+      if (!row) return;
+      await submitRestoreForRow(row);
+    });
+
+    body.addEventListener('keydown', async (event) => {
+      if (event.key !== 'Enter') return;
+      const input = event.target.closest('.url-input');
+      if (!input) return;
+      event.preventDefault();
+      const row = input.closest('tr[data-source-id]');
+      if (!row) return;
+      await submitRestoreForRow(row);
     });
 
     loadEntries();
