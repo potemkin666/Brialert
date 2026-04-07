@@ -768,6 +768,18 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       }
     }
 
+    function getOrCreateRowFeedbackNote(row) {
+      if (!row) return null;
+      const existing = row.querySelector('.status-feedback');
+      if (existing) return existing;
+      const container = row.querySelector('.action') || row;
+      const note = document.createElement('div');
+      note.className = 'status-note status-feedback';
+      note.setAttribute('aria-live', 'polite');
+      container.appendChild(note);
+      return note;
+    }
+
     function renderRows() {
       if (!currentEntries.length) {
         emptyState('No quarantined sources currently recorded.');
@@ -1027,14 +1039,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       if (!row || !restoreEnabled || row.dataset.restoring === 'true') return;
       const sourceId = row.getAttribute('data-source-id');
       const input = row.querySelector('.url-input');
-      const note = row.querySelector('.status-feedback');
+      const note = getOrCreateRowFeedbackNote(row);
       const url = syncUrlInputState(input);
 
       if (!url) {
-        note.textContent = input && String(input.value || '').trim()
-          ? 'Use a valid absolute http/https URL (single URL only).'
-          : 'Paste a replacement URL first.';
-        note.className = 'status-note error';
+        if (note) {
+          note.textContent = input && String(input.value || '').trim()
+            ? 'Use a valid absolute http/https URL (single URL only).'
+            : 'Paste a replacement URL first.';
+          note.className = 'status-note error';
+        }
         if (input && typeof input.reportValidity === 'function') {
           input.reportValidity();
         }
@@ -1043,8 +1057,10 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
 
       row.dataset.restoring = 'true';
       setRowBusy(row, true);
-      note.textContent = 'Restoring source...';
-      note.className = 'status-note';
+      if (note) {
+        note.textContent = 'Restoring source...';
+        note.className = 'status-note';
+      }
 
       try {
         await restoreSource(sourceId, url);
@@ -1056,8 +1072,10 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         }
         showToast('Source restored.');
       } catch (error) {
-        note.textContent = explainError(error);
-        note.className = 'status-note error';
+        if (note) {
+          note.textContent = explainError(error);
+          note.className = 'status-note error';
+        }
         row.dataset.restoring = 'false';
         setRowBusy(row, false);
       }
