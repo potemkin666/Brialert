@@ -348,13 +348,15 @@
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/news",
+      "endpoint": "https://poliisi.fi/en/newsroom/-/asset_publisher/9qkizUHcJDTR/rss",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations."
+      "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations.",
+      "quarantined": false,
+      "restoredAt": "2026-04-08T22:06:01.329Z"
     },
     {
       "id": "german-bka-press",
