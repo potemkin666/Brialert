@@ -5,8 +5,8 @@ import { ApiError } from './github-persistence.js';
 const DEFAULT_ALLOWED_ORIGINS = ['https://potemkin666.github.io'];
 const SESSION_COOKIE_NAME = process.env.BRIALERT_SESSION_COOKIE_NAME || 'brialert_admin_session';
 const STATE_COOKIE_NAME = process.env.BRIALERT_OAUTH_STATE_COOKIE_NAME || 'brialert_admin_oauth_state';
-const SESSION_TTL_SECONDS = Math.max(60, Number.parseInt(process.env.BRIALERT_SESSION_TTL_SECONDS || '28800', 10) || 28800);
-const STATE_TTL_SECONDS = Math.max(60, Number.parseInt(process.env.BRIALERT_OAUTH_STATE_TTL_SECONDS || '600', 10) || 600);
+const SESSION_TTL_SECONDS = Math.max(60, Number.parseInt(process.env.BRIALERT_SESSION_TTL_SECONDS || '28800', 10) || 0) || 28800;
+const STATE_TTL_SECONDS = Math.max(60, Number.parseInt(process.env.BRIALERT_OAUTH_STATE_TTL_SECONDS || '600', 10) || 0) || 600;
 const SESSION_SECRET = String(process.env.BRIALERT_SESSION_SECRET || '').trim();
 
 function nowSeconds() {

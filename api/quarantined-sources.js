@@ -37,12 +37,10 @@ function sanitiseSources(rawSources) {
 }
 
 export default async function handler(request, response) {
-  const corsAllowed = applyCorsHeaders(request, response, 'GET,OPTIONS');
+  applyCorsHeaders(request, response, 'GET,OPTIONS');
   if (request.method === 'OPTIONS') {
     response.setHeader('Allow', 'GET,OPTIONS');
-    return corsAllowed
-      ? response.status(204).end()
-      : response.status(403).json({ ok: false, error: 'origin-not-allowed', message: 'Origin is not allowed.' });
+    return response.status(204).end();
   }
   if (request.method !== 'GET') {
     response.setHeader('Allow', 'GET,OPTIONS');

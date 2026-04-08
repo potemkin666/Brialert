@@ -674,7 +674,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     <h1>Source Quarantine Review</h1>
     <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run. Suggest a replacement URL and Brialert will restore it into the normal source catalog for the next run.</p>
     <div class="auth-panel" id="auth-panel">
-      <div id="auth-note" class="auth-note">Checking admin session…</div>
+      <div id="auth-note" class="auth-note">Checking admin session...</div>
       <div class="auth-actions" id="auth-actions"></div>
     </div>
     <div class="meta" id="meta">
