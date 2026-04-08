@@ -136,7 +136,7 @@ export default async function handler(request, response) {
     });
   }
   if (!requireAdminSession(request, response)) {
-    return undefined;
+    return response;
   }
 
   try {

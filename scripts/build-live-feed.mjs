@@ -1021,7 +1021,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       );
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
-        const error = new Error(payload && (payload.message || payload.detail) ? (payload.message || payload.detail) : fallbackError);
+        const apiMessage = payload?.message || payload?.detail;
+        const error = new Error(apiMessage || fallbackError);
         error.status = response.status;
         throw error;
       }

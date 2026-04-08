@@ -75,6 +75,7 @@ npm run build:feeds
 - Quarantine admin access now uses GitHub OAuth plus an HttpOnly session cookie (no manual token entry in the quarantine UI).
 - Backend env vars required for quarantine admin auth:
   - `BRIALERT_SESSION_SECRET` (strong random secret for signing session/state cookies)
+  - optional: `BRIALERT_SESSION_TTL_SECONDS` (defaults to `28800`, i.e. 8h), `BRIALERT_OAUTH_STATE_TTL_SECONDS` (defaults to `600`, i.e. 10m)
   - `GITHUB_OAUTH_CLIENT_ID`
   - `GITHUB_OAUTH_CLIENT_SECRET`
   - at least one allowlist: `BRIALERT_ADMIN_ALLOWED_USERS` (comma-separated logins), `BRIALERT_ADMIN_ALLOWED_ORGS` (comma-separated orgs), or `BRIALERT_ADMIN_ALLOWED_TEAMS` (comma-separated `org/team-slug`)
