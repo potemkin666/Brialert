@@ -1,26 +1,7 @@
 {
-  "generatedAt": "2026-04-08T22:01:35.870Z",
-  "count": 185,
+  "generatedAt": "2026-04-08T22:02:19.314Z",
+  "count": 184,
   "sources": [
-    {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-07T19:18:50.455Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T19:18:50.455Z",
-      "lastFailureAt": "2026-04-07T19:18:50.455Z",
-      "lastCheckedAt": "2026-04-07T19:18:50.455Z"
-    },
     {
       "id": "rte-ireland-news-rss",
       "provider": "RTÉ News - Ireland (RSS)",
