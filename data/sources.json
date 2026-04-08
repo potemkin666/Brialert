@@ -71,7 +71,7 @@
     {
       "id": "belgium-crisis-centre-news",
       "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/newsroom",
+      "endpoint": "https://www.theguardian.com/world/belgium",
       "kind": "html",
       "lane": "context",
       "region": "eu",
@@ -79,7 +79,7 @@
       "requiresKeywordMatch": true,
       "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context.",
       "quarantined": false,
-      "restoredAt": "2026-04-08T22:02:19.314Z"
+      "restoredAt": "2026-04-08T23:24:54.681Z"
     },
     {
       "id": "denmark-pet-news",
