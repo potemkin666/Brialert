@@ -1466,13 +1466,15 @@
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en/announcements.rss",
+      "endpoint": "https://www.occrp.org/en",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
+      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing.",
+      "quarantined": false,
+      "restoredAt": "2026-04-08T22:11:13.562Z"
     },
     {
       "id": "osce-press-releases",
