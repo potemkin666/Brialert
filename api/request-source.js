@@ -8,9 +8,28 @@ import {
 
 const VALID_REGIONS = new Set(['uk', 'europe', 'london', 'eu', 'international', 'us']);
 const SOURCE_REQUEST_TIMEOUT_MS = 12_000;
+const CONTENT_SAMPLE_SIZE = 2_000;
+const REQUEST_ID_HASH_LENGTH = 16;
 
-function setCorsHeaders(response) {
-  response.setHeader('Access-Control-Allow-Origin', '*');
+function resolveAllowedOrigin(request) {
+  const configured = String(
+    process.env.BRIALERT_ALLOWED_ORIGINS || process.env.BRIALERT_ALLOWED_ORIGIN || ''
+  ).trim();
+  if (!configured) return '*';
+
+  const allowed = configured
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+  if (!allowed.length) return '*';
+
+  const requestOrigin = String(request?.headers?.origin || '').trim();
+  if (requestOrigin && allowed.includes(requestOrigin)) return requestOrigin;
+  return allowed[0];
+}
+
+function setCorsHeaders(request, response) {
+  response.setHeader('Access-Control-Allow-Origin', resolveAllowedOrigin(request));
   response.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 }
@@ -45,7 +64,7 @@ function toRequests(payload) {
   if (payload && typeof payload === 'object' && Array.isArray(payload.requests)) {
     return { requests: payload.requests, payloadType: 'object' };
   }
-  throw new ApiError('persistence-failure', 'source-requests.json must contain an array or { requests: [] }.', 500);
+  throw new ApiError('invalid-source-requests-format', 'Payload must contain an array or { requests: [] }.', 500);
 }
 
 function validateRequestUrl(rawUrl) {
@@ -73,7 +92,7 @@ function normaliseRegionHint(regionHint) {
 
 function inferProvider(sourceUrl) {
   try {
-    const hostname = new URL(sourceUrl).hostname.replace(/^www\./i, '').trim();
+    const hostname = new URL(sourceUrl).hostname.replace(/^www\./i, '');
     return hostname || 'Requested source';
   } catch {
     return 'Requested source';
@@ -107,7 +126,7 @@ async function probeSource(sourceUrl) {
     }
     const contentType = response.headers.get('content-type') || '';
     const body = await response.text().catch(() => '');
-    return { kind: inferKind(contentType, body.slice(0, 2_000)) };
+    return { kind: inferKind(contentType, body.slice(0, CONTENT_SAMPLE_SIZE)) };
   } catch (error) {
     if (error instanceof ApiError) throw error;
     if (error?.name === 'AbortError') {
@@ -121,7 +140,7 @@ async function probeSource(sourceUrl) {
 
 function buildRequestedSource(sourceUrl, regionHint, kind) {
   const endpointKey = normaliseEndpoint(sourceUrl) || sourceUrl;
-  const hash = createHash('sha256').update(endpointKey).digest('hex').slice(0, 12);
+  const hash = createHash('sha256').update(endpointKey).digest('hex').slice(0, REQUEST_ID_HASH_LENGTH);
   return {
     id: `requested-${hash}`,
     provider: inferProvider(sourceUrl),
@@ -141,12 +160,37 @@ function hasDuplicateEndpoint(entries, sourceUrl) {
   const candidate = normaliseEndpoint(sourceUrl);
   if (!candidate) return false;
   return (Array.isArray(entries) ? entries : []).some((item) => {
-    return normaliseEndpoint(item?.endpoint || item?.url || item?.sourceUrl || '') === candidate;
+    return normaliseEndpoint(item?.endpoint || '') === candidate;
   });
 }
 
+function normaliseRequestEntry(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  const endpoint = String(entry.endpoint || entry.url || entry.sourceUrl || '').trim();
+  if (!endpoint) return null;
+  return {
+    ...entry,
+    endpoint
+  };
+}
+
+function normaliseRequestEntries(entries) {
+  return (Array.isArray(entries) ? entries : [])
+    .map(normaliseRequestEntry)
+    .filter(Boolean);
+}
+
+function buildNextRequestsPayload(originalPayload, payloadType, nextRequests) {
+  if (payloadType === 'array') return nextRequests;
+  // Preserve additional metadata keys on object payloads while replacing requests.
+  return {
+    ...originalPayload,
+    requests: nextRequests
+  };
+}
+
 export default async function handler(request, response) {
-  setCorsHeaders(response);
+  setCorsHeaders(request, response);
   if (request.method === 'OPTIONS') {
     response.setHeader('Allow', 'GET,POST,OPTIONS');
     return response.status(204).end();
@@ -163,12 +207,13 @@ export default async function handler(request, response) {
   try {
     const sourceRequestsFile = await loadJsonFile('data/source-requests.json');
     const { requests, payloadType } = toRequests(sourceRequestsFile.data);
+    const normalisedRequests = normaliseRequestEntries(requests);
 
     if (request.method === 'GET') {
       return response.status(200).json({
         ok: true,
-        requests,
-        count: requests.length
+        requests: normalisedRequests,
+        count: normalisedRequests.length
       });
     }
 
@@ -180,17 +225,18 @@ export default async function handler(request, response) {
       ? sourcesFile.data.sources
       : (Array.isArray(sourcesFile.data) ? sourcesFile.data : []);
 
-    if (hasDuplicateEndpoint(activeSources, sourceUrl) || hasDuplicateEndpoint(requests, sourceUrl)) {
-      throw new ApiError('duplicate-source', 'That source link already exists or has already been requested.', 409);
+    if (hasDuplicateEndpoint(activeSources, sourceUrl)) {
+      throw new ApiError('duplicate-source', 'That source link already exists in active sources.', 409);
+    }
+    if (hasDuplicateEndpoint(normalisedRequests, sourceUrl)) {
+      throw new ApiError('duplicate-source', 'That source link has already been requested and is pending review.', 409);
     }
 
     const probe = await probeSource(sourceUrl);
     const requestEntry = buildRequestedSource(sourceUrl, body.regionHint, probe.kind);
-    const nextRequests = [requestEntry, ...requests];
+    const nextRequests = [requestEntry, ...normalisedRequests];
 
-    const nextPayload = payloadType === 'array'
-      ? nextRequests
-      : { ...sourceRequestsFile.data, requests: nextRequests };
+    const nextPayload = buildNextRequestsPayload(sourceRequestsFile.data, payloadType, nextRequests);
 
     await commitJsonFilesAtomically(
       sourceRequestsFile.config,
