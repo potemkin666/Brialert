@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-08T22:27:19.216Z",
-  "count": 175,
+  "generatedAt": "2026-04-08T22:27:42.796Z",
+  "count": 174,
   "sources": [
     {
       "id": "rte-ireland-news-rss",
@@ -1743,25 +1743,6 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T17:04:11.606Z",
-      "lastFailureAt": "2026-04-06T17:04:11.606Z",
-      "lastCheckedAt": "2026-04-06T17:04:11.606Z"
-    },
-    {
-      "id": "gov-uk-report-terrorism",
-      "provider": "GOV.UK - Report Terrorism",
-      "endpoint": "https://www.gov.uk/report-terrorism",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-06T17:04:11.606Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
