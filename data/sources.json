@@ -4599,13 +4599,15 @@
     {
       "id": "gov-uk-report-terrorism",
       "provider": "GOV.UK - Report Terrorism",
-      "endpoint": "https://www.gov.uk/report-terrorism",
+      "endpoint": "https://www.gov.uk/search/news-and-communications",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Official GOV.UK page for reporting terrorism and suspicious activity."
+      "comment": "Official GOV.UK page for reporting terrorism and suspicious activity.",
+      "quarantined": false,
+      "restoredAt": "2026-04-08T22:27:42.796Z"
     },
     {
       "id": "gov-uk-terrorism-national-emergency",
