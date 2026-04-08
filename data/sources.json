@@ -762,13 +762,15 @@
     {
       "id": "isd-global-publications",
       "provider": "ISD - Publications",
-      "endpoint": "https://www.isdglobal.org/publications/",
+      "endpoint": "https://www.isdglobal.org/reports/",
       "kind": "html",
       "lane": "prevention",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research."
+      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research.",
+      "quarantined": false,
+      "restoredAt": "2026-04-08T22:10:05.602Z"
     },
     {
       "id": "ncsc-nl-rss",
