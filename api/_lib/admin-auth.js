@@ -87,10 +87,9 @@ function extractRequestToken(request) {
 }
 
 function tokensMatch(left, right) {
-  const leftBuffer = Buffer.from(String(left || ''), 'utf8');
-  const rightBuffer = Buffer.from(String(right || ''), 'utf8');
-  if (leftBuffer.length !== rightBuffer.length) return false;
-  return crypto.timingSafeEqual(leftBuffer, rightBuffer);
+  const leftDigest = crypto.createHash('sha256').update(String(left || ''), 'utf8').digest();
+  const rightDigest = crypto.createHash('sha256').update(String(right || ''), 'utf8').digest();
+  return crypto.timingSafeEqual(leftDigest, rightDigest);
 }
 
 export function assertAdminAuth(request) {

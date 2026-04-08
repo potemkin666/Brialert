@@ -624,6 +624,49 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       pointer-events: none;
     }
     .toast.visible { opacity: 1; transform: translateY(0); }
+    .auth-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      background: rgba(4, 9, 16, 0.82);
+    }
+    .auth-gate.hidden { display: none; }
+    .auth-panel {
+      width: min(420px, 100%);
+      background: rgba(14, 24, 40, 0.98);
+      border: 1px solid rgba(127, 156, 203, 0.35);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
+    }
+    .auth-panel h2 { margin: 0 0 8px; font-size: 18px; }
+    .auth-panel p { margin: 0 0 10px; font-size: 13px; color: #b8c8e5; }
+    .auth-panel input {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(112, 138, 179, 0.35);
+      background: rgba(8, 13, 24, 0.84);
+      color: var(--text);
+      padding: 9px 11px;
+      font: inherit;
+    }
+    .auth-panel input:focus { outline: none; border-color: rgba(159, 208, 255, 0.6); box-shadow: 0 0 0 3px rgba(159, 208, 255, 0.12); }
+    .auth-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+    .auth-actions button {
+      border: 0;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .auth-actions .cancel { background: rgba(120, 142, 177, 0.24); color: #dce8ff; }
+    .auth-actions .submit { background: #9fd0ff; color: #09101c; }
+    .auth-status { min-height: 18px; margin-top: 8px; font-size: 12px; color: var(--danger); }
     @media (max-width: 760px) {
       main { padding: 18px 10px 26px; }
       .card { border-radius: 12px; }
@@ -666,6 +709,18 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     </div>
   </main>
   <div id="toast" class="toast" aria-live="polite"></div>
+  <div id="auth-gate" class="auth-gate hidden" aria-hidden="true">
+    <div class="auth-panel" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <h2 id="auth-title">Admin access required</h2>
+      <p>Enter the quarantine admin token to continue.</p>
+      <input id="auth-token-input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Admin token">
+      <div class="auth-actions">
+        <button id="auth-cancel" class="cancel" type="button">Cancel</button>
+        <button id="auth-submit" class="submit" type="button">Unlock</button>
+      </div>
+      <div id="auth-status" class="auth-status" aria-live="polite"></div>
+    </div>
+  </div>
   <script>
     const DEFAULT_WRITE_API_BASE = 'https://brialertbackend.vercel.app';
     function normaliseApiBase(value) {
@@ -698,10 +753,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     const body = document.getElementById('quarantine-body');
     const meta = document.getElementById('meta');
     const toast = document.getElementById('toast');
+    const authGate = document.getElementById('auth-gate');
+    const authTokenInput = document.getElementById('auth-token-input');
+    const authSubmitButton = document.getElementById('auth-submit');
+    const authCancelButton = document.getElementById('auth-cancel');
+    const authStatus = document.getElementById('auth-status');
     let currentEntries = [];
     let currentDataMode = 'live';
     let restoreEnabled = true;
     let adminToken = '';
+    let authPromptPromise = null;
     const READ_ONLY_NOTE = 'Restore is unavailable in read-only mode because the backend write API is not reachable.';
     const TOAST_DURATION_MS = 1900;
     const LOAD_FETCH_TIMEOUT_MS = 12000;
@@ -849,17 +910,72 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       writeStoredAdminToken('');
     }
 
-    function ensureAdminToken() {
+    function requestAdminToken() {
+      if (!authGate || !authTokenInput || !authSubmitButton || !authCancelButton || !authStatus) {
+        const prompted = typeof prompt === 'function'
+          ? prompt('Enter quarantine admin token:')
+          : '';
+        const fallbackToken = String(prompted || '').trim();
+        if (!fallbackToken) {
+          throw new Error('Admin authentication is required to access this page.');
+        }
+        return Promise.resolve(fallbackToken);
+      }
+      if (authPromptPromise) return authPromptPromise;
+      authPromptPromise = new Promise((resolve, reject) => {
+        const cleanup = () => {
+          authPromptPromise = null;
+          authGate.classList.add('hidden');
+          authGate.setAttribute('aria-hidden', 'true');
+          authStatus.textContent = '';
+          authTokenInput.value = '';
+          authTokenInput.setCustomValidity('');
+          authTokenInput.removeEventListener('keydown', onInputKeyDown);
+          authSubmitButton.removeEventListener('click', onSubmit);
+          authCancelButton.removeEventListener('click', onCancel);
+        };
+        const onSubmit = () => {
+          const value = String(authTokenInput.value || '').trim();
+          if (!value) {
+            authStatus.textContent = 'Enter an admin token.';
+            authTokenInput.setCustomValidity('Enter an admin token.');
+            if (typeof authTokenInput.reportValidity === 'function') authTokenInput.reportValidity();
+            return;
+          }
+          cleanup();
+          resolve(value);
+        };
+        const onCancel = () => {
+          cleanup();
+          reject(new Error('Admin authentication is required to access this page.'));
+        };
+        const onInputKeyDown = (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            onSubmit();
+          }
+        };
+        authGate.classList.remove('hidden');
+        authGate.setAttribute('aria-hidden', 'false');
+        authStatus.textContent = '';
+        authTokenInput.value = '';
+        authTokenInput.setCustomValidity('');
+        authTokenInput.addEventListener('keydown', onInputKeyDown);
+        authSubmitButton.addEventListener('click', onSubmit);
+        authCancelButton.addEventListener('click', onCancel);
+        authTokenInput.focus();
+      });
+      return authPromptPromise;
+    }
+
+    async function ensureAdminToken() {
       if (adminToken) return adminToken;
       const stored = readStoredAdminToken();
       if (stored) {
         adminToken = stored;
         return stored;
       }
-      const prompted = typeof prompt === 'function'
-        ? prompt('Enter quarantine admin token:')
-        : '';
-      const token = String(prompted || '').trim();
+      const token = String(await requestAdminToken()).trim();
       if (!token) {
         throw new Error('Admin authentication is required to access this page.');
       }
@@ -1158,7 +1274,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     async function loadEntries() {
       emptyState('Loading quarantined sources...');
       try {
-        ensureAdminToken();
+        await ensureAdminToken();
         let payload;
         try {
           payload = await fetchLivePayloadWithFailover();
