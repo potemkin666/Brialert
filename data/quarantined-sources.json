@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-08T22:05:24.902Z",
-  "count": 183,
+  "generatedAt": "2026-04-08T22:06:01.329Z",
+  "count": 182,
   "sources": [
     {
       "id": "rte-ireland-news-rss",
@@ -1673,25 +1673,6 @@
       "reviewBy": "2026-04-08T17:59:08.402Z",
       "lastFailureAt": "2026-04-06T17:59:08.402Z",
       "lastCheckedAt": "2026-04-06T17:59:08.402Z"
-    },
-    {
-      "id": "finland-police-news",
-      "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/news",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-06T17:04:11.606Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T17:04:11.606Z",
-      "lastFailureAt": "2026-04-06T17:04:11.606Z",
-      "lastCheckedAt": "2026-04-06T17:04:11.606Z"
     },
     {
       "id": "eu-council-fight-against-terrorism",
