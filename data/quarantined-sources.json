@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-08T22:06:01.329Z",
-  "count": 182,
+  "generatedAt": "2026-04-08T22:10:05.602Z",
+  "count": 181,
   "sources": [
     {
       "id": "rte-ireland-news-rss",
@@ -1699,25 +1699,6 @@
       "endpoint": "https://www.consilium.europa.eu/en/about-site/rss/",
       "kind": "html",
       "lane": "oversight",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-06T17:04:11.606Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T17:04:11.606Z",
-      "lastFailureAt": "2026-04-06T17:04:11.606Z",
-      "lastCheckedAt": "2026-04-06T17:04:11.606Z"
-    },
-    {
-      "id": "isd-global-publications",
-      "provider": "ISD - Publications",
-      "endpoint": "https://www.isdglobal.org/publications/",
-      "kind": "html",
-      "lane": "prevention",
       "region": "eu",
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
