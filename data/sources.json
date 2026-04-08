@@ -71,13 +71,15 @@
     {
       "id": "belgium-crisis-centre-news",
       "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
+      "endpoint": "https://crisiscenter.be/en/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context."
+      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context.",
+      "quarantined": false,
+      "restoredAt": "2026-04-08T22:02:19.314Z"
     },
     {
       "id": "denmark-pet-news",
