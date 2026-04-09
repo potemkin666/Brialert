@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-09T18:34:28.199Z",
-  "count": 173,
+  "generatedAt": "2026-04-09T18:34:50.799Z",
+  "count": 172,
   "sources": [
     {
       "id": "frontex-news-releases",
@@ -1241,25 +1241,6 @@
       "id": "suffolk-constabulary-news",
       "provider": "Suffolk Constabulary - News",
       "endpoint": "https://www.suffolk.police.uk/news/suffolk/news/",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T11:11:10.131Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 2,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T11:11:10.131Z",
-      "lastFailureAt": "2026-04-07T11:11:10.131Z",
-      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
-    },
-    {
-      "id": "surrey-police-news",
-      "provider": "Surrey Police a News",
-      "endpoint": "https://www.surrey.police.uk/news/surrey/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
