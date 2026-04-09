@@ -3162,13 +3162,15 @@
     {
       "id": "cleveland-police-news",
       "provider": "Cleveland Police - News",
-      "endpoint": "https://www.cleveland.police.uk/news/cleveland/news/",
+      "endpoint": "https://www.cleveland.police.uk/news/cleveland/news/?newsCategory=News",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Cleveland Police news for Teesside and North-East urban incident corroboration."
+      "comment": "Cleveland Police news for Teesside and North-East urban incident corroboration.",
+      "quarantined": false,
+      "restoredAt": "2026-04-09T18:33:41.677Z"
     },
     {
       "id": "cps-news-centre",
