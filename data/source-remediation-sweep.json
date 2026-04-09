@@ -1,32 +1,34 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-09T06:59:46.204Z",
-  "totalSourceErrors": 2,
+  "generatedAt": "2026-04-09T07:35:13.094Z",
+  "totalSourceErrors": 4,
   "byCategory": {
-    "anti-bot-protection": 2
+    "brittle-selectors-or-js-rendering": 1,
+    "anti-bot-protection": 1,
+    "http-status-error": 2
   },
   "byKind": {
-    "rss": 1,
+    "html": 3,
     "playwright_html": 1
   },
-  "machineReadableErrorCount": 1,
-  "htmlErrorCount": 1,
+  "machineReadableErrorCount": 0,
+  "htmlErrorCount": 4,
   "top20": [
     {
-      "id": "gnet-youth-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
-      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "id": "hammersmith-fulham-news",
+      "provider": "Hammersmith and Fulham Council a News",
+      "endpoint": "https://www.lbhf.gov.uk/news",
       "finalUrl": "",
-      "category": "anti-bot-protection",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
+      "category": "brittle-selectors-or-js-rendering",
+      "message": "No items parsed from source payload",
+      "status": 202,
       "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
       "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "prevention",
+      "sourceKind": "html",
+      "sourceLane": "context",
       "sourceRegion": "",
-      "isMachineReadable": true
+      "isMachineReadable": false
     },
     {
       "id": "skwawkbox",
@@ -43,24 +45,56 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": false
+    },
+    {
+      "id": "eu-commission-counter-terrorism-measures-2026",
+      "provider": "European Commission - Counter Terrorism Measures 2026",
+      "endpoint": "https://commission.europa.eu/news-and-media/news/commission-proposes-new-measures-prevent-and-counter-terrorism-2026-02-26_en",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 503",
+      "status": 503,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "eu-commission-home-affairs-topic",
+      "provider": "European Commission - Home Affairs",
+      "endpoint": "https://commission.europa.eu/topics/home-affairs_en",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 503",
+      "status": 503,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ],
   "sources": [
     {
-      "id": "gnet-youth-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
-      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "id": "hammersmith-fulham-news",
+      "provider": "Hammersmith and Fulham Council a News",
+      "endpoint": "https://www.lbhf.gov.uk/news",
       "finalUrl": "",
-      "category": "anti-bot-protection",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
+      "category": "brittle-selectors-or-js-rendering",
+      "message": "No items parsed from source payload",
+      "status": 202,
       "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
       "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "prevention",
+      "sourceKind": "html",
+      "sourceLane": "context",
       "sourceRegion": "",
-      "isMachineReadable": true
+      "isMachineReadable": false
     },
     {
       "id": "skwawkbox",
@@ -75,6 +109,38 @@
       "replacementCandidate": "",
       "sourceKind": "playwright_html",
       "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "eu-commission-counter-terrorism-measures-2026",
+      "provider": "European Commission - Counter Terrorism Measures 2026",
+      "endpoint": "https://commission.europa.eu/news-and-media/news/commission-proposes-new-measures-prevent-and-counter-terrorism-2026-02-26_en",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 503",
+      "status": 503,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "eu-commission-home-affairs-topic",
+      "provider": "European Commission - Home Affairs",
+      "endpoint": "https://commission.europa.eu/topics/home-affairs_en",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "message": "HTTP 503",
+      "status": 503,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
       "sourceRegion": "",
       "isMachineReadable": false
     }
