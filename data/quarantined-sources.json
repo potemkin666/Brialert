@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-09T18:34:50.799Z",
-  "count": 172,
+  "generatedAt": "2026-04-09T18:35:29.365Z",
+  "count": 171,
   "sources": [
     {
       "id": "frontex-news-releases",
@@ -1800,25 +1800,6 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T17:04:11.606Z",
-      "lastFailureAt": "2026-04-06T17:04:11.606Z",
-      "lastCheckedAt": "2026-04-06T17:04:11.606Z"
-    },
-    {
-      "id": "gov-uk-terrorism-national-emergency",
-      "provider": "GOV.UK - Terrorism National Emergency",
-      "endpoint": "https://www.gov.uk/terrorism-national-emergency",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-06T17:04:11.606Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
