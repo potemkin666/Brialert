@@ -759,10 +759,21 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     function sessionUrlFor(base) {
       return apiUrlFor(base, '/api/auth/session');
     }
+    function returnToUrlForAuth() {
+      try {
+        const currentUrl = new URL(globalThis.location?.href || '/source-quarantine.html');
+        currentUrl.searchParams.delete('auth');
+        currentUrl.searchParams.delete('error');
+        return currentUrl.toString();
+      } catch {
+        return globalThis.location?.href || '/source-quarantine.html';
+      }
+    }
     function loginUrlFor(base) {
+      const targetBase = normaliseApiBase(base) || normaliseApiBase(apiBase) || normaliseApiBase(DEFAULT_API_BASE);
       return apiUrlFor(
-        DEFAULT_API_BASE,
-        '/api/auth/github/start?returnTo=' + encodeURIComponent(globalThis.location?.href || '/source-quarantine.html')
+        targetBase,
+        '/api/auth/github/start?returnTo=' + encodeURIComponent(returnToUrlForAuth())
       );
     }
     function logoutUrlFor(base) {
@@ -781,6 +792,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     const TOAST_DURATION_MS = 1900;
     const LOAD_FETCH_TIMEOUT_MS = 12000;
     const PROBE_FETCH_TIMEOUT_MS = 5000;
+    const POST_LOGIN_SESSION_RETRY_DELAYS_MS = [0, 250, 750];
     let toastTimer = null;
 
     function escapeHtml(value) {
@@ -1129,26 +1141,36 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       return data.restoredSource;
     }
 
-    async function loadAuthSession() {
-      const failures = [];
-      for (const candidateBase of API_BASE_CANDIDATES) {
-        apiBase = candidateBase;
-        const url = sessionUrlFor(candidateBase);
-        if (!url) continue;
-        try {
-          const payload = await fetchPayload(url, 'Failed to load admin session.');
-          const authenticated = !!payload?.authenticated;
-          authState = {
-            authenticated,
-            user: authenticated ? payload.user || null : null,
-            loginUrl: resolveAuthUrl(candidateBase, payload.loginUrl, loginUrlFor),
-            logoutUrl: resolveAuthUrl(candidateBase, payload.logoutUrl, logoutUrlFor)
-          };
-          renderAuthPanel();
-          if (authenticated) return true;
-        } catch (error) {
-          failures.push(candidateBase + ': ' + serializeError(error));
+    async function loadAuthSession(options = {}) {
+      const retryAfterOauth = options.retryAfterOauth === true;
+      const delays = retryAfterOauth ? POST_LOGIN_SESSION_RETRY_DELAYS_MS : [0];
+      let latestFailures = [];
+
+      for (const delayMs of delays) {
+        if (delayMs > 0) {
+          await new Promise((resolve) => setTimeout(resolve, delayMs));
         }
+        const failures = [];
+        for (const candidateBase of API_BASE_CANDIDATES) {
+          apiBase = candidateBase;
+          const url = sessionUrlFor(candidateBase);
+          if (!url) continue;
+          try {
+            const payload = await fetchPayload(url, 'Failed to load admin session.');
+            const authenticated = !!payload?.authenticated;
+            authState = {
+              authenticated,
+              user: authenticated ? payload.user || null : null,
+              loginUrl: resolveAuthUrl(candidateBase, payload.loginUrl, loginUrlFor),
+              logoutUrl: resolveAuthUrl(candidateBase, payload.logoutUrl, logoutUrlFor)
+            };
+            renderAuthPanel();
+            if (authenticated) return true;
+          } catch (error) {
+            failures.push(candidateBase + ': ' + serializeError(error));
+          }
+        }
+        latestFailures = failures;
       }
       authState = {
         authenticated: false,
@@ -1157,8 +1179,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         logoutUrl: logoutUrlFor(apiBase)
       };
       renderAuthPanel();
-      if (failures.length) {
-        console.warn('Failed to load auth session from configured backends.', { failures });
+      if (latestFailures.length) {
+        console.warn('Failed to load auth session from configured backends.', { failures: latestFailures });
       }
       return false;
     }
@@ -1231,7 +1253,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     async function loadEntries() {
       emptyState('Loading quarantined sources...');
       try {
-        const isAuthenticated = await loadAuthSession();
+        const authStatus = new URLSearchParams(globalThis.location?.search || '').get('auth');
+        const isAuthenticated = await loadAuthSession({ retryAfterOauth: authStatus === 'ok' });
+        if (authStatus) {
+          try {
+            const currentUrl = new URL(globalThis.location?.href || '/source-quarantine.html');
+            currentUrl.searchParams.delete('auth');
+            currentUrl.searchParams.delete('error');
+            globalThis.history?.replaceState?.({}, '', currentUrl.toString());
+          } catch {}
+        }
         if (!isAuthenticated) {
           currentDataMode = 'live';
           restoreEnabled = false;
@@ -1293,6 +1324,10 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }, true);
 
     loadEntries();
+    globalThis.addEventListener('pageshow', (event) => {
+      if (!event?.persisted) return;
+      loadEntries();
+    });
   </script>
 </body>
 </html>
