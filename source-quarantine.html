@@ -263,7 +263,9 @@
     }
     function loginUrlFor(base) {
       const normalizedBase = normaliseApiBase(base);
-      const targetBase = normalizedBase || normaliseApiBase(apiBase) || normaliseApiBase(DEFAULT_API_BASE);
+      const normalizedActiveBase = normaliseApiBase(apiBase);
+      const normalizedDefaultBase = normaliseApiBase(DEFAULT_API_BASE);
+      const targetBase = normalizedBase || normalizedActiveBase || normalizedDefaultBase;
       return apiUrlFor(
         targetBase,
         '/api/auth/github/start?returnTo=' + encodeURIComponent(returnToUrlForAuth())
