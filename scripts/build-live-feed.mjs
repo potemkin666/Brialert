@@ -759,7 +759,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     function sessionUrlFor(base) {
       return apiUrlFor(base, '/api/auth/session');
     }
-    function currentQuarantineUrl() {
+    function resolveQuarantineUrl() {
       const fallbackOrigin = globalThis.location?.origin || DEFAULT_API_BASE;
       try {
         return new URL(globalThis.location?.href || '/source-quarantine.html', fallbackOrigin);
@@ -774,7 +774,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       return sanitized;
     }
     function returnToUrlForAuth() {
-      const currentUrl = stripAuthQueryParams(currentQuarantineUrl());
+      const currentUrl = stripAuthQueryParams(resolveQuarantineUrl());
       return currentUrl.toString();
     }
     function loginUrlFor(base) {
@@ -803,6 +803,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     const TOAST_DURATION_MS = 1900;
     const LOAD_FETCH_TIMEOUT_MS = 12000;
     const PROBE_FETCH_TIMEOUT_MS = 5000;
+    // Retry quickly after OAuth redirect to absorb short cookie/session propagation delays.
     const POST_LOGIN_SESSION_RETRY_DELAYS_MS = [0, 250, 750];
     let toastTimer = null;
 
@@ -1267,7 +1268,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         const authStatus = new URLSearchParams(globalThis.location?.search || '').get('auth');
         const isAuthenticated = await loadAuthSession({ retryAfterOauth: authStatus === 'ok' });
         if (authStatus) {
-          const currentUrl = stripAuthQueryParams(currentQuarantineUrl());
+          const currentUrl = stripAuthQueryParams(resolveQuarantineUrl());
           globalThis.history?.replaceState?.({}, '', currentUrl.toString());
         }
         if (!isAuthenticated) {
