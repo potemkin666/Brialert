@@ -201,7 +201,7 @@
   </main>
   <div id="toast" class="toast" aria-live="polite"></div>
   <script>
-    const DEFAULT_WRITE_API_BASE = 'https://brialertbackend.vercel.app';
+    const DEFAULT_API_BASE = 'https://brialertbackend.vercel.app';
     function normaliseApiBase(value) {
       const raw = String(value || '').trim();
       return raw ? raw.replace(/\/$/, '') : '';
@@ -218,7 +218,7 @@
     }
     const API_BASE_CANDIDATES = uniqueValues([
       normaliseApiBase(globalThis.BRIALERT_API_BASE),
-      normaliseApiBase(DEFAULT_WRITE_API_BASE)
+      normaliseApiBase(DEFAULT_API_BASE)
     ]);
     let apiBase = API_BASE_CANDIDATES[0] || '';
     let authState = {
@@ -227,20 +227,32 @@
       loginUrl: '',
       logoutUrl: ''
     };
+    function apiUrlFor(base, path) {
+      return base ? base + path : '';
+    }
+    function resolveAuthUrl(base, value, fallbackFactory) {
+      const raw = String(value || '').trim();
+      if (!raw) return fallbackFactory(base);
+      if (/^https?:\/\//i.test(raw)) return raw;
+      return apiUrlFor(base, raw.startsWith('/') ? raw : '/' + raw);
+    }
     function quarantineUrlFor(base) {
-      return base ? base + '/api/quarantined-sources' : '';
+      return apiUrlFor(base, '/api/quarantined-sources');
     }
     function restoreUrlFor(base) {
-      return base ? base + '/api/restore-source' : '';
+      return apiUrlFor(base, '/api/restore-source');
     }
     function sessionUrlFor(base) {
-      return base ? base + '/api/auth/session' : '';
+      return apiUrlFor(base, '/api/auth/session');
     }
     function loginUrlFor(base) {
-      return base ? base + '/api/auth/github/start?returnTo=' + encodeURIComponent(globalThis.location?.href || '/source-quarantine.html') : '';
+      return apiUrlFor(
+        base,
+        '/api/auth/github/start?returnTo=' + encodeURIComponent(globalThis.location?.href || '/source-quarantine.html')
+      );
     }
     function logoutUrlFor(base) {
-      return base ? base + '/api/auth/logout' : '';
+      return apiUrlFor(base, '/api/auth/logout');
     }
     const LOCAL_DATA_URL = 'data/quarantined-sources.json';
     const body = document.getElementById('quarantine-body');
@@ -617,8 +629,8 @@
           authState = {
             authenticated,
             user: authenticated ? payload.user || null : null,
-            loginUrl: payload.loginUrl ? candidateBase + payload.loginUrl : loginUrlFor(candidateBase),
-            logoutUrl: payload.logoutUrl ? candidateBase + payload.logoutUrl : logoutUrlFor(candidateBase)
+            loginUrl: resolveAuthUrl(candidateBase, payload.loginUrl, loginUrlFor),
+            logoutUrl: resolveAuthUrl(candidateBase, payload.logoutUrl, logoutUrlFor)
           };
           renderAuthPanel();
           if (authenticated) return true;
