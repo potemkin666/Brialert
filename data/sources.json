@@ -2305,13 +2305,15 @@
     {
       "id": "nhs-london-swl-news",
       "provider": "NHS South West London a News",
-      "endpoint": "https://www.southwestlondon.icb.nhs.uk/news/",
+      "endpoint": "https://www.england.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "South West London ICB news used for system-level local health and incident context."
+      "comment": "South West London ICB news used for system-level local health and incident context.",
+      "quarantined": false,
+      "restoredAt": "2026-04-09T18:32:46.406Z"
     },
     {
       "id": "north-middlesex-news",
