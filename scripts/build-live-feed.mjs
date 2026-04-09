@@ -738,6 +738,12 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     function apiUrlFor(base, path) {
       return base ? base + path : '';
     }
+    function withSessionCredentials(options = {}) {
+      return {
+        ...options,
+        credentials: 'include'
+      };
+    }
     function resolveAuthUrl(base, value, fallbackFactory) {
       const raw = String(value || '').trim();
       if (!raw) return fallbackFactory(base);
@@ -755,7 +761,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
     function loginUrlFor(base) {
       return apiUrlFor(
-        base,
+        DEFAULT_API_BASE,
         '/api/auth/github/start?returnTo=' + encodeURIComponent(globalThis.location?.href || '/source-quarantine.html')
       );
     }
@@ -915,10 +921,10 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         signOut.textContent = 'Sign out';
         signOut.addEventListener('click', async () => {
           try {
-            await fetch(logoutUrlFor(apiBase) || authState.logoutUrl, {
-              method: 'POST',
-              credentials: 'include'
-            });
+            await fetch(
+              logoutUrlFor(apiBase) || authState.logoutUrl,
+              withSessionCredentials({ method: 'POST' })
+            );
           } catch {}
           authState = {
             authenticated: false,
@@ -1027,7 +1033,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     async function fetchPayload(url, fallbackError) {
       const response = await fetchWithTimeout(
         url,
-        { cache: 'no-store', credentials: 'include' },
+        withSessionCredentials({ cache: 'no-store' }),
         LOAD_FETCH_TIMEOUT_MS,
         'Quarantine data request'
       );
@@ -1069,11 +1075,10 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         try {
           const response = await fetchWithTimeout(
             restoreUrl,
-            {
+            withSessionCredentials({
               method: attempt.method,
-              cache: 'no-store',
-              credentials: 'include'
-            },
+              cache: 'no-store'
+            }),
             PROBE_FETCH_TIMEOUT_MS,
             'Restore API probe (' + attempt.method + ')'
           );
@@ -1107,9 +1112,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       if (!restoreUrl) {
         throw new Error('No restore API base is configured.');
       }
-      const response = await fetch(restoreUrl, {
+      const response = await fetch(restoreUrl, withSessionCredentials({
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -1117,7 +1121,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
           sourceId,
           replacementUrl: String(replacementUrl || '').trim()
         })
-      });
+      }));
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.ok) {
         throw new Error(data.message || 'Restore failed');
