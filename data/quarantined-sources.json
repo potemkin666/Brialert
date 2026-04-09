@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-09T18:31:50.645Z",
-  "count": 178,
+  "generatedAt": "2026-04-09T18:32:46.406Z",
+  "count": 177,
   "sources": [
     {
       "id": "frontex-news-releases",
@@ -2894,25 +2894,6 @@
       "id": "nhs-london-ncl-news",
       "provider": "NHS North Central London a News",
       "endpoint": "https://nclhealthandcare.org.uk/news/",
-      "kind": "html",
-      "lane": "context",
-      "region": "london",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-06T11:16:46.434Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 2,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T11:16:46.434Z",
-      "lastFailureAt": "2026-04-06T11:16:46.434Z",
-      "lastCheckedAt": "2026-04-06T11:16:46.434Z"
-    },
-    {
-      "id": "nhs-london-swl-news",
-      "provider": "NHS South West London a News",
-      "endpoint": "https://www.southwestlondon.icb.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
