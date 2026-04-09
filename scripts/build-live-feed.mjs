@@ -1327,6 +1327,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     loadEntries();
     globalThis.addEventListener('pageshow', (event) => {
       if (!event?.persisted) return;
+      if (authState.authenticated) return;
       loadEntries();
     });
   </script>
