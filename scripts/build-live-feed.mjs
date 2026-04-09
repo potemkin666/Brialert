@@ -768,9 +768,10 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       }
     }
     function stripAuthQueryParams(url) {
-      url.searchParams.delete('auth');
-      url.searchParams.delete('error');
-      return url;
+      const sanitized = new URL(url.toString());
+      sanitized.searchParams.delete('auth');
+      sanitized.searchParams.delete('error');
+      return sanitized;
     }
     function returnToUrlForAuth() {
       const currentUrl = stripAuthQueryParams(currentQuarantineUrl());
