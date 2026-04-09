@@ -3463,13 +3463,15 @@
     {
       "id": "merseyside-police-news",
       "provider": "Merseyside Police a News",
-      "endpoint": "https://www.merseyside.police.uk/news/",
+      "endpoint": "https://www.merseyside.police.uk/news/merseyside/news/?newsCategory=News",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Merseyside Police news for Liverpool-area terrorism-related incidents and counter-terror operations."
+      "comment": "Merseyside Police news for Liverpool-area terrorism-related incidents and counter-terror operations.",
+      "quarantined": false,
+      "restoredAt": "2026-04-09T18:34:28.199Z"
     },
     {
       "id": "merseyside-police-news-html",
