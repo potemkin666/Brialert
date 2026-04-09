@@ -1057,13 +1057,15 @@
     {
       "id": "coe-counter-terrorism",
       "provider": "Council of Europe a Counter-Terrorism",
-      "endpoint": "https://www.coe.int/en/web/counter-terrorism/news-updates",
+      "endpoint": "https://www.coe.int/en/web/portal/newsroom",
       "kind": "html",
       "lane": "oversight",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Council of Europe Counter-Terrorism Committee (CDCT) news updates for European counter-terrorism legal framework context."
+      "comment": "Council of Europe Counter-Terrorism Committee (CDCT) news updates for European counter-terrorism legal framework context.",
+      "quarantined": false,
+      "restoredAt": "2026-04-09T18:21:03.604Z"
     },
     {
       "id": "echr-key-judgments-rss",
