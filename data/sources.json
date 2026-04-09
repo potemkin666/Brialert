@@ -848,13 +848,15 @@
     {
       "id": "financial-times-world",
       "provider": "Financial Times a World",
-      "endpoint": "https://www.ft.com/world",
+      "endpoint": "https://www.ft.com/world-uk",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Financial Times world coverage used as corroborating context rather than a trigger feed."
+      "comment": "Financial Times world coverage used as corroborating context rather than a trigger feed.",
+      "quarantined": false,
+      "restoredAt": "2026-04-09T18:23:18.459Z"
     },
     {
       "id": "france24-europe-rss",
