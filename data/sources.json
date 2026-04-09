@@ -25,15 +25,13 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://www.independent.co.uk/topic/frontex",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:01:35.870Z"
+      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering."
     },
     {
       "id": "austria-interior-ministry-news",
@@ -71,28 +69,24 @@
     {
       "id": "belgium-crisis-centre-news",
       "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://www.theguardian.com/world/belgium",
+      "endpoint": "https://crisiscenter.be/en/news",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T23:24:54.681Z"
+      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context."
     },
     {
       "id": "denmark-pet-news",
       "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://www.thedanishparliament.dk/en/news",
+      "endpoint": "https://pet.dk/nyheder",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "PET updates on Danish terrorism threats, extremism and national security alerts.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:05:24.902Z"
+      "comment": "PET updates on Danish terrorism threats, extremism and national security alerts."
     },
     {
       "id": "ecfr-feeds-index",
@@ -348,15 +342,13 @@
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/newsroom/-/asset_publisher/9qkizUHcJDTR/rss",
+      "endpoint": "https://poliisi.fi/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:06:01.329Z"
+      "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations."
     },
     {
       "id": "german-bka-press",
@@ -762,15 +754,13 @@
     {
       "id": "isd-global-publications",
       "provider": "ISD - Publications",
-      "endpoint": "https://www.isdglobal.org/reports/",
+      "endpoint": "https://www.isdglobal.org/publications/",
       "kind": "html",
       "lane": "prevention",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:10:05.602Z"
+      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research."
     },
     {
       "id": "ncsc-nl-rss",
@@ -1006,15 +996,13 @@
     {
       "id": "ireland-gardai-press",
       "provider": "An Garda Siochana - Press Releases",
-      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/2026/april/",
+      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:10:46.543Z"
+      "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context."
     },
     {
       "id": "netherlands-police-news",
@@ -1466,15 +1454,13 @@
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en",
+      "endpoint": "https://www.occrp.org/en/announcements.rss",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:11:13.562Z"
+      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
     },
     {
       "id": "osce-press-releases",
@@ -2136,15 +2122,13 @@
     {
       "id": "london-gov-press-releases-html",
       "provider": "London.gov.uk - Press Releases",
-      "endpoint": "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-press-releases",
+      "endpoint": "https://www.london.gov.uk/press-releases",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "London.gov.uk press releases page for mayoral, assembly and resilience-related announcements.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:12:06.114Z"
+      "comment": "London.gov.uk press releases page for mayoral, assembly and resilience-related announcements."
     },
     {
       "id": "london-gov-rss-80603",
@@ -3233,15 +3217,13 @@
     {
       "id": "derbyshire-police-news",
       "provider": "Derbyshire Police - News",
-      "endpoint": "https://www.derbyshire.police.uk/news/derbyshire/news/?newsCategory=News",
+      "endpoint": "https://www.derbyshire.police.uk/news/derbyshire/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Derbyshire Police newsroom for East Midlands incident corroboration and public-safety context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:26:32.529Z"
+      "comment": "Derbyshire Police newsroom for East Midlands incident corroboration and public-safety context."
     },
     {
       "id": "devon-and-cornwall-police-newsroom",
@@ -3444,15 +3426,13 @@
     {
       "id": "lincolnshire-police-news",
       "provider": "Lincolnshire Police - News",
-      "endpoint": "https://www.lincs.police.uk/news/lincolnshire/news/GetNewsRss/",
+      "endpoint": "https://www.lincs.police.uk/news/lincolnshire/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Lincolnshire Police updates for regional public-safety and infrastructure-adjacent incident reporting.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:26:56.787Z"
+      "comment": "Lincolnshire Police updates for regional public-safety and infrastructure-adjacent incident reporting."
     },
     {
       "id": "merseyside-police-news",
@@ -3622,15 +3602,13 @@
     {
       "id": "staffordshire-police-news",
       "provider": "Staffordshire Police a News",
-      "endpoint": "https://www.staffordshire.police.uk/news/staffordshire/news/?newsCategory=News",
+      "endpoint": "https://www.staffordshire.police.uk/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Staffordshire Police news for the West Midlands fringe and major events incident corroboration.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:27:19.216Z"
+      "comment": "Staffordshire Police news for the West Midlands fringe and major events incident corroboration."
     },
     {
       "id": "staffordshire-police-staffordshire-news",
@@ -4599,15 +4577,13 @@
     {
       "id": "gov-uk-report-terrorism",
       "provider": "GOV.UK - Report Terrorism",
-      "endpoint": "https://www.gov.uk/search/news-and-communications",
+      "endpoint": "https://www.gov.uk/report-terrorism",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Official GOV.UK page for reporting terrorism and suspicious activity.",
-      "quarantined": false,
-      "restoredAt": "2026-04-08T22:27:42.796Z"
+      "comment": "Official GOV.UK page for reporting terrorism and suspicious activity."
     },
     {
       "id": "gov-uk-terrorism-national-emergency",
