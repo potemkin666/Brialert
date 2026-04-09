@@ -770,7 +770,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       }
     }
     function loginUrlFor(base) {
-      const targetBase = normaliseApiBase(base) || normaliseApiBase(apiBase) || normaliseApiBase(DEFAULT_API_BASE);
+      const normalizedBase = normaliseApiBase(base);
+      const targetBase = normalizedBase || normaliseApiBase(apiBase) || normaliseApiBase(DEFAULT_API_BASE);
       return apiUrlFor(
         targetBase,
         '/api/auth/github/start?returnTo=' + encodeURIComponent(returnToUrlForAuth())
