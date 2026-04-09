@@ -3663,13 +3663,15 @@
     {
       "id": "surrey-police-news",
       "provider": "Surrey Police a News",
-      "endpoint": "https://www.surrey.police.uk/news/surrey/news/",
+      "endpoint": "https://www.surrey.police.uk/news/surrey/news/?newsCategory=News",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Surrey Police news covering Gatwick Airport corridor and M25 south-west sector incidents."
+      "comment": "Surrey Police news covering Gatwick Airport corridor and M25 south-west sector incidents.",
+      "quarantined": false,
+      "restoredAt": "2026-04-09T18:34:50.799Z"
     },
     {
       "id": "sussex-police-news",
