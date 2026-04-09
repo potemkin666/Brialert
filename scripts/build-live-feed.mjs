@@ -1026,12 +1026,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
 
     async function fetchWithTimeout(url, options, timeoutMs, timeoutLabel) {
+      const requestOptions = withSessionCredentials(options || {});
       if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
-        return fetch(url, options);
+        return fetch(url, requestOptions);
       }
       if (typeof AbortController !== 'function') {
         return Promise.race([
-          fetch(url, options),
+          fetch(url, requestOptions),
           new Promise((_, reject) => {
             setTimeout(() => reject(new Error(timeoutLabel + ' timed out after ' + timeoutMs + 'ms.')), timeoutMs);
           })
@@ -1041,7 +1042,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       const timer = setTimeout(() => controller.abort(), timeoutMs);
       try {
         return await fetch(url, {
-          ...options,
+          ...requestOptions,
           signal: controller.signal
         });
       } catch (error) {
