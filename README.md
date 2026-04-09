@@ -3,9 +3,7 @@
 [![Feed validation](https://github.com/potemkin666/Brialert/actions/workflows/ci-feed-validation.yml/badge.svg)](https://github.com/potemkin666/Brialert/actions/workflows/ci-feed-validation.yml)
 [![Update live feeds](https://github.com/potemkin666/Brialert/actions/workflows/update-live-feed.yml/badge.svg)](https://github.com/potemkin666/Brialert/actions/workflows/update-live-feed.yml)
 
-Brialert is a GitHub Pages web app for fast, phone-friendly terrorism monitoring with a UK, London, and Europe bias.
-
-The product is built around one idea: the feed builder decides what an alert is, how trustworthy it is, whether it belongs in the live responder lane, and how it should be grouped. The browser then validates that payload, renders it quickly, and follows upstream queueing decisions without reclassifying alert type.
+Brialert is a GitHub Pages web app for fast terrorism monitoring (UK/EU bias)
 
 ## Live site
 
@@ -13,9 +11,9 @@ The product is built around one idea: the feed builder decides what an alert is,
 
 ## What it does
 
-- pulls from a curated source catalog focused on official, policing, transport, prosecution, resilience, and tightly relevant corroboration sources
+- pulls from a curated source catalog - all human reviewed 
 - ranks likely live incidents above slower context and case-stage material
-- keeps source-tier, reliability, incident-track, and queue-reason decisions upstream in the feed builder
+- keeps source-tier, reliability, incident-track, and queue-reason decisions upstream in the feed builder 
 - provides a mobile-first live dashboard, map, watchlists, notes, and briefing modal
 - refreshes the generated feed on an hourly GitHub Actions schedule
 
