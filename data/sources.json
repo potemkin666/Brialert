@@ -410,13 +410,15 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "endpoint": "https://www.heraldscotland.com/topics/spain/",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Spanish National Police press updates for terrorism arrests and major security operations."
+      "comment": "Spanish National Police press updates for terrorism arrests and major security operations.",
+      "quarantined": false,
+      "restoredAt": "2026-04-09T18:17:37.496Z"
     },
     {
       "id": "romanian-police-news",
