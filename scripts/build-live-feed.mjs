@@ -1082,6 +1082,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       return { reachable: false, reason: 'unexpected-status' };
     }
 
+    function cacheBustedUrl(url, cacheKey) {
+      try {
+        const candidate = new URL(url);
+        candidate.searchParams.set('_brialert_probe', String(cacheKey || Date.now()));
+        return candidate.toString();
+      } catch {
+        return url;
+      }
+    }
+
     async function probeRestoreApi() {
       const restoreUrl = restoreUrlFor(apiBase);
       if (!restoreUrl) {
@@ -1090,19 +1100,32 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
           reason: 'no-api-base'
         };
       }
+      // POST probe intentionally sends invalid payload so backend returns a non-mutating validation/auth response.
       const attempts = [
-        { method: 'OPTIONS', note: 'preferred probe for POST-only routes' },
-        { method: 'GET', note: 'fallback probe for hosts that reject OPTIONS' }
+        {
+          method: 'POST',
+          note: 'invalid-body reachability probe for write route',
+          options: {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sourceId: '', replacementUrl: '' })
+          }
+        },
+        { method: 'OPTIONS', note: 'fallback probe for hosts that reject POST without CORS headers' },
+        { method: 'GET', note: 'final fallback probe for hosts that reject OPTIONS' }
       ];
       let lastUnreachableReason = 'probe-not-run';
 
       for (const attempt of attempts) {
         try {
+          const requestUrl = cacheBustedUrl(restoreUrl, Date.now());
           const response = await fetchWithTimeout(
-            restoreUrl,
+            requestUrl,
             withSessionCredentials({
               method: attempt.method,
-              cache: 'no-store'
+              cache: 'no-store',
+              ...attempt.options
             }),
             PROBE_FETCH_TIMEOUT_MS,
             'Restore API probe (' + attempt.method + ')'
@@ -1285,10 +1308,17 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         try {
           payload = await fetchLivePayloadWithFailover();
           currentDataMode = 'live';
-          const probe = await probeRestoreApi();
-          restoreEnabled = probe.reachable;
-          if (!probe.reachable) {
-            console.warn('Restore API probe marked backend as unreachable; keeping quarantine UI in live read-only mode.', probe);
+          if (typeof payload?.restoreAvailable === 'boolean') {
+            restoreEnabled = payload.restoreAvailable;
+            if (!restoreEnabled) {
+              console.warn('Quarantine API reported restore is unavailable; keeping UI in live read-only mode.');
+            }
+          } else {
+            const probe = await probeRestoreApi();
+            restoreEnabled = probe.reachable;
+            if (!probe.reachable) {
+              console.warn('Restore API probe marked backend as unreachable; keeping quarantine UI in live read-only mode.', probe);
+            }
           }
         } catch (primaryError) {
           if (primaryError && primaryError.status === 401) {
