@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-10T09:47:13.429Z",
-  "count": 184,
+  "generatedAt": "2026-04-10T09:47:55.999Z",
+  "count": 183,
   "sources": [
     {
       "id": "romanian-police-news",
@@ -590,25 +590,6 @@
       "reviewBy": "2026-04-09T14:01:19.759Z",
       "lastFailureAt": "2026-04-07T14:01:19.759Z",
       "lastCheckedAt": "2026-04-07T14:01:19.759Z"
-    },
-    {
-      "id": "clingendael-publications",
-      "provider": "Clingendael Institute a Publications",
-      "endpoint": "https://www.clingendael.org/publications",
-      "kind": "html",
-      "lane": "context",
-      "region": "europe",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T12:07:40.986Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T12:07:40.986Z",
-      "lastFailureAt": "2026-04-07T12:07:40.986Z",
-      "lastCheckedAt": "2026-04-07T12:07:40.986Z"
     },
     {
       "id": "soufan-center-intelbrief",
