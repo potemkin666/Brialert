@@ -3492,13 +3492,15 @@
     {
       "id": "north-wales-police-news",
       "provider": "North Wales Police - News",
-      "endpoint": "https://www.northwales.police.uk/news/north-wales/news/",
+      "endpoint": "https://www.northwales.police.uk/news/north-wales/news/?newsCategory=News",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "North Wales Police news page for regional incidents, coastal policing and operational reporting."
+      "comment": "North Wales Police news page for regional incidents, coastal policing and operational reporting.",
+      "quarantined": false,
+      "restoredAt": "2026-04-10T09:54:49.585Z"
     },
     {
       "id": "north-yorkshire-police-news-html",
