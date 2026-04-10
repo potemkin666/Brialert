@@ -110,8 +110,8 @@ export const SOURCE_ITEM_LIMITS = Object.freeze({
 });
 export const MAX_STORED_ALERTS = 120;
 export const MAX_FAILING_SOURCES_TO_LOG = 10;
-export const EXPECTED_REFRESH_MINUTES = 60;
-export const STALE_AFTER_MINUTES = 75;
+export const EXPECTED_REFRESH_MINUTES = 15;
+export const STALE_AFTER_MINUTES = 25;
 export const SOURCE_TIMEZONE = 'Europe/London';
 export const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
 export const FEED_BOT_USER_AGENT = 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)';
@@ -122,13 +122,13 @@ export const FEED_BOT_USER_AGENTS = Object.freeze([
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'
 ]);
 export const DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE = Object.freeze({
-  incidents: 1,
-  context: 2,
-  sanctions: 3,
-  oversight: 4,
-  border: 2,
-  prevention: 4,
-  default: 3
+  incidents: 0.25,
+  context: 0.5,
+  sanctions: 1,
+  oversight: 1,
+  border: 0.5,
+  prevention: 1,
+  default: 1
 });
 export const SOURCE_FAILURE_COOLDOWN_HOURS = 24;
 export const SOURCE_EMPTY_COOLDOWN_HOURS = 24;
@@ -179,12 +179,12 @@ export function sourceUserAgent(source) {
 }
 
 export function sourceRefreshEveryHours(source) {
-  const explicit = Math.floor(Number(source?.refreshEveryHours));
-  if (Number.isFinite(explicit) && explicit >= 1) return explicit;
+  const explicit = Number(source?.refreshEveryHours);
+  if (Number.isFinite(explicit) && explicit >= 0.25) return explicit;
 
   const byLane = DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE[source?.lane] || DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE.default;
-  if (source?.lane === 'incidents') return 1;
-  if (source?.kind === 'html') return Math.max(byLane, 3);
+  if (source?.lane === 'incidents') return 0.25;
+  if (source?.kind === 'html') return Math.max(byLane, 1);
   return byLane;
 }
 
@@ -194,14 +194,39 @@ export function isMachineReadableSourceKind(kind) {
 
 export function sourceRefreshOffset(source) {
   const cadence = sourceRefreshEveryHours(source);
-  const explicit = Math.floor(Number(source?.refreshOffset));
+  const explicit = Number(source?.refreshOffset);
   if (Number.isFinite(explicit) && explicit >= 0) return explicit % cadence;
-  return deterministicSourceHash(source?.id || source?.endpoint || source?.provider || '') % cadence;
+
+  // Compute a deterministic offset based on source identifier
+  const sourceKey = source?.id || source?.endpoint || source?.provider || '';
+  const hashValue = deterministicSourceHash(sourceKey);
+  const hashRange = Math.max(1, Math.floor(cadence));
+  const baseOffset = hashValue % hashRange;
+
+  // Scale offset for sub-hour cadences to distribute sources across time slots
+  const scalingFactor = cadence < 1 ? cadence : 1;
+  return baseOffset * scalingFactor;
 }
 
 export function shouldRefreshSourceThisRun(source, buildDate = new Date()) {
   const cadence = sourceRefreshEveryHours(source);
-  if (cadence <= 1) return true;
+  const offset = sourceRefreshOffset(source);
+
+  // Sub-hour cadences: refresh every run (workflow runs every 15 minutes)
+  if (cadence <= 0.25) return true;
+
+  // For cadences up to 1 hour, use 15-minute slots
+  if (cadence <= 1) {
+    const slotMinutes = 15;
+    const currentSlot = Math.floor(buildDate.getTime() / (slotMinutes * 60_000));
+    const slotsPerCadence = Math.ceil(cadence * 60 / slotMinutes);
+    const offsetSlot = Math.floor(offset * 60 / slotMinutes) % slotsPerCadence;
+    return currentSlot % slotsPerCadence === offsetSlot;
+  }
+
+  // Multi-hour cadences: use hourly slots
   const hourSlot = Math.floor(buildDate.getTime() / 3600000);
-  return hourSlot % cadence === sourceRefreshOffset(source);
+  const cadenceHours = Math.floor(cadence);
+  const offsetHours = Math.floor(offset) % cadenceHours;
+  return hourSlot % cadenceHours === offsetHours;
 }

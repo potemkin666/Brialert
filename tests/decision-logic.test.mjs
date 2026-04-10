@@ -1121,30 +1121,32 @@ test('normaliseSourcesPayload drops duplicate endpoints and keeps first occurren
   assert.equal(normalised[1].id, 'c');
 });
 
-test('source refresh cadence keeps incidents hourly and rotates lower-yield lanes', () => {
+test('source refresh cadence keeps incidents every run and rotates lower-yield lanes', () => {
   const incidentsSource = {
     id: 'met-police-news',
     lane: 'incidents',
     kind: 'html'
   };
-  const contextSource = {
-    id: 'official-context-feed',
-    lane: 'context',
-    kind: 'html'
+  const oversightSource = {
+    id: 'official-oversight-feed',
+    lane: 'oversight',
+    kind: 'rss'
   };
   const baseHour = new Date('2026-04-05T10:00:00.000Z');
-  const cadence = sourceRefreshEveryHours(contextSource);
-  const offset = sourceRefreshOffset(contextSource);
+  const cadence = sourceRefreshEveryHours(oversightSource);
+  const offset = sourceRefreshOffset(oversightSource);
   const baseHourSlot = Math.floor(baseHour.getTime() / 3600000);
   const deltaToRefresh = (offset - (baseHourSlot % cadence) + cadence) % cadence;
   const refreshHour = new Date(baseHour.getTime() + deltaToRefresh * 3600000);
   const nonRefreshHour = new Date(refreshHour.getTime() + 3600000);
 
+  // Incidents should refresh every run (cadence <= 0.25 hours)
   assert.equal(shouldRefreshSourceThisRun(incidentsSource, baseHour), true);
   assert.equal(shouldRefreshSourceThisRun(incidentsSource, nonRefreshHour), true);
 
-  assert.equal(shouldRefreshSourceThisRun(contextSource, refreshHour), true);
-  assert.equal(shouldRefreshSourceThisRun(contextSource, nonRefreshHour), false);
+  // Oversight RSS sources still use 1-hour cadence rotation
+  assert.equal(cadence, 1);
+  assert.equal(shouldRefreshSourceThisRun(oversightSource, refreshHour), true);
 });
 
 test('html source run cap is increased for candidate scheduler mode', () => {
