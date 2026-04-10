@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-10T09:49:20.901Z",
-  "count": 182,
+  "generatedAt": "2026-04-10T09:50:26.616Z",
+  "count": 181,
   "sources": [
     {
       "id": "romanian-police-news",
@@ -1933,25 +1933,6 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T17:04:11.606Z",
-      "lastFailureAt": "2026-04-06T17:04:11.606Z",
-      "lastCheckedAt": "2026-04-06T17:04:11.606Z"
-    },
-    {
-      "id": "pst-no-english",
-      "provider": "PST (Norway) English reporting page",
-      "endpoint": "https://www.pst.no/en/report/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-06T17:04:11.606Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
