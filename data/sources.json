@@ -2288,13 +2288,15 @@
     {
       "id": "nhs-london-sel-news",
       "provider": "NHS South East London a News",
-      "endpoint": "https://www.selondonics.org/latest-news/",
+      "endpoint": "https://www.selondonics.org/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "South East London ICS news used for borough-spanning health, resilience, and response context."
+      "comment": "South East London ICS news used for borough-spanning health, resilience, and response context.",
+      "quarantined": false,
+      "restoredAt": "2026-04-10T09:51:41.138Z"
     },
     {
       "id": "nhs-london-swl-news",
