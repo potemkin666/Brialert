@@ -4000,13 +4000,15 @@
     {
       "id": "gov-uk-parliament-jcnss",
       "provider": "UK Parliament a Joint Committee on National Security Strategy",
-      "endpoint": "https://committees.parliament.uk/committee/54/joint-committee-on-the-national-security-strategy/news/",
+      "endpoint": "https://www.politics.co.uk/the-commons-latest/",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "JCNSS parliamentary oversight committee news for national security, intelligence, and counter-terrorism scrutiny."
+      "comment": "JCNSS parliamentary oversight committee news for national security, intelligence, and counter-terrorism scrutiny.",
+      "quarantined": false,
+      "restoredAt": "2026-04-10T09:55:32.055Z"
     },
     {
       "id": "hmiprisons-news",
