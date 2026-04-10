@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-10T09:50:52.220Z",
-  "count": 180,
+  "generatedAt": "2026-04-10T09:51:41.138Z",
+  "count": 179,
   "sources": [
     {
       "id": "romanian-police-news",
@@ -2267,25 +2267,6 @@
       "id": "homerton-healthcare-news",
       "provider": "Homerton Healthcare NHS Foundation Trust a News",
       "endpoint": "https://www.homerton.nhs.uk/latest-news/",
-      "kind": "html",
-      "lane": "context",
-      "region": "london",
-      "status": "auto-quarantined",
-      "reason": "Repeated dead-or-moved-url failures",
-      "quarantinedAt": "2026-04-06T13:27:14.171Z",
-      "lastErrorCategory": "dead-or-moved-url",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 2,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T13:27:14.171Z",
-      "lastFailureAt": "2026-04-06T13:27:14.171Z",
-      "lastCheckedAt": "2026-04-06T13:27:14.171Z"
-    },
-    {
-      "id": "nhs-london-sel-news",
-      "provider": "NHS South East London a News",
-      "endpoint": "https://www.selondonics.org/latest-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
