@@ -3301,13 +3301,15 @@
     {
       "id": "durham-police-durham-news",
       "provider": "Durham Police - Durham News",
-      "endpoint": "https://www.durham.police.uk/news/durham/news/",
+      "endpoint": "https://www.durham.police.uk/news/durham/news/?newsCategory=News",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Durham Police detailed county news page for incidents, arrests and operational notices."
+      "comment": "Durham Police detailed county news page for incidents, arrests and operational notices.",
+      "quarantined": false,
+      "restoredAt": "2026-04-10T09:54:13.943Z"
     },
     {
       "id": "dyfed-powys-police-news",
