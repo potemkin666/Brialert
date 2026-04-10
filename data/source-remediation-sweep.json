@@ -1,36 +1,16 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-10T20:47:59.919Z",
-  "totalSourceErrors": 5,
+  "generatedAt": "2026-04-10T21:43:21.525Z",
+  "totalSourceErrors": 2,
   "byCategory": {
-    "blocked-or-auth": 1,
-    "anti-bot-protection": 1,
-    "brittle-selectors-or-js-rendering": 1,
-    "network-failure": 2
+    "anti-bot-protection": 2
   },
   "byKind": {
-    "rss": 2,
-    "html": 3
+    "rss": 2
   },
   "machineReadableErrorCount": 2,
-  "htmlErrorCount": 3,
+  "htmlErrorCount": 0,
   "top20": [
-    {
-      "id": "euractiv-security-rss",
-      "provider": "Euractiv a Security & Defence (RSS)",
-      "endpoint": "https://www.euractiv.com/sections/security/feed/",
-      "finalUrl": "",
-      "category": "blocked-or-auth",
-      "message": "HTTP 403",
-      "status": 403,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
     {
       "id": "gnet-radicalisation-rss",
       "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation (RSS)",
@@ -48,72 +28,24 @@
       "isMachineReadable": true
     },
     {
-      "id": "hammersmith-fulham-news",
-      "provider": "Hammersmith and Fulham Council a News",
-      "endpoint": "https://www.lbhf.gov.uk/news",
+      "id": "gnet-youth-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
       "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
-      "message": "No items parsed from source payload",
-      "status": 202,
+      "category": "anti-bot-protection",
+      "message": "Blocked by anti-bot protection",
+      "status": 200,
       "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
       "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "german-bka-press-releases-de",
-      "provider": "BKA Germany - Press Releases",
-      "endpoint": "https://www.bka.de/DE/Aktuelle. Informationen/Aktuelle. Meldungen/Pressemeldungen/pressemitteilungen_node.html",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "ocam-be-english",
-      "provider": "CUTA (Belgium) threat analysis",
-      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
+      "sourceKind": "rss",
       "sourceLane": "prevention",
       "sourceRegion": "",
-      "isMachineReadable": false
+      "isMachineReadable": true
     }
   ],
   "sources": [
     {
-      "id": "euractiv-security-rss",
-      "provider": "Euractiv a Security & Defence (RSS)",
-      "endpoint": "https://www.euractiv.com/sections/security/feed/",
-      "finalUrl": "",
-      "category": "blocked-or-auth",
-      "message": "HTTP 403",
-      "status": 403,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
-    {
       "id": "gnet-radicalisation-rss",
       "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation (RSS)",
       "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
@@ -130,52 +62,20 @@
       "isMachineReadable": true
     },
     {
-      "id": "hammersmith-fulham-news",
-      "provider": "Hammersmith and Fulham Council a News",
-      "endpoint": "https://www.lbhf.gov.uk/news",
+      "id": "gnet-youth-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
       "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
-      "message": "No items parsed from source payload",
-      "status": 202,
+      "category": "anti-bot-protection",
+      "message": "Blocked by anti-bot protection",
+      "status": 200,
       "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
       "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "german-bka-press-releases-de",
-      "provider": "BKA Germany - Press Releases",
-      "endpoint": "https://www.bka.de/DE/Aktuelle. Informationen/Aktuelle. Meldungen/Pressemeldungen/pressemitteilungen_node.html",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "ocam-be-english",
-      "provider": "CUTA (Belgium) threat analysis",
-      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
+      "sourceKind": "rss",
       "sourceLane": "prevention",
       "sourceRegion": "",
-      "isMachineReadable": false
+      "isMachineReadable": true
     }
   ]
 }
