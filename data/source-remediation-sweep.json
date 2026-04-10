@@ -1,35 +1,16 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-10T19:04:56.085Z",
-  "totalSourceErrors": 3,
+  "generatedAt": "2026-04-10T19:57:58.800Z",
+  "totalSourceErrors": 1,
   "byCategory": {
-    "anti-bot-protection": 1,
-    "brittle-selectors-or-js-rendering": 1,
-    "network-failure": 1
+    "brittle-selectors-or-js-rendering": 1
   },
   "byKind": {
-    "rss": 1,
-    "html": 2
+    "html": 1
   },
-  "machineReadableErrorCount": 1,
-  "htmlErrorCount": 2,
+  "machineReadableErrorCount": 0,
+  "htmlErrorCount": 1,
   "top20": [
-    {
-      "id": "gnet-youth-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
-      "endpoint": "https://gnet-research.org/tag/youth/feed/",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "prevention",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
     {
       "id": "hammersmith-fulham-news",
       "provider": "Hammersmith and Fulham Council a News",
@@ -40,22 +21,6 @@
       "status": 202,
       "rankScore": 2,
       "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "haringey-council-news",
-      "provider": "Haringey Council a News",
-      "endpoint": "https://new.haringey.gov.uk/news",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
       "sourceKind": "html",
       "sourceLane": "context",
@@ -65,22 +30,6 @@
   ],
   "sources": [
     {
-      "id": "gnet-youth-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
-      "endpoint": "https://gnet-research.org/tag/youth/feed/",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "prevention",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
-    {
       "id": "hammersmith-fulham-news",
       "provider": "Hammersmith and Fulham Council a News",
       "endpoint": "https://www.lbhf.gov.uk/news",
@@ -90,22 +39,6 @@
       "status": 202,
       "rankScore": 2,
       "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "haringey-council-news",
-      "provider": "Haringey Council a News",
-      "endpoint": "https://new.haringey.gov.uk/news",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
       "sourceKind": "html",
       "sourceLane": "context",
