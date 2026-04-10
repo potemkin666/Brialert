@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-10T09:53:22.095Z",
-  "count": 178,
+  "generatedAt": "2026-04-10T09:53:52.103Z",
+  "count": 177,
   "sources": [
     {
       "id": "romanian-police-news",
@@ -842,25 +842,6 @@
       "id": "btp-british-transport-police-news-html",
       "provider": "British Transport Police - News",
       "endpoint": "https://www.btp.police.uk/news/british-transport-police/",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T11:11:10.131Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 2,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T11:11:10.131Z",
-      "lastFailureAt": "2026-04-07T11:11:10.131Z",
-      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
-    },
-    {
-      "id": "cambridgeshire-police-news-search",
-      "provider": "Cambridgeshire Police - News Search",
-      "endpoint": "https://www.cambs.police.uk/news/news-search/?ct=News",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
