@@ -2488,13 +2488,15 @@
     {
       "id": "tower-hamlets-council-news",
       "provider": "Tower Hamlets Council a News",
-      "endpoint": "https://www.towerhamlets.gov.uk/rss/news.xml",
+      "endpoint": "https://eastlondontimes.co.uk/local/tower-hamlets/",
       "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced legacy ASPX listing with Tower Hamlets official news RSS feed."
+      "comment": "Replaced legacy ASPX listing with Tower Hamlets official news RSS feed.",
+      "quarantined": false,
+      "restoredAt": "2026-04-10T09:53:22.095Z"
     },
     {
       "id": "uclh-news",
