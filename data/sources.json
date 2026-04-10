@@ -25,15 +25,13 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/feed",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T13:57:01.299Z"
+      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering."
     },
     {
       "id": "austria-interior-ministry-news",
@@ -410,28 +408,24 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.heraldscotland.com/topics/spain/",
+      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Spanish National Police press updates for terrorism arrests and major security operations.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:17:37.496Z"
+      "comment": "Spanish National Police press updates for terrorism arrests and major security operations."
     },
     {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
-      "endpoint": "https://politiaromana.ro/en/news-and-media/news",
+      "endpoint": "https://www.politiaromana.ro/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:22:52.720Z"
+      "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration."
     },
     {
       "id": "sweden-police-news",
@@ -848,15 +842,13 @@
     {
       "id": "financial-times-world",
       "provider": "Financial Times a World",
-      "endpoint": "https://www.ft.com/world-uk",
+      "endpoint": "https://www.ft.com/world",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Financial Times world coverage used as corroborating context rather than a trigger feed.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:23:18.459Z"
+      "comment": "Financial Times world coverage used as corroborating context rather than a trigger feed."
     },
     {
       "id": "france24-europe-rss",
@@ -905,15 +897,13 @@
     {
       "id": "netherlands-nctv-news",
       "provider": "Dutch NCTV - News",
-      "endpoint": "https://english.nctv.nl/",
+      "endpoint": "https://www.nctv.nl/actueel",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch National Coordinator for Security and Counterterrorism updates on threat posture and resilience.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:19:19.201Z"
+      "comment": "Dutch National Coordinator for Security and Counterterrorism updates on threat posture and resilience."
     },
     {
       "id": "norway-pst-news",
@@ -1061,15 +1051,13 @@
     {
       "id": "coe-counter-terrorism",
       "provider": "Council of Europe a Counter-Terrorism",
-      "endpoint": "https://www.coe.int/en/web/portal/newsroom",
+      "endpoint": "https://www.coe.int/en/web/counter-terrorism/news-updates",
       "kind": "html",
       "lane": "oversight",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Council of Europe Counter-Terrorism Committee (CDCT) news updates for European counter-terrorism legal framework context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:21:03.604Z"
+      "comment": "Council of Europe Counter-Terrorism Committee (CDCT) news updates for European counter-terrorism legal framework context."
     },
     {
       "id": "echr-key-judgments-rss",
@@ -1250,15 +1238,13 @@
     {
       "id": "acled-updates",
       "provider": "ACLED a Updates and Analysis",
-      "endpoint": "https://www.arabnews.com/world",
+      "endpoint": "https://acleddata.com/",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ACLED provides conflict event reporting and analysis; RSS varies by section, so the main site is used with keyword filtering.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:25:37.497Z"
+      "comment": "ACLED provides conflict event reporting and analysis; RSS varies by section, so the main site is used with keyword filtering."
     },
     {
       "id": "aljazeera-news-rss",
@@ -1545,15 +1531,13 @@
     {
       "id": "tony-blair-institute-news",
       "provider": "Tony Blair Institute for Global Change a Publications",
-      "endpoint": "https://europostagency.com/category/my-europe/europe-news/",
+      "endpoint": "https://institute.global/insights",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "TBI publications on counter-extremism, technology and political violence used for strategic context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:29:42.888Z"
+      "comment": "TBI publications on counter-extremism, technology and political violence used for strategic context."
     },
     {
       "id": "unodc-news",
@@ -2017,15 +2001,13 @@
     {
       "id": "kensington-chelsea-newsroom",
       "provider": "Royal Borough of Kensington and Chelsea a Newsroom",
-      "endpoint": "https://www.newsnow.co.uk/h/UK/England/London/Boroughs/Kensington+&+Chelsea",
+      "endpoint": "https://www.rbkc.gov.uk/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "RBKC newsroom used for West London community-safety and incident context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:31:50.645Z"
+      "comment": "RBKC newsroom used for West London community-safety and incident context."
     },
     {
       "id": "kings-college-hospital-news",
@@ -2305,15 +2287,13 @@
     {
       "id": "nhs-london-swl-news",
       "provider": "NHS South West London a News",
-      "endpoint": "https://www.england.nhs.uk/news/",
+      "endpoint": "https://www.southwestlondon.icb.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "South West London ICB news used for system-level local health and incident context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:32:46.406Z"
+      "comment": "South West London ICB news used for system-level local health and incident context."
     },
     {
       "id": "north-middlesex-news",
@@ -2549,15 +2529,13 @@
     {
       "id": "whittington-health-news",
       "provider": "Whittington Health a News",
-      "endpoint": "https://www.whittington.nhs.uk/default.asp?c=182",
+      "endpoint": "https://www.whittington.nhs.uk/news/default.asp",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Whittington Health updates used for North London hospital and local incident context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:33:14.221Z"
+      "comment": "Whittington Health updates used for North London hospital and local incident context."
     },
     {
       "id": "city-of-london-police-news",
@@ -3162,15 +3140,13 @@
     {
       "id": "cleveland-police-news",
       "provider": "Cleveland Police - News",
-      "endpoint": "https://www.cleveland.police.uk/news/cleveland/news/?newsCategory=News",
+      "endpoint": "https://www.cleveland.police.uk/news/cleveland/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Cleveland Police news for Teesside and North-East urban incident corroboration.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:33:41.677Z"
+      "comment": "Cleveland Police news for Teesside and North-East urban incident corroboration."
     },
     {
       "id": "cps-news-centre",
@@ -3340,15 +3316,13 @@
     {
       "id": "gloucestershire-police-news",
       "provider": "Gloucestershire Police - News",
-      "endpoint": "https://www.gloucestershire.police.uk/news/gloucestershire/news/?newsCategory=News",
+      "endpoint": "https://www.gloucestershire.police.uk/news/gloucestershire/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Gloucestershire Police newsroom for South-West and M5 corridor incident corroboration.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:34:05.980Z"
+      "comment": "Gloucestershire Police newsroom for South-West and M5 corridor incident corroboration."
     },
     {
       "id": "gmp-news",
@@ -3463,15 +3437,13 @@
     {
       "id": "merseyside-police-news",
       "provider": "Merseyside Police a News",
-      "endpoint": "https://www.merseyside.police.uk/news/merseyside/news/?newsCategory=News",
+      "endpoint": "https://www.merseyside.police.uk/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Merseyside Police news for Liverpool-area terrorism-related incidents and counter-terror operations.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:34:28.199Z"
+      "comment": "Merseyside Police news for Liverpool-area terrorism-related incidents and counter-terror operations."
     },
     {
       "id": "merseyside-police-news-html",
@@ -3663,15 +3635,13 @@
     {
       "id": "surrey-police-news",
       "provider": "Surrey Police a News",
-      "endpoint": "https://www.surrey.police.uk/news/surrey/news/?newsCategory=News",
+      "endpoint": "https://www.surrey.police.uk/news/surrey/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Surrey Police news covering Gatwick Airport corridor and M25 south-west sector incidents.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:34:50.799Z"
+      "comment": "Surrey Police news covering Gatwick Airport corridor and M25 south-west sector incidents."
     },
     {
       "id": "sussex-police-news",
@@ -4618,15 +4588,13 @@
     {
       "id": "gov-uk-terrorism-national-emergency",
       "provider": "GOV.UK - Terrorism National Emergency",
-      "endpoint": "https://www.gov.uk/search/news-and-communications",
+      "endpoint": "https://www.gov.uk/terrorism-national-emergency",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Official GOV.UK public guidance page for responding to a terrorism national emergency.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:35:29.365Z"
+      "comment": "Official GOV.UK public guidance page for responding to a terrorism national emergency."
     },
     {
       "id": "icsr-kcl",
@@ -5000,15 +4968,13 @@
     {
       "id": "rand-terrorism-topic",
       "provider": "RAND - Terrorism Topic Updates",
-      "endpoint": "https://www.rand.org/topics/counterterrorism.html",
+      "endpoint": "https://www.rand.org/topics/terrorism.html",
       "kind": "html",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RAND topic pages are HTML; using the terrorism topic index and relying on keyword filtering.",
-      "quarantined": false,
-      "restoredAt": "2026-04-09T18:36:00.701Z"
+      "comment": "RAND topic pages are HTML; using the terrorism topic index and relying on keyword filtering."
     },
     {
       "id": "rewards-for-justice",
