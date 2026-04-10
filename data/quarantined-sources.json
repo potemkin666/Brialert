@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-10T09:51:41.138Z",
-  "count": 179,
+  "generatedAt": "2026-04-10T09:53:22.095Z",
+  "count": 178,
   "sources": [
     {
       "id": "romanian-police-news",
@@ -1755,25 +1755,6 @@
       "provider": "South London and Maudsley NHS Foundation Trust a News",
       "endpoint": "https://slam.nhs.uk/news/",
       "kind": "html",
-      "lane": "context",
-      "region": "london",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-06T17:59:08.402Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T17:59:08.402Z",
-      "lastFailureAt": "2026-04-06T17:59:08.402Z",
-      "lastCheckedAt": "2026-04-06T17:59:08.402Z"
-    },
-    {
-      "id": "tower-hamlets-council-news",
-      "provider": "Tower Hamlets Council a News",
-      "endpoint": "https://www.towerhamlets.gov.uk/rss/news.xml",
-      "kind": "rss",
       "lane": "context",
       "region": "london",
       "status": "auto-quarantined",
