@@ -5060,13 +5060,15 @@
     {
       "id": "us-house-homeland-security",
       "provider": "US House Committee on Homeland Security - News",
-      "endpoint": "https://homeland.house.gov/news/",
+      "endpoint": "https://homeland.house.gov/press/",
       "kind": "html",
       "lane": "oversight",
       "region": "us",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "US House Homeland Security Committee news on terrorism threats, border security and DHS oversight hearings."
+      "comment": "US House Homeland Security Committee news on terrorism threats, border security and DHS oversight hearings.",
+      "quarantined": false,
+      "restoredAt": "2026-04-10T09:57:58.267Z"
     },
     {
       "id": "us-treasury-ofac-press-releases",
