@@ -25,15 +25,13 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://www.frontex.europa.eu/media-centre/news/management-board-updates/",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering.",
-      "quarantined": false,
-      "restoredAt": "2026-04-11T18:16:02.308Z"
+      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering."
     },
     {
       "id": "austria-interior-ministry-news",
