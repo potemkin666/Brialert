@@ -44,6 +44,8 @@ jobs:
           path: |
             data/source-remediation-sweep.json
             data/top-20-source-remediation.json
+            data/build-observability-summary.json
+            data/build-observability-trend.json
             data/quarantined-sources.json
             source-quarantine.html
           if-no-files-found: warn
@@ -58,6 +60,12 @@ jobs:
           fi
           if [ -f data/top-20-source-remediation.json ]; then
             git add data/top-20-source-remediation.json
+          fi
+          if [ -f data/build-observability-summary.json ]; then
+            git add data/build-observability-summary.json
+          fi
+          if [ -f data/build-observability-trend.json ]; then
+            git add data/build-observability-trend.json
           fi
           if [ -f data/quarantined-sources.json ]; then
             git add data/quarantined-sources.json

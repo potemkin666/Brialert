@@ -1226,9 +1226,22 @@ test('validate-live-feed-output script passes valid feed and fails invalid sourc
   );
 
   const validPayload = {
+    schemaVersion: '2026-04-live-feed-v1',
     generatedAt: '2026-04-04T09:00:00.000Z',
     sourceCount: 3,
-    alerts: [],
+    alerts: [{
+      id: 'a-1',
+      title: 'Test alert',
+      lane: 'incidents',
+      region: 'uk',
+      sourceUrl: 'https://example.test/1',
+      queueBucket: 'responder'
+    }],
+    runMetrics: {
+      coverage: {
+        checked: 3
+      }
+    },
     health: {
       lastSuccessfulSourceCount: 3,
       lastAttemptedRefreshTime: '2026-04-04T09:00:00.000Z'

@@ -6,7 +6,12 @@ import {
   normaliseEndpoint,
   validateAbsoluteHttpUrl
 } from './_lib/github-persistence.js';
-import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
+import {
+  applyCorsHeaders,
+  ensureMutatingRequestIsTrusted,
+  logAdminAudit,
+  requireAdminSession
+} from './_lib/admin-session.js';
 
 const QUARANTINE_ONLY_FIELDS = new Set([
   'status',
@@ -135,7 +140,12 @@ export default async function handler(request, response) {
       message: 'Only POST is supported.'
     });
   }
-  if (!requireAdminSession(request, response)) {
+  const session = requireAdminSession(request, response);
+  if (!session) {
+    return response;
+  }
+  if (!ensureMutatingRequestIsTrusted(request, response)) {
+    logAdminAudit('restore-source.forbidden-origin', { actor: session.login });
     return response;
   }
 
@@ -217,12 +227,22 @@ export default async function handler(request, response) {
       `Restore quarantined source ${sourceId}`
     );
 
+    logAdminAudit('restore-source.success', {
+      actor: session.login,
+      sourceId,
+      replacementUrl
+    });
+
     return response.status(200).json({
       ok: true,
       restoredSource,
       message: 'Source restored successfully.'
     });
   } catch (error) {
+    logAdminAudit('restore-source.failed', {
+      actor: session.login,
+      message: error instanceof Error ? error.message : String(error)
+    });
     return sendError(response, error);
   }
 }

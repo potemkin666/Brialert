@@ -16,7 +16,9 @@ export function bindEvents({
   notesStorageKey,
   sourceRequestsStorageKey,
   watchedStorageKey,
+  mutedSourcesStorageKey,
   sourceRequestApiUrl,
+  severityThresholdStorageKey,
   actions,
   rendering,
   setActiveTab,
@@ -34,6 +36,42 @@ export function bindEvents({
     rendering.invalidateDerivedView();
     elements.filters.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
     button.classList.add('active');
+    rendering.renderAll();
+  });
+
+  elements.laneFilter?.addEventListener('change', (event) => {
+    actions.setActiveLane(state, String(event.target?.value || 'all'));
+    rendering.invalidateDerivedView();
+    rendering.renderAll();
+  });
+
+  elements.severityFilter?.addEventListener('change', (event) => {
+    const value = String(event.target?.value || 'all');
+    actions.setActiveSeverityThreshold(state, value);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(severityThresholdStorageKey, value);
+    }
+    rendering.invalidateDerivedView();
+    rendering.renderAll();
+  });
+
+  elements.sourceMuteForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const value = String(elements.sourceMuteInput?.value || '').trim();
+    if (!actions.addMutedSource(state, value)) return;
+    saveSet(mutedSourcesStorageKey, state.mutedSources);
+    if (elements.sourceMuteInput) elements.sourceMuteInput.value = '';
+    rendering.invalidateDerivedView();
+    rendering.renderAll();
+  });
+
+  elements.sourceMuteList?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-remove-muted-source]');
+    if (!button) return;
+    const source = button.getAttribute('data-remove-muted-source');
+    if (!actions.removeMutedSource(state, source)) return;
+    saveSet(mutedSourcesStorageKey, state.mutedSources);
+    rendering.invalidateDerivedView();
     rendering.renderAll();
   });
 

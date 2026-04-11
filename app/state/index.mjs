@@ -7,6 +7,8 @@ export const WATCHED_STORAGE_KEY = 'brialert.watched';
 export const NOTES_STORAGE_KEY = 'brialert.notes';
 export const SOURCE_REQUESTS_STORAGE_KEY = 'brialert.sourceRequests';
 export const BRIEFING_MODE_STORAGE_KEY = 'brialert.briefingMode';
+export const SEVERITY_THRESHOLD_STORAGE_KEY = 'brialert.severityThreshold';
+export const MUTED_SOURCES_STORAGE_KEY = 'brialert.mutedSources';
 export const SOURCE_REQUEST_API_URL = '/api/request-source';
 export const INITIAL_RESPONDER_VISIBLE = 18;
 export const RESPONDER_LOAD_STEP = 16;
@@ -21,6 +23,8 @@ export function createState() {
     searchQuery: '',
     activeRegion: 'all',
     activeLane: 'all',
+    activeSeverityThreshold: 'all',
+    mutedSources: new Set(),
     mapViewMode: 'world',
     watched: new Set(),
     lastBrowserPollAt: new Date(),

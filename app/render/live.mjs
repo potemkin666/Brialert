@@ -49,6 +49,18 @@ function trimTrailingPeriod(value) {
   return String(value || '').trim().replace(/\.+$/, '');
 }
 
+function renderMutedSources(elements, mutedSources) {
+  if (!elements.sourceMuteList) return;
+  const entries = [...(mutedSources || new Set())].sort();
+  if (!entries.length) {
+    elements.sourceMuteList.innerHTML = `<p class="panel-copy">No muted sources.</p>`;
+    return;
+  }
+  elements.sourceMuteList.innerHTML = entries
+    .map((entry) => `<button class="secondary-button muted-source-chip" type="button" data-remove-muted-source="${escapeHtml(entry)}">${escapeHtml(entry)} ✕</button>`)
+    .join('');
+}
+
 export function renderPriority({ state, elements, view, modalController }) {
   const alert = view.topPriority;
   if (!alert) {
@@ -170,6 +182,13 @@ export function renderHero({ state, elements }) {
   if (elements.heroSearch && elements.heroSearch.value !== state.searchQuery) {
     elements.heroSearch.value = state.searchQuery;
   }
+  if (elements.laneFilter && elements.laneFilter.value !== state.activeLane) {
+    elements.laneFilter.value = state.activeLane;
+  }
+  if (elements.severityFilter && elements.severityFilter.value !== state.activeSeverityThreshold) {
+    elements.severityFilter.value = state.activeSeverityThreshold;
+  }
+  renderMutedSources(elements, state.mutedSources);
   const healthRefresh = state.liveFeedHealth?.lastSuccessfulRefreshTime;
   const stamp = healthRefresh ? new Date(healthRefresh) : state.liveFeedGeneratedAt;
   const hasValidStamp = stamp instanceof Date && !Number.isNaN(stamp.getTime());

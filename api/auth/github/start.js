@@ -2,6 +2,7 @@ import { ApiError } from '../../_lib/github-persistence.js';
 import {
   createOauthState,
   getOAuthRedirectUri,
+  logAdminAudit,
   normalizeReturnTo,
   setOauthStateCookie
 } from '../../_lib/admin-session.js';
@@ -53,11 +54,15 @@ export default async function handler(request, response) {
     authUrl.searchParams.set('scope', 'read:user read:org');
     authUrl.searchParams.set('state', nonce);
     authUrl.searchParams.set('allow_signup', 'false');
+    logAdminAudit('auth.oauth.start', { returnTo });
 
     response.statusCode = 302;
     response.setHeader('Location', authUrl.toString());
     return response.end();
   } catch (error) {
+    logAdminAudit('auth.oauth.start.failed', {
+      message: error instanceof Error ? error.message : String(error)
+    });
     return sendError(response, error);
   }
 }

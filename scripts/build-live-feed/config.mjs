@@ -15,6 +15,8 @@ export const quarantinedSourcesPath = path.join(repoRoot, 'data', 'quarantined-s
 export const quarantinedSourcesReviewPath = path.join(repoRoot, 'source-quarantine.html');
 export const topSourceRemediationPath = path.join(repoRoot, 'data', 'top-20-source-remediation.json');
 export const sourceRemediationSweepPath = path.join(repoRoot, 'data', 'source-remediation-sweep.json');
+export const observabilitySummaryPath = path.join(repoRoot, 'data', 'build-observability-summary.json');
+export const observabilityTrendPath = path.join(repoRoot, 'data', 'build-observability-trend.json');
 
 export const parser = new XMLParser({
   ignoreAttributes: false,

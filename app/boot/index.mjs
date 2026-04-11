@@ -19,8 +19,10 @@ import {
   MAP_INIT_FALLBACK_DELAY_MS,
   MAP_INIT_IDLE_TIMEOUT_MS,
   LIVE_FEED_URL,
+  MUTED_SOURCES_STORAGE_KEY,
   NOTES_STORAGE_KEY,
   POLL_INTERVAL_MS,
+  SEVERITY_THRESHOLD_STORAGE_KEY,
   SOURCE_REQUEST_API_URL,
   SOURCE_REQUESTS_STORAGE_KEY,
   WATCHED_STORAGE_KEY,
@@ -120,7 +122,9 @@ export function initialiseApp() {
     notesStorageKey: NOTES_STORAGE_KEY,
     sourceRequestsStorageKey: SOURCE_REQUESTS_STORAGE_KEY,
     watchedStorageKey: WATCHED_STORAGE_KEY,
+    mutedSourcesStorageKey: MUTED_SOURCES_STORAGE_KEY,
     sourceRequestApiUrl: SOURCE_REQUEST_API_URL,
+    severityThresholdStorageKey: SEVERITY_THRESHOLD_STORAGE_KEY,
     actions,
     rendering,
     setActiveTab,
@@ -151,6 +155,12 @@ export function initialiseApp() {
   state.watched = loadSet(WATCHED_STORAGE_KEY);
   state.notes = loadArray(NOTES_STORAGE_KEY, defaultNotes);
   state.sourceRequests = loadArray(SOURCE_REQUESTS_STORAGE_KEY, []);
+  state.mutedSources = loadSet(MUTED_SOURCES_STORAGE_KEY);
+  try {
+    state.activeSeverityThreshold = String(localStorage.getItem(SEVERITY_THRESHOLD_STORAGE_KEY) || 'all');
+  } catch {
+    state.activeSeverityThreshold = 'all';
+  }
   state.briefingMode = false;
   state.mapViewMode = state.mapViewMode || MAP_VIEW_MODES.world;
 

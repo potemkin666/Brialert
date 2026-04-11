@@ -38,10 +38,26 @@ function validateSource(source, index) {
   const prefix = `source[${index}] (id=${JSON.stringify(source?.id)})`;
   if (!source || typeof source !== 'object') throw new Error(`${prefix}: not an object`);
   if (typeof source.id !== 'string' || !source.id.trim()) throw new Error(`${prefix}: missing or empty "id"`);
+  if (!/^[a-z0-9-]+$/.test(source.id.trim())) {
+    throw new Error(`${prefix}: "id" must use lowercase letters, numbers, and dashes only`);
+  }
   if (typeof source.provider !== 'string' || !source.provider.trim()) throw new Error(`${prefix}: missing or empty "provider"`);
   if (typeof source.endpoint !== 'string' || !source.endpoint.trim()) throw new Error(`${prefix}: missing or empty "endpoint"`);
   if (!source.endpoint.startsWith('https://') && !source.endpoint.startsWith('http://')) {
     throw new Error(`${prefix}: "endpoint" must be an http/https URL, got ${JSON.stringify(source.endpoint)}`);
+  }
+  try {
+    const parsedEndpoint = new URL(source.endpoint);
+    if (!parsedEndpoint.hostname) throw new Error('missing hostname');
+    if (parsedEndpoint.username || parsedEndpoint.password) {
+      throw new Error('must not contain credentials');
+    }
+    if (/\s/.test(parsedEndpoint.toString())) {
+      throw new Error('must not contain spaces');
+    }
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    throw new Error(`${prefix}: invalid endpoint URL (${detail})`);
   }
   if (source.endpoint.startsWith('http://') && !LEGACY_HTTP_ALLOWLIST.has(source.endpoint)) {
     throw new Error(`${prefix}: "endpoint" must use https:// when available; got ${JSON.stringify(source.endpoint)}`);

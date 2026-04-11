@@ -1,6 +1,7 @@
 import {
   applyCorsHeaders,
   getAllowedOrigins,
+  logAdminAudit,
   readAdminSession
 } from '../_lib/admin-session.js';
 
@@ -35,6 +36,7 @@ export default async function handler(request, response) {
   const session = readAdminSession(request);
   const originHint = request.headers.origin;
   if (!session) {
+    logAdminAudit('auth.session.unauthenticated', {});
     return response.status(200).json({
       ok: true,
       authenticated: false,

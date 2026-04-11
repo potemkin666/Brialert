@@ -153,10 +153,35 @@ export function applyCorsHeaders(request, response, methods) {
   }
   response.setHeader('Access-Control-Allow-Methods', methods);
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  response.setHeader('Access-Control-Max-Age', '600');
   if (request?.method === 'OPTIONS') {
     return !requestOrigin || allowedOrigins.has(requestOrigin);
   }
   return true;
+}
+
+export function logAdminAudit(event, details = {}) {
+  const payload = {
+    event: String(event || 'unknown'),
+    at: new Date().toISOString(),
+    ...details
+  };
+  console.info(`[admin-audit] ${JSON.stringify(payload)}`);
+}
+
+export function ensureMutatingRequestIsTrusted(request, response) {
+  const allowedOrigins = new Set(getAllowedOrigins());
+  const origin = normaliseOrigin(request?.headers?.origin);
+  const referer = normaliseOrigin(request?.headers?.referer);
+  if (origin && allowedOrigins.has(origin)) return true;
+  if (referer && allowedOrigins.has(referer)) return true;
+
+  response.status(403).json({
+    ok: false,
+    error: 'forbidden-origin',
+    message: 'Origin/referer is not authorized for state-changing admin actions.'
+  });
+  return false;
 }
 
 export function readAdminSession(request) {

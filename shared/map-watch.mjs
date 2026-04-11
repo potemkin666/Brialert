@@ -11,6 +11,8 @@ const WORLD_FALLBACK = Object.freeze({ center: [50.2, 10.4], zoom: 4 });
 const LONDON_CLUSTER_MAX_ZOOM = 12;
 const WORLD_CLUSTER_MAX_ZOOM = 7;
 const FRESH_ALERT_WINDOW_MS = 90 * 60 * 1000;
+const WORLD_MAP_ITEM_CAP = 220;
+const LONDON_MAP_ITEM_CAP = 320;
 
 function statusLine(mode, count) {
   if (count <= 0) return 'No alerts in current view';
@@ -65,6 +67,30 @@ function alertPublishedAtMs(alert) {
 function isFreshAlert(alert, nowMs = Date.now()) {
   const publishedAtMs = alertPublishedAtMs(alert);
   return Number.isFinite(publishedAtMs) && (nowMs - publishedAtMs) >= 0 && (nowMs - publishedAtMs) <= FRESH_ALERT_WINDOW_MS;
+}
+
+function mapSeverityRank(alert) {
+  const severity = String(alert?.severity || '').toLowerCase();
+  if (severity === 'critical') return 4;
+  if (severity === 'high') return 3;
+  if (severity === 'elevated') return 2;
+  return 1;
+}
+
+function selectMapItems(mode, items) {
+  const cap = mode === MAP_VIEW_MODES.london ? LONDON_MAP_ITEM_CAP : WORLD_MAP_ITEM_CAP;
+  if (items.length <= cap) return items;
+  return [...items]
+    .sort((left, right) => {
+      const freshnessGap = Number(isFreshAlert(right)) - Number(isFreshAlert(left));
+      if (freshnessGap !== 0) return freshnessGap;
+      const severityGap = mapSeverityRank(right) - mapSeverityRank(left);
+      if (severityGap !== 0) return severityGap;
+      const timeGap = alertPublishedAtMs(right) - alertPublishedAtMs(left);
+      if (timeGap !== 0) return timeGap;
+      return String(left.id || '').localeCompare(String(right.id || ''));
+    })
+    .slice(0, cap);
 }
 
 export function createMapController(config) {
@@ -183,7 +209,8 @@ export function createMapController(config) {
     lastState = state;
     lastView = view;
     const mode = state.mapViewMode === MAP_VIEW_MODES.world ? MAP_VIEW_MODES.world : MAP_VIEW_MODES.london;
-    const items = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
+    const mappedItems = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
+    const items = selectMapItems(mode, mappedItems);
     const signature = `${mode}:${liveMap.getZoom()}:${items.map((item) => `${item.id}:${item.lat.toFixed(3)},${item.lng.toFixed(3)}`).join('|')}`;
     if (!forceFit && signature === lastSignature) return;
     lastSignature = signature;

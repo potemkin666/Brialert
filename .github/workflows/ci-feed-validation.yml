@@ -56,6 +56,9 @@ jobs:
       - name: Validate compiled source catalog freshness
         run: npm run check:sources:freshness
 
+      - name: Generate source catalog lint hints
+        run: npm run check:sources:hints
+
       - name: Validate London source health
         env:
           BRIALERT_SOURCE_HEALTH_SCOPE: critical
@@ -116,6 +119,8 @@ jobs:
           cp live-alerts.json .ci-artifacts/live-alerts.json 2>/dev/null || true
           cp data/source-remediation-sweep.json .ci-artifacts/source-remediation-sweep.json 2>/dev/null || true
           cp data/top-20-source-remediation.json .ci-artifacts/top-20-source-remediation.json 2>/dev/null || true
+          cp data/build-observability-summary.json .ci-artifacts/build-observability-summary.json 2>/dev/null || true
+          cp data/build-observability-trend.json .ci-artifacts/build-observability-trend.json 2>/dev/null || true
           node ./scripts/ci/generate-feed-smoke-summary.mjs live-alerts.json .ci-artifacts/feed-smoke-summary.json
 
       - name: Enforce CI smoke runtime budget

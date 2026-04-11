@@ -41,6 +41,8 @@ import {
   sourceDeterministicHash,
   shouldRefreshSourceThisRun,
   outputPath,
+  observabilitySummaryPath,
+  observabilityTrendPath,
   quarantinedSourcesPath,
   quarantinedSourcesReviewPath,
   sourceRemediationSweepPath,
@@ -162,6 +164,19 @@ function sourceMayAutoCooldown(source, previousEntry, buildDate) {
   return null;
 }
 
+function clampReliabilityScore(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return 50;
+  return Math.max(0, Math.min(100, Math.round(numeric)));
+}
+
+function reliabilityPenaltyForCategory(category) {
+  if (category === 'not-found-404' || category === 'dead-or-moved-url') return 16;
+  if (category === 'blocked-or-auth' || category === 'anti-bot-protection') return 11;
+  if (category === 'timeout' || category === 'network-failure') return 8;
+  return 6;
+}
+
 function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   const prior = previousEntry && typeof previousEntry === 'object' ? previousEntry : {};
   const priorBlockedFailures = Number(prior.consecutiveBlockedFailures || 0);
@@ -188,7 +203,9 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     autoSkipReason: null,
     quarantined: Boolean(prior.quarantined),
     quarantinedAt: prior.quarantinedAt || null,
-    quarantineReason: prior.quarantineReason || null
+    quarantineReason: prior.quarantineReason || null,
+    reliabilityScore: clampReliabilityScore(prior.reliabilityScore),
+    rehabilitationStreak: Number(prior.rehabilitationStreak || 0)
   };
 
   if ((stat?.built || 0) > 0) {
@@ -200,6 +217,9 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.lastErrorCategory = null;
     next.lastErrorMessage = null;
     next.lastSuccessfulAt = generatedAt;
+    next.rehabilitationStreak += 1;
+    const reliabilityBoost = next.rehabilitationStreak >= 3 ? 10 : 7;
+    next.reliabilityScore = clampReliabilityScore(next.reliabilityScore + reliabilityBoost);
     return next;
   }
 
@@ -215,6 +235,10 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.lastFailureAt = generatedAt;
     next.lastErrorCategory = stat?.lastErrorCategory || null;
     next.lastErrorMessage = stat?.lastErrorMessage || null;
+    next.rehabilitationStreak = 0;
+    next.reliabilityScore = clampReliabilityScore(
+      next.reliabilityScore - reliabilityPenaltyForCategory(stat?.lastErrorCategory || '')
+    );
     if (!next.quarantined && notFoundFailure) {
       next.quarantined = true;
       next.quarantinedAt = generatedAt;
@@ -255,6 +279,8 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   next.lastErrorCategory = null;
   next.lastErrorMessage = null;
   next.lastEmptyAt = generatedAt;
+  next.rehabilitationStreak = 0;
+  next.reliabilityScore = clampReliabilityScore(next.reliabilityScore - 2);
   if (!source.isTrustedOfficial && source.lane !== 'incidents' && next.consecutiveEmptyRuns >= AUTO_SKIP_EMPTY_THRESHOLD) {
     next.cooldownUntil = new Date(Date.parse(generatedAt) + SOURCE_EMPTY_COOLDOWN_HOURS * 3600000).toISOString();
     next.autoSkipReason = 'empty-cooldown';
@@ -315,22 +341,37 @@ function buildAlertChurnRows(previousAlerts, nextAlerts) {
   return rows;
 }
 
-function sourceSchedulingPriority(source) {
+function sourceSchedulingPriority(source, healthEntry = null) {
   if (isMachineReadableSourceKind(source?.kind)) {
     if (source?.lane === 'incidents') return 100;
     if (source?.isTrustedOfficial) return 90;
-    return 80;
+    let score = 80;
+    const reliabilityScore = Number(healthEntry?.reliabilityScore);
+    if (Number.isFinite(reliabilityScore)) {
+      if (reliabilityScore < 30) score -= 15;
+      else if (reliabilityScore < 45) score -= 8;
+      else if (reliabilityScore > 75) score += 3;
+    }
+    if (Number(healthEntry?.rehabilitationStreak || 0) >= 3) score += 4;
+    return score;
   }
 
   let score = 10;
   if (source?.lane === 'incidents') score += 15;
   if (source?.isTrustedOfficial) score += 10;
   if (source?.lane === 'prevention') score += 4;
+  const reliabilityScore = Number(healthEntry?.reliabilityScore);
+  if (Number.isFinite(reliabilityScore)) {
+    if (reliabilityScore < 30) score -= 10;
+    else if (reliabilityScore < 45) score -= 6;
+    else if (reliabilityScore > 75) score += 2;
+  }
+  if (Number(healthEntry?.rehabilitationStreak || 0) >= 3) score += 3;
   return score;
 }
 
-function schedulingTier(source) {
-  const priority = sourceSchedulingPriority(source);
+function schedulingTier(source, healthEntry = null) {
+  const priority = sourceSchedulingPriority(source, healthEntry);
   if (priority >= 90) return 'high';
   if (priority >= 25) return 'medium';
   return 'low';
@@ -1434,6 +1475,62 @@ function buildSourceRemediationSweep({ generatedAt, sourceErrors, sourceStats })
   };
 }
 
+async function readJsonIfExists(filePath, fallback) {
+  try {
+    const raw = await fs.readFile(filePath, 'utf8');
+    return JSON.parse(raw);
+  } catch {
+    return fallback;
+  }
+}
+
+async function writeObservabilityArtifacts({
+  generatedAt,
+  runMetrics,
+  buildWarning,
+  sourceErrors,
+  sourceStats,
+  guardrailViolations
+}) {
+  const summary = {
+    schemaVersion: '2026-04-obs-v1',
+    generatedAt,
+    runMetrics,
+    buildWarning: buildWarning || null,
+    guardrailViolations: Array.isArray(guardrailViolations) ? guardrailViolations : [],
+    topSourceErrors: (Array.isArray(sourceErrors) ? sourceErrors : []).slice(0, 20),
+    sourceStats: (Array.isArray(sourceStats) ? sourceStats : []).map((entry) => ({
+      id: entry.id,
+      provider: entry.provider,
+      lane: entry.lane,
+      kind: entry.kind,
+      built: entry.built,
+      errors: entry.errors,
+      fetchOutcome: entry.fetchOutcome,
+      lastErrorCategory: entry.lastErrorCategory
+    }))
+  };
+  await fs.writeFile(observabilitySummaryPath, JSON.stringify(summary, null, 2) + '\n', 'utf8');
+
+  const previousTrend = await readJsonIfExists(observabilityTrendPath, { schemaVersion: '2026-04-obs-trend-v1', history: [] });
+  const history = Array.isArray(previousTrend?.history) ? previousTrend.history : [];
+  history.push({
+    generatedAt,
+    checked: Number(runMetrics?.coverage?.checked || 0),
+    eligible: Number(runMetrics?.coverage?.eligible || 0),
+    successfulSources: Number(runMetrics?.guardrails?.successfulSources || 0),
+    failedSourceRate: Number(runMetrics?.guardrails?.failedSourceRate || 0),
+    runDurationMs: Number(runMetrics?.runDurationMs || 0),
+    sourceErrors: Array.isArray(sourceErrors) ? sourceErrors.length : 0
+  });
+  const bounded = history.slice(-200);
+  await fs.writeFile(observabilityTrendPath, JSON.stringify({
+    schemaVersion: '2026-04-obs-trend-v1',
+    generatedAt,
+    history: bounded
+  }, null, 2) + '\n', 'utf8');
+}
+
 async function syncBuilderSQLite(snapshot) {
   const helperPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'build-live-feed', 'sqlite-sync.py');
   const tempPath = path.join(os.tmpdir(), `brialert-sqlite-sync-${Date.now()}-${process.pid}.json`);
@@ -1561,7 +1658,7 @@ async function main() {
     .map((source, index) => ({
       source,
       index,
-      priority: sourceSchedulingPriority(source)
+      priority: sourceSchedulingPriority(source, sourceHealthEntry(previousHealth, source.id))
     }))
     .sort((left, right) => {
       if (right.priority !== left.priority) return right.priority - left.priority;
@@ -1597,7 +1694,8 @@ async function main() {
   }
   const continuationCandidates = [...continuationCandidatesById.values()]
     .sort((left, right) => {
-      const priorityDelta = sourceSchedulingPriority(right.source) - sourceSchedulingPriority(left.source);
+      const priorityDelta = sourceSchedulingPriority(right.source, sourceHealthEntry(previousHealth, right.source?.id))
+        - sourceSchedulingPriority(left.source, sourceHealthEntry(previousHealth, left.source?.id));
       if (priorityDelta !== 0) return priorityDelta;
       return left.index - right.index;
     })
@@ -1972,7 +2070,7 @@ async function main() {
   const sourceById = new Map(eligibleSources.map((source) => [source.id, source]));
   const freshnessByTier = Object.entries(nextSourceHealth).reduce((acc, [sourceId, entry]) => {
     const source = sourceById.get(sourceId) || entry;
-    const tier = schedulingTier(source);
+    const tier = schedulingTier(source, entry);
     const minutes = freshnessMinutes(entry, nowMs);
     if (minutes === null) return acc;
     if (!acc[tier]) acc[tier] = [];
@@ -2001,6 +2099,7 @@ async function main() {
   };
 
   const payload = {
+    schemaVersion: '2026-04-live-feed-v1',
     generatedAt,
     sourceCount: checked,
     alertCount: finalAlerts.length,
@@ -2090,6 +2189,14 @@ async function main() {
   const existingRuntimeMs = Number(existing?.runMetrics?.runDurationMs || 0);
 
   if (hasExistingAlertsSnapshot && currentComparable === nextComparable && !sourceErrors.length && !geoLookupFallbackNote) {
+    await writeObservabilityArtifacts({
+      generatedAt,
+      runMetrics: payload.runMetrics,
+      buildWarning,
+      sourceErrors,
+      sourceStats,
+      guardrailViolations
+    });
     if (Number.isFinite(existingRuntimeMs) && existingRuntimeMs > GUARDRAIL_MAX_RUNTIME_MS) {
       console.log(`No alert changes detected, refreshing feed metadata because previous runDurationMs=${existingRuntimeMs} exceeds guardrail=${GUARDRAIL_MAX_RUNTIME_MS}.`);
     } else {
@@ -2098,6 +2205,14 @@ async function main() {
     }
   }
 
+  await writeObservabilityArtifacts({
+    generatedAt,
+    runMetrics: payload.runMetrics,
+    buildWarning,
+    sourceErrors,
+    sourceStats,
+    guardrailViolations
+  });
   await fs.writeFile(outputPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');
   await fs.writeFile(quarantinedSourcesPath, JSON.stringify(quarantinedPayload, null, 2) + '\n', 'utf8');
   await fs.writeFile(quarantinedSourcesReviewPath, renderQuarantinedSourcesHtml(generatedAt, quarantinedEntries), 'utf8');

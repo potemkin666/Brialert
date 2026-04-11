@@ -303,6 +303,47 @@ function shouldKeepPeopleInvolved(reliabilityProfile, confidenceScore, needsHuma
   return false;
 }
 
+function dedupeTokens(value) {
+  return new Set(
+    clean(value)
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(Boolean)
+      .filter((token) => token.length >= 4)
+  );
+}
+
+function jaccardSimilarity(left, right) {
+  const leftTokens = dedupeTokens(left);
+  const rightTokens = dedupeTokens(right);
+  if (!leftTokens.size || !rightTokens.size) return 0;
+  let intersection = 0;
+  for (const token of leftTokens) {
+    if (rightTokens.has(token)) intersection += 1;
+  }
+  const union = leftTokens.size + rightTokens.size - intersection;
+  return union > 0 ? intersection / union : 0;
+}
+
+function nearDuplicateKey(item, deduped) {
+  const itemPublished = parseSourceDate(item?.publishedAt)?.getTime() || 0;
+  for (const existing of deduped) {
+    if (clean(item?.location).toLowerCase() !== clean(existing?.location).toLowerCase()) continue;
+    if (clean(item?.eventType).toLowerCase() !== clean(existing?.eventType).toLowerCase()) continue;
+    const existingPublished = parseSourceDate(existing?.publishedAt)?.getTime() || 0;
+    if (Math.abs(itemPublished - existingPublished) > 6 * 3600000) continue;
+    const similarity = jaccardSimilarity(
+      `${item?.title || ''} ${item?.summary || ''}`,
+      `${existing?.title || ''} ${existing?.summary || ''}`
+    );
+    if (similarity >= 0.55) {
+      return existing.fusedIncidentId || existing.id;
+    }
+  }
+  return '';
+}
+
 export function discardReasonForItem(source, item) {
   const sourceTier = inferSourceTier(source);
   const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
@@ -429,7 +470,8 @@ export function dedupeAndSortAlerts(items) {
   const seen = new Map();
 
   for (const item of items) {
-    const key = item.fusedIncidentId || `${sameStoryKey(item)}|${item.location}|${item.eventType}`;
+    const semanticKey = nearDuplicateKey(item, deduped);
+    const key = semanticKey || item.fusedIncidentId || `${sameStoryKey(item)}|${item.location}|${item.eventType}`;
     if (seen.has(key)) {
       const existingIndex = seen.get(key);
       const incumbent = deduped[existingIndex];

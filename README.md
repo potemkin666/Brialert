@@ -62,6 +62,7 @@ Requires Node `20.18.1` or newer.
 npm ci
 npm run compile:sources
 npm run check:sources:freshness
+npm run check:sources:hints
 npm run validate:feed-data
 npm run validate:source-health
 npm test
@@ -89,7 +90,9 @@ npm run build:feeds
 - If a refresh preserves prior alerts and reports `sourceCount: 0`, the app now falls back to `health.lastSuccessfulSourceCount` so the hero source count does not stick at zero.
 - Source catalog can be managed in sharded files under `data/sources/<region>/<lane>.json`; `npm run compile:sources` rebuilds `data/sources.json`.
 - Build runs now emit `data/source-remediation-sweep.json` and `data/top-20-source-remediation.json` to prioritize dead/moved URLs and replacement actions.
+- Build runs now emit `data/build-observability-summary.json` and `data/build-observability-trend.json` for structured diagnostics and trend tracking.
 - Build/runtime knobs (timeouts, retries, prefetch counts, html budget, guardrail fail behavior) are configurable through `BRIALERT_*` environment variables for CI fast-mode tuning.
+- Operational recovery procedures are documented in `docs/runbooks/operations.md`.
 
 ## Source catalog contribution rules
 

@@ -88,12 +88,43 @@
             </div>
           </section>
 
-            <section class="filters briefing-mode-hidden" id="filters">
-              <button class="filter active" data-region="all">All</button>
-              <button class="filter" data-region="london">London</button>
-              <button class="filter" data-region="uk">UK</button>
-              <button class="filter" data-region="europe">EU</button>
-            </section>
+          <section class="filters briefing-mode-hidden" id="filters">
+            <button class="filter active" data-region="all">All</button>
+            <button class="filter" data-region="london">London</button>
+            <button class="filter" data-region="uk">UK</button>
+            <button class="filter" data-region="europe">EU</button>
+          </section>
+          <section class="panel briefing-mode-hidden compact-filter-panel">
+            <div class="filter-grid">
+              <label>
+                <span class="detail-label">Lane</span>
+                <select id="lane-filter" class="control-select">
+                  <option value="all">All lanes</option>
+                  <option value="incidents">Incidents</option>
+                  <option value="context">Context</option>
+                  <option value="oversight">Oversight</option>
+                  <option value="sanctions">Sanctions</option>
+                  <option value="border">Border</option>
+                  <option value="prevention">Prevention</option>
+                </select>
+              </label>
+              <label>
+                <span class="detail-label">Min severity</span>
+                <select id="severity-filter" class="control-select">
+                  <option value="all">All severities</option>
+                  <option value="critical">Critical+</option>
+                  <option value="high">High+</option>
+                  <option value="elevated">Elevated+</option>
+                  <option value="moderate">Moderate+</option>
+                </select>
+              </label>
+            </div>
+            <form id="source-mute-form" class="source-mute-form">
+              <input id="source-mute-input" type="text" placeholder="Mute source name (e.g. Reuters)" autocomplete="off">
+              <button class="secondary-button" type="submit">Mute source</button>
+            </form>
+            <div id="source-mute-list" class="source-mute-list"></div>
+          </section>
 
           <section class="priority-card actionable briefing-mode-hidden" id="priority-card"></section>
 

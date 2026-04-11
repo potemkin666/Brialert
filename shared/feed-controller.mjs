@@ -1,5 +1,5 @@
 import { isLondonAlert } from './alert-view-model.mjs';
-import { LANE_ALL, MAP_VIEW_MODES, QUEUE_BUCKETS } from './ui-constants.mjs';
+import { LANE_ALL, MAP_VIEW_MODES, QUEUE_BUCKETS, SEVERITY_LEVELS, SEVERITY_ORDER } from './ui-constants.mjs';
 import { reportBackgroundError } from './logger.mjs';
 
 function searchTerms(query) {
@@ -39,14 +39,18 @@ function normaliseHealthSnapshot(health) {
 export function normaliseRenderState(state) {
   const next = state && typeof state === 'object' ? state : {};
   const watched = next.watched instanceof Set ? next.watched : new Set();
+  const mutedSources = next.mutedSources instanceof Set ? next.mutedSources : new Set();
+  const activeSeverityThreshold = String(next.activeSeverityThreshold || 'all');
   return {
     ...next,
     alerts: Array.isArray(next.alerts) ? next.alerts : [],
     searchQuery: String(next.searchQuery || ''),
     activeRegion: String(next.activeRegion || LANE_ALL),
     activeLane: String(next.activeLane || LANE_ALL),
+    activeSeverityThreshold: SEVERITY_LEVELS.includes(activeSeverityThreshold) ? activeSeverityThreshold : 'all',
     mapViewMode: String(next.mapViewMode || MAP_VIEW_MODES.world),
     watched,
+    mutedSources,
     notes: Array.isArray(next.notes) ? next.notes : [],
     sourceRequests: Array.isArray(next.sourceRequests) ? next.sourceRequests : [],
     feedVisibleCount: Math.max(1, Number(next.feedVisibleCount || 0)),
@@ -101,6 +105,20 @@ export function normaliseRenderState(state) {
   };
 }
 
+function passesSeverityThreshold(alert, threshold) {
+  if (!threshold || threshold === 'all') return true;
+  const alertSeverity = String(alert?.severity || '').toLowerCase();
+  const alertRank = SEVERITY_ORDER[alertSeverity] || 0;
+  const thresholdRank = SEVERITY_ORDER[threshold] || 0;
+  return alertRank >= thresholdRank;
+}
+
+function isMutedSource(alert, mutedSources) {
+  const source = String(alert?.source || '').trim().toLowerCase();
+  if (!source) return false;
+  return mutedSources.has(source);
+}
+
 function alertSearchText(alert) {
   const fields = [
     alert?.title,
@@ -135,9 +153,12 @@ export function matchesAlertSearch(alert, query) {
 }
 
 export function filteredAlerts(state) {
+  const mutedSources = new Set([...state.mutedSources].map((value) => String(value || '').trim().toLowerCase()).filter(Boolean));
   return state.alerts.filter((alert) =>
     (state.activeRegion === LANE_ALL || (state.activeRegion === MAP_VIEW_MODES.london ? isLondonAlert(alert) : alert.region === state.activeRegion)) &&
     (state.activeLane === LANE_ALL || alert.lane === state.activeLane) &&
+    passesSeverityThreshold(alert, state.activeSeverityThreshold) &&
+    !isMutedSource(alert, mutedSources) &&
     matchesAlertSearch(alert, state.searchQuery)
   );
 }

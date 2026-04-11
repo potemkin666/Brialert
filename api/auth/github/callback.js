@@ -5,6 +5,7 @@ import {
   clearOauthStateCookie,
   getAuthRedirectConfig,
   getOAuthRedirectUri,
+  logAdminAudit,
   readOauthState,
   setAdminSessionCookie
 } from '../../_lib/admin-session.js';
@@ -77,8 +78,12 @@ export default async function handler(request, response) {
 
     setAdminSessionCookie(request, response, user);
     clearOauthStateCookie(request, response);
+    logAdminAudit('auth.oauth.callback.success', { actor: user.login });
     return redirect(response, appendQueryParams(returnTo, { auth: 'ok' }));
   } catch (error) {
+    logAdminAudit('auth.oauth.callback.failed', {
+      message: error instanceof Error ? error.message : String(error)
+    });
     clearAdminSessionCookie(request, response);
     clearOauthStateCookie(request, response);
     return redirect(response, failRedirectTarget(mapErrorCode(error)));

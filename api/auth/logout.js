@@ -1,6 +1,9 @@
 import {
   applyCorsHeaders,
-  clearAdminSessionCookie
+  clearAdminSessionCookie,
+  ensureMutatingRequestIsTrusted,
+  logAdminAudit,
+  readAdminSession
 } from '../_lib/admin-session.js';
 
 export default async function handler(request, response) {
@@ -16,7 +19,12 @@ export default async function handler(request, response) {
       message: 'Only POST is supported.'
     });
   }
+  if (!ensureMutatingRequestIsTrusted(request, response)) {
+    return response;
+  }
 
+  const session = readAdminSession(request);
   clearAdminSessionCookie(request, response);
+  logAdminAudit('auth.logout', { actor: session?.login || 'anonymous' });
   return response.status(200).json({ ok: true });
 }

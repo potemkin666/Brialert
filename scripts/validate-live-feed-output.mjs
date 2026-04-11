@@ -10,6 +10,15 @@ function fail(message) {
   throw new Error(`live-alerts.json integrity failure: ${message}`);
 }
 
+function validUrl(value) {
+  try {
+    const parsed = new URL(String(value || '').trim());
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 async function main() {
   const raw = await fs.readFile(outputPath, 'utf8');
   let parsed;
@@ -21,6 +30,9 @@ async function main() {
   }
 
   if (!parsed || typeof parsed !== 'object') fail('payload is not an object');
+  if (parsed.schemaVersion !== '2026-04-live-feed-v1') {
+    fail('schemaVersion must be 2026-04-live-feed-v1');
+  }
   if (!Array.isArray(parsed.alerts)) fail('alerts must be an array');
   if (!Number.isFinite(Number(parsed.sourceCount)) || Number(parsed.sourceCount) < 0) {
     fail('sourceCount must be a non-negative number');
@@ -31,12 +43,27 @@ async function main() {
   if (!parsed.health || typeof parsed.health !== 'object') {
     fail('health block is required');
   }
+  if (!parsed.runMetrics || typeof parsed.runMetrics !== 'object') {
+    fail('runMetrics block is required');
+  }
+  if (!parsed.runMetrics.coverage || typeof parsed.runMetrics.coverage !== 'object') {
+    fail('runMetrics.coverage block is required');
+  }
   if (!Number.isFinite(Number(parsed.health.lastSuccessfulSourceCount)) || Number(parsed.health.lastSuccessfulSourceCount) < 0) {
     fail('health.lastSuccessfulSourceCount must be a non-negative number');
   }
   if (!parsed.health.lastAttemptedRefreshTime || Number.isNaN(new Date(parsed.health.lastAttemptedRefreshTime).getTime())) {
     fail('health.lastAttemptedRefreshTime must be a valid timestamp');
   }
+  parsed.alerts.forEach((alert, index) => {
+    if (!alert || typeof alert !== 'object') fail(`alerts[${index}] must be an object`);
+    if (!String(alert.id || '').trim()) fail(`alerts[${index}].id is required`);
+    if (!String(alert.title || '').trim()) fail(`alerts[${index}].title is required`);
+    if (!String(alert.lane || '').trim()) fail(`alerts[${index}].lane is required`);
+    if (!String(alert.region || '').trim()) fail(`alerts[${index}].region is required`);
+    if (!validUrl(alert.sourceUrl)) fail(`alerts[${index}].sourceUrl must be a valid http(s) URL`);
+    if (!String(alert.queueBucket || '').trim()) fail(`alerts[${index}].queueBucket is required`);
+  });
 
   console.log(`live-alerts.json integrity OK (alerts=${parsed.alerts.length}, sourceCount=${parsed.sourceCount})`);
 }

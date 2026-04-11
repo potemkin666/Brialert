@@ -1,5 +1,5 @@
 import { ApiError, loadJsonFile } from './_lib/github-persistence.js';
-import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
+import { applyCorsHeaders, logAdminAudit, requireAdminSession } from './_lib/admin-session.js';
 
 function sendError(response, error) {
   const status = error instanceof ApiError ? error.status : 500;
@@ -50,7 +50,9 @@ export default async function handler(request, response) {
       message: 'Only GET is supported.'
     });
   }
-  if (!requireAdminSession(request, response)) {
+  const session = requireAdminSession(request, response);
+  if (!session) {
+    logAdminAudit('quarantined-sources.unauthenticated', {});
     return response;
   }
 
@@ -77,6 +79,10 @@ export default async function handler(request, response) {
       sources
     });
   } catch (error) {
+    logAdminAudit('quarantined-sources.failed', {
+      actor: session.login,
+      message: error instanceof Error ? error.message : String(error)
+    });
     return sendError(response, error);
   }
 }

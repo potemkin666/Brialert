@@ -30,3 +30,18 @@ export const SOURCE_REQUEST_STATUS_KINDS = Object.freeze({
   success: 'success',
   error: 'error'
 });
+
+export const SEVERITY_LEVELS = Object.freeze([
+  'all',
+  'critical',
+  'high',
+  'elevated',
+  'moderate'
+]);
+
+export const SEVERITY_ORDER = Object.freeze({
+  critical: 4,
+  high: 3,
+  elevated: 2,
+  moderate: 1
+});
