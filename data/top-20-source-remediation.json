@@ -1,24 +1,8 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-11T21:57:30.227Z",
-  "totalSourceErrors": 3,
+  "generatedAt": "2026-04-11T22:35:59.433Z",
+  "totalSourceErrors": 1,
   "top20": [
-    {
-      "id": "euractiv-security-rss",
-      "provider": "Euractiv a Security & Defence (RSS)",
-      "endpoint": "https://www.euractiv.com/sections/security/feed/",
-      "finalUrl": "",
-      "category": "blocked-or-auth",
-      "message": "HTTP 403",
-      "status": 403,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
     {
       "id": "gnet-radicalisation-rss",
       "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation (RSS)",
@@ -34,22 +18,6 @@
       "sourceLane": "prevention",
       "sourceRegion": "",
       "isMachineReadable": true
-    },
-    {
-      "id": "haringey-council-news",
-      "provider": "Haringey Council a News",
-      "endpoint": "https://new.haringey.gov.uk/news",
-      "finalUrl": "",
-      "category": "network-failure",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
     }
   ]
 }
