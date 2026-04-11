@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-11T18:05:28.459Z",
-  "count": 188,
+  "generatedAt": "2026-04-11T18:16:02.308Z",
+  "count": 187,
   "sources": [
     {
       "id": "cumbria-police-newsroom",
@@ -628,25 +628,6 @@
       "reviewBy": "2026-04-11T19:21:50.287Z",
       "lastFailureAt": "2026-04-09T19:21:50.287Z",
       "lastCheckedAt": "2026-04-09T19:21:50.287Z"
-    },
-    {
-      "id": "frontex-news-releases",
-      "provider": "Frontex a News Releases",
-      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
-      "kind": "html",
-      "lane": "border",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-09T17:18:52.492Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 2,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-11T17:18:52.492Z",
-      "lastFailureAt": "2026-04-09T17:18:52.492Z",
-      "lastCheckedAt": "2026-04-09T17:18:52.492Z"
     },
     {
       "id": "belgium-crisis-centre-news",
@@ -3574,5 +3555,6 @@
       "lastFailureAt": "2026-04-05T13:02:51.966Z",
       "lastCheckedAt": "2026-04-05T13:02:51.966Z"
     }
-  ]
+  ],
+  "schemaVersion": 1
 }
