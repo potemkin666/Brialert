@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-11T18:16:02.308Z",
+  "generatedAt": "2026-04-11T18:52:13.800Z",
   "count": 187,
   "sources": [
     {
@@ -3555,6 +3555,5 @@
       "lastFailureAt": "2026-04-05T13:02:51.966Z",
       "lastCheckedAt": "2026-04-05T13:02:51.966Z"
     }
-  ],
-  "schemaVersion": 1
+  ]
 }
