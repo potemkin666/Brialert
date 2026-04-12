@@ -17,7 +17,7 @@ function regionBadgeMarkup(alert) {
   const css = known?.css || 'is-other';
   const flag = known?.flag || '🏳️';
   const label = known?.label || regionLabel(alert?.region);
-  return `<span class="region-badge ${css}">${escapeHtml(flag)} ${escapeHtml(label)}</span>`;
+  return `<span class="region-badge ${css}" aria-label="Region: ${escapeHtml(label)}"><span aria-hidden="true">${escapeHtml(flag)}</span><span>${escapeHtml(label)}</span></span>`;
 }
 
 export function responderCardMarkup(alert, watched) {
