@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T11:04:06.727Z",
-  "count": 182,
+  "generatedAt": "2026-04-12T11:04:30.257Z",
+  "count": 181,
   "sources": [
     {
       "id": "frontex-news-releases",
@@ -33,25 +33,6 @@
       "quarantinedAt": "2026-04-12T10:52:15.680Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveBlockedFailures": 4,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-14T10:52:15.680Z",
-      "lastFailureAt": "2026-04-12T10:52:15.680Z",
-      "lastCheckedAt": "2026-04-12T10:52:15.680Z"
-    },
-    {
-      "id": "politico-europe",
-      "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/",
-      "kind": "html",
-      "lane": "context",
-      "region": "europe",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-12T10:52:15.680Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
