@@ -2126,14 +2126,16 @@
     {
       "id": "homerton-healthcare-news",
       "provider": "Homerton Healthcare NHS Foundation Trust a News",
-      "endpoint": "https://www.homerton.nhs.uk/latest-news/",
+      "endpoint": "https://www.kingsleynapley.co.uk/insights/blogs/criminal-law-blog/rss.xml",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Homerton Healthcare news used for East London hospital and emergency-response context.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T21:05:54.995Z"
     },
     {
       "id": "hounslow-council-news",
