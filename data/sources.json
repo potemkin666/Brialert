@@ -218,13 +218,15 @@
     {
       "id": "german-bfv-news",
       "provider": "German BfV - News",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
+      "endpoint": "https://www.dw.com/en/germany/s-1432",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "German domestic intelligence updates on extremism, terrorism and hostile-state activity."
+      "comment": "German domestic intelligence updates on extremism, terrorism and hostile-state activity.",
+      "quarantined": false,
+      "restoredAt": "2026-04-12T10:57:52.544Z"
     },
     {
       "id": "german-interior-ministry-press",
