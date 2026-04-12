@@ -111,7 +111,7 @@ export const TARGET_SUCCESSFUL_SOURCES_PER_RUN = Math.max(
   1,
   Number.isFinite(Number(process.env.BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
     ? Math.floor(Number(process.env.BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
-    : 45
+    : 60
 );
 export const SOURCE_ITEM_LIMITS = Object.freeze({
   tabloid: 1,

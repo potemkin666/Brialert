@@ -134,14 +134,14 @@
     },
     {
       "id": "rte-ireland-news-rss",
-      "provider": "RTÉ News - Ireland (RSS)",
+      "provider": "RTE News - Ireland (RSS)",
       "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
       "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RTÃ‰ Ireland RSS for Irish national security, dissident republican activity and cross-border incident corroboration."
+      "comment": "RTE Ireland RSS for Irish national security, dissident republican activity and cross-border incident corroboration."
     },
     {
       "id": "switzerland-fedpol-news",

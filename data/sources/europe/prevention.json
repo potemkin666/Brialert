@@ -9,7 +9,7 @@
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Press page of Germany’s Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English."
+      "comment": "Press page of Germany's Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English."
     },
     {
       "id": "dsn-at-english",
@@ -86,7 +86,7 @@
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Norwegian Police Security Service (PST) English page for reporting suspicious activity; describes PST’s role and threat landscape; accessible alternative to the unavailable English news page."
+      "comment": "Norwegian Police Security Service (PST) English page for reporting suspicious activity; describes PST's role and threat landscape; accessible alternative to the unavailable English news page."
     },
     {
       "id": "ran-network",
@@ -108,7 +108,7 @@
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Press-room news page of the Swedish Security Service (Säkerhetspolisen) in English, listing recent news and updates about security threats."
+      "comment": "Press-room news page of the Swedish Security Service (Sakerhetspolisen) in English, listing recent news and updates about security threats."
     },
     {
       "id": "supo-fi-english",

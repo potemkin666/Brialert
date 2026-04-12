@@ -27,16 +27,14 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://blog.bham.ac.uk/urbterr/feed/",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:38:47.646Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "austria-interior-ministry-news",
@@ -76,43 +74,37 @@
     {
       "id": "belgium-crisis-centre-news",
       "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://www.gfatf.org/data-belgium-terrorevents/",
+      "endpoint": "https://crisiscenter.be/en/news",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:56:35.553Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "denmark-pet-news",
       "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://www.nationalbanken.dk/api/rssfeed?topic=News&lang=en",
+      "endpoint": "https://pet.dk/nyheder",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "PET updates on Danish terrorism threats, extremism and national security alerts.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:11:09.619Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "ecfr-feeds-index",
       "provider": "ECFR - Feeds",
-      "endpoint": "https://ecfr.eu/feed/?post_type=post",
+      "endpoint": "https://ecfr.eu/feeds/",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR feed index page for European foreign-policy and security research feed discovery.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:15:21.402Z"
+      "comment": "ECFR feed index page for European foreign-policy and security research feed discovery."
     },
     {
       "id": "enisa-news",
@@ -233,16 +225,14 @@
     {
       "id": "german-bfv-news",
       "provider": "German BfV - News",
-      "endpoint": "https://deutschlandinenglish.com/topics/police#google_vignette",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "German domestic intelligence updates on extremism, terrorism and hostile-state activity.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:57:47.555Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "german-interior-ministry-press",
@@ -327,6 +317,32 @@
       "refreshEveryHours": 1
     },
     {
+      "id": "breakingnews-ie",
+      "provider": "BreakingNews.ie",
+      "endpoint": "https://feeds.breakingnews.ie/bntopstories",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "major_media",
+      "comment": "Ireland top stories feed."
+    },
+    {
+      "id": "independent-ie",
+      "provider": "Independent.ie",
+      "endpoint": "https://www.independent.ie/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "major_media",
+      "comment": "Ireland Independent RSS feed."
+    },
+    {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
       "endpoint": "https://www.politie.be/5998/en/news",
@@ -341,16 +357,14 @@
     {
       "id": "czech-police-news",
       "provider": "Police of the Czech Republic - News",
-      "endpoint": "https://tracefeed.com/a/czech-republic/",
+      "endpoint": "https://www.policie.cz/clanek/news.aspx",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:12:52.217Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "dutch-police-rss-index",
@@ -451,30 +465,26 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.bing.com/search?q=spanish+terrorism+rss&cvid=3846f7a939b34f3582f2ea88effb1b98&gs_lcrp=EgRlZGdlKgYIABBFGDkyBggAEEUYOdIBCDQwOTVqMGo0qAIIsAIB&FORM=ANAB01&PC=LCTS",
+      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Spanish National Police press updates for terrorism arrests and major security operations.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:53:34.082Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
-      "endpoint": "https://world.einnews.com/news/romania-terrorism",
+      "endpoint": "https://www.politiaromana.ro/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:58:44.074Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "sweden-police-news",
@@ -900,15 +910,13 @@
     {
       "id": "ecfr-publications",
       "provider": "European Council on Foreign Relations (ECFR) a Publications",
-      "endpoint": "https://ecfr.eu/feed/",
+      "endpoint": "https://ecfr.eu/publications/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR research and commentary on European security, terrorism, and foreign policy used as specialist context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:59:18.342Z"
+      "comment": "ECFR research and commentary on European security, terrorism, and foreign policy used as specialist context."
     },
     {
       "id": "euronews-europe",
@@ -946,16 +954,14 @@
     {
       "id": "french-interior-ministry-news",
       "provider": "French Ministry of the Interior - News",
-      "endpoint": "https://www.rfi.fr/en/france/",
+      "endpoint": "https://www.interieur.gouv.fr/actualites",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "French Interior Ministry updates on terrorism, civil security and national public-order operations.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:55:30.052Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "icct-perspectives-on-terrorism",
@@ -1016,14 +1022,14 @@
     },
     {
       "id": "rte-ireland-news-rss",
-      "provider": "RTÉ News - Ireland (RSS)",
+      "provider": "RTE News - Ireland (RSS)",
       "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
       "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RTÃ‰ Ireland RSS for Irish national security, dissident republican activity and cross-border incident corroboration."
+      "comment": "RTE Ireland RSS for Irish national security, dissident republican activity and cross-border incident corroboration."
     },
     {
       "id": "switzerland-fedpol-news",
@@ -1194,16 +1200,14 @@
     {
       "id": "netherlands-prosecution-news",
       "provider": "Dutch Public Prosecution Service - News",
-      "endpoint": "https://nltimes.nl/categories/crime",
+      "endpoint": "https://www.om.nl/actueel/nieuws",
       "kind": "html",
       "lane": "oversight",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Dutch prosecution updates on terrorism cases, charges and court proceedings.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T19:59:55.079Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "bfv-de-english",
@@ -1214,7 +1218,7 @@
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Press page of Germany’s Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English.",
+      "comment": "Press page of Germany's Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English.",
       "refreshEveryHours": 1
     },
     {
@@ -1297,7 +1301,7 @@
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Norwegian Police Security Service (PST) English page for reporting suspicious activity; describes PST’s role and threat landscape; accessible alternative to the unavailable English news page.",
+      "comment": "Norwegian Police Security Service (PST) English page for reporting suspicious activity; describes PST's role and threat landscape; accessible alternative to the unavailable English news page.",
       "refreshEveryHours": 1
     },
     {
@@ -1321,7 +1325,7 @@
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Press-room news page of the Swedish Security Service (Säkerhetspolisen) in English, listing recent news and updates about security threats.",
+      "comment": "Press-room news page of the Swedish Security Service (Sakerhetspolisen) in English, listing recent news and updates about security threats.",
       "refreshEveryHours": 1
     },
     {
@@ -1558,15 +1562,13 @@
     {
       "id": "nato-news-rss",
       "provider": "NATO a News (RSS)",
-      "endpoint": "https://tracefeed.com/global/nato/",
+      "endpoint": "https://www.nato.int/cps/en/natohq/rss/news.rss",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:00:24.802Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "occrp-news",
@@ -1771,16 +1773,14 @@
     {
       "id": "fatf-news",
       "provider": "Financial Action Task Force (FATF) a News",
-      "endpoint": "https://www.rss.org.bb/newsroom",
+      "endpoint": "https://www.fatf-gafi.org/en/publications.html",
       "kind": "html",
       "lane": "sanctions",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "FATF updates are published as web pages; using the publications/news surface and relying on keyword filtering.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:01:12.698Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "interpol-notices",
@@ -1988,16 +1988,14 @@
     {
       "id": "enfield-council-news",
       "provider": "Enfield Council a News and Events",
-      "endpoint": "https://www.enfieldindependent.co.uk/news/rss/",
+      "endpoint": "https://www.enfield.gov.uk/news-and-events",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Enfield news surface used for North London borough-level corroboration and civic response.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:02:05.741Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "gosh-news",
@@ -2674,16 +2672,14 @@
     {
       "id": "tower-hamlets-council-news",
       "provider": "Tower Hamlets Council a News",
-      "endpoint": "https://towerhamlets.public-i.tv/core/data/5155",
+      "endpoint": "https://www.towerhamlets.gov.uk/rss/news.xml",
       "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Replaced legacy ASPX listing with Tower Hamlets official news RSS feed.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:03:09.750Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "uclh-news",
@@ -2968,16 +2964,14 @@
     {
       "id": "gov-uk-defence-intelligence",
       "provider": "UK Defence Intelligence a GOV.UK",
-      "endpoint": "https://www.govwire.co.uk/rss",
+      "endpoint": "https://www.gov.uk/government/organisations/defence-intelligence",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Defence Intelligence publications used for UK threat assessment and intelligence context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:03:50.210Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "gov-uk-terrorism-search",
@@ -3283,6 +3277,552 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Wiltshire emergency services news site for local incident corroboration and public reporting."
+    },
+    {
+      "id": "belfast-live",
+      "provider": "Belfast Live",
+      "endpoint": "https://www.belfastlive.co.uk/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Northern Ireland local news RSS."
+    },
+    {
+      "id": "birmingham-mail",
+      "provider": "Birmingham Mail",
+      "endpoint": "https://www.birminghammail.co.uk/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Birmingham local news RSS."
+    },
+    {
+      "id": "breaking-news-today",
+      "provider": "Breaking News Today",
+      "endpoint": "https://www.breakingnewstoday.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "UK breaking news feed."
+    },
+    {
+      "id": "cambridge-news",
+      "provider": "Cambridge News",
+      "endpoint": "https://www.cambridge-news.co.uk/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Cambridgeshire local news RSS."
+    },
+    {
+      "id": "channel-4-news",
+      "provider": "Channel 4 News",
+      "endpoint": "https://www.channel4.com/news/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "trigger",
+      "reliabilityProfile": "major_media",
+      "comment": "Channel 4 News RSS feed."
+    },
+    {
+      "id": "consett-magazine",
+      "provider": "Consett Magazine",
+      "endpoint": "https://consettmagazine.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "general_media",
+      "comment": "Local community magazine RSS."
+    },
+    {
+      "id": "daily-echo",
+      "provider": "Daily Echo",
+      "endpoint": "https://www.dailyecho.co.uk/news/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Hampshire/Southampton local news RSS."
+    },
+    {
+      "id": "daily-express",
+      "provider": "Daily Express",
+      "endpoint": "https://feeds.feedburner.com/daily-express-news-showbiz",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "tabloid",
+      "comment": "Daily Express feed; tabloid gating applies."
+    },
+    {
+      "id": "daily-mail-online",
+      "provider": "Daily Mail Online - Popular Stories",
+      "endpoint": "https://www.dailymail.co.uk/home/index.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "tabloid",
+      "comment": "Daily Mail popular stories RSS; tabloid gating applies."
+    },
+    {
+      "id": "daily-mirror",
+      "provider": "Daily Mirror",
+      "endpoint": "https://www.mirror.co.uk/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "tabloid",
+      "comment": "Daily Mirror RSS; tabloid gating applies."
+    },
+    {
+      "id": "daily-politics",
+      "provider": "Daily Politics",
+      "endpoint": "https://www.dailypolitics.com/feed.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Politics analysis RSS."
+    },
+    {
+      "id": "deadline-news",
+      "provider": "Deadline News",
+      "endpoint": "https://www.deadlinenews.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Scotland news agency feed."
+    },
+    {
+      "id": "evening-standard",
+      "provider": "Evening Standard",
+      "endpoint": "https://www.standard.co.uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "trigger",
+      "reliabilityProfile": "major_media",
+      "comment": "London Evening Standard RSS feed."
+    },
+    {
+      "id": "glasgow-times",
+      "provider": "Glasgow Times",
+      "endpoint": "https://www.glasgowtimes.co.uk/news/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Glasgow local news RSS."
+    },
+    {
+      "id": "grimsby-telegraph",
+      "provider": "Grimsby Telegraph",
+      "endpoint": "https://www.grimsbytelegraph.co.uk/news/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Grimsby local news RSS."
+    },
+    {
+      "id": "herald-scotland-news",
+      "provider": "Herald Scotland - News",
+      "endpoint": "https://www.heraldscotland.com/news/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "major_media",
+      "comment": "Scotland news RSS."
+    },
+    {
+      "id": "huffpost-uk",
+      "provider": "HuffPost UK",
+      "endpoint": "https://www.huffingtonpost.co.uk/feeds/index.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "HuffPost UK RSS feed."
+    },
+    {
+      "id": "larne-times",
+      "provider": "Larne Times",
+      "endpoint": "https://www.larnetimes.co.uk/news/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Northern Ireland local news RSS."
+    },
+    {
+      "id": "manchester-evening-news",
+      "provider": "Manchester Evening News",
+      "endpoint": "https://www.manchestereveningnews.co.uk/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Manchester local news RSS."
+    },
+    {
+      "id": "metro",
+      "provider": "Metro",
+      "endpoint": "https://metro.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "tabloid",
+      "comment": "Metro UK RSS; tabloid gating applies."
+    },
+    {
+      "id": "news-uk",
+      "provider": "News UK",
+      "endpoint": "https://www.news.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "official_context",
+      "comment": "Publisher corporate feed."
+    },
+    {
+      "id": "pinknews",
+      "provider": "PinkNews",
+      "endpoint": "https://www.pinknews.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "UK community news RSS."
+    },
+    {
+      "id": "politics-co-uk",
+      "provider": "Politics.co.uk",
+      "endpoint": "https://www.politics.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "corroboration",
+      "reliabilityProfile": "general_media",
+      "comment": "UK politics analysis RSS."
+    },
+    {
+      "id": "positive-news",
+      "provider": "Positive News",
+      "endpoint": "https://www.positive.news/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "general_media",
+      "comment": "UK features and analysis RSS."
+    },
+    {
+      "id": "scottish-field",
+      "provider": "Scottish Field",
+      "endpoint": "https://www.scottishfield.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "general_media",
+      "comment": "Scotland features RSS."
+    },
+    {
+      "id": "surgezirc-uk",
+      "provider": "SurgeZirc UK",
+      "endpoint": "https://surgezirc.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "general_media",
+      "comment": "UK news/opinion RSS."
+    },
+    {
+      "id": "the-argus-news",
+      "provider": "The Argus",
+      "endpoint": "https://www.theargus.co.uk/news/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Brighton/Sussex local news RSS."
+    },
+    {
+      "id": "the-bolton-news",
+      "provider": "The Bolton News - News",
+      "endpoint": "https://www.theboltonnews.co.uk/news/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Bolton local news RSS."
+    },
+    {
+      "id": "church-of-england-newspaper",
+      "provider": "Church of England Newspaper",
+      "endpoint": "https://www.churchnewspaper.com/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "specialist_research",
+      "comment": "Religion and church news feed; specialist context."
+    },
+    {
+      "id": "the-daily-mash",
+      "provider": "The Daily Mash",
+      "endpoint": "https://www.thedailymash.co.uk/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "tabloid",
+      "comment": "Satire feed; strict keyword gating applies."
+    },
+    {
+      "id": "daily-record",
+      "provider": "Daily Record",
+      "endpoint": "https://www.dailyrecord.co.uk/news/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "tabloid",
+      "comment": "Daily Record RSS; tabloid gating applies."
+    },
+    {
+      "id": "guardian-uk-top-stories",
+      "provider": "The Guardian - UK Top Stories",
+      "endpoint": "https://www.theguardian.com/uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "trigger",
+      "reliabilityProfile": "major_media",
+      "comment": "Guardian UK top stories RSS."
+    },
+    {
+      "id": "independent-top-stories",
+      "provider": "The Independent - Top Stories",
+      "endpoint": "https://www.independent.co.uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "trigger",
+      "reliabilityProfile": "major_media",
+      "comment": "Independent top stories RSS."
+    },
+    {
+      "id": "northern-echo-news",
+      "provider": "The Northern Echo - News",
+      "endpoint": "https://www.thenorthernecho.co.uk/news/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "North East local news RSS."
+    },
+    {
+      "id": "the-poke",
+      "provider": "The Poke",
+      "endpoint": "https://www.thepoke.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "research",
+      "reliabilityProfile": "tabloid",
+      "comment": "Satire/comedy feed; strict keyword gating applies."
+    },
+    {
+      "id": "scarborough-news",
+      "provider": "The Scarborough News",
+      "endpoint": "https://www.thescarboroughnews.co.uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Scarborough local news RSS."
+    },
+    {
+      "id": "the-scotsman-news",
+      "provider": "The Scotsman - News",
+      "endpoint": "https://www.scotsman.com/news/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "major_media",
+      "comment": "Scotsman news RSS."
+    },
+    {
+      "id": "the-scottish-sun",
+      "provider": "The Scottish Sun",
+      "endpoint": "https://www.thescottishsun.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "tabloid",
+      "comment": "Scottish Sun RSS; tabloid gating applies."
+    },
+    {
+      "id": "the-sun",
+      "provider": "The Sun",
+      "endpoint": "https://www.thesun.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "tabloid",
+      "comment": "The Sun RSS; tabloid gating applies."
+    },
+    {
+      "id": "the-week-uk",
+      "provider": "The Week UK",
+      "endpoint": "https://www.theweek.co.uk/feeds/all",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "corroboration",
+      "reliabilityProfile": "general_media",
+      "comment": "UK digest RSS feed."
+    },
+    {
+      "id": "the-york-press-news",
+      "provider": "The York Press - News",
+      "endpoint": "https://www.yorkpress.co.uk/news/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "York local news RSS."
+    },
+    {
+      "id": "wales-online",
+      "provider": "WalesOnline",
+      "endpoint": "https://www.walesonline.co.uk/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "general_media",
+      "comment": "Wales local news RSS."
     },
     {
       "id": "avon-and-somerset-police-news-html",
@@ -5475,116 +6015,6 @@
       "requiresKeywordMatch": true,
       "comment": "OFAC retired its public RSS feed in 2025; using the official Recent Actions page.",
       "refreshEveryHours": 1
-    },
-    {
-      "id": "urban-terrorism-in-europe",
-      "provider": "University of Birmingham - Urban Terrorism in Europe",
-      "endpoint": "https://blog.bham.ac.uk/urbterr/feed",
-      "kind": "rss",
-      "lane": "context",
-      "region": "eu",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "University of Birmingham blog on urban terrorism in Europe."
-    },
-    {
-      "id": "new-york-times-terrorism",
-      "provider": "The New York Times - Terrorism",
-      "endpoint": "https://www.nytimes.com/topic/subject/terrorism",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "NYT terrorism topic page. RSS endpoint missing/truncated; replace with exact collection RSS before relying on this source."
-    },
-    {
-      "id": "aymenn-jawad-al-tamimi-blog",
-      "provider": "Aymenn Jawad Al-Tamimi - Blog",
-      "endpoint": "https://aymennjawad.org/jawad/rss.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Independent specialist analysis focused heavily on Syria and regional militant activity."
-    },
-    {
-      "id": "kyle-orton-blog",
-      "provider": "Kyle Orton - Blog",
-      "endpoint": "https://kyleorton.co.uk/feed",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Independent researcher covering terrorism, geopolitics and intelligence issues."
-    },
-    {
-      "id": "intelnews",
-      "provider": "intelNews",
-      "endpoint": "https://intelnews.org/feed",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Security and intelligence commentary site with relevant terrorism coverage."
-    },
-    {
-      "id": "caert",
-      "provider": "CAERT - African Centre for the Study and Research on Terrorism",
-      "endpoint": "https://caert.org.dz/feed",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "African Centre for the Study and Research on Terrorism."
-    },
-    {
-      "id": "occrp",
-      "provider": "OCCRP",
-      "endpoint": "https://www.occrp.org/en/investigations/page/1?format=feed&type=rss",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Investigative journalism organization focused on crime, corruption, and cross-border accountability reporting."
-    },
-    {
-      "id": "citizen-lab",
-      "provider": "The Citizen Lab",
-      "endpoint": "https://citizenlab.ca/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Research unit at University of Toronto investigating digital threats, surveillance, and disinformation."
-    },
-    {
-      "id": "gijn",
-      "provider": "GIJN",
-      "endpoint": "https://gijn.org/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Global Investigative Journalism Network resources, tools, methods, and stories."
-    },
-    {
-      "id": "krebsonsecurity",
-      "provider": "Krebs on Security",
-      "endpoint": "https://krebsonsecurity.com/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "In-depth security reporting and investigations on cybercrime and infrastructure abuse."
     }
   ]
 }

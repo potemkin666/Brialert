@@ -261,6 +261,32 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Sapo news on Swedish terror-threat developments, extremism and security operations."
+    },
+    {
+      "id": "breakingnews-ie",
+      "provider": "BreakingNews.ie",
+      "endpoint": "https://feeds.breakingnews.ie/bntopstories",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "major_media",
+      "comment": "Ireland top stories feed."
+    },
+    {
+      "id": "independent-ie",
+      "provider": "Independent.ie",
+      "endpoint": "https://www.independent.ie/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "sourceTier": "context",
+      "reliabilityProfile": "major_media",
+      "comment": "Ireland Independent RSS feed."
     }
   ]
 }
