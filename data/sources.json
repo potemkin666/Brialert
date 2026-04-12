@@ -2092,14 +2092,16 @@
     {
       "id": "heathrow-media-centre",
       "provider": "Heathrow a Media Centre",
-      "endpoint": "https://mediacentre.heathrow.com/",
+      "endpoint": "https://www.heathrow.com/latest-news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Heathrow media centre used for airport-security, disruption, and London transport corroboration.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T20:58:56.659Z"
     },
     {
       "id": "hillingdon-council-news",
