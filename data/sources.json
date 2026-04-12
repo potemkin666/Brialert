@@ -1765,14 +1765,16 @@
     {
       "id": "fatf-news",
       "provider": "Financial Action Task Force (FATF) a News",
-      "endpoint": "https://www.fatf-gafi.org/en/publications.html",
+      "endpoint": "https://www.rss.org.bb/newsroom",
       "kind": "html",
       "lane": "sanctions",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "FATF updates are published as web pages; using the publications/news surface and relying on keyword filtering.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T20:01:12.698Z"
     },
     {
       "id": "interpol-notices",
