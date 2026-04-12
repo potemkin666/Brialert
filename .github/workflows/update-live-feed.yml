@@ -135,6 +135,11 @@ jobs:
           name: live-feed-output
           path: .
 
+      - name: Sync with main before commit
+        run: |
+          git fetch origin main
+          git rebase origin/main
+
       - name: Commit refreshed feed data
         run: |
           git config user.name 'github-actions[bot]'
@@ -165,7 +170,20 @@ jobs:
           fi
           echo 'Initial push failed (likely non-fast-forward). Rebasing and retrying once.'
           git fetch origin main
-          git pull --rebase origin main
+          if git pull --rebase origin main; then
+            git push
+            exit 0
+          fi
+          echo 'Rebase conflict detected in generated artifacts; resolving in favor of newly generated files.'
+          git checkout --theirs live-alerts.json || true
+          git checkout --theirs data/quarantined-sources.json || true
+          git checkout --theirs source-quarantine.html || true
+          git checkout --theirs data/source-remediation-sweep.json || true
+          git checkout --theirs data/top-20-source-remediation.json || true
+          git checkout --theirs data/brialert.sqlite || true
+          git add live-alerts.json data/quarantined-sources.json source-quarantine.html \
+            data/source-remediation-sweep.json data/top-20-source-remediation.json data/brialert.sqlite || true
+          git rebase --continue
           git push
 
   verify-live-feed-freshness:
