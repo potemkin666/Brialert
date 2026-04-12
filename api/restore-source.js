@@ -24,6 +24,8 @@ const QUARANTINE_ONLY_FIELDS = new Set([
 ]);
 
 const FEED_WORKFLOW_FILENAME = 'update-live-feed.yml';
+const RESTORE_AUDIT_PATH = 'data/restore-audit.json';
+const RESTORE_AUDIT_HISTORY_LIMIT = 20;
 
 function sendError(response, error) {
   const status = error instanceof ApiError ? error.status : 500;
@@ -92,6 +94,21 @@ function detectDuplicateConflict(sources, excludedSourceId, replacementUrl) {
     if (normaliseEndpoint(entry.endpoint) === candidate) return true;
   }
   return false;
+}
+
+function normaliseRestoreAuditHistory(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw.filter((entry) => entry && typeof entry === 'object');
+}
+
+function buildRestoreAuditPayload(previous, entry) {
+  const history = normaliseRestoreAuditHistory(previous?.history);
+  const nextHistory = [entry, ...history].slice(0, RESTORE_AUDIT_HISTORY_LIMIT);
+  return {
+    generatedAt: entry.at,
+    lastRestore: entry,
+    history: nextHistory
+  };
 }
 
 /**
@@ -188,6 +205,17 @@ export default async function handler(request, response) {
 
     const quarantinedSource = quarantinedSources[quarantineIndex];
     const restoredSource = cleanupRestoredSource(quarantinedSource, replacementUrl);
+    let previousRestoreAudit = null;
+    try {
+      previousRestoreAudit = (await loadJsonFile(RESTORE_AUDIT_PATH)).data;
+    } catch {}
+    const restoreAuditEntry = {
+      at: new Date().toISOString(),
+      sourceId,
+      provider: String(restoredSource?.provider || quarantinedSource?.provider || ''),
+      replacementUrl
+    };
+    const nextRestoreAuditPayload = buildRestoreAuditPayload(previousRestoreAudit, restoreAuditEntry);
 
     const nextActiveSources = [...activeSources];
     const activeIndex = nextActiveSources.findIndex((entry) => entry?.id === sourceId);
@@ -233,7 +261,8 @@ export default async function handler(request, response) {
       {
         'data/quarantined-sources.json': nextQuarantinePayload,
         'data/sources.json': nextSourcesPayload,
-        [shardResolution.shardPath]: nextShardPayload
+        [shardResolution.shardPath]: nextShardPayload,
+        [RESTORE_AUDIT_PATH]: nextRestoreAuditPayload
       },
       `Restore quarantined source ${sourceId}`
     );

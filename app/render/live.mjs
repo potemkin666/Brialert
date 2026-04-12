@@ -6,7 +6,7 @@ import {
   regionLabel
 } from '../../shared/alert-view-model.mjs';
 import { laneLabels } from '../../shared/ui-data.mjs';
-import { formatTimeHm, parseValidDate } from '../../shared/time-format.mjs';
+import { formatAgeFromDate, formatTimeHm, parseValidDate } from '../../shared/time-format.mjs';
 import {
   supportingCardMarkup,
   responderCardMarkup
@@ -47,6 +47,68 @@ function formatStatusTime(value) {
 
 function trimTrailingPeriod(value) {
   return String(value || '').trim().replace(/\.+$/, '');
+}
+
+function formatAuditStamp(value) {
+  const parsed = parseValidDate(value);
+  if (!parsed) return 'unknown';
+  const time = formatTimeHm(parsed);
+  const age = formatAgeFromDate(parsed);
+  return time ? `${time} (${age})` : age;
+}
+
+function formatFailureLabel(entry) {
+  if (!entry) return '';
+  const provider = entry.provider || entry.id || 'Unknown source';
+  const category = entry.category || entry.errorCode || 'unknown';
+  const status = Number.isFinite(entry.status) ? `HTTP ${entry.status}` : '';
+  const message = entry.message ? trimTrailingPeriod(entry.message) : '';
+  const meta = [category, status].filter(Boolean).join(' | ');
+  const suffix = message ? ` - ${message}` : '';
+  return `${provider} - ${meta}${suffix}`;
+}
+
+export function renderAuditBanner({ state, elements }) {
+  if (!elements.auditBanner) return;
+  const lastRefresh = state.liveFeedHealth?.lastSuccessfulRefreshTime || state.liveFeedGeneratedAt;
+  const sourceCount = displaySourceCount(state);
+  const restoreAudit = state.liveFeedLastRestore;
+  const errors = Array.isArray(state.liveFeedSourceErrors) ? state.liveFeedSourceErrors : [];
+  const shouldShow = Boolean(lastRefresh || restoreAudit || errors.length || sourceCount);
+
+  elements.auditBanner.classList.toggle('hidden', !shouldShow);
+  if (!shouldShow) return;
+
+  if (elements.auditLastRefresh) {
+    elements.auditLastRefresh.textContent = lastRefresh
+      ? `Last refresh: ${formatAuditStamp(lastRefresh)}`
+      : 'Last refresh: unknown';
+  }
+  if (elements.auditSourceCount) {
+    elements.auditSourceCount.textContent = sourceCount
+      ? `Sources checked: ${sourceCount}`
+      : 'Sources checked: unknown';
+  }
+  if (elements.auditLastRestore) {
+    if (restoreAudit?.at) {
+      const restoreMeta = restoreAudit.provider || restoreAudit.sourceId;
+      elements.auditLastRestore.textContent = restoreMeta
+        ? `Last restore: ${formatAuditStamp(restoreAudit.at)} (${restoreMeta})`
+        : `Last restore: ${formatAuditStamp(restoreAudit.at)}`;
+    } else {
+      elements.auditLastRestore.textContent = 'Last restore: none yet';
+    }
+  }
+  if (elements.auditFailures) {
+    if (errors.length) {
+      const top = errors.slice(0, 3).map((entry) => {
+        return `<li>${escapeHtml(formatFailureLabel(entry))}</li>`;
+      }).join('');
+      elements.auditFailures.innerHTML = top;
+    } else {
+      elements.auditFailures.innerHTML = `<li class="audit-empty">No source failures recorded in the latest run.</li>`;
+    }
+  }
 }
 
 export function renderPriority({ state, elements, view, modalController }) {

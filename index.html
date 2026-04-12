@@ -55,6 +55,25 @@
           </div>
         </header>
 
+        <section class="panel audit-banner hidden" id="audit-banner" aria-live="polite">
+          <div class="audit-header">
+            <div>
+              <p class="eyebrow">Feed Audit</p>
+              <h3>Refresh + Restore Pulse</h3>
+              <p class="panel-copy">Live health, last refresh, and any sources that failed the latest run.</p>
+            </div>
+            <div class="audit-metrics">
+              <span class="audit-chip" id="audit-last-refresh">Last refresh: --</span>
+              <span class="audit-chip" id="audit-source-count">Sources checked: --</span>
+              <span class="audit-chip" id="audit-last-restore">Last restore: --</span>
+            </div>
+          </div>
+          <div class="audit-failures">
+            <span class="detail-label">Top Failures</span>
+            <ul id="audit-failures"></ul>
+          </div>
+        </section>
+
         <section class="bulldog-card actionable briefing-mode-hidden" id="albert-card">
           <img src="assets/albert-icon.jpg" alt="Albert bulldog mascot">
           <div>

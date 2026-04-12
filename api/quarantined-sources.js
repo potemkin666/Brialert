@@ -36,6 +36,30 @@ function sanitiseSources(rawSources) {
   return { sources, droppedCount };
 }
 
+function sanitiseRequests(rawRequests) {
+  const entries = Array.isArray(rawRequests) ? rawRequests : [];
+  const seenIds = new Set();
+  const requests = [];
+  let droppedCount = 0;
+
+  for (const entry of entries) {
+    if (!entry || typeof entry !== 'object') {
+      droppedCount += 1;
+      continue;
+    }
+    const id = typeof entry.id === 'string' ? entry.id.trim() : '';
+    if (!id) {
+      droppedCount += 1;
+      continue;
+    }
+    if (seenIds.has(id)) continue;
+    seenIds.add(id);
+    requests.push(entry);
+  }
+
+  return { requests, droppedCount };
+}
+
 export default async function handler(request, response) {
   applyCorsHeaders(request, response, 'GET,OPTIONS');
   if (request.method === 'OPTIONS') {
@@ -55,14 +79,26 @@ export default async function handler(request, response) {
   }
 
   try {
-    const file = await loadJsonFile('data/quarantined-sources.json');
+    const [file, requestsFile] = await Promise.all([
+      loadJsonFile('data/quarantined-sources.json'),
+      loadJsonFile('data/source-requests.json')
+    ]);
     const {
       sources,
       droppedCount
     } = sanitiseSources(file.data?.sources);
+    const {
+      requests,
+      droppedCount: droppedRequests
+    } = sanitiseRequests(requestsFile.data?.requests || requestsFile.data);
     if (droppedCount > 0) {
       console.warn(
         `quarantined-sources GET skipped ${droppedCount} invalid source entr${droppedCount === 1 ? 'y' : 'ies'}.`
+      );
+    }
+    if (droppedRequests > 0) {
+      console.warn(
+        `quarantined-sources GET skipped ${droppedRequests} invalid source request entr${droppedRequests === 1 ? 'y' : 'ies'}.`
       );
     }
     const generatedAt = typeof file.data?.generatedAt === 'string'
@@ -74,7 +110,8 @@ export default async function handler(request, response) {
       restoreAvailable: true,
       generatedAt,
       count: Number.isFinite(Number(file.data?.count)) ? Number(file.data.count) : sources.length,
-      sources
+      sources,
+      sourceRequests: requests
     });
   } catch (error) {
     return sendError(response, error);

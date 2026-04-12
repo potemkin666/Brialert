@@ -37,6 +37,7 @@ import {
   SOURCE_FAILURE_COOLDOWN_HOURS,
   TARGET_SUCCESSFUL_SOURCES_PER_RUN,
   SOURCE_ITEM_LIMITS,
+  AUTO_QUARANTINE_FAILURE_THRESHOLD,
   isMachineReadableSourceKind,
   sourceDeterministicHash,
   shouldRefreshSourceThisRun,
@@ -46,6 +47,7 @@ import {
   sourceRemediationSweepPath,
   sqlitePath,
   topSourceRemediationPath,
+  restoreAuditPath,
   sourcePath,
   sourceRequestsPath
 } from './build-live-feed/config.mjs';
@@ -91,6 +93,32 @@ const execFile = promisify(execFileCallback);
 function parseIsoMs(value) {
   const ms = new Date(value || '').getTime();
   return Number.isFinite(ms) ? ms : 0;
+}
+
+function normaliseRestoreAudit(payload) {
+  if (!payload || typeof payload !== 'object') return null;
+  const lastRestore = payload.lastRestore && typeof payload.lastRestore === 'object'
+    ? payload.lastRestore
+    : null;
+  if (!lastRestore || typeof lastRestore.at !== 'string' || !lastRestore.at.trim()) return null;
+  return {
+    generatedAt: typeof payload.generatedAt === 'string' ? payload.generatedAt : null,
+    lastRestore: {
+      at: lastRestore.at,
+      sourceId: typeof lastRestore.sourceId === 'string' ? lastRestore.sourceId : '',
+      provider: typeof lastRestore.provider === 'string' ? lastRestore.provider : '',
+      replacementUrl: typeof lastRestore.replacementUrl === 'string' ? lastRestore.replacementUrl : ''
+    }
+  };
+}
+
+async function safeLoadRestoreAudit() {
+  try {
+    const raw = await readJsonFile(restoreAuditPath);
+    return normaliseRestoreAudit(raw);
+  } catch {
+    return null;
+  }
 }
 
 function sourceHealthEntry(previousHealth, sourceId) {
@@ -235,6 +263,14 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       next.quarantined = true;
       next.quarantinedAt = generatedAt;
       next.quarantineReason = 'Repeated dead-or-moved-url failures';
+      next.autoSkipReason = 'review-quarantine';
+      next.cooldownUntil = null;
+      return next;
+    }
+    if (!next.quarantined && next.consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD) {
+      next.quarantined = true;
+      next.quarantinedAt = generatedAt;
+      next.quarantineReason = `Repeated failures (${next.consecutiveFailures}) need manual review`;
       next.autoSkipReason = 'review-quarantine';
       next.cooldownUntil = null;
       return next;
@@ -550,6 +586,11 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       border-color: rgba(255, 196, 122, 0.33);
       color: #ffdda8;
     }
+    .pill.suggest {
+      background: rgba(159, 245, 188, 0.14);
+      border-color: rgba(159, 245, 188, 0.4);
+      color: #b8ffd2;
+    }
     .auth-panel {
       display: flex;
       align-items: center;
@@ -638,6 +679,47 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
     .action button:hover { filter: brightness(1.04); }
     .action button:disabled { cursor: wait; opacity: 0.72; }
+    .action button.approve {
+      background: #9ff5bc;
+      color: #09101c;
+    }
+    .suggestion-row td {
+      background: rgba(159, 245, 188, 0.08);
+    }
+    .suggestion-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(159, 245, 188, 0.45);
+      background: rgba(159, 245, 188, 0.16);
+      color: #caffdc;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(127, 156, 203, 0.35);
+      background: rgba(159, 208, 255, 0.12);
+      color: #d8e7ff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
     .helper-note, .status-note { min-height: 18px; font-size: 12px; }
     .helper-note { color: #8ea3c8; }
     .status-note { color: #9fb2d6; }
@@ -680,6 +762,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     <div class="meta" id="meta">
       <span class="pill">Generated: ${clean(generatedAt)}</span>
       <span class="pill">Quarantined sources: ${entries.length}</span>
+      <span class="pill suggest">Pending suggestions: 0</span>
       <span class="pill">SLA: review within 48h</span>
     </div>
     <div class="card">
@@ -695,10 +778,10 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
             <th>Last Error</th>
             <th>Blocked Runs</th>
             <th>Dead/Moved Runs</th>
-            <th>SLA Review By</th>
-            <th>Endpoint</th>
-            <th>Restore</th>
-          </tr>
+          <th>SLA Review By</th>
+          <th>Endpoint</th>
+          <th>Action</th>
+        </tr>
         </thead>
         <tbody id="quarantine-body">
           <tr><td colspan="11" class="empty">Loading quarantined sources...</td></tr>
@@ -756,6 +839,9 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     function restoreUrlFor(base) {
       return apiUrlFor(base, '/api/restore-source');
     }
+    function approveUrlFor(base) {
+      return apiUrlFor(base, '/api/approve-source');
+    }
     function sessionUrlFor(base) {
       return apiUrlFor(base, '/api/auth/session');
     }
@@ -797,12 +883,16 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     const authNote = document.getElementById('auth-note');
     const authActions = document.getElementById('auth-actions');
     let currentEntries = [];
+    let currentSuggestions = [];
     let currentDataMode = 'live';
     let restoreEnabled = true;
+    let approveEnabled = true;
     const READ_ONLY_NOTE = 'Restore is unavailable in read-only mode because the backend write API is not reachable.';
+    const APPROVE_READ_ONLY_NOTE = 'Approval is unavailable in read-only mode because the backend write API is not reachable.';
     const TOAST_DURATION_MS = 1900;
     const LOAD_FETCH_TIMEOUT_MS = 12000;
     const PROBE_FETCH_TIMEOUT_MS = 5000;
+    const APPROVE_FETCH_TIMEOUT_MS = 12000;
     // Retry quickly after OAuth redirect to absorb short cookie/session propagation delays.
     const POST_LOGIN_SESSION_RETRY_DELAYS_MS = [0, 250, 750];
     let toastTimer = null;
@@ -825,6 +915,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       meta.innerHTML = [
         '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '${clean(generatedAt)}') + '</span>',
         '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
+        '<span class="pill suggest">Pending suggestions: ' + escapeHtml(currentSuggestions.length) + '</span>',
         '<span class="pill">SLA: review within 48h</span>',
         '<span class="pill' + (!restoreEnabled ? ' warn' : '') + '">' +
           modeLabel +
@@ -834,6 +925,35 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
 
     function emptyState(message) {
        body.innerHTML = '<tr><td colspan="11" class="empty">' + escapeHtml(message) + '</td></tr>';
+    }
+
+    function tagRowMarkup(tags) {
+      const safeTags = Array.isArray(tags) ? tags.filter((tag) => tag) : [];
+      if (!safeTags.length) return '';
+      return '<div class="tag-row">' + safeTags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('') + '</div>';
+    }
+
+    function suggestionRowMarkup(entry) {
+      const tags = Array.isArray(entry?.tags) ? entry.tags : [];
+      const tagMarkup = tagRowMarkup(tags);
+      const tagSummary = entry?.tagSummary ? `<div class="helper-note">${escapeHtml(entry.tagSummary)}</div>` : '';
+      return '<tr class="suggestion-row" data-request-id="' + escapeHtml(entry.id) + '">' +
+        '<td>' + escapeHtml(entry.provider || 'Requested source') + '</td>' +
+        '<td>' + escapeHtml(entry.kind || 'html') + ' / ' + escapeHtml(entry.lane || 'context') + '</td>' +
+        '<td>' + escapeHtml(entry.region || 'uk') + '</td>' +
+        '<td><span class="suggestion-pill">New Source Suggestion</span></td>' +
+        '<td>' + (tagMarkup || tagSummary || 'Pending review') + '</td>' +
+        '<td>n/a</td>' +
+        '<td>0</td>' +
+        '<td>0</td>' +
+        '<td>' + escapeHtml(entry.requestedAt || 'n/a') + '</td>' +
+        '<td><a href="' + escapeHtml(entry.endpoint || '') + '" target="_blank" rel="noreferrer">' + escapeHtml(entry.endpoint || '') + '</a></td>' +
+        '<td><div class="action">' +
+          '<button type="button" class="approve" data-action="approve">Approve into catalog</button>' +
+          '<div class="helper-note">Adds this source to the catalog for the next run.</div>' +
+          '<div class="status-note status-feedback" aria-live="polite"></div>' +
+        '</div></td>' +
+      '</tr>';
     }
 
     function rowMarkup(entry) {
@@ -859,10 +979,15 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
 
     function setRowBusy(row, isBusy) {
       const button = row.querySelector('button[data-action="restore"]');
+      const approveButton = row.querySelector('button[data-action="approve"]');
       const input = row.querySelector('.url-input');
       if (button) {
         button.disabled = isBusy || !restoreEnabled;
         button.textContent = isBusy ? 'Restoring...' : 'Restore source';
+      }
+      if (approveButton) {
+        approveButton.disabled = isBusy || !approveEnabled;
+        approveButton.textContent = isBusy ? 'Approving...' : 'Approve into catalog';
       }
       if (input) {
         input.disabled = isBusy || !restoreEnabled;
@@ -882,11 +1007,27 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
 
     function renderRows() {
-      if (!currentEntries.length) {
+      if (!currentEntries.length && !currentSuggestions.length) {
         emptyState('No quarantined sources currently recorded.');
         return;
       }
-      body.innerHTML = currentEntries.map(rowMarkup).join('');
+      const suggestionMarkup = currentSuggestions.map(suggestionRowMarkup).join('');
+      const quarantineMarkup = currentEntries.map(rowMarkup).join('');
+      body.innerHTML = `${suggestionMarkup}${quarantineMarkup}`;
+      if (!approveEnabled) {
+        for (const row of body.querySelectorAll('tr[data-request-id]')) {
+          const button = row.querySelector('button[data-action="approve"]');
+          const note = row.querySelector('.status-feedback');
+          if (button) {
+            button.disabled = true;
+            button.title = APPROVE_READ_ONLY_NOTE;
+          }
+          if (note) {
+            note.textContent = APPROVE_READ_ONLY_NOTE;
+            note.className = 'status-note error';
+          }
+        }
+      }
       if (!restoreEnabled) {
         for (const row of body.querySelectorAll('tr[data-source-id]')) {
           const button = row.querySelector('button[data-action="restore"]');
@@ -959,6 +1100,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
           renderAuthPanel();
           currentEntries = [];
           restoreEnabled = false;
+          approveEnabled = false;
+          currentSuggestions = [];
           renderMeta({ generatedAt: new Date().toISOString() });
           renderRows();
           emptyState('Sign in as an admin to view quarantined sources.');
@@ -1151,6 +1294,32 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       return data.restoredSource;
     }
 
+    async function approveSource(requestId) {
+      const approveUrl = approveUrlFor(apiBase);
+      if (!approveUrl) {
+        throw new Error('No approve API base is configured.');
+      }
+      const response = await fetchWithTimeout(
+        approveUrl,
+        withSessionCredentials({
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            requestId
+          })
+        }),
+        APPROVE_FETCH_TIMEOUT_MS,
+        'Approve source request'
+      );
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) {
+        throw new Error(data.message || 'Approve failed');
+      }
+      return data.approvedSource;
+    }
+
     async function loadAuthSession(options = {}) {
       const retryAfterOauth = options.retryAfterOauth === true;
       const delays = retryAfterOauth ? POST_LOGIN_SESSION_RETRY_DELAYS_MS : [0];
@@ -1260,6 +1429,37 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       }
     }
 
+    async function approveSourceRow(row) {
+      if (!row || !approveEnabled || row.dataset.approving === 'true') return;
+      const requestId = row.getAttribute('data-request-id');
+      const note = getOrCreateRowFeedbackNote(row);
+
+      row.dataset.approving = 'true';
+      setRowBusy(row, true);
+      if (note) {
+        note.textContent = 'Approving source...';
+        note.className = 'status-note';
+      }
+
+      try {
+        await approveSource(requestId);
+        currentSuggestions = currentSuggestions.filter((entry) => entry.id !== requestId);
+        renderMeta({ generatedAt: new Date().toISOString() });
+        row.remove();
+        if (!body.querySelector('tr[data-source-id]') && !body.querySelector('tr[data-request-id]')) {
+          emptyState('No quarantined sources currently recorded.');
+        }
+        showToast('Source approved into catalog.');
+      } catch (error) {
+        if (note) {
+          note.textContent = explainError(error);
+          note.className = 'status-note error';
+        }
+        row.dataset.approving = 'false';
+        setRowBusy(row, false);
+      }
+    }
+
     async function loadEntries() {
       emptyState('Loading quarantined sources...');
       try {
@@ -1272,7 +1472,9 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         if (!isAuthenticated) {
           currentDataMode = 'live';
           restoreEnabled = false;
+          approveEnabled = false;
           currentEntries = [];
+          currentSuggestions = [];
           renderMeta({ generatedAt: new Date().toISOString() });
           renderRows();
           emptyState('Sign in as an admin to view quarantined sources.');
@@ -1304,8 +1506,11 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
           payload = await fetchPayload(LOCAL_DATA_URL, 'Failed to load local quarantine snapshot.');
           currentDataMode = 'snapshot';
           restoreEnabled = false;
+          approveEnabled = false;
         }
         currentEntries = Array.isArray(payload.sources) ? payload.sources : [];
+        currentSuggestions = Array.isArray(payload.sourceRequests) ? payload.sourceRequests : [];
+        approveEnabled = restoreEnabled;
         renderMeta(payload);
         renderRows();
       } catch (error) {
@@ -1314,11 +1519,19 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
 
     body.addEventListener('click', async (event) => {
-      const button = event.target.closest('button[data-action="restore"]');
-      if (!button) return;
-      const row = button.closest('tr[data-source-id]');
-      if (!row) return;
-      await restoreSourceRow(row);
+      const restoreButton = event.target.closest('button[data-action="restore"]');
+      if (restoreButton) {
+        const row = restoreButton.closest('tr[data-source-id]');
+        if (!row) return;
+        await restoreSourceRow(row);
+        return;
+      }
+      const approveButton = event.target.closest('button[data-action="approve"]');
+      if (approveButton) {
+        const row = approveButton.closest('tr[data-request-id]');
+        if (!row) return;
+        await approveSourceRow(row);
+      }
     });
 
     body.addEventListener('keydown', async (event) => {
@@ -1473,6 +1686,7 @@ async function main() {
   const existing = await readExisting();
   const geoLookupFallbackNote = await safeLoadGeoLookup(existing);
   const previousHealth = existing?.health && typeof existing.health === 'object' ? existing.health : null;
+  const restoreAudit = (await safeLoadRestoreAudit()) || existing?.restoreAudit || null;
 
   let sources;
   try {
@@ -1487,6 +1701,7 @@ async function main() {
         ...existing,
         generatedAt,
         buildWarning,
+        restoreAudit,
         sourceErrors: [
           {
             id: 'sources-json',
@@ -1515,8 +1730,7 @@ async function main() {
   try {
     const requestedSources = normaliseSourceRequestsPayload(await readJsonFile(sourceRequestsPath));
     if (requestedSources.length) {
-      sources = mergeSourceCatalogs(sources, requestedSources);
-      console.log(`Merged ${requestedSources.length} requested source(s) into the active source catalog.`);
+      console.log(`Loaded ${requestedSources.length} pending source request(s). Manual approval required before activation.`);
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -2006,6 +2220,7 @@ async function main() {
     alertCount: finalAlerts.length,
     alerts: finalAlerts,
     sourceErrors: sourceErrors.slice(0, MAX_SOURCE_ERRORS_TO_REPORT),
+    restoreAudit,
     geoLookupSnapshot: geoLookupSnapshot(),
     buildWarning,
     runMetrics: {

@@ -15,7 +15,9 @@ function requestMatchesSearch(request, query) {
     request?.region,
     request?.kind,
     request?.lane,
-    request?.validationLabel
+    request?.validationLabel,
+    request?.tagSummary,
+    Array.isArray(request?.tags) ? request.tags.join(' ') : ''
   ]
     .filter((value) => typeof value === 'string' && value.trim())
     .join(' ')
@@ -26,10 +28,15 @@ function requestMatchesSearch(request, query) {
 
 function sourceRequestCardMarkup(request) {
   const validationLabel = request?.validationLabel || `${request?.kind || 'html'} | ${request?.region || 'uk'} | queued`;
+  const tags = Array.isArray(request?.tags) ? request.tags : [];
+  const tagMarkup = tags.length
+    ? `<div class="source-request-tags">${tags.map((tag) => `<span class="source-request-tag">${escapeHtml(tag)}</span>`).join('')}</div>`
+    : '';
   return `
     <article class="source-request-card">
       <strong>${escapeHtml(request?.provider || request?.endpoint || 'Requested source')}</strong>
       <p>${escapeHtml(request?.endpoint || '')}</p>
+      ${tagMarkup}
       <div class="meta-row">
         <span>${escapeHtml(formatRequestedAtLabel(request?.requestedAt))}</span>
         <span>${escapeHtml(validationLabel)}</span>
@@ -50,7 +57,7 @@ export function renderSourceRequests({ state, elements }) {
 
   if (elements.sourceRequestHint) {
     const region = state.activeRegion === 'all' ? 'UK' : String(state.activeRegion).replace(/^./, (match) => match.toUpperCase());
-    elements.sourceRequestHint.textContent = `Brialert will validate the link and queue it for the next hourly run using the current ${region} scope.`;
+    elements.sourceRequestHint.textContent = `Brialert will validate the link, auto-tag it, and queue it for approval using the current ${region} scope.`;
   }
 
   if (elements.sourceRequestStatus) {

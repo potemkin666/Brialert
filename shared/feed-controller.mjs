@@ -36,6 +36,40 @@ function normaliseHealthSnapshot(health) {
   };
 }
 
+function normaliseSourceError(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  const status = Number(entry.status);
+  return {
+    id: typeof entry.id === 'string' ? entry.id : '',
+    provider: typeof entry.provider === 'string' ? entry.provider : '',
+    endpoint: typeof entry.endpoint === 'string' ? entry.endpoint : '',
+    finalUrl: typeof entry.finalUrl === 'string' ? entry.finalUrl : '',
+    status: Number.isFinite(status) ? status : null,
+    message: typeof entry.message === 'string' ? entry.message : '',
+    errorCode: typeof entry.errorCode === 'string' ? entry.errorCode : '',
+    category: typeof entry.category === 'string' ? entry.category : ''
+  };
+}
+
+function normaliseSourceErrors(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries
+    .map(normaliseSourceError)
+    .filter(Boolean);
+}
+
+function normaliseLastRestore(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  const at = typeof entry.at === 'string' ? entry.at : '';
+  if (!at.trim()) return null;
+  return {
+    at,
+    sourceId: typeof entry.sourceId === 'string' ? entry.sourceId : '',
+    provider: typeof entry.provider === 'string' ? entry.provider : '',
+    replacementUrl: typeof entry.replacementUrl === 'string' ? entry.replacementUrl : ''
+  };
+}
+
 export function normaliseRenderState(state) {
   const next = state && typeof state === 'object' ? state : {};
   const watched = next.watched instanceof Set ? next.watched : new Set();
@@ -55,6 +89,8 @@ export function normaliseRenderState(state) {
     liveFetchedAlertCount: Number.isFinite(Number(next.liveFetchedAlertCount)) ? Number(next.liveFetchedAlertCount) : 0,
     liveFeedGeneratedAt: next.liveFeedGeneratedAt instanceof Date ? next.liveFeedGeneratedAt : null,
     liveFeedHealth: normaliseHealthSnapshot(next.liveFeedHealth),
+    liveFeedSourceErrors: normaliseSourceErrors(next.liveFeedSourceErrors),
+    liveFeedLastRestore: normaliseLastRestore(next.liveFeedLastRestore),
     liveSourceRunStats: next.liveSourceRunStats && typeof next.liveSourceRunStats === 'object'
       ? {
           totalConfiguredSources: Number(next.liveSourceRunStats.totalConfiguredSources || 0),
@@ -225,6 +261,12 @@ export function coerceLiveFeedPayload(raw) {
   const sourceCount = Number(payload.sourceCount ?? payload.alertData?.sourceCount ?? 0);
   const isValidTimestamp = typeof generatedAt === 'string' && !Number.isNaN(new Date(generatedAt).getTime());
   const hasNumericSourceCount = Number.isFinite(sourceCount) && sourceCount >= 0;
+  const restoreAudit = payload.restoreAudit && typeof payload.restoreAudit === 'object'
+    ? payload.restoreAudit
+    : null;
+  const lastRestore = normaliseLastRestore(
+    restoreAudit?.lastRestore || payload.lastRestore || null
+  );
 
   if (!Array.isArray(payload.alerts)) {
     throw new Error('Live feed payload is missing an alerts array.');
@@ -255,7 +297,9 @@ export function coerceLiveFeedPayload(raw) {
     fetchedAlertCount,
     generatedAt,
     sourceCount,
-    health: normaliseHealthSnapshot(payload.health)
+    health: normaliseHealthSnapshot(payload.health),
+    sourceErrors: normaliseSourceErrors(payload.sourceErrors),
+    lastRestore
   };
 }
 
@@ -270,6 +314,8 @@ export async function loadLiveFeed(state, options) {
   const previousSourceCount = state.liveSourceCount;
   const previousFetchedAlertCount = state.liveFetchedAlertCount || 0;
   const previousHealth = state.liveFeedHealth;
+  const previousSourceErrors = state.liveFeedSourceErrors;
+  const previousLastRestore = state.liveFeedLastRestore;
   try {
     const response = await fetch(`${liveFeedUrl}?t=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -278,6 +324,8 @@ export async function loadLiveFeed(state, options) {
     state.liveFetchedAlertCount = data.fetchedAlertCount;
     state.liveFeedGeneratedAt = data.generatedAt ? new Date(data.generatedAt) : new Date();
     state.liveFeedHealth = data.health;
+    state.liveFeedSourceErrors = data.sourceErrors;
+    state.liveFeedLastRestore = data.lastRestore;
     const sourceCount = Number(data.sourceCount);
     const successfulSourceCount = Number(data.health?.lastSuccessfulSourceCount);
     state.liveSourceCount = Number.isFinite(sourceCount) && sourceCount > 0
@@ -303,6 +351,8 @@ export async function loadLiveFeed(state, options) {
     state.liveSourceCount = previousSourceCount;
     state.liveFetchedAlertCount = previousFetchedAlertCount;
     state.liveFeedHealth = previousHealth;
+    state.liveFeedSourceErrors = previousSourceErrors;
+    state.liveFeedLastRestore = previousLastRestore;
     state.liveFeedFetchState = 'error';
     state.liveFeedFetchError = {
       message: error instanceof Error ? error.message : String(error),

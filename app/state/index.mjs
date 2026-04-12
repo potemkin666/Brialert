@@ -29,6 +29,8 @@ export function createState() {
     liveSourceRunStats: null,
     liveFetchedAlertCount: 0,
     liveFeedHealth: null,
+    liveFeedSourceErrors: [],
+    liveFeedLastRestore: null,
     liveFeedFetchError: null,
     liveFeedFetchState: 'idle',
     liveFeedLastAttemptAt: null,

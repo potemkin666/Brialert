@@ -1,6 +1,6 @@
 import { normaliseRenderState } from '../../shared/feed-controller.mjs';
 import { renderMapIfActive } from '../render/map.mjs';
-import { renderBriefingMode, renderFeed, renderHero, renderPriority, renderSupporting } from '../render/live.mjs';
+import { renderAuditBanner, renderBriefingMode, renderFeed, renderHero, renderPriority, renderSupporting } from '../render/live.mjs';
 import { renderNotes, renderWatchlist } from '../render/notes.mjs';
 import { renderSourceRequests } from '../render/source-requests.mjs';
 
@@ -21,6 +21,7 @@ export function createRenderingCoordinator({
     const renderState = normaliseRenderState(state);
     const view = currentView();
     renderHero({ state: renderState, elements });
+    renderAuditBanner({ state: renderState, elements });
     renderBriefingMode({ state: renderState, elements, view, modalController });
     renderPriority({ state: renderState, elements, view, modalController });
     renderFeed({

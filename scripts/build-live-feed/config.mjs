@@ -13,6 +13,7 @@ export const quarantinedSourcesPath = path.join(repoRoot, 'data', 'quarantined-s
 export const quarantinedSourcesReviewPath = path.join(repoRoot, 'source-quarantine.html');
 export const topSourceRemediationPath = path.join(repoRoot, 'data', 'top-20-source-remediation.json');
 export const sourceRemediationSweepPath = path.join(repoRoot, 'data', 'source-remediation-sweep.json');
+export const restoreAuditPath = path.join(repoRoot, 'data', 'restore-audit.json');
 
 export const parser = new XMLParser({
   ignoreAttributes: false,
@@ -146,6 +147,7 @@ export const AUTO_SKIP_FAILURE_THRESHOLD = 4;
 export const AUTO_SKIP_EMPTY_THRESHOLD = 6;
 export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD', 4, 1);
 export const AUTO_QUARANTINE_DEAD_URL_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_DEAD_URL_THRESHOLD', 2, 1);
+export const AUTO_QUARANTINE_FAILURE_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD', 6, 1);
 export const FAIL_ON_GUARDRAIL_VIOLATION = clean(process.env.BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION).toLowerCase() === 'true';
 export const OFFLINE_FIXTURE_MODE = clean(process.env.BRIALERT_OFFLINE_FIXTURE_MODE).toLowerCase() === 'true';
 export const offlineFixturesPath = envPath(
