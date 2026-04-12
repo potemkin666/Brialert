@@ -866,14 +866,16 @@
     {
       "id": "eu-council-terrorism-sanctions",
       "provider": "Council of the EU - Sanctions Against Terrorism",
-      "endpoint": "https://www.consilium.europa.eu/en/policies/sanctions-against-terrorism/",
+      "endpoint": "https://www.indiatoday.in/",
       "kind": "html",
       "lane": "sanctions",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "Council of the EU policy page for sanctions against terrorism and terrorist entities.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T20:56:04.617Z"
     },
     {
       "id": "unhcr-europe-news",
