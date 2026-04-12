@@ -1160,13 +1160,15 @@
     {
       "id": "nctv-nl-english-news",
       "provider": "NCTV Netherlands latest news (English)",
-      "endpoint": "https://english.nctv.nl/latest/news",
+      "endpoint": "https://english.nctv.nl/api/rss?query=%7B%22filters%22%3A%5B%7B%22field%22%3A%22content_type%22%2C%22values%22%3A%5B%22pro%3AnewsDocument%22%5D%2C%22type%22%3A%22all%22%7D%5D%2C%22resultSearchTerm%22%3A%22%22%7D",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases."
+      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases.",
+      "quarantined": false,
+      "restoredAt": "2026-04-12T08:53:02.544Z"
     },
     {
       "id": "ocam-be-english",
