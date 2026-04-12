@@ -6,8 +6,6 @@ import { clean } from '../../shared/taxonomy.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const repoRoot = path.resolve(__dirname, '..', '..');
-export const sourcePath = path.join(repoRoot, 'data', 'sources.json');
-export const sourceRequestsPath = path.join(repoRoot, 'data', 'source-requests.json');
 export const geoLookupPath = path.join(repoRoot, 'data', 'geo-lookup.json');
 export const outputPath = path.join(repoRoot, 'live-alerts.json');
 export const sqlitePath = path.join(repoRoot, 'data', 'brialert.sqlite');
@@ -30,6 +28,15 @@ function envInt(name, fallback, minimum = 0) {
   const parsed = Math.floor(Number(raw));
   return Number.isFinite(parsed) && parsed >= minimum ? parsed : fallback;
 }
+
+function envPath(name, fallbackPath) {
+  const raw = clean(process.env[name]);
+  if (!raw) return fallbackPath;
+  return path.isAbsolute(raw) ? raw : path.join(repoRoot, raw);
+}
+
+export const sourcePath = envPath('BRIALERT_SOURCE_PATH', path.join(repoRoot, 'data', 'sources.json'));
+export const sourceRequestsPath = envPath('BRIALERT_SOURCE_REQUESTS_PATH', path.join(repoRoot, 'data', 'source-requests.json'));
 
 export const DEFAULT_TIMEOUT_MS = envInt('BRIALERT_FETCH_TIMEOUT_MS', 12000, 1000);
 export const DEFAULT_MAX_RETRIES = envInt('BRIALERT_FETCH_MAX_RETRIES', 3, 1);
@@ -137,9 +144,14 @@ export const SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS = 12;
 export const AUTO_QUARANTINE_RECHECK_HOURS = 7 * 24;
 export const AUTO_SKIP_FAILURE_THRESHOLD = 4;
 export const AUTO_SKIP_EMPTY_THRESHOLD = 6;
-export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = 2;
+export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD', 4, 1);
 export const AUTO_QUARANTINE_DEAD_URL_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_DEAD_URL_THRESHOLD', 2, 1);
 export const FAIL_ON_GUARDRAIL_VIOLATION = clean(process.env.BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION).toLowerCase() === 'true';
+export const OFFLINE_FIXTURE_MODE = clean(process.env.BRIALERT_OFFLINE_FIXTURE_MODE).toLowerCase() === 'true';
+export const offlineFixturesPath = envPath(
+  'BRIALERT_OFFLINE_FIXTURES_PATH',
+  path.join(repoRoot, 'tests', 'fixtures', 'offline-build', 'fixtures.json')
+);
 export const HARD_SKIP_SOURCE_IDS = new Set([
   'globalsecurity-terror-news',
   'un-ctitf-news',

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Fixture Incidents</title>
+    <link>https://fixtures.brialert.local/incidents.rss</link>
+    <description>Offline incidents fixture</description>
+    <item>
+      <title>Terrorism suspect arrested after bomb plot disrupted in Brussels</title>
+      <link>https://fixtures.brialert.local/incidents/1</link>
+      <description>Counter-terror police said a terrorism suspect was arrested and an explosive device was recovered.</description>
+      <pubDate>Fri, 04 Apr 2026 10:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

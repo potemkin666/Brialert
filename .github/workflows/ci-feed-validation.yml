@@ -5,22 +5,24 @@ on:
     branches:
       - main
     paths:
-      - 'package.json'
-      - 'package-lock.json'
-      - 'data/**'
-      - 'scripts/**'
-      - 'shared/**'
-      - 'tests/**'
-      - '.github/workflows/**'
+      - "package.json"
+      - "package-lock.json"
+      - "eslint.config.mjs"
+      - "data/**"
+      - "scripts/**"
+      - "shared/**"
+      - "tests/**"
+      - ".github/workflows/**"
   pull_request:
     paths:
-      - 'package.json'
-      - 'package-lock.json'
-      - 'data/**'
-      - 'scripts/**'
-      - 'shared/**'
-      - 'tests/**'
-      - '.github/workflows/**'
+      - "package.json"
+      - "package-lock.json"
+      - "eslint.config.mjs"
+      - "data/**"
+      - "scripts/**"
+      - "shared/**"
+      - "tests/**"
+      - ".github/workflows/**"
   workflow_dispatch:
 
 permissions:
@@ -40,8 +42,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '20.18.1'
-          cache: 'npm'
+          node-version: "20.18.1"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
@@ -62,26 +64,19 @@ jobs:
           BRIALERT_SOURCE_HEALTH_CRITICAL_IDS: ct-policing-london,met-police-news,met-police-latest-news,city-of-london-police-news,city-of-london-police-news-html,city-of-london-police-newsroom,mopac-html,london-fire-brigade-news,tfl-press-releases-html,london-gov-press-releases-html
         run: npm run validate:source-health
 
+      - name: Lint codebase
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
       - name: Run decision-logic tests
         run: npm test
 
-  build-feed-smoke:
+  build-feed-offline-smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     needs: validate-feed
-    env:
-      BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
-      BRIALERT_SCHEDULER_AB_MODE: control
-      BRIALERT_MAX_HTML_SOURCES_PER_RUN: '6'
-      BRIALERT_CONTROL_MAX_HTML_SOURCES_PER_RUN: '5'
-      BRIALERT_MAX_HTML_PREFETCH_ITEMS: '4'
-      BRIALERT_MAX_FEED_PREFETCH_ITEMS: '4'
-      BRIALERT_FETCH_TIMEOUT_MS: '5000'
-      BRIALERT_FETCH_MAX_RETRIES: '2'
-      BRIALERT_FEED_SOURCE_CONCURRENCY: '3'
-      BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN: '12'
-      BRIALERT_GUARDRAIL_MAX_RUNTIME_MS: '420000'
-      BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION: 'true'
 
     steps:
       - name: Check out repository
@@ -90,8 +85,45 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '20.18.1'
-          cache: 'npm'
+          node-version: "20.18.1"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build live alert feed from offline fixtures
+        run: npm run build:feeds:offline
+
+      - name: Validate generated feed output
+        run: npm run validate:live-feed-output
+
+  build-feed-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: validate-feed
+    env:
+      BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
+      BRIALERT_SCHEDULER_AB_MODE: control
+      BRIALERT_MAX_HTML_SOURCES_PER_RUN: "6"
+      BRIALERT_CONTROL_MAX_HTML_SOURCES_PER_RUN: "5"
+      BRIALERT_MAX_HTML_PREFETCH_ITEMS: "4"
+      BRIALERT_MAX_FEED_PREFETCH_ITEMS: "4"
+      BRIALERT_FETCH_TIMEOUT_MS: "5000"
+      BRIALERT_FETCH_MAX_RETRIES: "2"
+      BRIALERT_FEED_SOURCE_CONCURRENCY: "3"
+      BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN: "12"
+      BRIALERT_GUARDRAIL_MAX_RUNTIME_MS: "420000"
+      BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION: "true"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "20.18.1"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci --no-audit --no-fund

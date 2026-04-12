@@ -1,0 +1,44 @@
+{
+  "sources": [
+    {
+      "id": "fixture-rss-incidents",
+      "provider": "Fixture Incidents Feed",
+      "endpoint": "https://fixtures.brialert.local/incidents.rss",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true
+    },
+    {
+      "id": "fixture-rss-context",
+      "provider": "Fixture Context Feed",
+      "endpoint": "https://fixtures.brialert.local/context.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "fixture-atom-oversight",
+      "provider": "Fixture Oversight Feed",
+      "endpoint": "https://fixtures.brialert.local/oversight.atom",
+      "kind": "atom",
+      "lane": "oversight",
+      "region": "europe",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false
+    },
+    {
+      "id": "fixture-json-prevention",
+      "provider": "Fixture Prevention Feed",
+      "endpoint": "https://fixtures.brialert.local/prevention.json",
+      "kind": "json",
+      "lane": "prevention",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false
+    }
+  ]
+}

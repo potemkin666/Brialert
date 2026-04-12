@@ -4,6 +4,8 @@ import {
   BACKOFF_CAP_MS,
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
+  OFFLINE_FIXTURE_MODE,
+  offlineFixturesPath,
   sourceUserAgent,
   RETRYABLE_STATUS_CODES,
   outputPath,
@@ -55,6 +57,7 @@ const ERROR_CODE_TO_CATEGORY = Object.freeze({
   [ERROR_CODE.NETWORK_CIRCUIT_OPEN]: 'network-failure',
   [ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING]: 'brittle-selectors-or-js-rendering'
 });
+let offlineFixtureCache = null;
 
 function createBrialertError(message, meta = {}) {
   const error = new Error(message);
@@ -144,6 +147,53 @@ function parseRetryAfterMs(value) {
   return null;
 }
 
+async function loadOfflineFixtures() {
+  if (!OFFLINE_FIXTURE_MODE) return null;
+  if (offlineFixtureCache) return offlineFixtureCache;
+  const payload = await readJsonFile(offlineFixturesPath);
+  offlineFixtureCache = {
+    sources: payload?.sources && typeof payload.sources === 'object' ? payload.sources : {},
+    endpoints: payload?.endpoints && typeof payload.endpoints === 'object' ? payload.endpoints : {}
+  };
+  return offlineFixtureCache;
+}
+
+async function offlineFixtureResponse(url, options = {}) {
+  if (!OFFLINE_FIXTURE_MODE) return null;
+  const fixtures = await loadOfflineFixtures();
+  const sourceId = clean(options?.source?.id);
+  const endpoint = clean(url);
+  const fixture = (sourceId && fixtures?.sources?.[sourceId]) || fixtures?.endpoints?.[endpoint];
+  if (!fixture || typeof fixture !== 'object') {
+    throw createBrialertError(`Offline fixture missing for source ${sourceId || 'unknown'} endpoint ${endpoint}`, {
+      errorCode: ERROR_CODE.FETCH_NETWORK_FAILURE,
+      finalUrl: endpoint
+    });
+  }
+  if (clean(fixture.errorMessage)) {
+    throw createBrialertError(clean(fixture.errorMessage), {
+      errorCode: clean(fixture.errorCode) || ERROR_CODE.FETCH_NETWORK_FAILURE,
+      finalUrl: clean(fixture.finalUrl || endpoint),
+      status: Number.isFinite(Number(fixture.status)) ? Number(fixture.status) : null
+    });
+  }
+  const bodyFile = clean(fixture.bodyFile);
+  if (!bodyFile) {
+    throw createBrialertError(`Offline fixture bodyFile missing for source ${sourceId || 'unknown'}`, {
+      errorCode: ERROR_CODE.FETCH_NETWORK_FAILURE,
+      finalUrl: endpoint
+    });
+  }
+  const bodyPath = path.isAbsolute(bodyFile) ? bodyFile : path.join(repoRoot, bodyFile);
+  const text = await fs.readFile(bodyPath, 'utf8');
+  return {
+    text,
+    finalUrl: clean(fixture.finalUrl || endpoint),
+    status: Number.isFinite(Number(fixture.status)) ? Number(fixture.status) : 200,
+    unchanged304: false
+  };
+}
+
 function endpointDomain(url) {
   try {
     return new URL(url).hostname.toLowerCase();
@@ -214,6 +264,10 @@ function classifyBodyBlock(text = '') {
 }
 
 export async function fetchText(url, attempt = 1, options = {}) {
+  if (OFFLINE_FIXTURE_MODE) {
+    const offlinePayload = await offlineFixtureResponse(url, options);
+    return options?.includeMeta ? offlinePayload : offlinePayload.text;
+  }
   const source = options?.source || null;
   const configuredTimeoutMs = Number(source?.timeoutMs);
   const configuredMaxRetries = Number(source?.maxRetries);

@@ -43,6 +43,7 @@ import {
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
 import { normaliseSourcesPayload } from '../scripts/build-live-feed/io.mjs';
 import {
+  AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD,
   CONTROL_MAX_HTML_SOURCES_PER_RUN,
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
@@ -1163,6 +1164,7 @@ test('default fetch/runtime tuning constants remain stable', () => {
   assert.equal(FEED_SOURCE_CONCURRENCY, 4);
   assert.equal(MAX_HTML_PREFETCH_ITEMS, 12);
   assert.equal(MAX_FEED_PREFETCH_ITEMS, 8);
+  assert.equal(AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD, 4);
 });
 
 test('source error summary classifies HTTP 404 separately for direct quarantine routing', async () => {

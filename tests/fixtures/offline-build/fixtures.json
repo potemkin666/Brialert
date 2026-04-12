@@ -1,0 +1,20 @@
+{
+  "sources": {
+    "fixture-rss-incidents": {
+      "bodyFile": "tests/fixtures/offline-build/payloads/incidents.rss.xml",
+      "status": 200
+    },
+    "fixture-rss-context": {
+      "bodyFile": "tests/fixtures/offline-build/payloads/context.rss.xml",
+      "status": 200
+    },
+    "fixture-atom-oversight": {
+      "bodyFile": "tests/fixtures/offline-build/payloads/oversight.atom.xml",
+      "status": 200
+    },
+    "fixture-json-prevention": {
+      "bodyFile": "tests/fixtures/offline-build/payloads/prevention.feed.json",
+      "status": 200
+    }
+  }
+}
