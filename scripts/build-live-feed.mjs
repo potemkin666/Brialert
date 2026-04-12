@@ -477,6 +477,13 @@ function classifyFetchFailure(summary) {
   return 'unknown';
 }
 
+function statusKindFromCategory(category) {
+  const normalized = clean(category).toLowerCase();
+  if (normalized === 'blocked-or-auth' || normalized === 'anti-bot-protection') return 'blocked_non_content';
+  if (normalized === 'not-found-404' || normalized === 'dead-or-moved-url' || normalized === 'moved-temporarily') return 'stale';
+  return '';
+}
+
 /**
  * Returns a redirected final URL as a replacement candidate when it differs
  * from the configured endpoint; otherwise returns an empty string.
@@ -581,6 +588,13 @@ async function attemptSourceBuild(source, requestState, playwrightBudget) {
       buildFetchError('No items parsed from source payload', 'brittle-selectors-or-js-rendering')
     ));
   }
+  const statusKind = (() => {
+    const category = localErrors[0]?.category;
+    const mapped = statusKindFromCategory(category);
+    if (mapped) return mapped;
+    if (fetchOutcome === 'success' && isMachineReadableSourceKind(source?.kind)) return 'feed_preferred';
+    return '';
+  })();
 
   const preLimit = source.kind === 'html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
   const preLimited = parsed.slice(0, preLimit);
@@ -623,6 +637,7 @@ async function attemptSourceBuild(source, requestState, playwrightBudget) {
       errors: localErrors.length,
       lastErrorCategory: localErrors[0]?.category || null,
       lastErrorMessage: localErrors[0]?.message || null,
+      statusKind,
       usedPlaywrightFallback,
       finalUrl,
       status: responseStatus,
@@ -1896,6 +1911,7 @@ function buildSourceRemediationSweep({ generatedAt, sourceErrors, sourceStats })
       endpoint,
       finalUrl: movedCandidate ? finalUrl : '',
       category: effectiveCategory,
+      statusKind: clean(stat?.statusKind),
       message: clean(error?.message),
       status: Number.isFinite(Number(error?.status ?? stat?.status)) ? Number(error?.status ?? stat?.status) : null,
       rankScore: remediationRankScore(effectiveCategory) + (movedCandidate ? 1 : 0),
@@ -2055,7 +2071,8 @@ async function main() {
         id: source.id,
         provider: source.provider,
         reason: autoCooldown.reason,
-        until: autoCooldown.until
+        until: autoCooldown.until,
+        statusKind: 'cooled_down'
       });
       cooldownDeferredSourceIds.add(source.id);
       return false;
