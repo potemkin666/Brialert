@@ -190,7 +190,7 @@ export function recencyOkay(source, rawDate) {
   if (Number.isNaN(parsed.getTime())) return false;
   const ageDays = (currentTimeMs() - parsed.getTime()) / 86400000;
   if (source.lane === 'incidents') return ageDays <= 7;
-  if (source.lane === 'context') return ageDays <= 10;
+  if (source.lane === 'context') return ageDays <= 1;
   if (source.lane === 'border') return ageDays <= 14;
   if (source.lane === 'sanctions') return ageDays <= 21;
   if (source.lane === 'oversight' || source.lane === 'prevention') return ageDays <= 30;

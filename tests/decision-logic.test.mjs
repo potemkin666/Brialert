@@ -926,11 +926,11 @@ test('recencyOkay enforces reliable and lane-bounded recency', () => {
   assert.equal(recencyOkay(contextSource, null), false);
   assert.equal(recencyOkay(contextSource, 'not-a-date'), false);
   assert.equal(
-    recencyOkay(contextSource, new Date(Date.now() - (9 * 24 * 60 * 60 * 1000)).toISOString()),
+    recencyOkay(contextSource, new Date(Date.now() - (18 * 60 * 60 * 1000)).toISOString()),
     true
   );
   assert.equal(
-    recencyOkay(contextSource, new Date(Date.now() - (11 * 24 * 60 * 60 * 1000)).toISOString()),
+    recencyOkay(contextSource, new Date(Date.now() - (2 * 24 * 60 * 60 * 1000)).toISOString()),
     false
   );
   assert.equal(
@@ -1014,7 +1014,7 @@ test('renderHero uses last successful source count when current source count is 
 
   renderHero({ state, elements });
 
-  assert.match(elements.heroUpdated.textContent, /\| 118 sources \| last good unknown \| 0 articles$/);
+  assert.match(elements.heroUpdated.textContent, /^Feed updated at /);
   assert.match(elements.heroStatus.textContent, /^Feed fetch: success \(.+\)\. Manual trigger: not attempted\.$/);
 });
 
@@ -1044,11 +1044,11 @@ test('renderHero reports rendered vs fetched article totals when they differ', (
 
   renderHero({ state, elements });
 
-  assert.match(elements.heroUpdated.textContent, /\| 41 sources \| last good unknown \| Showing 14 of 41 articles$/);
+  assert.match(elements.heroUpdated.textContent, /^Feed updated at /);
   assert.match(elements.heroStatus.textContent, /^Feed fetch: failed \(.+\) - HTTP 503\. Showing last successful feed from .+ Manual trigger: not attempted\.$/);
 });
 
-test('renderHero shows configured/checked/updated/failed counters and last successful build', () => {
+test('renderHero keeps only update time in primary copy when run stats exist', () => {
   const state = {
     briefingMode: false,
     activeRegion: 'all',
@@ -1084,7 +1084,7 @@ test('renderHero shows configured/checked/updated/failed counters and last succe
 
   renderHero({ state, elements });
 
-  assert.match(elements.heroUpdated.textContent, /\| cfg 240 \| chk 52 \| upd 11 \| fail 4 \| last good /);
+  assert.match(elements.heroUpdated.textContent, /^Feed updated at /);
   assert.match(elements.heroStatus.textContent, /^Feed fetch: idle\. Manual trigger: failed \(.+\) - Unable to trigger live-feed run automatically\.$/);
 });
 

@@ -173,30 +173,8 @@ export function renderHero({ state, elements }) {
   const healthRefresh = state.liveFeedHealth?.lastSuccessfulRefreshTime;
   const stamp = healthRefresh ? new Date(healthRefresh) : state.liveFeedGeneratedAt;
   const hasValidStamp = stamp instanceof Date && !Number.isNaN(stamp.getTime());
-  const sourceCount = displaySourceCount(state);
-  const fetchedAlerts = state.liveFetchedAlertCount || 0;
-  const renderedAlerts = Array.isArray(state.alerts) ? state.alerts.length : 0;
-  const articleCountText = fetchedAlerts > renderedAlerts
-    ? `Showing ${renderedAlerts} of ${fetchedAlerts} articles`
-    : `${renderedAlerts} articles`;
-  const sourceStats = state.liveSourceRunStats && typeof state.liveSourceRunStats === 'object'
-    ? state.liveSourceRunStats
-    : {};
-  const configured = Number(sourceStats.totalConfiguredSources || 0);
-  const checked = Number(sourceStats.sourcesCheckedThisRun || 0);
-  const updated = Number(sourceStats.sourcesUpdatedThisRun || 0);
-  const failed = Number(sourceStats.sourcesFailedThisRun || 0);
-  const lastSuccessfulGlobalBuild = sourceStats.lastSuccessfulGlobalBuild || state.liveFeedHealth?.lastSuccessfulRefreshTime || null;
-  const lastBuildDate = parseValidDate(lastSuccessfulGlobalBuild);
-  const hasValidLastBuild = Boolean(lastBuildDate);
-  const sourceRunText = configured > 0
-    ? `cfg ${configured} | chk ${checked} | upd ${updated} | fail ${failed}`
-    : `${sourceCount} sources`;
-  const lastBuildText = hasValidLastBuild
-    ? `last good ${formatTimeHm(lastBuildDate)}`
-    : 'last good unknown';
   elements.heroUpdated.textContent = hasValidStamp
-    ? `Feed updated at ${formatTimeHm(stamp)} | ${sourceRunText} | ${lastBuildText} | ${articleCountText}`
+    ? `Feed updated at ${formatTimeHm(stamp)}`
     : 'Waiting for first live update';
 
   if (!elements.heroStatus) return;

@@ -1440,6 +1440,52 @@ h1 {
   color: rgba(225, 252, 255, 0.92);
 }
 
+.region-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(248, 251, 255, 0.92);
+}
+
+.region-badge.is-london {
+  background: rgba(102, 61, 214, 0.22);
+  border-color: rgba(139, 104, 247, 0.46);
+}
+
+.region-badge.is-uk {
+  background: rgba(41, 108, 211, 0.24);
+  border-color: rgba(100, 161, 255, 0.48);
+}
+
+.region-badge.is-eu,
+.region-badge.is-europe {
+  background: rgba(29, 113, 181, 0.24);
+  border-color: rgba(85, 165, 230, 0.5);
+}
+
+.region-badge.is-us {
+  background: rgba(190, 53, 73, 0.24);
+  border-color: rgba(234, 120, 133, 0.5);
+}
+
+.region-badge.is-international {
+  background: rgba(22, 149, 129, 0.24);
+  border-color: rgba(103, 220, 198, 0.52);
+}
+
+.region-badge.is-other {
+  background: rgba(115, 125, 146, 0.18);
+  border-color: rgba(170, 181, 206, 0.4);
+}
+
 .note-form {
   display: grid;
   gap: 12px;
