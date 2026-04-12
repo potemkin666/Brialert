@@ -2248,14 +2248,16 @@
     {
       "id": "london-ambulance-news",
       "provider": "London Ambulance Service a News",
-      "endpoint": "https://www.londonambulance.nhs.uk/news/",
+      "endpoint": "https://promotingcrime.blogspot.com/feeds/posts/default",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "London Ambulance Service news used for London emergency-response corroboration.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T21:06:24.226Z"
     },
     {
       "id": "london-city-airport-media-centre",
