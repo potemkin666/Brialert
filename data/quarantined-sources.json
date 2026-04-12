@@ -1,26 +1,7 @@
 {
-  "generatedAt": "2026-04-12T20:15:21.402Z",
-  "count": 172,
+  "generatedAt": "2026-04-12T20:54:53.537Z",
+  "count": 171,
   "sources": [
-    {
-      "id": "enisa-news",
-      "provider": "ENISA (EU Cybersecurity Agency) a News",
-      "endpoint": "https://www.enisa.europa.eu/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-12T14:32:49.299Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 4,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-14T14:32:49.299Z",
-      "lastFailureAt": "2026-04-12T14:32:49.299Z",
-      "lastCheckedAt": "2026-04-12T14:32:49.299Z"
-    },
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
