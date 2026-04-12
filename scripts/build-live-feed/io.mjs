@@ -363,11 +363,18 @@ export async function discoverFeedUrl(endpointUrl) {
     clearTimeout(timeout);
     if (response.ok) {
       const html = await response.text();
-      const feedLinkMatch = html.match(/<link[^>]+type=["']application\/(rss\+xml|atom\+xml)["'][^>]*href=["']([^"']+)["']/i);
-      if (feedLinkMatch) {
-        const feedKind = feedLinkMatch[1].includes('atom') ? 'atom' : 'rss';
-        const feedUrl = absoluteUrl(feedLinkMatch[2], endpointUrl);
-        return { feedUrl, feedKind };
+      // Match <link> tags with type="application/rss+xml" or "application/atom+xml"
+      // regardless of attribute order (type and href may appear in any sequence).
+      const linkTagPattern = /<link\b[^>]*?(?:type=["']application\/(rss\+xml|atom\+xml)["'])[^>]*>/gi;
+      const hrefPattern = /href=["']([^"']+)["']/i;
+      let linkMatch;
+      while ((linkMatch = linkTagPattern.exec(html)) !== null) {
+        const hrefMatch = linkMatch[0].match(hrefPattern);
+        if (hrefMatch) {
+          const feedKind = linkMatch[1].includes('atom') ? 'atom' : 'rss';
+          const feedUrl = absoluteUrl(hrefMatch[1], endpointUrl);
+          return { feedUrl, feedKind };
+        }
       }
     }
   } catch {

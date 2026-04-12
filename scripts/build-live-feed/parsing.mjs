@@ -339,7 +339,9 @@ export function parseHtmlItems(source, html) {
           const ldType = clean(obj['@type'] || '');
           if (!/article|newsarticle|reportagenewsarticle|blogposting|webpage/i.test(ldType)) continue;
           const title = plainText(obj.headline || obj.name || '');
-          const href = clean(obj.url || obj.mainEntityOfPage?.['@id'] || obj.mainEntityOfPage || '');
+          const mainEntity = obj.mainEntityOfPage;
+          const mainEntityUrl = typeof mainEntity === 'string' ? mainEntity : clean(mainEntity?.['@id'] || '');
+          const href = clean(obj.url || mainEntityUrl || '');
           const summary = plainText(obj.description || '').slice(0, 420);
           const published = clean(obj.datePublished || obj.dateCreated || '');
           addCandidate(href, title, summary, published);

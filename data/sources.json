@@ -1,61 +1,6 @@
 {
   "sources": [
     {
-      "id": "google-news-terrorism-uk",
-      "provider": "Google News - Terrorism UK",
-      "endpoint": "https://news.google.com/rss/search?q=terrorism+UK&hl=en-GB&gl=GB&ceid=GB:en",
-      "kind": "rss",
-      "lane": "context",
-      "region": "aggregators",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Google News RSS aggregator for UK terrorism coverage. Acts as a safety net when individual institutional sources fail."
-    },
-    {
-      "id": "google-news-counter-terrorism",
-      "provider": "Google News - Counter Terrorism",
-      "endpoint": "https://news.google.com/rss/search?q=%22counter+terrorism%22&hl=en-GB&gl=GB&ceid=GB:en",
-      "kind": "rss",
-      "lane": "context",
-      "region": "aggregators",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Google News RSS aggregator for counter-terrorism policy and operations coverage."
-    },
-    {
-      "id": "google-news-terror-attack",
-      "provider": "Google News - Terror Attack",
-      "endpoint": "https://news.google.com/rss/search?q=%22terror+attack%22&hl=en-GB&gl=GB&ceid=GB:en",
-      "kind": "rss",
-      "lane": "context",
-      "region": "aggregators",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Google News RSS aggregator for terror attack incident coverage."
-    },
-    {
-      "id": "google-news-extremism",
-      "provider": "Google News - Extremism",
-      "endpoint": "https://news.google.com/rss/search?q=extremism+UK&hl=en-GB&gl=GB&ceid=GB:en",
-      "kind": "rss",
-      "lane": "context",
-      "region": "aggregators",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Google News RSS aggregator for UK extremism reporting and prevention coverage."
-    },
-    {
-      "id": "google-alerts-uk-security-threat",
-      "provider": "Google News - UK Security Threat",
-      "endpoint": "https://news.google.com/rss/search?q=%22security+threat%22+UK&hl=en-GB&gl=GB&ceid=GB:en",
-      "kind": "rss",
-      "lane": "context",
-      "region": "aggregators",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Google News RSS aggregator for UK security threat level changes and alerts."
-    },
-    {
       "id": "euaa-news",
       "provider": "EUAA (EU Agency for Asylum) a News",
       "endpoint": "https://euaa.europa.eu/news-events",
@@ -1615,6 +1560,61 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "War on the Rocks publishes analysis on national security, military affairs and counter-terrorism; keyword filtering applied."
+    },
+    {
+      "id": "google-news-terrorism-uk",
+      "provider": "Google News - Terrorism UK",
+      "endpoint": "https://news.google.com/rss/search?q=terrorism+UK&hl=en-GB&gl=GB&ceid=GB:en",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Google News RSS aggregator for UK terrorism coverage. Acts as a safety net when individual institutional sources fail."
+    },
+    {
+      "id": "google-news-counter-terrorism",
+      "provider": "Google News - Counter Terrorism",
+      "endpoint": "https://news.google.com/rss/search?q=%22counter+terrorism%22&hl=en-GB&gl=GB&ceid=GB:en",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Google News RSS aggregator for counter-terrorism policy and operations coverage."
+    },
+    {
+      "id": "google-news-terror-attack",
+      "provider": "Google News - Terror Attack",
+      "endpoint": "https://news.google.com/rss/search?q=%22terror+attack%22&hl=en-GB&gl=GB&ceid=GB:en",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Google News RSS aggregator for terror attack incident coverage."
+    },
+    {
+      "id": "google-news-extremism",
+      "provider": "Google News - Extremism",
+      "endpoint": "https://news.google.com/rss/search?q=extremism+UK&hl=en-GB&gl=GB&ceid=GB:en",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Google News RSS aggregator for UK extremism reporting and prevention coverage."
+    },
+    {
+      "id": "google-alerts-uk-security-threat",
+      "provider": "Google News - UK Security Threat",
+      "endpoint": "https://news.google.com/rss/search?q=%22security+threat%22+UK&hl=en-GB&gl=GB&ceid=GB:en",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Google News RSS aggregator for UK security threat level changes and alerts."
     },
     {
       "id": "gctf-news",
