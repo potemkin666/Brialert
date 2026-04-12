@@ -1859,14 +1859,16 @@
     {
       "id": "barts-health-news",
       "provider": "Barts Health NHS Trust a News",
-      "endpoint": "https://www.bartshealth.nhs.uk/latest-news",
+      "endpoint": "https://www.ukcrimestats.com/blog/feed/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Barts Health updates used for East London hospital and emergency-response corroboration.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T21:05:33.238Z"
     },
     {
       "id": "bbc-news-london-rss",
