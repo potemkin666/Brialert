@@ -525,6 +525,7 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
         quarantinedAt: clean(health?.quarantinedAt),
         lastErrorCategory: clean(health?.lastErrorCategory),
         lastErrorMessage: clean(health?.lastErrorMessage),
+        consecutiveFailures: Number(health?.consecutiveFailures || 0),
         consecutiveBlockedFailures: Number(health?.consecutiveBlockedFailures || 0),
         consecutiveDeadUrlFailures: Number(health?.consecutiveDeadUrlFailures || 0),
         replacementSuggestion: clean(source?.replacementEndpoint || source?.fallbackEndpoint || source?.canonicalEndpoint || ''),
@@ -720,6 +721,60 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
+    .scoreboard {
+      margin: 18px 0 12px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(127, 156, 203, 0.26);
+      background: rgba(19, 27, 45, 0.72);
+    }
+    .scoreboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .scoreboard-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .scoreboard-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .scoreboard-list {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+    .scoreboard-item {
+      display: grid;
+      gap: 6px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(127, 156, 203, 0.2);
+      background: rgba(12, 20, 36, 0.6);
+    }
+    .scoreboard-item strong {
+      font-size: 14px;
+    }
+    .scoreboard-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      color: #cdd9f1;
+    }
+    .scoreboard-link {
+      align-self: start;
+      font-size: 12px;
+      color: #9fd0ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .scoreboard-link:hover { text-decoration: underline; }
     .helper-note, .status-note { min-height: 18px; font-size: 12px; }
     .helper-note { color: #8ea3c8; }
     .status-note { color: #9fb2d6; }
@@ -727,6 +782,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     .status-note.success { color: var(--ok); }
     .empty { padding: 18px 10px; color: var(--muted); }
     .endpoint-copy { color: #d6e5ff; font-weight: 600; }
+    .hidden { display: none; }
     .toast {
       position: fixed;
       right: 14px;
@@ -765,6 +821,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       <span class="pill suggest">Pending suggestions: 0</span>
       <span class="pill">SLA: review within 48h</span>
     </div>
+    <section class="scoreboard" id="scoreboard">
+      <div class="scoreboard-header">
+        <h2>Top Offenders</h2>
+        <p>Worst failure streaks in the last run.</p>
+      </div>
+      <div class="scoreboard-list" id="scoreboard-list"></div>
+    </section>
     <div class="card">
       <div class="table-scroll">
       <table>
@@ -880,6 +943,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     const body = document.getElementById('quarantine-body');
     const meta = document.getElementById('meta');
     const toast = document.getElementById('toast');
+    const scoreboard = document.getElementById('scoreboard');
+    const scoreboardList = document.getElementById('scoreboard-list');
     const authNote = document.getElementById('auth-note');
     const authActions = document.getElementById('auth-actions');
     let currentEntries = [];
@@ -906,6 +971,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         .replace(/'/g, '&#39;');
     }
 
+    function safeDomId(value) {
+      return String(value || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'source';
+    }
+
     function renderMeta(payload) {
       const modeLabel = currentDataMode === 'snapshot'
         ? 'Data mode: static snapshot (read-only)'
@@ -925,6 +997,60 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
 
     function emptyState(message) {
        body.innerHTML = '<tr><td colspan="11" class="empty">' + escapeHtml(message) + '</td></tr>';
+    }
+
+    function topOffenders() {
+      const entries = Array.isArray(currentEntries) ? currentEntries : [];
+      return entries
+        .map((entry) => {
+          const streak = Number(entry?.consecutiveFailures || 0);
+          const blocked = Number(entry?.consecutiveBlockedFailures || 0);
+          const dead = Number(entry?.consecutiveDeadUrlFailures || 0);
+          const effectiveStreak = streak || Math.max(blocked, dead);
+          const lastErrorCategory = entry?.lastErrorCategory || 'unknown';
+          const lastErrorMessage = entry?.lastErrorMessage || 'No error message recorded';
+          const lastFailureAt = entry?.lastFailureAt || entry?.quarantinedAt || entry?.lastCheckedAt || '';
+          return {
+            id: entry?.id,
+            provider: entry?.provider,
+            effectiveStreak,
+            lastErrorCategory,
+            lastErrorMessage,
+            lastFailureAt
+          };
+        })
+        .filter((entry) => entry.effectiveStreak > 0)
+        .sort((a, b) => {
+          if (b.effectiveStreak !== a.effectiveStreak) return b.effectiveStreak - a.effectiveStreak;
+          const bTime = Date.parse(b.lastFailureAt || '') || 0;
+          const aTime = Date.parse(a.lastFailureAt || '') || 0;
+          return bTime - aTime;
+        })
+        .slice(0, 6);
+    }
+
+    function renderScoreboard() {
+      if (!scoreboard || !scoreboardList) return;
+      const offenders = topOffenders();
+      scoreboard.classList.toggle('hidden', offenders.length === 0);
+      if (!offenders.length) {
+        scoreboardList.innerHTML = '<div class="scoreboard-item">No failure streaks recorded yet.</div>';
+        return;
+      }
+      scoreboardList.innerHTML = offenders.map((entry) => {
+        const id = safeDomId(entry.id);
+        return `
+          <div class="scoreboard-item">
+            <strong>${escapeHtml(entry.provider || entry.id || 'Unknown source')}</strong>
+            <div class="scoreboard-meta">
+              <span>Streak: ${escapeHtml(entry.effectiveStreak)}</span>
+              <span>${escapeHtml(entry.lastErrorCategory)}</span>
+              <span>${escapeHtml(entry.lastErrorMessage)}</span>
+            </div>
+            <a class="scoreboard-link" href="#source-${id}">Jump to row</a>
+          </div>
+        `;
+      }).join('');
     }
 
     function tagRowMarkup(tags) {
@@ -957,7 +1083,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     }
 
     function rowMarkup(entry) {
-      return '<tr data-source-id="' + escapeHtml(entry.id) + '">' +
+      return '<tr data-source-id="' + escapeHtml(entry.id) + '" id="source-' + safeDomId(entry.id) + '">' +
         '<td>' + escapeHtml(entry.provider) + '</td>' +
         '<td>' + escapeHtml(entry.kind) + ' / ' + escapeHtml(entry.lane) + '</td>' +
         '<td>' + escapeHtml(entry.region) + '</td>' +
@@ -1009,11 +1135,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     function renderRows() {
       if (!currentEntries.length && !currentSuggestions.length) {
         emptyState('No quarantined sources currently recorded.');
+        renderScoreboard();
         return;
       }
       const suggestionMarkup = currentSuggestions.map(suggestionRowMarkup).join('');
       const quarantineMarkup = currentEntries.map(rowMarkup).join('');
       body.innerHTML = `${suggestionMarkup}${quarantineMarkup}`;
+      renderScoreboard();
       if (!approveEnabled) {
         for (const row of body.querySelectorAll('tr[data-request-id]')) {
           const button = row.querySelector('button[data-action="approve"]');
