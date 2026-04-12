@@ -25,15 +25,13 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/feed",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:47:26.742Z"
+      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering."
     },
     {
       "id": "austria-interior-ministry-news",
@@ -71,15 +69,13 @@
     {
       "id": "belgium-crisis-centre-news",
       "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/newsroom",
+      "endpoint": "https://crisiscenter.be/en/news",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:47:52.261Z"
+      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context."
     },
     {
       "id": "denmark-pet-news",
@@ -313,15 +309,13 @@
     {
       "id": "czech-police-news",
       "provider": "Police of the Czech Republic - News",
-      "endpoint": "https://english.radio.cz/news",
+      "endpoint": "https://www.policie.cz/clanek/news.aspx",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:50:52.579Z"
+      "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context."
     },
     {
       "id": "dutch-police-rss-index",
@@ -566,15 +560,13 @@
     {
       "id": "eu-council-rss-index",
       "provider": "Council of the EU - RSS Index",
-      "endpoint": "https://securitymattersmagazine.com/news",
+      "endpoint": "https://www.consilium.europa.eu/en/about-site/rss/",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Council of the EU RSS index page for official feed discovery and source maintenance.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:51:52.686Z"
+      "comment": "Council of the EU RSS index page for official feed discovery and source maintenance."
     },
     {
       "id": "eu-ct-coordinator",
@@ -927,15 +919,13 @@
     {
       "id": "politico-europe",
       "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/section/defense/",
+      "endpoint": "https://www.politico.eu/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Politico Europe used as corroborating political-security context rather than live trigger input.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:52:42.850Z"
+      "comment": "Politico Europe used as corroborating political-security context rather than live trigger input."
     },
     {
       "id": "rte-ireland-news-rss",
@@ -1160,15 +1150,13 @@
     {
       "id": "nctv-nl-english-news",
       "provider": "NCTV Netherlands latest news (English)",
-      "endpoint": "https://english.nctv.nl/api/rss?query=%7B%22filters%22%3A%5B%7B%22field%22%3A%22content_type%22%2C%22values%22%3A%5B%22pro%3AnewsDocument%22%5D%2C%22type%22%3A%22all%22%7D%5D%2C%22resultSearchTerm%22%3A%22%22%7D",
+      "endpoint": "https://english.nctv.nl/latest/news",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:53:02.544Z"
+      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases."
     },
     {
       "id": "ocam-be-english",
@@ -1456,14 +1444,12 @@
     {
       "id": "nato-news-rss",
       "provider": "NATO a News (RSS)",
-      "endpoint": "https://www.nato.int/en/news-and-events/articles/news",
+      "endpoint": "https://www.nato.int/cps/en/natohq/rss/news.rss",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:53:42.867Z"
+      "requiresKeywordMatch": true
     },
     {
       "id": "occrp-news",
@@ -1713,9 +1699,7 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Barking and Dagenham borough news used for East London incident corroboration and civic response.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:54:18.092Z"
+      "comment": "Barking and Dagenham borough news used for East London incident corroboration and civic response."
     },
     {
       "id": "barnet-council-news",
@@ -1973,15 +1957,13 @@
     {
       "id": "homerton-healthcare-news",
       "provider": "Homerton Healthcare NHS Foundation Trust a News",
-      "endpoint": "https://hospitaltimes.co.uk/",
+      "endpoint": "https://www.homerton.nhs.uk/latest-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Homerton Healthcare news used for East London hospital and emergency-response context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T08:55:08.895Z"
+      "comment": "Homerton Healthcare news used for East London hospital and emergency-response context."
     },
     {
       "id": "hounslow-council-news",
