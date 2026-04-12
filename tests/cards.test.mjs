@@ -32,6 +32,15 @@ test('responder card unifies eu and europe geo tags to Europe with EU emoji', ()
   assert.doesNotMatch(fromEu, /🌍/);
 });
 
+test('responder card adds US flag geo tag for lowercase "the us" phrasing', () => {
+  const markup = responderCardMarkup(makeAlert({
+    region: 'europe',
+    summary: 'Officials in the us raised the alert level.'
+  }), false);
+
+  assert.match(markup, /🇺🇸/);
+});
+
 test('responder card adds US flag geo tag when story text mentions US', () => {
   const markup = responderCardMarkup(makeAlert({
     region: 'europe',

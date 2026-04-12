@@ -17,9 +17,9 @@ const regionBadgeMeta = {
 };
 
 const countryMentionMeta = [
-  { key: 'us', css: 'is-us', flag: '🇺🇸', label: 'US', patterns: [/\bUnited\s+States\b/i, /\bU\.S\.A\.?\b/i, /\bU\.S\.\b/i, /\bUS\b/, /\bAmerican\b/i] },
+  { key: 'us', css: 'is-us', flag: '🇺🇸', label: 'US', patterns: [/\bUnited\s+States\b/i, /\bU\.S\.A\.?\b/i, /\bU\.S\.\b/i, /\bUS\b/, /\bthe\s+us\b/i, /\bAmerican\b/i] },
   { key: 'uk', css: 'is-uk', flag: '🇬🇧', label: 'UK', patterns: [/\bUnited\s+Kingdom\b/i, /\bBritain\b/i, /\bBritish\b/i, /\bEngland\b/i, /\bScotland\b/i, /\bWales\b/i, /\bNorthern\s+Ireland\b/i] },
-  { key: 'europe', css: 'is-europe', flag: '🇪🇺', label: 'Europe', patterns: [/\bEurope\b/i, /\bEuropean\s+Union\b/i, /\bEU\b/] },
+  { key: 'europe', css: 'is-europe', flag: '🇪🇺', label: 'Europe', patterns: [/\bEurope\b/i, /\bEuropean\s+Union\b/i, /\bEU\b/i] },
   { key: 'france', css: 'is-country', flag: '🇫🇷', label: 'France', patterns: [/\bFrance\b/i, /\bFrench\b/i] },
   { key: 'germany', css: 'is-country', flag: '🇩🇪', label: 'Germany', patterns: [/\bGermany\b/i, /\bGerman\b/i] },
   { key: 'italy', css: 'is-country', flag: '🇮🇹', label: 'Italy', patterns: [/\bItaly\b/i, /\bItalian\b/i] },
