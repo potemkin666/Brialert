@@ -66,6 +66,13 @@ export const PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS = new Set([
     .map((value) => clean(value))
     .filter(Boolean)
 ]);
+export const PLAYWRIGHT_FALLBACK_DOMAINS = new Set(
+  clean(process.env.BRIALERT_PLAYWRIGHT_DOMAINS || '')
+    .split(',')
+    .map((value) => clean(value).toLowerCase())
+    .filter(Boolean)
+);
+export const PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS = envInt('BRIALERT_PLAYWRIGHT_MIN_HTML_CHARS', 1200, 200);
 export const PLAYWRIGHT_FALLBACK_MAX_ATTEMPTS_PER_RUN = Math.max(
   0,
   Number.isFinite(Number(process.env.BRIALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
@@ -118,8 +125,8 @@ export const SOURCE_ITEM_LIMITS = Object.freeze({
 });
 export const MAX_STORED_ALERTS = 120;
 export const MAX_FAILING_SOURCES_TO_LOG = 10;
-export const EXPECTED_REFRESH_MINUTES = 15;
-export const STALE_AFTER_MINUTES = 25;
+export const EXPECTED_REFRESH_MINUTES = 30;
+export const STALE_AFTER_MINUTES = 50;
 export const SOURCE_TIMEZONE = 'Europe/London';
 export const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
 export const FEED_BOT_USER_AGENT = 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)';
@@ -226,12 +233,12 @@ export function shouldRefreshSourceThisRun(source, buildDate = new Date()) {
   const cadence = sourceRefreshEveryHours(source);
   const offset = sourceRefreshOffset(source);
 
-  // Sub-hour cadences: refresh every run (workflow runs every 15 minutes)
+  // Sub-hour cadences: refresh every run (workflow runs every 30 minutes)
   if (cadence <= 0.25) return true;
 
-  // For cadences up to 1 hour, use 15-minute slots
+  // For cadences up to 1 hour, use schedule-aligned slots
   if (cadence <= 1) {
-    const slotMinutes = 15;
+    const slotMinutes = EXPECTED_REFRESH_MINUTES;
     const currentSlot = Math.floor(buildDate.getTime() / (slotMinutes * 60_000));
     const slotsPerCadence = Math.ceil(cadence * 60 / slotMinutes);
     const offsetSlot = Math.floor(offset * 60 / slotMinutes) % slotsPerCadence;

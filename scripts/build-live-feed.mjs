@@ -26,9 +26,11 @@ import {
   MAX_FETCH_STAGGER_JITTER_MS,
   MAX_STORED_ALERTS,
   PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS,
+  PLAYWRIGHT_FALLBACK_DOMAINS,
   PLAYWRIGHT_FALLBACK_AGGRESSIVE,
   PLAYWRIGHT_FALLBACK_MAX_ATTEMPTS_PER_RUN,
   PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
+  PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS,
   FAIL_ON_GUARDRAIL_VIOLATION,
   SCHEDULER_MODE,
   SOURCE_EMPTY_COOLDOWN_HOURS,
@@ -499,8 +501,23 @@ function shouldTryPlaywrightFallback(source, summary, playwrightBudget) {
   if (!summary) return false;
   if ((playwrightBudget?.attempts || 0) >= (playwrightBudget?.maxAttempts || 0)) return false;
   const reason = classifyFetchFailure(summary);
-  if (reason !== 'bot-block') return false;
-  return PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS.has(source.id) || PLAYWRIGHT_FALLBACK_AGGRESSIVE;
+  if (reason !== 'bot-block' && reason !== 'parser-failure') return false;
+  const domain = sourceDomain(source);
+  return PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS.has(source.id)
+    || (domain && PLAYWRIGHT_FALLBACK_DOMAINS.has(domain))
+    || PLAYWRIGHT_FALLBACK_AGGRESSIVE;
+}
+
+function shouldTryPlaywrightForThinHtml(source, body, playwrightBudget) {
+  if (!source || source.kind !== 'html') return false;
+  if ((playwrightBudget?.attempts || 0) >= (playwrightBudget?.maxAttempts || 0)) return false;
+  if (!PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS || PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS <= 0) return false;
+  const bodySize = typeof body === 'string' ? body.trim().length : 0;
+  if (bodySize >= PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS) return false;
+  const domain = sourceDomain(source);
+  return PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS.has(source.id)
+    || (domain && PLAYWRIGHT_FALLBACK_DOMAINS.has(domain))
+    || PLAYWRIGHT_FALLBACK_AGGRESSIVE;
 }
 
 function buildQuarantinedSourceEntries(sources, sourceHealth) {
@@ -2057,9 +2074,24 @@ async function main() {
               throw error;
             }
           }
-          const parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
+          let parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
             ? parseFeedItems(source, body)
             : parseHtmlItems(source, body);
+          if (!parsed.length && source.kind === 'html' && !usedPlaywrightFallback && shouldTryPlaywrightForThinHtml(source, body, playwrightBudget)) {
+            try {
+              playwrightBudget.attempts += 1;
+              body = await fetchTextWithPlaywright(source.endpoint, {
+                source,
+                timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
+                contentSelectors: source?.playwright?.contentSelectors
+              });
+              usedPlaywrightFallback = true;
+              playwrightBudget.successes += 1;
+              parsed = parseHtmlItems(source, body);
+            } catch (error) {
+              // fall through to normal empty parse handling
+            }
+          }
           if (!parsed.length) {
             discardReasons.parseNoItems += 1;
             if (fetchOutcome !== 'unchanged') {

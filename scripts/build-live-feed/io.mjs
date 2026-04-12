@@ -247,6 +247,7 @@ function classifyBodyBlock(text = '') {
     lower.includes('cf-challenge') ||
     lower.includes('just a moment') ||
     lower.includes('enable javascript and cookies') ||
+    lower.includes('enable javascript') ||
     lower.includes('security check') ||
     lower.includes('verify you are human') ||
     lower.includes('browser validation') ||
@@ -459,13 +460,20 @@ export async function fetchTextWithPlaywright(url, options = {}) {
   try {
     const context = await browser.newContext({
       userAgent: sourceUserAgent(options?.source),
-      locale: 'en-GB'
+      locale: 'en-GB',
+      viewport: options?.viewport || { width: 1280, height: 720 }
     });
     const page = await context.newPage();
     await page.goto(url, {
       waitUntil: 'domcontentloaded',
       timeout: timeoutMs
     });
+    const selectors = arrayify(options?.contentSelectors || options?.source?.playwright?.contentSelectors || 'article, main, .news-list, .article, .post, [role="main"]');
+    if (selectors.length) {
+      await Promise.any(
+        selectors.map((selector) => page.waitForSelector(selector, { timeout: Math.min(timeoutMs, 5000) }))
+      ).catch(() => {});
+    }
     const html = await page.content();
     const blockedClass = classifyBodyBlock(html);
     if (blockedClass) {
