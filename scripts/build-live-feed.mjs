@@ -2088,14 +2088,17 @@ async function main() {
   const nextComparable = JSON.stringify(payload.alerts);
   const hasExistingAlertsSnapshot = Array.isArray(existing?.alerts);
   const existingRuntimeMs = Number(existing?.runMetrics?.runDurationMs || 0);
+  const forceFeedWrite = clean(process.env.BRIALERT_FORCE_FEED_WRITE).toLowerCase() === 'true';
 
-  if (hasExistingAlertsSnapshot && currentComparable === nextComparable && !sourceErrors.length && !geoLookupFallbackNote) {
+  if (hasExistingAlertsSnapshot && currentComparable === nextComparable && !sourceErrors.length && !geoLookupFallbackNote && !forceFeedWrite) {
     if (Number.isFinite(existingRuntimeMs) && existingRuntimeMs > GUARDRAIL_MAX_RUNTIME_MS) {
       console.log(`No alert changes detected, refreshing feed metadata because previous runDurationMs=${existingRuntimeMs} exceeds guardrail=${GUARDRAIL_MAX_RUNTIME_MS}.`);
     } else {
       console.log('No alert changes detected.');
       return;
     }
+  } else if (forceFeedWrite && hasExistingAlertsSnapshot && currentComparable === nextComparable) {
+    console.log('Force writing feed output despite unchanged alerts.');
   }
 
   await fs.writeFile(outputPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');

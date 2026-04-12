@@ -18,6 +18,7 @@ jobs:
     timeout-minutes: 25
     env:
       BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
+      BRIALERT_FORCE_FEED_WRITE: 'true'
 
     steps:
       - name: Check out repository
