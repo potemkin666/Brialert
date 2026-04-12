@@ -145,6 +145,11 @@ export const DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE = Object.freeze({
   prevention: 1,
   default: 1
 });
+export const SOURCE_REFRESH_TIER_WINDOWS_MINUTES = Object.freeze({
+  critical: [30, 60],
+  important: [120, 240],
+  background: [720, 1440]
+});
 export const SOURCE_FAILURE_COOLDOWN_HOURS = 24;
 export const SOURCE_EMPTY_COOLDOWN_HOURS = 24;
 export const SOURCE_PROTECTED_FAILURE_COOLDOWN_HOURS = 6;
@@ -193,6 +198,80 @@ export function sourceDeterministicHash(value) {
   return deterministicSourceHash(value);
 }
 
+function parseIsoMs(value) {
+  const ms = new Date(value || '').getTime();
+  return Number.isFinite(ms) ? ms : 0;
+}
+
+function normaliseRefreshTier(value) {
+  const raw = clean(value).toLowerCase();
+  if (!raw) return '';
+  if (['critical', 'tier1', 'tier-1', 'high', 'p0'].includes(raw)) return 'critical';
+  if (['important', 'tier2', 'tier-2', 'medium', 'p1'].includes(raw)) return 'important';
+  if (['background', 'tier3', 'tier-3', 'low', 'p2'].includes(raw)) return 'background';
+  return '';
+}
+
+export function sourceRefreshTier(source) {
+  const explicit = normaliseRefreshTier(source?.refreshTier);
+  if (explicit) return explicit;
+  if (source?.lane === 'incidents' || source?.isTrustedOfficial) return 'critical';
+  if (['context', 'sanctions', 'oversight', 'border', 'prevention'].includes(source?.lane)) return 'important';
+  return 'background';
+}
+
+export function sourceRefreshWindowMinutes(source) {
+  const tier = sourceRefreshTier(source);
+  const window = SOURCE_REFRESH_TIER_WINDOWS_MINUTES[tier] || SOURCE_REFRESH_TIER_WINDOWS_MINUTES.background;
+  return {
+    tier,
+    min: window[0],
+    max: window[1]
+  };
+}
+
+export function sourceScheduleIntervalMinutes(source) {
+  const explicitHours = Number(source?.refreshEveryHours);
+  if (Number.isFinite(explicitHours) && explicitHours >= 0.25) {
+    return Math.max(1, Math.round(explicitHours * 60));
+  }
+  const { min, max } = sourceRefreshWindowMinutes(source);
+  const sourceKey = source?.id || source?.endpoint || source?.provider || '';
+  const range = Math.max(1, Math.floor(max - min + 1));
+  const offset = sourceKey ? sourceDeterministicHash(sourceKey) % range : 0;
+  return Math.max(1, min + offset);
+}
+
+export function sourceScheduleOffsetMinutes(source, intervalMinutes) {
+  const normalizedInterval = Math.max(1, Math.floor(intervalMinutes || 1));
+  const explicitOffset = Number(source?.refreshOffset);
+  if (Number.isFinite(explicitOffset) && explicitOffset >= 0) {
+    return Math.floor((explicitOffset * 60) % normalizedInterval);
+  }
+  const sourceKey = source?.id || source?.endpoint || source?.provider || '';
+  const hashSeed = sourceKey ? `offset:${sourceKey}` : 'offset';
+  return sourceKey ? sourceDeterministicHash(hashSeed) % normalizedInterval : 0;
+}
+
+export function sourceScheduleNextFetchAt(source, buildDate = new Date(), previousEntry = null, preferExisting = true) {
+  const nowMs = buildDate.getTime();
+  const existingMs = parseIsoMs(previousEntry?.nextFetchAt);
+  if (preferExisting && existingMs && nowMs < existingMs) return new Date(existingMs).toISOString();
+  const intervalMinutes = sourceScheduleIntervalMinutes(source);
+  const offsetMinutes = sourceScheduleOffsetMinutes(source, intervalMinutes);
+  const nowMinutes = Math.floor(nowMs / 60000);
+  const remainder = ((nowMinutes % intervalMinutes) + intervalMinutes) % intervalMinutes;
+  const base = nowMinutes - remainder;
+  let nextMinutes = base + offsetMinutes;
+  if (nextMinutes <= nowMinutes) nextMinutes += intervalMinutes;
+  return new Date(nextMinutes * 60000).toISOString();
+}
+
+export function sourceScheduleNextFetchAfterRun(source, buildDate = new Date()) {
+  const intervalMinutes = sourceScheduleIntervalMinutes(source);
+  return new Date(buildDate.getTime() + intervalMinutes * 60000).toISOString();
+}
+
 export function sourceUserAgent(source) {
   const explicit = clean(source?.headers?.['user-agent']);
   if (explicit) return explicit;
@@ -231,25 +310,11 @@ export function sourceRefreshOffset(source) {
   return baseOffset * scalingFactor;
 }
 
-export function shouldRefreshSourceThisRun(source, buildDate = new Date()) {
-  const cadence = sourceRefreshEveryHours(source);
-  const offset = sourceRefreshOffset(source);
-
-  // Sub-hour cadences: refresh every run (workflow runs every 30 minutes)
-  if (cadence <= 0.25) return true;
-
-  // For cadences up to 1 hour, use schedule-aligned slots
-  if (cadence <= 1) {
-    const slotMinutes = EXPECTED_REFRESH_MINUTES;
-    const currentSlot = Math.floor(buildDate.getTime() / (slotMinutes * 60_000));
-    const slotsPerCadence = Math.ceil(cadence * 60 / slotMinutes);
-    const offsetSlot = Math.floor(offset * 60 / slotMinutes) % slotsPerCadence;
-    return currentSlot % slotsPerCadence === offsetSlot;
-  }
-
-  // Multi-hour cadences: use hourly slots
-  const hourSlot = Math.floor(buildDate.getTime() / 3600000);
-  const cadenceHours = Math.floor(cadence);
-  const offsetHours = Math.floor(offset) % cadenceHours;
-  return hourSlot % cadenceHours === offsetHours;
+export function shouldRefreshSourceThisRun(source, buildDate = new Date(), previousEntry = null) {
+  const nextFetchAtMs = parseIsoMs(previousEntry?.nextFetchAt);
+  if (nextFetchAtMs) return buildDate.getTime() >= nextFetchAtMs;
+  const intervalMinutes = sourceScheduleIntervalMinutes(source);
+  const offsetMinutes = sourceScheduleOffsetMinutes(source, intervalMinutes);
+  const nowMinutes = Math.floor(buildDate.getTime() / 60000);
+  return intervalMinutes ? (nowMinutes % intervalMinutes) === offsetMinutes : true;
 }

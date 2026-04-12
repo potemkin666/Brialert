@@ -44,6 +44,8 @@ import {
   AUTO_QUARANTINE_FAILURE_THRESHOLD,
   isMachineReadableSourceKind,
   sourceDeterministicHash,
+  sourceScheduleNextFetchAfterRun,
+  sourceScheduleNextFetchAt,
   shouldRefreshSourceThisRun,
   outputPath,
   quarantinedSourcesPath,
@@ -204,6 +206,9 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   const prior = previousEntry && typeof previousEntry === 'object' ? previousEntry : {};
   const priorBlockedFailures = Number(prior.consecutiveBlockedFailures || 0);
   const priorDeadUrlFailures = Number(prior.consecutiveDeadUrlFailures || 0);
+  const generatedAtMs = Date.parse(generatedAt);
+  const scheduleBaseDate = Number.isFinite(generatedAtMs) ? new Date(generatedAtMs) : new Date();
+  const scheduledNextFetchAt = sourceScheduleNextFetchAfterRun(source, scheduleBaseDate);
   const next = {
     provider: source.provider,
     lane: source.lane,
@@ -226,7 +231,8 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     autoSkipReason: null,
     quarantined: Boolean(prior.quarantined),
     quarantinedAt: prior.quarantinedAt || null,
-    quarantineReason: prior.quarantineReason || null
+    quarantineReason: prior.quarantineReason || null,
+    nextFetchAt: scheduledNextFetchAt
   };
 
   if ((stat?.built || 0) > 0) {
@@ -257,6 +263,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     if (blockedNonContent && next.consecutiveBlockedFailures >= BLOCKED_NON_CONTENT_FAIL_THRESHOLD) {
       next.cooldownUntil = new Date(Date.parse(generatedAt) + BLOCKED_NON_CONTENT_COOLDOWN_HOURS * 3600000).toISOString();
       next.autoSkipReason = 'blocked-cooldown';
+      next.nextFetchAt = next.cooldownUntil;
       return next;
     }
     if (!next.quarantined && notFoundFailure) {
@@ -265,6 +272,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       next.quarantineReason = 'HTTP 404 not found; needs manual source URL review';
       next.autoSkipReason = 'review-quarantine';
       next.cooldownUntil = null;
+      next.nextFetchAt = new Date(Date.parse(generatedAt) + AUTO_QUARANTINE_RECHECK_HOURS * 3600000).toISOString();
       return next;
     }
     if (!next.quarantined && source?.kind === 'html' && next.consecutiveBlockedFailures >= AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD) {
@@ -273,6 +281,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       next.quarantineReason = 'Repeated blocked-or-auth failures on html source';
       next.autoSkipReason = 'review-quarantine';
       next.cooldownUntil = null;
+      next.nextFetchAt = new Date(Date.parse(generatedAt) + AUTO_QUARANTINE_RECHECK_HOURS * 3600000).toISOString();
       return next;
     }
     if (!next.quarantined && next.consecutiveDeadUrlFailures >= AUTO_QUARANTINE_DEAD_URL_THRESHOLD) {
@@ -281,6 +290,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       next.quarantineReason = 'Repeated dead-or-moved-url failures';
       next.autoSkipReason = 'review-quarantine';
       next.cooldownUntil = null;
+      next.nextFetchAt = new Date(Date.parse(generatedAt) + AUTO_QUARANTINE_RECHECK_HOURS * 3600000).toISOString();
       return next;
     }
     if (!next.quarantined && next.consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD) {
@@ -289,12 +299,14 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       next.quarantineReason = `Repeated failures (${next.consecutiveFailures}) need manual review`;
       next.autoSkipReason = 'review-quarantine';
       next.cooldownUntil = null;
+      next.nextFetchAt = new Date(Date.parse(generatedAt) + AUTO_QUARANTINE_RECHECK_HOURS * 3600000).toISOString();
       return next;
     }
     if (next.consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
       const cooldownHours = sourceFailureCooldownHours(source, stat?.lastErrorCategory || '');
       next.cooldownUntil = new Date(Date.parse(generatedAt) + cooldownHours * 3600000).toISOString();
       next.autoSkipReason = 'failure-cooldown';
+      next.nextFetchAt = next.cooldownUntil;
     }
     return next;
   }
@@ -310,6 +322,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   if (!source.isTrustedOfficial && source.lane !== 'incidents' && next.consecutiveEmptyRuns >= AUTO_SKIP_EMPTY_THRESHOLD) {
     next.cooldownUntil = new Date(Date.parse(generatedAt) + SOURCE_EMPTY_COOLDOWN_HOURS * 3600000).toISOString();
     next.autoSkipReason = 'empty-cooldown';
+    next.nextFetchAt = next.cooldownUntil;
   }
   return next;
 }
@@ -1221,13 +1234,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
     function tagRowMarkup(tags) {
       const safeTags = Array.isArray(tags) ? tags.filter((tag) => tag) : [];
       if (!safeTags.length) return '';
-      return '<div class="tag-row">' + safeTags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('') + '</div>';
+      return '<div class="tag-row">' + safeTags.map((tag) => '<span class="tag">' + escapeHtml(tag) + '</span>').join('') + '</div>';
     }
 
     function suggestionRowMarkup(entry) {
       const tags = Array.isArray(entry?.tags) ? entry.tags : [];
       const tagMarkup = tagRowMarkup(tags);
-      const tagSummary = entry?.tagSummary ? `<div class="helper-note">${escapeHtml(entry.tagSummary)}</div>` : '';
+      const tagSummary = entry?.tagSummary ? '<div class="helper-note">' + escapeHtml(entry.tagSummary) + '</div>' : '';
       return '<tr class="suggestion-row" data-request-id="' + escapeHtml(entry.id) + '">' +
         '<td>' + escapeHtml(entry.provider || 'Requested source') + '</td>' +
         '<td>' + escapeHtml(entry.kind || 'html') + ' / ' + escapeHtml(entry.lane || 'context') + '</td>' +
@@ -1304,7 +1317,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       }
       const suggestionMarkup = currentSuggestions.map(suggestionRowMarkup).join('');
       const quarantineMarkup = currentEntries.map(rowMarkup).join('');
-      body.innerHTML = `${suggestionMarkup}${quarantineMarkup}`;
+      body.innerHTML = suggestionMarkup + quarantineMarkup;
       if (!approveEnabled) {
         for (const row of body.querySelectorAll('tr[data-request-id]')) {
           const button = row.querySelector('button[data-action="approve"]');
@@ -2079,7 +2092,8 @@ async function main() {
     return true;
   });
   const scheduledSources = eligibleSources.filter((source) => {
-    const autoCooldown = sourceMayAutoCooldown(source, sourceHealthEntry(previousHealth, source.id), buildDate);
+    const priorEntry = sourceHealthEntry(previousHealth, source.id);
+    const autoCooldown = sourceMayAutoCooldown(source, priorEntry, buildDate);
     if (autoCooldown) {
       autoDeferredSources.push({
         id: source.id,
@@ -2091,7 +2105,7 @@ async function main() {
       cooldownDeferredSourceIds.add(source.id);
       return false;
     }
-    const scheduledThisRun = shouldRefreshSourceThisRun(source, buildDate);
+    const scheduledThisRun = shouldRefreshSourceThisRun(source, buildDate, priorEntry);
     if (!scheduledThisRun) cadenceDeferredSources.push(source);
     return scheduledThisRun;
   });
@@ -2513,6 +2527,12 @@ async function main() {
     const priorEntry = sourceHealthEntry(previousHealth, source.id);
     const deferred = autoDeferredSources.find((entry) => entry.id === source.id);
     if (deferred) {
+      const quarantineRecheckAt = deferred.reason === 'review-quarantine' && priorEntry?.quarantinedAt
+        ? new Date(Date.parse(priorEntry.quarantinedAt) + AUTO_QUARANTINE_RECHECK_HOURS * 3600000).toISOString()
+        : null;
+      const deferredNextFetchAt = deferred.until
+        || quarantineRecheckAt
+        || sourceScheduleNextFetchAt(source, buildDate, priorEntry, true);
       nextSourceHealth[source.id] = {
         ...(priorEntry || {}),
         provider: source.provider,
@@ -2525,7 +2545,8 @@ async function main() {
           : (priorEntry?.quarantineReason || null),
         autoSkipReason: deferred.reason,
         cooldownUntil: deferred.until,
-        lastDeferredAt: generatedAt
+        lastDeferredAt: generatedAt,
+        nextFetchAt: deferredNextFetchAt
       };
       continue;
     }
@@ -2537,7 +2558,8 @@ async function main() {
         provider: source.provider,
         lane: source.lane,
         kind: source.kind,
-        autoSkipReason: null
+        autoSkipReason: null,
+        nextFetchAt: sourceScheduleNextFetchAt(source, buildDate, priorEntry, true)
       };
       continue;
     }
@@ -2554,9 +2576,9 @@ async function main() {
     return acc;
   }, {});
   const nowMs = Date.now();
-  const sourceById = new Map(eligibleSources.map((source) => [source.id, source]));
+  const eligibleSourceById = new Map(eligibleSources.map((source) => [source.id, source]));
   const freshnessByTier = Object.entries(nextSourceHealth).reduce((acc, [sourceId, entry]) => {
-    const source = sourceById.get(sourceId) || entry;
+    const source = eligibleSourceById.get(sourceId) || entry;
     const tier = schedulingTier(source);
     const minutes = freshnessMinutes(entry, nowMs);
     if (minutes === null) return acc;
