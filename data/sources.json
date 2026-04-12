@@ -1523,14 +1523,16 @@
     {
       "id": "interpol-news-events",
       "provider": "INTERPOL a News and Events",
-      "endpoint": "https://www.interpol.int/News-and-Events",
+      "endpoint": "https://www.interpol.int/en/News-and-Events/News?format=RSS",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "INTERPOL does not consistently publish RSS; using the official news and events page.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T20:58:09.836Z"
     },
     {
       "id": "just-security",
