@@ -52,8 +52,8 @@ import {
   MAX_HTML_PREFETCH_ITEMS,
   MAX_HTML_SOURCES_PER_RUN,
   shouldRefreshSourceThisRun,
-  sourceRefreshEveryHours,
-  sourceRefreshOffset
+  sourceScheduleIntervalMinutes,
+  sourceScheduleOffsetMinutes
 } from '../scripts/build-live-feed/config.mjs';
 import { renderHero, renderSupporting } from '../app/render/live.mjs';
 import { filteredMapView } from '../app/render/map.mjs';
@@ -1134,19 +1134,18 @@ test('source refresh cadence keeps incidents every run and rotates lower-yield l
     kind: 'rss'
   };
   const baseHour = new Date('2026-04-05T10:00:00.000Z');
-  const cadence = sourceRefreshEveryHours(oversightSource);
-  const offset = sourceRefreshOffset(oversightSource);
-  const baseHourSlot = Math.floor(baseHour.getTime() / 3600000);
-  const deltaToRefresh = (offset - (baseHourSlot % cadence) + cadence) % cadence;
-  const refreshHour = new Date(baseHour.getTime() + deltaToRefresh * 3600000);
-  const nonRefreshHour = new Date(refreshHour.getTime() + 3600000);
+  const intervalMinutes = sourceScheduleIntervalMinutes(oversightSource);
+  const offsetMinutes = sourceScheduleOffsetMinutes(oversightSource, intervalMinutes);
+  const baseMinutes = Math.floor(baseHour.getTime() / 60000);
+  const deltaToRefresh = (offsetMinutes - (baseMinutes % intervalMinutes) + intervalMinutes) % intervalMinutes;
+  const refreshHour = new Date(baseHour.getTime() + deltaToRefresh * 60000);
+  const nonRefreshHour = new Date(refreshHour.getTime() + intervalMinutes * 60000);
 
   // Incidents should refresh every run (cadence <= 0.25 hours)
   assert.equal(shouldRefreshSourceThisRun(incidentsSource, baseHour), true);
   assert.equal(shouldRefreshSourceThisRun(incidentsSource, nonRefreshHour), true);
 
-  // Oversight RSS sources still use 1-hour cadence rotation
-  assert.equal(cadence, 1);
+  // Oversight RSS sources rotate on the scheduled interval
   assert.equal(shouldRefreshSourceThisRun(oversightSource, refreshHour), true);
 });
 
