@@ -1713,7 +1713,9 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Barking and Dagenham borough news used for East London incident corroboration and civic response."
+      "comment": "Barking and Dagenham borough news used for East London incident corroboration and civic response.",
+      "quarantined": false,
+      "restoredAt": "2026-04-12T08:54:18.092Z"
     },
     {
       "id": "barnet-council-news",
