@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T08:53:02.544Z",
-  "count": 182,
+  "generatedAt": "2026-04-12T08:53:42.867Z",
+  "count": 181,
   "sources": [
     {
       "id": "cumbria-police-newsroom",
@@ -1901,25 +1901,6 @@
       "reviewBy": "2026-04-08T19:13:04.758Z",
       "lastFailureAt": "2026-04-06T19:13:04.758Z",
       "lastCheckedAt": "2026-04-06T19:13:04.758Z"
-    },
-    {
-      "id": "nato-news-rss",
-      "provider": "NATO a News (RSS)",
-      "endpoint": "https://www.nato.int/cps/en/natohq/rss/news.rss",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-06T17:59:08.402Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T17:59:08.402Z",
-      "lastFailureAt": "2026-04-06T17:59:08.402Z",
-      "lastCheckedAt": "2026-04-06T17:59:08.402Z"
     },
     {
       "id": "barts-health-news",
