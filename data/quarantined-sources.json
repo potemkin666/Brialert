@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T21:03:12.615Z",
-  "count": 166,
+  "generatedAt": "2026-04-12T21:04:24.721Z",
+  "count": 165,
   "sources": [
     {
       "id": "finland-police-news",
@@ -153,25 +153,6 @@
       "reviewBy": "2026-04-13T15:27:18.437Z",
       "lastFailureAt": "2026-04-11T15:27:18.437Z",
       "lastCheckedAt": "2026-04-11T15:27:18.437Z"
-    },
-    {
-      "id": "statewatch-news",
-      "provider": "Statewatch - News",
-      "endpoint": "https://www.statewatch.org/news/",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-10T12:03:32.036Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 2,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-12T12:03:32.036Z",
-      "lastFailureAt": "2026-04-10T12:03:32.036Z",
-      "lastCheckedAt": "2026-04-10T12:03:32.036Z"
     },
     {
       "id": "clingendael-publications",
