@@ -1,7 +1,45 @@
 {
-  "generatedAt": "2026-04-12T11:04:30.257Z",
-  "count": 181,
+  "generatedAt": "2026-04-12T11:39:28.016Z",
+  "count": 183,
   "sources": [
+    {
+      "id": "denmark-pet-news",
+      "provider": "Danish Security and Intelligence Service - News",
+      "endpoint": "https://pet.dk/nyheder",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "status": "auto-quarantined",
+      "reason": "HTTP 404 not found; needs manual source URL review",
+      "quarantinedAt": "2026-04-12T11:39:28.016Z",
+      "lastErrorCategory": "not-found-404",
+      "lastErrorMessage": "HTTP 404",
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-14T11:39:28.016Z",
+      "lastFailureAt": "2026-04-12T11:39:28.016Z",
+      "lastCheckedAt": "2026-04-12T11:39:28.016Z"
+    },
+    {
+      "id": "german-bfv-news",
+      "provider": "German BfV - News",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "status": "auto-quarantined",
+      "reason": "HTTP 404 not found; needs manual source URL review",
+      "quarantinedAt": "2026-04-12T11:39:28.016Z",
+      "lastErrorCategory": "not-found-404",
+      "lastErrorMessage": "HTTP 404",
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-14T11:39:28.016Z",
+      "lastFailureAt": "2026-04-12T11:39:28.016Z",
+      "lastCheckedAt": "2026-04-12T11:39:28.016Z"
+    },
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
@@ -3441,6 +3479,5 @@
       "lastFailureAt": "2026-04-05T13:02:51.966Z",
       "lastCheckedAt": "2026-04-05T13:02:51.966Z"
     }
-  ],
-  "schemaVersion": 1
+  ]
 }
