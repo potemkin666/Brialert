@@ -313,13 +313,15 @@
     {
       "id": "czech-police-news",
       "provider": "Police of the Czech Republic - News",
-      "endpoint": "https://www.policie.cz/clanek/news.aspx",
+      "endpoint": "https://english.radio.cz/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context."
+      "comment": "Czech Police updates for arrests, security incidents and public-order operations relevant to regional threat context.",
+      "quarantined": false,
+      "restoredAt": "2026-04-12T08:50:52.579Z"
     },
     {
       "id": "dutch-police-rss-index",
