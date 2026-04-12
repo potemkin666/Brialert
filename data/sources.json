@@ -566,13 +566,15 @@
     {
       "id": "eu-council-rss-index",
       "provider": "Council of the EU - RSS Index",
-      "endpoint": "https://www.consilium.europa.eu/en/about-site/rss/",
+      "endpoint": "https://securitymattersmagazine.com/news",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Council of the EU RSS index page for official feed discovery and source maintenance."
+      "comment": "Council of the EU RSS index page for official feed discovery and source maintenance.",
+      "quarantined": false,
+      "restoredAt": "2026-04-12T08:51:52.686Z"
     },
     {
       "id": "eu-ct-coordinator",
