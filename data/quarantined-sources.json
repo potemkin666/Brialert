@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T20:11:09.619Z",
-  "count": 174,
+  "generatedAt": "2026-04-12T20:12:52.217Z",
+  "count": 173,
   "sources": [
     {
       "id": "ecfr-feeds-index",
@@ -153,25 +153,6 @@
       "reviewBy": "2026-04-14T10:52:15.680Z",
       "lastFailureAt": "2026-04-12T10:52:15.680Z",
       "lastCheckedAt": "2026-04-12T10:52:15.680Z"
-    },
-    {
-      "id": "czech-police-news",
-      "provider": "Police of the Czech Republic - News",
-      "endpoint": "https://www.policie.cz/clanek/news.aspx",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-12T09:14:31.402Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-14T09:14:31.402Z",
-      "lastFailureAt": "2026-04-12T09:14:31.402Z",
-      "lastCheckedAt": "2026-04-12T09:14:31.402Z"
     },
     {
       "id": "homerton-healthcare-news",
