@@ -27,14 +27,16 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
+      "endpoint": "https://blog.bham.ac.uk/urbterr/feed/",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T19:38:47.646Z"
     },
     {
       "id": "austria-interior-ministry-news",
