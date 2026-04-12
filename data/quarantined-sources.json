@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T20:03:09.750Z",
-  "count": 176,
+  "generatedAt": "2026-04-12T20:03:50.210Z",
+  "count": 175,
   "sources": [
     {
       "id": "ecfr-feeds-index",
@@ -2429,25 +2429,6 @@
       "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-08T13:27:14.171Z",
-      "lastFailureAt": "2026-04-06T13:27:14.171Z",
-      "lastCheckedAt": "2026-04-06T13:27:14.171Z"
-    },
-    {
-      "id": "gov-uk-defence-intelligence",
-      "provider": "UK Defence Intelligence a GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/defence-intelligence",
-      "kind": "html",
-      "lane": "context",
-      "region": "uk",
-      "status": "auto-quarantined",
-      "reason": "Repeated dead-or-moved-url failures",
-      "quarantinedAt": "2026-04-06T13:27:14.171Z",
-      "lastErrorCategory": "dead-or-moved-url",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 2,
       "replacementSuggestion": "",
       "reviewBy": "2026-04-08T13:27:14.171Z",
       "lastFailureAt": "2026-04-06T13:27:14.171Z",
