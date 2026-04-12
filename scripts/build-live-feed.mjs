@@ -520,6 +520,117 @@ function shouldTryPlaywrightForThinHtml(source, body, playwrightBudget) {
     || PLAYWRIGHT_FALLBACK_AGGRESSIVE;
 }
 
+async function attemptSourceBuild(source, requestState, playwrightBudget) {
+  const localErrors = [];
+  const builtAlerts = [];
+  let body;
+  let usedPlaywrightFallback = false;
+  let finalUrl = clean(source?.endpoint);
+  let responseStatus = null;
+  let fetchOutcome = 'unknown';
+  try {
+    const fetched = await fetchText(source.endpoint, 1, { source, requestState, includeMeta: true });
+    if (typeof fetched === 'string') {
+      body = fetched;
+      fetchOutcome = 'success';
+    } else {
+      body = fetched.text;
+      finalUrl = clean(fetched.finalUrl || source.endpoint);
+      responseStatus = Number.isFinite(Number(fetched.status)) ? Number(fetched.status) : null;
+      fetchOutcome = (responseStatus === 304 || fetched.unchanged304) ? 'unchanged' : 'success';
+    }
+  } catch (error) {
+    const summary = summariseSourceError(source, error);
+    if (shouldTryPlaywrightFallback(source, summary, playwrightBudget)) {
+      playwrightBudget.attempts += 1;
+      body = await fetchTextWithPlaywright(source.endpoint, {
+        source,
+        timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
+        contentSelectors: source?.playwright?.contentSelectors
+      });
+      usedPlaywrightFallback = true;
+      playwrightBudget.successes += 1;
+      fetchOutcome = 'success';
+    } else {
+      throw error;
+    }
+  }
+
+  let parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
+    ? parseFeedItems(source, body)
+    : parseHtmlItems(source, body);
+  if (!parsed.length && source.kind === 'html' && !usedPlaywrightFallback && shouldTryPlaywrightForThinHtml(source, body, playwrightBudget)) {
+    try {
+      playwrightBudget.attempts += 1;
+      body = await fetchTextWithPlaywright(source.endpoint, {
+        source,
+        timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
+        contentSelectors: source?.playwright?.contentSelectors
+      });
+      usedPlaywrightFallback = true;
+      playwrightBudget.successes += 1;
+      parsed = parseHtmlItems(source, body);
+    } catch (error) {
+      // ignore, handled below
+    }
+  }
+
+  if (!parsed.length) {
+    localErrors.push(summariseSourceError(
+      source,
+      buildFetchError('No items parsed from source payload', 'brittle-selectors-or-js-rendering')
+    ));
+  }
+
+  const preLimit = source.kind === 'html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
+  const preLimited = parsed.slice(0, preLimit);
+  const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
+  const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
+  const itemLimit = reliabilityProfile === 'tabloid'
+    ? SOURCE_ITEM_LIMITS.tabloid
+    : SOURCE_ITEM_LIMITS[source.lane] || SOURCE_ITEM_LIMITS.default;
+  const filtered = hydrated.filter((item) => {
+    try {
+      return discardReasonForItem(source, item) === null;
+    } catch (error) {
+      localErrors.push(summariseSourceError(source, error));
+      return false;
+    }
+  });
+  const kept = filtered.slice(0, itemLimit);
+
+  kept.forEach((item, idx) => {
+    try {
+      builtAlerts.push(buildAlert(source, item, idx));
+    } catch (error) {
+      localErrors.push(summariseSourceError(source, error));
+    }
+  });
+
+  return {
+    alerts: builtAlerts,
+    sourceErrors: localErrors,
+    sourceStat: {
+      id: source.id,
+      provider: source.provider,
+      lane: source.lane,
+      kind: source.kind,
+      parsed: parsed.length,
+      hydrated: hydrated.length,
+      filtered: filtered.length,
+      kept: kept.length,
+      built: builtAlerts.length,
+      errors: localErrors.length,
+      lastErrorCategory: localErrors[0]?.category || null,
+      lastErrorMessage: localErrors[0]?.message || null,
+      usedPlaywrightFallback,
+      finalUrl,
+      status: responseStatus,
+      fetchOutcome
+    }
+  };
+}
+
 function buildQuarantinedSourceEntries(sources, sourceHealth) {
   const healthMap = sourceHealth && typeof sourceHealth === 'object' ? sourceHealth : {};
   return (Array.isArray(sources) ? sources : [])
@@ -2006,6 +2117,9 @@ async function main() {
     conditionalCache: {},
     domainState: {}
   };
+  const sourceById = new Map(
+    Array.isArray(sources) ? sources.map((entry) => [entry?.id, entry]).filter(([id]) => id) : []
+  );
 
   async function processSourceBatch(batch) {
     if (!batch.length) return;
@@ -2184,6 +2298,35 @@ async function main() {
           } else {
             failureReasonCounts['timeout-or-aborted'] += 1;
             console.warn(`Unhandled source failure reason mapped to timeout-or-aborted: ${reason} (${summary.id})`);
+          }
+          const fallbackIds = Array.isArray(source?.fallbackSourceIds) ? source.fallbackSourceIds : [];
+          for (const fallbackId of fallbackIds) {
+            const fallbackSource = sourceById.get(fallbackId);
+            if (!fallbackSource) continue;
+            try {
+              const fallbackResult = await attemptSourceBuild(fallbackSource, requestState, playwrightBudget);
+              if (!fallbackResult.alerts.length) continue;
+              failureReasonCounts.success += 1;
+              return {
+                checked: 1,
+                alerts: fallbackResult.alerts,
+                sourceErrors: [...localErrors, ...fallbackResult.sourceErrors],
+                sourceStat: {
+                  ...fallbackResult.sourceStat,
+                  id: source.id,
+                  provider: source.provider,
+                  lane: source.lane,
+                  kind: source.kind,
+                  usedFallbackSource: true,
+                  fallbackSourceId: fallbackSource.id,
+                  fallbackProvider: fallbackSource.provider,
+                  failureReasonCounts,
+                  discardReasons
+                }
+              };
+            } catch (fallbackError) {
+              localErrors.push(summariseSourceError(fallbackSource, fallbackError));
+            }
           }
           console.error(`Source failed: ${summary.id} [${source.kind}/${source.lane}] - ${summary.message}`);
           return {
