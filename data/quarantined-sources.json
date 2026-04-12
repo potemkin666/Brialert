@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T20:54:53.537Z",
-  "count": 171,
+  "generatedAt": "2026-04-12T20:56:04.617Z",
+  "count": 170,
   "sources": [
     {
       "id": "finland-police-news",
@@ -14,25 +14,6 @@
       "quarantinedAt": "2026-04-12T14:32:49.299Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 4,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-14T14:32:49.299Z",
-      "lastFailureAt": "2026-04-12T14:32:49.299Z",
-      "lastCheckedAt": "2026-04-12T14:32:49.299Z"
-    },
-    {
-      "id": "eu-council-terrorism-sanctions",
-      "provider": "Council of the EU - Sanctions Against Terrorism",
-      "endpoint": "https://www.consilium.europa.eu/en/policies/sanctions-against-terrorism/",
-      "kind": "html",
-      "lane": "sanctions",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-12T14:32:49.299Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
       "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
