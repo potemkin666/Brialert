@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T10:57:52.544Z",
-  "count": 185,
+  "generatedAt": "2026-04-12T10:58:18.179Z",
+  "count": 184,
   "sources": [
     {
       "id": "frontex-news-releases",
@@ -799,25 +799,6 @@
       "reviewBy": "2026-04-11T19:21:50.287Z",
       "lastFailureAt": "2026-04-09T19:21:50.287Z",
       "lastCheckedAt": "2026-04-09T19:21:50.287Z"
-    },
-    {
-      "id": "finland-police-news",
-      "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/news",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-08T23:49:08.059Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 2,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-10T23:49:08.059Z",
-      "lastFailureAt": "2026-04-08T23:49:08.059Z",
-      "lastCheckedAt": "2026-04-08T23:49:08.059Z"
     },
     {
       "id": "isd-global-publications",
