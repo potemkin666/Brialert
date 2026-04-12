@@ -441,14 +441,16 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "endpoint": "https://www.bing.com/search?q=spanish+terrorism+rss&cvid=3846f7a939b34f3582f2ea88effb1b98&gs_lcrp=EgRlZGdlKgYIABBFGDkyBggAEEUYOdIBCDQwOTVqMGo0qAIIsAIB&FORM=ANAB01&PC=LCTS",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Spanish National Police press updates for terrorism arrests and major security operations.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-12T19:53:34.082Z"
     },
     {
       "id": "romanian-police-news",
