@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-12T20:58:09.836Z",
-  "count": 168,
+  "generatedAt": "2026-04-12T20:58:56.659Z",
+  "count": 167,
   "sources": [
     {
       "id": "finland-police-news",
@@ -984,25 +984,6 @@
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
       "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-09T11:11:10.131Z",
-      "lastFailureAt": "2026-04-07T11:11:10.131Z",
-      "lastCheckedAt": "2026-04-07T11:11:10.131Z"
-    },
-    {
-      "id": "heathrow-media-centre",
-      "provider": "Heathrow a Media Centre",
-      "endpoint": "https://mediacentre.heathrow.com/",
-      "kind": "html",
-      "lane": "context",
-      "region": "london",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-07T11:11:10.131Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
       "reviewBy": "2026-04-09T11:11:10.131Z",
