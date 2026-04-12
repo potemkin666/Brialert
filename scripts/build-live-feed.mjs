@@ -1174,8 +1174,8 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       if (minutes < 1) return 'just now';
       const hours = Math.floor(minutes / 60);
       const remainingMinutes = minutes % 60;
-      if (hours < 1) return `\${minutes}m ago`;
-      return `\${hours}h \${remainingMinutes}m ago`;
+      if (hours < 1) return minutes + 'm ago';
+      return hours + 'h ' + remainingMinutes + 'm ago';
     }
 
     function formatShortTime(timestampMs) {
@@ -1193,13 +1193,13 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       const lastRestoreAt = restoreAudit?.lastRestore?.at;
       const lastRestoreMs = Date.parse(lastRestoreAt || '');
       const lastRestoreLabel = Number.isFinite(lastRestoreMs)
-        ? `\${formatShortTime(lastRestoreMs)} (\${formatTimeAgo(lastRestoreMs)})`
+        ? formatShortTime(lastRestoreMs) + ' (' + formatTimeAgo(lastRestoreMs) + ')'
         : 'none yet';
 
       auditSummary.innerHTML = [
-        `<div class="audit-line">Last refresh: <strong>\${escapeHtml(refreshTime)}</strong> (\${escapeHtml(refreshAge)})</div>`,
-        `<div class="audit-line">Sources checked: <strong>\${escapeHtml(sourceCount)}</strong></div>`,
-        `<div class="audit-line">Last restore: <strong>\${escapeHtml(lastRestoreLabel)}</strong></div>`
+        '<div class="audit-line">Last refresh: <strong>' + escapeHtml(refreshTime) + '</strong> (' + escapeHtml(refreshAge) + ')</div>',
+        '<div class="audit-line">Sources checked: <strong>' + escapeHtml(sourceCount) + '</strong></div>',
+        '<div class="audit-line">Last restore: <strong>' + escapeHtml(lastRestoreLabel) + '</strong></div>'
       ].join('');
 
       const failures = Array.isArray(remediation?.top20) ? remediation.top20.slice(0, 3) : [];
@@ -1210,11 +1210,11 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       auditFailures.innerHTML = failures.map((entry) => {
         const provider = entry?.provider || entry?.id || 'Unknown source';
         const category = entry?.category || 'unknown';
-        const statusLabel = Number.isFinite(Number(entry?.status)) ? `HTTP \${entry.status}` : '';
+        const statusLabel = Number.isFinite(Number(entry?.status)) ? 'HTTP ' + entry.status : '';
         const message = entry?.message || '';
         const detail = [statusLabel, message].filter(Boolean).join(' - ');
-        const suffix = detail ? ` | \${detail}` : '';
-        return `<li>\${escapeHtml(provider)} - \${escapeHtml(category)}\${escapeHtml(suffix)}</li>`;
+        const suffix = detail ? ' | ' + detail : '';
+        return '<li>' + escapeHtml(provider) + ' - ' + escapeHtml(category) + escapeHtml(suffix) + '</li>';
       }).join('');
     }
 
