@@ -1,54 +1,19 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-12T11:39:28.016Z",
-  "totalSourceErrors": 10,
+  "generatedAt": "2026-04-12T12:03:49.843Z",
+  "totalSourceErrors": 6,
   "byCategory": {
-    "not-found-404": 2,
     "moved-temporarily": 1,
-    "anti-bot-protection": 4,
+    "anti-bot-protection": 3,
     "blocked-or-auth": 1,
-    "timeout": 1,
     "network-failure": 1
   },
   "byKind": {
-    "html": 9,
-    "rss": 1
+    "html": 6
   },
-  "machineReadableErrorCount": 1,
-  "htmlErrorCount": 9,
+  "machineReadableErrorCount": 0,
+  "htmlErrorCount": 6,
   "top20": [
-    {
-      "id": "denmark-pet-news",
-      "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://pet.dk/nyheder",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "german-bfv-news",
-      "provider": "German BfV - News",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
@@ -114,22 +79,6 @@
       "isMachineReadable": false
     },
     {
-      "id": "gnet-radicalisation-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation (RSS)",
-      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "prevention",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
-    {
       "id": "politico-europe",
       "provider": "Politico Europe",
       "endpoint": "https://www.politico.eu/",
@@ -146,25 +95,9 @@
       "isMachineReadable": false
     },
     {
-      "id": "german-bka-press-releases-de",
-      "provider": "BKA Germany - Press Releases",
-      "endpoint": "https://www.bka.de/DE/Aktuelle. Informationen/Aktuelle. Meldungen/Pressemeldungen/pressemitteilungen_node.html",
-      "finalUrl": "",
-      "category": "timeout",
-      "message": "This operation was aborted",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "haringey-council-news",
-      "provider": "Haringey Council a News",
-      "endpoint": "https://new.haringey.gov.uk/news",
+      "id": "london-resilience",
+      "provider": "Resilience First - Latest Updates",
+      "endpoint": "https://resiliencefirst.org/latest-updates",
       "finalUrl": "",
       "category": "network-failure",
       "message": "fetch failed",
@@ -173,45 +106,13 @@
       "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
       "sourceKind": "html",
-      "sourceLane": "context",
+      "sourceLane": "prevention",
       "sourceRegion": "",
       "isMachineReadable": false
     }
   ],
   "sources": [
     {
-      "id": "denmark-pet-news",
-      "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://pet.dk/nyheder",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "german-bfv-news",
-      "provider": "German BfV - News",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
       "endpoint": "https://poliisi.fi/en/news",
@@ -276,22 +177,6 @@
       "isMachineReadable": false
     },
     {
-      "id": "gnet-radicalisation-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Radicalisation (RSS)",
-      "endpoint": "https://gnet-research.org/tag/radicalisation/feed/",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "prevention",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
-    {
       "id": "politico-europe",
       "provider": "Politico Europe",
       "endpoint": "https://www.politico.eu/",
@@ -308,25 +193,9 @@
       "isMachineReadable": false
     },
     {
-      "id": "german-bka-press-releases-de",
-      "provider": "BKA Germany - Press Releases",
-      "endpoint": "https://www.bka.de/DE/Aktuelle. Informationen/Aktuelle. Meldungen/Pressemeldungen/pressemitteilungen_node.html",
-      "finalUrl": "",
-      "category": "timeout",
-      "message": "This operation was aborted",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "haringey-council-news",
-      "provider": "Haringey Council a News",
-      "endpoint": "https://new.haringey.gov.uk/news",
+      "id": "london-resilience",
+      "provider": "Resilience First - Latest Updates",
+      "endpoint": "https://resiliencefirst.org/latest-updates",
       "finalUrl": "",
       "category": "network-failure",
       "message": "fetch failed",
@@ -335,7 +204,7 @@
       "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
       "sourceKind": "html",
-      "sourceLane": "context",
+      "sourceLane": "prevention",
       "sourceRegion": "",
       "isMachineReadable": false
     }
