@@ -1492,6 +1492,31 @@ h1 {
   margin-top: 12px;
 }
 
+.tab-panel[data-panel="notes"] .panel {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(236, 246, 255, 0.10), rgba(207, 229, 255, 0.04)),
+    var(--panel);
+  border-color: rgba(149, 186, 236, 0.35);
+}
+
+.tab-panel[data-panel="notes"] .panel::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  bottom: 18px;
+  width: 2px;
+  background: rgba(255, 133, 133, 0.35);
+  box-shadow: 14px 0 0 rgba(255, 255, 255, 0.04);
+}
+
+.tab-panel[data-panel="notes"] .panel > * {
+  position: relative;
+  z-index: 1;
+}
+
 .source-request-form {
   display: grid;
   gap: 12px;
@@ -1508,6 +1533,25 @@ h1 {
   font-size: 16px;
   background: rgba(255, 255, 255, 0.06);
   color: var(--text);
+}
+
+.tab-panel[data-panel="notes"] .note-form input,
+.tab-panel[data-panel="notes"] .note-form textarea {
+  border-color: rgba(153, 193, 245, 0.42);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(150, 184, 233, 0.16) 0,
+      rgba(150, 184, 233, 0.16) 1px,
+      rgba(255, 255, 255, 0.06) 1px,
+      rgba(255, 255, 255, 0.06) 30px
+    );
+  box-shadow: inset 0 0 0 1px rgba(12, 18, 30, 0.12);
+}
+
+.tab-panel[data-panel="notes"] .note-form .primary-button {
+  background: linear-gradient(180deg, #ffd76b, #f0b63d);
+  color: #1a1206;
 }
 
 .note-form textarea {
@@ -1562,13 +1606,26 @@ h1 {
 .note-card {
   padding: 18px;
   border-radius: 22px;
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(123, 170, 234, 0.15) 0,
+      rgba(123, 170, 234, 0.15) 1px,
+      rgba(255, 255, 255, 0.07) 1px,
+      rgba(255, 255, 255, 0.07) 28px
+    );
+  border: 1px solid rgba(149, 186, 236, 0.36);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .note-card p {
   margin-top: 8px;
   color: var(--muted);
+}
+
+.tab-panel[data-panel="notes"] #notes-list {
+  display: grid;
+  gap: 12px;
 }
 
 .modal.hidden {
