@@ -939,7 +939,7 @@
     {
       "id": "politico-europe",
       "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/section/defense/",
+      "endpoint": "https://www.politico.eu/latest/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
@@ -947,7 +947,7 @@
       "requiresKeywordMatch": true,
       "comment": "Politico Europe used as corroborating political-security context rather than live trigger input.",
       "quarantined": false,
-      "restoredAt": "2026-04-12T08:52:42.850Z"
+      "restoredAt": "2026-04-12T11:04:30.257Z"
     },
     {
       "id": "rte-ireland-news-rss",
