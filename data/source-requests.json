@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "provider": "BSC Policing Network",
+    "endpoint": "https://bscpolicingnetwork.wordpress.com/feed",
+    "kind": "rss",
+    "lane": "context",
+    "region": "uk",
+    "isTrustedOfficial": false,
+    "requiresKeywordMatch": true,
+    "validationLabel": "rss | uk | queued for next run",
+    "id": "requested-bsc-policing-network-f5c77a83a91e",
+    "requestedAt": "2026-04-13T20:55:53.716Z"
+  }
+]
