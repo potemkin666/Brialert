@@ -280,14 +280,16 @@
     {
       "id": "paris-prefecture-police-rss-page",
       "provider": "Paris Prefecture of Police - RSS",
-      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/presentation/les-directions-et-services/le-cabinet-du-prefet-de-police/service-de-la-communication/abonnez-vous-aux-flux-rss",
+      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/rss/actualites.xml",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Paris Prefecture of Police RSS subscription page for official press and public-information feed discovery.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-13T20:40:49.656Z"
     },
     {
       "id": "spain-interior-ministry-news",
