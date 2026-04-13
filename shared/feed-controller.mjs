@@ -303,6 +303,21 @@ export function coerceLiveFeedPayload(raw) {
   };
 }
 
+function ensureUniqueAlertIds(alerts) {
+  const seen = new Map();
+  alerts.forEach((alert, index) => {
+    const rawBase = typeof alert.id === 'string' ? alert.id.trim() : '';
+    const base = rawBase || `live-${index}`;
+    const count = seen.get(base) || 0;
+    if (count === 0) {
+      alert.id = base;
+    } else {
+      alert.id = `${base}-dup-${count}`;
+    }
+    seen.set(base, count + 1);
+  });
+}
+
 export async function loadLiveFeed(state, options) {
   const { liveFeedUrl, normaliseAlert, onAfterLoad } = options;
   const startedAtIso = new Date().toISOString();
@@ -321,6 +336,7 @@ export async function loadLiveFeed(state, options) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = coerceLiveFeedPayload(await response.json());
     state.alerts = data.alerts.map((alert, index) => normaliseAlert(alert, index, state.geoLookup));
+    ensureUniqueAlertIds(state.alerts);
     state.liveFetchedAlertCount = data.fetchedAlertCount;
     state.liveFeedGeneratedAt = data.generatedAt ? new Date(data.generatedAt) : new Date();
     state.liveFeedHealth = data.health;
