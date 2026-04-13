@@ -1,5 +1,17 @@
 [
   {
+    "provider": "Neighbourhood Alerts Feed",
+    "endpoint": "https://v4-api.neighbourhoodalert.co.uk/RSS",
+    "kind": "rss",
+    "lane": "context",
+    "region": "uk",
+    "isTrustedOfficial": false,
+    "requiresKeywordMatch": true,
+    "validationLabel": "rss | uk | queued for next run",
+    "id": "requested-neighbourhood-alerts-feed-8ad5321239de",
+    "requestedAt": "2026-04-13T21:03:54.953Z"
+  },
+  {
     "provider": "RSS Feed",
     "endpoint": "https://www.govwire.co.uk/rss/department-for-business-and-trade",
     "kind": "rss",
