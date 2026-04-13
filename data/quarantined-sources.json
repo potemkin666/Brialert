@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-13T20:43:06.575Z",
-  "count": 223,
+  "generatedAt": "2026-04-13T20:43:46.221Z",
+  "count": 222,
   "sources": [
     {
       "id": "german-bka-press",
@@ -515,26 +515,6 @@
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "Blocked by blocked access page",
       "consecutiveFailures": 16,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-15T12:56:06.769Z",
-      "lastFailureAt": "2026-04-13T12:56:06.769Z",
-      "lastCheckedAt": "2026-04-13T12:56:06.769Z"
-    },
-    {
-      "id": "ran-network",
-      "provider": "Radicalisation Awareness Network (RAN) a Publications",
-      "endpoint": "https://www.radicalisationawarenessnetwork.eu/news-events/publications",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "status": "auto-quarantined",
-      "reason": "Repeated failures (26) need manual review",
-      "quarantinedAt": "2026-04-13T12:56:06.769Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 26,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
