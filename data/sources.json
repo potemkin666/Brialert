@@ -491,14 +491,16 @@
     {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
-      "endpoint": "https://www.politiaromana.ro/en/news",
+      "endpoint": "https://apbweb.com/feed/",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-13T20:41:45.956Z"
     },
     {
       "id": "sweden-police-news",
