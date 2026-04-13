@@ -1926,14 +1926,16 @@
     {
       "id": "bromley-council-news",
       "provider": "Bromley Council a Newsroom",
-      "endpoint": "https://www.bromley.gov.uk/newsroom/news?format=rss",
+      "endpoint": "https://www.bromleyconservativegroup.org.uk/news/feed",
       "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Replaced Bromley newsroom HTML with RSS endpoint.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-13T20:45:45.274Z"
     },
     {
       "id": "camden-council-news",
