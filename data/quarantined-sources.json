@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-13T20:05:00.793Z",
-  "count": 230,
+  "generatedAt": "2026-04-13T20:40:27.275Z",
+  "count": 229,
   "sources": [
     {
       "id": "german-bka-press",
@@ -341,26 +341,6 @@
       "reviewBy": "2026-04-15T14:11:58.193Z",
       "lastFailureAt": "2026-04-13T14:11:58.193Z",
       "lastCheckedAt": "2026-04-13T14:11:58.193Z"
-    },
-    {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-13T12:56:06.769Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 1,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-15T12:56:06.769Z",
-      "lastFailureAt": "2026-04-13T12:56:06.769Z",
-      "lastCheckedAt": "2026-04-13T12:56:06.769Z"
     },
     {
       "id": "denmark-pet-news",
@@ -4602,5 +4582,6 @@
       "lastFailureAt": "2026-04-05T13:02:51.966Z",
       "lastCheckedAt": "2026-04-13T20:05:00.793Z"
     }
-  ]
+  ],
+  "schemaVersion": 1
 }
