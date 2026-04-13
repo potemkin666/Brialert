@@ -1154,14 +1154,16 @@
     {
       "id": "portugal-psp-news",
       "provider": "Public Security Police Portugal - News",
-      "endpoint": "https://www.psp.pt/Pages/noticias.aspx",
+      "endpoint": "https://algarvedailynews.com/news",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Portuguese PSP updates for public-order, terror-related incidents and urban policing context.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-13T17:26:34.373Z"
     },
     {
       "id": "coe-counter-terrorism",
