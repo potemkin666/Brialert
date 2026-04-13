@@ -129,16 +129,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Sync with main before commit
+        run: |
+          git fetch origin main
+          git rebase origin/main
+
       - name: Download generated feed files
         uses: actions/download-artifact@v4
         with:
           name: live-feed-output
           path: .
-
-      - name: Sync with main before commit
-        run: |
-          git fetch origin main
-          git rebase origin/main
 
       - name: Commit refreshed feed data
         run: |
