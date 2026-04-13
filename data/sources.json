@@ -1102,14 +1102,16 @@
     {
       "id": "french-police-nationale-news",
       "provider": "Police Nationale - News",
-      "endpoint": "https://www.police-nationale.interieur.gouv.fr/actualites",
+      "endpoint": "https://www.policenow.org.uk/feed/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "French Police Nationale reporting for terrorism arrests, raids and major public-safety incidents.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-13T20:42:43.868Z"
     },
     {
       "id": "ireland-gardai-press",
