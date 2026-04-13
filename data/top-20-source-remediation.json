@@ -1,12 +1,29 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-13T07:42:25.325Z",
-  "totalSourceErrors": 100,
+  "generatedAt": "2026-04-13T12:56:06.769Z",
+  "totalSourceErrors": 110,
   "top20": [
     {
       "id": "barts-health-news",
       "provider": "Barts Health NHS Trust a News",
       "endpoint": "https://www.bartshealth.nhs.uk/latest-news",
+      "finalUrl": "",
+      "category": "not-found-404",
+      "statusKind": "",
+      "message": "HTTP 404",
+      "status": 404,
+      "rankScore": 5,
+      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "belgium-crisis-centre-news",
+      "provider": "Belgian National Crisis Centre - News",
+      "endpoint": "https://crisiscenter.be/en/news",
       "finalUrl": "",
       "category": "not-found-404",
       "statusKind": "",
@@ -58,23 +75,6 @@
       "id": "german-bfv-news",
       "provider": "German BfV - News",
       "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "statusKind": "",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "gov-uk-defence-intelligence",
-      "provider": "UK Defence Intelligence a GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/defence-intelligence",
       "finalUrl": "",
       "category": "not-found-404",
       "statusKind": "",
@@ -208,6 +208,23 @@
       "isMachineReadable": false
     },
     {
+      "id": "elluminet-press",
+      "provider": "Elluminet Press",
+      "endpoint": "https://www.elluminetpress.com/feed/",
+      "finalUrl": "https://elluminetpress.com/",
+      "category": "moved-temporarily",
+      "statusKind": "",
+      "message": "No items parsed from source payload",
+      "status": 200,
+      "rankScore": 4,
+      "suggestedAction": "update source endpoint to redirected final URL",
+      "replacementCandidate": "https://elluminetpress.com/",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
       "id": "german-interior-ministry-press",
       "provider": "German Federal Ministry of the Interior - Press",
       "endpoint": "https://www.bmi.bund.de/EN/press/press-releases/press-releases-node.html",
@@ -325,23 +342,6 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": false
-    },
-    {
-      "id": "bdk-rss",
-      "provider": "Bund Deutscher Kriminalbeamter - RSS",
-      "endpoint": "https://www.bdk.de/rss",
-      "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
-      "statusKind": "",
-      "message": "No items parsed from source payload",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": true
     }
   ]
 }
