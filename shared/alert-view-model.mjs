@@ -77,7 +77,12 @@ function looksGenericSummary(text) {
     summary.includes('matched the incident watch logic') ||
     summary.includes('the immediate value is source validation') ||
     summary.includes('should be read as') ||
-    summary.includes('contextual monitoring item');
+    summary.includes('contextual monitoring item') ||
+    summary.includes('corroborating or adjacent reporting') ||
+    summary.includes('sanctions-related update') ||
+    summary.includes('oversight or review update') ||
+    summary.includes('prevention or radicalisation update') ||
+    summary.includes('border or screening update');
 }
 
 function articleBodyBits(alert) {
@@ -467,34 +472,20 @@ export function renderCorroboratingSources(alert) {
 }
 
 export function buildBriefing(alert, summaryText) {
-  const matches = terrorismMatches(alert);
-  const peopleInvolved = extractPeopleInvolved(alert);
-  const sceneClock = buildSceneClock(alert);
-  const trust = trustSignal(alert);
-  return [
-    `WHAT: ${alert.title}`,
-    `WHERE: ${alert.location}`,
-    `WHEN: ${alert.happenedWhen || alert.time}`,
-    `SOURCE: ${alert.source}`,
-    `TRUST SIGNAL: ${trust.label}`,
-    confidenceScoreLabel(alert),
-    `SOURCE CONFIDENCE TEXT: ${alert.confidence}`,
-    `LANE: ${laneLabels[alert.lane] || alert.lane}`,
-    alert.lane === 'incidents' && resolvedIncidentTrack(alert) ? `INCIDENT TRACK: ${resolvedIncidentTrack(alert) === 'live' ? 'Live incident' : 'Case / prosecution'}` : '',
-    alert.eventType ? `EVENT TYPE: ${clean(alert.eventType).replace(/_/g, ' ')}` : '',
-    alert.geoPrecision ? `GEO PRECISION: ${alert.geoPrecision}` : '',
-    Number(alert.corroborationCount || 0) ? `CORROBORATION COUNT: ${alert.corroborationCount}` : '',
-    '',
-    'SCENE CLOCK:',
-    `FIRST REPORT: ${sceneClock.firstReport ? `${clockDisplay(sceneClock.firstReport.publishedAt)} | ${sceneClockStamp(sceneClock.firstReport.publishedAt)}` : 'Unconfirmed'}`,
-    '',
-    peopleInvolved.length ? ['PEOPLE INVOLVED:', ...peopleInvolved, ''] : [],
-    'SUMMARY:',
-    summaryText,
-    '',
-    matches.length ? `TRIGGER KEYWORDS: ${matches.join(', ')}` : '',
-    `ORIGINAL LINK: ${alert.sourceUrl}`
-  ].flat().filter(Boolean).join('\n');
+  const metaBits = [clean(alert.location), clean(alert.happenedWhen || alert.time)].filter(Boolean);
+  const lead = metaBits.length ? `${alert.title} (${metaBits.join(', ')})` : alert.title;
+  const trimmedSummary = clean(summaryText);
+  const leadLower = clean(alert.title).toLowerCase();
+  const summaryLower = trimmedSummary.toLowerCase();
+  const sentences = [];
+
+  sentences.push(lead.endsWith('.') ? lead : `${lead}.`);
+
+  if (trimmedSummary && summaryLower !== leadLower) {
+    sentences.push(trimmedSummary.endsWith('.') ? trimmedSummary : `${trimmedSummary}.`);
+  }
+
+  return sentences.join(' ');
 }
 
 const UNCONFIRMED_SOURCE_DATE = 'source date unconfirmed';
