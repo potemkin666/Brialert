@@ -79,6 +79,176 @@ function markerPopup(alert) {
     </div>`;
 }
 
+function normaliseCountryName(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  const lower = raw.toLowerCase();
+  const aliasMap = new Map([
+    ['uk', 'United Kingdom'],
+    ['u.k.', 'United Kingdom'],
+    ['united kingdom', 'United Kingdom'],
+    ['great britain', 'United Kingdom'],
+    ['britain', 'United Kingdom'],
+    ['england', 'United Kingdom'],
+    ['scotland', 'United Kingdom'],
+    ['wales', 'United Kingdom'],
+    ['northern ireland', 'United Kingdom'],
+    ['united states', 'United States'],
+    ['u.s.', 'United States'],
+    ['u.s.a.', 'United States'],
+    ['usa', 'United States'],
+    ['us', 'United States']
+  ]);
+  if (aliasMap.has(lower)) return aliasMap.get(lower);
+  return raw;
+}
+
+function countryLabelFromAlert(alert) {
+  const location = String(alert?.location || '').trim();
+  if (location.includes(',')) {
+    const parts = location.split(',').map((part) => part.trim()).filter(Boolean);
+    if (parts.length >= 2) {
+      return normaliseCountryName(parts[parts.length - 1]);
+    }
+  }
+
+  if (location) return normaliseCountryName(location);
+
+  const region = String(alert?.region || '').toLowerCase();
+  if (region === 'uk' || region === 'london') return 'United Kingdom';
+  if (region === 'us') return 'United States';
+  return '';
+}
+
+function countryCodeFor(label) {
+  const codeMap = new Map([
+    ['United Kingdom', 'GBR'],
+    ['United States', 'USA'],
+    ['France', 'FRA'],
+    ['Germany', 'DEU'],
+    ['Italy', 'ITA'],
+    ['Spain', 'ESP'],
+    ['Belgium', 'BEL'],
+    ['Netherlands', 'NLD'],
+    ['Ireland', 'IRL'],
+    ['Poland', 'POL'],
+    ['Sweden', 'SWE'],
+    ['Norway', 'NOR'],
+    ['Denmark', 'DNK'],
+    ['Finland', 'FIN'],
+    ['Switzerland', 'CHE'],
+    ['Austria', 'AUT'],
+    ['Greece', 'GRC'],
+    ['Turkey', 'TUR'],
+    ['Russia', 'RUS'],
+    ['Ukraine', 'UKR'],
+    ['Israel', 'ISR'],
+    ['Palestine', 'PSE'],
+    ['Iraq', 'IRQ'],
+    ['Iran', 'IRN'],
+    ['Syria', 'SYR'],
+    ['Afghanistan', 'AFG'],
+    ['Pakistan', 'PAK'],
+    ['India', 'IND'],
+    ['China', 'CHN'],
+    ['Japan', 'JPN'],
+    ['Australia', 'AUS'],
+    ['Canada', 'CAN'],
+    ['Brazil', 'BRA'],
+    ['Mexico', 'MEX'],
+    ['South Africa', 'ZAF'],
+    ['Nigeria', 'NGA'],
+    ['Somalia', 'SOM'],
+    ['Yemen', 'YEM'],
+    ['Saudi Arabia', 'SAU'],
+    ['United Arab Emirates', 'ARE'],
+    ['Qatar', 'QAT'],
+    ['Kuwait', 'KWT'],
+    ['Egypt', 'EGY'],
+    ['Libya', 'LBY'],
+    ['Algeria', 'DZA'],
+    ['Morocco', 'MAR'],
+    ['Tunisia', 'TUN'],
+    ['Philippines', 'PHL'],
+    ['Indonesia', 'IDN'],
+    ['Malaysia', 'MYS'],
+    ['Bangladesh', 'BGD'],
+    ['Sri Lanka', 'LKA'],
+    ['Myanmar', 'MMR'],
+    ['Thailand', 'THA'],
+    ['Vietnam', 'VNM'],
+    ['South Korea', 'KOR'],
+    ['North Korea', 'PRK'],
+    ['Czech Republic', 'CZE'],
+    ['Czechia', 'CZE'],
+    ['Romania', 'ROU'],
+    ['Bulgaria', 'BGR'],
+    ['Hungary', 'HUN'],
+    ['Portugal', 'PRT'],
+    ['Slovakia', 'SVK'],
+    ['Slovenia', 'SVN'],
+    ['Croatia', 'HRV'],
+    ['Serbia', 'SRB'],
+    ['Bosnia and Herzegovina', 'BIH'],
+    ['Albania', 'ALB'],
+    ['North Macedonia', 'MKD'],
+    ['Montenegro', 'MNE'],
+    ['Kosovo', 'XKX']
+  ]);
+  return codeMap.get(label) || '';
+}
+
+function countryStatsUrl(label) {
+  const code = countryCodeFor(label);
+  if (code) {
+    return `https://ourworldindata.org/grapher/terrorist-attacks?tab=line&country=~${encodeURIComponent(code)}`;
+  }
+  return 'https://ourworldindata.org/terrorism';
+}
+
+function dominantCountryLabel(items) {
+  const counts = new Map();
+  items.forEach((alert) => {
+    const label = countryLabelFromAlert(alert);
+    if (!label) return;
+    counts.set(label, (counts.get(label) || 0) + 1);
+  });
+  let best = '';
+  let bestCount = 0;
+  counts.forEach((count, label) => {
+    if (count > bestCount) {
+      best = label;
+      bestCount = count;
+    }
+  });
+  return best;
+}
+
+function clusterPopup(entry) {
+  const items = entry.items || [];
+  const topItems = items.slice(0, 6);
+  const remaining = Math.max(0, items.length - topItems.length);
+  const countryLabel = dominantCountryLabel(items);
+  const statsUrl = countryLabel ? countryStatsUrl(countryLabel) : '';
+  return `
+    <div class="map-preview-card map-cluster-card">
+      <span class="map-preview-eyebrow">${escapeHtml(items.length)} alerts${countryLabel ? ` • ${escapeHtml(countryLabel)}` : ''}</span>
+      <div class="map-cluster-list">
+        ${topItems.map((alert) => `
+          <button class="map-cluster-item" type="button" data-open-detail="${escapeHtml(alert.id)}">
+            <strong>${escapeHtml(alert.title)}</strong>
+            <span>${escapeHtml(alert.location || 'Unknown location')}</span>
+          </button>
+        `).join('')}
+        ${remaining ? `<span class="map-cluster-more">+${remaining} more alerts</span>` : ''}
+      </div>
+      <div class="map-cluster-actions">
+        ${statsUrl ? `<a class="map-cluster-link" href="${statsUrl}" target="_blank" rel="noreferrer">Country terrorism stats</a>` : ''}
+        <button class="map-preview-button" type="button" data-zoom-cluster="true">Zoom in</button>
+      </div>
+    </div>`;
+}
+
 function clusterSeverity(items) {
   let best = 'moderate';
   for (const item of items) {
@@ -290,11 +460,25 @@ export function createMapController(config) {
         keyboard: true,
         title: `${entry.items.length} alerts`
       });
-      clusterMarker.on('click', () => {
-        liveMap.fitBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
-          padding: [26, 26],
-          maxZoom: Math.min((liveMap.getZoom() || 3) + 2, mode === MAP_VIEW_MODES.london ? LONDON_CLUSTER_MAX_ZOOM : WORLD_CLUSTER_MAX_ZOOM)
+      clusterMarker.bindPopup(clusterPopup(entry), { className: 'map-preview-popup-shell' });
+      clusterMarker.on('popupopen', (event) => {
+        const popupElement = event.popup?.getElement();
+        if (!popupElement) return;
+        popupElement.querySelectorAll('[data-open-detail]').forEach((button) => {
+          const id = button.getAttribute('data-open-detail');
+          const alert = entry.items.find((item) => String(item.id) === String(id));
+          if (!alert) return;
+          button.addEventListener('click', () => openDetail(alert), { once: true });
         });
+        const zoomButton = popupElement.querySelector('[data-zoom-cluster]');
+        if (zoomButton) {
+          zoomButton.addEventListener('click', () => {
+            liveMap.fitBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
+              padding: [26, 26],
+              maxZoom: Math.min((liveMap.getZoom() || 3) + 2, mode === MAP_VIEW_MODES.london ? LONDON_CLUSTER_MAX_ZOOM : WORLD_CLUSTER_MAX_ZOOM)
+            });
+          }, { once: true });
+        }
       });
       clusterMarker.addTo(liveMap);
       layers.push(clusterMarker);
