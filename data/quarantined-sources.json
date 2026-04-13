@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-13T17:23:11.030Z",
-  "count": 218,
+  "generatedAt": "2026-04-13T17:24:58.073Z",
+  "count": 217,
   "sources": [
     {
       "id": "gov-uk-defence-intelligence",
@@ -355,26 +355,6 @@
       "lastErrorCategory": "brittle-selectors-or-js-rendering",
       "lastErrorMessage": "No items parsed from source payload",
       "consecutiveFailures": 11,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-15T12:56:06.769Z",
-      "lastFailureAt": "2026-04-13T12:56:06.769Z",
-      "lastCheckedAt": "2026-04-13T12:56:06.769Z"
-    },
-    {
-      "id": "paris-police-prefecture-news",
-      "provider": "Prefecture de Police de Paris - News",
-      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/actualites",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "europe",
-      "status": "auto-quarantined",
-      "reason": "Repeated failures (22) need manual review",
-      "quarantinedAt": "2026-04-13T12:56:06.769Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 22,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
