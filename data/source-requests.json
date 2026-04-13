@@ -1,5 +1,17 @@
 [
   {
+    "provider": "RSS Feed",
+    "endpoint": "https://www.govwire.co.uk/rss/attorney-generals-office",
+    "kind": "rss",
+    "lane": "context",
+    "region": "uk",
+    "isTrustedOfficial": false,
+    "requiresKeywordMatch": true,
+    "validationLabel": "rss | uk | queued for next run",
+    "id": "requested-rss-feed-3f8b8535297b",
+    "requestedAt": "2026-04-13T20:57:17.876Z"
+  },
+  {
     "provider": "BSC Policing Network",
     "endpoint": "https://bscpolicingnetwork.wordpress.com/feed",
     "kind": "rss",
