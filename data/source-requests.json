@@ -1,5 +1,17 @@
 [
   {
+    "provider": "RSS Feed",
+    "endpoint": "https://www.govwire.co.uk/rss/department-for-business-and-trade",
+    "kind": "rss",
+    "lane": "context",
+    "region": "uk",
+    "isTrustedOfficial": false,
+    "requiresKeywordMatch": true,
+    "validationLabel": "rss | uk | queued for next run",
+    "id": "requested-rss-feed-364751d1cc8d",
+    "requestedAt": "2026-04-13T21:03:11.454Z"
+  },
+  {
     "provider": "News | National Police Air Service",
     "endpoint": "https://www.npas.police.uk/news?page=1",
     "kind": "html",
