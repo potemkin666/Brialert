@@ -227,7 +227,6 @@
       color: #d6e2fb;
       font-size: 13px;
     }
-    .hidden { display: none; }
     .helper-note, .status-note { min-height: 18px; font-size: 12px; }
     .helper-note { color: #8ea3c8; }
     .status-note { color: #9fb2d6; }
@@ -235,6 +234,7 @@
     .status-note.success { color: var(--ok); }
     .empty { padding: 18px 10px; color: var(--muted); }
     .endpoint-copy { color: #d6e5ff; font-weight: 600; }
+    .hidden { display: none; }
     .toast {
       position: fixed;
       right: 14px;
@@ -269,8 +269,8 @@
       <div class="auth-actions" id="auth-actions"></div>
     </div>
     <div class="meta" id="meta">
-      <span class="pill">Generated: 2026-04-12T14:32:49.299Z</span>
-      <span class="pill">Quarantined sources: 188</span>
+      <span class="pill">Generated: 2026-04-13T07:42:25.325Z</span>
+      <span class="pill">Quarantined sources: 225</span>
       <span class="pill suggest">Pending suggestions: 0</span>
       <span class="pill">SLA: review within 48h</span>
     </div>
@@ -302,10 +302,10 @@
             <th>Last Error</th>
             <th>Blocked Runs</th>
             <th>Dead/Moved Runs</th>
-            <th>SLA Review By</th>
-            <th>Endpoint</th>
-            <th>Action</th>
-          </tr>
+          <th>SLA Review By</th>
+          <th>Endpoint</th>
+          <th>Action</th>
+        </tr>
         </thead>
         <tbody id="quarantine-body">
           <tr><td colspan="11" class="empty">Loading quarantined sources...</td></tr>
@@ -450,7 +450,7 @@
           ? 'Data mode: live API (restore enabled)'
           : 'Data mode: live read-only (restore unavailable)';
       meta.innerHTML = [
-        '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '2026-04-12T14:32:49.299Z') + '</span>',
+        '<span class="pill">Generated: ' + escapeHtml(payload.generatedAt || '2026-04-13T07:42:25.325Z') + '</span>',
         '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
         '<span class="pill suggest">Pending suggestions: ' + escapeHtml(currentSuggestions.length) + '</span>',
         '<span class="pill">SLA: review within 48h</span>',
@@ -472,8 +472,8 @@
       if (minutes < 1) return 'just now';
       const hours = Math.floor(minutes / 60);
       const remainingMinutes = minutes % 60;
-      if (hours < 1) return `${minutes}m ago`;
-      return `${hours}h ${remainingMinutes}m ago`;
+      if (hours < 1) return minutes + 'm ago';
+      return hours + 'h ' + remainingMinutes + 'm ago';
     }
 
     function formatShortTime(timestampMs) {
@@ -491,13 +491,13 @@
       const lastRestoreAt = restoreAudit?.lastRestore?.at;
       const lastRestoreMs = Date.parse(lastRestoreAt || '');
       const lastRestoreLabel = Number.isFinite(lastRestoreMs)
-        ? `${formatShortTime(lastRestoreMs)} (${formatTimeAgo(lastRestoreMs)})`
+        ? formatShortTime(lastRestoreMs) + ' (' + formatTimeAgo(lastRestoreMs) + ')'
         : 'none yet';
 
       auditSummary.innerHTML = [
-        `<div class="audit-line">Last refresh: <strong>${escapeHtml(refreshTime)}</strong> (${escapeHtml(refreshAge)})</div>`,
-        `<div class="audit-line">Sources checked: <strong>${escapeHtml(sourceCount)}</strong></div>`,
-        `<div class="audit-line">Last restore: <strong>${escapeHtml(lastRestoreLabel)}</strong></div>`
+        '<div class="audit-line">Last refresh: <strong>' + escapeHtml(refreshTime) + '</strong> (' + escapeHtml(refreshAge) + ')</div>',
+        '<div class="audit-line">Sources checked: <strong>' + escapeHtml(sourceCount) + '</strong></div>',
+        '<div class="audit-line">Last restore: <strong>' + escapeHtml(lastRestoreLabel) + '</strong></div>'
       ].join('');
 
       const failures = Array.isArray(remediation?.top20) ? remediation.top20.slice(0, 3) : [];
@@ -508,24 +508,24 @@
       auditFailures.innerHTML = failures.map((entry) => {
         const provider = entry?.provider || entry?.id || 'Unknown source';
         const category = entry?.category || 'unknown';
-        const statusLabel = Number.isFinite(Number(entry?.status)) ? `HTTP ${entry.status}` : '';
+        const statusLabel = Number.isFinite(Number(entry?.status)) ? 'HTTP ' + entry.status : '';
         const message = entry?.message || '';
         const detail = [statusLabel, message].filter(Boolean).join(' - ');
-        const suffix = detail ? ` | ${detail}` : '';
-        return `<li>${escapeHtml(provider)} - ${escapeHtml(category)}${escapeHtml(suffix)}</li>`;
+        const suffix = detail ? ' | ' + detail : '';
+        return '<li>' + escapeHtml(provider) + ' - ' + escapeHtml(category) + escapeHtml(suffix) + '</li>';
       }).join('');
     }
 
     function tagRowMarkup(tags) {
       const safeTags = Array.isArray(tags) ? tags.filter((tag) => tag) : [];
       if (!safeTags.length) return '';
-      return '<div class="tag-row">' + safeTags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('') + '</div>';
+      return '<div class="tag-row">' + safeTags.map((tag) => '<span class="tag">' + escapeHtml(tag) + '</span>').join('') + '</div>';
     }
 
     function suggestionRowMarkup(entry) {
       const tags = Array.isArray(entry?.tags) ? entry.tags : [];
       const tagMarkup = tagRowMarkup(tags);
-      const tagSummary = entry?.tagSummary ? `<div class="helper-note">${escapeHtml(entry.tagSummary)}</div>` : '';
+      const tagSummary = entry?.tagSummary ? '<div class="helper-note">' + escapeHtml(entry.tagSummary) + '</div>' : '';
       return '<tr class="suggestion-row" data-request-id="' + escapeHtml(entry.id) + '">' +
         '<td>' + escapeHtml(entry.provider || 'Requested source') + '</td>' +
         '<td>' + escapeHtml(entry.kind || 'html') + ' / ' + escapeHtml(entry.lane || 'context') + '</td>' +
@@ -602,7 +602,7 @@
       }
       const suggestionMarkup = currentSuggestions.map(suggestionRowMarkup).join('');
       const quarantineMarkup = currentEntries.map(rowMarkup).join('');
-      body.innerHTML = `${suggestionMarkup}${quarantineMarkup}`;
+      body.innerHTML = suggestionMarkup + quarantineMarkup;
       if (!approveEnabled) {
         for (const row of body.querySelectorAll('tr[data-request-id]')) {
           const button = row.querySelector('button[data-action="approve"]');

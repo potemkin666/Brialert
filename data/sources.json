@@ -109,16 +109,14 @@
     {
       "id": "enisa-news",
       "provider": "ENISA (EU Cybersecurity Agency) a News",
-      "endpoint": "https://krebsonsecurity.com/feed/",
+      "endpoint": "https://www.enisa.europa.eu/news",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "ENISA news on EU cybersecurity threats, state-sponsored attacks and critical infrastructure security relevant to CT context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:54:53.537Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "enisa-rss-transition-page",
@@ -262,16 +260,14 @@
     {
       "id": "nctv-english-rss",
       "provider": "NCTV Netherlands - English RSS",
-      "endpoint": "https://www.amsterdamnews.net/category/netherlands-news",
+      "endpoint": "https://english.nctv.nl/actueel/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "English NCTV RSS feed for Dutch threat posture, terrorism and national security updates.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T21:03:12.615Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "paris-prefecture-police-rss-page",
@@ -300,15 +296,13 @@
     {
       "id": "statewatch-news",
       "provider": "Statewatch - News",
-      "endpoint": "https://crimeresearch.org/feed/",
+      "endpoint": "https://www.statewatch.org/news/",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Statewatch news page for civil-liberties, policing, borders and counter-terror policy scrutiny.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T21:04:24.721Z"
+      "comment": "Statewatch news page for civil-liberties, policing, borders and counter-terror policy scrutiny."
     },
     {
       "id": "sweden-sapo-news",
@@ -870,16 +864,14 @@
     {
       "id": "eu-council-terrorism-sanctions",
       "provider": "Council of the EU - Sanctions Against Terrorism",
-      "endpoint": "https://www.indiatoday.in/",
+      "endpoint": "https://www.consilium.europa.eu/en/policies/sanctions-against-terrorism/",
       "kind": "html",
       "lane": "sanctions",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "Council of the EU policy page for sanctions against terrorism and terrorist entities.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:56:04.617Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "unhcr-europe-news",
@@ -1100,16 +1092,14 @@
     {
       "id": "ireland-gardai-press",
       "provider": "An Garda Siochana - Press Releases",
-      "endpoint": "https://www.newsletter.co.uk/rss",
+      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:57:33.046Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "netherlands-police-news",
@@ -1527,16 +1517,14 @@
     {
       "id": "interpol-news-events",
       "provider": "INTERPOL a News and Events",
-      "endpoint": "https://www.interpol.int/en/News-and-Events/News?format=RSS",
+      "endpoint": "https://www.interpol.int/News-and-Events",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "INTERPOL does not consistently publish RSS; using the official news and events page.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:58:09.836Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "just-security",
@@ -1585,15 +1573,13 @@
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://nypost.com/tag/crime/feed/",
+      "endpoint": "https://www.occrp.org/en/announcements.rss",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing.",
-      "quarantined": false,
-      "restoredAt": "2026-04-12T21:04:55.750Z"
+      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
     },
     {
       "id": "osce-press-releases",
@@ -1859,16 +1845,14 @@
     {
       "id": "barts-health-news",
       "provider": "Barts Health NHS Trust a News",
-      "endpoint": "https://www.ukcrimestats.com/blog/feed/",
+      "endpoint": "https://www.bartshealth.nhs.uk/latest-news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Barts Health updates used for East London hospital and emergency-response corroboration.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T21:05:33.238Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "bbc-news-london-rss",
@@ -2100,16 +2084,14 @@
     {
       "id": "heathrow-media-centre",
       "provider": "Heathrow a Media Centre",
-      "endpoint": "https://www.heathrow.com/latest-news",
+      "endpoint": "https://mediacentre.heathrow.com/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Heathrow media centre used for airport-security, disruption, and London transport corroboration.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T20:58:56.659Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "hillingdon-council-news",
@@ -2126,16 +2108,14 @@
     {
       "id": "homerton-healthcare-news",
       "provider": "Homerton Healthcare NHS Foundation Trust a News",
-      "endpoint": "https://www.kingsleynapley.co.uk/insights/blogs/criminal-law-blog/rss.xml",
+      "endpoint": "https://www.homerton.nhs.uk/latest-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Homerton Healthcare news used for East London hospital and emergency-response context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T21:05:54.995Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "hounslow-council-news",
@@ -2248,16 +2228,14 @@
     {
       "id": "london-ambulance-news",
       "provider": "London Ambulance Service a News",
-      "endpoint": "https://promotingcrime.blogspot.com/feeds/posts/default",
+      "endpoint": "https://www.londonambulance.nhs.uk/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "London Ambulance Service news used for London emergency-response corroboration.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-12T21:06:24.226Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "london-city-airport-media-centre",
