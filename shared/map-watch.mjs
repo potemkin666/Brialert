@@ -11,6 +11,47 @@ const WORLD_FALLBACK = Object.freeze({ center: [50.2, 10.4], zoom: 4 });
 const LONDON_CLUSTER_MAX_ZOOM = 12;
 const WORLD_CLUSTER_MAX_ZOOM = 7;
 const FRESH_ALERT_WINDOW_MS = 90 * 60 * 1000;
+const LEAFLET_CSS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+const LEAFLET_JS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+const MAX_MAP_INIT_ATTEMPTS = 8;
+
+let leafletLoadPromise = null;
+
+function ensureLeafletAssets() {
+  if (typeof document === 'undefined') return;
+  const existingLink = document.querySelector('link[data-leaflet-css]');
+  const hasLeafletStyles = existingLink || Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+    .some((link) => String(link.href || '').includes('leaflet'));
+  if (!hasLeafletStyles) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = LEAFLET_CSS_URL;
+    link.crossOrigin = '';
+    link.dataset.leafletCss = 'true';
+    document.head.appendChild(link);
+  }
+}
+
+function ensureLeafletLoaded() {
+  if (typeof window === 'undefined') return Promise.resolve(null);
+  if (window.L) return Promise.resolve(window.L);
+  if (leafletLoadPromise) return leafletLoadPromise;
+
+  leafletLoadPromise = new Promise((resolve, reject) => {
+    ensureLeafletAssets();
+    const script = document.createElement('script');
+    script.src = LEAFLET_JS_URL;
+    script.async = true;
+    script.onload = () => resolve(window.L);
+    script.onerror = () => {
+      leafletLoadPromise = null;
+      reject(new Error('Leaflet failed to load'));
+    };
+    document.head.appendChild(script);
+  });
+
+  return leafletLoadPromise;
+}
 
 function statusLine(mode, count) {
   if (count <= 0) return 'No alerts in current view';
@@ -76,9 +117,40 @@ export function createMapController(config) {
   let lastState = null;
   let lastView = null;
   let hasInitialLondonFrame = false;
+  let initAttempts = 0;
+  let isLoadingLeaflet = false;
 
   function ensureMap() {
-    if (liveMap || !mapElement || typeof L === 'undefined') return;
+    if (liveMap || !mapElement) return;
+    if (typeof window !== 'undefined' && !window.L) {
+      if (!isLoadingLeaflet) {
+        isLoadingLeaflet = true;
+        if (mapStatusLine) mapStatusLine.textContent = 'Loading map...';
+        ensureLeafletLoaded()
+          .then(() => {
+            isLoadingLeaflet = false;
+            ensureMap();
+            if (lastState && lastView) {
+              renderMap(lastState, lastView, true);
+            }
+          })
+          .catch(() => {
+            isLoadingLeaflet = false;
+            if (mapStatusLine) mapStatusLine.textContent = 'Map failed to load. Please refresh.';
+          });
+      }
+      return;
+    }
+
+    const rect = mapElement.getBoundingClientRect();
+    if ((rect.width <= 0 || rect.height <= 0) && initAttempts < MAX_MAP_INIT_ATTEMPTS) {
+      initAttempts += 1;
+      setTimeout(ensureMap, 120);
+      return;
+    }
+    initAttempts = 0;
+
+    if (typeof L === 'undefined') return;
     liveMap = L.map(mapElement, {
       center: WORLD_FALLBACK.center,
       zoom: WORLD_FALLBACK.zoom,
