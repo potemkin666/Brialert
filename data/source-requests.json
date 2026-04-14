@@ -1,6 +1,18 @@
 [
   {
     "provider": "RSS Feed",
+    "endpoint": "https://www.govwire.co.uk/rss/crown-prosecution-service",
+    "kind": "rss",
+    "lane": "context",
+    "region": "uk",
+    "isTrustedOfficial": false,
+    "requiresKeywordMatch": true,
+    "validationLabel": "rss | uk | queued for next run",
+    "id": "requested-rss-feed-c34c5c93b43b",
+    "requestedAt": "2026-04-14T20:22:17.977Z"
+  },
+  {
+    "provider": "RSS Feed",
     "endpoint": "https://www.govwire.co.uk/rss/department-for-transport",
     "kind": "rss",
     "lane": "context",
