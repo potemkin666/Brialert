@@ -63,29 +63,25 @@
     {
       "id": "bdk-rss",
       "provider": "Bund Deutscher Kriminalbeamter - RSS",
-      "endpoint": "https://www.deutschland.de/en/feed-news/rss.xml",
+      "endpoint": "https://www.bdk.de/rss",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:20:55.094Z"
+      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context."
     },
     {
       "id": "belgium-crisis-centre-news",
       "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://www.brusselstimes.com/",
+      "endpoint": "https://crisiscenter.be/en/news",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:40:27.275Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "denmark-pet-news",
@@ -229,30 +225,26 @@
     {
       "id": "german-bfv-news",
       "provider": "German BfV - News",
-      "endpoint": "https://www.spiegel.de/international/index.rss",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "German domestic intelligence updates on extremism, terrorism and hostile-state activity.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:21:18.888Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "german-interior-ministry-press",
       "provider": "German Federal Ministry of the Interior - Press",
-      "endpoint": "https://feeds.thelocal.com/rss/de",
+      "endpoint": "https://www.bmi.bund.de/EN/press/press-releases/press-releases-node.html",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "German Interior Ministry press releases on terrorism, border security and domestic threat posture.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:21:46.620Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "icct-home",
@@ -280,16 +272,14 @@
     {
       "id": "paris-prefecture-police-rss-page",
       "provider": "Paris Prefecture of Police - RSS",
-      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/rss/actualites.xml",
+      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/presentation/les-directions-et-services/le-cabinet-du-prefet-de-police/service-de-la-communication/abonnez-vous-aux-flux-rss",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Paris Prefecture of Police RSS subscription page for official press and public-information feed discovery.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:40:49.656Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "spain-interior-ministry-news",
@@ -415,16 +405,14 @@
     {
       "id": "german-bka-press",
       "provider": "German BKA - Press Releases",
-      "endpoint": "https://www.kn-online.de/arc/outboundfeeds/rss/",
+      "endpoint": "https://www.bka.de/EN/Press/Listings/PressReleases/pressReleases_node.html",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "German Federal Criminal Police Office press releases on terrorism investigations and arrests.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:22:07.804Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "german-bka-press-releases-de",
@@ -477,30 +465,26 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.lawofficer.com/feed/",
+      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Spanish National Police press updates for terrorism arrests and major security operations.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:41:23.067Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
-      "endpoint": "https://apbweb.com/feed/",
+      "endpoint": "https://www.politiaromana.ro/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:41:45.956Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "sweden-police-news",
@@ -833,30 +817,26 @@
     {
       "id": "fra-rss",
       "provider": "EU Agency for Fundamental Rights - RSS",
-      "endpoint": "https://fra.europa.eu/en/news-and-events/news.rss.xml",
+      "endpoint": "https://fra.europa.eu/rss",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Official FRA RSS feed for rights, justice and security-related updates.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:22:44.242Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "europol-eu-iru",
       "provider": "Europol a EU Internet Referral Unit (EU IRU)",
-      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
+      "endpoint": "https://www.europol.europa.eu/about-europol/european-counter-terrorism-centre-ectc/eu-internet-referal-unit-eu-iru",
       "kind": "html",
       "lane": "prevention",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "EU IRU page within the European Counter Terrorism Centre; monitors and counters terrorist online content.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:23:11.030Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "isd-global-publications",
@@ -919,15 +899,13 @@
     {
       "id": "dw-europe-rss",
       "provider": "Deutsche Welle a Europe (RSS)",
-      "endpoint": "https://oldafsarge.blogspot.com/feeds/posts/default?alt=rss",
+      "endpoint": "https://rss.dw.com/rdf/rss-en-eu",
       "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents.",
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:42:13.114Z"
+      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents."
     },
     {
       "id": "ecfr-publications",
@@ -1102,30 +1080,26 @@
     {
       "id": "french-police-nationale-news",
       "provider": "Police Nationale - News",
-      "endpoint": "https://www.policenow.org.uk/feed/",
+      "endpoint": "https://www.police-nationale.interieur.gouv.fr/actualites",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "French Police Nationale reporting for terrorism arrests, raids and major public-safety incidents.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:42:43.868Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "ireland-gardai-press",
       "provider": "An Garda Siochana - Press Releases",
-      "endpoint": "https://leelofland.com/feed/",
+      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:43:06.575Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "netherlands-police-news",
@@ -1142,16 +1116,14 @@
     {
       "id": "paris-police-prefecture-news",
       "provider": "Prefecture de Police de Paris - News",
-      "endpoint": "https://www.france24.com/en/rss",
+      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/actualites",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Paris Police Prefecture news for capital-city operational incidents and public-order security context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:24:58.073Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "portugal-pj-news",
@@ -1168,16 +1140,14 @@
     {
       "id": "portugal-psp-news",
       "provider": "Public Security Police Portugal - News",
-      "endpoint": "https://algarvedailynews.com/news",
+      "endpoint": "https://www.psp.pt/Pages/noticias.aspx",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Portuguese PSP updates for public-order, terror-related incidents and urban policing context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T17:26:34.373Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "coe-counter-terrorism",
@@ -1337,16 +1307,14 @@
     {
       "id": "ran-network",
       "provider": "Radicalisation Awareness Network (RAN) a Publications",
-      "endpoint": "https://www.canadianpolicechaplainassociation.com/blog",
+      "endpoint": "https://www.radicalisationawarenessnetwork.eu/news-events/publications",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "EU Commission-funded RAN network publications on radicalisation prevention and counter-extremism approaches.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:43:46.221Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "sapo-se-english",
@@ -1661,15 +1629,13 @@
     {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center a IntelBrief",
-      "endpoint": "https://defrostingcoldcases.com/feed/",
+      "endpoint": "https://thesoufancenter.org/category/intelbrief/",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "No official RSS link advertised; using the IntelBrief category page and relying on keyword filtering.",
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:44:29.722Z"
+      "comment": "No official RSS link advertised; using the IntelBrief category page and relying on keyword filtering."
     },
     {
       "id": "tech-against-terrorism-podcast",
@@ -1926,16 +1892,14 @@
     {
       "id": "bromley-council-news",
       "provider": "Bromley Council a Newsroom",
-      "endpoint": "https://www.bromleyconservativegroup.org.uk/news/feed",
+      "endpoint": "https://www.bromley.gov.uk/newsroom/news?format=rss",
       "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Replaced Bromley newsroom HTML with RSS endpoint.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:45:45.274Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "camden-council-news",
@@ -2307,9 +2271,7 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "London Fire Brigade news used for London incident corroboration and scene context.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-13T20:46:28.316Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "london-gov-home",
