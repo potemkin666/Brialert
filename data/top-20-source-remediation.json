@@ -1,7 +1,7 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-14T08:24:44.136Z",
-  "totalSourceErrors": 73,
+  "generatedAt": "2026-04-14T10:09:04.023Z",
+  "totalSourceErrors": 69,
   "top20": [
     {
       "id": "dni-press-releases",
@@ -225,23 +225,6 @@
       "isMachineReadable": true
     },
     {
-      "id": "german-interior-ministry-press",
-      "provider": "German Federal Ministry of the Interior - Press",
-      "endpoint": "https://www.bmi.bund.de/EN/press/press-releases/press-releases-node.html",
-      "finalUrl": "https://www.bmi.bund.de/cookie-check-d973?l=%2FEN%2. Fpress%2. Fpress%2. Dreleases%2. Fpress%2. Dreleases%2. Dnode%2. Ehtml&v=61405663&m=572902497&h=AWmEW37zQLu5iMHtf%2BC466wKF1dc. Aj4HYQ709Q5. QiXE",
-      "category": "moved-temporarily",
-      "statusKind": "",
-      "message": "HTTP 400",
-      "status": 400,
-      "rankScore": 4,
-      "suggestedAction": "update source endpoint to redirected final URL",
-      "replacementCandidate": "https://www.bmi.bund.de/cookie-check-d973?l=%2FEN%2. Fpress%2. Fpress%2. Dreleases%2. Fpress%2. Dreleases%2. Dnode%2. Ehtml&v=61405663&m=572902497&h=AWmEW37zQLu5iMHtf%2BC466wKF1dc. Aj4HYQ709Q5. QiXE",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
       "id": "guardia-civil-news",
       "provider": "Guardia Civil - News",
       "endpoint": "https://www.guardiacivil.es/es/prensa/noticias/",
@@ -330,6 +313,23 @@
       "id": "chatham-house-security-defence",
       "provider": "Chatham House - Security and Defence",
       "endpoint": "https://www.chathamhouse.org/topics/security-and-defence",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "city-of-london-police-fraud-reporting",
+      "provider": "City of London Police - Fraud Reporting",
+      "endpoint": "https://www.cityoflondon.police.uk/ro/report/fo/v1/fraud/",
       "finalUrl": "",
       "category": "blocked-or-auth",
       "statusKind": "",
