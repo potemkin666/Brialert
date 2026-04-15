@@ -653,14 +653,16 @@
     {
       "id": "eu-ct-coordinator",
       "provider": "EU Counter-Terrorism Coordinator a Council of the EU",
-      "endpoint": "https://www.consilium.europa.eu/en/policies/fight-against-terrorism/eu-counter-terrorism-coordinator/",
+      "endpoint": "https://www.europarl.europa.eu/rss/doc/top-stories/en.xml",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
       "comment": "EU Counter-Terrorism Coordinator reports and briefings on EU-wide CT strategy and threat landscape.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-15T19:42:17.585Z"
     },
     {
       "id": "eu-ejustice-news-rss",
