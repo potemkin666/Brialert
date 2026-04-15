@@ -264,14 +264,16 @@
     {
       "id": "nctv-english-rss",
       "provider": "NCTV Netherlands - English RSS",
-      "endpoint": "https://english.nctv.nl/actueel/rss.xml",
+      "endpoint": "https://apnews.com/world-news",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "English NCTV RSS feed for Dutch threat posture, terrorism and national security updates.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-15T08:56:35.233Z"
     },
     {
       "id": "paris-prefecture-police-rss-page",
