@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-15T08:55:50.362Z",
-  "count": 231,
+  "generatedAt": "2026-04-15T08:56:35.233Z",
+  "count": 230,
   "sources": [
     {
       "id": "german-interior-ministry-press",
@@ -616,26 +616,6 @@
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveFailures": 23,
       "consecutiveBlockedFailures": 1,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-15T12:56:06.769Z",
-      "lastFailureAt": "2026-04-13T12:56:06.769Z",
-      "lastCheckedAt": "2026-04-13T12:56:06.769Z"
-    },
-    {
-      "id": "nctv-english-rss",
-      "provider": "NCTV Netherlands - English RSS",
-      "endpoint": "https://english.nctv.nl/actueel/rss.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-13T12:56:06.769Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 1,
-      "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
       "reviewBy": "2026-04-15T12:56:06.769Z",
