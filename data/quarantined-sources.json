@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-15T19:40:27.614Z",
-  "count": 231,
+  "generatedAt": "2026-04-15T19:41:30.106Z",
+  "count": 230,
   "sources": [
     {
       "id": "nctv-english-rss",
@@ -656,26 +656,6 @@
       "lastErrorMessage": "Blocked by anti-bot protection",
       "consecutiveFailures": 23,
       "consecutiveBlockedFailures": 1,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-15T12:56:06.769Z",
-      "lastFailureAt": "2026-04-13T12:56:06.769Z",
-      "lastCheckedAt": "2026-04-13T12:56:06.769Z"
-    },
-    {
-      "id": "spain-interior-ministry-news",
-      "provider": "Spanish Ministry of the Interior - Press",
-      "endpoint": "https://www.interior.gob.es/opencms/en/prensa/",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated failures (24) need manual review",
-      "quarantinedAt": "2026-04-13T12:56:06.769Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 24,
-      "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
       "reviewBy": "2026-04-15T12:56:06.769Z",
