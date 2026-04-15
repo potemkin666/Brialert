@@ -347,14 +347,16 @@
     {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
-      "endpoint": "https://www.politie.be/5998/en/news",
+      "endpoint": "https://brusselsmorning.com/belgium-news/police/",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Belgian Federal Police reporting on terrorism arrests, raids and national security incidents.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-15T22:23:43.685Z"
     },
     {
       "id": "czech-police-news",
