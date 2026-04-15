@@ -63,13 +63,15 @@
     {
       "id": "bdk-rss",
       "provider": "Bund Deutscher Kriminalbeamter - RSS",
-      "endpoint": "https://www.bdk.de/rss",
+      "endpoint": "https://www.bdk.de/rss/bremen/RSS",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context."
+      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context.",
+      "quarantined": false,
+      "restoredAt": "2026-04-15T08:55:19.581Z"
     },
     {
       "id": "belgium-crisis-centre-news",
