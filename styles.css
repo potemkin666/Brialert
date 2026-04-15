@@ -393,11 +393,11 @@ h1 {
 }
 
 .screen.briefing-mode .briefing-mode-hidden {
-  display: none !important;
+  display: none;
 }
 
 .screen.briefing-mode .briefing-mode-panel.hidden {
-  display: block !important;
+  display: block;
 }
 
 .screen.briefing-mode .tab-panel.active {

@@ -11,7 +11,8 @@ const sourceRequestRateState = {
   lastAttemptAtMs: 0
 };
 
-function clean(value) {
+/** Trim-only string coercion — intentionally simpler than taxonomy.clean() which also splits camelCase. */
+function trimString(value) {
   return String(value || '').trim();
 }
 
@@ -22,7 +23,7 @@ function currentOriginBase() {
 }
 
 function resolveApiUrls(apiUrl) {
-  const trimmed = clean(apiUrl);
+  const trimmed = trimString(apiUrl);
   if (!trimmed) return [];
   if (/^https?:\/\//i.test(trimmed)) return [trimmed];
   const bases = [SOURCE_REQUEST_BACKEND_BASE, currentOriginBase()].filter(Boolean);
@@ -32,7 +33,7 @@ function resolveApiUrls(apiUrl) {
 function normaliseRequestUrl(value) {
   let parsed;
   try {
-    parsed = new URL(clean(value));
+    parsed = new URL(trimString(value));
   } catch {
     throw new Error('Enter a valid http(s) source link.');
   }
@@ -65,11 +66,11 @@ function enforceClientRateLimit(nowMs = Date.now()) {
 
 function normalisedEndpointKey(endpoint) {
   try {
-    const url = new URL(clean(endpoint));
+    const url = new URL(trimString(endpoint));
     url.hash = '';
     return url.toString().replace(/\/$/, '');
   } catch {
-    return clean(endpoint).replace(/\/$/, '');
+    return trimString(endpoint).replace(/\/$/, '');
   }
 }
 
@@ -150,7 +151,7 @@ export async function submitSourceRequest(state, { apiUrl, url, regionHint }) {
         return {};
       });
       if (!response.ok) {
-        throw new Error(clean(payload?.detail) || `HTTP ${response.status}`);
+        throw new Error(trimString(payload?.detail) || `HTTP ${response.status}`);
       }
 
       const requests = Array.isArray(payload?.requests)

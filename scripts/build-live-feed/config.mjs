@@ -126,6 +126,8 @@ export const TARGET_SUCCESSFUL_SOURCES_PER_RUN = Math.max(
     ? Math.floor(Number(process.env.BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
     : 60
 );
+export const CONTINUATION_RUNTIME_HEADROOM_MS = envInt('BRIALERT_CONTINUATION_RUNTIME_HEADROOM_MS', 20_000, 1000);
+export const ROTATION_WEIGHT_BUCKETS = envInt('BRIALERT_ROTATION_WEIGHT_BUCKETS', 7, 2);
 /** Base lane caps – used as the starting point before dynamic adjustments. */
 const BASE_LANE_LIMITS = Object.freeze({
   incidents: 6,

@@ -18,9 +18,16 @@ function normaliseGeoText(value) {
     .trim();
 }
 
+const geoTermRegexCache = new Map();
+
 function geoTermRegex(term) {
-  const escaped = escapeRegex(normaliseGeoText(term));
-  return new RegExp(`(^|\\W)${escaped}(?=$|\\W)`, 'i');
+  const normalised = normaliseGeoText(term);
+  let cached = geoTermRegexCache.get(normalised);
+  if (cached) return cached;
+  const escaped = escapeRegex(normalised);
+  cached = new RegExp(`(^|\\W)${escaped}(?=$|\\W)`, 'i');
+  geoTermRegexCache.set(normalised, cached);
+  return cached;
 }
 
 function scoreGeoEntryMatch(entry, haystack) {

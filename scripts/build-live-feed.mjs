@@ -40,6 +40,8 @@ import {
   SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS,
   SOURCE_FAILURE_COOLDOWN_HOURS,
   TARGET_SUCCESSFUL_SOURCES_PER_RUN,
+  CONTINUATION_RUNTIME_HEADROOM_MS,
+  ROTATION_WEIGHT_BUCKETS,
   computeDynamicItemLimit,
   AUTO_QUARANTINE_FAILURE_THRESHOLD,
   isMachineReadableSourceKind,
@@ -412,7 +414,6 @@ function sourceDomain(source) {
 function selectHtmlSourcesForRun(rankedHtmlEntries, buildDate, maxSources) {
   const safeEntries = Array.isArray(rankedHtmlEntries) ? rankedHtmlEntries : [];
   const runSeed = Math.floor(buildDate.getTime() / 3600000);
-  const ROTATION_WEIGHT_BUCKETS = 7;
   const runCap = Math.max(0, Number(maxSources || 0));
   const domainUse = new Map();
   const domainCappedSourceIds = new Set();
@@ -2063,7 +2064,6 @@ async function syncBuilderSQLite(snapshot) {
 
 async function main() {
   const runStartedAtMs = Date.now();
-  const CONTINUATION_RUNTIME_HEADROOM_MS = 20_000;
   const buildDate = new Date();
   const existing = await readExisting();
   const geoLookupFallbackNote = await safeLoadGeoLookup(existing);
