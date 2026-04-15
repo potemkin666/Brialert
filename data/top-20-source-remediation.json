@@ -1,7 +1,7 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-15T00:08:57.394Z",
-  "totalSourceErrors": 113,
+  "generatedAt": "2026-04-15T03:12:36.772Z",
+  "totalSourceErrors": 107,
   "top20": [
     {
       "id": "chatham-house-rss",
@@ -24,23 +24,6 @@
       "id": "gctf-news",
       "provider": "Global Counterterrorism Forum (GCTF) a News",
       "endpoint": "https://www.thegctf.org/News/",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "statusKind": "",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "oversight",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "joint-committee-human-rights-html",
-      "provider": "Joint Committee on Human Rights",
-      "endpoint": "https://www.gov.uk/government/organisations/joint-committee-on-human-rights",
       "finalUrl": "",
       "category": "not-found-404",
       "statusKind": "",
@@ -155,23 +138,6 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": true
-    },
-    {
-      "id": "scottish-government-justice-news",
-      "provider": "Scottish Government - Justice and Safety",
-      "endpoint": "https://www.gov.scot/justice-and-law/",
-      "finalUrl": "",
-      "category": "not-found-404",
-      "statusKind": "",
-      "message": "HTTP 404",
-      "status": 404,
-      "rankScore": 5,
-      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "oversight",
-      "sourceRegion": "",
-      "isMachineReadable": false
     },
     {
       "id": "slam-news",
@@ -327,21 +293,55 @@
       "isMachineReadable": false
     },
     {
-      "id": "bdk-rss",
-      "provider": "Bund Deutscher Kriminalbeamter - RSS",
-      "endpoint": "https://www.bdk.de/rss",
+      "id": "city-of-london-police-fraud-reporting",
+      "provider": "City of London Police - Fraud Reporting",
+      "endpoint": "https://www.cityoflondon.police.uk/ro/report/fo/v1/fraud/",
       "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
+      "category": "blocked-or-auth",
       "statusKind": "",
-      "message": "No items parsed from source payload",
-      "status": 200,
+      "message": "HTTP 403",
+      "status": 403,
       "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
       "replacementCandidate": "",
-      "sourceKind": "rss",
+      "sourceKind": "html",
       "sourceLane": "context",
       "sourceRegion": "",
-      "isMachineReadable": true
+      "isMachineReadable": false
+    },
+    {
+      "id": "city-of-london-police-news-html",
+      "provider": "City of London Police - News",
+      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london-police/news/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "incidents",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "cnwl-news",
+      "provider": "Central and North West London NHS Foundation Trust a News",
+      "endpoint": "https://www.cnwl.nhs.uk/news",
+      "finalUrl": "",
+      "category": "anti-bot-protection",
+      "statusKind": "",
+      "message": "Blocked by anti-bot protection",
+      "status": 200,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ]
 }
