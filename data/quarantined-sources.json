@@ -1,27 +1,7 @@
 {
-  "generatedAt": "2026-04-15T11:21:26.814Z",
-  "count": 233,
+  "generatedAt": "2026-04-15T19:36:53.535Z",
+  "count": 232,
   "sources": [
-    {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "HTTP 404 not found; needs manual source URL review",
-      "quarantinedAt": "2026-04-15T09:58:03.929Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 1,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-17T09:58:03.929Z",
-      "lastFailureAt": "2026-04-15T09:58:03.929Z",
-      "lastCheckedAt": "2026-04-15T09:58:03.929Z"
-    },
     {
       "id": "nctv-english-rss",
       "provider": "NCTV Netherlands - English RSS",
@@ -4662,5 +4642,6 @@
       "lastFailureAt": "2026-04-05T13:02:51.966Z",
       "lastCheckedAt": "2026-04-15T11:21:26.814Z"
     }
-  ]
+  ],
+  "schemaVersion": 1
 }
