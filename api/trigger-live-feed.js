@@ -60,6 +60,11 @@ export default async function handler(request, response) {
       });
     }
 
+    // Claim the slot before the async dispatch so concurrent requests see
+    // the lock immediately (avoids check-then-act race).
+    const previousTriggerTime = lastTriggerTime;
+    lastTriggerTime = now;
+
     const config = getRepoConfig();
 
     const dispatchUrl = `${GITHUB_API_BASE}/repos/${config.owner}/${config.repo}/actions/workflows/${WORKFLOW_FILENAME}/dispatches`;
@@ -79,6 +84,8 @@ export default async function handler(request, response) {
     });
 
     if (!dispatchResponse.ok) {
+      // Roll back so the next request can retry after a real failure.
+      lastTriggerTime = previousTriggerTime;
       let errorMessage = 'Failed to trigger workflow dispatch.';
 
       if (dispatchResponse.status === 401 || dispatchResponse.status === 403) {
@@ -89,8 +96,6 @@ export default async function handler(request, response) {
       }
       throw new ApiError('trigger-failed', errorMessage, 500);
     }
-
-    lastTriggerTime = now;
 
     return response.status(200).json({
       ok: true,
