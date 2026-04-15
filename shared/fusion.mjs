@@ -129,8 +129,10 @@ function stripDiacritics(text) {
 function collapseEntities(text) {
   let result = text;
   for (const [phrase, token] of multiWordEntities) {
-    // Match phrase with flexible separators (hyphens, spaces)
-    const escaped = phrase.replace(/\s+/g, '[\\s\\-]+');
+    // Escape regex-special chars, then allow flexible separators (hyphens, spaces)
+    const escaped = phrase
+      .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/\s+/g, '[\\s\\-]+');
     result = result.replace(new RegExp(escaped, 'gi'), ` ${token} `);
   }
   return result;
@@ -171,6 +173,7 @@ function normaliseFusionToken(token) {
 function informativeTokens(text, minLength) {
   const normalised = stripDiacritics(clean(text)).toLowerCase();
   const collapsed = collapseEntities(normalised);
+  // Underscores are preserved so collapsed entity tokens (e.g. islamic_state) survive splitting
   return collapsed
     .replace(/[^a-z0-9_\s]+/g, ' ')
     .split(/\s+/)
