@@ -66,13 +66,13 @@ function encodeBase64(plainText) {
   return Buffer.from(plainText, 'utf8').toString('base64');
 }
 
-function parseJsonFile(raw, filePath) {
+function parseJsonFile(raw) {
   try {
     return JSON.parse(raw);
-  } catch (error) {
+  } catch {
     throw new ApiError(
       'persistence-failure',
-      `Invalid JSON in ${filePath}: ${error instanceof Error ? error.message : String(error)}`,
+      'Repository data file contains invalid JSON.',
       500
     );
   }
@@ -120,7 +120,7 @@ export async function loadJsonFile(pathName) {
     config,
     path: pathName,
     sha: payload.sha,
-    data: parseJsonFile(content, pathName)
+    data: parseJsonFile(content)
   };
 }
 

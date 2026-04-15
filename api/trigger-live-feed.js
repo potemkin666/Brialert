@@ -79,20 +79,13 @@ export default async function handler(request, response) {
     });
 
     if (!dispatchResponse.ok) {
-      const errorText = await dispatchResponse.text().catch(() => '');
       let errorMessage = 'Failed to trigger workflow dispatch.';
-      try {
-        const errorPayload = JSON.parse(errorText);
-        errorMessage = errorPayload.message || errorMessage;
-      } catch {
-        // Use default error message
-      }
 
       if (dispatchResponse.status === 401 || dispatchResponse.status === 403) {
-        throw new ApiError('unauthorized', errorMessage, 503);
+        throw new ApiError('unauthorized', 'GitHub API authentication failed.', 503);
       }
       if (dispatchResponse.status === 404) {
-        throw new ApiError('workflow-not-found', `Workflow ${WORKFLOW_FILENAME} not found.`, 404);
+        throw new ApiError('workflow-not-found', 'Workflow not found.', 404);
       }
       throw new ApiError('trigger-failed', errorMessage, 500);
     }

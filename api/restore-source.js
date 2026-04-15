@@ -274,8 +274,8 @@ export default async function handler(request, response) {
       try {
         await dispatchWorkflow(quarantinedFile.config, FEED_WORKFLOW_FILENAME);
         workflowTriggered = true;
-      } catch (error) {
-        workflowMessage = error instanceof Error ? error.message : String(error);
+      } catch {
+        workflowMessage = 'Feed refresh workflow could not be triggered.';
       }
     }
 

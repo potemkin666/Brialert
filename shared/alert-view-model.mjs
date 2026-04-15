@@ -8,6 +8,7 @@ import {
 import { laneLabels } from './ui-data.mjs';
 import { formatAgeFromDate } from './time-format.mjs';
 import { DEFAULT_LANE, LANE_KEYS, STATUS_LABELS } from './ui-constants.mjs';
+import { escapeHtml } from '../app/utils/text.mjs';
 
 export function formatAgeFrom(dateLike) {
   return formatAgeFromDate(dateLike);
@@ -438,7 +439,7 @@ export function renderSceneClock(alert) {
   return `<div class="scene-clock-grid">${items.map(({ label, entry, fallback }) => `
     <article class="scene-clock-item">
       <strong>${label}</strong>
-      <p>${entry ? `${clockDisplay(entry.publishedAt)} | ${sceneClockStamp(entry.publishedAt)}${entry.source ? ` | ${entry.source}` : ''}` : fallback}</p>
+      <p>${entry ? `${clockDisplay(entry.publishedAt)} | ${sceneClockStamp(entry.publishedAt)}${entry.source ? ` | ${escapeHtml(entry.source)}` : ''}` : fallback}</p>
     </article>`).join('')}</div>`;
 }
 
@@ -466,7 +467,7 @@ export function renderCorroboratingSources(alert) {
   }
   return `<div class="corroboration-list">${sources.map((entry) => `
     <article class="corroboration-item">
-      <a href="${entry.sourceUrl}" target="_blank" rel="noreferrer">${entry.source}</a>
+      <a href="${escapeHtml(entry.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(entry.source)}</a>
       <p>${reliabilityLabel(normaliseReliabilityProfile(entry.reliabilityProfile))} | ${clean(entry.sourceTier) || 'source tier unknown'} | ${clean(entry.publishedAt) ? formatAgeFrom(entry.publishedAt) : 'age unknown'}</p>
     </article>`).join('')}</div>`;
 }
@@ -554,7 +555,7 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     freshUntil: clean(alert.freshUntil),
     needsHumanReview: !!alert.needsHumanReview,
     priorityScore: Number.isFinite(alert.priorityScore) ? alert.priorityScore : null,
-    confidenceScore: Number.isFinite(alert.confidenceScore) ? alert.confidenceScore : null,
+    confidenceScore: Number.isFinite(alert.confidenceScore) && alert.confidenceScore >= 0 && alert.confidenceScore <= 1 ? alert.confidenceScore : null,
     publishedAt: clean(alert.publishedAt),
     freshnessBucket: Number.isFinite(alert.freshnessBucket) ? alert.freshnessBucket : null,
     keywordHits: Array.isArray(alert.keywordHits) ? alert.keywordHits.filter(Boolean) : [],
