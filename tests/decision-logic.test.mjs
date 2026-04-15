@@ -38,7 +38,9 @@ import {
 } from '../shared/taxonomy.mjs';
 import {
   fusedIncidentIdFor,
-  mergeCorroboratingSources
+  mergeCorroboratingSources,
+  stableFusionTerms,
+  sameStoryKey
 } from '../shared/fusion.mjs';
 import { buildHealthBlock } from '../scripts/build-live-feed.mjs';
 import { normaliseSourcesPayload } from '../scripts/build-live-feed/io.mjs';
@@ -1614,4 +1616,90 @@ test('computeDynamicItemLimit returns sensible defaults with empty options', () 
   const limit = computeDynamicItemLimit();
   assert.ok(limit >= 1, `limit should be at least 1, got ${limit}`);
   assert.ok(limit <= 10, `limit should be reasonable, got ${limit}`);
+});
+
+// ── stableFusionTerms: diacritics / stemming / entity / multilingual tests ──
+
+test('fusion tokens strip diacritics so accented and plain text match', () => {
+  const accented = stableFusionTerms({
+    title: 'Attentat déjoué à Paris',
+    summary: 'Attentat déjoué à Paris par la police',
+    sourceExtract: 'Attentat déjoué à Paris'
+  });
+  const plain = stableFusionTerms({
+    title: 'Attentat dejoue a Paris',
+    summary: 'Attentat dejoue a Paris par la police',
+    sourceExtract: 'Attentat dejoue a Paris'
+  });
+  assert.deepEqual(accented, plain);
+});
+
+test('fusion tokens collapse "Islamic State" to a single canonical token', () => {
+  const tokens = stableFusionTerms({
+    title: 'Islamic State claims responsibility for London attack',
+    summary: 'Islamic State operatives planned the London attack',
+    sourceExtract: 'Islamic State fighters detained in London'
+  });
+  assert.ok(tokens.includes('islamic_state'), `expected 'islamic_state' in ${JSON.stringify(tokens)}`);
+});
+
+test('fusion tokens collapse "al-Qaeda" variants to the same canonical token', () => {
+  const tokensHyphen = stableFusionTerms({
+    title: 'al-Qaeda linked suspect arrested in Berlin',
+    summary: 'al-Qaeda linked suspect arrested in Berlin',
+    sourceExtract: 'al-Qaeda suspect detained in Berlin'
+  });
+  const tokensSpace = stableFusionTerms({
+    title: 'al Qaeda linked suspect arrested in Berlin',
+    summary: 'al Qaeda linked suspect arrested in Berlin',
+    sourceExtract: 'al Qaeda suspect detained in Berlin'
+  });
+  assert.ok(tokensHyphen.includes('alqaeda'), `expected 'alqaeda' in ${JSON.stringify(tokensHyphen)}`);
+  assert.ok(tokensSpace.includes('alqaeda'), `expected 'alqaeda' in ${JSON.stringify(tokensSpace)}`);
+});
+
+test('fusion tokens produce cross-language canonical terms for French CT vocabulary', () => {
+  const french = stableFusionTerms({
+    title: 'Attentat terroriste au Stade de France',
+    summary: 'Un attentat terroriste au Stade de France',
+    sourceExtract: 'Attentat terroriste au Stade de France par des extremistes',
+  });
+  // French "attentat" and "terroriste" should map to canonical CT tokens
+  assert.ok(french.includes('attack_ct'), `expected 'attack_ct' in ${JSON.stringify(french)}`);
+  assert.ok(french.includes('terrorist_ct'), `expected 'terrorist_ct' in ${JSON.stringify(french)}`);
+});
+
+test('fusion tokens handle German CT terms via aliases', () => {
+  const tokens = stableFusionTerms({
+    title: 'Anschlag in München vereitelt',
+    summary: 'Terroristen planten Anschlag in München',
+    sourceExtract: 'Anschlag in München vereitelt durch Polizei'
+  });
+  assert.ok(tokens.includes('attack_ct'), `expected 'attack_ct' in ${JSON.stringify(tokens)}`);
+  assert.ok(tokens.includes('munchen'), `expected 'munchen' in ${JSON.stringify(tokens)}`);
+});
+
+test('fusion tokens handle Spanish CT terms via aliases', () => {
+  const tokens = stableFusionTerms({
+    title: 'Atentado terrorista en Madrid',
+    summary: 'Terroristas planificaron atentado en Madrid',
+    sourceExtract: 'Atentado terrorista en el centro de Madrid'
+  });
+  assert.ok(tokens.includes('attack_ct'), `expected 'attack_ct' in ${JSON.stringify(tokens)}`);
+  assert.ok(tokens.includes('terrorist_ct'), `expected 'terrorist_ct' in ${JSON.stringify(tokens)}`);
+});
+
+test('sameStoryKey strips diacritics for stable dedup keys', () => {
+  const a = sameStoryKey({ title: 'Attaque à l\'aéroport de Bruxelles' });
+  const b = sameStoryKey({ title: 'Attaque a l\'aeroport de Bruxelles' });
+  assert.equal(a, b);
+});
+
+test('normaliseFusionToken handles additional English suffixes', () => {
+  const tokens = stableFusionTerms({
+    title: 'Radicalization of dangerous individuals',
+    summary: 'The radicalization and dangerousness of individuals',
+    sourceExtract: 'Radicalization programmes and dangerous activities'
+  });
+  assert.ok(tokens.includes('radicaliz_ct'), `expected 'radicaliz_ct' in ${JSON.stringify(tokens)}`);
 });
