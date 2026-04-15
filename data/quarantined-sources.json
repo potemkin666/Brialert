@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-15T22:23:43.685Z",
-  "count": 227,
+  "generatedAt": "2026-04-15T22:24:31.722Z",
+  "count": 226,
   "sources": [
     {
       "id": "nctv-english-rss",
@@ -675,26 +675,6 @@
       "lastErrorCategory": "brittle-selectors-or-js-rendering",
       "lastErrorMessage": "No items parsed from source payload",
       "consecutiveFailures": 22,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-15T12:56:06.769Z",
-      "lastFailureAt": "2026-04-13T12:56:06.769Z",
-      "lastCheckedAt": "2026-04-13T12:56:06.769Z"
-    },
-    {
-      "id": "eu-commission-presscorner-home",
-      "provider": "European Commission - Press Corner",
-      "endpoint": "https://ec.europa.eu/commission/presscorner/home/en",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated failures (24) need manual review",
-      "quarantinedAt": "2026-04-13T12:56:06.769Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 24,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
