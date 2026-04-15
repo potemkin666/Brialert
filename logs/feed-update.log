@@ -245,4 +245,55 @@ Source failed: royal-free-london-news [html/context] - HTTP 403
 Source failed: slam-news [html/context] - HTTP 404
 Source failed: tavistock-portman-news [html/context] - Blocked by anti-bot protection
 Source failed: mopac-html [html/oversight] - Blocked by anti-bot protection
-^C
+^C==== 15/04/2026 21:48:15.89 ==== 
+Running Brialert feed update... 
+Loaded 8 pending source request(s). Manual approval required before activation.
+Source failed: city-of-london-police-news [rss/incidents] - HTTP 403
+Source failed: british-transport-police-news [rss/incidents] - HTTP 403
+Source failed: ct-policing-uk-rss-feed [rss/incidents] - Blocked by anti-bot protection
+Unclassified source failure category: thames-valley-police-news-html [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Source failed: thames-valley-police-news-html [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Unclassified source failure category: warwickshire-police-news [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Source failed: warwickshire-police-news [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Unclassified source failure category: west-mercia-police-news-html [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Source failed: west-mercia-police-news-html [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Unclassified source failure category: west-midlands-police-news [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Source failed: west-midlands-police-news [html/incidents] - Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback
+Source failed: west-yorkshire-police-news [html/incidents] - HTTP 403
+Source failed: wiltshire-police-news [html/incidents] - HTTP 403
+Source failed: ertzaintza-news [html/incidents] - HTTP 403
+Source failed: belgian-federal-police-news [html/incidents] - HTTP 404
+Source failed: german-bka-press [html/incidents] - HTTP 404
+Source failed: finland-police-news [html/incidents] - Blocked by anti-bot protection
+Source failed: guardia-civil-news [html/incidents] - HTTP 404
+Source failed: french-gendarmerie-news [html/incidents] - HTTP 403
+Source failed: french-police-nationale-news [html/incidents] - HTTP 403
+Source failed: city-of-london-police-news-html [html/incidents] - HTTP 403
+Source failed: ct-policing-london [html/incidents] - Blocked by anti-bot protection
+Source failed: city-of-london-police-newsroom [html/incidents] - fetch failed
+Source failed: bedfordshire-police-news [html/incidents] - HTTP 403
+Source failed: bedfordshire-police-news-search [html/incidents] - HTTP 403
+Source failed: btp-british-transport-police-news-html [html/incidents] - HTTP 403
+Source failed: cheshire-police-news [html/incidents] - HTTP 403
+Source failed: cps-news-centre [html/incidents] - Blocked by anti-bot protection
+Source failed: ct-policing-north-west [html/incidents] - Blocked by anti-bot protection
+Source failed: portugal-psp-news [html/incidents] - fetch failed
+Source failed: ct-policing-uk-latest-news [html/incidents] - Blocked by anti-bot protection
+Source failed: cumbria-police-news [html/incidents] - HTTP 403
+Source failed: devon-and-cornwall-police-newsroom [html/incidents] - Blocked by anti-bot protection
+Source failed: devon-cornwall-police-news [html/incidents] - HTTP 403
+Source failed: dorset-police-news [html/incidents] - HTTP 403
+Source failed: fra-rss [rss/oversight] - Blocked by anti-bot protection
+Source failed: ncsc-nl-rss [rss/prevention] - Blocked by blocked access page
+Source failed: unsc-consolidated-list [rss/sanctions] - Blocked by anti-bot protection
+Source failed: bromley-council-news [rss/context] - HTTP 404
+Source failed: mayor-of-london-press-releases [rss/context] - HTTP 404
+Source failed: tfl-press-releases [rss/context] - HTTP 404
+Source failed: westminster-city-council-news [rss/context] - HTTP 404
+Source failed: southwark-newsroom [rss/context] - fetch failed
+Source failed: mi5-news [rss/context] - HTTP 403
+Source failed: london-assembly-press-releases [rss/oversight] - HTTP 404
+Source failed: mi5-news-rss-direct [rss/context] - HTTP 403
+Source failed: lords-in-focus-rss [rss/oversight] - HTTP 403
+Source failed: lords-library-notes-rss [rss/oversight] - HTTP 403
+Source failed: fbi-stories [rss/context] - HTTP 403
