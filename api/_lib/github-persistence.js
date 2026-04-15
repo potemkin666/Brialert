@@ -78,6 +78,50 @@ function parseJsonFile(raw) {
   }
 }
 
+/**
+ * Returns true when a hostname looks like a private, loopback, link-local, or
+ * otherwise non-routable address that must be rejected to prevent SSRF.
+ * Checks the raw hostname string — no DNS resolution is performed, so only
+ * literal IP addresses and well-known internal hostnames are caught.
+ */
+function isPrivateOrReservedHost(hostname) {
+  const host = String(hostname || '').toLowerCase();
+  if (!host) return true;
+
+  // Loopback / localhost
+  if (host === 'localhost' || host === '[::1]') return true;
+
+  // Strip IPv6 brackets for numeric checks
+  const bare = host.startsWith('[') && host.endsWith(']') ? host.slice(1, -1) : host;
+
+  // IPv6 loopback & link-local
+  if (bare === '::1' || bare.startsWith('fe80:') || bare.startsWith('fc00:') || bare.startsWith('fd00:')) return true;
+
+  // IPv4 dotted-quad checks
+  const ipv4Parts = bare.split('.');
+  if (ipv4Parts.length === 4 && ipv4Parts.every((p) => /^\d{1,3}$/.test(p))) {
+    const octets = ipv4Parts.map(Number);
+    if (octets.some((o) => o > 255)) return true;             // malformed — block as suspicious
+    const [a, b] = octets;
+    if (a === 127) return true;                              // 127.0.0.0/8   loopback
+    if (a === 10) return true;                               // 10.0.0.0/8    private
+    if (a === 172 && b >= 16 && b <= 31) return true;        // 172.16.0.0/12 private
+    if (a === 192 && b === 168) return true;                 // 192.168.0.0/16 private
+    if (a === 169 && b === 254) return true;                 // 169.254.0.0/16 link-local
+    if (a === 0) return true;                                // 0.0.0.0/8
+    if (a === 100 && b >= 64 && b <= 127) return true;      // 100.64.0.0/10 CGN shared
+    if (a === 198 && (b === 18 || b === 19)) return true;    // 198.18.0.0/15 benchmarking
+    if (a >= 224) return true;                               // 224+  multicast / reserved
+  }
+
+  // Block common internal / metadata hostnames
+  if (host.endsWith('.local') || host.endsWith('.internal') || host.endsWith('.localhost')) return true;
+  // Cloud provider metadata endpoints
+  if (host === '169.254.169.254' || host === 'metadata.google.internal') return true;
+
+  return false;
+}
+
 export function validateAbsoluteHttpUrl(value, code = 'invalid-url') {
   const trimmed = String(value || '').trim();
   if (!trimmed) {
@@ -91,6 +135,9 @@ export function validateAbsoluteHttpUrl(value, code = 'invalid-url') {
   }
   if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
     throw new ApiError(code, 'Replacement URL must use http or https.', 400);
+  }
+  if (isPrivateOrReservedHost(parsed.hostname)) {
+    throw new ApiError(code, 'URL must not point to a private or internal network address.', 400);
   }
   return parsed.toString();
 }
