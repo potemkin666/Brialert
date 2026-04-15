@@ -4,7 +4,9 @@ import {
 } from '../_lib/admin-session.js';
 
 export default async function handler(request, response) {
-  applyCorsHeaders(request, response, 'POST,OPTIONS');
+  if (!applyCorsHeaders(request, response, 'POST,OPTIONS')) {
+    return response.status(403).json({ ok: false, error: 'origin-not-allowed', detail: 'Cross-origin request from disallowed origin.' });
+  }
   if (request.method === 'OPTIONS') {
     return response.status(204).end();
   }

@@ -146,17 +146,15 @@ function serializeCookie(parts, value, maxAgeSeconds) {
 export function applyCorsHeaders(request, response, methods) {
   const requestOrigin = normaliseOrigin(request?.headers?.origin);
   const allowedOrigins = new Set(getAllowedOrigins());
-  if (requestOrigin && allowedOrigins.has(requestOrigin)) {
+  const originAllowed = !requestOrigin || allowedOrigins.has(requestOrigin);
+  if (requestOrigin && originAllowed) {
     response.setHeader('Access-Control-Allow-Origin', requestOrigin);
     response.setHeader('Access-Control-Allow-Credentials', 'true');
     response.setHeader('Vary', 'Origin');
   }
   response.setHeader('Access-Control-Allow-Methods', methods);
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  if (request?.method === 'OPTIONS') {
-    return !requestOrigin || allowedOrigins.has(requestOrigin);
-  }
-  return true;
+  return originAllowed;
 }
 
 export function readAdminSession(request) {

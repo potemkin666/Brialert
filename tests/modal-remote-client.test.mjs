@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { requestRemoteLongBrief } from '../app/render/modal-remote-client.mjs';
+import { DEFAULT_API_BASE } from '../shared/api-base.mjs';
 
 test('requestRemoteLongBrief stops retrying on terminal HTTP statuses like 501', async () => {
   const previousFetch = globalThis.fetch;
@@ -37,7 +38,7 @@ test('requestRemoteLongBrief uses Vercel backend URL as the primary endpoint', a
     const result = await requestRemoteLongBrief([{ headline: 'one' }]);
     assert.equal(result, 'remote brief');
     assert.deepEqual(calledUrls, [
-      'https://brialertbackend.vercel.app/api/generate-brief'
+      `${DEFAULT_API_BASE}/api/generate-brief`
     ]);
   } finally {
     globalThis.fetch = previousFetch;

@@ -1,5 +1,7 @@
+import { DEFAULT_API_BASE } from '../../shared/api-base.mjs';
+
 const LONG_BRIEF_API_URLS = [
-  'https://brialertbackend.vercel.app/api/generate-brief'
+  `${DEFAULT_API_BASE}/api/generate-brief`
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 const TERMINAL_HTTP_STATUSES = new Set([400, 401, 403, 404, 405, 410, 501]);

@@ -61,7 +61,9 @@ function sanitiseRequests(rawRequests) {
 }
 
 export default async function handler(request, response) {
-  applyCorsHeaders(request, response, 'GET,OPTIONS');
+  if (!applyCorsHeaders(request, response, 'GET,OPTIONS')) {
+    return response.status(403).json({ ok: false, error: 'origin-not-allowed', detail: 'Cross-origin request from disallowed origin.' });
+  }
   if (request.method === 'OPTIONS') {
     response.setHeader('Allow', 'GET,OPTIONS');
     return response.status(204).end();

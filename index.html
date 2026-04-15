@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content, shrink-to-fit=no">
+  <!-- CSP connect-src must include the backend URL from shared/api-base.mjs -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com; img-src 'self' data: https://*.basemaps.cartocdn.com; connect-src 'self' https://brialertbackend.vercel.app; font-src 'self' https://unpkg.com data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <title>Brialert</title>
   <meta name="mobile-web-app-capable" content="yes">

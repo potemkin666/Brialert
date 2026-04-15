@@ -1078,7 +1078,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
   </main>
   <div id="toast" class="toast" aria-live="polite"></div>
   <script>
-    const DEFAULT_API_BASE = 'https://brialertbackend.vercel.app';
+    const DEFAULT_API_BASE = '${process.env.BRIALERT_API_BASE || 'https://brialertbackend.vercel.app'}';
     function normaliseApiBase(value) {
       const raw = String(value || '').trim();
       return raw ? raw.replace(/\\/$/, '') : '';
