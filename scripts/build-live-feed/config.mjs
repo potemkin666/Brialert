@@ -148,10 +148,10 @@ const RELIABILITY_MULTIPLIERS = Object.freeze({
  * reliability profile, lane, health history, and current event density.
  *
  * @param {object} options
- * @param {string} options.reliabilityProfile – from inferReliabilityProfile()
- * @param {string} options.lane – source lane (incidents, context, etc.)
- * @param {object|null} [options.sourceHealth] – health entry from previous run
- * @param {number} [options.filteredCount] – items that passed content filters this run
+ * @param {string} options.reliabilityProfile - from inferReliabilityProfile()
+ * @param {string} options.lane - source lane (incidents, context, etc.)
+ * @param {object|null} [options.sourceHealth] - health entry from previous run
+ * @param {number} [options.filteredCount] - items that passed content filters this run
  * @returns {number} positive integer item limit (minimum 1)
  */
 export function computeDynamicItemLimit({ reliabilityProfile, lane, sourceHealth, filteredCount } = {}) {

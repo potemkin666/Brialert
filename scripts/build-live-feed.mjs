@@ -554,7 +554,7 @@ function shouldTryPlaywrightForThinHtml(source, body, playwrightBudget) {
     || PLAYWRIGHT_FALLBACK_AGGRESSIVE;
 }
 
-async function attemptSourceBuild(source, requestState, playwrightBudget) {
+async function attemptSourceBuild(source, requestState, playwrightBudget, priorHealthEntry) {
   const localErrors = [];
   const builtAlerts = [];
   let body;
@@ -638,6 +638,7 @@ async function attemptSourceBuild(source, requestState, playwrightBudget) {
   const itemLimit = computeDynamicItemLimit({
     reliabilityProfile,
     lane: source.lane,
+    sourceHealth: priorHealthEntry || null,
     filteredCount: filtered.length
   });
   const kept = filtered.slice(0, itemLimit);
@@ -2354,7 +2355,7 @@ async function main() {
             const fallbackSource = sourceById.get(fallbackId);
             if (!fallbackSource) continue;
             try {
-              const fallbackResult = await attemptSourceBuild(fallbackSource, requestState, playwrightBudget);
+              const fallbackResult = await attemptSourceBuild(fallbackSource, requestState, playwrightBudget, sourceHealthEntry(previousHealth, fallbackSource.id));
               if (!fallbackResult.alerts.length) continue;
               failureReasonCounts.success += 1;
               return {
