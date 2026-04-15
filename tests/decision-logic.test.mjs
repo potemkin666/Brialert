@@ -34,7 +34,14 @@ import {
   inferIncidentTrack,
   isTerrorRelevantIncident,
   matchesKeywords,
-  terrorismKeywords
+  terrorismKeywords,
+  incidentKeywords,
+  majorMediaProviders,
+  tabloidProviders,
+  englishFriendlyPatterns,
+  nonEnglishEndpointPatterns,
+  inferConfidenceScore,
+  sourceLooksEnglish
 } from '../shared/taxonomy.mjs';
 import {
   fusedIncidentIdFor,
@@ -1702,4 +1709,164 @@ test('normaliseFusionToken handles additional English suffixes', () => {
     sourceExtract: 'Radicalization programmes and dangerous activities'
   });
   assert.ok(tokens.includes('radicaliz_ct'), `expected 'radicaliz_ct' in ${JSON.stringify(tokens)}`);
+});
+
+// ── expanded classification and reliability heuristic tests ──
+
+test('terrorismKeywords include EU-language terrorism terms', () => {
+  // French
+  assert.ok(terrorismKeywords.includes('terrorisme'), 'should include French terrorisme');
+  assert.ok(terrorismKeywords.includes('djihadiste'), 'should include French djihadiste');
+  assert.ok(terrorismKeywords.includes('etat islamique'), 'should include French etat islamique');
+  // German
+  assert.ok(terrorismKeywords.includes('terrorismus'), 'should include German terrorismus');
+  assert.ok(terrorismKeywords.includes('rechtsextremismus'), 'should include German rechtsextremismus');
+  // Spanish
+  assert.ok(terrorismKeywords.includes('yihadista'), 'should include Spanish yihadista');
+  // Italian
+  assert.ok(terrorismKeywords.includes('radicalizzazione'), 'should include Italian radicalizzazione');
+});
+
+test('incidentKeywords include EU-language incident terms', () => {
+  assert.ok(incidentKeywords.includes('attentat'), 'should include French attentat');
+  assert.ok(incidentKeywords.includes('anschlag'), 'should include German anschlag');
+  assert.ok(incidentKeywords.includes('atentado'), 'should include Spanish atentado');
+  assert.ok(incidentKeywords.includes('attentato'), 'should include Italian attentato');
+  assert.ok(incidentKeywords.includes('sparatoria'), 'should include Italian sparatoria');
+});
+
+test('matchesKeywords detects French terrorism terms in text', () => {
+  const hits = matchesKeywords('un attentat terroriste a ete dejoue a paris', terrorismKeywords);
+  assert.ok(hits.includes('terroriste'), `expected 'terroriste' in ${JSON.stringify(hits)}`);
+});
+
+test('matchesKeywords detects German terrorism terms in text', () => {
+  const hits = matchesKeywords('terroranschlag in berlin vereitelt', terrorismKeywords);
+  assert.ok(hits.includes('terroranschlag'), `expected 'terroranschlag' in ${JSON.stringify(hits)}`);
+});
+
+test('majorMediaProviders includes European quality press', () => {
+  assert.ok(majorMediaProviders.has('Le Monde'), 'should include Le Monde');
+  assert.ok(majorMediaProviders.has('Der Spiegel'), 'should include Der Spiegel');
+  assert.ok(majorMediaProviders.has('El País'), 'should include El País');
+  assert.ok(majorMediaProviders.has('Corriere della Sera'), 'should include Corriere della Sera');
+  assert.ok(majorMediaProviders.has('AFP'), 'should include AFP');
+  assert.ok(majorMediaProviders.has('NRK'), 'should include NRK');
+});
+
+test('tabloidProviders includes European tabloids', () => {
+  assert.ok(tabloidProviders.has('Bild'), 'should include Bild');
+  assert.ok(tabloidProviders.has('Kronen Zeitung'), 'should include Kronen Zeitung');
+  assert.ok(tabloidProviders.has('Daily Express'), 'should include Daily Express');
+  assert.ok(tabloidProviders.has('Daily Mirror'), 'should include Daily Mirror');
+});
+
+test('englishFriendlyPatterns includes expanded EU English endpoints', () => {
+  assert.ok(englishFriendlyPatterns.includes('yle.fi/en'), 'should include yle.fi/en');
+  assert.ok(englishFriendlyPatterns.includes('balkaninsight.com'), 'should include balkaninsight.com');
+  assert.ok(englishFriendlyPatterns.includes('romania-insider.com'), 'should include romania-insider.com');
+  assert.ok(englishFriendlyPatterns.includes('thelocal.de'), 'should include thelocal.de');
+  assert.ok(englishFriendlyPatterns.includes('euractiv.com'), 'should include euractiv.com');
+});
+
+test('nonEnglishEndpointPatterns includes expanded EU-language outlets', () => {
+  // Portuguese
+  assert.ok(nonEnglishEndpointPatterns.includes('publico.pt'), 'should include publico.pt');
+  // Polish
+  assert.ok(nonEnglishEndpointPatterns.includes('tvn24.pl'), 'should include tvn24.pl');
+  // Romanian
+  assert.ok(nonEnglishEndpointPatterns.includes('digi24.ro'), 'should include digi24.ro');
+  // Hungarian
+  assert.ok(nonEnglishEndpointPatterns.includes('index.hu'), 'should include index.hu');
+  // Croatian
+  assert.ok(nonEnglishEndpointPatterns.includes('index.hr'), 'should include index.hr');
+});
+
+test('sourceLooksEnglish correctly identifies new EU endpoints', () => {
+  assert.equal(sourceLooksEnglish({ endpoint: 'https://yle.fi/en/news' }), true);
+  assert.equal(sourceLooksEnglish({ endpoint: 'https://publico.pt/politica' }), false);
+  assert.equal(sourceLooksEnglish({ endpoint: 'https://tvn24.pl/swiat' }), false);
+  assert.equal(sourceLooksEnglish({ endpoint: 'https://balkaninsight.com/articles' }), true);
+});
+
+test('isTerrorRelevantIncident rejects tabloid sensationalism with low keyword diversity', () => {
+  const metadata = {
+    lane: 'incidents',
+    provider: 'The Sun',
+    source: 'The Sun',
+    sourceTier: 'corroboration',
+    reliabilityProfile: 'tabloid',
+    isOfficial: false
+  };
+  // Uses only "terror" family repeatedly — low diversity, should be rejected
+  const sensationalItem = {
+    title: 'Stabbing near shopping centre',
+    summary: 'A terror-like stabbing happened. Police say no terrorism confirmed but terror fears remain.',
+    sourceExtract: 'Terror fears after a stabbing attack near a shopping centre. Suspects arrested.'
+  };
+  assert.equal(isTerrorRelevantIncident(metadata, sensationalItem), false,
+    'tabloid with only terror-family keywords should be rejected by diversity check');
+});
+
+test('isTerrorRelevantIncident accepts tabloid with diverse terror keywords', () => {
+  const metadata = {
+    lane: 'incidents',
+    provider: 'The Sun',
+    source: 'The Sun',
+    sourceTier: 'corroboration',
+    reliabilityProfile: 'tabloid',
+    isOfficial: false
+  };
+  const genuineItem = {
+    title: 'ISIS terror suspect arrested after bomb plot',
+    summary: 'An ISIS-linked terrorism suspect was arrested for planning a bomb plot in the city centre.',
+    sourceExtract: 'Counter-terror police arrested a jihad-linked suspect who was radicalised online and planned an attack.'
+  };
+  assert.equal(isTerrorRelevantIncident(metadata, genuineItem), true,
+    'tabloid with diverse terror keywords (isis+jihad+terror) should pass');
+});
+
+test('isTerrorRelevantIncident rejects tabloid when terror keywords only in body', () => {
+  const metadata = {
+    lane: 'incidents',
+    provider: 'Daily Mail',
+    source: 'Daily Mail',
+    sourceTier: 'corroboration',
+    reliabilityProfile: 'tabloid',
+    isOfficial: false
+  };
+  const item = {
+    title: 'Man arrested after knife attack in park',
+    summary: 'The isis terrorism suspect was radicalised before planning the knife attack.',
+    sourceExtract: 'Counter-terror officers investigated the knife attack.'
+  };
+  assert.equal(isTerrorRelevantIncident(metadata, item), false,
+    'tabloid with no terror keywords in title should be rejected by title-boost check');
+});
+
+test('inferConfidenceScore gives diversity bonus for multi-family terror hits', () => {
+  const base = inferConfidenceScore(
+    { lane: 'incidents' },
+    'a terrorism suspect was arrested',
+    new Date().toISOString(),
+    'major_media'
+  );
+  const diverse = inferConfidenceScore(
+    { lane: 'incidents' },
+    'an isis jihadist terrorism suspect was arrested after a bomb plot. the extremist was radicalised online.',
+    new Date().toISOString(),
+    'major_media'
+  );
+  assert.ok(diverse > base, `diverse score ${diverse} should exceed base score ${base}`);
+});
+
+test('inferConfidenceScore penalises tabloid sources with low keyword diversity', () => {
+  const tabloidScore = inferConfidenceScore(
+    { lane: 'incidents' },
+    'terror fears after a terror attack on the high street',
+    new Date().toISOString(),
+    'tabloid'
+  );
+  // Base tabloid is 0.48, with kw hits + single-family penalty should stay low
+  assert.ok(tabloidScore <= 0.52, `tabloid low-diversity score ${tabloidScore} should be ≤ 0.52`);
 });
