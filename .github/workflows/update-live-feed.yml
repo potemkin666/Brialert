@@ -178,7 +178,7 @@ jobs:
           git rebase --abort
           git merge origin/main --no-edit || true
           git checkout --ours live-alerts.json || true
-          git checkout --theirs data/quarantined-sources.json || true
+          node scripts/merge-quarantined-sources.mjs || git checkout --theirs data/quarantined-sources.json || true
           git checkout --ours source-quarantine.html || true
           git checkout --ours data/source-remediation-sweep.json || true
           git checkout --ours data/top-20-source-remediation.json || true
