@@ -86,16 +86,14 @@
     {
       "id": "denmark-pet-news",
       "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://www.nationalbanken.dk/api/rssfeed?topic=News&lang=en",
+      "endpoint": "https://pet.dk/nyheder",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "PET updates on Danish terrorism threats, extremism and national security alerts.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-15T22:22:31.241Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "ecfr-feeds-index",
@@ -347,16 +345,14 @@
     {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
-      "endpoint": "https://brusselsmorning.com/belgium-news/police/",
+      "endpoint": "https://www.politie.be/5998/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Belgian Federal Police reporting on terrorism arrests, raids and national security incidents.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-15T22:23:43.685Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "czech-police-news",
@@ -565,16 +561,14 @@
     {
       "id": "eu-commission-presscorner-home",
       "provider": "European Commission - Press Corner",
-      "endpoint": "https://www.euronews.com/tag/terrorism",
+      "endpoint": "https://ec.europa.eu/commission/presscorner/home/en",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "European Commission Press Corner home for official releases, statements and security-related announcements.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-15T22:24:31.722Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "eu-council-fight-against-terrorism",
