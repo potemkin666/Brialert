@@ -235,6 +235,56 @@
     .empty { padding: 18px 10px; color: var(--muted); }
     .endpoint-copy { color: #d6e5ff; font-weight: 600; }
     .hidden { display: none; }
+    .bulk-bar {
+      position: sticky;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: rgba(19, 27, 45, 0.96);
+      border-top: 1px solid rgba(159, 208, 255, 0.3);
+      backdrop-filter: blur(12px);
+      z-index: 2;
+    }
+    .bulk-bar.hidden { display: none; }
+    .bulk-bar .bulk-count {
+      font-size: 14px;
+      font-weight: 700;
+      color: #d8ecff;
+    }
+    .bulk-bar .bulk-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bulk-bar button {
+      border: 0;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font: inherit;
+      font-weight: 700;
+      color: #09101c;
+      background: #9fd0ff;
+      cursor: pointer;
+    }
+    .bulk-bar button:hover { filter: brightness(1.04); }
+    .bulk-bar button:disabled { cursor: wait; opacity: 0.72; }
+    .bulk-bar button.secondary {
+      color: #dceaff;
+      background: rgba(97, 125, 168, 0.45);
+      border: 1px solid rgba(163, 190, 228, 0.38);
+    }
+    tr.selected td { background: rgba(159, 208, 255, 0.07); }
+    .row-check { width: 20px; text-align: center; }
+    .row-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #9fd0ff;
+    }
     .toast {
       position: fixed;
       right: 14px;
@@ -294,6 +344,7 @@
       <table>
         <thead>
           <tr>
+            <th class="row-check"><input type="checkbox" id="select-all" title="Select all sources"></th>
             <th>Provider</th>
             <th>Type</th>
             <th>Region</th>
@@ -308,9 +359,16 @@
         </tr>
         </thead>
         <tbody id="quarantine-body">
-          <tr><td colspan="11" class="empty">Loading quarantined sources...</td></tr>
+          <tr><td colspan="12" class="empty">Loading quarantined sources...</td></tr>
         </tbody>
       </table>
+      </div>
+    </div>
+    <div id="bulk-bar" class="bulk-bar hidden">
+      <span class="bulk-count" id="bulk-count">0 sources selected</span>
+      <div class="bulk-actions">
+        <button type="button" class="secondary" id="bulk-deselect">Deselect all</button>
+        <button type="button" id="bulk-restore">Restore selected</button>
       </div>
     </div>
   </main>
@@ -461,7 +519,7 @@
     }
 
     function emptyState(message) {
-       body.innerHTML = '<tr><td colspan="11" class="empty">' + escapeHtml(message) + '</td></tr>';
+       body.innerHTML = '<tr><td colspan="12" class="empty">' + escapeHtml(message) + '</td></tr>';
     }
 
     function formatTimeAgo(timestampMs) {
@@ -527,6 +585,7 @@
       const tagMarkup = tagRowMarkup(tags);
       const tagSummary = entry?.tagSummary ? '<div class="helper-note">' + escapeHtml(entry.tagSummary) + '</div>' : '';
       return '<tr class="suggestion-row" data-request-id="' + escapeHtml(entry.id) + '">' +
+        '<td class="row-check"></td>' +
         '<td>' + escapeHtml(entry.provider || 'Requested source') + '</td>' +
         '<td>' + escapeHtml(entry.kind || 'html') + ' / ' + escapeHtml(entry.lane || 'context') + '</td>' +
         '<td>' + escapeHtml(entry.region || 'uk') + '</td>' +
@@ -547,6 +606,7 @@
 
     function rowMarkup(entry) {
       return '<tr data-source-id="' + escapeHtml(entry.id) + '" id="source-' + safeDomId(entry.id) + '">' +
+        '<td class="row-check"><input type="checkbox" class="source-check" data-source-id="' + escapeHtml(entry.id) + '" title="Select ' + escapeHtml(entry.provider) + '"></td>' +
         '<td>' + escapeHtml(entry.provider) + '</td>' +
         '<td>' + escapeHtml(entry.kind) + ' / ' + escapeHtml(entry.lane) + '</td>' +
         '<td>' + escapeHtml(entry.region) + '</td>' +
@@ -622,6 +682,7 @@
           const button = row.querySelector('button[data-action="restore"]');
           const input = row.querySelector('.url-input');
           const note = row.querySelector('.status-feedback');
+          const checkbox = row.querySelector('input.source-check');
           if (button) {
             button.disabled = true;
             button.title = READ_ONLY_NOTE;
@@ -629,12 +690,20 @@
           if (input) {
             input.disabled = true;
           }
+          if (checkbox) {
+            checkbox.disabled = true;
+          }
           if (note) {
             note.textContent = READ_ONLY_NOTE;
             note.className = 'status-note error';
           }
         }
       }
+      if (selectAll) {
+        selectAll.checked = false;
+        selectAll.disabled = !restoreEnabled;
+      }
+      if (bulkBar) bulkBar.classList.add('hidden');
     }
 
     function serializeError(error) {
@@ -1138,6 +1207,141 @@
       }
     }
 
+    const selectAll = document.getElementById('select-all');
+    const bulkBar = document.getElementById('bulk-bar');
+    const bulkCount = document.getElementById('bulk-count');
+    const bulkRestoreBtn = document.getElementById('bulk-restore');
+    const bulkDeselectBtn = document.getElementById('bulk-deselect');
+
+    function getSelectedSourceRows() {
+      return Array.from(body.querySelectorAll('input.source-check:checked'))
+        .map((checkbox) => checkbox.closest('tr[data-source-id]'))
+        .filter(Boolean);
+    }
+
+    function updateBulkBar() {
+      const selected = getSelectedSourceRows();
+      const count = selected.length;
+      if (!bulkBar || !bulkCount) return;
+      if (count === 0) {
+        bulkBar.classList.add('hidden');
+      } else {
+        bulkBar.classList.remove('hidden');
+        bulkCount.textContent = count + ' source' + (count === 1 ? '' : 's') + ' selected';
+      }
+      if (selectAll) {
+        const allCheckboxes = body.querySelectorAll('input.source-check');
+        const allChecked = allCheckboxes.length > 0 && count === allCheckboxes.length;
+        selectAll.checked = allChecked;
+        selectAll.indeterminate = count > 0 && !allChecked;
+      }
+    }
+
+    if (selectAll) {
+      selectAll.addEventListener('change', () => {
+        const checked = selectAll.checked;
+        for (const checkbox of body.querySelectorAll('input.source-check')) {
+          checkbox.checked = checked;
+          const row = checkbox.closest('tr');
+          if (row) row.classList.toggle('selected', checked);
+        }
+        updateBulkBar();
+      });
+    }
+
+    if (bulkDeselectBtn) {
+      bulkDeselectBtn.addEventListener('click', () => {
+        for (const checkbox of body.querySelectorAll('input.source-check:checked')) {
+          checkbox.checked = false;
+          const row = checkbox.closest('tr');
+          if (row) row.classList.remove('selected');
+        }
+        if (selectAll) selectAll.checked = false;
+        updateBulkBar();
+      });
+    }
+
+    async function bulkRestoreSources() {
+      if (!restoreEnabled) return;
+      const selectedRows = getSelectedSourceRows();
+      if (!selectedRows.length) return;
+
+      const items = [];
+      const validationErrors = [];
+      for (const row of selectedRows) {
+        const sourceId = row.getAttribute('data-source-id');
+        const input = row.querySelector('.url-input');
+        const url = syncUrlInputState(input);
+        if (!url) {
+          const provider = row.querySelector('td:nth-child(2)')?.textContent || sourceId;
+          validationErrors.push(provider);
+        } else {
+          items.push({ sourceId, replacementUrl: url, row });
+        }
+      }
+
+      if (validationErrors.length) {
+        showToast('Missing replacement URL for: ' + validationErrors.slice(0, 3).join(', ') + (validationErrors.length > 3 ? ' and ' + (validationErrors.length - 3) + ' more' : ''));
+        return;
+      }
+
+      if (bulkRestoreBtn) {
+        bulkRestoreBtn.disabled = true;
+        bulkRestoreBtn.textContent = 'Restoring ' + items.length + '...';
+      }
+      for (const { row } of items) {
+        setRowBusy(row, true);
+      }
+
+      try {
+        const restoreUrl = restoreUrlFor(apiBase);
+        if (!restoreUrl) throw new Error('No restore API base is configured.');
+        const response = await fetch(restoreUrl, withSessionCredentials({
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sources: items.map(({ sourceId, replacementUrl }) => ({ sourceId, replacementUrl }))
+          })
+        }));
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) {
+          throw new Error(data.message || 'Bulk restore failed');
+        }
+
+        const restoredIds = new Set(items.map(({ sourceId }) => sourceId));
+        currentEntries = currentEntries.filter((entry) => !restoredIds.has(entry.id));
+        renderMeta({ generatedAt: new Date().toISOString() });
+        for (const { row } of items) {
+          row.remove();
+        }
+        if (!body.querySelector('tr[data-source-id]') && !body.querySelector('tr[data-request-id]')) {
+          emptyState('No quarantined sources currently recorded.');
+        }
+        if (selectAll) selectAll.checked = false;
+        updateBulkBar();
+        showToast(items.length + ' source' + (items.length === 1 ? '' : 's') + ' restored.');
+      } catch (error) {
+        for (const { row } of items) {
+          setRowBusy(row, false);
+          const note = getOrCreateRowFeedbackNote(row);
+          if (note) {
+            note.textContent = explainError(error);
+            note.className = 'status-note error';
+          }
+        }
+        showToast('Bulk restore failed: ' + serializeError(error));
+      } finally {
+        if (bulkRestoreBtn) {
+          bulkRestoreBtn.disabled = false;
+          bulkRestoreBtn.textContent = 'Restore selected';
+        }
+      }
+    }
+
+    if (bulkRestoreBtn) {
+      bulkRestoreBtn.addEventListener('click', bulkRestoreSources);
+    }
+
     body.addEventListener('click', async (event) => {
       const restoreButton = event.target.closest('button[data-action="restore"]');
       if (restoreButton) {
@@ -1168,6 +1372,14 @@
       if (!input) return;
       syncUrlInputState(input);
     }, true);
+
+    body.addEventListener('change', (event) => {
+      const checkbox = event.target.closest('input.source-check');
+      if (!checkbox) return;
+      const row = checkbox.closest('tr');
+      if (row) row.classList.toggle('selected', checkbox.checked);
+      updateBulkBar();
+    });
 
     loadEntries();
     globalThis.addEventListener('pageshow', (event) => {
