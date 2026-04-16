@@ -217,14 +217,16 @@
     {
       "id": "finland-supo-news",
       "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/current-issues",
+      "endpoint": "https://poliisi.fi/en/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Finnish Supo updates on terrorism, extremism and hostile-state security concerns.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-16T07:45:31.745Z"
     },
     {
       "id": "german-bfv-news",
