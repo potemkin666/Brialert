@@ -26,6 +26,7 @@ import {
   HEALTH_SCORE_LOW_INTERVAL_HOURS,
   HEALTH_SCORE_REVIEW_THRESHOLD,
   HEALTH_SCORE_SUCCESS_BOOST,
+  ROLLING_ERROR_WINDOW_SIZE,
   HTML_DOMAIN_CAP_PER_RUN,
   MAX_HTML_SOURCES_PER_RUN,
   MAX_FAILING_SOURCES_TO_LOG,
@@ -105,6 +106,7 @@ import {
 
 export { buildHealthBlock } from './build-live-feed/health.mjs';
 export { createMidRunGuardrail };
+export { nextSourceHealthEntry, analyseErrorPattern };
 const execFile = promisify(execFileCallback);
 
 function parseIsoMs(value) {
@@ -196,11 +198,71 @@ function sourceMayAutoCooldown(source, previousEntry, buildDate) {
   return null;
 }
 
+/**
+ * Analyse a rolling error window and return a pattern-based quarantine reason.
+ * Falls back to a generic message if the window is empty or the pattern is unclear.
+ *
+ * @param {Array<{category: string, message?: string, at?: string}>} recentErrors
+ * @param {{ healthScore?: number, kind?: string }} context
+ * @returns {string} Human-readable quarantine reason derived from error pattern
+ */
+function analyseErrorPattern(recentErrors, context) {
+  if (!Array.isArray(recentErrors) || recentErrors.length === 0) {
+    const score = Number.isFinite(context?.healthScore) ? context.healthScore : null;
+    return score != null
+      ? `Health score degraded to ${score} after repeated failures`
+      : 'Needs review';
+  }
+
+  const categories = recentErrors.map((e) => e?.category).filter(Boolean);
+  if (categories.length === 0) {
+    return 'Needs review';
+  }
+
+  const unique = new Set(categories);
+  const total = categories.length;
+
+  // --- Consistent single-category patterns ---
+  if (unique.size === 1) {
+    const cat = categories[0];
+    if (cat === 'not-found-404') return 'Endpoint likely removed — all recent errors are HTTP 404';
+    if (cat === 'dead-or-moved-url') return 'Endpoint dead or permanently moved — consistent dead-URL errors';
+    if (cat === 'blocked-or-auth') return 'Access protection added — consistent 401/403 blocks; consider new endpoint';
+    if (cat === 'anti-bot-protection') return 'Anti-bot protection active — consider Playwright fallback or new endpoint';
+    if (cat === 'timeout') return 'Persistent timeouts — endpoint may be overloaded or unreachable';
+    if (cat === 'network-failure') return 'Persistent network failures — DNS/connection issues; infrastructure may be down';
+    if (cat === 'brittle-selectors-or-js-rendering') return 'HTML structure changed — selectors no longer match; needs parser update';
+  }
+
+  // --- Mixed access-protection pattern (blocked + anti-bot) ---
+  const blockedCount = categories.filter((c) => c === 'blocked-or-auth' || c === 'anti-bot-protection').length;
+  if (blockedCount >= Math.ceil(total * 0.6)) {
+    return 'Access protection added — errors alternate between auth blocks and anti-bot; consider Playwright fallback or new endpoint';
+  }
+
+  // --- Mixed network/timeout pattern ---
+  const networkCount = categories.filter((c) => c === 'network-failure' || c === 'timeout').length;
+  if (networkCount >= Math.ceil(total * 0.6)) {
+    return 'Infrastructure instability — mixed timeout and network errors; auto-retry likely to recover';
+  }
+
+  // --- Varied/transient errors ---
+  if (unique.size >= 3) {
+    return 'Varied error types — transient instability; may recover automatically';
+  }
+
+  const score = Number.isFinite(context?.healthScore) ? context.healthScore : null;
+  return score != null
+    ? `Health score degraded to ${score} after repeated failures`
+    : 'Repeated failures — needs manual review';
+}
+
 function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   const prior = previousEntry && typeof previousEntry === 'object' ? previousEntry : {};
   const priorBlockedFailures = Number(prior.consecutiveBlockedFailures || 0);
   const priorDeadUrlFailures = Number(prior.consecutiveDeadUrlFailures || 0);
   const priorHealthScore = Number.isFinite(Number(prior.healthScore)) ? Number(prior.healthScore) : HEALTH_SCORE_INITIAL;
+  const priorRecentErrors = Array.isArray(prior.recentErrors) ? prior.recentErrors : [];
   const generatedAtMs = Date.parse(generatedAt);
   const scheduleBaseDate = Number.isFinite(generatedAtMs) ? new Date(generatedAtMs) : new Date();
   const scheduledNextFetchAt = sourceScheduleNextFetchAfterRun(source, scheduleBaseDate);
@@ -222,6 +284,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     lastEmptyAt: prior.lastEmptyAt || null,
     lastErrorCategory: prior.lastErrorCategory || null,
     lastErrorMessage: prior.lastErrorMessage || null,
+    recentErrors: priorRecentErrors,
     cooldownUntil: null,
     autoSkipReason: null,
     healthScore: priorHealthScore,
@@ -239,6 +302,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.consecutiveDeadUrlFailures = 0;
     next.lastErrorCategory = null;
     next.lastErrorMessage = null;
+    next.recentErrors = [];
     next.lastSuccessfulAt = generatedAt;
     next.healthScore = Math.min(100, priorHealthScore + HEALTH_SCORE_SUCCESS_BOOST);
     next.quarantined = false;
@@ -262,6 +326,14 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.lastErrorCategory = stat?.lastErrorCategory || null;
     next.lastErrorMessage = stat?.lastErrorMessage || null;
 
+    // Append to rolling error window (capped at ROLLING_ERROR_WINDOW_SIZE).
+    const errorEvent = {
+      category: stat?.lastErrorCategory || 'unknown',
+      message: stat?.lastErrorMessage || '',
+      at: generatedAt
+    };
+    next.recentErrors = [...priorRecentErrors, errorEvent].slice(-ROLLING_ERROR_WINDOW_SIZE);
+
     // Critical failures receive a larger health penalty.
     const isCritical = notFoundFailure || deadUrlFailure
       || (source?.kind === 'html' && next.consecutiveBlockedFailures >= AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD)
@@ -274,15 +346,10 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     if (next.healthScore < HEALTH_SCORE_REVIEW_THRESHOLD && !next.quarantined) {
       next.quarantined = true;
       next.quarantinedAt = generatedAt;
-      if (notFoundFailure) {
-        next.quarantineReason = 'HTTP 404 not found; needs manual source URL review';
-      } else if (source?.kind === 'html' && next.consecutiveBlockedFailures >= AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD) {
-        next.quarantineReason = 'Repeated blocked-or-auth failures on html source';
-      } else if (next.consecutiveDeadUrlFailures >= AUTO_QUARANTINE_DEAD_URL_THRESHOLD) {
-        next.quarantineReason = 'Repeated dead-or-moved-url failures';
-      } else {
-        next.quarantineReason = `Health score degraded to ${next.healthScore} after repeated failures`;
-      }
+      next.quarantineReason = analyseErrorPattern(next.recentErrors, {
+        healthScore: next.healthScore,
+        kind: source?.kind
+      });
     }
 
     // Low-health sources are deprioritised with a longer interval instead of a hard block.
@@ -892,6 +959,7 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
         consecutiveFailures: Number(health?.consecutiveFailures || 0),
         consecutiveBlockedFailures: Number(health?.consecutiveBlockedFailures || 0),
         consecutiveDeadUrlFailures: Number(health?.consecutiveDeadUrlFailures || 0),
+        recentErrors: Array.isArray(health?.recentErrors) ? health.recentErrors : [],
         replacementSuggestion: clean(source?.replacementEndpoint || source?.fallbackEndpoint || source?.canonicalEndpoint || ''),
         reviewBy: reviewByTimestamp(health, AUTO_QUARANTINE_RECHECK_HOURS),
         lastFailureAt: clean(health?.lastFailureAt),
