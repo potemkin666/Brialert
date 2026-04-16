@@ -9,7 +9,6 @@ import {
   AUTO_QUARANTINE_DEAD_URL_THRESHOLD,
   AUTO_QUARANTINE_RECHECK_HOURS,
   AUTO_SKIP_EMPTY_THRESHOLD,
-  AUTO_SKIP_FAILURE_THRESHOLD,
   BLOCKED_NON_CONTENT_COOLDOWN_HOURS,
   BLOCKED_NON_CONTENT_FAIL_THRESHOLD,
   CONTROL_MAX_HTML_SOURCES_PER_RUN,
@@ -36,9 +35,6 @@ import {
   FAIL_ON_GUARDRAIL_VIOLATION,
   SCHEDULER_MODE,
   SOURCE_EMPTY_COOLDOWN_HOURS,
-  SOURCE_PROTECTED_FAILURE_COOLDOWN_HOURS,
-  SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS,
-  SOURCE_FAILURE_COOLDOWN_HOURS,
   TARGET_SUCCESSFUL_SOURCES_PER_RUN,
   computeDynamicItemLimit,
   AUTO_QUARANTINE_FAILURE_THRESHOLD,
@@ -134,12 +130,6 @@ function sourceHealthEntry(previousHealth, sourceId) {
   return entry && typeof entry === 'object' ? entry : null;
 }
 
-function sourceCriticality(source) {
-  if (source?.lane === 'incidents') return 'critical';
-  if (source?.isTrustedOfficial) return 'high';
-  return 'normal';
-}
-
 function isBlockedFailureCategory(category) {
   return category === 'blocked-or-auth' || category === 'anti-bot-protection';
 }
@@ -150,13 +140,6 @@ function isDeadUrlFailureCategory(category) {
 
 function isNotFoundFailureCategory(category) {
   return category === 'not-found-404';
-}
-
-function sourceFailureCooldownHours(source, errorCategory) {
-  const criticality = sourceCriticality(source);
-  if (isBlockedFailureCategory(errorCategory)) return SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS;
-  if (criticality === 'critical' || criticality === 'high') return SOURCE_PROTECTED_FAILURE_COOLDOWN_HOURS;
-  return SOURCE_FAILURE_COOLDOWN_HOURS;
 }
 
 function quarantineRecheckAtIso(quarantinedAtIso) {
@@ -191,16 +174,8 @@ function sourceMayAutoCooldown(source, previousEntry, buildDate) {
     };
   }
 
-  const consecutiveFailures = Number(previousEntry.consecutiveFailures || 0);
   const consecutiveEmptyRuns = Number(previousEntry.consecutiveEmptyRuns || 0);
   const isProtected = source?.lane === 'incidents' || source?.isTrustedOfficial;
-
-  if (consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
-    return {
-      reason: 'failure-cooldown',
-      until: previousEntry.cooldownUntil
-    };
-  }
 
   if (!isProtected && consecutiveEmptyRuns >= AUTO_SKIP_EMPTY_THRESHOLD) {
     return {
@@ -316,12 +291,6 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       next.autoSkipReason = 'blocked-cooldown';
       next.nextFetchAt = next.cooldownUntil;
       return next;
-    }
-    if (next.consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
-      const cooldownHours = sourceFailureCooldownHours(source, stat?.lastErrorCategory || '');
-      next.cooldownUntil = new Date(Date.parse(generatedAt) + cooldownHours * 3600000).toISOString();
-      next.autoSkipReason = 'failure-cooldown';
-      next.nextFetchAt = next.cooldownUntil;
     }
     return next;
   }
@@ -1801,6 +1770,18 @@ function renderQuarantinedSourcesHtml(generatedAt, entries, metrics) {
         }
         if (input && typeof input.reportValidity === 'function') {
           input.reportValidity();
+        }
+        return;
+      }
+
+      const normalisedUrl = normaliseAbsoluteHttpUrl(url) || url;
+      const duplicate = currentEntries.find((entry) =>
+        entry.id !== sourceId && normaliseAbsoluteHttpUrl(entry.endpoint) === normalisedUrl
+      );
+      if (duplicate) {
+        if (note) {
+          note.textContent = 'This URL is already used by quarantined source \u201c' + escapeHtml(duplicate.provider || duplicate.id) + '\u201d.';
+          note.className = 'status-note error';
         }
         return;
       }
