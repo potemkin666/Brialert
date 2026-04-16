@@ -52,6 +52,8 @@ export const DEFAULT_MAX_RETRIES = envInt('BRIALERT_FETCH_MAX_RETRIES', 2, 1);
 export const DEFAULT_FETCH_STAGGER_MS = envInt('BRIALERT_FETCH_STAGGER_MS', 60, 0);
 export const MAX_FETCH_STAGGER_JITTER_MS = envInt('BRIALERT_FETCH_STAGGER_JITTER_MS', 90, 0);
 export const BACKOFF_CAP_MS = envInt('BRIALERT_FETCH_BACKOFF_CAP_MS', 16000, 1000);
+/** Maximum total stagger delay (ms) any single source may incur before its fetch starts. */
+export const MAX_STAGGER_CAP_MS = envInt('BRIALERT_MAX_STAGGER_CAP_MS', 3000, 0);
 export const MAX_SOURCE_ERRORS_TO_REPORT = 25;
 export const FEED_SOURCE_CONCURRENCY = envInt('BRIALERT_FEED_SOURCE_CONCURRENCY', 4, 1);
 export const HTML_HYDRATION_CONCURRENCY = 3;

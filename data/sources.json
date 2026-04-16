@@ -63,15 +63,13 @@
     {
       "id": "bdk-rss",
       "provider": "Bund Deutscher Kriminalbeamter - RSS",
-      "endpoint": "https://www.bdk.de/rss/alle-termine/RSS",
+      "endpoint": "https://www.bdk.de/rss",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context.",
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:44:19.648Z"
+      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context."
     },
     {
       "id": "belgium-crisis-centre-news",
@@ -203,30 +201,26 @@
     {
       "id": "europol-newsroom-html",
       "provider": "Europol - Newsroom",
-      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Europol newsroom page variant for press releases, operational updates and EU policing statements.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:44:54.026Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "finland-supo-news",
       "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://poliisi.fi/en/newsroom",
+      "endpoint": "https://supo.fi/en/current-issues",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Finnish Supo updates on terrorism, extremism and hostile-state security concerns.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:45:31.745Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "german-bfv-news",
@@ -399,16 +393,14 @@
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
-      "endpoint": "https://yle.fi/t/18-217206/en",
+      "endpoint": "https://poliisi.fi/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:45:55.984Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "german-bka-press",
@@ -485,16 +477,14 @@
     {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
-      "endpoint": "https://politiaromana.ro/en/news-and-media/news",
+      "endpoint": "https://www.politiaromana.ro/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:46:22.853Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "sweden-police-news",
@@ -915,9 +905,7 @@
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents.",
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:46:48.694Z"
+      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents."
     },
     {
       "id": "ecfr-publications",
@@ -1547,9 +1535,7 @@
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Just Security covers law, rights and national security including terrorism prosecutions and CT legislation; keyword filtering applied.",
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:47:16.624Z"
+      "comment": "Just Security covers law, rights and national security including terrorism prosecutions and CT legislation; keyword filtering applied."
     },
     {
       "id": "lawfare-blog",
@@ -1676,16 +1662,14 @@
     {
       "id": "unodc-news",
       "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
-      "endpoint": "https://www.unodc.org/unodc/en/news/news.html",
+      "endpoint": "https://www.unodc.org/unodc/en/press/releases/latest.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "UNODC press releases on drug trafficking, organised crime, terrorism financing and international criminal operations.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:47:37.779Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "war-on-the-rocks",
@@ -1837,16 +1821,14 @@
     {
       "id": "barking-dagenham-council-news",
       "provider": "Barking and Dagenham Council a News",
-      "endpoint": "https://www.barkinganddagenhampost.co.uk/News/",
+      "endpoint": "https://www.lbbd.gov.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Barking and Dagenham borough news used for East London incident corroboration and civic response.",
-      "refreshEveryHours": 1,
-      "quarantined": false,
-      "restoredAt": "2026-04-16T07:48:32.275Z"
+      "refreshEveryHours": 1
     },
     {
       "id": "barnet-council-news",
