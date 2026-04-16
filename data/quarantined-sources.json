@@ -1,7 +1,47 @@
 {
-  "generatedAt": "2026-04-16T00:24:40.257Z",
-  "count": 232,
+  "generatedAt": "2026-04-16T04:10:16.943Z",
+  "count": 234,
   "sources": [
+    {
+      "id": "french-police-nationale-news",
+      "provider": "Police Nationale - News",
+      "endpoint": "https://www.police-nationale.interieur.gouv.fr/actualites",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "status": "auto-quarantined",
+      "reason": "Repeated failures (6) need manual review",
+      "quarantinedAt": "2026-04-16T04:10:16.943Z",
+      "lastErrorCategory": "unknown",
+      "lastErrorMessage": "browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
+      "consecutiveFailures": 6,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
+    },
+    {
+      "id": "ireland-gardai-press",
+      "provider": "An Garda Siochana - Press Releases",
+      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "status": "auto-quarantined",
+      "reason": "Repeated failures (6) need manual review",
+      "quarantinedAt": "2026-04-16T04:10:16.943Z",
+      "lastErrorCategory": "unknown",
+      "lastErrorMessage": "browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
+      "consecutiveFailures": 6,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
+    },
     {
       "id": "bdk-rss",
       "provider": "Bund Deutscher Kriminalbeamter - RSS",
@@ -2254,13 +2294,13 @@
       "quarantinedAt": "2026-04-08T23:49:08.059Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "derbyshire-police-news",
@@ -2274,13 +2314,13 @@
       "quarantinedAt": "2026-04-08T23:49:08.059Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "lincolnshire-police-news",
@@ -2294,13 +2334,13 @@
       "quarantinedAt": "2026-04-08T23:49:08.059Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "staffordshire-police-news",
@@ -2314,13 +2354,13 @@
       "quarantinedAt": "2026-04-08T23:49:08.059Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "gov-uk-report-terrorism",
@@ -2334,13 +2374,13 @@
       "quarantinedAt": "2026-04-08T23:49:08.059Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "rte-ireland-news-rss",
@@ -2354,13 +2394,13 @@
       "quarantinedAt": "2026-04-07T14:01:19.759Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 20,
+      "consecutiveFailures": 21,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "counter-extremism-project-news",
@@ -2414,13 +2454,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 20,
+      "consecutiveFailures": 21,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "ertzaintza-news",
@@ -2432,15 +2472,15 @@
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
-      "lastErrorCategory": "unknown",
-      "lastErrorMessage": "browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 0,
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "french-gendarmerie-news",
@@ -2454,13 +2494,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "unknown",
       "lastErrorMessage": "browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "consecutiveFailures": 20,
+      "consecutiveFailures": 21,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "chatham-house-rss",
@@ -2474,13 +2514,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 20,
+      "consecutiveFailures": 21,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "port-of-london-authority-news",
@@ -2494,13 +2534,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 17,
-      "consecutiveBlockedFailures": 14,
+      "consecutiveFailures": 18,
+      "consecutiveBlockedFailures": 15,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "city-of-london-police-news-html",
@@ -2514,13 +2554,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "unknown",
       "lastErrorMessage": "browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "consecutiveFailures": 20,
+      "consecutiveFailures": 21,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "mi5-news-rss-direct",
@@ -2534,13 +2574,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 20,
+      "consecutiveFailures": 21,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "national-crime-agency-news",
@@ -2572,15 +2612,15 @@
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
-      "lastErrorCategory": "unknown",
-      "lastErrorMessage": "browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 0,
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "bedfordshire-police-news-search",
@@ -2594,13 +2634,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 9,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 10,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "btp-british-transport-police-news-html",
@@ -2614,13 +2654,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 9,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 10,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "cheshire-police-news",
@@ -2634,13 +2674,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 9,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 10,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "cps-news-centre",
@@ -2654,13 +2694,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "ct-policing-north-west",
@@ -2674,13 +2714,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "ct-policing-uk-latest-news",
@@ -2694,13 +2734,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 6,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 7,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "cumbria-police-news",
@@ -2714,13 +2754,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 5,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 6,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "devon-and-cornwall-police-newsroom",
@@ -2734,13 +2774,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 5,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 6,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "devon-cornwall-police-news",
@@ -2754,13 +2794,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 4,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 5,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "dorset-police-news",
@@ -2774,13 +2814,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 4,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 5,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "dorset-police-newsroom",
@@ -2794,13 +2834,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 4,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 5,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "durham-constabulary-news",
@@ -2814,13 +2854,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 4,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 5,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "dyfed-powys-police-news",
@@ -2834,13 +2874,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "essex-police-news-html",
@@ -2854,13 +2894,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "gmp-news",
@@ -2874,13 +2914,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "greater-manchester-police-news",
@@ -2894,13 +2934,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "gwent-police-news",
@@ -2914,13 +2954,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "hampshire-police-news",
@@ -2934,13 +2974,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 13,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 14,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "hertfordshire-police-news",
@@ -2954,13 +2994,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 13,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 14,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "kent-police-news-html",
@@ -2974,13 +3014,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 12,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 13,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "lancashire-constabulary-news",
@@ -2994,13 +3034,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 1,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "leicestershire-police-news",
@@ -3014,13 +3054,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 1,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "merseyside-police-news-html",
@@ -3034,13 +3074,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 1,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "norfolk-constabulary-news",
@@ -3054,13 +3094,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 1,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 2,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "north-yorkshire-police-news-html",
@@ -3074,13 +3114,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "northamptonshire-police-news-html",
@@ -3094,13 +3134,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "northumbria-police-northumbria-news",
@@ -3114,13 +3154,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 8,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 9,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "nottinghamshire-police-news",
@@ -3134,13 +3174,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 8,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 9,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "nottinghamshire-police-nottinghamshire-news",
@@ -3154,13 +3194,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 8,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 9,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "south-wales-police-news",
@@ -3174,13 +3214,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 2,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "south-yorkshire-police-news",
@@ -3194,13 +3234,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 2,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "staffordshire-police-staffordshire-news",
@@ -3214,13 +3254,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 2,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "suffolk-constabulary-news",
@@ -3234,13 +3274,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "sussex-police-news",
@@ -3254,13 +3294,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "thames-valley-police-news",
@@ -3274,13 +3314,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "thames-valley-police-news-html",
@@ -3294,13 +3334,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "warwickshire-police-news",
@@ -3314,13 +3354,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "west-mercia-police-news-html",
@@ -3334,13 +3374,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 10,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 11,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "west-midlands-police-news",
@@ -3354,13 +3394,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 10,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 11,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "wiltshire-police-news",
@@ -3374,13 +3414,13 @@
       "quarantinedAt": "2026-04-07T11:11:10.131Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 3,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "finland-supo-news",
@@ -3394,13 +3434,13 @@
       "quarantinedAt": "2026-04-06T19:13:04.758Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 19,
-      "consecutiveBlockedFailures": 14,
+      "consecutiveFailures": 20,
+      "consecutiveBlockedFailures": 15,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "mayor-of-london-press-releases",
@@ -3414,13 +3454,13 @@
       "quarantinedAt": "2026-04-06T19:13:04.758Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 21,
+      "consecutiveFailures": 22,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "slam-news",
@@ -3434,13 +3474,13 @@
       "quarantinedAt": "2026-04-06T17:59:08.402Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 16,
+      "consecutiveFailures": 17,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "westminster-city-council-news",
@@ -3454,13 +3494,13 @@
       "quarantinedAt": "2026-04-06T17:59:08.402Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 22,
+      "consecutiveFailures": 23,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "scottish-government-justice-news",
@@ -3534,13 +3574,13 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 17,
-      "consecutiveBlockedFailures": 17,
+      "consecutiveFailures": 18,
+      "consecutiveBlockedFailures": 18,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "north-middlesex-news",
@@ -3554,13 +3594,13 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 15,
-      "consecutiveBlockedFailures": 15,
+      "consecutiveFailures": 16,
+      "consecutiveBlockedFailures": 16,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "royal-free-london-news",
@@ -3574,13 +3614,13 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 14,
-      "consecutiveBlockedFailures": 14,
+      "consecutiveFailures": 15,
+      "consecutiveBlockedFailures": 15,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "psni-news",
@@ -3594,13 +3634,13 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 19,
-      "consecutiveBlockedFailures": 2,
+      "consecutiveFailures": 20,
+      "consecutiveBlockedFailures": 3,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "west-yorkshire-police-news",
@@ -3614,13 +3654,13 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 19,
-      "consecutiveBlockedFailures": 3,
+      "consecutiveFailures": 20,
+      "consecutiveBlockedFailures": 4,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "northamptonshire-talking",
@@ -3634,13 +3674,13 @@
       "quarantinedAt": "2026-04-06T17:04:11.606Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 19,
-      "consecutiveBlockedFailures": 19,
+      "consecutiveFailures": 20,
+      "consecutiveBlockedFailures": 20,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "guardia-civil-news",
@@ -3654,13 +3694,13 @@
       "quarantinedAt": "2026-04-06T16:01:40.268Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 23,
+      "consecutiveFailures": 24,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "nctv-nl-english",
@@ -3674,13 +3714,13 @@
       "quarantinedAt": "2026-04-06T15:02:06.946Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 23,
+      "consecutiveFailures": 24,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "pet-dk-english",
@@ -3694,13 +3734,13 @@
       "quarantinedAt": "2026-04-06T15:02:06.946Z",
       "lastErrorCategory": "network-failure",
       "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 23,
+      "consecutiveFailures": 24,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "london-assembly-press-releases",
@@ -3714,13 +3754,13 @@
       "quarantinedAt": "2026-04-06T15:02:06.946Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 23,
+      "consecutiveFailures": 24,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "unodc-news",
@@ -3734,13 +3774,13 @@
       "quarantinedAt": "2026-04-06T13:27:14.171Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 19,
+      "consecutiveFailures": 20,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "gctf-news",
@@ -3754,13 +3794,13 @@
       "quarantinedAt": "2026-04-06T13:27:14.171Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 19,
+      "consecutiveFailures": 20,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "brent-council-news",
@@ -3780,7 +3820,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-08T13:27:14.171Z",
       "lastFailureAt": "2026-04-06T13:27:14.171Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "rusi-terrorism-conflict",
@@ -3834,13 +3874,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 20,
-      "consecutiveBlockedFailures": 17,
+      "consecutiveFailures": 21,
+      "consecutiveBlockedFailures": 18,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "reuters-uk",
@@ -3874,13 +3914,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 16,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 17,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "harrow-council-news",
@@ -3894,13 +3934,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 16,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 17,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "imperial-healthcare-news",
@@ -3914,13 +3954,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 17,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 18,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "london-city-airport-media-centre",
@@ -3934,13 +3974,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 15,
-      "consecutiveBlockedFailures": 15,
+      "consecutiveFailures": 16,
+      "consecutiveBlockedFailures": 16,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "london-gov-home",
@@ -3954,13 +3994,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 15,
-      "consecutiveBlockedFailures": 15,
+      "consecutiveFailures": 16,
+      "consecutiveBlockedFailures": 16,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "royal-greenwich-news",
@@ -3974,13 +4014,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 10,
-      "consecutiveBlockedFailures": 10,
+      "consecutiveFailures": 11,
+      "consecutiveBlockedFailures": 11,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "mopac-html",
@@ -3994,13 +4034,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 12,
-      "consecutiveBlockedFailures": 11,
+      "consecutiveFailures": 13,
+      "consecutiveBlockedFailures": 12,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "chatham-house-home",
@@ -4054,13 +4094,13 @@
       "quarantinedAt": "2026-04-06T12:11:54.469Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 12,
-      "consecutiveBlockedFailures": 12,
+      "consecutiveFailures": 13,
+      "consecutiveBlockedFailures": 13,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "institute-global-home",
@@ -4194,13 +4234,13 @@
       "quarantinedAt": "2026-04-06T11:16:46.434Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 17,
-      "consecutiveBlockedFailures": 17,
+      "consecutiveFailures": 18,
+      "consecutiveBlockedFailures": 18,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "east-london-nhs-news",
@@ -4214,13 +4254,13 @@
       "quarantinedAt": "2026-04-06T11:16:46.434Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 17,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 18,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "london-councils-news",
@@ -4232,15 +4272,15 @@
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
       "quarantinedAt": "2026-04-06T11:16:46.434Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 16,
-      "consecutiveBlockedFailures": 15,
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 17,
+      "consecutiveBlockedFailures": 16,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "nhs-london-ncl-news",
@@ -4254,13 +4294,13 @@
       "quarantinedAt": "2026-04-06T11:16:46.434Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 15,
-      "consecutiveBlockedFailures": 14,
+      "consecutiveFailures": 16,
+      "consecutiveBlockedFailures": 15,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "tavistock-portman-news",
@@ -4274,13 +4314,13 @@
       "quarantinedAt": "2026-04-06T11:16:46.434Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 13,
-      "consecutiveBlockedFailures": 13,
+      "consecutiveFailures": 14,
+      "consecutiveBlockedFailures": 14,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "tfl-press-releases-html",
@@ -4294,13 +4334,13 @@
       "quarantinedAt": "2026-04-06T11:16:46.434Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 13,
-      "consecutiveBlockedFailures": 12,
+      "consecutiveFailures": 14,
+      "consecutiveBlockedFailures": 13,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "report-fraud-home",
@@ -4354,13 +4394,13 @@
       "quarantinedAt": "2026-04-06T07:49:39.939Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 25,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 26,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "cnwl-news",
@@ -4374,13 +4414,13 @@
       "quarantinedAt": "2026-04-06T07:49:39.939Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 17,
-      "consecutiveBlockedFailures": 16,
+      "consecutiveFailures": 18,
+      "consecutiveBlockedFailures": 17,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "kent-police-news",
@@ -4434,13 +4474,13 @@
       "quarantinedAt": "2026-04-05T22:37:03.546Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 18,
-      "consecutiveBlockedFailures": 17,
+      "consecutiveFailures": 19,
+      "consecutiveBlockedFailures": 18,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "unsc-counter-terrorism-committee",
@@ -4454,13 +4494,13 @@
       "quarantinedAt": "2026-04-05T20:40:59.773Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 18,
-      "consecutiveBlockedFailures": 17,
+      "consecutiveFailures": 19,
+      "consecutiveBlockedFailures": 18,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "npsa-blog",
@@ -4474,13 +4514,13 @@
       "quarantinedAt": "2026-04-05T20:40:59.773Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 23,
-      "consecutiveBlockedFailures": 22,
+      "consecutiveFailures": 24,
+      "consecutiveBlockedFailures": 23,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "npsa-blog-news",
@@ -4494,13 +4534,13 @@
       "quarantinedAt": "2026-04-05T20:40:59.773Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 23,
-      "consecutiveBlockedFailures": 22,
+      "consecutiveFailures": 24,
+      "consecutiveBlockedFailures": 23,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "uk-ncsc-homepage",
@@ -4514,13 +4554,13 @@
       "quarantinedAt": "2026-04-05T20:40:59.773Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 23,
-      "consecutiveBlockedFailures": 22,
+      "consecutiveFailures": 24,
+      "consecutiveBlockedFailures": 23,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "ct-policing-prevent-programme",
@@ -4534,13 +4574,13 @@
       "quarantinedAt": "2026-04-05T19:38:38.443Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 23,
-      "consecutiveBlockedFailures": 22,
+      "consecutiveFailures": 24,
+      "consecutiveBlockedFailures": 23,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "ct-policing-what-you-can-do",
@@ -4554,13 +4594,13 @@
       "quarantinedAt": "2026-04-05T19:38:38.443Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 23,
-      "consecutiveBlockedFailures": 22,
+      "consecutiveFailures": 24,
+      "consecutiveBlockedFailures": 23,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "mi5-terrorism-threat-levels",
@@ -4574,13 +4614,13 @@
       "quarantinedAt": "2026-04-05T19:38:38.443Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 23,
-      "consecutiveBlockedFailures": 22,
+      "consecutiveFailures": 24,
+      "consecutiveBlockedFailures": 23,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-18T00:24:40.257Z",
-      "lastFailureAt": "2026-04-16T00:24:40.257Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "hope-not-hate-home",
@@ -4600,7 +4640,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-07T16:42:53.076Z",
       "lastFailureAt": "2026-04-05T16:42:53.076Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "police-scotland-news",
@@ -4612,15 +4652,15 @@
       "status": "auto-quarantined",
       "reason": "Repeated blocked-or-auth failures on html source",
       "quarantinedAt": "2026-04-05T15:36:10.273Z",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 1,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-17T22:41:14.929Z",
-      "lastFailureAt": "2026-04-15T22:41:14.929Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "reviewBy": "2026-04-18T04:10:16.943Z",
+      "lastFailureAt": "2026-04-16T04:10:16.943Z",
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     },
     {
       "id": "npsa-national-protective-security-authority",
@@ -4640,7 +4680,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-07T13:02:51.966Z",
       "lastFailureAt": "2026-04-05T13:02:51.966Z",
-      "lastCheckedAt": "2026-04-16T00:24:40.257Z"
+      "lastCheckedAt": "2026-04-16T04:10:16.943Z"
     }
   ]
 }
