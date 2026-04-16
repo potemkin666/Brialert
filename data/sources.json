@@ -915,7 +915,9 @@
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents."
+      "comment": "DW Europe English RSS used as corroborating context for Europe-wide terrorism and security incidents.",
+      "quarantined": false,
+      "restoredAt": "2026-04-16T07:46:48.694Z"
     },
     {
       "id": "ecfr-publications",
