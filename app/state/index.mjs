@@ -41,6 +41,7 @@ export function createState() {
       apiUrl: null
     },
     userLocationLabel: null,
+    userLocation: null,
     albertIndex: -1,
     notes: [],
     sourceRequests: [],

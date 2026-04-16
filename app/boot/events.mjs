@@ -3,7 +3,7 @@ import { filteredMapView } from '../render/map.mjs';
 import { renderNotes } from '../render/notes.mjs';
 import { renderSourceRequests } from '../render/source-requests.mjs';
 import { applyDeviceProfile } from '../utils/device.mjs';
-import { MAP_VIEW_MODES, REGION_ALL, SOURCE_REQUEST_STATUS_KINDS } from '../../shared/ui-constants.mjs';
+import { MAP_VIEW_MODES, REGION_ALL, SOURCE_REQUEST_STATUS_KINDS, resolveMapMode } from '../../shared/ui-constants.mjs';
 
 export function bindEvents({
   state,
@@ -147,20 +147,61 @@ export function bindEvents({
   elements.mapModeTabs?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-map-mode]');
     if (!button) return;
-    const nextMode = button.dataset.mapMode === MAP_VIEW_MODES.world ? MAP_VIEW_MODES.world : MAP_VIEW_MODES.london;
+    const raw = button.dataset.mapMode;
+    const nextMode = resolveMapMode(raw);
     if (state.mapViewMode === nextMode) return;
+
+    if (nextMode === MAP_VIEW_MODES.nearby && !state.userLocation) {
+      if (typeof navigator !== 'undefined' && navigator.geolocation) {
+        if (mapController.mapStatusLine || elements.mapStatusLine) {
+          const line = elements.mapStatusLine;
+          if (line) line.textContent = 'Requesting location...';
+        }
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords?.latitude;
+            const lng = position.coords?.longitude;
+            if (Number.isFinite(lat) && Number.isFinite(lng)) {
+              state.userLocation = { lat, lng };
+            }
+            actions.setMapViewMode(state, nextMode);
+            syncMapModeTabs(nextMode);
+            mapController.renderMap(state, filteredMapView(state, rendering.currentView()), true);
+            mapController.invalidateSize();
+          },
+          () => {
+            actions.setMapViewMode(state, nextMode);
+            syncMapModeTabs(nextMode);
+            mapController.renderMap(state, filteredMapView(state, rendering.currentView()), true);
+            mapController.invalidateSize();
+          },
+          { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
+        );
+        return;
+      }
+    }
+
     actions.setMapViewMode(state, nextMode);
+    syncMapModeTabs(nextMode);
+    mapController.renderMap(state, filteredMapView(state, rendering.currentView()), true);
+    mapController.invalidateSize();
+  });
+
+  function syncMapModeTabs(nextMode) {
     elements.mapModeTabs.querySelectorAll('[data-map-mode]').forEach((item) => {
       const active = item.dataset.mapMode === nextMode;
       item.classList.toggle('active', active);
       item.setAttribute('aria-selected', String(active));
     });
     if (elements.mapPanelSurface) {
-      elements.mapPanelSurface.setAttribute('aria-labelledby', nextMode === MAP_VIEW_MODES.world ? 'map-mode-world-tab' : 'map-mode-london-tab');
+      const labelId = nextMode === MAP_VIEW_MODES.world
+        ? 'map-mode-world-tab'
+        : nextMode === MAP_VIEW_MODES.nearby
+          ? 'map-mode-nearby-tab'
+          : 'map-mode-london-tab';
+      elements.mapPanelSurface.setAttribute('aria-labelledby', labelId);
     }
-    mapController.renderMap(state, filteredMapView(state, rendering.currentView()), true);
-    mapController.invalidateSize();
-  });
+  }
 
   window.addEventListener('resize', () => {
     applyDeviceProfile();

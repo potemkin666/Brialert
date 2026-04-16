@@ -1416,6 +1416,120 @@ h1 {
     opacity: 0.55;
     transform: translate(-50%, -50%) scale(1.35);
   }
+  .map-marker-enter {
+    animation: none !important;
+  }
+}
+
+/* ── Severity legend ── */
+.map-severity-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(9, 14, 25, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  font-size: 11px;
+  color: #f8fafc;
+  line-height: 1.3;
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.map-legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+}
+
+.map-legend-dot--critical {
+  background: #dc2626;
+}
+
+.map-legend-dot--high {
+  background: #ea580c;
+}
+
+.map-legend-dot--elevated {
+  background: #d97706;
+}
+
+.map-legend-dot--moderate {
+  background: #0284c7;
+}
+
+/* ── Dark-mode tile toggle ── */
+.map-tile-toggle {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(9, 14, 25, 0.82);
+  color: #f8fafc;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
+  transition: background 0.2s;
+}
+
+.map-tile-toggle:hover {
+  background: rgba(20, 28, 46, 0.95);
+}
+
+/* ── Hover tooltip ── */
+.map-hover-tooltip {
+  background: rgba(9, 14, 25, 0.92);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.30);
+}
+
+.map-hover-tooltip::before {
+  border-top-color: rgba(9, 14, 25, 0.92);
+}
+
+/* ── Marker entry animation ── */
+@keyframes map-marker-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(2px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.map-marker-enter {
+  animation: map-marker-drop 0.35s ease-out both;
+}
+
+/* ── Cluster expansion animation ── */
+.map-cluster {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.map-cluster:hover {
+  transform: scale(1.12);
 }
 
 .watch-site-icon {

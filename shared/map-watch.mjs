@@ -1,5 +1,5 @@
 import { escapeHtml } from '../app/utils/text.mjs';
-import { MAP_VIEW_MODES } from './ui-constants.mjs';
+import { MAP_VIEW_MODES, resolveMapMode } from './ui-constants.mjs';
 
 const LONDON_CENTER = Object.freeze([51.5074, -0.1278]);
 const LONDON_BOUNDS = Object.freeze([
@@ -10,10 +10,29 @@ const INITIAL_LONDON_ZOOM = 12;
 const WORLD_FALLBACK = Object.freeze({ center: [50.2, 10.4], zoom: 4 });
 const LONDON_CLUSTER_MAX_ZOOM = 12;
 const WORLD_CLUSTER_MAX_ZOOM = 7;
+const NEARBY_CLUSTER_MAX_ZOOM = 10;
+const INITIAL_NEARBY_ZOOM = 9;
 const FRESH_ALERT_WINDOW_MS = 90 * 60 * 1000;
 const LEAFLET_CSS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
 const LEAFLET_JS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
 const MAX_MAP_INIT_ATTEMPTS = 8;
+
+const TILE_LIGHT = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+const TILE_DARK = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+const TILE_OPTIONS = Object.freeze({
+  maxZoom: 19,
+  subdomains: 'abcd',
+  attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+});
+
+const SEVERITY_LEGEND_ITEMS = Object.freeze([
+  { level: 'critical', label: 'Critical' },
+  { level: 'high', label: 'High' },
+  { level: 'elevated', label: 'Elevated' },
+  { level: 'moderate', label: 'Moderate' }
+]);
+
+const CLUSTER_FLY_DURATION = 0.8;
 
 let leafletLoadPromise = null;
 
@@ -57,6 +76,7 @@ function statusLine(mode, count) {
   if (count <= 0) return 'No alerts in current view';
   const countLabel = `${count} alert${count === 1 ? '' : 's'}`;
   if (mode === MAP_VIEW_MODES.london) return `${countLabel} in London`;
+  if (mode === MAP_VIEW_MODES.nearby) return `${countLabel} nearby`;
   return `${countLabel} in last 24h`;
 }
 
@@ -68,7 +88,7 @@ function severityClass(alert) {
 
 function markerPopup(alert) {
   return `
-    <div class="map-preview-card">
+    <div class="map-preview-card" role="dialog" aria-label="${escapeHtml(alert.title)}">
       <strong>${escapeHtml(alert.title)}</strong>
       <p>${escapeHtml(alert.location || 'Unknown location')}</p>
       <div class="map-preview-meta">
@@ -230,8 +250,9 @@ function clusterPopup(entry) {
   const remaining = Math.max(0, items.length - topItems.length);
   const countryLabel = dominantCountryLabel(items);
   const statsUrl = countryLabel ? countryStatsUrl(countryLabel) : '';
+  const clusterLabel = `${items.length} alerts${countryLabel ? ` in ${countryLabel}` : ''}`;
   return `
-    <div class="map-preview-card map-cluster-card">
+    <div class="map-preview-card map-cluster-card" role="dialog" aria-label="${escapeHtml(clusterLabel)}">
       <span class="map-preview-eyebrow">${escapeHtml(items.length)} alerts${countryLabel ? ` • ${escapeHtml(countryLabel)}` : ''}</span>
       <div class="map-cluster-list">
         ${topItems.map((alert) => `
@@ -267,6 +288,12 @@ function clusterThreshold(zoom) {
   return 24;
 }
 
+function clusterMaxZoomForMode(mode) {
+  if (mode === MAP_VIEW_MODES.london) return LONDON_CLUSTER_MAX_ZOOM;
+  if (mode === MAP_VIEW_MODES.nearby) return NEARBY_CLUSTER_MAX_ZOOM;
+  return WORLD_CLUSTER_MAX_ZOOM;
+}
+
 function alertPublishedAtMs(alert) {
   const stamp = alert?.publishedAt || alert?.updatedAt || alert?.firstReportedAt || null;
   const timeMs = stamp ? new Date(stamp).getTime() : NaN;
@@ -278,6 +305,38 @@ function isFreshAlert(alert, nowMs = Date.now()) {
   return Number.isFinite(publishedAtMs) && (nowMs - publishedAtMs) >= 0 && (nowMs - publishedAtMs) <= FRESH_ALERT_WINDOW_MS;
 }
 
+const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function setupPopupAccessibility(popupElement, marker, map) {
+  if (!popupElement) return;
+  const focusableElements = popupElement.querySelectorAll(FOCUSABLE_SELECTOR);
+  const firstFocusable = focusableElements[0];
+  if (firstFocusable) firstFocusable.focus();
+
+  function handleKeyDown(event) {
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      map.closePopup();
+      return;
+    }
+    if (event.key === 'Tab' && focusableElements.length > 0) {
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+      if (event.shiftKey && document.activeElement === firstFocusable) {
+        event.preventDefault();
+        lastFocusable.focus();
+      } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+        event.preventDefault();
+        firstFocusable.focus();
+      }
+    }
+  }
+
+  popupElement.addEventListener('keydown', handleKeyDown);
+  marker.once('popupclose', () => {
+    popupElement.removeEventListener('keydown', handleKeyDown);
+  });
+}
+
 export function createMapController(config) {
   const { mapElement, mapStatusLine, mapEmptyState, openDetail } = config;
   let liveMap = null;
@@ -286,6 +345,8 @@ export function createMapController(config) {
   let lastMode = MAP_VIEW_MODES.world;
   let lastState = null;
   let lastView = null;
+  let tileLayer = null;
+  let isDarkTiles = false;
   let hasInitialLondonFrame = false;
   let initAttempts = 0;
   let isLoadingLeaflet = false;
@@ -329,22 +390,62 @@ export function createMapController(config) {
       zoomControl: true,
       attributionControl: true
     });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      subdomains: 'abcd',
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-    }).addTo(liveMap);
+    tileLayer = L.tileLayer(TILE_LIGHT, TILE_OPTIONS).addTo(liveMap);
+    addSeverityLegend();
+    addTileToggle();
     liveMap.on('zoomend', () => {
       if (!lastState || !lastView) return;
       renderMap(lastState, lastView, false);
     });
   }
 
+  function addSeverityLegend() {
+    if (!liveMap || typeof L === 'undefined') return;
+    const legend = L.control({ position: 'bottomleft' });
+    legend.onAdd = () => {
+      const container = L.DomUtil.create('div', 'map-severity-legend');
+      container.setAttribute('aria-label', 'Severity legend');
+      container.innerHTML = SEVERITY_LEGEND_ITEMS.map(
+        ({ level, label }) =>
+          `<span class="map-legend-item"><span class="map-legend-dot map-legend-dot--${level}" aria-hidden="true"></span>${escapeHtml(label)}</span>`
+      ).join('');
+      return container;
+    };
+    legend.addTo(liveMap);
+  }
+
+  function addTileToggle() {
+    if (!liveMap || typeof L === 'undefined') return;
+    const toggle = L.control({ position: 'topright' });
+    toggle.onAdd = () => {
+      const button = L.DomUtil.create('button', 'map-tile-toggle');
+      button.type = 'button';
+      button.setAttribute('aria-label', 'Toggle dark map');
+      button.title = 'Toggle dark map';
+      button.textContent = '🌙';
+      L.DomEvent.disableClickPropagation(button);
+      button.addEventListener('click', () => {
+        isDarkTiles = !isDarkTiles;
+        if (tileLayer) liveMap.removeLayer(tileLayer);
+        tileLayer = L.tileLayer(isDarkTiles ? TILE_DARK : TILE_LIGHT, TILE_OPTIONS).addTo(liveMap);
+        button.textContent = isDarkTiles ? '☀️' : '🌙';
+        button.setAttribute('aria-label', isDarkTiles ? 'Toggle light map' : 'Toggle dark map');
+        button.title = isDarkTiles ? 'Toggle light map' : 'Toggle dark map';
+      });
+      return button;
+    };
+    toggle.addTo(liveMap);
+  }
+
+  const prefersReducedMotion = typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+  const enterClass = prefersReducedMotion ? '' : ' map-marker-enter';
+
   function mapIconForAlert(alert) {
     const level = severityClass(alert);
     const freshClass = isFreshAlert(alert) ? ' map-dot--fresh' : '';
     return L.divIcon({
-      className: 'map-dot-icon',
+      className: `map-dot-icon${enterClass}`,
       html: `<span class="map-dot map-dot--${level}${freshClass}" aria-hidden="true"></span>`,
       iconSize: [16, 16],
       iconAnchor: [8, 8],
@@ -356,7 +457,7 @@ export function createMapController(config) {
     const level = clusterSeverity(items);
     const size = items.length >= 20 ? 40 : items.length >= 10 ? 36 : 32;
     return L.divIcon({
-      className: 'map-cluster-icon',
+      className: `map-cluster-icon${enterClass}`,
       html: `<span class="map-cluster map-cluster--${level}" style="width:${size}px;height:${size}px;">${items.length}</span>`,
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2]
@@ -401,13 +502,25 @@ export function createMapController(config) {
     });
   }
 
-  function fitForMode(mode, points) {
+  function fitForMode(mode, points, state) {
     if (!liveMap) return;
     if (mode === 'london') {
       if (points.length) {
         liveMap.fitBounds(L.latLngBounds(points), { padding: [22, 22], maxZoom: 12 });
       } else {
         liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 11 });
+      }
+      return;
+    }
+
+    if (mode === MAP_VIEW_MODES.nearby) {
+      const loc = state?.userLocation;
+      if (points.length) {
+        liveMap.fitBounds(L.latLngBounds(points), { padding: [22, 22], maxZoom: 11 });
+      } else if (loc && Number.isFinite(loc.lat) && Number.isFinite(loc.lng)) {
+        liveMap.setView([loc.lat, loc.lng], INITIAL_NEARBY_ZOOM);
+      } else {
+        liveMap.setView(WORLD_FALLBACK.center, WORLD_FALLBACK.zoom);
       }
       return;
     }
@@ -424,7 +537,7 @@ export function createMapController(config) {
     if (!liveMap) return;
     lastState = state;
     lastView = view;
-    const mode = state.mapViewMode === MAP_VIEW_MODES.world ? MAP_VIEW_MODES.world : MAP_VIEW_MODES.london;
+    const mode = resolveMapMode(state.mapViewMode);
     const items = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
     const signature = `${mode}:${liveMap.getZoom()}:${items.map((item) => `${item.id}:${item.lat.toFixed(3)},${item.lng.toFixed(3)}`).join('|')}`;
     if (!forceFit && signature === lastSignature) return;
@@ -443,11 +556,17 @@ export function createMapController(config) {
           title: alert.title
         });
         marker.bindPopup(markerPopup(alert), { className: 'map-preview-popup-shell' });
+        marker.bindTooltip(escapeHtml(alert.title), {
+          direction: 'top',
+          offset: [0, -10],
+          className: 'map-hover-tooltip'
+        });
         marker.on('popupopen', (event) => {
           const popupElement = event.popup?.getElement();
           const button = popupElement?.querySelector(`[data-open-detail="${alert.id}"]`);
           if (!button) return;
           button.addEventListener('click', () => openDetail(alert), { once: true });
+          setupPopupAccessibility(popupElement, marker, liveMap);
         });
         marker.addTo(liveMap);
         layers.push(marker);
@@ -461,6 +580,11 @@ export function createMapController(config) {
         title: `${entry.items.length} alerts`
       });
       clusterMarker.bindPopup(clusterPopup(entry), { className: 'map-preview-popup-shell' });
+      clusterMarker.bindTooltip(`${entry.items.length} alerts`, {
+        direction: 'top',
+        offset: [0, -10],
+        className: 'map-hover-tooltip'
+      });
       clusterMarker.on('popupopen', (event) => {
         const popupElement = event.popup?.getElement();
         if (!popupElement) return;
@@ -473,12 +597,15 @@ export function createMapController(config) {
         const zoomButton = popupElement.querySelector('[data-zoom-cluster]');
         if (zoomButton) {
           zoomButton.addEventListener('click', () => {
-            liveMap.fitBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
+            liveMap.closePopup();
+            liveMap.flyToBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
               padding: [26, 26],
-              maxZoom: Math.min((liveMap.getZoom() || 3) + 2, mode === MAP_VIEW_MODES.london ? LONDON_CLUSTER_MAX_ZOOM : WORLD_CLUSTER_MAX_ZOOM)
+              maxZoom: Math.min((liveMap.getZoom() || 3) + 2, clusterMaxZoomForMode(mode)),
+              duration: CLUSTER_FLY_DURATION
             });
           }, { once: true });
         }
+        setupPopupAccessibility(popupElement, clusterMarker, liveMap);
       });
       clusterMarker.addTo(liveMap);
       layers.push(clusterMarker);
@@ -493,7 +620,15 @@ export function createMapController(config) {
       requestAnimationFrame(() => liveMap.invalidateSize());
       return;
     }
-    fitForMode(mode, points);
+    if (forceFit && mode === MAP_VIEW_MODES.nearby) {
+      const loc = state?.userLocation;
+      if (loc && Number.isFinite(loc.lat) && Number.isFinite(loc.lng)) {
+        liveMap.setView([loc.lat, loc.lng], INITIAL_NEARBY_ZOOM);
+        requestAnimationFrame(() => liveMap.invalidateSize());
+        return;
+      }
+    }
+    fitForMode(mode, points, state);
     requestAnimationFrame(() => liveMap.invalidateSize());
   }
 
@@ -515,6 +650,15 @@ export function createMapController(config) {
       liveMap.setView(WORLD_FALLBACK.center, WORLD_FALLBACK.zoom);
       return;
     }
+    if (lastMode === MAP_VIEW_MODES.nearby) {
+      const loc = lastState?.userLocation;
+      if (loc && Number.isFinite(loc.lat) && Number.isFinite(loc.lng)) {
+        liveMap.setView([loc.lat, loc.lng], INITIAL_NEARBY_ZOOM);
+      } else {
+        liveMap.setView(WORLD_FALLBACK.center, WORLD_FALLBACK.zoom);
+      }
+      return;
+    }
     liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 11 });
   }
 
@@ -526,3 +670,5 @@ export function createMapController(config) {
     resetView
   };
 }
+
+export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK, CLUSTER_FLY_DURATION as _CLUSTER_FLY_DURATION };
