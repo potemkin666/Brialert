@@ -122,10 +122,8 @@ export async function run(alertsFile = alertsPath, sourcesFile = sourcesPath) {
 }
 
 // Run when invoked directly (not imported for testing).
-const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(
-  path.dirname(new URL(import.meta.url).pathname),
-  path.basename(new URL(import.meta.url).pathname)
-);
+import { fileURLToPath } from 'node:url';
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isDirectRun) {
   run().catch((err) => {
