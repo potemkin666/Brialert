@@ -213,6 +213,8 @@ jobs:
           node <<'NODE'
           const { execSync } = require('node:child_process');
 
+          // live-alerts.json regularly exceeds Node's default 1 MB maxBuffer;
+          // 50 MB gives ample headroom for continued feed growth.
           const raw = execSync('git show origin/main:live-alerts.json', {
             encoding: 'utf8',
             maxBuffer: 50 * 1024 * 1024,

@@ -456,6 +456,16 @@ export function buildAuditBlock(alert) {
   ].join('\n');
 }
 
+function safeHref(url) {
+  const raw = String(url ?? '').trim();
+  if (!raw || raw === '#') return '#';
+  try {
+    const parsed = new URL(raw);
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return escapeHtml(raw);
+  } catch { /* invalid URL */ }
+  return '#';
+}
+
 export function renderCorroboratingSources(alert) {
   const sources = Array.isArray(alert.corroboratingSources) ? alert.corroboratingSources : [];
   if (!sources.length) {
@@ -463,7 +473,7 @@ export function renderCorroboratingSources(alert) {
   }
   return `<div class="corroboration-list">${sources.map((entry) => `
     <article class="corroboration-item">
-      <a href="${escapeHtml(entry.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(entry.source)}</a>
+      <a href="${safeHref(entry.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(entry.source)}</a>
       <p>${reliabilityLabel(normaliseReliabilityProfile(entry.reliabilityProfile))} | ${clean(entry.sourceTier) || 'source tier unknown'} | ${clean(entry.publishedAt) ? formatAgeFrom(entry.publishedAt) : 'age unknown'}</p>
     </article>`).join('')}</div>`;
 }
