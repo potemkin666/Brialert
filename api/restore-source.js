@@ -15,17 +15,21 @@ const QUARANTINE_ONLY_FIELDS = new Set([
   'quarantinedAt',
   'lastErrorCategory',
   'lastErrorMessage',
+  'consecutiveFailures',
   'consecutiveBlockedFailures',
   'consecutiveDeadUrlFailures',
   'replacementSuggestion',
   'reviewBy',
   'lastFailureAt',
-  'lastCheckedAt'
+  'lastCheckedAt',
+  'healthScore'
 ]);
 
 const FEED_WORKFLOW_FILENAME = 'update-live-feed.yml';
 const RESTORE_AUDIT_PATH = 'data/restore-audit.json';
 const RESTORE_AUDIT_HISTORY_LIMIT = 20;
+const BULK_RESTORE_LIMIT = 50;
+const URL_HEALTH_CHECK_TIMEOUT_MS = 8000;
 
 function sendError(response, error) {
   const status = error instanceof ApiError ? error.status : 500;
@@ -36,6 +40,25 @@ function sendError(response, error) {
     error: code,
     message
   });
+}
+
+async function checkUrlHealth(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), URL_HEALTH_CHECK_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, {
+      method: 'HEAD',
+      signal: controller.signal,
+      redirect: 'follow',
+      headers: { 'User-Agent': 'Brialert-HealthCheck/1.0' }
+    });
+    return { ok: res.ok, status: res.status };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return { ok: false, status: 0, error: message };
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 function applyRefreshPolicy(source) {
@@ -159,6 +182,20 @@ async function resolveShardPath(config, restoredSource, shardPaths) {
   };
 }
 
+function parseBulkSources(body) {
+  if (!Array.isArray(body.sources)) return null;
+  if (body.sources.length === 0) {
+    throw new ApiError('invalid-body', 'sources array must not be empty.', 400);
+  }
+  if (body.sources.length > BULK_RESTORE_LIMIT) {
+    throw new ApiError('invalid-body', `sources array exceeds maximum of ${BULK_RESTORE_LIMIT}.`, 400);
+  }
+  return body.sources.map((entry) => ({
+    sourceId: ensureValidSourceId(entry?.sourceId),
+    replacementUrl: validateAbsoluteHttpUrl(entry?.replacementUrl)
+  }));
+}
+
 export default async function handler(request, response) {
   applyCorsHeaders(request, response, 'POST,OPTIONS');
   if (request.method === 'OPTIONS') {
@@ -179,8 +216,31 @@ export default async function handler(request, response) {
 
   try {
     const body = parseRequestBody(request);
-    const sourceId = ensureValidSourceId(body.sourceId);
-    const replacementUrl = validateAbsoluteHttpUrl(body.replacementUrl);
+    const skipHealthCheck = body.skipHealthCheck === true;
+    const bulkItems = parseBulkSources(body);
+    const restoreItems = bulkItems || [{
+      sourceId: ensureValidSourceId(body.sourceId),
+      replacementUrl: validateAbsoluteHttpUrl(body.replacementUrl)
+    }];
+
+    if (!skipHealthCheck) {
+      const uniqueUrls = [...new Set(restoreItems.map((item) => item.replacementUrl))];
+      const healthResults = await Promise.all(uniqueUrls.map((url) => checkUrlHealth(url)));
+      const failures = uniqueUrls
+        .map((url, i) => ({ url, ...healthResults[i] }))
+        .filter((r) => !r.ok);
+      if (failures.length > 0) {
+        const details = failures.map((f) => f.error
+          ? `${f.url} — ${f.error}`
+          : `${f.url} — HTTP ${f.status}`
+        ).join('; ');
+        throw new ApiError(
+          'url-health-check-failed',
+          `Replacement URL(s) did not respond successfully: ${details}. Pass skipHealthCheck: true to override.`,
+          422
+        );
+      }
+    }
 
     const [quarantinedFile, sourcesFile] = await Promise.all([
       loadJsonFile('data/quarantined-sources.json'),
@@ -190,45 +250,78 @@ export default async function handler(request, response) {
     const quarantinedSources = Array.isArray(quarantinedFile.data?.sources) ? quarantinedFile.data.sources : [];
     const activeSources = Array.isArray(sourcesFile.data?.sources) ? sourcesFile.data.sources : [];
 
-    const quarantineIndex = quarantinedSources.findIndex((entry) => entry?.id === sourceId);
-    if (quarantineIndex < 0) {
-      throw new ApiError('source-not-found', `Quarantined source "${sourceId}" was not found.`, 404);
-    }
-
-    if (detectDuplicateConflict(activeSources, sourceId, replacementUrl)) {
-      throw new ApiError(
-        'duplicate-conflict',
-        'Replacement URL already exists on a different active source.',
-        409
-      );
-    }
-
-    const quarantinedSource = quarantinedSources[quarantineIndex];
-    const restoredSource = cleanupRestoredSource(quarantinedSource, replacementUrl);
+    const restoredSources = [];
+    const restoredIds = new Set();
+    const nextActiveSources = [...activeSources];
     let previousRestoreAudit = null;
     try {
       previousRestoreAudit = (await loadJsonFile(RESTORE_AUDIT_PATH)).data;
-    } catch {}
-    const restoreAuditEntry = {
-      at: new Date().toISOString(),
-      sourceId,
-      provider: String(restoredSource?.provider || quarantinedSource?.provider || ''),
-      replacementUrl
-    };
-    const nextRestoreAuditPayload = buildRestoreAuditPayload(previousRestoreAudit, restoreAuditEntry);
+    } catch (auditLoadErr) {
+      console.warn(`[restore-source] Failed to load ${RESTORE_AUDIT_PATH}: ${auditLoadErr?.message || auditLoadErr}`);
+    }
+    let auditPayload = previousRestoreAudit;
 
-    const nextActiveSources = [...activeSources];
-    const activeIndex = nextActiveSources.findIndex((entry) => entry?.id === sourceId);
-    if (activeIndex >= 0) {
-      nextActiveSources[activeIndex] = {
-        ...nextActiveSources[activeIndex],
-        ...restoredSource
+    const shardPaths = await listSourceShardPaths(quarantinedFile.config);
+    const shardUpdates = {};
+
+    for (const item of restoreItems) {
+      const { sourceId, replacementUrl } = item;
+      const quarantineIndex = quarantinedSources.findIndex((entry) => entry?.id === sourceId);
+      if (quarantineIndex < 0) {
+        throw new ApiError('source-not-found', `Quarantined source "${sourceId}" was not found.`, 404);
+      }
+
+      if (detectDuplicateConflict(nextActiveSources, sourceId, replacementUrl)) {
+        throw new ApiError(
+          'duplicate-conflict',
+          `Replacement URL for "${sourceId}" already exists on a different active source.`,
+          409
+        );
+      }
+
+      const quarantinedSource = quarantinedSources[quarantineIndex];
+      const restoredSource = cleanupRestoredSource(quarantinedSource, replacementUrl);
+      restoredSources.push(restoredSource);
+      restoredIds.add(sourceId);
+
+      const restoreAuditEntry = {
+        at: new Date().toISOString(),
+        sourceId,
+        provider: String(restoredSource?.provider || quarantinedSource?.provider || ''),
+        replacementUrl
       };
-    } else {
-      nextActiveSources.push(restoredSource);
+      auditPayload = buildRestoreAuditPayload(auditPayload, restoreAuditEntry);
+
+      const activeIndex = nextActiveSources.findIndex((entry) => entry?.id === sourceId);
+      if (activeIndex >= 0) {
+        nextActiveSources[activeIndex] = {
+          ...nextActiveSources[activeIndex],
+          ...restoredSource
+        };
+      } else {
+        nextActiveSources.push(restoredSource);
+      }
+
+      const shardResolution = await resolveShardPath(quarantinedFile.config, restoredSource, shardPaths);
+      const shardPath = shardResolution.shardPath;
+      if (!shardUpdates[shardPath]) {
+        shardUpdates[shardPath] = shardResolution.shardFile?.data
+          ? { ...shardResolution.shardFile.data }
+          : { sources: [] };
+        shardUpdates[shardPath].sources = Array.isArray(shardUpdates[shardPath].sources)
+          ? [...shardUpdates[shardPath].sources]
+          : [];
+      }
+      const shardSources = shardUpdates[shardPath].sources;
+      const shardIndex = shardSources.findIndex((entry) => entry?.id === sourceId);
+      if (shardIndex >= 0) {
+        shardSources[shardIndex] = { ...shardSources[shardIndex], ...restoredSource };
+      } else {
+        shardSources.push(restoredSource);
+      }
     }
 
-    const nextQuarantinedSources = quarantinedSources.filter((entry) => entry?.id !== sourceId);
+    const nextQuarantinedSources = quarantinedSources.filter((entry) => !restoredIds.has(entry?.id));
     const nextQuarantinePayload = {
       ...quarantinedFile.data,
       generatedAt: new Date().toISOString(),
@@ -240,32 +333,16 @@ export default async function handler(request, response) {
       sources: nextActiveSources
     };
 
-    const shardPaths = await listSourceShardPaths(quarantinedFile.config);
-    const shardResolution = await resolveShardPath(quarantinedFile.config, restoredSource, shardPaths);
-    const nextShardPayload = shardResolution.shardFile?.data
-      ? { ...shardResolution.shardFile.data }
-      : { sources: [] };
-    const shardSources = Array.isArray(nextShardPayload.sources) ? [...nextShardPayload.sources] : [];
-    if (shardResolution.sourceIndex >= 0) {
-      shardSources[shardResolution.sourceIndex] = {
-        ...shardSources[shardResolution.sourceIndex],
-        ...restoredSource
-      };
-    } else {
-      shardSources.push(restoredSource);
-    }
-    nextShardPayload.sources = shardSources;
-
-    await commitJsonFilesAtomically(
-      quarantinedFile.config,
-      {
-        'data/quarantined-sources.json': nextQuarantinePayload,
-        'data/sources.json': nextSourcesPayload,
-        [shardResolution.shardPath]: nextShardPayload,
-        [RESTORE_AUDIT_PATH]: nextRestoreAuditPayload
-      },
-      `Restore quarantined source ${sourceId}`
-    );
+    const commitFiles = {
+      'data/quarantined-sources.json': nextQuarantinePayload,
+      'data/sources.json': nextSourcesPayload,
+      [RESTORE_AUDIT_PATH]: auditPayload,
+      ...shardUpdates
+    };
+    const commitLabel = restoredIds.size === 1
+      ? `Restore quarantined source ${[...restoredIds][0]}`
+      : `Bulk restore ${restoredIds.size} quarantined sources`;
+    await commitJsonFilesAtomically(quarantinedFile.config, commitFiles, commitLabel);
 
     const autoTrigger = String(process.env.BRIALERT_AUTO_TRIGGER_FEED || 'true').toLowerCase() !== 'false';
     let workflowTriggered = false;
@@ -279,14 +356,17 @@ export default async function handler(request, response) {
       }
     }
 
+    const isBulk = bulkItems !== null;
+    const restoredPayload = isBulk ? { restoredSources } : { restoredSource: restoredSources[0] };
+    const countLabel = isBulk ? `${restoredSources.length} sources` : 'Source';
     return response.status(200).json({
       ok: true,
-      restoredSource,
+      ...restoredPayload,
       workflowTriggered,
       workflowMessage,
       message: workflowTriggered
-        ? 'Source restored and live feed refresh triggered.'
-        : 'Source restored successfully.'
+        ? `${countLabel} restored and live feed refresh triggered.`
+        : `${countLabel} restored successfully.`
     });
   } catch (error) {
     return sendError(response, error);

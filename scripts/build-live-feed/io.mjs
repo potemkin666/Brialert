@@ -503,7 +503,7 @@ export function summariseSourceError(source, error) {
   let category = resolvedErrorCode ? (ERROR_CODE_TO_CATEGORY[resolvedErrorCode] || 'unknown') : 'unknown';
   if (category === 'unknown' && /HTTP 304/i.test(message)) category = 'unchanged-304';
   else if (category === 'unknown' && /HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(message)) category = 'moved-temporarily';
-  else if (category === 'unknown' && /HTTP 403|HTTP 401|access denied|blocked/i.test(message)) category = 'blocked-or-auth';
+  else if (category === 'unknown' && /HTTP 403|HTTP 401|access denied|\bblocked\b/i.test(message)) category = 'blocked-or-auth';
   else if (category === 'unknown' && /anti-bot|captcha|cloudflare|javascript and cookies/i.test(message)) category = 'anti-bot-protection';
   else if (category === 'unknown' && /HTTP \d{3}/i.test(message)) category = 'http-status-error';
   else if (category === 'unknown' && /abort|timeout|timed out|ETIMEDOUT/i.test(message)) category = 'timeout';
@@ -537,7 +537,7 @@ function resolveErrorCode(meta, message) {
   if (/HTTP 404/i.test(text)) return ERROR_CODE.HTTP_NOT_FOUND_404;
   if (/HTTP 410/i.test(text)) return ERROR_CODE.HTTP_GONE_410;
   if (/HTTP 301|HTTP 302|HTTP 307|HTTP 308/i.test(text)) return ERROR_CODE.HTTP_REDIRECT_3XX;
-  if (/HTTP 403|HTTP 401|access denied|blocked/i.test(text)) return ERROR_CODE.HTTP_BLOCKED_OR_AUTH;
+  if (/HTTP 403|HTTP 401|access denied|\bblocked\b/i.test(text)) return ERROR_CODE.HTTP_BLOCKED_OR_AUTH;
   if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(text)) return ERROR_CODE.BLOCKED_ANTI_BOT;
   if (/abort|timeout|timed out|ETIMEDOUT/i.test(text)) return ERROR_CODE.FETCH_TIMEOUT;
   if (/fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(text)) return ERROR_CODE.FETCH_NETWORK_FAILURE;

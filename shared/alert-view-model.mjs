@@ -249,11 +249,7 @@ export function isLiveIncidentCandidate(alert) {
 
 export function quarantineReason(alert) {
   if (clean(alert.queueReason)) return clean(alert.queueReason);
-  if (alert.needsHumanReview) return 'Needs human review';
-  if (typeof alert.isTerrorRelevant === 'boolean' && !alert.isTerrorRelevant) return 'Incident kept out of trigger lane';
-  if (!alert.isOfficial && Number(alert.confidenceScore || 0) > 0 && Number(alert.confidenceScore || 0) < 0.8) return 'Secondary source with weak confidence';
-  if (normaliseSourceTier(alert.sourceTier) !== 'trigger' && alert.lane === 'incidents') return 'Non-trigger source awaiting corroboration';
-  return 'Borderline incident relevance';
+  return 'Queued for review';
 }
 
 export function isQuarantineCandidate(alert) {

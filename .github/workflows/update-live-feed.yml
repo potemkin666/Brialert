@@ -174,17 +174,19 @@ jobs:
             git push
             exit 0
           fi
-          echo 'Rebase conflict detected in generated artifacts; resolving in favor of newly generated files.'
-          git checkout --theirs live-alerts.json || true
-          git checkout --theirs data/quarantined-sources.json || true
-          git checkout --theirs source-quarantine.html || true
-          git checkout --theirs data/source-remediation-sweep.json || true
-          git checkout --theirs data/top-20-source-remediation.json || true
-          git checkout --theirs data/brialert.sqlite || true
+          echo 'Rebase conflict detected; aborting rebase and switching to merge strategy.'
+          git rebase --abort
+          git merge origin/main --no-edit || true
+          git checkout --ours live-alerts.json || true
+          node scripts/merge-quarantined-sources.mjs || git checkout --theirs data/quarantined-sources.json || true
+          git checkout --ours source-quarantine.html || true
+          git checkout --ours data/source-remediation-sweep.json || true
+          git checkout --ours data/top-20-source-remediation.json || true
+          git checkout --ours data/brialert.sqlite || true
           git add live-alerts.json data/quarantined-sources.json source-quarantine.html \
             data/source-remediation-sweep.json data/top-20-source-remediation.json data/brialert.sqlite || true
-          git rebase --continue
-          git push
+          git -c core.editor=true merge --continue || git commit --no-edit || true
+          git push --force-with-lease
 
   verify-live-feed-freshness:
     needs: commit-live-feed
