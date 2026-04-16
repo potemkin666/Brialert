@@ -234,11 +234,10 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.lastErrorMessage = null;
     next.lastSuccessfulAt = generatedAt;
     next.healthScore = Math.min(100, priorHealthScore + HEALTH_SCORE_SUCCESS_BOOST);
-    if (next.healthScore >= HEALTH_SCORE_REVIEW_THRESHOLD && next.quarantined) {
-      next.quarantined = false;
-      next.quarantinedAt = null;
-      next.quarantineReason = null;
-    }
+    next.quarantined = false;
+    next.quarantinedAt = null;
+    next.quarantineReason = null;
+    next.autoSkipReason = null;
     return next;
   }
 
