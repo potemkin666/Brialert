@@ -275,12 +275,6 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.lastFailureAt = generatedAt;
     next.lastErrorCategory = stat?.lastErrorCategory || null;
     next.lastErrorMessage = stat?.lastErrorMessage || null;
-    if (blockedNonContent && next.consecutiveBlockedFailures >= BLOCKED_NON_CONTENT_FAIL_THRESHOLD) {
-      next.cooldownUntil = new Date(Date.parse(generatedAt) + BLOCKED_NON_CONTENT_COOLDOWN_HOURS * 3600000).toISOString();
-      next.autoSkipReason = 'blocked-cooldown';
-      next.nextFetchAt = next.cooldownUntil;
-      return next;
-    }
     if (!next.quarantined && notFoundFailure) {
       next.quarantined = true;
       next.quarantinedAt = generatedAt;
@@ -315,6 +309,12 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
       next.autoSkipReason = 'review-quarantine';
       next.cooldownUntil = null;
       next.nextFetchAt = quarantineRecheckAtIso(generatedAt);
+      return next;
+    }
+    if (blockedNonContent && next.consecutiveBlockedFailures >= BLOCKED_NON_CONTENT_FAIL_THRESHOLD) {
+      next.cooldownUntil = new Date(Date.parse(generatedAt) + BLOCKED_NON_CONTENT_COOLDOWN_HOURS * 3600000).toISOString();
+      next.autoSkipReason = 'blocked-cooldown';
+      next.nextFetchAt = next.cooldownUntil;
       return next;
     }
     if (next.consecutiveFailures >= AUTO_SKIP_FAILURE_THRESHOLD) {
