@@ -399,14 +399,16 @@
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/news",
+      "endpoint": "https://yle.fi/t/18-217206/en",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-16T07:45:55.984Z"
     },
     {
       "id": "german-bka-press",
