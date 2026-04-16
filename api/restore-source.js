@@ -28,6 +28,7 @@ const FEED_WORKFLOW_FILENAME = 'update-live-feed.yml';
 const RESTORE_AUDIT_PATH = 'data/restore-audit.json';
 const RESTORE_AUDIT_HISTORY_LIMIT = 20;
 const BULK_RESTORE_LIMIT = 50;
+const URL_HEALTH_CHECK_TIMEOUT_MS = 8000;
 
 function sendError(response, error) {
   const status = error instanceof ApiError ? error.status : 500;
@@ -38,6 +39,25 @@ function sendError(response, error) {
     error: code,
     message
   });
+}
+
+async function checkUrlHealth(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), URL_HEALTH_CHECK_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, {
+      method: 'HEAD',
+      signal: controller.signal,
+      redirect: 'follow',
+      headers: { 'User-Agent': 'Brialert-HealthCheck/1.0' }
+    });
+    return { ok: res.ok, status: res.status };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return { ok: false, status: 0, error: message };
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 function applyRefreshPolicy(source) {
@@ -195,11 +215,31 @@ export default async function handler(request, response) {
 
   try {
     const body = parseRequestBody(request);
+    const skipHealthCheck = body.skipHealthCheck === true;
     const bulkItems = parseBulkSources(body);
     const restoreItems = bulkItems || [{
       sourceId: ensureValidSourceId(body.sourceId),
       replacementUrl: validateAbsoluteHttpUrl(body.replacementUrl)
     }];
+
+    if (!skipHealthCheck) {
+      const uniqueUrls = [...new Set(restoreItems.map((item) => item.replacementUrl))];
+      const healthResults = await Promise.all(uniqueUrls.map((url) => checkUrlHealth(url)));
+      const failures = uniqueUrls
+        .map((url, i) => ({ url, ...healthResults[i] }))
+        .filter((r) => !r.ok);
+      if (failures.length > 0) {
+        const details = failures.map((f) => f.error
+          ? `${f.url} — ${f.error}`
+          : `${f.url} — HTTP ${f.status}`
+        ).join('; ');
+        throw new ApiError(
+          'url-health-check-failed',
+          `Replacement URL(s) did not respond successfully: ${details}. Pass skipHealthCheck: true to override.`,
+          422
+        );
+      }
+    }
 
     const [quarantinedFile, sourcesFile] = await Promise.all([
       loadJsonFile('data/quarantined-sources.json'),

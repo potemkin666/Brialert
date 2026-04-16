@@ -730,7 +730,53 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
     });
 }
 
-function renderQuarantinedSourcesHtml(generatedAt, entries) {
+function computeQuarantineMetrics(quarantinedEntries, restoreAudit) {
+  const now = Date.now();
+  const oneWeekMs = 7 * 24 * 3600000;
+  const weekAgo = now - oneWeekMs;
+
+  let newThisWeek = 0;
+  let totalTimeMs = 0;
+  let countWithTime = 0;
+
+  for (const entry of quarantinedEntries) {
+    const qAtMs = parseIsoMs(entry.quarantinedAt);
+    if (qAtMs >= weekAgo) newThisWeek++;
+    if (qAtMs > 0) {
+      totalTimeMs += now - qAtMs;
+      countWithTime++;
+    }
+  }
+
+  const avgTimeHours = countWithTime > 0
+    ? Math.round(totalTimeMs / countWithTime / 3600000)
+    : 0;
+
+  const auditHistory = Array.isArray(restoreAudit?.history) ? restoreAudit.history : [];
+  const restoredIds = new Set();
+  for (const entry of auditHistory) {
+    if (entry?.sourceId) restoredIds.add(entry.sourceId);
+  }
+  const currentIds = new Set(quarantinedEntries.map((e) => e.id));
+  let reQuarantined = 0;
+  for (const id of restoredIds) {
+    if (currentIds.has(id)) reQuarantined++;
+  }
+  const reQuarantineRate = restoredIds.size > 0
+    ? Math.round((reQuarantined / restoredIds.size) * 100)
+    : 0;
+
+  return {
+    total: quarantinedEntries.length,
+    newThisWeek,
+    avgTimeInQuarantineHours: avgTimeHours,
+    reQuarantineRate,
+    reQuarantined,
+    restoredTotal: restoredIds.size
+  };
+}
+
+function renderQuarantinedSourcesHtml(generatedAt, entries, metrics) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -1006,6 +1052,9 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
       <span class="pill">Quarantined sources: ${entries.length}</span>
       <span class="pill suggest">Pending suggestions: 0</span>
       <span class="pill">SLA: auto-recheck in 7 days</span>
+      <span class="pill warn">New this week: ${metrics?.newThisWeek ?? 0}</span>
+      <span class="pill">Avg time in quarantine: ${metrics?.avgTimeInQuarantineHours ?? 0}h</span>
+      <span class="pill${(metrics?.reQuarantineRate ?? 0) > 25 ? ' warn' : ''}">Re-quarantine rate: ${metrics?.reQuarantineRate ?? 0}%</span>
     </div>
     <section class="audit" id="audit">
       <div class="audit-header">
@@ -1187,6 +1236,9 @@ function renderQuarantinedSourcesHtml(generatedAt, entries) {
         '<span class="pill">Quarantined sources: ' + escapeHtml(currentEntries.length) + '</span>',
         '<span class="pill suggest">Pending suggestions: ' + escapeHtml(currentSuggestions.length) + '</span>',
         '<span class="pill">SLA: auto-recheck in 7 days</span>',
+        payload.metrics ? '<span class="pill warn">New this week: ' + escapeHtml(payload.metrics.newThisWeek) + '</span>' : '',
+        payload.metrics ? '<span class="pill">Avg time in quarantine: ' + escapeHtml(payload.metrics.avgTimeInQuarantineHours) + 'h</span>' : '',
+        payload.metrics ? '<span class="pill' + (Number(payload.metrics.reQuarantineRate) > 25 ? ' warn' : '') + '">Re-quarantine rate: ' + escapeHtml(payload.metrics.reQuarantineRate) + '%</span>' : '',
         '<span class="pill' + (!restoreEnabled ? ' warn' : '') + '">' +
           modeLabel +
         '</span>'
@@ -2698,9 +2750,11 @@ async function main() {
     sourceStats
   });
   const quarantinedEntries = buildQuarantinedSourceEntries(sources, nextSourceHealth);
+  const quarantineMetrics = computeQuarantineMetrics(quarantinedEntries, restoreAudit);
   const quarantinedPayload = {
     generatedAt,
     count: quarantinedEntries.length,
+    metrics: quarantineMetrics,
     sources: quarantinedEntries
   };
 
@@ -2730,7 +2784,7 @@ async function main() {
 
   await fs.writeFile(outputPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');
   await fs.writeFile(quarantinedSourcesPath, JSON.stringify(quarantinedPayload, null, 2) + '\n', 'utf8');
-  await fs.writeFile(quarantinedSourcesReviewPath, renderQuarantinedSourcesHtml(generatedAt, quarantinedEntries), 'utf8');
+  await fs.writeFile(quarantinedSourcesReviewPath, renderQuarantinedSourcesHtml(generatedAt, quarantinedEntries, quarantineMetrics), 'utf8');
   await fs.writeFile(sourceRemediationSweepPath, JSON.stringify(remediationSweep, null, 2) + '\n', 'utf8');
   await fs.writeFile(topSourceRemediationPath, JSON.stringify({
     generatedFrom: remediationSweep.generatedFrom,
