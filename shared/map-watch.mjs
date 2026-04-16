@@ -32,6 +32,8 @@ const SEVERITY_LEGEND_ITEMS = Object.freeze([
   { level: 'moderate', label: 'Moderate' }
 ]);
 
+const CLUSTER_FLY_DURATION = 0.8;
+
 let leafletLoadPromise = null;
 
 function ensureLeafletAssets() {
@@ -595,9 +597,11 @@ export function createMapController(config) {
         const zoomButton = popupElement.querySelector('[data-zoom-cluster]');
         if (zoomButton) {
           zoomButton.addEventListener('click', () => {
-            liveMap.fitBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
+            liveMap.closePopup();
+            liveMap.flyToBounds(L.latLngBounds(entry.items.map((item) => [item.lat, item.lng])), {
               padding: [26, 26],
-              maxZoom: Math.min((liveMap.getZoom() || 3) + 2, clusterMaxZoomForMode(mode))
+              maxZoom: Math.min((liveMap.getZoom() || 3) + 2, clusterMaxZoomForMode(mode)),
+              duration: CLUSTER_FLY_DURATION
             });
           }, { once: true });
         }
@@ -667,4 +671,4 @@ export function createMapController(config) {
   };
 }
 
-export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK };
+export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK, CLUSTER_FLY_DURATION as _CLUSTER_FLY_DURATION };

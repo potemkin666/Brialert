@@ -5,7 +5,8 @@ import {
   _clusterPopup,
   _SEVERITY_LEGEND_ITEMS,
   _TILE_LIGHT,
-  _TILE_DARK
+  _TILE_DARK,
+  _CLUSTER_FLY_DURATION
 } from '../shared/map-watch.mjs';
 
 describe('SEVERITY_LEGEND_ITEMS', () => {
@@ -85,5 +86,16 @@ describe('clusterPopup hover-friendly content', () => {
   it('shows alert count', () => {
     const html = _clusterPopup(entry);
     assert.ok(html.includes('2 alerts'), 'Expected count in cluster popup');
+  });
+});
+
+describe('CLUSTER_FLY_DURATION', () => {
+  it('is a positive number', () => {
+    assert.equal(typeof _CLUSTER_FLY_DURATION, 'number');
+    assert.ok(_CLUSTER_FLY_DURATION > 0, 'Expected positive duration');
+  });
+
+  it('is a reasonable animation duration (under 3 seconds)', () => {
+    assert.ok(_CLUSTER_FLY_DURATION <= 3, 'Expected duration <= 3 seconds');
   });
 });

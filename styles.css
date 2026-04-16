@@ -1523,6 +1523,15 @@ h1 {
   animation: map-marker-drop 0.35s ease-out both;
 }
 
+/* ── Cluster expansion animation ── */
+.map-cluster {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.map-cluster:hover {
+  transform: scale(1.12);
+}
+
 .watch-site-icon {
   background: transparent;
   border: 0;
