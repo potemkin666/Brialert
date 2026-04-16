@@ -106,7 +106,7 @@
   { "terms": ["bucharest"], "label": "Bucharest, Romania", "kind": "city", "precision": "high", "lat": 44.4268, "lng": 26.1025 },
   { "terms": ["romania"], "label": "Romania", "kind": "country", "precision": "low", "lat": 45.9432, "lng": 24.9668 },
 
-  { "terms": ["europe"], "label": "Europe", "kind": "continent", "precision": "low", "lat": 54.0, "lng": 15.0 },
+  { "terms": ["europe"], "label": "Europe", "kind": "continent", "precision": "low", "lat": 50.0, "lng": 10.0 },
 
   { "terms": ["tehran"], "label": "Tehran, Iran", "kind": "city", "precision": "high", "lat": 35.6892, "lng": 51.3890 },
   { "terms": ["iran"], "label": "Iran", "kind": "country", "precision": "low", "lat": 32.4279, "lng": 53.6880 },
