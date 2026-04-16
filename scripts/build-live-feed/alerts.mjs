@@ -444,7 +444,7 @@ export function dedupeAndSortAlerts(items) {
         (itemTrack === incumbentTrack && itemTier === incumbentTier && (item.priorityScore || 0) > (incumbent.priorityScore || 0))
       ) {
         item.isDuplicateOf = incumbent.fusedIncidentId || incumbent.id;
-        item.fusedIncidentId = incumbent.fusedIncidentId || item.fusedIncidentId;
+        item.fusedIncidentId = incumbent.fusedIncidentId || incumbent.id;
         item.corroboratingSources = mergeCorroboratingSources(item, incumbent);
         item.corroborationCount = item.corroboratingSources.length;
         deduped[existingIndex] = item;
