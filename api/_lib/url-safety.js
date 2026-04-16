@@ -44,7 +44,6 @@ function isPrivateIp(ip) {
   if (ip.startsWith('10.')) return true;
   if (ip.startsWith('127.')) return true;
   if (ip.startsWith('0.')) return true;
-  if (ip === '0.0.0.0') return true;
   if (ip.startsWith('169.254.')) return true;
   if (ip.startsWith('192.168.')) return true;
   if (/^172\.(1[6-9]|2\d|3[01])\./.test(ip)) return true;
