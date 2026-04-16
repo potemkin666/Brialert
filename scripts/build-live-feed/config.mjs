@@ -115,6 +115,55 @@ export const GUARDRAIL_MIN_SUCCESSFUL_SOURCES = Math.max(
     ? Math.floor(Number(process.env.BRIALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES))
     : 8
 );
+// ---------------------------------------------------------------------------
+// Mid-run adaptive guardrail thresholds
+// ---------------------------------------------------------------------------
+/** Fraction of GUARDRAIL_MAX_RUNTIME_MS at which we switch to fast-fail mode. */
+export const MIDRUN_RUNTIME_WARNING_RATIO = Math.max(
+  0.1,
+  Math.min(
+    0.99,
+    Number.isFinite(Number(process.env.BRIALERT_MIDRUN_RUNTIME_WARNING_RATIO))
+      ? Number(process.env.BRIALERT_MIDRUN_RUNTIME_WARNING_RATIO)
+      : 0.8
+  )
+);
+/** Fraction of GUARDRAIL_MAX_FAILED_SOURCE_RATE at which we start throttling. */
+export const MIDRUN_FAILURE_RATE_WARNING_RATIO = Math.max(
+  0.1,
+  Math.min(
+    0.99,
+    Number.isFinite(Number(process.env.BRIALERT_MIDRUN_FAILURE_RATE_WARNING_RATIO))
+      ? Number(process.env.BRIALERT_MIDRUN_FAILURE_RATE_WARNING_RATIO)
+      : 0.6
+  )
+);
+/**
+ * Minimum sources processed before the failure-rate warning can trigger.
+ * Avoids reacting to 1-of-2 failures at the very start of a run.
+ */
+export const MIDRUN_MIN_SOURCES_FOR_RATE_CHECK = envInt('BRIALERT_MIDRUN_MIN_SOURCES_FOR_RATE_CHECK', 6, 2);
+/** Per-source timeout used in fast-fail mode (ms). */
+export const MIDRUN_FAST_FAIL_TIMEOUT_MS = envInt('BRIALERT_MIDRUN_FAST_FAIL_TIMEOUT_MS', 5000, 1000);
+/**
+ * Safety margin (ms) subtracted from the runtime guardrail when computing
+ * whether a continuation batch has enough time to complete.
+ */
+export const CONTINUATION_SAFETY_MARGIN_MS = envInt('BRIALERT_CONTINUATION_SAFETY_MARGIN_MS', 30_000, 5000);
+/**
+ * Floor for the observed success rate used when computing the dynamic
+ * continuation oversample factor.  Prevents division-by-tiny-number spikes.
+ */
+export const CONTINUATION_MIN_OVERSAMPLE_RATE = Math.max(
+  0.01,
+  Math.min(
+    1,
+    Number.isFinite(Number(process.env.BRIALERT_CONTINUATION_MIN_OVERSAMPLE_RATE))
+      ? Number(process.env.BRIALERT_CONTINUATION_MIN_OVERSAMPLE_RATE)
+      : 0.1
+  )
+);
+
 export const TARGET_SUCCESSFUL_SOURCES_PER_RUN = Math.max(
   1,
   Number.isFinite(Number(process.env.BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
@@ -243,6 +292,16 @@ export const HEALTH_SCORE_FAILURE_PENALTY = envInt('BRIALERT_HEALTH_SCORE_FAILUR
 export const HEALTH_SCORE_CRITICAL_FAILURE_PENALTY = envInt('BRIALERT_HEALTH_SCORE_CRITICAL_FAILURE_PENALTY', 30, 1);
 export const HEALTH_SCORE_EMPTY_PENALTY = envInt('BRIALERT_HEALTH_SCORE_EMPTY_PENALTY', 3, 0);
 export const HEALTH_SCORE_LOW_INTERVAL_HOURS = envInt('BRIALERT_HEALTH_SCORE_LOW_INTERVAL_HOURS', 24, 1);
+export const ROLLING_ERROR_WINDOW_SIZE = envInt('BRIALERT_ROLLING_ERROR_WINDOW_SIZE', 5, 1);
+// ---------------------------------------------------------------------------
+// Domain circuit-breaker ↔ health-score integration
+// ---------------------------------------------------------------------------
+/** Health penalty applied to sibling sources when a domain's circuit breaker trips. */
+export const CIRCUIT_BREAKER_DOMAIN_PENALTY = envInt('BRIALERT_CIRCUIT_BREAKER_DOMAIN_PENALTY', 10, 0);
+/** Health boost for sibling sources when a probe succeeds on a tripped domain. */
+export const CIRCUIT_BREAKER_PROBE_BOOST = envInt('BRIALERT_CIRCUIT_BREAKER_PROBE_BOOST', 5, 0);
+/** Number of probe requests allowed per half-open cooldown interval. */
+export const CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT = envInt('BRIALERT_CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT', 1, 1);
 export const FAIL_ON_GUARDRAIL_VIOLATION = clean(process.env.BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION).toLowerCase() === 'true';
 export const OFFLINE_FIXTURE_MODE = clean(process.env.BRIALERT_OFFLINE_FIXTURE_MODE).toLowerCase() === 'true';
 export const offlineFixturesPath = envPath(

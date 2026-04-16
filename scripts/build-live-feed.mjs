@@ -11,6 +11,8 @@ import {
   AUTO_SKIP_EMPTY_THRESHOLD,
   BLOCKED_NON_CONTENT_COOLDOWN_HOURS,
   BLOCKED_NON_CONTENT_FAIL_THRESHOLD,
+  CIRCUIT_BREAKER_DOMAIN_PENALTY,
+  CIRCUIT_BREAKER_PROBE_BOOST,
   CONTROL_MAX_HTML_SOURCES_PER_RUN,
   DEFAULT_FETCH_STAGGER_MS,
   FEED_SOURCE_CONCURRENCY,
@@ -26,6 +28,7 @@ import {
   HEALTH_SCORE_LOW_INTERVAL_HOURS,
   HEALTH_SCORE_REVIEW_THRESHOLD,
   HEALTH_SCORE_SUCCESS_BOOST,
+  ROLLING_ERROR_WINDOW_SIZE,
   HTML_DOMAIN_CAP_PER_RUN,
   MAX_HTML_SOURCES_PER_RUN,
   MAX_FAILING_SOURCES_TO_LOG,
@@ -41,6 +44,12 @@ import {
   PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
   PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS,
   FAIL_ON_GUARDRAIL_VIOLATION,
+  MIDRUN_RUNTIME_WARNING_RATIO,
+  MIDRUN_FAILURE_RATE_WARNING_RATIO,
+  MIDRUN_MIN_SOURCES_FOR_RATE_CHECK,
+  MIDRUN_FAST_FAIL_TIMEOUT_MS,
+  CONTINUATION_SAFETY_MARGIN_MS,
+  CONTINUATION_MIN_OVERSAMPLE_RATE,
   SCHEDULER_MODE,
   SOURCE_EMPTY_COOLDOWN_HOURS,
   TARGET_SUCCESSFUL_SOURCES_PER_RUN,
@@ -73,6 +82,7 @@ import {
 } from './build-live-feed/geo.mjs';
 import { buildHealthBlock } from './build-live-feed/health.mjs';
 import {
+  endpointDomain,
   mapWithConcurrency,
   readExisting,
   readJsonFile,
@@ -98,6 +108,8 @@ import {
 } from '../shared/taxonomy.mjs';
 
 export { buildHealthBlock } from './build-live-feed/health.mjs';
+export { createMidRunGuardrail };
+export { nextSourceHealthEntry, analyseErrorPattern, applyDomainCircuitBreakerEffects };
 const execFile = promisify(execFileCallback);
 
 function parseIsoMs(value) {
@@ -189,11 +201,71 @@ function sourceMayAutoCooldown(source, previousEntry, buildDate) {
   return null;
 }
 
+/**
+ * Analyse a rolling error window and return a pattern-based quarantine reason.
+ * Falls back to a generic message if the window is empty or the pattern is unclear.
+ *
+ * @param {Array<{category: string, message?: string, at?: string}>} recentErrors
+ * @param {{ healthScore?: number, kind?: string }} context
+ * @returns {string} Human-readable quarantine reason derived from error pattern
+ */
+function analyseErrorPattern(recentErrors, context) {
+  if (!Array.isArray(recentErrors) || recentErrors.length === 0) {
+    const score = Number.isFinite(context?.healthScore) ? context.healthScore : null;
+    return score != null
+      ? `Health score degraded to ${score} after repeated failures`
+      : 'Needs review';
+  }
+
+  const categories = recentErrors.map((e) => e?.category).filter(Boolean);
+  if (categories.length === 0) {
+    return 'Needs review';
+  }
+
+  const unique = new Set(categories);
+  const total = categories.length;
+
+  // --- Consistent single-category patterns ---
+  if (unique.size === 1) {
+    const cat = categories[0];
+    if (cat === 'not-found-404') return 'Endpoint likely removed — all recent errors are HTTP 404';
+    if (cat === 'dead-or-moved-url') return 'Endpoint dead or permanently moved — consistent dead-URL errors';
+    if (cat === 'blocked-or-auth') return 'Access protection added — consistent 401/403 blocks; consider new endpoint';
+    if (cat === 'anti-bot-protection') return 'Anti-bot protection active — consider Playwright fallback or new endpoint';
+    if (cat === 'timeout') return 'Persistent timeouts — endpoint may be overloaded or unreachable';
+    if (cat === 'network-failure') return 'Persistent network failures — DNS/connection issues; infrastructure may be down';
+    if (cat === 'brittle-selectors-or-js-rendering') return 'HTML structure changed — selectors no longer match; needs parser update';
+  }
+
+  // --- Mixed access-protection pattern (blocked + anti-bot) ---
+  const blockedCount = categories.filter((c) => c === 'blocked-or-auth' || c === 'anti-bot-protection').length;
+  if (blockedCount >= Math.ceil(total * 0.6)) {
+    return 'Access protection added — errors alternate between auth blocks and anti-bot; consider Playwright fallback or new endpoint';
+  }
+
+  // --- Mixed network/timeout pattern ---
+  const networkCount = categories.filter((c) => c === 'network-failure' || c === 'timeout').length;
+  if (networkCount >= Math.ceil(total * 0.6)) {
+    return 'Infrastructure instability — mixed timeout and network errors; auto-retry likely to recover';
+  }
+
+  // --- Varied/transient errors ---
+  if (unique.size >= 3) {
+    return 'Varied error types — transient instability; may recover automatically';
+  }
+
+  const score = Number.isFinite(context?.healthScore) ? context.healthScore : null;
+  return score != null
+    ? `Health score degraded to ${score} after repeated failures`
+    : 'Repeated failures — needs manual review';
+}
+
 function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   const prior = previousEntry && typeof previousEntry === 'object' ? previousEntry : {};
   const priorBlockedFailures = Number(prior.consecutiveBlockedFailures || 0);
   const priorDeadUrlFailures = Number(prior.consecutiveDeadUrlFailures || 0);
   const priorHealthScore = Number.isFinite(Number(prior.healthScore)) ? Number(prior.healthScore) : HEALTH_SCORE_INITIAL;
+  const priorRecentErrors = Array.isArray(prior.recentErrors) ? prior.recentErrors : [];
   const generatedAtMs = Date.parse(generatedAt);
   const scheduleBaseDate = Number.isFinite(generatedAtMs) ? new Date(generatedAtMs) : new Date();
   const scheduledNextFetchAt = sourceScheduleNextFetchAfterRun(source, scheduleBaseDate);
@@ -215,6 +287,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     lastEmptyAt: prior.lastEmptyAt || null,
     lastErrorCategory: prior.lastErrorCategory || null,
     lastErrorMessage: prior.lastErrorMessage || null,
+    recentErrors: priorRecentErrors,
     cooldownUntil: null,
     autoSkipReason: null,
     healthScore: priorHealthScore,
@@ -232,6 +305,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.consecutiveDeadUrlFailures = 0;
     next.lastErrorCategory = null;
     next.lastErrorMessage = null;
+    next.recentErrors = [];
     next.lastSuccessfulAt = generatedAt;
     next.healthScore = Math.min(100, priorHealthScore + HEALTH_SCORE_SUCCESS_BOOST);
     next.quarantined = false;
@@ -255,6 +329,14 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.lastErrorCategory = stat?.lastErrorCategory || null;
     next.lastErrorMessage = stat?.lastErrorMessage || null;
 
+    // Append to rolling error window (capped at ROLLING_ERROR_WINDOW_SIZE).
+    const errorEvent = {
+      category: stat?.lastErrorCategory || 'unknown',
+      message: stat?.lastErrorMessage || '',
+      at: generatedAt
+    };
+    next.recentErrors = [...priorRecentErrors, errorEvent].slice(-ROLLING_ERROR_WINDOW_SIZE);
+
     // Critical failures receive a larger health penalty.
     const isCritical = notFoundFailure || deadUrlFailure
       || (source?.kind === 'html' && next.consecutiveBlockedFailures >= AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD)
@@ -267,15 +349,10 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     if (next.healthScore < HEALTH_SCORE_REVIEW_THRESHOLD && !next.quarantined) {
       next.quarantined = true;
       next.quarantinedAt = generatedAt;
-      if (notFoundFailure) {
-        next.quarantineReason = 'HTTP 404 not found; needs manual source URL review';
-      } else if (source?.kind === 'html' && next.consecutiveBlockedFailures >= AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD) {
-        next.quarantineReason = 'Repeated blocked-or-auth failures on html source';
-      } else if (next.consecutiveDeadUrlFailures >= AUTO_QUARANTINE_DEAD_URL_THRESHOLD) {
-        next.quarantineReason = 'Repeated dead-or-moved-url failures';
-      } else {
-        next.quarantineReason = `Health score degraded to ${next.healthScore} after repeated failures`;
-      }
+      next.quarantineReason = analyseErrorPattern(next.recentErrors, {
+        healthScore: next.healthScore,
+        kind: source?.kind
+      });
     }
 
     // Low-health sources are deprioritised with a longer interval instead of a hard block.
@@ -308,6 +385,79 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.nextFetchAt = next.cooldownUntil;
   }
   return next;
+}
+
+/**
+ * Propagate domain-level circuit-breaker signals into per-source health scores.
+ *
+ * When a domain's circuit breaker tripped during the run, apply a proportional
+ * health penalty to every source on that domain that was NOT the cause of the
+ * trip (sibling sources).  When a probe request succeeded on a tripped domain,
+ * apply a small health boost to siblings instead.
+ *
+ * Mutates `nextSourceHealth` in place and returns a summary of adjustments.
+ *
+ * @param {Object} nextSourceHealth Map of sourceId → health entry
+ * @param {Object} domainState      The requestState.domainState after the run
+ * @param {Array}  sources          Source definitions (need .id, .endpoint)
+ * @returns {{ penalised: string[], boosted: string[] }}
+ */
+function applyDomainCircuitBreakerEffects(nextSourceHealth, domainState, sources) {
+  const penalised = [];
+  const boosted = [];
+
+  if (!domainState || typeof domainState !== 'object' || !nextSourceHealth || typeof nextSourceHealth !== 'object') {
+    return { penalised, boosted };
+  }
+
+  // Build a map of domain → source IDs
+  const domainToSourceIds = new Map();
+  const sourcesArray = Array.isArray(sources) ? sources : [];
+  for (const source of sourcesArray) {
+    if (!source?.id || !source?.endpoint) continue;
+    const domain = endpointDomain(source.endpoint);
+    if (!domain) continue;
+    if (!domainToSourceIds.has(domain)) domainToSourceIds.set(domain, []);
+    domainToSourceIds.get(domain).push(source.id);
+  }
+
+  for (const [domain, state] of Object.entries(domainState)) {
+    if (!state || typeof state !== 'object') continue;
+    const siblingIds = domainToSourceIds.get(domain);
+    if (!siblingIds || siblingIds.length === 0) continue;
+
+    const circuitTripped = Number(state.circuitOpenUntil || 0) > 0 && Date.now() < Number(state.circuitOpenUntil);
+    const probeSucceeded = Boolean(state.probeSuccess);
+
+    if (probeSucceeded && CIRCUIT_BREAKER_PROBE_BOOST > 0) {
+      // A probe succeeded — boost sibling sources that didn't run this cycle
+      for (const sourceId of siblingIds) {
+        const entry = nextSourceHealth[sourceId];
+        if (!entry || typeof entry !== 'object') continue;
+        // Only boost sources that didn't already get updated this run (deferred / not-stat'd)
+        const currentScore = Number.isFinite(Number(entry.healthScore)) ? Number(entry.healthScore) : HEALTH_SCORE_INITIAL;
+        const boostedScore = Math.min(100, currentScore + CIRCUIT_BREAKER_PROBE_BOOST);
+        if (boostedScore > currentScore) {
+          entry.healthScore = boostedScore;
+          boosted.push(sourceId);
+        }
+      }
+    } else if (circuitTripped && CIRCUIT_BREAKER_DOMAIN_PENALTY > 0) {
+      // Circuit breaker is open — penalise sibling sources
+      for (const sourceId of siblingIds) {
+        const entry = nextSourceHealth[sourceId];
+        if (!entry || typeof entry !== 'object') continue;
+        const currentScore = Number.isFinite(Number(entry.healthScore)) ? Number(entry.healthScore) : HEALTH_SCORE_INITIAL;
+        const penalisedScore = Math.max(0, currentScore - CIRCUIT_BREAKER_DOMAIN_PENALTY);
+        if (penalisedScore < currentScore) {
+          entry.healthScore = penalisedScore;
+          penalised.push(sourceId);
+        }
+      }
+    }
+  }
+
+  return { penalised, boosted };
 }
 
 function alertKey(alert) {
@@ -516,6 +666,7 @@ function reviewByTimestamp(entry, hours = AUTO_QUARANTINE_RECHECK_HOURS) {
 function shouldTryPlaywrightFallback(source, summary, playwrightBudget) {
   if (!source || source.kind !== 'html') return false;
   if (!summary) return false;
+  if (playwrightBudget?.disabled) return false;
   if ((playwrightBudget?.attempts || 0) >= (playwrightBudget?.maxAttempts || 0)) return false;
   const reason = classifyFetchFailure(summary);
   if (reason !== 'bot-block' && reason !== 'parser-failure') return false;
@@ -527,6 +678,7 @@ function shouldTryPlaywrightFallback(source, summary, playwrightBudget) {
 
 function shouldTryPlaywrightForThinHtml(source, body, playwrightBudget) {
   if (!source || source.kind !== 'html') return false;
+  if (playwrightBudget?.disabled) return false;
   if ((playwrightBudget?.attempts || 0) >= (playwrightBudget?.maxAttempts || 0)) return false;
   if (!PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS || PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS <= 0) return false;
   const bodySize = typeof body === 'string' ? body.trim().length : 0;
@@ -535,6 +687,193 @@ function shouldTryPlaywrightForThinHtml(source, body, playwrightBudget) {
   return PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS.has(source.id)
     || (domain && PLAYWRIGHT_FALLBACK_DOMAINS.has(domain))
     || PLAYWRIGHT_FALLBACK_AGGRESSIVE;
+}
+
+function isPlaywrightUnavailableError(error) {
+  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
+  if (meta && meta.errorCode === ERROR_CODE.PLAYWRIGHT_UNAVAILABLE) return true;
+  const msg = error instanceof Error ? error.message : String(error || '');
+  return /Executable doesn't exist|Playwright browser not installed/i.test(msg);
+}
+
+// ---------------------------------------------------------------------------
+// Mid-run adaptive guardrail
+// ---------------------------------------------------------------------------
+
+/**
+ * Creates a mid-run guardrail tracker that monitors failure rate and runtime
+ * consumption after each batch, progressively throttling the build when
+ * thresholds are approached.
+ *
+ * @param {object} options
+ * @param {number} options.runStartedAtMs - epoch ms when the run started
+ * @param {number} options.maxRuntimeMs - GUARDRAIL_MAX_RUNTIME_MS
+ * @param {number} options.maxFailedRate - GUARDRAIL_MAX_FAILED_SOURCE_RATE
+ * @param {number} options.runtimeWarningRatio - fraction of maxRuntimeMs that triggers fast-fail
+ * @param {number} options.failureRateWarningRatio - fraction of maxFailedRate that triggers throttle
+ * @param {number} options.minSourcesForRateCheck - min sources before failure rate is evaluated
+ * @param {number} options.baseConcurrency - starting FEED_SOURCE_CONCURRENCY
+ * @param {number} options.baseStaggerMs - starting DEFAULT_FETCH_STAGGER_MS
+ * @param {number} options.baseStaggerJitterMs - starting MAX_FETCH_STAGGER_JITTER_MS
+ * @param {number} options.fastFailTimeoutMs - per-source timeout when in fast-fail mode
+ * @returns {object} guardrail tracker
+ */
+function createMidRunGuardrail({
+  runStartedAtMs,
+  maxRuntimeMs,
+  maxFailedRate,
+  runtimeWarningRatio,
+  failureRateWarningRatio,
+  minSourcesForRateCheck,
+  baseConcurrency,
+  baseStaggerMs,
+  baseStaggerJitterMs,
+  fastFailTimeoutMs
+}) {
+  let totalAttempted = 0;
+  let totalFailed = 0;
+  let totalSuccessful = 0;
+  let throttleLevel = 0; // 0 = normal, 1 = throttled, 2 = fast-fail
+  let criticalOnly = false;
+  let skipPlaywright = false;
+  let cumulativeBatchMs = 0;
+  let batchCount = 0;
+  const log = [];
+
+  function elapsedMs() {
+    return Date.now() - runStartedAtMs;
+  }
+
+  function failedRate() {
+    return totalAttempted > 0 ? totalFailed / totalAttempted : 0;
+  }
+
+  /** Observed success rate (sources with built > 0 / totalAttempted). */
+  function successRate() {
+    return totalAttempted > 0 ? totalSuccessful / totalAttempted : 0;
+  }
+
+  /** Average wall-clock milliseconds per source across all recorded batches. */
+  function avgSourceDurationMs() {
+    return totalAttempted > 0 ? cumulativeBatchMs / totalAttempted : 0;
+  }
+
+  /**
+   * Record the results of a processed batch.
+   * @param {Array} batchStats - array of sourceStat objects from processSourceBatch
+   * @param {number} [batchDurationMs] - wall-clock time the batch took (optional)
+   */
+  function recordBatch(batchStats, batchDurationMs) {
+    for (const stat of batchStats) {
+      totalAttempted += 1;
+      if ((stat?.errors || 0) > 0 && (stat?.built || 0) === 0) {
+        totalFailed += 1;
+      }
+      if ((stat?.built || 0) > 0) {
+        totalSuccessful += 1;
+      }
+    }
+    if (Number.isFinite(batchDurationMs) && batchDurationMs > 0) {
+      cumulativeBatchMs += batchDurationMs;
+      batchCount += 1;
+    }
+  }
+
+  /**
+   * Evaluate guardrail thresholds and return the current adaptive state.
+   * Call after recordBatch() to get updated throttle decisions.
+   * @returns {{ concurrency: number, staggerMs: number, staggerJitterMs: number, timeoutOverrideMs: number|null, skipPlaywright: boolean, criticalOnly: boolean, shouldAbort: boolean }}
+   */
+  function evaluate() {
+    const elapsed = elapsedMs();
+    const runtimeRatio = maxRuntimeMs > 0 ? elapsed / maxRuntimeMs : 0;
+    const rate = failedRate();
+    const failureWarningThreshold = maxFailedRate * failureRateWarningRatio;
+    const runtimeWarningThreshold = runtimeWarningRatio;
+
+    let newThrottleLevel = 0;
+    let reason = null;
+
+    // --- runtime pressure ---
+    if (runtimeRatio >= runtimeWarningThreshold) {
+      newThrottleLevel = Math.max(newThrottleLevel, 2);
+      reason = `runtime at ${(runtimeRatio * 100).toFixed(1)}% of guardrail`;
+    } else if (runtimeRatio >= runtimeWarningThreshold * 0.85) {
+      newThrottleLevel = Math.max(newThrottleLevel, 1);
+      reason = reason || `runtime approaching ${(runtimeRatio * 100).toFixed(1)}% of guardrail`;
+    }
+
+    // --- failure-rate pressure (only with enough samples) ---
+    if (totalAttempted >= minSourcesForRateCheck) {
+      if (rate >= maxFailedRate) {
+        newThrottleLevel = Math.max(newThrottleLevel, 2);
+        reason = `failure rate ${(rate * 100).toFixed(1)}% exceeds guardrail ${(maxFailedRate * 100).toFixed(1)}%`;
+      } else if (rate >= failureWarningThreshold) {
+        newThrottleLevel = Math.max(newThrottleLevel, 1);
+        reason = reason || `failure rate ${(rate * 100).toFixed(1)}% approaching guardrail`;
+      }
+    }
+
+    // Only escalate, never de-escalate within a run
+    if (newThrottleLevel > throttleLevel) {
+      throttleLevel = newThrottleLevel;
+      log.push({ at: new Date().toISOString(), level: throttleLevel, reason, elapsed, rate: Number(rate.toFixed(3)), attempted: totalAttempted });
+      console.warn(`[mid-run-guardrail] Escalated to level ${throttleLevel}: ${reason}`);
+    }
+
+    // Level 1: reduce concurrency, increase stagger
+    // Level 2: fast-fail mode — further reduce concurrency, skip Playwright, critical-only, reduced timeout
+    const concurrency = throttleLevel >= 2
+      ? Math.max(1, Math.floor(baseConcurrency / 2))
+      : throttleLevel >= 1
+        ? Math.max(1, baseConcurrency - 1)
+        : baseConcurrency;
+
+    const staggerMs = throttleLevel >= 2
+      ? baseStaggerMs * 3
+      : throttleLevel >= 1
+        ? Math.round(baseStaggerMs * 1.5)
+        : baseStaggerMs;
+
+    const staggerJitterMs = throttleLevel >= 2
+      ? Math.round(baseStaggerJitterMs * 2)
+      : baseStaggerJitterMs;
+
+    if (throttleLevel >= 2) {
+      skipPlaywright = true;
+      criticalOnly = true;
+    }
+
+    const shouldAbort = runtimeRatio >= 0.95;
+
+    return {
+      concurrency,
+      staggerMs,
+      staggerJitterMs,
+      timeoutOverrideMs: throttleLevel >= 2 ? fastFailTimeoutMs : null,
+      skipPlaywright,
+      criticalOnly,
+      shouldAbort
+    };
+  }
+
+  /** Return a snapshot for inclusion in runMetrics. */
+  function snapshot() {
+    return {
+      throttleLevel,
+      totalAttempted,
+      totalFailed,
+      totalSuccessful,
+      failedRate: Number(failedRate().toFixed(3)),
+      successRate: Number(successRate().toFixed(3)),
+      avgSourceDurationMs: Math.round(avgSourceDurationMs()),
+      criticalOnly,
+      skipPlaywright,
+      transitions: log
+    };
+  }
+
+  return { recordBatch, evaluate, snapshot, elapsedMs, successRate, avgSourceDurationMs };
 }
 
 async function attemptSourceBuild(source, requestState, playwrightBudget, priorHealthEntry) {
@@ -560,14 +899,21 @@ async function attemptSourceBuild(source, requestState, playwrightBudget, priorH
     const summary = summariseSourceError(source, error);
     if (shouldTryPlaywrightFallback(source, summary, playwrightBudget)) {
       playwrightBudget.attempts += 1;
-      body = await fetchTextWithPlaywright(source.endpoint, {
-        source,
-        timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
-        contentSelectors: source?.playwright?.contentSelectors
-      });
-      usedPlaywrightFallback = true;
-      playwrightBudget.successes += 1;
-      fetchOutcome = 'success';
+      try {
+        body = await fetchTextWithPlaywright(source.endpoint, {
+          source,
+          timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS,
+          contentSelectors: source?.playwright?.contentSelectors
+        });
+        usedPlaywrightFallback = true;
+        playwrightBudget.successes += 1;
+        fetchOutcome = 'success';
+      } catch (pwError) {
+        if (isPlaywrightUnavailableError(pwError)) {
+          playwrightBudget.disabled = true;
+        }
+        throw pwError;
+      }
     } else {
       throw error;
     }
@@ -588,7 +934,10 @@ async function attemptSourceBuild(source, requestState, playwrightBudget, priorH
       playwrightBudget.successes += 1;
       parsed = parseHtmlItems(source, body);
     } catch (error) {
-      // ignore, handled below
+      if (isPlaywrightUnavailableError(error)) {
+        playwrightBudget.disabled = true;
+      }
+      // fall through to normal empty parse handling
     }
   }
 
@@ -686,6 +1035,7 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
         consecutiveFailures: Number(health?.consecutiveFailures || 0),
         consecutiveBlockedFailures: Number(health?.consecutiveBlockedFailures || 0),
         consecutiveDeadUrlFailures: Number(health?.consecutiveDeadUrlFailures || 0),
+        recentErrors: Array.isArray(health?.recentErrors) ? health.recentErrors : [],
         replacementSuggestion: clean(source?.replacementEndpoint || source?.fallbackEndpoint || source?.canonicalEndpoint || ''),
         reviewBy: reviewByTimestamp(health, AUTO_QUARANTINE_RECHECK_HOURS),
         lastFailureAt: clean(health?.lastFailureAt),
@@ -2201,7 +2551,7 @@ async function main() {
   const scheduledSourceIds = new Set([...machineReadableScheduled, ...htmlScheduled].map((source) => source.id));
   const scheduledSourcesInitial = [...machineReadableScheduled, ...htmlScheduled];
   const htmlDeferredForBudget = scheduledSources.filter((source) => source?.kind === 'html' && !scheduledSourceIds.has(source.id));
-  const continuationOversamplingFactor = 2;
+  const fallbackOversamplingFactor = 2;
   const htmlDeferredReasonById = new Map();
   for (const source of htmlDeferredForBudget) {
     htmlDeferredReasonById.set(source.id, htmlSelection.domainCappedSourceIds.has(source.id) ? 'domain-cap' : 'html-budget');
@@ -2233,11 +2583,29 @@ async function main() {
     Array.isArray(sources) ? sources.map((entry) => [entry?.id, entry]).filter(([id]) => id) : []
   );
 
-  async function processSourceBatch(batch) {
+  const midRunGuardrail = createMidRunGuardrail({
+    runStartedAtMs,
+    maxRuntimeMs: GUARDRAIL_MAX_RUNTIME_MS,
+    maxFailedRate: GUARDRAIL_MAX_FAILED_SOURCE_RATE,
+    runtimeWarningRatio: MIDRUN_RUNTIME_WARNING_RATIO,
+    failureRateWarningRatio: MIDRUN_FAILURE_RATE_WARNING_RATIO,
+    minSourcesForRateCheck: MIDRUN_MIN_SOURCES_FOR_RATE_CHECK,
+    baseConcurrency: FEED_SOURCE_CONCURRENCY,
+    baseStaggerMs: DEFAULT_FETCH_STAGGER_MS,
+    baseStaggerJitterMs: MAX_FETCH_STAGGER_JITTER_MS,
+    fastFailTimeoutMs: MIDRUN_FAST_FAIL_TIMEOUT_MS
+  });
+
+  async function processSourceBatch(batch, adaptiveState) {
     if (!batch.length) return;
+    const batchStartMs = Date.now();
+    const effectiveConcurrency = adaptiveState?.concurrency || FEED_SOURCE_CONCURRENCY;
+    const effectiveStaggerMs = adaptiveState?.staggerMs ?? DEFAULT_FETCH_STAGGER_MS;
+    const effectiveJitterMs = adaptiveState?.staggerJitterMs ?? MAX_FETCH_STAGGER_JITTER_MS;
+    const timeoutOverrideMs = adaptiveState?.timeoutOverrideMs || null;
     const sourceResults = await mapWithConcurrency(
       batch,
-      FEED_SOURCE_CONCURRENCY,
+      effectiveConcurrency,
       async (source, sourceIndex) => {
         const localErrors = [];
         const builtAlerts = [];
@@ -2260,9 +2628,9 @@ async function main() {
         };
 
         try {
-          const baseDelay = (sourceAttemptOffset + sourceIndex) * DEFAULT_FETCH_STAGGER_MS;
-          const jitter = MAX_FETCH_STAGGER_JITTER_MS > 0
-            ? Math.floor(Math.random() * (MAX_FETCH_STAGGER_JITTER_MS + 1))
+          const baseDelay = (sourceAttemptOffset + sourceIndex) * effectiveStaggerMs;
+          const jitter = effectiveJitterMs > 0
+            ? Math.floor(Math.random() * (effectiveJitterMs + 1))
             : 0;
           await sleep(baseDelay + jitter);
           let body;
@@ -2271,7 +2639,7 @@ async function main() {
           let responseStatus = null;
           let fetchOutcome = 'unknown';
           try {
-            const fetched = await fetchText(source.endpoint, 1, { source, requestState, includeMeta: true });
+            const fetched = await fetchText(source.endpoint, 1, { source, requestState, includeMeta: true, timeoutOverrideMs: timeoutOverrideMs });
             if (typeof fetched === 'string') {
               body = fetched;
               fetchOutcome = 'success';
@@ -2287,15 +2655,22 @@ async function main() {
             if (reason === 'stale-endpoint') failureReasonCounts['stale-endpoint'] += 1;
             else if (reason === 'bot-block') failureReasonCounts['blocked-or-anti-bot'] += 1;
             else if (reason === 'timeout') failureReasonCounts['timeout-or-aborted'] += 1;
-            if (shouldTryPlaywrightFallback(source, summary, playwrightBudget)) {
+            if (!adaptiveState?.skipPlaywright && shouldTryPlaywrightFallback(source, summary, playwrightBudget)) {
               playwrightBudget.attempts += 1;
-              body = await fetchTextWithPlaywright(source.endpoint, {
-                source,
-                timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS
-              });
-              usedPlaywrightFallback = true;
-              playwrightBudget.successes += 1;
-              fetchOutcome = 'success';
+              try {
+                body = await fetchTextWithPlaywright(source.endpoint, {
+                  source,
+                  timeoutMs: PLAYWRIGHT_FALLBACK_TIMEOUT_MS
+                });
+                usedPlaywrightFallback = true;
+                playwrightBudget.successes += 1;
+                fetchOutcome = 'success';
+              } catch (pwError) {
+                if (isPlaywrightUnavailableError(pwError)) {
+                  playwrightBudget.disabled = true;
+                }
+                throw pwError;
+              }
             } else {
               throw error;
             }
@@ -2303,7 +2678,7 @@ async function main() {
           let parsed = source.kind === 'rss' || source.kind === 'atom' || source.kind === 'json'
             ? parseFeedItems(source, body)
             : parseHtmlItems(source, body);
-          if (!parsed.length && source.kind === 'html' && !usedPlaywrightFallback && shouldTryPlaywrightForThinHtml(source, body, playwrightBudget)) {
+          if (!parsed.length && source.kind === 'html' && !usedPlaywrightFallback && !adaptiveState?.skipPlaywright && shouldTryPlaywrightForThinHtml(source, body, playwrightBudget)) {
             try {
               playwrightBudget.attempts += 1;
               body = await fetchTextWithPlaywright(source.endpoint, {
@@ -2315,6 +2690,9 @@ async function main() {
               playwrightBudget.successes += 1;
               parsed = parseHtmlItems(source, body);
             } catch (error) {
+              if (isPlaywrightUnavailableError(error)) {
+                playwrightBudget.disabled = true;
+              }
               // fall through to normal empty parse handling
             }
           }
@@ -2474,33 +2852,77 @@ async function main() {
     );
     sourceAttemptOffset += batch.length;
     sourcesAttemptedCount += batch.length;
+    const batchSourceStats = [];
     for (const result of sourceResults) {
       checked += result.checked || 0;
       if (Array.isArray(result.alerts) && result.alerts.length) items.push(...result.alerts);
       if (Array.isArray(result.sourceErrors) && result.sourceErrors.length) sourceErrors.push(...result.sourceErrors);
-      if (result.sourceStat) sourceStats.push(result.sourceStat);
+      if (result.sourceStat) {
+        sourceStats.push(result.sourceStat);
+        batchSourceStats.push(result.sourceStat);
+      }
     }
+    midRunGuardrail.recordBatch(batchSourceStats, Date.now() - batchStartMs);
   }
 
-  await processSourceBatch(scheduledSourcesInitial);
+  // --- Initial batch (no adaptive throttling yet) ---
+  await processSourceBatch(scheduledSourcesInitial, null);
+
+  // --- Evaluate mid-run guardrail after initial batch ---
+  let adaptiveState = midRunGuardrail.evaluate();
 
   let successfulSourcesFound = sourceStats.filter((stat) => stat.built > 0).length;
   while (
     successfulSourcesFound < TARGET_SUCCESSFUL_SOURCES_PER_RUN
     && continuationCandidates.length
   ) {
+    if (adaptiveState.shouldAbort) {
+      console.warn('[mid-run-guardrail] Aborting continuation: runtime at 95%+ of guardrail.');
+      break;
+    }
     const elapsed = Date.now() - runStartedAtMs;
     if (elapsed >= Math.max(0, GUARDRAIL_MAX_RUNTIME_MS - CONTINUATION_RUNTIME_HEADROOM_MS)) {
       break;
     }
+
+    // --- Dynamic oversample factor based on observed success rate ---
+    const observedSuccess = midRunGuardrail.successRate();
+    const continuationOversamplingFactor = observedSuccess > 0
+      ? Math.min(10, 1 / Math.max(observedSuccess, CONTINUATION_MIN_OVERSAMPLE_RATE))
+      : fallbackOversamplingFactor;
+
     const remainingNeeded = TARGET_SUCCESSFUL_SOURCES_PER_RUN - successfulSourcesFound;
     // Oversample remaining candidates because many source attempts fail or return zero built alerts.
+    const effectiveConcurrency = adaptiveState.concurrency || FEED_SOURCE_CONCURRENCY;
     const nextBatchSize = Math.min(
       continuationCandidates.length,
-      Math.max(FEED_SOURCE_CONCURRENCY, remainingNeeded * continuationOversamplingFactor)
+      Math.max(effectiveConcurrency, Math.ceil(remainingNeeded * continuationOversamplingFactor))
     );
-    const nextBatch = continuationCandidates.splice(0, nextBatchSize);
-    await processSourceBatch(nextBatch);
+
+    // --- Time-budget checkpoint: skip batch if insufficient time remains ---
+    const avgPerSource = midRunGuardrail.avgSourceDurationMs();
+    if (avgPerSource > 0) {
+      const remainingMs = GUARDRAIL_MAX_RUNTIME_MS - (Date.now() - runStartedAtMs) - CONTINUATION_SAFETY_MARGIN_MS;
+      const expectedBatchMs = nextBatchSize * avgPerSource;
+      if (expectedBatchMs > remainingMs) {
+        console.warn(`[continuation] Skipping batch: expected ${Math.round(expectedBatchMs)}ms > remaining ${Math.round(remainingMs)}ms budget.`);
+        break;
+      }
+    }
+
+    let nextBatch = continuationCandidates.splice(0, nextBatchSize);
+    // In critical-only mode, only process critical-lane sources in continuation
+    if (adaptiveState.criticalOnly) {
+      const criticalSources = nextBatch.filter((source) => source?.lane === 'incidents' || source?.isTrustedOfficial);
+      const skippedCount = nextBatch.length - criticalSources.length;
+      if (skippedCount > 0) {
+        console.warn(`[mid-run-guardrail] Skipped ${skippedCount} non-critical continuation source(s).`);
+      }
+      nextBatch = criticalSources;
+    }
+    if (!nextBatch.length) continue;
+    await processSourceBatch(nextBatch, adaptiveState);
+    adaptiveState = midRunGuardrail.evaluate();
     successfulSourcesFound = sourceStats.filter((stat) => stat.built > 0).length;
   }
 
@@ -2637,6 +3059,15 @@ async function main() {
     nextSourceHealth[source.id] = nextSourceHealthEntry(source, stat, priorEntry, generatedAt);
   }
 
+  // Propagate domain circuit-breaker signals into sibling sources' health scores.
+  const circuitBreakerEffects = applyDomainCircuitBreakerEffects(nextSourceHealth, requestState.domainState, eligibleSources);
+  if (circuitBreakerEffects.penalised.length) {
+    console.warn(`[circuit-breaker] Domain penalty applied to ${circuitBreakerEffects.penalised.length} source(s): ${circuitBreakerEffects.penalised.slice(0, 5).join(', ')}${circuitBreakerEffects.penalised.length > 5 ? '…' : ''}`);
+  }
+  if (circuitBreakerEffects.boosted.length) {
+    console.log(`[circuit-breaker] Probe-success boost applied to ${circuitBreakerEffects.boosted.length} source(s): ${circuitBreakerEffects.boosted.slice(0, 5).join(', ')}${circuitBreakerEffects.boosted.length > 5 ? '…' : ''}`);
+  }
+
   const failureReasons = sourceStats.reduce((acc, stat) => {
     const reasonCounts = stat?.failureReasonCounts || {};
     for (const [reason, count] of Object.entries(reasonCounts)) {
@@ -2709,7 +3140,8 @@ async function main() {
         targetSuccessfulSourcesPerRun: TARGET_SUCCESSFUL_SOURCES_PER_RUN,
         failedSourceRate: Number(failedRate.toFixed(3)),
         successfulSources,
-        violations: guardrailViolations
+        violations: guardrailViolations,
+        midRun: midRunGuardrail.snapshot()
       }
     },
     health: buildHealthBlock({
@@ -2733,7 +3165,8 @@ async function main() {
           attempts: playwrightBudget.attempts,
           successes: playwrightBudget.successes
         },
-        guardrailViolations
+        guardrailViolations,
+        midRunGuardrail: midRunGuardrail.snapshot()
       }
     })
   };

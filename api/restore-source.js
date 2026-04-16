@@ -15,6 +15,7 @@ const QUARANTINE_ONLY_FIELDS = new Set([
   'quarantinedAt',
   'lastErrorCategory',
   'lastErrorMessage',
+  'recentErrors',
   'consecutiveFailures',
   'consecutiveBlockedFailures',
   'consecutiveDeadUrlFailures',

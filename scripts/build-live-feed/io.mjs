@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {
   BACKOFF_CAP_MS,
+  CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT,
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
   OFFLINE_FIXTURE_MODE,
@@ -55,8 +56,10 @@ const ERROR_CODE_TO_CATEGORY = Object.freeze({
   [ERROR_CODE.FETCH_TIMEOUT]: 'timeout',
   [ERROR_CODE.FETCH_NETWORK_FAILURE]: 'network-failure',
   [ERROR_CODE.NETWORK_CIRCUIT_OPEN]: 'network-failure',
+  [ERROR_CODE.PLAYWRIGHT_UNAVAILABLE]: 'brittle-selectors-or-js-rendering',
   [ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING]: 'brittle-selectors-or-js-rendering'
 });
+const PLAYWRIGHT_MISSING_BROWSER_RE = /Executable doesn't exist|Playwright browser not installed/i;
 let offlineFixtureCache = null;
 
 function createBrialertError(message, meta = {}) {
@@ -194,7 +197,7 @@ async function offlineFixtureResponse(url, options = {}) {
   };
 }
 
-function endpointDomain(url) {
+export function endpointDomain(url) {
   try {
     return new URL(url).hostname.toLowerCase();
   } catch {
@@ -272,7 +275,8 @@ export async function fetchText(url, attempt = 1, options = {}) {
   const source = options?.source || null;
   const configuredTimeoutMs = Number(source?.timeoutMs);
   const configuredMaxRetries = Number(source?.maxRetries);
-  const timeoutMs = configuredTimeoutMs > 0 ? configuredTimeoutMs : DEFAULT_TIMEOUT_MS;
+  const overrideTimeoutMs = Number(options?.timeoutOverrideMs);
+  const timeoutMs = overrideTimeoutMs > 0 ? overrideTimeoutMs : (configuredTimeoutMs > 0 ? configuredTimeoutMs : DEFAULT_TIMEOUT_MS);
   const maxAttempts = configuredMaxRetries > 0 ? configuredMaxRetries : DEFAULT_MAX_RETRIES;
   const endpoint = clean(url);
   const domain = endpointDomain(endpoint);
@@ -289,11 +293,17 @@ export async function fetchText(url, attempt = 1, options = {}) {
   if (priorCache?.etag) conditionalHeaders['if-none-match'] = clean(priorCache.etag);
   if (priorCache?.lastModified) conditionalHeaders['if-modified-since'] = clean(priorCache.lastModified);
   if (domain && domainState[domain]?.circuitOpenUntil && Date.now() < Number(domainState[domain].circuitOpenUntil || 0)) {
-    const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
-    throw createBrialertError(`Circuit open for domain ${domain} until ${openUntil}`, {
-      errorCode: ERROR_CODE.NETWORK_CIRCUIT_OPEN,
-      finalUrl: endpoint
-    });
+    const probesUsed = Number(domainState[domain].halfOpenProbes || 0);
+    if (probesUsed < CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT) {
+      // Half-open: allow a probe request and increment counter.
+      domainState[domain] = { ...domainState[domain], halfOpenProbes: probesUsed + 1 };
+    } else {
+      const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
+      throw createBrialertError(`Circuit open for domain ${domain} until ${openUntil}`, {
+        errorCode: ERROR_CODE.NETWORK_CIRCUIT_OPEN,
+        finalUrl: endpoint
+      });
+    }
   }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -398,9 +408,12 @@ export async function fetchText(url, attempt = 1, options = {}) {
       };
     }
     if (domain && options?.requestState?.domainState && options.requestState.domainState[domain]) {
+      const wasCircuitOpen = Number(options.requestState.domainState[domain].circuitOpenUntil || 0) > 0;
       options.requestState.domainState[domain] = {
         failures: 0,
-        circuitOpenUntil: 0
+        circuitOpenUntil: 0,
+        halfOpenProbes: 0,
+        probeSuccess: wasCircuitOpen
       };
     }
     return options?.includeMeta ? payload : payload.text;
@@ -432,13 +445,14 @@ export async function fetchText(url, attempt = 1, options = {}) {
       }
       const current = options.requestState.domainState[domain] && typeof options.requestState.domainState[domain] === 'object'
         ? options.requestState.domainState[domain]
-        : { failures: 0, circuitOpenUntil: 0 };
+        : { failures: 0, circuitOpenUntil: 0, halfOpenProbes: 0 };
       const nextFailures = Number(current.failures || 0) + 1;
       const isBotBlock = BOT_BLOCK_PATTERN.test(message);
       const shouldTrip = nextFailures >= (isBotBlock ? 6 : 4) && CIRCUIT_TRIP_PATTERN.test(message);
       options.requestState.domainState[domain] = {
         failures: nextFailures,
-        circuitOpenUntil: shouldTrip ? Date.now() + ((isBotBlock ? 5 : 10) * 60 * 1000) : Number(current.circuitOpenUntil || 0)
+        circuitOpenUntil: shouldTrip ? Date.now() + ((isBotBlock ? 5 : 10) * 60 * 1000) : Number(current.circuitOpenUntil || 0),
+        halfOpenProbes: shouldTrip ? 0 : Number(current.halfOpenProbes || 0)
       };
     }
 
@@ -456,7 +470,18 @@ export async function fetchTextWithPlaywright(url, options = {}) {
       errorCode: ERROR_CODE.PLAYWRIGHT_UNAVAILABLE
     });
   }
-  const browser = await playwright.chromium.launch({ headless: true });
+  let browser;
+  try {
+    browser = await playwright.chromium.launch({ headless: true });
+  } catch (launchError) {
+    const msg = launchError instanceof Error ? launchError.message : String(launchError);
+    if (PLAYWRIGHT_MISSING_BROWSER_RE.test(msg)) {
+      throw createBrialertError(`Playwright browser not installed: ${msg}`, {
+        errorCode: ERROR_CODE.PLAYWRIGHT_UNAVAILABLE
+      });
+    }
+    throw launchError;
+  }
   try {
     const context = await browser.newContext({
       userAgent: sourceUserAgent(options?.source),
@@ -541,6 +566,7 @@ function resolveErrorCode(meta, message) {
   if (/anti-bot|captcha|cloudflare|javascript and cookies/i.test(text)) return ERROR_CODE.BLOCKED_ANTI_BOT;
   if (/abort|timeout|timed out|ETIMEDOUT/i.test(text)) return ERROR_CODE.FETCH_TIMEOUT;
   if (/fetch failed|ECONNRESET|ENOTFOUND|circuit open/i.test(text)) return ERROR_CODE.FETCH_NETWORK_FAILURE;
+  if (PLAYWRIGHT_MISSING_BROWSER_RE.test(text)) return ERROR_CODE.PLAYWRIGHT_UNAVAILABLE;
   if (/no items parsed|selector/i.test(text)) return ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING;
   return '';
 }
