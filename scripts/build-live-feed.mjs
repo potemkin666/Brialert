@@ -244,6 +244,11 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.lastErrorCategory = null;
     next.lastErrorMessage = null;
     next.lastSuccessfulAt = generatedAt;
+    if (next.quarantined) {
+      next.quarantined = false;
+      next.quarantinedAt = null;
+      next.quarantineReason = null;
+    }
     return next;
   }
 
