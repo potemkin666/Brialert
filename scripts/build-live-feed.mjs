@@ -36,6 +36,7 @@ import {
   MAX_SOURCE_ERRORS_TO_REPORT,
   MAX_HTML_PREFETCH_ITEMS,
   MAX_FETCH_STAGGER_JITTER_MS,
+  MAX_STAGGER_CAP_MS,
   MAX_STORED_ALERTS,
   PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS,
   PLAYWRIGHT_FALLBACK_DOMAINS,
@@ -851,6 +852,8 @@ function createMidRunGuardrail({
       staggerMs,
       staggerJitterMs,
       timeoutOverrideMs: throttleLevel >= 2 ? fastFailTimeoutMs : null,
+      maxRetriesOverride: throttleLevel >= 2 ? 1 : null,
+      skipEnrichment: throttleLevel >= 2,
       skipPlaywright,
       criticalOnly,
       shouldAbort
@@ -2603,6 +2606,9 @@ async function main() {
     const effectiveStaggerMs = adaptiveState?.staggerMs ?? DEFAULT_FETCH_STAGGER_MS;
     const effectiveJitterMs = adaptiveState?.staggerJitterMs ?? MAX_FETCH_STAGGER_JITTER_MS;
     const timeoutOverrideMs = adaptiveState?.timeoutOverrideMs || null;
+    const maxRetriesOverride = adaptiveState?.maxRetriesOverride || null;
+    const skipEnrichment = adaptiveState?.skipEnrichment === true;
+    const deadlineMs = GUARDRAIL_MAX_RUNTIME_MS > 0 ? runStartedAtMs + GUARDRAIL_MAX_RUNTIME_MS : 0;
     const sourceResults = await mapWithConcurrency(
       batch,
       effectiveConcurrency,
@@ -2628,7 +2634,28 @@ async function main() {
         };
 
         try {
-          const baseDelay = (sourceAttemptOffset + sourceIndex) * effectiveStaggerMs;
+          // Hard runtime cutoff: skip this source if we've exceeded the guardrail
+          if (deadlineMs > 0 && Date.now() >= deadlineMs) {
+            return {
+              checked: 0,
+              alerts: [],
+              sourceErrors: [],
+              sourceStat: {
+                id: source.id,
+                provider: source.provider,
+                lane: source.lane,
+                kind: source.kind,
+                parsed: 0, hydrated: 0, filtered: 0, kept: 0, built: 0, errors: 0,
+                lastErrorCategory: null, lastErrorMessage: null,
+                usedPlaywrightFallback: false,
+                finalUrl: clean(source?.endpoint),
+                status: null, fetchOutcome: 'skipped-deadline',
+                failureReasonCounts, discardReasons
+              }
+            };
+          }
+          const rawDelay = sourceIndex * effectiveStaggerMs;
+          const baseDelay = MAX_STAGGER_CAP_MS > 0 ? Math.min(rawDelay, MAX_STAGGER_CAP_MS) : rawDelay;
           const jitter = effectiveJitterMs > 0
             ? Math.floor(Math.random() * (effectiveJitterMs + 1))
             : 0;
@@ -2639,7 +2666,7 @@ async function main() {
           let responseStatus = null;
           let fetchOutcome = 'unknown';
           try {
-            const fetched = await fetchText(source.endpoint, 1, { source, requestState, includeMeta: true, timeoutOverrideMs: timeoutOverrideMs });
+            const fetched = await fetchText(source.endpoint, 1, { source, requestState, includeMeta: true, timeoutOverrideMs, maxRetriesOverride });
             if (typeof fetched === 'string') {
               body = fetched;
               fetchOutcome = 'success';
@@ -2708,7 +2735,7 @@ async function main() {
           }
           const preLimit = source.kind === 'html' ? MAX_HTML_PREFETCH_ITEMS : MAX_FEED_PREFETCH_ITEMS;
           const preLimited = parsed.slice(0, preLimit);
-          const hydrated = source.kind === 'html' ? await enrichHtmlItems(source, preLimited) : preLimited;
+          const hydrated = (source.kind === 'html' && !skipEnrichment) ? await enrichHtmlItems(source, preLimited) : preLimited;
           const reliabilityProfile = inferReliabilityProfile(source, inferSourceTier(source));
           const filtered = hydrated.filter((item) => {
             try {

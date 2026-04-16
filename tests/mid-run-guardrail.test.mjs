@@ -34,6 +34,8 @@ test('createMidRunGuardrail returns level 0 with no sources processed', () => {
   assert.equal(state.staggerMs, 60);
   assert.equal(state.staggerJitterMs, 90);
   assert.equal(state.timeoutOverrideMs, null);
+  assert.equal(state.maxRetriesOverride, null);
+  assert.equal(state.skipEnrichment, false);
   assert.equal(state.skipPlaywright, false);
   assert.equal(state.criticalOnly, false);
   assert.equal(state.shouldAbort, false);
@@ -87,6 +89,8 @@ test('failure rate above warning ratio (60% of max) triggers level 1', () => {
   assert.equal(state.concurrency, 3, 'concurrency reduced by 1');
   assert.equal(state.staggerMs, 90, 'stagger increased to 1.5x');
   assert.equal(state.timeoutOverrideMs, null, 'no timeout override at level 1');
+  assert.equal(state.maxRetriesOverride, null, 'no retry override at level 1');
+  assert.equal(state.skipEnrichment, false, 'enrichment not skipped at level 1');
   assert.equal(state.criticalOnly, false, 'not critical-only at level 1');
   assert.equal(state.skipPlaywright, false, 'playwright not skipped at level 1');
 });
@@ -103,6 +107,8 @@ test('failure rate exceeding max triggers level 2 (fast-fail)', () => {
   assert.equal(state.staggerMs, 180, 'stagger tripled');
   assert.equal(state.staggerJitterMs, 180, 'jitter doubled');
   assert.equal(state.timeoutOverrideMs, 5000, 'fast-fail timeout applied');
+  assert.equal(state.maxRetriesOverride, 1, 'retries reduced to 1 in fast-fail');
+  assert.equal(state.skipEnrichment, true, 'enrichment skipped in fast-fail');
   assert.equal(state.criticalOnly, true, 'critical-only mode');
   assert.equal(state.skipPlaywright, true, 'playwright skipped');
 });
