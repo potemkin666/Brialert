@@ -13,10 +13,16 @@ function truncateAtWordBoundary(value, maxChars) {
   return text.slice(0, maxChars).trim();
 }
 
+const LONG_BRIEF_PROMPT = {
+  id: 'pmpt_69e13dfd0ce48195866d2bf5a9c58ea9084af6b6d247fa7c',
+  version: '1'
+};
+
 export function mapAlertToLongBriefPayload(alert, maxSourceExtractChars) {
   const sourceExtract = alert.sourceExtract ?? alert.extract ?? alert.summary ?? '';
   const trimmedSourceExtract = cleanTextBlock(truncateAtWordBoundary(sourceExtract, maxSourceExtractChars));
   return {
+    prompt: LONG_BRIEF_PROMPT,
     sourceName: String(alert.sourceName ?? alert.source ?? ''),
     headline: String(alert.headline ?? alert.title ?? ''),
     sourceExtract: trimmedSourceExtract,

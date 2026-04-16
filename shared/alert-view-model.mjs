@@ -8,6 +8,7 @@ import {
 import { laneLabels } from './ui-data.mjs';
 import { formatAgeFromDate } from './time-format.mjs';
 import { DEFAULT_LANE, LANE_KEYS, STATUS_LABELS } from './ui-constants.mjs';
+import { escapeHtml } from '../app/utils/text.mjs';
 
 export function formatAgeFrom(dateLike) {
   return formatAgeFromDate(dateLike);
@@ -370,7 +371,7 @@ function buildConfidenceLadder(alert) {
     {
       label: 'Initial signal',
       active: score >= 1,
-      detail: stack.length ? `${stack[0].source || 'Primary source'} opened the incident.` : 'No incident signal yet.'
+      detail: stack.length ? `${escapeHtml(stack[0].source || 'Primary source')} opened the incident.` : 'No incident signal yet.'
     },
     {
       label: 'Corroborated',
@@ -434,7 +435,7 @@ export function renderSceneClock(alert) {
   return `<div class="scene-clock-grid">${items.map(({ label, entry, fallback }) => `
     <article class="scene-clock-item">
       <strong>${label}</strong>
-      <p>${entry ? `${clockDisplay(entry.publishedAt)} | ${sceneClockStamp(entry.publishedAt)}${entry.source ? ` | ${entry.source}` : ''}` : fallback}</p>
+      <p>${entry ? `${clockDisplay(entry.publishedAt)} | ${sceneClockStamp(entry.publishedAt)}${entry.source ? ` | ${escapeHtml(entry.source)}` : ''}` : fallback}</p>
     </article>`).join('')}</div>`;
 }
 
@@ -455,6 +456,16 @@ export function buildAuditBlock(alert) {
   ].join('\n');
 }
 
+function safeHref(url) {
+  const raw = String(url ?? '').trim();
+  if (!raw || raw === '#') return '#';
+  try {
+    const parsed = new URL(raw);
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return escapeHtml(raw);
+  } catch { /* invalid URL */ }
+  return '#';
+}
+
 export function renderCorroboratingSources(alert) {
   const sources = Array.isArray(alert.corroboratingSources) ? alert.corroboratingSources : [];
   if (!sources.length) {
@@ -462,7 +473,7 @@ export function renderCorroboratingSources(alert) {
   }
   return `<div class="corroboration-list">${sources.map((entry) => `
     <article class="corroboration-item">
-      <a href="${entry.sourceUrl}" target="_blank" rel="noreferrer">${entry.source}</a>
+      <a href="${safeHref(entry.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(entry.source)}</a>
       <p>${reliabilityLabel(normaliseReliabilityProfile(entry.reliabilityProfile))} | ${clean(entry.sourceTier) || 'source tier unknown'} | ${clean(entry.publishedAt) ? formatAgeFrom(entry.publishedAt) : 'age unknown'}</p>
     </article>`).join('')}</div>`;
 }
