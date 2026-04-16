@@ -12,7 +12,8 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const snapshotsRoot = path.join(__dirname, "__snapshots__");
 const shouldUpdateSnapshots =
-  String(process.env.ALBERTALERT_UPDATE_SNAPSHOTS || "").toLowerCase() === "true";
+  String(process.env.ALBERTALERT_UPDATE_SNAPSHOTS || "").toLowerCase() ===
+  "true";
 
 function makeAlert(overrides = {}) {
   return {
