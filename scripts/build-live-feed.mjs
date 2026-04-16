@@ -45,6 +45,8 @@ import {
   MIDRUN_FAILURE_RATE_WARNING_RATIO,
   MIDRUN_MIN_SOURCES_FOR_RATE_CHECK,
   MIDRUN_FAST_FAIL_TIMEOUT_MS,
+  CONTINUATION_SAFETY_MARGIN_MS,
+  CONTINUATION_MIN_OVERSAMPLE_RATE,
   SCHEDULER_MODE,
   SOURCE_EMPTY_COOLDOWN_HOURS,
   TARGET_SUCCESSFUL_SOURCES_PER_RUN,
@@ -587,9 +589,12 @@ function createMidRunGuardrail({
 }) {
   let totalAttempted = 0;
   let totalFailed = 0;
+  let totalSuccessful = 0;
   let throttleLevel = 0; // 0 = normal, 1 = throttled, 2 = fast-fail
   let criticalOnly = false;
   let skipPlaywright = false;
+  let cumulativeBatchMs = 0;
+  let batchCount = 0;
   const log = [];
 
   function elapsedMs() {
@@ -600,16 +605,34 @@ function createMidRunGuardrail({
     return totalAttempted > 0 ? totalFailed / totalAttempted : 0;
   }
 
+  /** Observed success rate (sources with built > 0 / totalAttempted). */
+  function successRate() {
+    return totalAttempted > 0 ? totalSuccessful / totalAttempted : 0;
+  }
+
+  /** Average wall-clock milliseconds per source across all recorded batches. */
+  function avgSourceDurationMs() {
+    return totalAttempted > 0 ? cumulativeBatchMs / totalAttempted : 0;
+  }
+
   /**
    * Record the results of a processed batch.
    * @param {Array} batchStats - array of sourceStat objects from processSourceBatch
+   * @param {number} [batchDurationMs] - wall-clock time the batch took (optional)
    */
-  function recordBatch(batchStats) {
+  function recordBatch(batchStats, batchDurationMs) {
     for (const stat of batchStats) {
       totalAttempted += 1;
       if ((stat?.errors || 0) > 0 && (stat?.built || 0) === 0) {
         totalFailed += 1;
       }
+      if ((stat?.built || 0) > 0) {
+        totalSuccessful += 1;
+      }
+    }
+    if (Number.isFinite(batchDurationMs) && batchDurationMs > 0) {
+      cumulativeBatchMs += batchDurationMs;
+      batchCount += 1;
     }
   }
 
@@ -697,14 +720,17 @@ function createMidRunGuardrail({
       throttleLevel,
       totalAttempted,
       totalFailed,
+      totalSuccessful,
       failedRate: Number(failedRate().toFixed(3)),
+      successRate: Number(successRate().toFixed(3)),
+      avgSourceDurationMs: Math.round(avgSourceDurationMs()),
       criticalOnly,
       skipPlaywright,
       transitions: log
     };
   }
 
-  return { recordBatch, evaluate, snapshot, elapsedMs };
+  return { recordBatch, evaluate, snapshot, elapsedMs, successRate, avgSourceDurationMs };
 }
 
 async function attemptSourceBuild(source, requestState, playwrightBudget, priorHealthEntry) {
@@ -2381,7 +2407,7 @@ async function main() {
   const scheduledSourceIds = new Set([...machineReadableScheduled, ...htmlScheduled].map((source) => source.id));
   const scheduledSourcesInitial = [...machineReadableScheduled, ...htmlScheduled];
   const htmlDeferredForBudget = scheduledSources.filter((source) => source?.kind === 'html' && !scheduledSourceIds.has(source.id));
-  const continuationOversamplingFactor = 2;
+  const defaultOversamplingFactor = 2;
   const htmlDeferredReasonById = new Map();
   for (const source of htmlDeferredForBudget) {
     htmlDeferredReasonById.set(source.id, htmlSelection.domainCappedSourceIds.has(source.id) ? 'domain-cap' : 'html-budget');
@@ -2428,6 +2454,7 @@ async function main() {
 
   async function processSourceBatch(batch, adaptiveState) {
     if (!batch.length) return;
+    const batchStartMs = Date.now();
     const effectiveConcurrency = adaptiveState?.concurrency || FEED_SOURCE_CONCURRENCY;
     const effectiveStaggerMs = adaptiveState?.staggerMs ?? DEFAULT_FETCH_STAGGER_MS;
     const effectiveJitterMs = adaptiveState?.staggerJitterMs ?? MAX_FETCH_STAGGER_JITTER_MS;
@@ -2691,7 +2718,7 @@ async function main() {
         batchSourceStats.push(result.sourceStat);
       }
     }
-    midRunGuardrail.recordBatch(batchSourceStats);
+    midRunGuardrail.recordBatch(batchSourceStats, Date.now() - batchStartMs);
   }
 
   // --- Initial batch (no adaptive throttling yet) ---
@@ -2713,13 +2740,32 @@ async function main() {
     if (elapsed >= Math.max(0, GUARDRAIL_MAX_RUNTIME_MS - CONTINUATION_RUNTIME_HEADROOM_MS)) {
       break;
     }
+
+    // --- Dynamic oversample factor based on observed success rate ---
+    const observedSuccess = midRunGuardrail.successRate();
+    const continuationOversamplingFactor = observedSuccess > 0
+      ? Math.min(10, 1 / Math.max(observedSuccess, CONTINUATION_MIN_OVERSAMPLE_RATE))
+      : defaultOversamplingFactor;
+
     const remainingNeeded = TARGET_SUCCESSFUL_SOURCES_PER_RUN - successfulSourcesFound;
     // Oversample remaining candidates because many source attempts fail or return zero built alerts.
     const effectiveConcurrency = adaptiveState.concurrency || FEED_SOURCE_CONCURRENCY;
     const nextBatchSize = Math.min(
       continuationCandidates.length,
-      Math.max(effectiveConcurrency, remainingNeeded * continuationOversamplingFactor)
+      Math.max(effectiveConcurrency, Math.ceil(remainingNeeded * continuationOversamplingFactor))
     );
+
+    // --- Time-budget checkpoint: skip batch if insufficient time remains ---
+    const avgPerSource = midRunGuardrail.avgSourceDurationMs();
+    if (avgPerSource > 0) {
+      const remainingMs = GUARDRAIL_MAX_RUNTIME_MS - (Date.now() - runStartedAtMs) - CONTINUATION_SAFETY_MARGIN_MS;
+      const expectedBatchMs = nextBatchSize * avgPerSource;
+      if (expectedBatchMs > remainingMs) {
+        console.warn(`[continuation] Skipping batch: expected ${Math.round(expectedBatchMs)}ms > remaining ${Math.round(remainingMs)}ms budget.`);
+        break;
+      }
+    }
+
     let nextBatch = continuationCandidates.splice(0, nextBatchSize);
     // In critical-only mode, only process critical-lane sources in continuation
     if (adaptiveState.criticalOnly) {

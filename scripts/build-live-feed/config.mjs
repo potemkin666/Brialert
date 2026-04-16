@@ -145,6 +145,24 @@ export const MIDRUN_FAILURE_RATE_WARNING_RATIO = Math.max(
 export const MIDRUN_MIN_SOURCES_FOR_RATE_CHECK = envInt('BRIALERT_MIDRUN_MIN_SOURCES_FOR_RATE_CHECK', 6, 2);
 /** Per-source timeout used in fast-fail mode (ms). */
 export const MIDRUN_FAST_FAIL_TIMEOUT_MS = envInt('BRIALERT_MIDRUN_FAST_FAIL_TIMEOUT_MS', 5000, 1000);
+/**
+ * Safety margin (ms) subtracted from the runtime guardrail when computing
+ * whether a continuation batch has enough time to complete.
+ */
+export const CONTINUATION_SAFETY_MARGIN_MS = envInt('BRIALERT_CONTINUATION_SAFETY_MARGIN_MS', 30_000, 5000);
+/**
+ * Floor for the observed success rate used when computing the dynamic
+ * continuation oversample factor.  Prevents division-by-tiny-number spikes.
+ */
+export const CONTINUATION_MIN_OVERSAMPLE_RATE = Math.max(
+  0.01,
+  Math.min(
+    1,
+    Number.isFinite(Number(process.env.BRIALERT_CONTINUATION_MIN_OVERSAMPLE_RATE))
+      ? Number(process.env.BRIALERT_CONTINUATION_MIN_OVERSAMPLE_RATE)
+      : 0.1
+  )
+);
 
 export const TARGET_SUCCESSFUL_SOURCES_PER_RUN = Math.max(
   1,

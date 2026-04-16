@@ -45,7 +45,10 @@ test('createMidRunGuardrail snapshot starts clean', () => {
   assert.equal(snap.throttleLevel, 0);
   assert.equal(snap.totalAttempted, 0);
   assert.equal(snap.totalFailed, 0);
+  assert.equal(snap.totalSuccessful, 0);
   assert.equal(snap.failedRate, 0);
+  assert.equal(snap.successRate, 0);
+  assert.equal(snap.avgSourceDurationMs, 0);
   assert.deepEqual(snap.transitions, []);
 });
 
@@ -55,7 +58,9 @@ test('recordBatch tracks successes and failures correctly', () => {
   const snap = g.snapshot();
   assert.equal(snap.totalAttempted, 3);
   assert.equal(snap.totalFailed, 1);
+  assert.equal(snap.totalSuccessful, 2);
   assert.ok(Math.abs(snap.failedRate - 0.333) < 0.01);
+  assert.ok(Math.abs(snap.successRate - 0.667) < 0.01);
 });
 
 test('failure rate below warning ratio keeps level 0', () => {
@@ -176,4 +181,70 @@ test('baseConcurrency of 1 does not go below 1', () => {
   g.recordBatch([failStat('a'), failStat('b'), failStat('c'), failStat('d'), failStat('e'), failStat('f')]);
   const state = g.evaluate();
   assert.equal(state.concurrency, 1, 'cannot go below 1');
+});
+
+// ---------------------------------------------------------------------------
+// successRate() / avgSourceDurationMs() / dynamic oversample support
+// ---------------------------------------------------------------------------
+
+test('successRate returns 0 with no data', () => {
+  const g = makeGuardrail();
+  assert.equal(g.successRate(), 0);
+});
+
+test('successRate reflects proportion of sources with built > 0', () => {
+  const g = makeGuardrail();
+  // 4 attempted, 3 successful (built > 0), 1 failed
+  g.recordBatch([successStat('a'), successStat('b'), successStat('c'), failStat('d')]);
+  assert.ok(Math.abs(g.successRate() - 0.75) < 0.01);
+});
+
+test('successRate accumulates across multiple recordBatch calls', () => {
+  const g = makeGuardrail();
+  g.recordBatch([successStat('a'), failStat('b')]);    // 1/2
+  g.recordBatch([successStat('c'), successStat('d')]);  // now 3/4
+  assert.ok(Math.abs(g.successRate() - 0.75) < 0.01);
+});
+
+test('avgSourceDurationMs returns 0 with no batch timing data', () => {
+  const g = makeGuardrail();
+  assert.equal(g.avgSourceDurationMs(), 0);
+  // Recording without duration still returns 0
+  g.recordBatch([successStat('a')]);
+  assert.equal(g.avgSourceDurationMs(), 0);
+});
+
+test('avgSourceDurationMs computes average across batches', () => {
+  const g = makeGuardrail();
+  // Batch 1: 2 sources took 6000ms → 3000ms/source
+  g.recordBatch([successStat('a'), failStat('b')], 6000);
+  assert.equal(g.avgSourceDurationMs(), 3000);
+  // Batch 2: 3 sources took 9000ms → total 15000ms / 5 sources = 3000ms
+  g.recordBatch([successStat('c'), successStat('d'), failStat('e')], 9000);
+  assert.equal(g.avgSourceDurationMs(), 3000);
+  // Batch 3: 1 source took 500ms → total 15500ms / 6 sources ≈ 2583ms
+  g.recordBatch([successStat('f')], 500);
+  assert.ok(Math.abs(g.avgSourceDurationMs() - 2583) < 2);
+});
+
+test('avgSourceDurationMs ignores non-finite and non-positive durations', () => {
+  const g = makeGuardrail();
+  g.recordBatch([successStat('a')], NaN);
+  assert.equal(g.avgSourceDurationMs(), 0);
+  g.recordBatch([successStat('b')], -100);
+  assert.equal(g.avgSourceDurationMs(), 0);
+  g.recordBatch([successStat('c')], 0);
+  assert.equal(g.avgSourceDurationMs(), 0);
+  // Valid duration should now compute correctly over all 3 sources + 1 more
+  g.recordBatch([successStat('d')], 4000);
+  assert.equal(g.avgSourceDurationMs(), 1000); // 4000ms / 4 sources
+});
+
+test('snapshot includes successRate and avgSourceDurationMs', () => {
+  const g = makeGuardrail();
+  g.recordBatch([successStat('a'), failStat('b')], 2000);
+  const snap = g.snapshot();
+  assert.equal(snap.successRate, 0.5);
+  assert.equal(snap.avgSourceDurationMs, 1000);
+  assert.equal(snap.totalSuccessful, 1);
 });
