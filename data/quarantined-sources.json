@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-16T07:45:31.745Z",
-  "count": 233,
+  "generatedAt": "2026-04-16T07:45:55.984Z",
+  "count": 232,
   "sources": [
     {
       "id": "spain-interior-ministry-news",
@@ -1601,26 +1601,6 @@
       "reviewBy": "2026-04-15T12:56:06.769Z",
       "lastFailureAt": "2026-04-13T12:56:06.769Z",
       "lastCheckedAt": "2026-04-13T12:56:06.769Z"
-    },
-    {
-      "id": "finland-police-news",
-      "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/news",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "status": "auto-quarantined",
-      "reason": "Repeated blocked-or-auth failures on html source",
-      "quarantinedAt": "2026-04-12T14:32:49.299Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 4,
-      "consecutiveBlockedFailures": 4,
-      "consecutiveDeadUrlFailures": 0,
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-14T14:32:49.299Z",
-      "lastFailureAt": "2026-04-12T14:32:49.299Z",
-      "lastCheckedAt": "2026-04-12T14:32:49.299Z"
     },
     {
       "id": "politico-europe",
