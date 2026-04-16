@@ -1676,14 +1676,16 @@
     {
       "id": "unodc-news",
       "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
-      "endpoint": "https://www.unodc.org/unodc/en/press/releases/latest.html",
+      "endpoint": "https://www.unodc.org/unodc/en/news/news.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "UNODC press releases on drug trafficking, organised crime, terrorism financing and international criminal operations.",
-      "refreshEveryHours": 1
+      "refreshEveryHours": 1,
+      "quarantined": false,
+      "restoredAt": "2026-04-16T07:47:37.779Z"
     },
     {
       "id": "war-on-the-rocks",
