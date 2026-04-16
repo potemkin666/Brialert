@@ -11,6 +11,8 @@ import {
   AUTO_SKIP_EMPTY_THRESHOLD,
   BLOCKED_NON_CONTENT_COOLDOWN_HOURS,
   BLOCKED_NON_CONTENT_FAIL_THRESHOLD,
+  CIRCUIT_BREAKER_DOMAIN_PENALTY,
+  CIRCUIT_BREAKER_PROBE_BOOST,
   CONTROL_MAX_HTML_SOURCES_PER_RUN,
   DEFAULT_FETCH_STAGGER_MS,
   FEED_SOURCE_CONCURRENCY,
@@ -80,6 +82,7 @@ import {
 } from './build-live-feed/geo.mjs';
 import { buildHealthBlock } from './build-live-feed/health.mjs';
 import {
+  endpointDomain,
   mapWithConcurrency,
   readExisting,
   readJsonFile,
@@ -106,7 +109,7 @@ import {
 
 export { buildHealthBlock } from './build-live-feed/health.mjs';
 export { createMidRunGuardrail };
-export { nextSourceHealthEntry, analyseErrorPattern };
+export { nextSourceHealthEntry, analyseErrorPattern, applyDomainCircuitBreakerEffects };
 const execFile = promisify(execFileCallback);
 
 function parseIsoMs(value) {
@@ -382,6 +385,79 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.nextFetchAt = next.cooldownUntil;
   }
   return next;
+}
+
+/**
+ * Propagate domain-level circuit-breaker signals into per-source health scores.
+ *
+ * When a domain's circuit breaker tripped during the run, apply a proportional
+ * health penalty to every source on that domain that was NOT the cause of the
+ * trip (sibling sources).  When a probe request succeeded on a tripped domain,
+ * apply a small health boost to siblings instead.
+ *
+ * Mutates `nextSourceHealth` in place and returns a summary of adjustments.
+ *
+ * @param {Object} nextSourceHealth Map of sourceId → health entry
+ * @param {Object} domainState      The requestState.domainState after the run
+ * @param {Array}  sources          Source definitions (need .id, .endpoint)
+ * @returns {{ penalised: string[], boosted: string[] }}
+ */
+function applyDomainCircuitBreakerEffects(nextSourceHealth, domainState, sources) {
+  const penalised = [];
+  const boosted = [];
+
+  if (!domainState || typeof domainState !== 'object' || !nextSourceHealth || typeof nextSourceHealth !== 'object') {
+    return { penalised, boosted };
+  }
+
+  // Build a map of domain → source IDs
+  const domainToSourceIds = new Map();
+  const sourcesArray = Array.isArray(sources) ? sources : [];
+  for (const source of sourcesArray) {
+    if (!source?.id || !source?.endpoint) continue;
+    const domain = endpointDomain(source.endpoint);
+    if (!domain) continue;
+    if (!domainToSourceIds.has(domain)) domainToSourceIds.set(domain, []);
+    domainToSourceIds.get(domain).push(source.id);
+  }
+
+  for (const [domain, state] of Object.entries(domainState)) {
+    if (!state || typeof state !== 'object') continue;
+    const siblingIds = domainToSourceIds.get(domain);
+    if (!siblingIds || siblingIds.length === 0) continue;
+
+    const circuitTripped = Number(state.circuitOpenUntil || 0) > 0 && Date.now() < Number(state.circuitOpenUntil);
+    const probeSucceeded = Boolean(state.probeSuccess);
+
+    if (probeSucceeded && CIRCUIT_BREAKER_PROBE_BOOST > 0) {
+      // A probe succeeded — boost sibling sources that didn't run this cycle
+      for (const sourceId of siblingIds) {
+        const entry = nextSourceHealth[sourceId];
+        if (!entry || typeof entry !== 'object') continue;
+        // Only boost sources that didn't already get updated this run (deferred / not-stat'd)
+        const currentScore = Number.isFinite(Number(entry.healthScore)) ? Number(entry.healthScore) : HEALTH_SCORE_INITIAL;
+        const boostedScore = Math.min(100, currentScore + CIRCUIT_BREAKER_PROBE_BOOST);
+        if (boostedScore > currentScore) {
+          entry.healthScore = boostedScore;
+          boosted.push(sourceId);
+        }
+      }
+    } else if (circuitTripped && CIRCUIT_BREAKER_DOMAIN_PENALTY > 0) {
+      // Circuit breaker is open — penalise sibling sources
+      for (const sourceId of siblingIds) {
+        const entry = nextSourceHealth[sourceId];
+        if (!entry || typeof entry !== 'object') continue;
+        const currentScore = Number.isFinite(Number(entry.healthScore)) ? Number(entry.healthScore) : HEALTH_SCORE_INITIAL;
+        const penalisedScore = Math.max(0, currentScore - CIRCUIT_BREAKER_DOMAIN_PENALTY);
+        if (penalisedScore < currentScore) {
+          entry.healthScore = penalisedScore;
+          penalised.push(sourceId);
+        }
+      }
+    }
+  }
+
+  return { penalised, boosted };
 }
 
 function alertKey(alert) {
@@ -2981,6 +3057,15 @@ async function main() {
     }
 
     nextSourceHealth[source.id] = nextSourceHealthEntry(source, stat, priorEntry, generatedAt);
+  }
+
+  // Propagate domain circuit-breaker signals into sibling sources' health scores.
+  const circuitBreakerEffects = applyDomainCircuitBreakerEffects(nextSourceHealth, requestState.domainState, eligibleSources);
+  if (circuitBreakerEffects.penalised.length) {
+    console.warn(`[circuit-breaker] Domain penalty applied to ${circuitBreakerEffects.penalised.length} source(s): ${circuitBreakerEffects.penalised.slice(0, 5).join(', ')}${circuitBreakerEffects.penalised.length > 5 ? '…' : ''}`);
+  }
+  if (circuitBreakerEffects.boosted.length) {
+    console.log(`[circuit-breaker] Probe-success boost applied to ${circuitBreakerEffects.boosted.length} source(s): ${circuitBreakerEffects.boosted.slice(0, 5).join(', ')}${circuitBreakerEffects.boosted.length > 5 ? '…' : ''}`);
   }
 
   const failureReasons = sourceStats.reduce((acc, stat) => {

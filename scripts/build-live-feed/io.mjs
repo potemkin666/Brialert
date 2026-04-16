@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {
   BACKOFF_CAP_MS,
+  CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT,
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
   OFFLINE_FIXTURE_MODE,
@@ -196,7 +197,7 @@ async function offlineFixtureResponse(url, options = {}) {
   };
 }
 
-function endpointDomain(url) {
+export function endpointDomain(url) {
   try {
     return new URL(url).hostname.toLowerCase();
   } catch {
@@ -292,11 +293,17 @@ export async function fetchText(url, attempt = 1, options = {}) {
   if (priorCache?.etag) conditionalHeaders['if-none-match'] = clean(priorCache.etag);
   if (priorCache?.lastModified) conditionalHeaders['if-modified-since'] = clean(priorCache.lastModified);
   if (domain && domainState[domain]?.circuitOpenUntil && Date.now() < Number(domainState[domain].circuitOpenUntil || 0)) {
-    const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
-    throw createBrialertError(`Circuit open for domain ${domain} until ${openUntil}`, {
-      errorCode: ERROR_CODE.NETWORK_CIRCUIT_OPEN,
-      finalUrl: endpoint
-    });
+    const probesUsed = Number(domainState[domain].halfOpenProbes || 0);
+    if (probesUsed < CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT) {
+      // Half-open: allow a probe request and increment counter.
+      domainState[domain] = { ...domainState[domain], halfOpenProbes: probesUsed + 1 };
+    } else {
+      const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
+      throw createBrialertError(`Circuit open for domain ${domain} until ${openUntil}`, {
+        errorCode: ERROR_CODE.NETWORK_CIRCUIT_OPEN,
+        finalUrl: endpoint
+      });
+    }
   }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -401,9 +408,12 @@ export async function fetchText(url, attempt = 1, options = {}) {
       };
     }
     if (domain && options?.requestState?.domainState && options.requestState.domainState[domain]) {
+      const wasCircuitOpen = Number(options.requestState.domainState[domain].circuitOpenUntil || 0) > 0;
       options.requestState.domainState[domain] = {
         failures: 0,
-        circuitOpenUntil: 0
+        circuitOpenUntil: 0,
+        halfOpenProbes: 0,
+        probeSuccess: wasCircuitOpen
       };
     }
     return options?.includeMeta ? payload : payload.text;
@@ -435,13 +445,14 @@ export async function fetchText(url, attempt = 1, options = {}) {
       }
       const current = options.requestState.domainState[domain] && typeof options.requestState.domainState[domain] === 'object'
         ? options.requestState.domainState[domain]
-        : { failures: 0, circuitOpenUntil: 0 };
+        : { failures: 0, circuitOpenUntil: 0, halfOpenProbes: 0 };
       const nextFailures = Number(current.failures || 0) + 1;
       const isBotBlock = BOT_BLOCK_PATTERN.test(message);
       const shouldTrip = nextFailures >= (isBotBlock ? 6 : 4) && CIRCUIT_TRIP_PATTERN.test(message);
       options.requestState.domainState[domain] = {
         failures: nextFailures,
-        circuitOpenUntil: shouldTrip ? Date.now() + ((isBotBlock ? 5 : 10) * 60 * 1000) : Number(current.circuitOpenUntil || 0)
+        circuitOpenUntil: shouldTrip ? Date.now() + ((isBotBlock ? 5 : 10) * 60 * 1000) : Number(current.circuitOpenUntil || 0),
+        halfOpenProbes: shouldTrip ? 0 : Number(current.halfOpenProbes || 0)
       };
     }
 

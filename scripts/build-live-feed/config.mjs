@@ -293,6 +293,15 @@ export const HEALTH_SCORE_CRITICAL_FAILURE_PENALTY = envInt('BRIALERT_HEALTH_SCO
 export const HEALTH_SCORE_EMPTY_PENALTY = envInt('BRIALERT_HEALTH_SCORE_EMPTY_PENALTY', 3, 0);
 export const HEALTH_SCORE_LOW_INTERVAL_HOURS = envInt('BRIALERT_HEALTH_SCORE_LOW_INTERVAL_HOURS', 24, 1);
 export const ROLLING_ERROR_WINDOW_SIZE = envInt('BRIALERT_ROLLING_ERROR_WINDOW_SIZE', 5, 1);
+// ---------------------------------------------------------------------------
+// Domain circuit-breaker ↔ health-score integration
+// ---------------------------------------------------------------------------
+/** Health penalty applied to sibling sources when a domain's circuit breaker trips. */
+export const CIRCUIT_BREAKER_DOMAIN_PENALTY = envInt('BRIALERT_CIRCUIT_BREAKER_DOMAIN_PENALTY', 10, 0);
+/** Health boost for sibling sources when a probe succeeds on a tripped domain. */
+export const CIRCUIT_BREAKER_PROBE_BOOST = envInt('BRIALERT_CIRCUIT_BREAKER_PROBE_BOOST', 5, 0);
+/** Number of probe requests allowed per half-open cooldown interval. */
+export const CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT = envInt('BRIALERT_CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT', 1, 1);
 export const FAIL_ON_GUARDRAIL_VIOLATION = clean(process.env.BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION).toLowerCase() === 'true';
 export const OFFLINE_FIXTURE_MODE = clean(process.env.BRIALERT_OFFLINE_FIXTURE_MODE).toLowerCase() === 'true';
 export const offlineFixturesPath = envPath(
