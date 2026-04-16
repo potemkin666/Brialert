@@ -607,7 +607,7 @@
     function rowMarkup(entry) {
       return '<tr data-source-id="' + escapeHtml(entry.id) + '" id="source-' + safeDomId(entry.id) + '">' +
         '<td class="row-check"><input type="checkbox" class="source-check" data-source-id="' + escapeHtml(entry.id) + '" title="Select ' + escapeHtml(entry.provider) + '"></td>' +
-        '<td>' + escapeHtml(entry.provider) + '</td>' +
+        '<td data-field="provider">' + escapeHtml(entry.provider) + '</td>' +
         '<td>' + escapeHtml(entry.kind) + ' / ' + escapeHtml(entry.lane) + '</td>' +
         '<td>' + escapeHtml(entry.region) + '</td>' +
         '<td>' + escapeHtml(entry.status) + '</td>' +
@@ -1273,7 +1273,7 @@
         const input = row.querySelector('.url-input');
         const url = syncUrlInputState(input);
         if (!url) {
-          const provider = row.querySelector('td:nth-child(2)')?.textContent || sourceId;
+          const provider = row.querySelector('td[data-field="provider"]')?.textContent || sourceId;
           validationErrors.push(provider);
         } else {
           items.push({ sourceId, replacementUrl: url, row });
