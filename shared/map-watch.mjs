@@ -17,6 +17,21 @@ const LEAFLET_CSS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
 const LEAFLET_JS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
 const MAX_MAP_INIT_ATTEMPTS = 8;
 
+const TILE_LIGHT = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+const TILE_DARK = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+const TILE_OPTIONS = Object.freeze({
+  maxZoom: 19,
+  subdomains: 'abcd',
+  attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+});
+
+const SEVERITY_LEGEND_ITEMS = Object.freeze([
+  { level: 'critical', label: 'Critical' },
+  { level: 'high', label: 'High' },
+  { level: 'elevated', label: 'Elevated' },
+  { level: 'moderate', label: 'Moderate' }
+]);
+
 let leafletLoadPromise = null;
 
 function ensureLeafletAssets() {
@@ -328,6 +343,8 @@ export function createMapController(config) {
   let lastMode = MAP_VIEW_MODES.world;
   let lastState = null;
   let lastView = null;
+  let tileLayer = null;
+  let isDarkTiles = false;
   let hasInitialLondonFrame = false;
   let initAttempts = 0;
   let isLoadingLeaflet = false;
@@ -371,22 +388,58 @@ export function createMapController(config) {
       zoomControl: true,
       attributionControl: true
     });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      subdomains: 'abcd',
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-    }).addTo(liveMap);
+    tileLayer = L.tileLayer(TILE_LIGHT, TILE_OPTIONS).addTo(liveMap);
+    addSeverityLegend();
+    addTileToggle();
     liveMap.on('zoomend', () => {
       if (!lastState || !lastView) return;
       renderMap(lastState, lastView, false);
     });
   }
 
+  function addSeverityLegend() {
+    if (!liveMap || typeof L === 'undefined') return;
+    const legend = L.control({ position: 'bottomleft' });
+    legend.onAdd = () => {
+      const container = L.DomUtil.create('div', 'map-severity-legend');
+      container.setAttribute('aria-label', 'Severity legend');
+      container.innerHTML = SEVERITY_LEGEND_ITEMS.map(
+        ({ level, label }) =>
+          `<span class="map-legend-item"><span class="map-legend-dot map-legend-dot--${level}" aria-hidden="true"></span>${escapeHtml(label)}</span>`
+      ).join('');
+      return container;
+    };
+    legend.addTo(liveMap);
+  }
+
+  function addTileToggle() {
+    if (!liveMap || typeof L === 'undefined') return;
+    const toggle = L.control({ position: 'topright' });
+    toggle.onAdd = () => {
+      const button = L.DomUtil.create('button', 'map-tile-toggle');
+      button.type = 'button';
+      button.setAttribute('aria-label', 'Toggle dark map');
+      button.title = 'Toggle dark map';
+      button.textContent = '🌙';
+      L.DomEvent.disableClickPropagation(button);
+      button.addEventListener('click', () => {
+        isDarkTiles = !isDarkTiles;
+        if (tileLayer) liveMap.removeLayer(tileLayer);
+        tileLayer = L.tileLayer(isDarkTiles ? TILE_DARK : TILE_LIGHT, TILE_OPTIONS).addTo(liveMap);
+        button.textContent = isDarkTiles ? '☀️' : '🌙';
+        button.setAttribute('aria-label', isDarkTiles ? 'Toggle light map' : 'Toggle dark map');
+        button.title = isDarkTiles ? 'Toggle light map' : 'Toggle dark map';
+      });
+      return button;
+    };
+    toggle.addTo(liveMap);
+  }
+
   function mapIconForAlert(alert) {
     const level = severityClass(alert);
     const freshClass = isFreshAlert(alert) ? ' map-dot--fresh' : '';
     return L.divIcon({
-      className: 'map-dot-icon',
+      className: 'map-dot-icon map-marker-enter',
       html: `<span class="map-dot map-dot--${level}${freshClass}" aria-hidden="true"></span>`,
       iconSize: [16, 16],
       iconAnchor: [8, 8],
@@ -398,7 +451,7 @@ export function createMapController(config) {
     const level = clusterSeverity(items);
     const size = items.length >= 20 ? 40 : items.length >= 10 ? 36 : 32;
     return L.divIcon({
-      className: 'map-cluster-icon',
+      className: 'map-cluster-icon map-marker-enter',
       html: `<span class="map-cluster map-cluster--${level}" style="width:${size}px;height:${size}px;">${items.length}</span>`,
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2]
@@ -497,6 +550,11 @@ export function createMapController(config) {
           title: alert.title
         });
         marker.bindPopup(markerPopup(alert), { className: 'map-preview-popup-shell' });
+        marker.bindTooltip(escapeHtml(alert.title), {
+          direction: 'top',
+          offset: [0, -10],
+          className: 'map-hover-tooltip'
+        });
         marker.on('popupopen', (event) => {
           const popupElement = event.popup?.getElement();
           const button = popupElement?.querySelector(`[data-open-detail="${alert.id}"]`);
@@ -516,6 +574,11 @@ export function createMapController(config) {
         title: `${entry.items.length} alerts`
       });
       clusterMarker.bindPopup(clusterPopup(entry), { className: 'map-preview-popup-shell' });
+      clusterMarker.bindTooltip(`${entry.items.length} alerts`, {
+        direction: 'top',
+        offset: [0, -10],
+        className: 'map-hover-tooltip'
+      });
       clusterMarker.on('popupopen', (event) => {
         const popupElement = event.popup?.getElement();
         if (!popupElement) return;
@@ -600,4 +663,4 @@ export function createMapController(config) {
   };
 }
 
-export { markerPopup as _markerPopup, clusterPopup as _clusterPopup };
+export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK };
