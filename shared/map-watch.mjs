@@ -435,11 +435,15 @@ export function createMapController(config) {
     toggle.addTo(liveMap);
   }
 
+  const prefersReducedMotion = typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+  const enterClass = prefersReducedMotion ? '' : ' map-marker-enter';
+
   function mapIconForAlert(alert) {
     const level = severityClass(alert);
     const freshClass = isFreshAlert(alert) ? ' map-dot--fresh' : '';
     return L.divIcon({
-      className: 'map-dot-icon map-marker-enter',
+      className: `map-dot-icon${enterClass}`,
       html: `<span class="map-dot map-dot--${level}${freshClass}" aria-hidden="true"></span>`,
       iconSize: [16, 16],
       iconAnchor: [8, 8],
@@ -451,7 +455,7 @@ export function createMapController(config) {
     const level = clusterSeverity(items);
     const size = items.length >= 20 ? 40 : items.length >= 10 ? 36 : 32;
     return L.divIcon({
-      className: 'map-cluster-icon map-marker-enter',
+      className: `map-cluster-icon${enterClass}`,
       html: `<span class="map-cluster map-cluster--${level}" style="width:${size}px;height:${size}px;">${items.length}</span>`,
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2]
