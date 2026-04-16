@@ -24,13 +24,13 @@ function parseTeamAllowList(value) {
 }
 
 function getAccessConfig() {
-  const allowedUsers = parseAllowList(process.env.BRIALERT_ADMIN_ALLOWED_USERS);
-  const allowedOrgs = parseAllowList(process.env.BRIALERT_ADMIN_ALLOWED_ORGS);
-  const allowedTeams = parseTeamAllowList(process.env.BRIALERT_ADMIN_ALLOWED_TEAMS);
+  const allowedUsers = parseAllowList(process.env.ALBERTALERT_ADMIN_ALLOWED_USERS);
+  const allowedOrgs = parseAllowList(process.env.ALBERTALERT_ADMIN_ALLOWED_ORGS);
+  const allowedTeams = parseTeamAllowList(process.env.ALBERTALERT_ADMIN_ALLOWED_TEAMS);
   if (!allowedUsers.size && !allowedOrgs.size && !allowedTeams.length) {
     throw new ApiError(
       'misconfigured-backend',
-      'Configure at least one of BRIALERT_ADMIN_ALLOWED_USERS/ORGS/TEAMS.',
+      'Configure at least one of ALBERTALERT_ADMIN_ALLOWED_USERS/ORGS/TEAMS.',
       503
     );
   }

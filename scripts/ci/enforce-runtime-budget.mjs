@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 const payloadPath = process.argv[2] || 'live-alerts.json';
-const maxRuntimeMs = Number(process.argv[3] || process.env.BRIALERT_CI_MAX_RUNTIME_MS || 420000);
+const maxRuntimeMs = Number(process.argv[3] || process.env.ALBERTALERT_CI_MAX_RUNTIME_MS || 420000);
 
 if (!fs.existsSync(payloadPath)) {
   throw new Error(`Missing payload file: ${payloadPath}`);

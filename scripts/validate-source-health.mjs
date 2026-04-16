@@ -8,14 +8,14 @@ const sourcesPath = path.join(repoRoot, 'data', 'sources.json');
 
 const REQUEST_TIMEOUT_MS = 20_000;
 const CONCURRENCY = 6;
-const SCOPE = String(process.env.BRIALERT_SOURCE_HEALTH_SCOPE || 'all').toLowerCase();
+const SCOPE = String(process.env.ALBERTALERT_SOURCE_HEALTH_SCOPE || 'all').toLowerCase();
 const CRITICAL_IDS = new Set(
-  String(process.env.BRIALERT_SOURCE_HEALTH_CRITICAL_IDS || '')
+  String(process.env.ALBERTALERT_SOURCE_HEALTH_CRITICAL_IDS || '')
     .split(',')
     .map((value) => value.trim())
     .filter(Boolean)
 );
-const USER_AGENT = 'Mozilla/5.0 (compatible; BrialertSourceValidator/1.0; +https://github.com/potemkin666/Brialert)';
+const USER_AGENT = 'Mozilla/5.0 (compatible; AlbertAlertSourceValidator/1.0; +https://github.com/potemkin666/AlbertAlert)';
 
 function stripBom(text) {
   return typeof text === 'string' ? text.replace(/^\uFEFF/, '') : text;

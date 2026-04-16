@@ -3,7 +3,7 @@
     {
       "id": "fixture-rss-incidents",
       "provider": "Fixture Incidents Feed",
-      "endpoint": "https://fixtures.brialert.local/incidents.rss",
+      "endpoint": "https://fixtures.albertalert.local/incidents.rss",
       "kind": "rss",
       "lane": "incidents",
       "region": "europe",
@@ -13,7 +13,7 @@
     {
       "id": "fixture-rss-context",
       "provider": "Fixture Context Feed",
-      "endpoint": "https://fixtures.brialert.local/context.rss",
+      "endpoint": "https://fixtures.albertalert.local/context.rss",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -23,7 +23,7 @@
     {
       "id": "fixture-atom-oversight",
       "provider": "Fixture Oversight Feed",
-      "endpoint": "https://fixtures.brialert.local/oversight.atom",
+      "endpoint": "https://fixtures.albertalert.local/oversight.atom",
       "kind": "atom",
       "lane": "oversight",
       "region": "europe",
@@ -33,7 +33,7 @@
     {
       "id": "fixture-json-prevention",
       "provider": "Fixture Prevention Feed",
-      "endpoint": "https://fixtures.brialert.local/prevention.json",
+      "endpoint": "https://fixtures.albertalert.local/prevention.json",
       "kind": "json",
       "lane": "prevention",
       "region": "international",

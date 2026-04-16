@@ -1,12 +1,12 @@
 // Keep this short so the hero metric updates quickly without stalling the initial UX.
 const GEOLOCATION_TIMEOUT_MS = 5000;
 const GEOLOCATION_MAX_AGE_MS = 300000;
-const LOCATION_CACHE_KEY = 'brialert.userLocationLabel.v1';
+const LOCATION_CACHE_KEY = 'albertalert.userLocationLabel.v1';
 // Public reverse-geocoding endpoint; treat failures/rate limits as non-fatal and fall back.
 const GEOCODE_API_URL = 'https://geocode.maps.co/reverse';
 
 function geocodeApiKey() {
-  const runtimeKey = globalThis?.BRIALERT_GEOCODE_API_KEY;
+  const runtimeKey = globalThis?.ALBERTALERT_GEOCODE_API_KEY;
   return typeof runtimeKey === 'string' && runtimeKey.trim() ? runtimeKey.trim() : null;
 }
 

@@ -1,7 +1,7 @@
 function enabled() {
   try {
-    if (typeof globalThis?.BRIALERT_DEBUG !== 'undefined') return Boolean(globalThis.BRIALERT_DEBUG);
-    return typeof localStorage !== 'undefined' && localStorage.getItem('brialert.debug') === 'true';
+    if (typeof globalThis?.ALBERTALERT_DEBUG !== 'undefined') return Boolean(globalThis.ALBERTALERT_DEBUG);
+    return typeof localStorage !== 'undefined' && localStorage.getItem('albertalert.debug') === 'true';
   } catch {
     return false;
   }
@@ -14,8 +14,8 @@ export function debugLog(scope, message, detail = null) {
 }
 
 function diagnosticsHook() {
-  return typeof globalThis?.BRIALERT_DIAGNOSTICS_HOOK === 'function'
-    ? globalThis.BRIALERT_DIAGNOSTICS_HOOK
+  return typeof globalThis?.ALBERTALERT_DIAGNOSTICS_HOOK === 'function'
+    ? globalThis.ALBERTALERT_DIAGNOSTICS_HOOK
     : null;
 }
 

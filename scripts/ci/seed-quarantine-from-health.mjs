@@ -16,10 +16,10 @@ import path from 'node:path';
 
 // ── Thresholds (mirror build-live-feed/config defaults) ──────────────
 const HEALTH_SCORE_REVIEW_THRESHOLD = Number(
-  process.env.BRIALERT_HEALTH_SCORE_REVIEW_THRESHOLD || 25
+  process.env.ALBERTALERT_HEALTH_SCORE_REVIEW_THRESHOLD || 25
 );
 const AUTO_QUARANTINE_FAILURE_THRESHOLD = Number(
-  process.env.BRIALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD || 6
+  process.env.ALBERTALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD || 6
 );
 
 // ── Paths ────────────────────────────────────────────────────────────

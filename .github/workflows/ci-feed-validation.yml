@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
+      ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
 
     steps:
       - name: Check out repository
@@ -49,7 +49,7 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Install Playwright Chromium
-        if: ${{ env.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
+        if: ${{ env.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
         run: npx playwright install chromium --with-deps
 
       - name: Validate feed data files
@@ -60,8 +60,8 @@ jobs:
 
       - name: Validate London source health
         env:
-          BRIALERT_SOURCE_HEALTH_SCOPE: critical
-          BRIALERT_SOURCE_HEALTH_CRITICAL_IDS: ct-policing-london,met-police-news,met-police-latest-news,city-of-london-police-news,city-of-london-police-news-html,city-of-london-police-newsroom,mopac-html,london-fire-brigade-news,tfl-press-releases-html,london-gov-press-releases-html
+          ALBERTALERT_SOURCE_HEALTH_SCOPE: critical
+          ALBERTALERT_SOURCE_HEALTH_CRITICAL_IDS: ct-policing-london,met-police-news,met-police-latest-news,city-of-london-police-news,city-of-london-police-news-html,city-of-london-police-newsroom,mopac-html,london-fire-brigade-news,tfl-press-releases-html,london-gov-press-releases-html
         run: npm run validate:source-health
 
       - name: Lint codebase
@@ -102,18 +102,18 @@ jobs:
     timeout-minutes: 20
     needs: validate-feed
     env:
-      BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
-      BRIALERT_SCHEDULER_AB_MODE: control
-      BRIALERT_MAX_HTML_SOURCES_PER_RUN: "6"
-      BRIALERT_CONTROL_MAX_HTML_SOURCES_PER_RUN: "5"
-      BRIALERT_MAX_HTML_PREFETCH_ITEMS: "4"
-      BRIALERT_MAX_FEED_PREFETCH_ITEMS: "4"
-      BRIALERT_FETCH_TIMEOUT_MS: "5000"
-      BRIALERT_FETCH_MAX_RETRIES: "2"
-      BRIALERT_FEED_SOURCE_CONCURRENCY: "3"
-      BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN: "12"
-      BRIALERT_GUARDRAIL_MAX_RUNTIME_MS: "480000"
-      BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION: "true"
+      ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
+      ALBERTALERT_SCHEDULER_AB_MODE: control
+      ALBERTALERT_MAX_HTML_SOURCES_PER_RUN: "6"
+      ALBERTALERT_CONTROL_MAX_HTML_SOURCES_PER_RUN: "5"
+      ALBERTALERT_MAX_HTML_PREFETCH_ITEMS: "4"
+      ALBERTALERT_MAX_FEED_PREFETCH_ITEMS: "4"
+      ALBERTALERT_FETCH_TIMEOUT_MS: "5000"
+      ALBERTALERT_FETCH_MAX_RETRIES: "2"
+      ALBERTALERT_FEED_SOURCE_CONCURRENCY: "3"
+      ALBERTALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN: "12"
+      ALBERTALERT_GUARDRAIL_MAX_RUNTIME_MS: "480000"
+      ALBERTALERT_FAIL_ON_GUARDRAIL_VIOLATION: "true"
 
     steps:
       - name: Check out repository
@@ -129,7 +129,7 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Install Playwright Chromium
-        if: ${{ env.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
+        if: ${{ env.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
         run: npx playwright install chromium --with-deps
 
       - name: Seed quarantine from production health
@@ -155,7 +155,7 @@ jobs:
 
       - name: Enforce CI smoke runtime budget
         run: |
-          node ./scripts/ci/enforce-runtime-budget.mjs live-alerts.json "$BRIALERT_GUARDRAIL_MAX_RUNTIME_MS"
+          node ./scripts/ci/enforce-runtime-budget.mjs live-alerts.json "$ALBERTALERT_GUARDRAIL_MAX_RUNTIME_MS"
 
       - name: Upload feed smoke artifact
         if: always()

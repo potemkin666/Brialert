@@ -57,7 +57,7 @@ export function renderSourceRequests({ state, elements }) {
 
   if (elements.sourceRequestHint) {
     const region = state.activeRegion === 'all' ? 'UK' : String(state.activeRegion).replace(/^./, (match) => match.toUpperCase());
-    elements.sourceRequestHint.textContent = `Brialert will validate the link, auto-tag it, and queue it for approval using the current ${region} scope.`;
+    elements.sourceRequestHint.textContent = `AlbertAlert will validate the link, auto-tag it, and queue it for approval using the current ${region} scope.`;
   }
 
   if (elements.sourceRequestStatus) {

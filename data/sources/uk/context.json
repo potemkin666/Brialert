@@ -301,7 +301,7 @@
         "h2 a[href]",
         "h3 a[href]"
       ],
-      "comment": "Hostile/JS-prone source example for Playwright fallback; only runs when BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK=1."
+      "comment": "Hostile/JS-prone source example for Playwright fallback; only runs when ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK=1."
     },
     {
       "id": "sky-news-uk-rss",

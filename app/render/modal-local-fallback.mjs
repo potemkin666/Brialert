@@ -29,6 +29,6 @@ export function buildLocalLongBrief(alert) {
     ...bits.map((paragraph) => paragraph.trim()),
     '',
     'NOTE',
-    'This long brief was generated from the captured source text and alert metadata available in this alert.'
+    'This long brief was generated locally from the captured source text and alert metadata only. It does not include internet research — for a research-backed brief, retry when the remote agent is available.'
   ].join('\n\n');
 }

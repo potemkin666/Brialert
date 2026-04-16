@@ -15,7 +15,7 @@ function currentOriginBase() {
 }
 
 const LIVE_FEED_TRIGGER_API_BASES = [
-  'https://brialertbackend.vercel.app',
+  'https://albertalertbackend.vercel.app',
   currentOriginBase()
 ].filter(Boolean);
 const LIVE_FEED_TRIGGER_API_PATHS = [

@@ -3,9 +3,9 @@ import crypto from 'node:crypto';
 import { ApiError } from './github-persistence.js';
 
 const DEFAULT_ALLOWED_ORIGINS = ['https://potemkin666.github.io'];
-const SESSION_COOKIE_NAME = process.env.BRIALERT_SESSION_COOKIE_NAME || 'brialert_admin_session';
-const STATE_COOKIE_NAME = process.env.BRIALERT_OAUTH_STATE_COOKIE_NAME || 'brialert_admin_oauth_state';
-const SESSION_SECRET = String(process.env.BRIALERT_SESSION_SECRET || '').trim();
+const SESSION_COOKIE_NAME = process.env.ALBERTALERT_SESSION_COOKIE_NAME || 'albertalert_admin_session';
+const STATE_COOKIE_NAME = process.env.ALBERTALERT_OAUTH_STATE_COOKIE_NAME || 'albertalert_admin_oauth_state';
+const SESSION_SECRET = String(process.env.ALBERTALERT_SESSION_SECRET || '').trim();
 
 function parseTtlSeconds(envKey, fallback) {
   const parsed = Number.parseInt(process.env[envKey] || String(fallback), 10);
@@ -13,8 +13,8 @@ function parseTtlSeconds(envKey, fallback) {
   return parsed;
 }
 
-const SESSION_TTL_SECONDS = Math.max(60, parseTtlSeconds('BRIALERT_SESSION_TTL_SECONDS', 28800));
-const STATE_TTL_SECONDS = Math.max(60, parseTtlSeconds('BRIALERT_OAUTH_STATE_TTL_SECONDS', 600));
+const SESSION_TTL_SECONDS = Math.max(60, parseTtlSeconds('ALBERTALERT_SESSION_TTL_SECONDS', 28800));
+const STATE_TTL_SECONDS = Math.max(60, parseTtlSeconds('ALBERTALERT_OAUTH_STATE_TTL_SECONDS', 600));
 
 function nowSeconds() {
   return Math.floor(Date.now() / 1000);
@@ -39,7 +39,7 @@ function normaliseOrigin(value) {
 }
 
 export function getAllowedOrigins() {
-  const configured = String(process.env.BRIALERT_ALLOWED_ORIGINS || '')
+  const configured = String(process.env.ALBERTALERT_ALLOWED_ORIGINS || '')
     .split(',')
     .map((value) => normaliseOrigin(value))
     .filter(Boolean);
@@ -74,7 +74,7 @@ function appendSetCookie(response, value) {
 
 function signToken(encodedPayload) {
   if (!SESSION_SECRET) {
-    throw new ApiError('misconfigured-backend', 'Backend is missing BRIALERT_SESSION_SECRET configuration.', 503);
+    throw new ApiError('misconfigured-backend', 'Backend is missing ALBERTALERT_SESSION_SECRET configuration.', 503);
   }
   return crypto.createHmac('sha256', SESSION_SECRET).update(encodedPayload).digest('base64url');
 }
@@ -177,7 +177,7 @@ export function requireAdminSession(request, response) {
     response.status(503).json({
       ok: false,
       error: 'misconfigured-backend',
-      message: 'Backend is missing BRIALERT_SESSION_SECRET configuration.'
+      message: 'Backend is missing ALBERTALERT_SESSION_SECRET configuration.'
     });
     return null;
   }
@@ -240,8 +240,8 @@ export function clearAdminSessionCookie(request, response) {
 
 export function getAuthRedirectConfig() {
   return {
-    successRedirect: String(process.env.BRIALERT_AUTH_SUCCESS_REDIRECT || '/source-quarantine.html').trim() || '/source-quarantine.html',
-    failureRedirect: String(process.env.BRIALERT_AUTH_FAILURE_REDIRECT || '/source-quarantine.html?auth=failed').trim() || '/source-quarantine.html?auth=failed'
+    successRedirect: String(process.env.ALBERTALERT_AUTH_SUCCESS_REDIRECT || '/source-quarantine.html').trim() || '/source-quarantine.html',
+    failureRedirect: String(process.env.ALBERTALERT_AUTH_FAILURE_REDIRECT || '/source-quarantine.html?auth=failed').trim() || '/source-quarantine.html?auth=failed'
   };
 }
 
@@ -263,7 +263,7 @@ export function appendQueryParams(target, values) {
   const entries = Object.entries(values || {}).filter(([, value]) => value != null && value !== '');
   if (!entries.length) return target;
   if (target.startsWith('/')) {
-    const temp = new URL(target, 'https://brialert.local');
+    const temp = new URL(target, 'https://albertalert.local');
     for (const [key, value] of entries) temp.searchParams.set(key, String(value));
     return `${temp.pathname}${temp.search}${temp.hash}`;
   }
@@ -285,13 +285,13 @@ export function resolveBackendOrigin(request) {
 }
 
 export function getOAuthRedirectUri(request) {
-  const configured = String(process.env.BRIALERT_GITHUB_OAUTH_REDIRECT_URI || '').trim();
+  const configured = String(process.env.ALBERTALERT_GITHUB_OAUTH_REDIRECT_URI || '').trim();
   if (configured) return configured;
   const origin = resolveBackendOrigin(request);
   if (!origin) {
     throw new ApiError(
       'misconfigured-backend',
-      'Backend cannot infer OAuth callback origin; set BRIALERT_GITHUB_OAUTH_REDIRECT_URI.',
+      'Backend cannot infer OAuth callback origin; set ALBERTALERT_GITHUB_OAUTH_REDIRECT_URI.',
       503
     );
   }

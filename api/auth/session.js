@@ -6,14 +6,14 @@ import {
 
 function inferPrimaryFrontendUrl() {
   const configured = getAllowedOrigins();
-  return configured[0] ? `${configured[0]}/Brialert/source-quarantine.html` : '/source-quarantine.html';
+  return configured[0] ? `${configured[0]}/AlbertAlert/source-quarantine.html` : '/source-quarantine.html';
 }
 
 function startLoginUrlFor(originHint) {
   let returnTo = inferPrimaryFrontendUrl();
   try {
     const parsed = new URL(String(originHint || '').trim());
-    returnTo = `${parsed.origin}/Brialert/source-quarantine.html`;
+    returnTo = `${parsed.origin}/AlbertAlert/source-quarantine.html`;
   } catch {}
   return `/api/auth/github/start?returnTo=${encodeURIComponent(returnTo)}`;
 }

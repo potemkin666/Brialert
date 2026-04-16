@@ -37,7 +37,7 @@ test('requestRemoteLongBrief uses Vercel backend URL as the primary endpoint', a
     const result = await requestRemoteLongBrief([{ headline: 'one' }]);
     assert.equal(result, 'remote brief');
     assert.deepEqual(calledUrls, [
-      'https://brialertbackend.vercel.app/api/generate-brief'
+      'https://albertalertbackend.vercel.app/api/generate-brief'
     ]);
   } finally {
     globalThis.fetch = previousFetch;

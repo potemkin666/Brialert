@@ -17,8 +17,8 @@ const fixturesPath = path.join(
 test("fetchText uses offline fixture responses when offline mode is enabled", () => {
   const code = `
     import { fetchText } from './scripts/build-live-feed/io.mjs';
-    const result = await fetchText('https://fixtures.brialert.local/incidents.rss', 1, {
-      source: { id: 'fixture-rss-incidents', endpoint: 'https://fixtures.brialert.local/incidents.rss', kind: 'rss' }
+    const result = await fetchText('https://fixtures.albertalert.local/incidents.rss', 1, {
+      source: { id: 'fixture-rss-incidents', endpoint: 'https://fixtures.albertalert.local/incidents.rss', kind: 'rss' }
     });
     console.log(result.includes('bomb plot disrupted') ? 'ok' : 'bad');
   `;
@@ -27,8 +27,8 @@ test("fetchText uses offline fixture responses when offline mode is enabled", ()
     cwd: repoRoot,
     env: {
       ...process.env,
-      BRIALERT_OFFLINE_FIXTURE_MODE: "true",
-      BRIALERT_OFFLINE_FIXTURES_PATH: fixturesPath,
+      ALBERTALERT_OFFLINE_FIXTURE_MODE: "true",
+      ALBERTALERT_OFFLINE_FIXTURES_PATH: fixturesPath,
     },
     encoding: "utf8",
   }).trim();

@@ -6,7 +6,7 @@ on:
     - cron: '*/30 * * * *'
 
 concurrency:
-  group: brialert-live-feed
+  group: albertalert-live-feed
   cancel-in-progress: false
 
 permissions:
@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
-      BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
-      BRIALERT_FORCE_FEED_WRITE: 'true'
+      ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
+      ALBERTALERT_FORCE_FEED_WRITE: 'true'
 
     steps:
       - name: Check out repository
@@ -36,7 +36,7 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Install Playwright Chromium
-        if: ${{ env.BRIALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
+        if: ${{ env.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
         run: npx playwright install chromium --with-deps
 
       - name: Validate feed data files
@@ -47,7 +47,7 @@ jobs:
 
       - name: Validate London source health (full scope)
         env:
-          BRIALERT_SOURCE_HEALTH_SCOPE: all
+          ALBERTALERT_SOURCE_HEALTH_SCOPE: all
         run: npm run validate:source-health
 
       - name: Build live alert feed
@@ -66,7 +66,7 @@ jobs:
             source-quarantine.html
             data/source-remediation-sweep.json
             data/top-20-source-remediation.json
-            data/brialert.sqlite
+            data/albertalert.sqlite
           if-no-files-found: ignore
 
       - name: Show build output
@@ -103,7 +103,7 @@ jobs:
           cp data/source-remediation-sweep.json .debug-artifacts/source-remediation-sweep.json 2>/dev/null || true
           cp data/top-20-source-remediation.json .debug-artifacts/top-20-source-remediation.json 2>/dev/null || true
           cp source-quarantine.html .debug-artifacts/source-quarantine.html 2>/dev/null || true
-          cp data/brialert.sqlite .debug-artifacts/brialert.sqlite 2>/dev/null || true
+          cp data/albertalert.sqlite .debug-artifacts/albertalert.sqlite 2>/dev/null || true
           cp data/sources.json .debug-artifacts/sources.json 2>/dev/null || true
           cp data/geo-lookup.json .debug-artifacts/geo-lookup.json 2>/dev/null || true
           cp package.json .debug-artifacts/package.json 2>/dev/null || true
@@ -157,8 +157,8 @@ jobs:
           if [ -f data/top-20-source-remediation.json ]; then
             git add data/top-20-source-remediation.json
           fi
-          if [ -f data/brialert.sqlite ]; then
-            git add data/brialert.sqlite
+          if [ -f data/albertalert.sqlite ]; then
+            git add data/albertalert.sqlite
           fi
           if git diff --cached --quiet; then
             echo 'No feed changes to commit.'
@@ -182,9 +182,9 @@ jobs:
           git checkout --ours source-quarantine.html || true
           git checkout --ours data/source-remediation-sweep.json || true
           git checkout --ours data/top-20-source-remediation.json || true
-          git checkout --ours data/brialert.sqlite || true
+          git checkout --ours data/albertalert.sqlite || true
           git add live-alerts.json data/quarantined-sources.json source-quarantine.html \
-            data/source-remediation-sweep.json data/top-20-source-remediation.json data/brialert.sqlite || true
+            data/source-remediation-sweep.json data/top-20-source-remediation.json data/albertalert.sqlite || true
           git -c core.editor=true merge --continue || git commit --no-edit || true
           git push --force-with-lease
 

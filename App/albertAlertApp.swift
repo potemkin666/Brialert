@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct brialertApp: App {
+struct albertAlertApp: App {
     @StateObject private var viewModel: AlertFeedViewModel
 
     init() {

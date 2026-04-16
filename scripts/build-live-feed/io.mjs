@@ -62,16 +62,16 @@ const ERROR_CODE_TO_CATEGORY = Object.freeze({
 const PLAYWRIGHT_MISSING_BROWSER_RE = /Executable doesn't exist|Playwright browser not installed/i;
 let offlineFixtureCache = null;
 
-function createBrialertError(message, meta = {}) {
+function createAlbertAlertError(message, meta = {}) {
   const error = new Error(message);
-  error.__brialertMeta = {
+  error.__albertAlertMeta = {
     ...(meta && typeof meta === 'object' ? meta : {})
   };
   return error;
 }
 
 function safeErrorMeta(error) {
-  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
+  const meta = error && typeof error === 'object' ? error.__albertAlertMeta : null;
   if (!meta || typeof meta !== 'object' || Array.isArray(meta)) return null;
   const proto = Object.getPrototypeOf(meta);
   if (proto !== Object.prototype && proto !== null) return null;
@@ -168,13 +168,13 @@ async function offlineFixtureResponse(url, options = {}) {
   const endpoint = clean(url);
   const fixture = (sourceId && fixtures?.sources?.[sourceId]) || fixtures?.endpoints?.[endpoint];
   if (!fixture || typeof fixture !== 'object') {
-    throw createBrialertError(`Offline fixture missing for source ${sourceId || 'unknown'} endpoint ${endpoint}`, {
+    throw createAlbertAlertError(`Offline fixture missing for source ${sourceId || 'unknown'} endpoint ${endpoint}`, {
       errorCode: ERROR_CODE.FETCH_NETWORK_FAILURE,
       finalUrl: endpoint
     });
   }
   if (clean(fixture.errorMessage)) {
-    throw createBrialertError(clean(fixture.errorMessage), {
+    throw createAlbertAlertError(clean(fixture.errorMessage), {
       errorCode: clean(fixture.errorCode) || ERROR_CODE.FETCH_NETWORK_FAILURE,
       finalUrl: clean(fixture.finalUrl || endpoint),
       status: Number.isFinite(Number(fixture.status)) ? Number(fixture.status) : null
@@ -182,7 +182,7 @@ async function offlineFixtureResponse(url, options = {}) {
   }
   const bodyFile = clean(fixture.bodyFile);
   if (!bodyFile) {
-    throw createBrialertError(`Offline fixture bodyFile missing for source ${sourceId || 'unknown'}`, {
+    throw createAlbertAlertError(`Offline fixture bodyFile missing for source ${sourceId || 'unknown'}`, {
       errorCode: ERROR_CODE.FETCH_NETWORK_FAILURE,
       finalUrl: endpoint
     });
@@ -300,7 +300,7 @@ export async function fetchText(url, attempt = 1, options = {}) {
       domainState[domain] = { ...domainState[domain], halfOpenProbes: probesUsed + 1 };
     } else {
       const openUntil = new Date(Number(domainState[domain].circuitOpenUntil)).toISOString();
-      throw createBrialertError(`Circuit open for domain ${domain} until ${openUntil}`, {
+      throw createAlbertAlertError(`Circuit open for domain ${domain} until ${openUntil}`, {
         errorCode: ERROR_CODE.NETWORK_CIRCUIT_OPEN,
         finalUrl: endpoint
       });
@@ -326,7 +326,7 @@ export async function fetchText(url, attempt = 1, options = {}) {
     if (response.status === 304) {
       const cachedText = typeof priorCache?.text === 'string' ? priorCache.text : '';
       if (!cachedText) {
-        throw createBrialertError('HTTP 304 with empty cache', {
+        throw createAlbertAlertError('HTTP 304 with empty cache', {
           errorCode: ERROR_CODE.HTTP_304_EMPTY_CACHE,
           status: response.status,
           finalUrl
@@ -373,7 +373,7 @@ export async function fetchText(url, attempt = 1, options = {}) {
           : (response.status === 401 || response.status === 403)
             ? ERROR_CODE.HTTP_BLOCKED_OR_AUTH
             : ERROR_CODE.HTTP_STATUS_ERROR;
-      throw createBrialertError(`HTTP ${response.status}`, {
+      throw createAlbertAlertError(`HTTP ${response.status}`, {
         errorCode,
         status: response.status,
         finalUrl
@@ -383,7 +383,7 @@ export async function fetchText(url, attempt = 1, options = {}) {
     const text = await response.text();
     const blockedClass = classifyBodyBlock(text);
     if (blockedClass) {
-      throw createBrialertError(`Blocked by ${blockedClass.message}`, {
+      throw createAlbertAlertError(`Blocked by ${blockedClass.message}`, {
         errorCode: blockedClass.code,
         status: response.status,
         finalUrl
@@ -423,7 +423,7 @@ export async function fetchText(url, attempt = 1, options = {}) {
     const existingMeta = safeErrorMeta(error);
     const derivedErrorCode = resolveErrorCode(existingMeta, message);
     if (error && typeof error === 'object' && derivedErrorCode && (!existingMeta || !existingMeta.errorCode)) {
-      error.__brialertMeta = {
+      error.__albertAlertMeta = {
         ...(existingMeta && typeof existingMeta === 'object' ? existingMeta : {}),
         errorCode: derivedErrorCode
       };
@@ -467,7 +467,7 @@ export async function fetchTextWithPlaywright(url, options = {}) {
   const timeoutMs = Math.max(5000, Number(options?.timeoutMs || DEFAULT_TIMEOUT_MS));
   const playwright = await import('playwright').catch(() => null);
   if (!playwright?.chromium) {
-    throw createBrialertError('Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback', {
+    throw createAlbertAlertError('Playwright fallback unavailable: install optional dependency "playwright" to enable browser fallback', {
       errorCode: ERROR_CODE.PLAYWRIGHT_UNAVAILABLE
     });
   }
@@ -477,7 +477,7 @@ export async function fetchTextWithPlaywright(url, options = {}) {
   } catch (launchError) {
     const msg = launchError instanceof Error ? launchError.message : String(launchError);
     if (PLAYWRIGHT_MISSING_BROWSER_RE.test(msg)) {
-      throw createBrialertError(`Playwright browser not installed: ${msg}`, {
+      throw createAlbertAlertError(`Playwright browser not installed: ${msg}`, {
         errorCode: ERROR_CODE.PLAYWRIGHT_UNAVAILABLE
       });
     }
@@ -503,7 +503,7 @@ export async function fetchTextWithPlaywright(url, options = {}) {
     const html = await page.content();
     const blockedClass = classifyBodyBlock(html);
     if (blockedClass) {
-      throw createBrialertError(`Blocked by ${blockedClass.message}`, {
+      throw createAlbertAlertError(`Blocked by ${blockedClass.message}`, {
         errorCode: blockedClass.code,
         finalUrl: clean(page.url() || url)
       });

@@ -1,5 +1,5 @@
 const LONG_BRIEF_API_URLS = [
-  'https://brialertbackend.vercel.app/api/generate-brief'
+  'https://albertalertbackend.vercel.app/api/generate-brief'
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 const TERMINAL_HTTP_STATUSES = new Set([400, 401, 403, 404, 405, 410, 501]);

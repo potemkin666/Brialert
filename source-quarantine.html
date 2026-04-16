@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brialert Source Quarantine Review</title>
+  <title>AlbertAlert Source Quarantine Review</title>
   <style>
     :root {
       color-scheme: dark;
@@ -263,7 +263,7 @@
 <body>
   <main>
     <h1>Source Quarantine Review</h1>
-    <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run. Suggest a replacement URL and Brialert will restore it into the normal source catalog for the next run.</p>
+    <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run. Suggest a replacement URL and AlbertAlert will restore it into the normal source catalog for the next run.</p>
     <div class="auth-panel" id="auth-panel">
       <div id="auth-note" class="auth-note">Checking admin session...</div>
       <div class="auth-actions" id="auth-actions"></div>
@@ -321,7 +321,7 @@
   </main>
   <div id="toast" class="toast" aria-live="polite"></div>
   <script>
-    const DEFAULT_API_BASE = 'https://brialertbackend.vercel.app';
+    const DEFAULT_API_BASE = 'https://albertalertbackend.vercel.app';
     function normaliseApiBase(value) {
       const raw = String(value || '').trim();
       return raw ? raw.replace(/\/$/, '') : '';
@@ -337,7 +337,7 @@
       return result;
     }
     const API_BASE_CANDIDATES = uniqueValues([
-      normaliseApiBase(globalThis.BRIALERT_API_BASE),
+      normaliseApiBase(globalThis.ALBERTALERT_API_BASE),
       normaliseApiBase(DEFAULT_API_BASE)
     ]);
     let apiBase = API_BASE_CANDIDATES[0] || '';
@@ -847,7 +847,7 @@
     function cacheBustedUrl(url, cacheKey) {
       try {
         const candidate = new URL(url);
-        candidate.searchParams.set('_brialert_probe', String(cacheKey || Date.now()));
+        candidate.searchParams.set('_albertalert_probe', String(cacheKey || Date.now()));
         return candidate.toString();
       } catch {
         return url;

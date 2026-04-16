@@ -1,8 +1,8 @@
 import Foundation
 
 final class LocalAnalystStore {
-    private let watchlistKey = "brialert.watchlistIDs"
-    private let notesKey = "brialert.analystNotes"
+    private let watchlistKey = "albertalert.watchlistIDs"
+    private let notesKey = "albertalert.analystNotes"
 
     func loadWatchlistIDs() -> Set<String> {
         Set(UserDefaults.standard.stringArray(forKey: watchlistKey) ?? [])

@@ -2,7 +2,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["node_modules/**", "data/brialert.sqlite", "live-alerts.json"],
+    ignores: ["node_modules/**", "data/albertalert.sqlite", "live-alerts.json"],
   },
   {
     files: ["**/*.{js,mjs}"],

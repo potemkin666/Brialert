@@ -19,7 +19,7 @@ function queryValue(request, key) {
     return request.query[key];
   }
   try {
-    const url = new URL(request.url, 'https://brialert.local');
+    const url = new URL(request.url, 'https://albertalert.local');
     return url.searchParams.get(key);
   } catch {
     return null;

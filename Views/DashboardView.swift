@@ -64,7 +64,7 @@ struct DashboardView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("brialert")
+            Text("albertalert")
                 .font(.caption.weight(.bold))
                 .foregroundStyle(Color.white.opacity(0.62))
                 .textCase(.uppercase)

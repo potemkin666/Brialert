@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const repoRoot = path.resolve(__dirname, '..', '..');
 export const geoLookupPath = path.join(repoRoot, 'data', 'geo-lookup.json');
 export const outputPath = path.join(repoRoot, 'live-alerts.json');
-export const sqlitePath = path.join(repoRoot, 'data', 'brialert.sqlite');
+export const sqlitePath = path.join(repoRoot, 'data', 'albertalert.sqlite');
 export const quarantinedSourcesPath = path.join(repoRoot, 'data', 'quarantined-sources.json');
 export const quarantinedSourcesReviewPath = path.join(repoRoot, 'source-quarantine.html');
 export const topSourceRemediationPath = path.join(repoRoot, 'data', 'top-20-source-remediation.json');
@@ -44,77 +44,77 @@ function envPath(name, fallbackPath) {
   return path.isAbsolute(raw) ? raw : path.join(repoRoot, raw);
 }
 
-export const sourcePath = envPath('BRIALERT_SOURCE_PATH', path.join(repoRoot, 'data', 'sources.json'));
-export const sourceRequestsPath = envPath('BRIALERT_SOURCE_REQUESTS_PATH', path.join(repoRoot, 'data', 'source-requests.json'));
+export const sourcePath = envPath('ALBERTALERT_SOURCE_PATH', path.join(repoRoot, 'data', 'sources.json'));
+export const sourceRequestsPath = envPath('ALBERTALERT_SOURCE_REQUESTS_PATH', path.join(repoRoot, 'data', 'source-requests.json'));
 
-export const DEFAULT_TIMEOUT_MS = envInt('BRIALERT_FETCH_TIMEOUT_MS', 12000, 1000);
-export const DEFAULT_MAX_RETRIES = envInt('BRIALERT_FETCH_MAX_RETRIES', 2, 1);
-export const DEFAULT_FETCH_STAGGER_MS = envInt('BRIALERT_FETCH_STAGGER_MS', 60, 0);
-export const MAX_FETCH_STAGGER_JITTER_MS = envInt('BRIALERT_FETCH_STAGGER_JITTER_MS', 90, 0);
-export const BACKOFF_CAP_MS = envInt('BRIALERT_FETCH_BACKOFF_CAP_MS', 16000, 1000);
+export const DEFAULT_TIMEOUT_MS = envInt('ALBERTALERT_FETCH_TIMEOUT_MS', 12000, 1000);
+export const DEFAULT_MAX_RETRIES = envInt('ALBERTALERT_FETCH_MAX_RETRIES', 2, 1);
+export const DEFAULT_FETCH_STAGGER_MS = envInt('ALBERTALERT_FETCH_STAGGER_MS', 60, 0);
+export const MAX_FETCH_STAGGER_JITTER_MS = envInt('ALBERTALERT_FETCH_STAGGER_JITTER_MS', 90, 0);
+export const BACKOFF_CAP_MS = envInt('ALBERTALERT_FETCH_BACKOFF_CAP_MS', 16000, 1000);
 /** Maximum total stagger delay (ms) any single source may incur before its fetch starts. */
-export const MAX_STAGGER_CAP_MS = envInt('BRIALERT_MAX_STAGGER_CAP_MS', 3000, 0);
+export const MAX_STAGGER_CAP_MS = envInt('ALBERTALERT_MAX_STAGGER_CAP_MS', 3000, 0);
 export const MAX_SOURCE_ERRORS_TO_REPORT = 25;
-export const FEED_SOURCE_CONCURRENCY = envInt('BRIALERT_FEED_SOURCE_CONCURRENCY', 4, 1);
+export const FEED_SOURCE_CONCURRENCY = envInt('ALBERTALERT_FEED_SOURCE_CONCURRENCY', 4, 1);
 export const HTML_HYDRATION_CONCURRENCY = 3;
 export const MAX_HTML_CANDIDATES_PER_SOURCE = 18;
 export const MAX_FEED_CANDIDATES_PER_SOURCE = 10;
 export const MAX_HTML_PARSING_THRESHOLD = MAX_HTML_CANDIDATES_PER_SOURCE * 2;
-export const MAX_HTML_PREFETCH_ITEMS = envInt('BRIALERT_MAX_HTML_PREFETCH_ITEMS', 12, 1);
-export const MAX_FEED_PREFETCH_ITEMS = envInt('BRIALERT_MAX_FEED_PREFETCH_ITEMS', 8, 1);
-export const MAX_HTML_SOURCES_PER_RUN = envInt('BRIALERT_MAX_HTML_SOURCES_PER_RUN', 40, 1);
-export const CONTROL_MAX_HTML_SOURCES_PER_RUN = envInt('BRIALERT_CONTROL_MAX_HTML_SOURCES_PER_RUN', 30, 1);
+export const MAX_HTML_PREFETCH_ITEMS = envInt('ALBERTALERT_MAX_HTML_PREFETCH_ITEMS', 12, 1);
+export const MAX_FEED_PREFETCH_ITEMS = envInt('ALBERTALERT_MAX_FEED_PREFETCH_ITEMS', 8, 1);
+export const MAX_HTML_SOURCES_PER_RUN = envInt('ALBERTALERT_MAX_HTML_SOURCES_PER_RUN', 40, 1);
+export const CONTROL_MAX_HTML_SOURCES_PER_RUN = envInt('ALBERTALERT_CONTROL_MAX_HTML_SOURCES_PER_RUN', 30, 1);
 export const HTML_DOMAIN_CAP_PER_RUN = 3;
-export const SCHEDULER_MODE = clean(process.env.BRIALERT_SCHEDULER_AB_MODE || 'candidate').toLowerCase() === 'control'
+export const SCHEDULER_MODE = clean(process.env.ALBERTALERT_SCHEDULER_AB_MODE || 'candidate').toLowerCase() === 'control'
   ? 'control'
   : 'candidate';
 export const PLAYWRIGHT_FALLBACK_ALLOWLIST_SOURCE_IDS = new Set([
   'met-police-news',
   'ct-policing-london',
-  ...clean(process.env.BRIALERT_PLAYWRIGHT_ALLOWLIST || '')
+  ...clean(process.env.ALBERTALERT_PLAYWRIGHT_ALLOWLIST || '')
     .split(',')
     .map((value) => clean(value))
     .filter(Boolean)
 ]);
 export const PLAYWRIGHT_FALLBACK_DOMAINS = new Set(
-  clean(process.env.BRIALERT_PLAYWRIGHT_DOMAINS || '')
+  clean(process.env.ALBERTALERT_PLAYWRIGHT_DOMAINS || '')
     .split(',')
     .map((value) => clean(value).toLowerCase())
     .filter(Boolean)
 );
-export const PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS = envInt('BRIALERT_PLAYWRIGHT_MIN_HTML_CHARS', 1200, 200);
+export const PLAYWRIGHT_SUSPECT_MIN_HTML_CHARS = envInt('ALBERTALERT_PLAYWRIGHT_MIN_HTML_CHARS', 1200, 200);
 export const PLAYWRIGHT_FALLBACK_MAX_ATTEMPTS_PER_RUN = Math.max(
   0,
-  Number.isFinite(Number(process.env.BRIALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
-    ? Math.floor(Number(process.env.BRIALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
+  Number.isFinite(Number(process.env.ALBERTALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
+    ? Math.floor(Number(process.env.ALBERTALERT_PLAYWRIGHT_MAX_ATTEMPTS_PER_RUN))
     : 4
 );
-export const PLAYWRIGHT_FALLBACK_AGGRESSIVE = clean(process.env.BRIALERT_PLAYWRIGHT_AGGRESSIVE || 'true').toLowerCase() === 'true';
+export const PLAYWRIGHT_FALLBACK_AGGRESSIVE = clean(process.env.ALBERTALERT_PLAYWRIGHT_AGGRESSIVE || 'true').toLowerCase() === 'true';
 export const PLAYWRIGHT_FALLBACK_TIMEOUT_MS = Math.max(
   5000,
-  Number.isFinite(Number(process.env.BRIALERT_PLAYWRIGHT_TIMEOUT_MS))
-    ? Math.floor(Number(process.env.BRIALERT_PLAYWRIGHT_TIMEOUT_MS))
+  Number.isFinite(Number(process.env.ALBERTALERT_PLAYWRIGHT_TIMEOUT_MS))
+    ? Math.floor(Number(process.env.ALBERTALERT_PLAYWRIGHT_TIMEOUT_MS))
     : 12000
 );
 export const GUARDRAIL_MAX_RUNTIME_MS = Math.max(
   60_000,
-  Number.isFinite(Number(process.env.BRIALERT_GUARDRAIL_MAX_RUNTIME_MS))
-    ? Math.floor(Number(process.env.BRIALERT_GUARDRAIL_MAX_RUNTIME_MS))
+  Number.isFinite(Number(process.env.ALBERTALERT_GUARDRAIL_MAX_RUNTIME_MS))
+    ? Math.floor(Number(process.env.ALBERTALERT_GUARDRAIL_MAX_RUNTIME_MS))
     : 12 * 60_000
 );
 export const GUARDRAIL_MAX_FAILED_SOURCE_RATE = Math.max(
   0,
   Math.min(
     1,
-    Number.isFinite(Number(process.env.BRIALERT_GUARDRAIL_MAX_FAILED_SOURCE_RATE))
-      ? Number(process.env.BRIALERT_GUARDRAIL_MAX_FAILED_SOURCE_RATE)
+    Number.isFinite(Number(process.env.ALBERTALERT_GUARDRAIL_MAX_FAILED_SOURCE_RATE))
+      ? Number(process.env.ALBERTALERT_GUARDRAIL_MAX_FAILED_SOURCE_RATE)
       : 0.65
   )
 );
 export const GUARDRAIL_MIN_SUCCESSFUL_SOURCES = Math.max(
   1,
-  Number.isFinite(Number(process.env.BRIALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES))
-    ? Math.floor(Number(process.env.BRIALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES))
+  Number.isFinite(Number(process.env.ALBERTALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES))
+    ? Math.floor(Number(process.env.ALBERTALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES))
     : 8
 );
 // ---------------------------------------------------------------------------
@@ -125,8 +125,8 @@ export const MIDRUN_RUNTIME_WARNING_RATIO = Math.max(
   0.1,
   Math.min(
     0.99,
-    Number.isFinite(Number(process.env.BRIALERT_MIDRUN_RUNTIME_WARNING_RATIO))
-      ? Number(process.env.BRIALERT_MIDRUN_RUNTIME_WARNING_RATIO)
+    Number.isFinite(Number(process.env.ALBERTALERT_MIDRUN_RUNTIME_WARNING_RATIO))
+      ? Number(process.env.ALBERTALERT_MIDRUN_RUNTIME_WARNING_RATIO)
       : 0.8
   )
 );
@@ -135,8 +135,8 @@ export const MIDRUN_FAILURE_RATE_WARNING_RATIO = Math.max(
   0.1,
   Math.min(
     0.99,
-    Number.isFinite(Number(process.env.BRIALERT_MIDRUN_FAILURE_RATE_WARNING_RATIO))
-      ? Number(process.env.BRIALERT_MIDRUN_FAILURE_RATE_WARNING_RATIO)
+    Number.isFinite(Number(process.env.ALBERTALERT_MIDRUN_FAILURE_RATE_WARNING_RATIO))
+      ? Number(process.env.ALBERTALERT_MIDRUN_FAILURE_RATE_WARNING_RATIO)
       : 0.6
   )
 );
@@ -144,14 +144,14 @@ export const MIDRUN_FAILURE_RATE_WARNING_RATIO = Math.max(
  * Minimum sources processed before the failure-rate warning can trigger.
  * Avoids reacting to 1-of-2 failures at the very start of a run.
  */
-export const MIDRUN_MIN_SOURCES_FOR_RATE_CHECK = envInt('BRIALERT_MIDRUN_MIN_SOURCES_FOR_RATE_CHECK', 6, 2);
+export const MIDRUN_MIN_SOURCES_FOR_RATE_CHECK = envInt('ALBERTALERT_MIDRUN_MIN_SOURCES_FOR_RATE_CHECK', 6, 2);
 /** Per-source timeout used in fast-fail mode (ms). */
-export const MIDRUN_FAST_FAIL_TIMEOUT_MS = envInt('BRIALERT_MIDRUN_FAST_FAIL_TIMEOUT_MS', 5000, 1000);
+export const MIDRUN_FAST_FAIL_TIMEOUT_MS = envInt('ALBERTALERT_MIDRUN_FAST_FAIL_TIMEOUT_MS', 5000, 1000);
 /**
  * Safety margin (ms) subtracted from the runtime guardrail when computing
  * whether a continuation batch has enough time to complete.
  */
-export const CONTINUATION_SAFETY_MARGIN_MS = envInt('BRIALERT_CONTINUATION_SAFETY_MARGIN_MS', 30_000, 5000);
+export const CONTINUATION_SAFETY_MARGIN_MS = envInt('ALBERTALERT_CONTINUATION_SAFETY_MARGIN_MS', 30_000, 5000);
 /**
  * Floor for the observed success rate used when computing the dynamic
  * continuation oversample factor.  Prevents division-by-tiny-number spikes.
@@ -160,16 +160,16 @@ export const CONTINUATION_MIN_OVERSAMPLE_RATE = Math.max(
   0.01,
   Math.min(
     1,
-    Number.isFinite(Number(process.env.BRIALERT_CONTINUATION_MIN_OVERSAMPLE_RATE))
-      ? Number(process.env.BRIALERT_CONTINUATION_MIN_OVERSAMPLE_RATE)
+    Number.isFinite(Number(process.env.ALBERTALERT_CONTINUATION_MIN_OVERSAMPLE_RATE))
+      ? Number(process.env.ALBERTALERT_CONTINUATION_MIN_OVERSAMPLE_RATE)
       : 0.1
   )
 );
 
 export const TARGET_SUCCESSFUL_SOURCES_PER_RUN = Math.max(
   1,
-  Number.isFinite(Number(process.env.BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
-    ? Math.floor(Number(process.env.BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
+  Number.isFinite(Number(process.env.ALBERTALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
+    ? Math.floor(Number(process.env.ALBERTALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN))
     : 60
 );
 /** Base lane caps – used as the starting point before dynamic adjustments. */
@@ -254,7 +254,7 @@ export const EXPECTED_REFRESH_MINUTES = 30;
 export const STALE_AFTER_MINUTES = 50;
 export const SOURCE_TIMEZONE = 'Europe/London';
 export const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
-export const FEED_BOT_USER_AGENT = 'Mozilla/5.0 (compatible; BrialertFeedBot/1.0; +https://potemkin666.github.io/Brialert/)';
+export const FEED_BOT_USER_AGENT = 'Mozilla/5.0 (compatible; AlbertAlertFeedBot/1.0; +https://potemkin666.github.io/AlbertAlert/)';
 export const FEED_BOT_USER_AGENTS = Object.freeze([
   FEED_BOT_USER_AGENT,
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
@@ -279,35 +279,35 @@ export const SOURCE_FAILURE_COOLDOWN_HOURS = 24;
 export const SOURCE_EMPTY_COOLDOWN_HOURS = 12;
 export const SOURCE_PROTECTED_FAILURE_COOLDOWN_HOURS = 6;
 export const SOURCE_BLOCKED_FAILURE_COOLDOWN_HOURS = 12;
-export const BLOCKED_NON_CONTENT_FAIL_THRESHOLD = envInt('BRIALERT_BLOCKED_NON_CONTENT_FAIL_THRESHOLD', 3, 1);
-export const BLOCKED_NON_CONTENT_COOLDOWN_HOURS = envInt('BRIALERT_BLOCKED_NON_CONTENT_COOLDOWN_HOURS', 6, 1);
+export const BLOCKED_NON_CONTENT_FAIL_THRESHOLD = envInt('ALBERTALERT_BLOCKED_NON_CONTENT_FAIL_THRESHOLD', 3, 1);
+export const BLOCKED_NON_CONTENT_COOLDOWN_HOURS = envInt('ALBERTALERT_BLOCKED_NON_CONTENT_COOLDOWN_HOURS', 6, 1);
 export const AUTO_QUARANTINE_RECHECK_HOURS = 7 * 24;
 export const AUTO_SKIP_EMPTY_THRESHOLD = 10;
-export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD', 4, 1);
-export const AUTO_QUARANTINE_DEAD_URL_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_DEAD_URL_THRESHOLD', 2, 1);
-export const AUTO_QUARANTINE_FAILURE_THRESHOLD = envInt('BRIALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD', 6, 1);
-export const HEALTH_SCORE_INITIAL = envInt('BRIALERT_HEALTH_SCORE_INITIAL', 80, 0);
-export const HEALTH_SCORE_DEPRIORITISE_THRESHOLD = envInt('BRIALERT_HEALTH_SCORE_DEPRIORITISE_THRESHOLD', 40, 0);
-export const HEALTH_SCORE_REVIEW_THRESHOLD = envInt('BRIALERT_HEALTH_SCORE_REVIEW_THRESHOLD', 25, 0);
-export const HEALTH_SCORE_SUCCESS_BOOST = envInt('BRIALERT_HEALTH_SCORE_SUCCESS_BOOST', 10, 1);
-export const HEALTH_SCORE_FAILURE_PENALTY = envInt('BRIALERT_HEALTH_SCORE_FAILURE_PENALTY', 15, 1);
-export const HEALTH_SCORE_CRITICAL_FAILURE_PENALTY = envInt('BRIALERT_HEALTH_SCORE_CRITICAL_FAILURE_PENALTY', 30, 1);
-export const HEALTH_SCORE_EMPTY_PENALTY = envInt('BRIALERT_HEALTH_SCORE_EMPTY_PENALTY', 3, 0);
-export const HEALTH_SCORE_LOW_INTERVAL_HOURS = envInt('BRIALERT_HEALTH_SCORE_LOW_INTERVAL_HOURS', 24, 1);
-export const ROLLING_ERROR_WINDOW_SIZE = envInt('BRIALERT_ROLLING_ERROR_WINDOW_SIZE', 5, 1);
+export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = envInt('ALBERTALERT_AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD', 4, 1);
+export const AUTO_QUARANTINE_DEAD_URL_THRESHOLD = envInt('ALBERTALERT_AUTO_QUARANTINE_DEAD_URL_THRESHOLD', 2, 1);
+export const AUTO_QUARANTINE_FAILURE_THRESHOLD = envInt('ALBERTALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD', 6, 1);
+export const HEALTH_SCORE_INITIAL = envInt('ALBERTALERT_HEALTH_SCORE_INITIAL', 80, 0);
+export const HEALTH_SCORE_DEPRIORITISE_THRESHOLD = envInt('ALBERTALERT_HEALTH_SCORE_DEPRIORITISE_THRESHOLD', 40, 0);
+export const HEALTH_SCORE_REVIEW_THRESHOLD = envInt('ALBERTALERT_HEALTH_SCORE_REVIEW_THRESHOLD', 25, 0);
+export const HEALTH_SCORE_SUCCESS_BOOST = envInt('ALBERTALERT_HEALTH_SCORE_SUCCESS_BOOST', 10, 1);
+export const HEALTH_SCORE_FAILURE_PENALTY = envInt('ALBERTALERT_HEALTH_SCORE_FAILURE_PENALTY', 15, 1);
+export const HEALTH_SCORE_CRITICAL_FAILURE_PENALTY = envInt('ALBERTALERT_HEALTH_SCORE_CRITICAL_FAILURE_PENALTY', 30, 1);
+export const HEALTH_SCORE_EMPTY_PENALTY = envInt('ALBERTALERT_HEALTH_SCORE_EMPTY_PENALTY', 3, 0);
+export const HEALTH_SCORE_LOW_INTERVAL_HOURS = envInt('ALBERTALERT_HEALTH_SCORE_LOW_INTERVAL_HOURS', 24, 1);
+export const ROLLING_ERROR_WINDOW_SIZE = envInt('ALBERTALERT_ROLLING_ERROR_WINDOW_SIZE', 5, 1);
 // ---------------------------------------------------------------------------
 // Domain circuit-breaker ↔ health-score integration
 // ---------------------------------------------------------------------------
 /** Health penalty applied to sibling sources when a domain's circuit breaker trips. */
-export const CIRCUIT_BREAKER_DOMAIN_PENALTY = envInt('BRIALERT_CIRCUIT_BREAKER_DOMAIN_PENALTY', 10, 0);
+export const CIRCUIT_BREAKER_DOMAIN_PENALTY = envInt('ALBERTALERT_CIRCUIT_BREAKER_DOMAIN_PENALTY', 10, 0);
 /** Health boost for sibling sources when a probe succeeds on a tripped domain. */
-export const CIRCUIT_BREAKER_PROBE_BOOST = envInt('BRIALERT_CIRCUIT_BREAKER_PROBE_BOOST', 5, 0);
+export const CIRCUIT_BREAKER_PROBE_BOOST = envInt('ALBERTALERT_CIRCUIT_BREAKER_PROBE_BOOST', 5, 0);
 /** Number of probe requests allowed per half-open cooldown interval. */
-export const CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT = envInt('BRIALERT_CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT', 1, 1);
-export const FAIL_ON_GUARDRAIL_VIOLATION = clean(process.env.BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION).toLowerCase() === 'true';
-export const OFFLINE_FIXTURE_MODE = clean(process.env.BRIALERT_OFFLINE_FIXTURE_MODE).toLowerCase() === 'true';
+export const CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT = envInt('ALBERTALERT_CIRCUIT_BREAKER_HALF_OPEN_PROBE_COUNT', 1, 1);
+export const FAIL_ON_GUARDRAIL_VIOLATION = clean(process.env.ALBERTALERT_FAIL_ON_GUARDRAIL_VIOLATION).toLowerCase() === 'true';
+export const OFFLINE_FIXTURE_MODE = clean(process.env.ALBERTALERT_OFFLINE_FIXTURE_MODE).toLowerCase() === 'true';
 export const offlineFixturesPath = envPath(
-  'BRIALERT_OFFLINE_FIXTURES_PATH',
+  'ALBERTALERT_OFFLINE_FIXTURES_PATH',
   path.join(repoRoot, 'tests', 'fixtures', 'offline-build', 'fixtures.json')
 );
 export const HARD_SKIP_SOURCE_IDS = new Set([

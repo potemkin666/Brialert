@@ -1,10 +1,10 @@
 {
-  "name": "Brialert",
-  "short_name": "Brialert",
+  "name": "AlbertAlert",
+  "short_name": "AlbertAlert",
   "description": "Responder-first terrorism monitoring dashboard for iPhone Safari home screen install.",
-  "id": "/Brialert/",
-  "start_url": "/Brialert/index.html",
-  "scope": "/Brialert/",
+  "id": "/AlbertAlert/",
+  "start_url": "/AlbertAlert/index.html",
+  "scope": "/AlbertAlert/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
@@ -12,19 +12,19 @@
   "theme_color": "#070914",
   "icons": [
     {
-      "src": "/Brialert/assets/albert-icon.jpg",
+      "src": "/AlbertAlert/assets/albert-icon.jpg",
       "sizes": "180x180",
       "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/Brialert/assets/albert-icon.jpg",
+      "src": "/AlbertAlert/assets/albert-icon.jpg",
       "sizes": "192x192",
       "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/Brialert/assets/albert-icon.jpg",
+      "src": "/AlbertAlert/assets/albert-icon.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any"

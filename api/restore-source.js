@@ -55,7 +55,7 @@ async function checkUrlHealth(url) {
       method: 'HEAD',
       signal: controller.signal,
       redirect: 'follow',
-      headers: { 'User-Agent': 'Brialert-HealthCheck/1.0' }
+      headers: { 'User-Agent': 'AlbertAlert-HealthCheck/1.0' }
     });
     return { ok: res.ok, status: res.status };
   } catch (err) {
@@ -349,7 +349,7 @@ export default async function handler(request, response) {
       : `Bulk restore ${restoredIds.size} quarantined sources`;
     await commitJsonFilesAtomically(quarantinedFile.config, commitFiles, commitLabel);
 
-    const autoTrigger = String(process.env.BRIALERT_AUTO_TRIGGER_FEED || 'true').toLowerCase() !== 'false';
+    const autoTrigger = String(process.env.ALBERTALERT_AUTO_TRIGGER_FEED || 'true').toLowerCase() !== 'false';
     let workflowTriggered = false;
     let workflowMessage = null;
     if (autoTrigger) {

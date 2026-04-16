@@ -6,7 +6,7 @@ struct MonitoredDocumentState: Codable, Hashable {
 }
 
 final class MonitoredDocumentStateStore {
-    private let keyPrefix = "brialert.monitoredDocumentState."
+    private let keyPrefix = "albertalert.monitoredDocumentState."
 
     func load(for sourceID: String) -> MonitoredDocumentState? {
         let key = keyPrefix + sourceID

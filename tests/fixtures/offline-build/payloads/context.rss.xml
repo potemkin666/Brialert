@@ -2,11 +2,11 @@
 <rss version="2.0">
   <channel>
     <title>Fixture Context</title>
-    <link>https://fixtures.brialert.local/context.rss</link>
+    <link>https://fixtures.albertalert.local/context.rss</link>
     <description>Offline context fixture</description>
     <item>
       <title>UK police publish updated public safety briefing</title>
-      <link>https://fixtures.brialert.local/context/1</link>
+      <link>https://fixtures.albertalert.local/context/1</link>
       <description>Official context update covering preparedness and resilience guidance.</description>
       <pubDate>Fri, 04 Apr 2026 09:45:00 GMT</pubDate>
     </item>

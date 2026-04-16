@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Fixture Oversight</title>
-  <id>https://fixtures.brialert.local/oversight.atom</id>
+  <id>https://fixtures.albertalert.local/oversight.atom</id>
   <updated>2026-04-04T10:10:00Z</updated>
   <entry>
     <title>Oversight committee schedules counter-terror review hearing</title>
-    <id>https://fixtures.brialert.local/oversight/1</id>
+    <id>https://fixtures.albertalert.local/oversight/1</id>
     <updated>2026-04-04T10:10:00Z</updated>
     <summary>Parliamentary committee confirms an oversight hearing on prevention strategy.</summary>
-    <link href="https://fixtures.brialert.local/oversight/1" />
+    <link href="https://fixtures.albertalert.local/oversight/1" />
   </entry>
 </feed>

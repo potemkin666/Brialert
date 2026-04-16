@@ -1197,7 +1197,7 @@ test('source error summary classifies HTTP 304 as unchanged', async () => {
 test('source error summary prefers structured errorCode over brittle message matching', async () => {
   const { summariseSourceError } = await import('../scripts/build-live-feed/io.mjs');
   const error = new Error('mystery parser crash without selector words');
-  error.__brialertMeta = { errorCode: 'PARSER_SELECTOR_OR_JS_RENDERING' };
+  error.__albertAlertMeta = { errorCode: 'PARSER_SELECTOR_OR_JS_RENDERING' };
   const summary = summariseSourceError(
     { id: 'test-source', provider: 'Test provider', endpoint: 'https://example.test/feed' },
     error
@@ -1209,7 +1209,7 @@ test('source error summary prefers structured errorCode over brittle message mat
 test('source error summary maps structured blocked and timeout codes centrally', async () => {
   const { summariseSourceError } = await import('../scripts/build-live-feed/io.mjs');
   const blockedError = new Error('opaque blocked page');
-  blockedError.__brialertMeta = { errorCode: 'BLOCKED_ACCESS_PAGE' };
+  blockedError.__albertAlertMeta = { errorCode: 'BLOCKED_ACCESS_PAGE' };
   const blockedSummary = summariseSourceError(
     { id: 'test-source', provider: 'Test provider', endpoint: 'https://example.test/feed' },
     blockedError
@@ -1218,7 +1218,7 @@ test('source error summary maps structured blocked and timeout codes centrally',
   assert.equal(blockedSummary.errorCode, 'BLOCKED_ACCESS_PAGE');
 
   const timeoutError = new Error('upstream timeout');
-  timeoutError.__brialertMeta = { errorCode: 'FETCH_TIMEOUT' };
+  timeoutError.__albertAlertMeta = { errorCode: 'FETCH_TIMEOUT' };
   const timeoutSummary = summariseSourceError(
     { id: 'test-source', provider: 'Test provider', endpoint: 'https://example.test/feed' },
     timeoutError
@@ -1228,7 +1228,7 @@ test('source error summary maps structured blocked and timeout codes centrally',
 });
 
 test('validate-live-feed-output script passes valid feed and fails invalid sourceCount', () => {
-  const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'brialert-live-feed-'));
+  const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'albertalert-live-feed-'));
   const scriptsDir = path.join(tmpRoot, 'scripts');
   fs.mkdirSync(scriptsDir, { recursive: true });
   fs.copyFileSync(
@@ -1515,13 +1515,13 @@ test('splitLongBriefSentences deduplicates cleaned sentence blocks', () => {
 });
 
 test('reportBackgroundError invokes diagnostics hook when present', () => {
-  const previousHook = globalThis.BRIALERT_DIAGNOSTICS_HOOK;
+  const previousHook = globalThis.ALBERTALERT_DIAGNOSTICS_HOOK;
   const calls = [];
-  globalThis.BRIALERT_DIAGNOSTICS_HOOK = (payload) => calls.push(payload);
+  globalThis.ALBERTALERT_DIAGNOSTICS_HOOK = (payload) => calls.push(payload);
   try {
     reportBackgroundError('test', 'background task failed', new Error('boom'), { step: 1 });
   } finally {
-    globalThis.BRIALERT_DIAGNOSTICS_HOOK = previousHook;
+    globalThis.ALBERTALERT_DIAGNOSTICS_HOOK = previousHook;
   }
 
   assert.equal(calls.length, 1);

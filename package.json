@@ -1,5 +1,5 @@
 {
-  "name": "brialert-pages",
+  "name": "albertalert-pages",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "validate:source-health": "node ./scripts/validate-source-health.mjs",
     "validate:live-feed-output": "node ./scripts/validate-live-feed-output.mjs",
     "build:feeds": "node ./scripts/compile-source-catalog.mjs --quiet && node ./scripts/build-live-feed.mjs",
-    "build:feeds:offline": "BRIALERT_OFFLINE_FIXTURE_MODE=true BRIALERT_SOURCE_PATH=tests/fixtures/offline-build/sources.json BRIALERT_SOURCE_REQUESTS_PATH=tests/fixtures/offline-build/source-requests.json BRIALERT_OFFLINE_FIXTURES_PATH=tests/fixtures/offline-build/fixtures.json BRIALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES=1 BRIALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN=1 BRIALERT_FAIL_ON_GUARDRAIL_VIOLATION=false node ./scripts/build-live-feed.mjs",
+    "build:feeds:offline": "ALBERTALERT_OFFLINE_FIXTURE_MODE=true ALBERTALERT_SOURCE_PATH=tests/fixtures/offline-build/sources.json ALBERTALERT_SOURCE_REQUESTS_PATH=tests/fixtures/offline-build/source-requests.json ALBERTALERT_OFFLINE_FIXTURES_PATH=tests/fixtures/offline-build/fixtures.json ALBERTALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES=1 ALBERTALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN=1 ALBERTALERT_FAIL_ON_GUARDRAIL_VIOLATION=false node ./scripts/build-live-feed.mjs",
     "lint": "eslint app shared scripts tests --ext .mjs,.js",
     "format:check": "prettier --check eslint.config.mjs package.json tests/cards-snapshots.test.mjs tests/offline-build-mode.test.mjs .github/workflows/ci-feed-validation.yml",
     "test": "node --test ./tests/*.test.mjs"

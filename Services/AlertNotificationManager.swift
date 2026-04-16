@@ -8,7 +8,7 @@ protocol AlertNotificationManaging {
 
 final class AlertNotificationManager: AlertNotificationManaging {
     private let center = UNUserNotificationCenter.current()
-    private let seenKey = "brialert.seenAlertIDs"
+    private let seenKey = "albertalert.seenAlertIDs"
 
     func requestAuthorizationIfNeeded() async {
         do {
@@ -27,7 +27,7 @@ final class AlertNotificationManager: AlertNotificationManaging {
 
         for alert in newUrgentAlerts.prefix(3) {
             let content = UNMutableNotificationContent()
-            content.title = "brialert Priority Incident"
+            content.title = "AlbertAlert Priority Incident"
             content.body = "\(alert.title) in \(alert.location)"
             content.sound = .default
 

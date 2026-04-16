@@ -244,7 +244,7 @@ export default async function handler(request, response) {
       `Approve source request ${requestId}`
     );
 
-    const autoTrigger = String(process.env.BRIALERT_AUTO_TRIGGER_FEED || 'true').toLowerCase() !== 'false';
+    const autoTrigger = String(process.env.ALBERTALERT_AUTO_TRIGGER_FEED || 'true').toLowerCase() !== 'false';
     let workflowTriggered = false;
     let workflowMessage = null;
     if (autoTrigger) {

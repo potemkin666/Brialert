@@ -619,9 +619,9 @@ function freshnessMinutes(entry, nowMs) {
 
 function buildFetchError(message, category) {
   const error = new Error(message);
-  error.__brialertCategory = category;
+  error.__albertAlertCategory = category;
   if (category === 'brittle-selectors-or-js-rendering') {
-    error.__brialertMeta = {
+    error.__albertAlertMeta = {
       errorCode: ERROR_CODE.PARSER_SELECTOR_OR_JS_RENDERING
     };
   }
@@ -695,7 +695,7 @@ function shouldTryPlaywrightForThinHtml(source, body, playwrightBudget) {
 }
 
 function isPlaywrightUnavailableError(error) {
-  const meta = error && typeof error === 'object' ? error.__brialertMeta : null;
+  const meta = error && typeof error === 'object' ? error.__albertAlertMeta : null;
   if (meta && meta.errorCode === ERROR_CODE.PLAYWRIGHT_UNAVAILABLE) return true;
   const msg = error instanceof Error ? error.message : String(error || '');
   return /Executable doesn't exist|Playwright browser not installed/i.test(msg);
@@ -1119,7 +1119,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries, metrics) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brialert Source Quarantine Review</title>
+  <title>AlbertAlert Source Quarantine Review</title>
   <style>
     :root {
       color-scheme: dark;
@@ -1379,7 +1379,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries, metrics) {
 <body>
   <main>
     <h1>Source Quarantine Review</h1>
-    <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run. Suggest a replacement URL and Brialert will restore it into the normal source catalog for the next run.</p>
+    <p>Auto-quarantined or manually quarantined sources that should be reviewed before returning to the hourly feed run. Suggest a replacement URL and AlbertAlert will restore it into the normal source catalog for the next run.</p>
     <div class="auth-panel" id="auth-panel">
       <div id="auth-note" class="auth-note">Checking admin session...</div>
       <div class="auth-actions" id="auth-actions"></div>
@@ -1437,7 +1437,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries, metrics) {
   </main>
   <div id="toast" class="toast" aria-live="polite"></div>
   <script>
-    const DEFAULT_API_BASE = 'https://brialertbackend.vercel.app';
+    const DEFAULT_API_BASE = 'https://albertalertbackend.vercel.app';
     function normaliseApiBase(value) {
       const raw = String(value || '').trim();
       return raw ? raw.replace(/\\/$/, '') : '';
@@ -1453,7 +1453,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries, metrics) {
       return result;
     }
     const API_BASE_CANDIDATES = uniqueValues([
-      normaliseApiBase(globalThis.BRIALERT_API_BASE),
+      normaliseApiBase(globalThis.ALBERTALERT_API_BASE),
       normaliseApiBase(DEFAULT_API_BASE)
     ]);
     let apiBase = API_BASE_CANDIDATES[0] || '';
@@ -1963,7 +1963,7 @@ function renderQuarantinedSourcesHtml(generatedAt, entries, metrics) {
     function cacheBustedUrl(url, cacheKey) {
       try {
         const candidate = new URL(url);
-        candidate.searchParams.set('_brialert_probe', String(cacheKey || Date.now()));
+        candidate.searchParams.set('_albertalert_probe', String(cacheKey || Date.now()));
         return candidate.toString();
       } catch {
         return url;
@@ -2410,7 +2410,7 @@ function buildSourceRemediationSweep({ generatedAt, sourceErrors, sourceStats })
 
 async function syncBuilderSQLite(snapshot) {
   const helperPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'build-live-feed', 'sqlite-sync.py');
-  const tempPath = path.join(os.tmpdir(), `brialert-sqlite-sync-${Date.now()}-${process.pid}.json`);
+  const tempPath = path.join(os.tmpdir(), `albertalert-sqlite-sync-${Date.now()}-${process.pid}.json`);
   const payload = {
     ...snapshot,
     sqlitePath
@@ -2466,7 +2466,7 @@ async function main() {
         sourceErrors: [
           {
             id: 'sources-json',
-            provider: 'Brialert builder',
+            provider: 'AlbertAlert builder',
             endpoint: sourcePath,
             message
           }
@@ -3233,7 +3233,7 @@ async function main() {
   const nextComparable = JSON.stringify(payload.alerts);
   const hasExistingAlertsSnapshot = Array.isArray(existing?.alerts);
   const existingRuntimeMs = Number(existing?.runMetrics?.runDurationMs || 0);
-  const forceFeedWrite = clean(process.env.BRIALERT_FORCE_FEED_WRITE).toLowerCase() === 'true';
+  const forceFeedWrite = clean(process.env.ALBERTALERT_FORCE_FEED_WRITE).toLowerCase() === 'true';
 
   if (hasExistingAlertsSnapshot && currentComparable === nextComparable && !sourceErrors.length && !geoLookupFallbackNote && !forceFeedWrite) {
     if (Number.isFinite(existingRuntimeMs) && existingRuntimeMs > GUARDRAIL_MAX_RUNTIME_MS) {
