@@ -6,6 +6,7 @@ import {
   validateAbsoluteHttpUrl
 } from './_lib/github-persistence.js';
 import { applyCorsHeaders } from './_lib/admin-session.js';
+import { isPrivateUrl } from './_lib/url-safety.js';
 
 const REQUESTS_PATH = 'data/source-requests.json';
 const SOURCES_PATH = 'data/sources.json';
@@ -13,6 +14,22 @@ const VALID_REGIONS = new Set(['uk', 'europe', 'london', 'eu', 'international', 
 const VALID_LANES = new Set(['incidents', 'context', 'sanctions', 'oversight', 'border', 'prevention']);
 const VALID_KINDS = new Set(['rss', 'atom', 'json', 'html', 'playwright_html']);
 const REQUEST_HISTORY_LIMIT = 250;
+const REQUEST_RATE_LIMIT_MS = 10_000;
+const REQUEST_RATE_LIMIT_BURST = 5;
+
+const recentRequests = [];
+
+function isRateLimited() {
+  const now = Date.now();
+  while (recentRequests.length > 0 && now - recentRequests[0] > REQUEST_RATE_LIMIT_MS) {
+    recentRequests.shift();
+  }
+  if (recentRequests.length >= REQUEST_RATE_LIMIT_BURST) {
+    return true;
+  }
+  recentRequests.push(now);
+  return false;
+}
 
 function sendError(response, error) {
   const status = error instanceof ApiError ? error.status : 500;
@@ -267,8 +284,19 @@ export default async function handler(request, response) {
   }
 
   try {
+    if (isRateLimited()) {
+      return response.status(429).json({
+        ok: false,
+        error: 'rate-limited',
+        message: 'Too many source requests. Please wait a few seconds before trying again.'
+      });
+    }
+
     const body = parseRequestBody(request);
     const endpoint = validateAbsoluteHttpUrl(body.url || body.endpoint);
+    if (await isPrivateUrl(endpoint)) {
+      throw new ApiError('invalid-url', 'URL points to a private or reserved address.', 400);
+    }
     const regionHint = body.regionHint;
 
     const [requestsFile, sourcesFile] = await Promise.all([

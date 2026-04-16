@@ -1,5 +1,5 @@
 import { ApiError } from './_lib/github-persistence.js';
-import { applyCorsHeaders } from './_lib/admin-session.js';
+import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
 
 const GITHUB_API_BASE = 'https://api.github.com';
 const WORKFLOW_FILENAME = 'update-live-feed.yml';
@@ -46,6 +46,10 @@ export default async function handler(request, response) {
       error: 'method-not-allowed',
       detail: 'Only POST is supported.'
     });
+  }
+
+  if (!requireAdminSession(request, response)) {
+    return response;
   }
 
   try {

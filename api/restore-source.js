@@ -8,6 +8,7 @@ import {
   validateAbsoluteHttpUrl
 } from './_lib/github-persistence.js';
 import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
+import { isPrivateUrl } from './_lib/url-safety.js';
 
 const QUARANTINE_ONLY_FIELDS = new Set([
   'status',
@@ -44,6 +45,9 @@ function sendError(response, error) {
 }
 
 async function checkUrlHealth(url) {
+  if (await isPrivateUrl(url)) {
+    return { ok: false, status: 0, error: 'URL resolves to a private or reserved IP range.' };
+  }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), URL_HEALTH_CHECK_TIMEOUT_MS);
   try {
