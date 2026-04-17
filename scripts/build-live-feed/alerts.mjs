@@ -329,7 +329,7 @@ export function discardReasonForItem(source, item) {
     if (terrorHits.length < 2) return 'tabloid-terror-hit-miss';
     if (incidentHits.length < 3) return 'tabloid-incident-hit-miss';
   }
-  if (source.requiresKeywordMatch && incidentHits.length === 0) return 'keyword-match-required';
+  if (source.requiresKeywordMatch && (incidentHits.length === 0 || terrorHits.length === 0)) return 'keyword-match-required';
   return null;
 }
 
