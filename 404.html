@@ -7,7 +7,7 @@
   <meta http-equiv="refresh" content="0; url=./index.html">
   <script>
     // Relative redirect — works regardless of repo name or deploy path.
-    var base = location.pathname.replace(/\/[^/]*$/, '/');
+    const base = location.pathname.replace(/\/[^/]*$/, '/');
     location.replace(base + 'index.html' + (location.search || '') + (location.hash || ''));
   </script>
   <style>

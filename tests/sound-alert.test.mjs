@@ -192,8 +192,11 @@ describe('sound-alert: isTabHidden', () => {
   test('returns false in Node.js (no document)', () => {
     const origDoc = globalThis.document;
     delete globalThis.document;
-    assert.equal(isTabHidden(), false);
-    globalThis.document = origDoc;
+    try {
+      assert.equal(isTabHidden(), false);
+    } finally {
+      globalThis.document = origDoc;
+    }
   });
 });
 
