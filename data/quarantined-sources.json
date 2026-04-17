@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-04-17T05:46:58.069Z",
-  "count": 35,
+  "generatedAt": "2026-04-17T07:11:27.406Z",
+  "count": 38,
   "metrics": {
-    "total": 35,
-    "newThisWeek": 35,
+    "total": 38,
+    "newThisWeek": 38,
     "avgTimeInQuarantineHours": 13,
     "avgHealthScore": 20,
     "reQuarantineRate": 0,
@@ -11,6 +11,82 @@
     "restoredTotal": 0
   },
   "sources": [
+    {
+      "id": "german-bka-press-releases-de",
+      "provider": "BKA Germany - Press Releases",
+      "endpoint": "https://www.bka.de/DE/Aktuelle. Informationen/Aktuelle. Meldungen/Pressemeldungen/pressemitteilungen_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "healthScore": 14,
+      "status": "auto-quarantined",
+      "reason": "Infrastructure instability — mixed timeout and network errors; auto-retry likely to recover",
+      "quarantinedAt": "2026-04-17T07:11:27.406Z",
+      "lastErrorCategory": "timeout",
+      "lastErrorMessage": "This operation was aborted",
+      "consecutiveFailures": 1,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-16T19:01:30.233Z"
+        },
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-17T07:11:27.406Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T07:11:27.406Z",
+      "lastFailureAt": "2026-04-17T07:11:27.406Z",
+      "lastCheckedAt": "2026-04-17T07:11:27.406Z"
+    },
+    {
+      "id": "portugal-pj-news",
+      "provider": "Policia Judiciaria Portugal - News",
+      "endpoint": "https://www.policiajudiciaria.pt/?p=noticias",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "healthScore": 14,
+      "status": "auto-quarantined",
+      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
+      "quarantinedAt": "2026-04-17T07:11:27.406Z",
+      "lastErrorCategory": "network-failure",
+      "lastErrorMessage": "fetch failed",
+      "consecutiveFailures": 1,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-17T07:11:27.406Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T07:11:27.406Z",
+      "lastFailureAt": "2026-04-17T07:11:27.406Z",
+      "lastCheckedAt": "2026-04-17T07:11:27.406Z"
+    },
     {
       "id": "counter-extremism-project-news",
       "provider": "Counter Extremism Project a News",
@@ -76,6 +152,44 @@
       "reviewBy": "2026-04-23T21:04:21.166Z",
       "lastFailureAt": "2026-04-16T21:04:21.166Z",
       "lastCheckedAt": "2026-04-16T21:04:21.166Z"
+    },
+    {
+      "id": "surgezirc-uk",
+      "provider": "Surge. Zirc UK",
+      "endpoint": "https://surgezirc.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 20,
+      "status": "auto-quarantined",
+      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
+      "quarantinedAt": "2026-04-17T07:11:27.406Z",
+      "lastErrorCategory": "network-failure",
+      "lastErrorMessage": "fetch failed",
+      "consecutiveFailures": 1,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T22:57:09.120Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-17T07:11:27.406Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T07:11:27.406Z",
+      "lastFailureAt": "2026-04-17T07:11:27.406Z",
+      "lastCheckedAt": "2026-04-17T07:11:27.406Z"
     },
     {
       "id": "denmark-pet-news",
