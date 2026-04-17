@@ -44,7 +44,7 @@ function scoreGeoEntryMatch(entry, haystack) {
     else if ((entry.kind || '') === 'town') score += 12;
     else if ((entry.kind || '') === 'airport_area') score += 11;
     else if ((entry.kind || '') === 'county' || (entry.kind || '') === 'region' || (entry.kind || '') === 'state') score += 8;
-    else if ((entry.kind || '') === 'country') score += 3;
+    else if ((entry.kind || '') === 'country' || (entry.kind || '') === 'country_part') score += 3;
     else if ((entry.kind || '') === 'continent') score += 1;
 
     best = Math.max(best, score);

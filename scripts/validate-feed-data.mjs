@@ -277,6 +277,16 @@ const targets = [
           fieldErrors.push(`${prefix}: "precision" must be one of [${[...VALID_GEO_PRECISIONS].join(', ')}], got ${JSON.stringify(entry.precision)}`);
         }
 
+        // Country / country_part demonym check — entries should have at
+        // least one alternate term (e.g. "french" for France) so that
+        // news text using adjective forms gets geo-resolved correctly.
+        const DEMONYM_KINDS = new Set(['country', 'country_part']);
+        if (DEMONYM_KINDS.has(entry.kind) && Array.isArray(entry.terms) && entry.terms.length < 2) {
+          fieldErrors.push(
+            `${prefix}: country/country_part entries should have ≥2 terms (include a demonym/adjective form), got ${JSON.stringify(entry.terms)}`
+          );
+        }
+
         // Coordinate range sanity
         if (Number.isFinite(entry.lat) && (entry.lat < -90 || entry.lat > 90)) {
           fieldErrors.push(`${prefix}: "lat" out of range [-90, 90], got ${entry.lat}`);

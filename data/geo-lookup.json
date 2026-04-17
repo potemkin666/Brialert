@@ -50,7 +50,7 @@
   { "terms": ["england", "english"], "label": "England, UK", "kind": "country_part", "precision": "low", "lat": 52.3555, "lng": -1.1743 },
   { "terms": ["scotland", "scottish"], "label": "Scotland, UK", "kind": "country_part", "precision": "low", "lat": 56.4907, "lng": -4.2026 },
   { "terms": ["wales", "welsh"], "label": "Wales, UK", "kind": "country_part", "precision": "low", "lat": 52.1307, "lng": -3.7837 },
-  { "terms": ["northern ireland"], "label": "Northern Ireland, UK", "kind": "country_part", "precision": "low", "lat": 54.7877, "lng": -6.4923 },
+  { "terms": ["northern ireland", "northern irish"], "label": "Northern Ireland, UK", "kind": "country_part", "precision": "low", "lat": 54.7877, "lng": -6.4923 },
 
   { "terms": ["paris"], "label": "Paris, France", "kind": "city", "precision": "high", "lat": 48.8566, "lng": 2.3522 },
   { "terms": ["france", "french"], "label": "France", "kind": "country", "precision": "low", "lat": 46.6034, "lng": 1.8883 },
@@ -124,14 +124,14 @@
   { "terms": ["norway", "norwegian"], "label": "Norway", "kind": "country", "precision": "low", "lat": 60.4720, "lng": 8.4689 },
   { "terms": ["portugal", "portuguese"], "label": "Portugal", "kind": "country", "precision": "low", "lat": 39.3999, "lng": -8.2245 },
   { "terms": ["albania", "albanian"], "label": "Albania", "kind": "country", "precision": "low", "lat": 41.1533, "lng": 20.1683 },
-  { "terms": ["kosovo"], "label": "Kosovo", "kind": "country", "precision": "low", "lat": 42.6026, "lng": 20.9020 },
+  { "terms": ["kosovo", "kosovar"], "label": "Kosovo", "kind": "country", "precision": "low", "lat": 42.6026, "lng": 20.9020 },
   { "terms": ["north macedonia", "macedonia"], "label": "North Macedonia", "kind": "country", "precision": "low", "lat": 41.5122, "lng": 21.7453 },
-  { "terms": ["montenegro"], "label": "Montenegro", "kind": "country", "precision": "low", "lat": 42.7087, "lng": 19.3744 },
+  { "terms": ["montenegro", "montenegrin"], "label": "Montenegro", "kind": "country", "precision": "low", "lat": 42.7087, "lng": 19.3744 },
   { "terms": ["bosnia", "bosnia and herzegovina", "bosnian"], "label": "Bosnia and Herzegovina", "kind": "country", "precision": "low", "lat": 43.9159, "lng": 17.6791 },
   { "terms": ["slovakia", "slovak"], "label": "Slovakia", "kind": "country", "precision": "low", "lat": 48.6690, "lng": 19.6990 },
   { "terms": ["slovenia", "slovenian"], "label": "Slovenia", "kind": "country", "precision": "low", "lat": 46.1512, "lng": 14.9955 },
-  { "terms": ["moldova"], "label": "Moldova", "kind": "country", "precision": "low", "lat": 47.4116, "lng": 28.3699 },
-  { "terms": ["luxembourg"], "label": "Luxembourg", "kind": "country", "precision": "low", "lat": 49.8153, "lng": 6.1296 },
+  { "terms": ["moldova", "moldovan"], "label": "Moldova", "kind": "country", "precision": "low", "lat": 47.4116, "lng": 28.3699 },
+  { "terms": ["luxembourg", "luxembourgish"], "label": "Luxembourg", "kind": "country", "precision": "low", "lat": 49.8153, "lng": 6.1296 },
 
   { "terms": ["europe", "european"], "label": "Europe", "kind": "continent", "precision": "low", "lat": 50.0, "lng": 10.0 },
 
