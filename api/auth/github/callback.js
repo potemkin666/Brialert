@@ -14,6 +14,22 @@ import {
   fetchGithubUser
 } from '../../_lib/github-admin-access.js';
 
+const CALLBACK_RATE_LIMIT_MS = 60_000;
+const CALLBACK_RATE_LIMIT_BURST = 10;
+const recentCallbacks = [];
+
+function isCallbackRateLimited() {
+  const now = Date.now();
+  while (recentCallbacks.length > 0 && now - recentCallbacks[0] > CALLBACK_RATE_LIMIT_MS) {
+    recentCallbacks.shift();
+  }
+  if (recentCallbacks.length >= CALLBACK_RATE_LIMIT_BURST) {
+    return true;
+  }
+  recentCallbacks.push(now);
+  return false;
+}
+
 function queryValue(request, key) {
   if (request?.query && Object.prototype.hasOwnProperty.call(request.query, key)) {
     return request.query[key];
@@ -50,6 +66,10 @@ export default async function handler(request, response) {
       error: 'method-not-allowed',
       message: 'Only GET is supported.'
     });
+  }
+
+  if (isCallbackRateLimited()) {
+    return redirect(response, failRedirectTarget('rate-limited'));
   }
 
   const statePayload = readOauthState(request);
