@@ -2,6 +2,7 @@ import { escapeHtml } from '../app/utils/text.mjs';
 import { MAP_VIEW_MODES, NEARBY_RADIUS_KM, resolveMapMode } from './ui-constants.mjs';
 import { LONDON_BOUNDS, WORLD_VIEW_DEFAULTS } from './geo-fallback-coords.mjs';
 
+// Leaflet-friendly [lat,lng] pairs derived from the shared LONDON_BOUNDS bounding box.
 const LONDON_BOUNDS_ARRAY = Object.freeze([
   [LONDON_BOUNDS.latMin, LONDON_BOUNDS.lngMin],
   [LONDON_BOUNDS.latMax, LONDON_BOUNDS.lngMax]
