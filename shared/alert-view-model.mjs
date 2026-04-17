@@ -53,24 +53,47 @@ export function isLondonAlert(alert) {
   ].some((term) => haystack.includes(term));
 }
 
-function fallbackLatForRegion(region) {
-  if (region === 'uk') return 54.5;
-  if (region === 'london') return 51.5074;
-  if (region === 'us') return 39.8283;
-  return 54;
-}
-
-function fallbackLngForRegion(region) {
-  if (region === 'uk') return -2.5;
-  if (region === 'london') return -0.1278;
-  if (region === 'us') return -98.5795;
-  return 15;
-}
-
 export function inferGeoPoint(alert, geoLookup = []) {
   const haystack = `${clean(alert.location)} ${clean(alert.title)} ${clean(alert.summary)}`.toLowerCase();
-  const match = geoLookup.find((entry) => entry.terms.some((term) => haystack.includes(term)));
-  if (match) return { lat: match.lat, lng: match.lng };
+  if (!haystack.trim()) return null;
+
+  let best = null;
+  let bestScore = 0;
+
+  for (const entry of geoLookup) {
+    for (const term of entry.terms || []) {
+      if (!term) continue;
+      // Word-boundary match (same approach as build-side scoreGeoEntryMatch)
+      const idx = haystack.indexOf(term.toLowerCase());
+      if (idx === -1) continue;
+      const before = idx === 0 || /\W/.test(haystack[idx - 1]);
+      const after = (idx + term.length) >= haystack.length || /\W/.test(haystack[idx + term.length]);
+      if (!before || !after) continue;
+
+      let score = term.length;
+      const prec = entry.precision || '';
+      if (prec === 'high') score += 40;
+      else if (prec === 'medium') score += 20;
+      else if (prec === 'low') score += 5;
+
+      const kind = entry.kind || '';
+      if (kind === 'neighbourhood') score += 18;
+      else if (kind === 'borough') score += 16;
+      else if (kind === 'city') score += 14;
+      else if (kind === 'town') score += 12;
+      else if (kind === 'airport_area') score += 11;
+      else if (kind === 'county' || kind === 'region' || kind === 'state') score += 8;
+      else if (kind === 'country' || kind === 'country_part') score += 3;
+      else if (kind === 'continent') score += 1;
+
+      if (score > bestScore) {
+        bestScore = score;
+        best = entry;
+      }
+    }
+  }
+
+  if (best) return { lat: best.lat, lng: best.lng };
   return null;
 }
 
@@ -605,8 +628,8 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     source: plainText(alert.source) || 'Unknown source',
     sourceUrl: clean(alert.sourceUrl) || '#',
     time: time || happenedWhen || fallbackAbsoluteTime(alert.publishedAt) || 'unknown',
-    lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? fallbackLatForRegion(alert.region)),
-    lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? fallbackLngForRegion(alert.region)),
+    lat: resolvedLat,
+    lng: resolvedLng,
     major: !!alert.major,
     eventType: clean(alert.eventType),
     geoPrecision: resolvedGeoPrecision,

@@ -113,7 +113,7 @@ const HARD_FALLBACK_COORDS = {
   london: { lat: 51.5074, lng: -0.1278 },
   us: { lat: 39.8283, lng: -98.5795 }
 };
-const DEFAULT_FALLBACK_COORDS = { lat: 54, lng: 15 };
+const DEFAULT_FALLBACK_COORDS = { lat: 50, lng: 10 };
 
 export function geoFor(location, title, summary, region) {
   const text = `${location || ''} ${title || ''} ${summary || ''}`;
