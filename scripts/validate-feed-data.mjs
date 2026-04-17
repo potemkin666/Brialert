@@ -170,6 +170,135 @@ const targets = [
       if (!Array.isArray(parsed)) {
         throw new Error('expected a top-level array');
       }
+
+      // Bounding boxes for major ocean areas. Any (lat, lng) falling entirely
+      // inside one of these rectangles is almost certainly a data error — all
+      // geo-lookup entries should resolve to land coordinates.
+      const OCEAN_BOXES = [
+        // Mid-Atlantic (between Europe/Africa and Americas)
+        { name: 'Mid-Atlantic Ocean', latMin: -50, latMax: 60, lngMin: -60, lngMax: -10 },
+        // Central Pacific
+        { name: 'Central Pacific Ocean', latMin: -50, latMax: 50, lngMin: -180, lngMax: -120 },
+        // South Pacific
+        { name: 'South Pacific Ocean', latMin: -60, latMax: -10, lngMin: 150, lngMax: 180 },
+        // Indian Ocean core
+        { name: 'Indian Ocean', latMin: -50, latMax: 0, lngMin: 50, lngMax: 100 },
+        // Southern Ocean
+        { name: 'Southern Ocean', latMin: -90, latMax: -60, lngMin: -180, lngMax: 180 }
+      ];
+
+      // Punched-out land exclusion zones inside the ocean boxes above.
+      // If a coordinate falls inside any of these it is NOT flagged, even
+      // when it also falls inside an ocean box.
+      const LAND_EXCLUSIONS = [
+        // UK & Ireland (sits inside the Mid-Atlantic box)
+        { latMin: 49.5, latMax: 61, lngMin: -11, lngMax: 2 },
+        // Iceland
+        { latMin: 63, latMax: 67, lngMin: -25, lngMax: -13 },
+        // Portugal & western Spain
+        { latMin: 36, latMax: 44, lngMin: -10, lngMax: -6 },
+        // West Africa coast that overlaps Mid-Atlantic box
+        { latMin: -35, latMax: 15, lngMin: -18, lngMax: -10 },
+        // Eastern Canada / US east coast overlap with Mid-Atlantic box
+        { latMin: 25, latMax: 60, lngMin: -60, lngMax: -50 },
+        // New Zealand (overlaps South Pacific box)
+        { latMin: -48, latMax: -34, lngMin: 165, lngMax: 179 },
+        // Eastern Australia (overlaps South Pacific box)
+        { latMin: -45, latMax: -10, lngMin: 150, lngMax: 155 }
+      ];
+
+      function insideBox(lat, lng, box) {
+        return lat >= box.latMin && lat <= box.latMax && lng >= box.lngMin && lng <= box.lngMax;
+      }
+
+      function isLikelyOcean(lat, lng) {
+        for (const ocean of OCEAN_BOXES) {
+          if (!insideBox(lat, lng, ocean)) continue;
+          // Check if excluded by a known land zone
+          const onLand = LAND_EXCLUSIONS.some((ex) => insideBox(lat, lng, ex));
+          if (!onLand) return ocean.name;
+        }
+        return null;
+      }
+
+      const fieldErrors = [];
+      const seenTerms = new Map();
+
+      for (let i = 0; i < parsed.length; i++) {
+        const entry = parsed[i];
+        const prefix = `geo[${i}]`;
+
+        if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+          fieldErrors.push(`${prefix}: not a plain object`);
+          continue;
+        }
+
+        // Required fields
+        if (!Number.isFinite(entry.lat)) {
+          fieldErrors.push(`${prefix}: "lat" must be a finite number, got ${JSON.stringify(entry.lat)}`);
+        }
+        if (!Number.isFinite(entry.lng)) {
+          fieldErrors.push(`${prefix}: "lng" must be a finite number, got ${JSON.stringify(entry.lng)}`);
+        }
+        if (!Array.isArray(entry.terms) || entry.terms.length === 0) {
+          fieldErrors.push(`${prefix}: "terms" must be a non-empty array`);
+        } else {
+          for (let t = 0; t < entry.terms.length; t++) {
+            if (typeof entry.terms[t] !== 'string' || !entry.terms[t].trim()) {
+              fieldErrors.push(`${prefix}: terms[${t}] must be a non-empty string`);
+            }
+          }
+          // Duplicate term check
+          for (const term of entry.terms) {
+            const key = (term || '').trim().toLowerCase();
+            if (!key) continue;
+            if (seenTerms.has(key)) {
+              fieldErrors.push(`${prefix}: duplicate term ${JSON.stringify(term)} (first seen at geo[${seenTerms.get(key)}])`);
+            } else {
+              seenTerms.set(key, i);
+            }
+          }
+        }
+        if (typeof entry.label !== 'string' || !entry.label.trim()) {
+          fieldErrors.push(`${prefix}: "label" must be a non-empty string`);
+        }
+
+        // kind / precision enum checks
+        const VALID_GEO_KINDS = new Set([
+          'neighbourhood', 'borough', 'city', 'town', 'airport_area',
+          'county', 'region', 'state', 'country', 'country_part', 'continent'
+        ]);
+        const VALID_GEO_PRECISIONS = new Set(['high', 'medium', 'low']);
+
+        if (entry.kind != null && !VALID_GEO_KINDS.has(entry.kind)) {
+          fieldErrors.push(`${prefix}: "kind" must be one of [${[...VALID_GEO_KINDS].join(', ')}], got ${JSON.stringify(entry.kind)}`);
+        }
+        if (entry.precision != null && !VALID_GEO_PRECISIONS.has(entry.precision)) {
+          fieldErrors.push(`${prefix}: "precision" must be one of [${[...VALID_GEO_PRECISIONS].join(', ')}], got ${JSON.stringify(entry.precision)}`);
+        }
+
+        // Coordinate range sanity
+        if (Number.isFinite(entry.lat) && (entry.lat < -90 || entry.lat > 90)) {
+          fieldErrors.push(`${prefix}: "lat" out of range [-90, 90], got ${entry.lat}`);
+        }
+        if (Number.isFinite(entry.lng) && (entry.lng < -180 || entry.lng > 180)) {
+          fieldErrors.push(`${prefix}: "lng" out of range [-180, 180], got ${entry.lng}`);
+        }
+
+        // Ocean check
+        if (Number.isFinite(entry.lat) && Number.isFinite(entry.lng)) {
+          const ocean = isLikelyOcean(entry.lat, entry.lng);
+          if (ocean) {
+            fieldErrors.push(
+              `${prefix}: (${entry.lat}, ${entry.lng}) appears to be in the ${ocean} — expected land coordinates`
+            );
+          }
+        }
+      }
+
+      if (fieldErrors.length) {
+        throw new Error(`${fieldErrors.length} geo entry/entries failed validation:\n  ${fieldErrors.join('\n  ')}`);
+      }
     }
   }
 ];

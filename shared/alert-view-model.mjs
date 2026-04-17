@@ -9,6 +9,7 @@ import { laneLabels } from './ui-data.mjs';
 import { formatAgeFromDate } from './time-format.mjs';
 import { DEFAULT_LANE, LANE_KEYS, STATUS_LABELS } from './ui-constants.mjs';
 import { escapeHtml } from '../app/utils/text.mjs';
+import { fallbackCoordsForRegion, fallbackLocationLabelForRegion, LONDON_BOUNDS } from './geo-fallback-coords.mjs';
 
 export function formatAgeFrom(dateLike) {
   return formatAgeFromDate(dateLike);
@@ -31,7 +32,7 @@ export function isLondonAlert(alert) {
   const lat = Number(alert?.lat);
   const lng = Number(alert?.lng);
   if (Number.isFinite(lat) && Number.isFinite(lng)) {
-    if (lat >= 51.28 && lat <= 51.70 && lng >= -0.52 && lng <= 0.24) {
+    if (lat >= LONDON_BOUNDS.latMin && lat <= LONDON_BOUNDS.latMax && lng >= LONDON_BOUNDS.lngMin && lng <= LONDON_BOUNDS.lngMax) {
       return true;
     }
   }
@@ -71,6 +72,27 @@ export function inferGeoPoint(alert, geoLookup = []) {
   const match = geoLookup.find((entry) => entry.terms.some((term) => haystack.includes(term)));
   if (match) return { lat: match.lat, lng: match.lng };
   return null;
+}
+
+/**
+ * Deterministic jitter for fallback markers so stacked dots spread visibly.
+ * Hash of alertId → ±0.05° offset (~5 km). Same id always produces the same offset.
+ */
+const JITTER_RANGE = 0.05;
+function simpleHash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  }
+  return h >>> 0; // unsigned
+}
+export function deterministicJitter(alertId) {
+  const id = String(alertId);
+  const hLat = simpleHash(id);
+  const hLng = simpleHash(id + '\x00');
+  const dlat = ((hLat % 10000) / 9999 * 2 - 1) * JITTER_RANGE;
+  const dlng = ((hLng % 10000) / 9999 * 2 - 1) * JITTER_RANGE;
+  return { dlat, dlng };
 }
 
 export function keywordMatches(alert) {
@@ -542,10 +564,32 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     console.warn(`Unknown alert region "${rawRegion}" normalized to "europe".`);
   }
   const region = ALLOWED_REGIONS.has(rawRegion) ? rawRegion : 'europe';
+
+  // Resolve coordinates: explicit → geo-lookup → fallback (with jitter)
+  const hasValidExplicit = (Number.isFinite(alert.lat) && alert.lat >= -90 && alert.lat <= 90) &&
+    (Number.isFinite(alert.lng) && alert.lng >= -180 && alert.lng <= 180);
+  let resolvedLat, resolvedLng, resolvedGeoPrecision;
+  if (hasValidExplicit) {
+    resolvedLat = alert.lat;
+    resolvedLng = alert.lng;
+    resolvedGeoPrecision = clean(alert.geoPrecision);
+  } else if (geoPoint) {
+    resolvedLat = geoPoint.lat;
+    resolvedLng = geoPoint.lng;
+    resolvedGeoPrecision = clean(alert.geoPrecision) || 'geo-lookup';
+  } else {
+    const fb = fallbackCoordsForRegion(region);
+    const alertId = clean(alert.id) || `live-${index}`;
+    const jitter = deterministicJitter(alertId);
+    resolvedLat = fb.lat + jitter.dlat;
+    resolvedLng = fb.lng + jitter.dlng;
+    resolvedGeoPrecision = 'fallback';
+  }
+
   return {
     id: clean(alert.id) || `live-${index}`,
     title: plainText(alert.title) || 'Untitled source item',
-    location: plainText(alert.location) || (alert.region === 'uk' ? 'United Kingdom' : 'Europe'),
+    location: plainText(alert.location) || fallbackLocationLabelForRegion(region),
     region,
     lane,
     severity: ['critical', 'high', 'elevated', 'moderate'].includes(alert.severity) ? alert.severity : 'moderate',
@@ -565,7 +609,7 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? fallbackLngForRegion(alert.region)),
     major: !!alert.major,
     eventType: clean(alert.eventType),
-    geoPrecision: clean(alert.geoPrecision),
+    geoPrecision: resolvedGeoPrecision,
     isOfficial: !!alert.isOfficial,
     sourceTier,
     reliabilityProfile,

@@ -1,13 +1,14 @@
 import { escapeHtml } from '../app/utils/text.mjs';
 import { MAP_VIEW_MODES, resolveMapMode } from './ui-constants.mjs';
+import { FALLBACK_COORDS, LONDON_BOUNDS, WORLD_VIEW_DEFAULTS } from './geo-fallback-coords.mjs';
 
-const LONDON_CENTER = Object.freeze([51.5074, -0.1278]);
-const LONDON_BOUNDS = Object.freeze([
-  [51.28, -0.52],
-  [51.7, 0.24]
+const LONDON_CENTER = Object.freeze([FALLBACK_COORDS.london.lat, FALLBACK_COORDS.london.lng]);
+const LONDON_BOUNDS_ARRAY = Object.freeze([
+  [LONDON_BOUNDS.latMin, LONDON_BOUNDS.lngMin],
+  [LONDON_BOUNDS.latMax, LONDON_BOUNDS.lngMax]
 ]);
 const INITIAL_LONDON_ZOOM = 12;
-const WORLD_FALLBACK = Object.freeze({ center: [50.2, 10.4], zoom: 4 });
+const WORLD_FALLBACK = Object.freeze({ center: WORLD_VIEW_DEFAULTS.center, zoom: WORLD_VIEW_DEFAULTS.zoom });
 const LONDON_CLUSTER_MAX_ZOOM = 12;
 const WORLD_CLUSTER_MAX_ZOOM = 7;
 const NEARBY_CLUSTER_MAX_ZOOM = 10;
@@ -514,7 +515,7 @@ export function createMapController(config) {
       if (points.length) {
         liveMap.fitBounds(L.latLngBounds(points), { padding: [22, 22], maxZoom: 12 });
       } else {
-        liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 11 });
+        liveMap.fitBounds(LONDON_BOUNDS_ARRAY, { padding: [14, 14], maxZoom: 11 });
       }
       return;
     }
@@ -668,7 +669,7 @@ export function createMapController(config) {
       }
       return;
     }
-    liveMap.fitBounds(LONDON_BOUNDS, { padding: [14, 14], maxZoom: 11 });
+    liveMap.fitBounds(LONDON_BOUNDS_ARRAY, { padding: [14, 14], maxZoom: 11 });
   }
 
   return {

@@ -1,4 +1,5 @@
 import { clean } from '../../shared/taxonomy.mjs';
+import { fallbackCoordsForRegion, fallbackLocationLabelForRegion } from '../../shared/geo-fallback-coords.mjs';
 import { geoLookupPath } from './config.mjs';
 import { readJsonFile } from './io.mjs';
 
