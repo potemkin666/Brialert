@@ -4,16 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>AlbertAlert redirect</title>
-  <meta http-equiv="refresh" content="0; url=/index.html">
+  <meta http-equiv="refresh" content="0; url=./index.html">
   <script>
-    const canonicalTarget = location.pathname.toLowerCase().includes('/albertalert')
-      ? '/AlbertAlert/index.html'
-      : '/index.html';
-    const query = location.search || '';
-    const hash = location.hash || '';
-    if (location.pathname.toLowerCase() !== canonicalTarget.toLowerCase()) {
-      location.replace(canonicalTarget + query + hash);
-    }
+    // Relative redirect — works regardless of repo name or deploy path.
+    var base = location.pathname.replace(/\/[^/]*$/, '/');
+    location.replace(base + 'index.html' + (location.search || '') + (location.hash || ''));
   </script>
   <style>
     body {
