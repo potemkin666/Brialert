@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-17T08:04:04.612Z",
-  "count": 37,
+  "generatedAt": "2026-04-17T09:48:51.002Z",
+  "count": 38,
   "metrics": {
-    "total": 37,
+    "total": 38,
     "newThisWeek": 37,
-    "avgTimeInQuarantineHours": 14,
+    "avgTimeInQuarantineHours": 16,
     "avgHealthScore": 20,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -1241,6 +1241,39 @@
       "reviewBy": "2026-04-23T16:57:11.406Z",
       "lastFailureAt": "2026-04-16T16:57:11.406Z",
       "lastCheckedAt": "2026-04-16T16:57:11.406Z"
+    },
+    {
+      "id": "portugal-pj-news",
+      "provider": "Policia Judiciaria Portugal - News",
+      "endpoint": "https://www.policiajudiciaria.pt/?p=noticias",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "healthScore": 23,
+      "status": "auto-quarantined",
+      "reason": "Needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:04:21.166Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-23T21:04:21.166Z",
+      "lastFailureAt": "2026-04-16T21:04:21.166Z",
+      "lastCheckedAt": "2026-04-17T09:48:51.002Z"
     }
   ]
 }
