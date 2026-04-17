@@ -827,12 +827,29 @@ h1 {
   line-height: 1.35;
 }
 
+/* ── Aesthetic: map vignette ──
+   Subtle radial shadow around the map edges draws the eye to the centre
+   and adds cinematic depth without obscuring content. */
 .map-viewport {
   position: relative;
   width: 100%;
   max-width: 100%;
   height: 100%;
   min-width: 0;
+}
+
+.map-viewport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 405;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    transparent 52%,
+    rgba(7, 9, 20, 0.22) 100%
+  );
 }
 
 .map-motion-overlay {
@@ -1033,12 +1050,21 @@ h1 {
   color: rgba(226, 232, 240, 0.82);
 }
 
+/* ── Aesthetic: popup glassmorphism ──
+   Frosted-glass popup with backdrop blur, refined border glow, and
+   elevated shadow so popups feel layered above the map. */
 .map-preview-popup-shell .leaflet-popup-content-wrapper,
 .map-preview-popup-shell .leaflet-popup-tip {
-  background: rgba(9, 14, 25, 0.96);
+  background: rgba(9, 14, 25, 0.82);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
   color: #f8fafc;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.40),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
 }
 
 .map-preview-popup-shell .leaflet-popup-content {
@@ -1388,6 +1414,10 @@ h1 {
   border: 0;
 }
 
+/* ── Aesthetic: cluster pulse ring ──
+   Pulsing ring behind each cluster draws attention to grouped alerts.
+   The ring colour matches the cluster severity via a shared
+   --cluster-ring custom property set on each severity variant. */
 .map-cluster {
   display: grid;
   place-items: center;
@@ -1399,22 +1429,53 @@ h1 {
   font-size: 12px;
   font-weight: 800;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+  --cluster-ring: rgba(148, 163, 184, 0.35);
+  position: relative;
+}
+
+.map-cluster::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--cluster-ring);
+  animation: map-cluster-ring-pulse 2.4s ease-out infinite;
+  pointer-events: none;
 }
 
 .map-cluster--critical {
   background: #fca5a5;
+  --cluster-ring: rgba(252, 165, 165, 0.50);
 }
 
 .map-cluster--high {
   background: #fdba74;
+  --cluster-ring: rgba(253, 186, 116, 0.45);
 }
 
 .map-cluster--elevated {
   background: #f59e0b;
+  --cluster-ring: rgba(245, 158, 11, 0.40);
 }
 
 .map-cluster--moderate {
   background: #93c5fd;
+  --cluster-ring: rgba(147, 197, 253, 0.40);
+}
+
+@keyframes map-cluster-ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
 }
 
 @keyframes map-ring-pulse {
@@ -1451,6 +1512,11 @@ h1 {
   }
   .map-marker-enter {
     animation: none !important;
+  }
+  .map-cluster::before {
+    animation: none;
+    opacity: 0.35;
+    transform: scale(1.2);
   }
 }
 
