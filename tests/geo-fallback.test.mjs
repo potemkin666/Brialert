@@ -6,6 +6,13 @@ import {
   inferLocation,
   safeLoadGeoLookup
 } from '../scripts/build-live-feed/geo.mjs';
+import { normaliseAlert } from '../shared/alert-view-model.mjs';
+import {
+  FALLBACK_COORDS,
+  FALLBACK_LOCATION_LABELS,
+  fallbackCoordsForRegion,
+  fallbackLocationLabelForRegion
+} from '../shared/geo-fallback-coords.mjs';
 
 // ── Setup: populate the in-memory geo lookup from data/geo-lookup.json ──
 
@@ -98,4 +105,65 @@ test('geoFor() resolves "paris" to Paris coordinates', () => {
 test('inferLocation() resolves "birmingham" in title to Birmingham label', () => {
   const result = inferLocation({ region: 'uk' }, 'Incident in Birmingham', '');
   assert.equal(result, 'Birmingham, UK');
+});
+
+// ── Shared FALLBACK_COORDS constant tests ───────────────────────────────
+
+test('FALLBACK_COORDS contains entries for every known region', () => {
+  for (const region of ALL_REGIONS) {
+    const entry = FALLBACK_COORDS[region];
+    assert.ok(entry, `missing FALLBACK_COORDS entry for "${region}"`);
+    assert.ok(Number.isFinite(entry.lat), `lat not finite for "${region}"`);
+    assert.ok(Number.isFinite(entry.lng), `lng not finite for "${region}"`);
+  }
+});
+
+test('FALLBACK_LOCATION_LABELS contains entries for every known region', () => {
+  for (const region of ALL_REGIONS) {
+    const label = FALLBACK_LOCATION_LABELS[region];
+    assert.ok(typeof label === 'string' && label.length > 0, `missing label for "${region}"`);
+  }
+});
+
+test('fallbackCoordsForRegion returns _default for unknown region', () => {
+  const result = fallbackCoordsForRegion('unknown-region');
+  assert.equal(result.lat, FALLBACK_COORDS._default.lat);
+  assert.equal(result.lng, FALLBACK_COORDS._default.lng);
+});
+
+test('fallbackLocationLabelForRegion returns _default for unknown region', () => {
+  const result = fallbackLocationLabelForRegion('unknown-region');
+  assert.equal(result, FALLBACK_LOCATION_LABELS._default);
+});
+
+// ── normaliseAlert() client-side fallback coord tests ───────────────────
+// These verify the frontend places dots on land, not in the Baltic Sea.
+
+for (const region of ALL_REGIONS) {
+  test(`normaliseAlert() with no coords returns on-land fallback for region "${region}"`, () => {
+    const alert = normaliseAlert({ id: `test-${region}`, region, title: 'Test' }, 0);
+    const expected = EXPECTED[region];
+    assert.equal(alert.lat, expected.lat, `lat mismatch for normaliseAlert region "${region}"`);
+    assert.equal(alert.lng, expected.lng, `lng mismatch for normaliseAlert region "${region}"`);
+  });
+}
+
+for (const region of ALL_REGIONS) {
+  test(`normaliseAlert() with no location text returns correct label for region "${region}"`, () => {
+    const alert = normaliseAlert({ id: `test-${region}`, region, title: 'Test' }, 0);
+    assert.equal(alert.location, EXPECTED[region].label, `location mismatch for region "${region}"`);
+  });
+}
+
+test('normaliseAlert() preserves explicit coords and does not use fallback', () => {
+  const alert = normaliseAlert({ id: 'explicit', region: 'uk', title: 'Test', lat: 51.0, lng: -1.0 }, 0);
+  assert.equal(alert.lat, 51.0);
+  assert.equal(alert.lng, -1.0);
+});
+
+test('normaliseAlert() for unknown region defaults to europe fallback coords', () => {
+  const alert = normaliseAlert({ id: 'unknown-region', region: 'martian', title: 'Test' }, 0);
+  assert.equal(alert.region, 'europe');
+  assert.equal(alert.lat, EXPECTED.europe.lat);
+  assert.equal(alert.lng, EXPECTED.europe.lng);
 });

@@ -1,4 +1,5 @@
 import { clean } from '../../shared/taxonomy.mjs';
+import { fallbackCoordsForRegion } from '../../shared/geo-fallback-coords.mjs';
 import { geoLookupPath } from './config.mjs';
 import { readJsonFile } from './io.mjs';
 
@@ -108,18 +109,11 @@ export function inferLocation(source, title, summary = '') {
   return fallbackLabelForRegion(source.region);
 }
 
-const HARD_FALLBACK_COORDS = Object.freeze({
-  uk: { lat: 54.5, lng: -2.5 },
-  london: { lat: 51.5074, lng: -0.1278 },
-  us: { lat: 39.8283, lng: -98.5795 },
-  _default: { lat: 50, lng: 10 }
-});
-
 export function geoFor(location, title, summary, region) {
   const text = `${location || ''} ${title || ''} ${summary || ''}`;
   const match = bestGeoEntryFor(text, region);
   if (match) return { lat: match.lat, lng: match.lng };
-  const fallback = HARD_FALLBACK_COORDS[region] || HARD_FALLBACK_COORDS._default;
+  const fallback = fallbackCoordsForRegion(region);
   return { lat: fallback.lat, lng: fallback.lng };
 }
 

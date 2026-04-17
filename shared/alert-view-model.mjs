@@ -9,6 +9,7 @@ import { laneLabels } from './ui-data.mjs';
 import { formatAgeFromDate } from './time-format.mjs';
 import { DEFAULT_LANE, LANE_KEYS, STATUS_LABELS } from './ui-constants.mjs';
 import { escapeHtml } from '../app/utils/text.mjs';
+import { fallbackCoordsForRegion, fallbackLocationLabelForRegion } from './geo-fallback-coords.mjs';
 
 export function formatAgeFrom(dateLike) {
   return formatAgeFromDate(dateLike);
@@ -531,7 +532,7 @@ export function normaliseAlert(alert, index, geoLookup = []) {
   return {
     id: clean(alert.id) || `live-${index}`,
     title: plainText(alert.title) || 'Untitled source item',
-    location: plainText(alert.location) || (alert.region === 'uk' ? 'United Kingdom' : 'Europe'),
+    location: plainText(alert.location) || fallbackLocationLabelForRegion(region),
     region,
     lane,
     severity: ['critical', 'high', 'elevated', 'moderate'].includes(alert.severity) ? alert.severity : 'moderate',
@@ -547,8 +548,8 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     source: plainText(alert.source) || 'Unknown source',
     sourceUrl: clean(alert.sourceUrl) || '#',
     time: time || happenedWhen || fallbackAbsoluteTime(alert.publishedAt) || 'unknown',
-    lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? (alert.region === 'uk' ? 54.5 : 54)),
-    lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? (alert.region === 'uk' ? -2.5 : 15)),
+    lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? fallbackCoordsForRegion(region).lat),
+    lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? fallbackCoordsForRegion(region).lng),
     major: !!alert.major,
     eventType: clean(alert.eventType),
     geoPrecision: clean(alert.geoPrecision),
