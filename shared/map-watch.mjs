@@ -1,5 +1,5 @@
 import { escapeHtml } from '../app/utils/text.mjs';
-import { MAP_VIEW_MODES, resolveMapMode } from './ui-constants.mjs';
+import { MAP_VIEW_MODES, NEARBY_RADIUS_KM, resolveMapMode } from './ui-constants.mjs';
 import { FALLBACK_COORDS, LONDON_BOUNDS, WORLD_VIEW_DEFAULTS } from './geo-fallback-coords.mjs';
 
 const LONDON_CENTER = Object.freeze([FALLBACK_COORDS.london.lat, FALLBACK_COORDS.london.lng]);
@@ -355,6 +355,7 @@ export function createMapController(config) {
   let lastView = null;
   let tileLayer = null;
   let isDarkTiles = false;
+  let radiusCircle = null;
   let initAttempts = 0;
   let isLoadingLeaflet = false;
   const motionOverlay = mapElement?.parentElement?.querySelector('.map-motion-overlay');
@@ -475,6 +476,10 @@ export function createMapController(config) {
   function clearLayers() {
     layers.forEach((layer) => layer.remove());
     layers = [];
+    if (radiusCircle) {
+      radiusCircle.remove();
+      radiusCircle = null;
+    }
   }
 
   function clusterAlerts(items) {
@@ -627,6 +632,16 @@ export function createMapController(config) {
       layers.push(clusterMarker);
       entry.items.forEach((item) => points.push([item.lat, item.lng]));
     });
+
+    // Watch-zone radius overlay for nearby mode
+    const loc = state?.userLocation;
+    if (mode === MAP_VIEW_MODES.nearby && loc && Number.isFinite(loc.lat) && Number.isFinite(loc.lng)) {
+      radiusCircle = L.circle([loc.lat, loc.lng], {
+        radius: NEARBY_RADIUS_KM * 1000,
+        className: 'map-radius-overlay',
+        interactive: false
+      }).addTo(liveMap);
+    }
 
     if (mapStatusLine) mapStatusLine.textContent = statusLine(mode, items.length);
     if (mapEmptyState) mapEmptyState.classList.toggle('hidden', items.length > 0);

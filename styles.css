@@ -1665,6 +1665,16 @@ h1 {
   box-shadow: 0 0 6px 1px rgba(2, 132, 199, 0.45);
 }
 
+/* ── Watch-zone radius overlay ──
+   Translucent boundary shown in "Near me" mode so the user can
+   see the NEARBY_RADIUS_KM watch zone around their position. */
+.map-radius-overlay {
+  fill: rgba(96, 165, 250, 0.10);
+  stroke: rgba(96, 165, 250, 0.45);
+  stroke-width: 2;
+  stroke-dasharray: 8 6;
+}
+
 /* ── Dark-mode tile toggle ── */
 .map-tile-toggle {
   display: grid;

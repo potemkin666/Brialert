@@ -91,4 +91,9 @@ describe('NEARBY_RADIUS_KM', () => {
   it('has a default value of 150', () => {
     assert.equal(NEARBY_RADIUS_KM, 150);
   });
+
+  it('converts to metres for Leaflet L.circle radius', () => {
+    const radiusMetres = NEARBY_RADIUS_KM * 1000;
+    assert.equal(radiusMetres, 150_000, 'Expected 150 km = 150 000 m');
+  });
 });
