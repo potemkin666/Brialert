@@ -95,23 +95,31 @@ export async function safeLoadGeoLookup(existing) {
   }
 }
 
+const REGION_LOCATION_LABELS = {
+  uk: 'United Kingdom',
+  london: 'London, UK',
+  us: 'United States'
+};
+
 export function inferLocation(source, title, summary = '') {
   const text = `${title || ''} ${summary || ''}`;
   const match = bestGeoEntryFor(text, source.region);
   if (match?.label) return match.label;
-  return fallbackLocationLabelForRegion(source.region);
+  return REGION_LOCATION_LABELS[source.region] || 'Europe';
 }
 
-function isValidCoord(lat, lng) {
-  return Number.isFinite(lat) && Number.isFinite(lng) &&
-    lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
-}
+const HARD_FALLBACK_COORDS = {
+  uk: { lat: 54.5, lng: -2.5 },
+  london: { lat: 51.5074, lng: -0.1278 },
+  us: { lat: 39.8283, lng: -98.5795 }
+};
+const DEFAULT_FALLBACK_COORDS = { lat: 54, lng: 15 };
 
 export function geoFor(location, title, summary, region) {
   const text = `${location || ''} ${title || ''} ${summary || ''}`;
   const match = bestGeoEntryFor(text, region);
-  if (match && isValidCoord(match.lat, match.lng)) return { lat: match.lat, lng: match.lng };
-  const fallback = fallbackCoordsForRegion(region);
+  if (match) return { lat: match.lat, lng: match.lng };
+  const fallback = HARD_FALLBACK_COORDS[region] || DEFAULT_FALLBACK_COORDS;
   return { lat: fallback.lat, lng: fallback.lng };
 }
 
