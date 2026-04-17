@@ -98,6 +98,15 @@ export function inferGeoPoint(alert, geoLookup = []) {
 }
 
 /**
+ * Coarse geo-precision values where deterministic jitter should be applied
+ * to prevent markers from stacking at the exact same coordinate.
+ * Build-side fallback coords arrive with 'country' or 'region' precision
+ * and many alerts share the exact same point.
+ * Note: 'fallback' is excluded because the fallback branch already applies jitter.
+ */
+const COARSE_GEO_PRECISIONS = new Set(['country', 'region', 'unknown']);
+
+/**
  * Deterministic jitter for fallback markers so stacked dots spread visibly.
  * Hash of alertId → ±0.05° offset (~5 km). Same id always produces the same offset.
  */
@@ -607,6 +616,16 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     resolvedLat = fb.lat + jitter.dlat;
     resolvedLng = fb.lng + jitter.dlng;
     resolvedGeoPrecision = 'fallback';
+  }
+
+  // Apply jitter for coarse-precision coordinates so stacked markers spread
+  // visibly on the map. Build-side fallback coords arrive with geoPrecision
+  // 'country' or 'region' and many alerts share the exact same point.
+  if (COARSE_GEO_PRECISIONS.has(resolvedGeoPrecision)) {
+    const alertId = clean(alert.id) || `live-${index}`;
+    const jitter = deterministicJitter(alertId);
+    resolvedLat += jitter.dlat;
+    resolvedLng += jitter.dlng;
   }
 
   return {

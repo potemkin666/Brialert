@@ -198,3 +198,71 @@ test('normaliseAlert() rejects out-of-range lat/lng and falls back', () => {
   assert.ok(Math.abs(a.lng - EXPECTED.uk.lng) <= JITTER_TOLERANCE, `lng ${a.lng} should fall back near UK`);
   assert.equal(a.geoPrecision, 'fallback');
 });
+
+// ── Coarse-precision jitter tests ──────────────────────────────────────
+// Build-side assigns exact fallback coordinates with geoPrecision 'country' or
+// 'region'. Without jitter, many alerts stack at the same pixel. These tests
+// verify that coarse-precision alerts get deterministic jitter applied.
+
+test('normaliseAlert() applies jitter for geoPrecision "country"', () => {
+  const a = normaliseAlert({
+    id: 'country-jitter', region: 'uk', title: 'Test',
+    lat: 54.5, lng: -2.5, geoPrecision: 'country'
+  }, 0);
+  assert.notEqual(a.lat, 54.5, 'lat should be jittered away from exact fallback');
+  assert.notEqual(a.lng, -2.5, 'lng should be jittered away from exact fallback');
+  assert.ok(Math.abs(a.lat - 54.5) <= JITTER_TOLERANCE,
+    `jittered lat ${a.lat} should stay near 54.5`);
+  assert.ok(Math.abs(a.lng - (-2.5)) <= JITTER_TOLERANCE,
+    `jittered lng ${a.lng} should stay near -2.5`);
+  assert.equal(a.geoPrecision, 'country');
+});
+
+test('normaliseAlert() applies jitter for geoPrecision "region"', () => {
+  const a = normaliseAlert({
+    id: 'region-jitter', region: 'london', title: 'Test',
+    lat: 51.5074, lng: -0.1278, geoPrecision: 'region'
+  }, 0);
+  assert.notEqual(a.lat, 51.5074, 'lat should be jittered away from exact fallback');
+  assert.notEqual(a.lng, -0.1278, 'lng should be jittered away from exact fallback');
+  assert.ok(Math.abs(a.lat - 51.5074) <= JITTER_TOLERANCE,
+    `jittered lat ${a.lat} should stay near 51.5074`);
+  assert.ok(Math.abs(a.lng - (-0.1278)) <= JITTER_TOLERANCE,
+    `jittered lng ${a.lng} should stay near -0.1278`);
+  assert.equal(a.geoPrecision, 'region');
+});
+
+test('normaliseAlert() does NOT jitter for geoPrecision "city"', () => {
+  const a = normaliseAlert({
+    id: 'city-exact', region: 'uk', title: 'Test',
+    lat: 53.4808, lng: -2.2426, geoPrecision: 'city'
+  }, 0);
+  assert.equal(a.lat, 53.4808, 'city-precision lat should be preserved exactly');
+  assert.equal(a.lng, -2.2426, 'city-precision lng should be preserved exactly');
+});
+
+test('normaliseAlert() coarse-precision jitter is deterministic', () => {
+  const a1 = normaliseAlert({
+    id: 'stable-country', region: 'eu', title: 'Test',
+    lat: 50, lng: 10, geoPrecision: 'country'
+  }, 0);
+  const a2 = normaliseAlert({
+    id: 'stable-country', region: 'eu', title: 'Test',
+    lat: 50, lng: 10, geoPrecision: 'country'
+  }, 0);
+  assert.equal(a1.lat, a2.lat, 'same id should produce same jittered lat');
+  assert.equal(a1.lng, a2.lng, 'same id should produce same jittered lng');
+});
+
+test('normaliseAlert() different ids at same coarse coords produce different jitter', () => {
+  const a1 = normaliseAlert({
+    id: 'coarse-a', region: 'uk', title: 'Test',
+    lat: 54.5, lng: -2.5, geoPrecision: 'country'
+  }, 0);
+  const a2 = normaliseAlert({
+    id: 'coarse-b', region: 'uk', title: 'Test',
+    lat: 54.5, lng: -2.5, geoPrecision: 'country'
+  }, 1);
+  const bothSame = a1.lat === a2.lat && a1.lng === a2.lng;
+  assert.ok(!bothSame, 'different alert ids should produce different jitter at coarse precision');
+});
