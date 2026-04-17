@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-17T11:07:28.674Z",
+  "generatedAt": "2026-04-17T12:15:37.169Z",
   "count": 38,
   "metrics": {
     "total": 38,
     "newThisWeek": 37,
-    "avgTimeInQuarantineHours": 17,
+    "avgTimeInQuarantineHours": 18,
     "avgHealthScore": 20,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -48,6 +48,39 @@
       "reviewBy": "2026-04-24T08:04:04.612Z",
       "lastFailureAt": "2026-04-17T08:04:04.612Z",
       "lastCheckedAt": "2026-04-17T08:04:04.612Z"
+    },
+    {
+      "id": "portugal-pj-news",
+      "provider": "Policia Judiciaria Portugal - News",
+      "endpoint": "https://www.policiajudiciaria.pt/?p=noticias",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "europe",
+      "healthScore": 17,
+      "status": "auto-quarantined",
+      "reason": "Needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:04:21.166Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-23T21:04:21.166Z",
+      "lastFailureAt": "2026-04-16T21:04:21.166Z",
+      "lastCheckedAt": "2026-04-17T12:15:37.169Z"
     },
     {
       "id": "counter-extremism-project-news",
@@ -152,39 +185,6 @@
       "reviewBy": "2026-04-24T08:04:04.612Z",
       "lastFailureAt": "2026-04-17T08:04:04.612Z",
       "lastCheckedAt": "2026-04-17T08:04:04.612Z"
-    },
-    {
-      "id": "portugal-pj-news",
-      "provider": "Policia Judiciaria Portugal - News",
-      "endpoint": "https://www.policiajudiciaria.pt/?p=noticias",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "europe",
-      "healthScore": 20,
-      "status": "auto-quarantined",
-      "reason": "Needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T15:11:26.228Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T21:04:21.166Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-23T21:04:21.166Z",
-      "lastFailureAt": "2026-04-16T21:04:21.166Z",
-      "lastCheckedAt": "2026-04-17T11:07:28.674Z"
     },
     {
       "id": "denmark-pet-news",
