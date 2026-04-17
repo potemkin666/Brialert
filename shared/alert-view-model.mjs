@@ -52,6 +52,20 @@ export function isLondonAlert(alert) {
   ].some((term) => haystack.includes(term));
 }
 
+function fallbackLatForRegion(region) {
+  if (region === 'uk') return 54.5;
+  if (region === 'london') return 51.5074;
+  if (region === 'us') return 39.8283;
+  return 54;
+}
+
+function fallbackLngForRegion(region) {
+  if (region === 'uk') return -2.5;
+  if (region === 'london') return -0.1278;
+  if (region === 'us') return -98.5795;
+  return 15;
+}
+
 export function inferGeoPoint(alert, geoLookup = []) {
   const haystack = `${clean(alert.location)} ${clean(alert.title)} ${clean(alert.summary)}`.toLowerCase();
   const match = geoLookup.find((entry) => entry.terms.some((term) => haystack.includes(term)));
@@ -547,8 +561,8 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     source: plainText(alert.source) || 'Unknown source',
     sourceUrl: clean(alert.sourceUrl) || '#',
     time: time || happenedWhen || fallbackAbsoluteTime(alert.publishedAt) || 'unknown',
-    lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? (alert.region === 'uk' ? 54.5 : 54)),
-    lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? (alert.region === 'uk' ? -2.5 : 15)),
+    lat: Number.isFinite(alert.lat) ? alert.lat : (geoPoint?.lat ?? fallbackLatForRegion(alert.region)),
+    lng: Number.isFinite(alert.lng) ? alert.lng : (geoPoint?.lng ?? fallbackLngForRegion(alert.region)),
     major: !!alert.major,
     eventType: clean(alert.eventType),
     geoPrecision: clean(alert.geoPrecision),

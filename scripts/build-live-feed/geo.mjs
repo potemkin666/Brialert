@@ -52,12 +52,16 @@ function scoreGeoEntryMatch(entry, haystack) {
   return best;
 }
 
+function fallbackTermForRegion(region) {
+  if (region === 'uk') return 'united kingdom';
+  if (region === 'london') return 'london';
+  if (region === 'us') return 'united states';
+  return 'europe';
+}
+
 function fallbackGeoEntryFor(region) {
-  return geoLookup.find((entry) =>
-    region === 'uk'
-      ? (entry.terms || []).includes('united kingdom')
-      : (entry.terms || []).includes('europe')
-  ) || null;
+  const term = fallbackTermForRegion(region);
+  return geoLookup.find((entry) => (entry.terms || []).includes(term)) || null;
 }
 
 function bestGeoEntryFor(text, region) {
@@ -90,18 +94,32 @@ export async function safeLoadGeoLookup(existing) {
   }
 }
 
+const REGION_LOCATION_LABELS = {
+  uk: 'United Kingdom',
+  london: 'London, UK',
+  us: 'United States'
+};
+
 export function inferLocation(source, title, summary = '') {
   const text = `${title || ''} ${summary || ''}`;
   const match = bestGeoEntryFor(text, source.region);
   if (match?.label) return match.label;
-  return source.region === 'uk' ? 'United Kingdom' : 'Europe';
+  return REGION_LOCATION_LABELS[source.region] || 'Europe';
 }
+
+const HARD_FALLBACK_COORDS = {
+  uk: { lat: 54.5, lng: -2.5 },
+  london: { lat: 51.5074, lng: -0.1278 },
+  us: { lat: 39.8283, lng: -98.5795 }
+};
+const DEFAULT_FALLBACK_COORDS = { lat: 54, lng: 15 };
 
 export function geoFor(location, title, summary, region) {
   const text = `${location || ''} ${title || ''} ${summary || ''}`;
   const match = bestGeoEntryFor(text, region);
   if (match) return { lat: match.lat, lng: match.lng };
-  return region === 'uk' ? { lat: 54.5, lng: -2.5 } : { lat: 54, lng: 15 };
+  const fallback = HARD_FALLBACK_COORDS[region] || DEFAULT_FALLBACK_COORDS;
+  return { lat: fallback.lat, lng: fallback.lng };
 }
 
 export function geoLookupSnapshot() {
