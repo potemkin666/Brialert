@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-17T19:18:33.309Z",
-  "count": 46,
+  "generatedAt": "2026-04-17T20:09:53.653Z",
+  "count": 50,
   "metrics": {
-    "total": 46,
-    "newThisWeek": 37,
-    "avgTimeInQuarantineHours": 25,
+    "total": 50,
+    "newThisWeek": 40,
+    "avgTimeInQuarantineHours": 24,
     "avgHealthScore": 19,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -48,6 +48,120 @@
       "reviewBy": "2026-04-24T19:18:33.309Z",
       "lastFailureAt": "2026-04-17T19:18:33.309Z",
       "lastCheckedAt": "2026-04-17T19:18:33.309Z"
+    },
+    {
+      "id": "belgium-crisis-centre-news",
+      "provider": "Belgian National Crisis Centre - News",
+      "endpoint": "https://crisiscenter.be/en/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "healthScore": 5,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 5 after repeated failures",
+      "quarantinedAt": "2026-04-17T20:09:53.653Z",
+      "lastErrorCategory": "not-found-404",
+      "lastErrorMessage": "HTTP 404",
+      "consecutiveFailures": 3,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-17T20:09:53.653Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T20:09:53.653Z",
+      "lastFailureAt": "2026-04-17T20:09:53.653Z",
+      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
+    },
+    {
+      "id": "german-bka-press",
+      "provider": "German BKA - Press Releases",
+      "endpoint": "https://www.bka.de/EN/Press/Listings/Press. Releases/press. Releases_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "healthScore": 5,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 5 after repeated failures",
+      "quarantinedAt": "2026-04-17T20:09:53.653Z",
+      "lastErrorCategory": "not-found-404",
+      "lastErrorMessage": "HTTP 404",
+      "consecutiveFailures": 3,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-17T20:09:53.653Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T20:09:53.653Z",
+      "lastFailureAt": "2026-04-17T20:09:53.653Z",
+      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
+    },
+    {
+      "id": "policia-nacional-news",
+      "provider": "Policia Nacional - Press",
+      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "healthScore": 5,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 5 after repeated failures",
+      "quarantinedAt": "2026-04-17T20:09:53.653Z",
+      "lastErrorCategory": "not-found-404",
+      "lastErrorMessage": "HTTP 404",
+      "consecutiveFailures": 3,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-17T20:09:53.653Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T20:09:53.653Z",
+      "lastFailureAt": "2026-04-17T20:09:53.653Z",
+      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
     },
     {
       "id": "german-bka-press-releases-de",
@@ -246,6 +360,72 @@
       "reviewBy": "2026-04-23T23:55:39.351Z",
       "lastFailureAt": "2026-04-16T23:55:39.351Z",
       "lastCheckedAt": "2026-04-17T19:18:33.309Z"
+    },
+    {
+      "id": "london-resilience",
+      "provider": "Resilience First - Latest Updates",
+      "endpoint": "https://resiliencefirst.org/latest-updates",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "london",
+      "healthScore": 20,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T22:57:09.120Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-23T22:57:09.120Z",
+      "lastFailureAt": "2026-04-16T22:57:09.120Z",
+      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
+    },
+    {
+      "id": "semibold",
+      "provider": "Semibold",
+      "endpoint": "https://www.semibold.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 20,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T22:57:09.120Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-23T22:57:09.120Z",
+      "lastFailureAt": "2026-04-16T22:57:09.120Z",
+      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
     },
     {
       "id": "judiciary-uk-news",
@@ -1449,48 +1629,15 @@
       "lastCheckedAt": "2026-04-17T19:18:33.309Z"
     },
     {
-      "id": "london-resilience",
-      "provider": "Resilience First - Latest Updates",
-      "endpoint": "https://resiliencefirst.org/latest-updates",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "london",
-      "healthScore": 23,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T22:57:09.120Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-23T22:57:09.120Z",
-      "lastFailureAt": "2026-04-16T22:57:09.120Z",
-      "lastCheckedAt": "2026-04-17T17:03:11.747Z"
-    },
-    {
-      "id": "semibold",
-      "provider": "Semibold",
-      "endpoint": "https://www.semibold.co.uk/feed/",
+      "id": "evening-shire",
+      "provider": "Evening Shire",
+      "endpoint": "https://eveningshire.com/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "healthScore": 23,
       "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
+      "reason": "Needs review",
       "quarantinedAt": "",
       "lastErrorCategory": "",
       "lastErrorMessage": "",
@@ -1512,7 +1659,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-23T22:57:09.120Z",
       "lastFailureAt": "2026-04-16T22:57:09.120Z",
-      "lastCheckedAt": "2026-04-17T17:03:11.747Z"
+      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
     }
   ]
 }
