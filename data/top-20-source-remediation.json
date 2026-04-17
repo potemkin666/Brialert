@@ -1,6 +1,6 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-17T09:48:51.002Z",
+  "generatedAt": "2026-04-17T11:07:28.674Z",
   "totalSourceErrors": 2,
   "top20": [
     {
@@ -21,21 +21,21 @@
       "isMachineReadable": true
     },
     {
-      "id": "independent-top-stories",
-      "provider": "The Independent - Top Stories",
-      "endpoint": "https://www.independent.co.uk/rss",
+      "id": "bfv-de-english",
+      "provider": "BfV press page (Federal Office for the Protection of the Constitution)",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
       "finalUrl": "",
-      "category": "anti-bot-protection",
+      "category": "timeout",
       "statusKind": "",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "message": "This operation was aborted",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
       "sourceRegion": "",
-      "isMachineReadable": true
+      "isMachineReadable": false
     }
   ]
 }
