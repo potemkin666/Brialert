@@ -1,5 +1,5 @@
 import { clean } from '../../shared/taxonomy.mjs';
-import { fallbackCoordsForRegion } from '../../shared/geo-fallback-coords.mjs';
+import { fallbackCoordsForRegion, fallbackLocationLabelForRegion } from '../../shared/geo-fallback-coords.mjs';
 import { geoLookupPath } from './config.mjs';
 import { readJsonFile } from './io.mjs';
 
@@ -95,18 +95,11 @@ export async function safeLoadGeoLookup(existing) {
   }
 }
 
-function fallbackLabelForRegion(region) {
-  if (region === 'uk') return 'United Kingdom';
-  if (region === 'london') return 'London, UK';
-  if (region === 'us') return 'United States';
-  return 'Europe';
-}
-
 export function inferLocation(source, title, summary = '') {
   const text = `${title || ''} ${summary || ''}`;
   const match = bestGeoEntryFor(text, source.region);
   if (match?.label) return match.label;
-  return fallbackLabelForRegion(source.region);
+  return fallbackLocationLabelForRegion(source.region);
 }
 
 export function geoFor(location, title, summary, region) {
