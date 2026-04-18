@@ -2,6 +2,7 @@ import { buildLocalLongBrief } from './modal-local-fallback.mjs';
 import { mapAlertToLongBriefPayload } from './modal-payload-adapter.mjs';
 import { requestRemoteLongBrief } from './modal-remote-client.mjs';
 import { createModalUiController } from './modal-ui-controller.mjs';
+import { saveLongBrief } from '../../shared/brief-cache.mjs';
 
 const LONG_BRIEF_MAX_SOURCE_EXTRACT_CHARS = 8_000;
 const LONG_BRIEF_FALLBACK_SOURCE_EXTRACT_CHARS = 3_500;
@@ -11,12 +12,19 @@ export function createModalRuntime(elements, options = {}) {
   const requestRemoteLongBriefFn = options.requestRemoteLongBrief || requestRemoteLongBrief;
   const buildLocalLongBriefFn = options.buildLocalLongBrief || buildLocalLongBrief;
   const mapAlertToLongBriefPayloadFn = options.mapAlertToLongBriefPayload || mapAlertToLongBriefPayload;
+  const saveLongBriefFn = options.saveLongBrief || saveLongBrief;
 
   function setLongBriefFallbackNotice(message = '') {
     if (!elements.longBriefFallbackNotice) return;
     const text = String(message || '').trim();
     elements.longBriefFallbackNotice.textContent = text;
     elements.longBriefFallbackNotice.hidden = !text;
+  }
+
+  function persistBrief(alert, brief) {
+    if (alert?.id && brief) {
+      saveLongBriefFn(alert.id, brief);
+    }
   }
 
   async function generateLongBrief() {
@@ -34,11 +42,13 @@ export function createModalRuntime(elements, options = {}) {
       ];
       const brief = await requestRemoteLongBriefFn(payloadAttempts);
       modalController.setExpandedBrief(brief);
+      persistBrief(alert, brief);
     } catch (error) {
       console.error('Remote long brief generation failed, falling back to local generator:', error);
       try {
         const fallbackBrief = buildLocalLongBriefFn(alert);
         modalController.setExpandedBrief(fallbackBrief);
+        persistBrief(alert, fallbackBrief);
         setLongBriefFallbackNotice('Vercel agent unavailable. Long brief generated locally on your device.');
       } catch (fallbackError) {
         console.error('Local long brief fallback failed:', fallbackError);

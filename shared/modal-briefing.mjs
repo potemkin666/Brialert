@@ -1,7 +1,8 @@
 import { regionLabel } from './alert-view-model.mjs';
+import { loadLongBrief } from './brief-cache.mjs';
 import { reportBackgroundError } from './logger.mjs';
 
-export function createModalController(elements, deps) {
+export function createModalController(elements, deps, options = {}) {
   const {
     modal,
     modalTitle,
@@ -40,6 +41,21 @@ export function createModalController(elements, deps) {
     window.scrollTo(0, lockedScrollY);
   }
 
+  const loadLongBriefFn = options.loadLongBrief || loadLongBrief;
+
+  function restoreCachedBrief(alert) {
+    const cached = loadLongBriefFn(alert.id);
+    if (!cached) return;
+    if (modalExpandedBrief) modalExpandedBrief.textContent = cached;
+    if (copyExpandedBrief) {
+      copyExpandedBrief.disabled = false;
+      copyExpandedBrief.dataset.brief = cached;
+    }
+    if (generateExpandedBrief) {
+      generateExpandedBrief.textContent = 'Regenerate Long Brief';
+    }
+  }
+
   function openDetail(alert) {
     if (!alert) return;
     currentAlert = alert;
@@ -76,6 +92,7 @@ export function createModalController(elements, deps) {
       copyExpandedBrief.dataset.brief = '';
       copyExpandedBrief.textContent = 'Copy Long Brief';
     }
+    restoreCachedBrief(alert);
     modalLink.href = alert.sourceUrl;
     copyBriefing.dataset.briefing = briefing;
     lockBodyScroll();
