@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-18T21:09:53.488Z",
-  "count": 421,
+  "generatedAt": "2026-04-18T22:00:46.520Z",
+  "count": 422,
   "metrics": {
-    "total": 421,
-    "newThisWeek": 256,
-    "avgTimeInQuarantineHours": 26,
+    "total": 422,
+    "newThisWeek": 257,
+    "avgTimeInQuarantineHours": 27,
     "avgHealthScore": 6,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -10784,6 +10784,49 @@
       "reviewBy": "2026-04-23T22:57:09.120Z",
       "lastFailureAt": "2026-04-16T22:57:09.120Z",
       "lastCheckedAt": "2026-04-18T19:28:57.337Z"
+    },
+    {
+      "id": "gnet-youth-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "international",
+      "healthScore": 10,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T22:00:46.520Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-17T09:48:51.002Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-17T11:07:28.674Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-17T12:15:37.169Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T22:00:46.520Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-25T22:00:46.520Z",
+      "lastFailureAt": "2026-04-18T22:00:46.520Z",
+      "lastCheckedAt": "2026-04-18T22:00:46.520Z"
     },
     {
       "id": "ct-policing-uk-rss-feed",
