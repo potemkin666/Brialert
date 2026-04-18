@@ -112,3 +112,66 @@ test('requestRemoteLongBrief works when AbortController is unavailable', async (
     globalThis.AbortController = previousAbortController;
   }
 });
+
+test('requestRemoteLongBrief reads SSE streaming responses and accumulates deltas', async () => {
+  const previousFetch = globalThis.fetch;
+  const chunks = [
+    'data: {"delta":"Streaming "}\n\n',
+    'data: {"delta":"brief "}\n\n',
+    'data: {"delta":"output."}\n\n',
+    'data: [DONE]\n\n'
+  ];
+  let chunkIndex = 0;
+
+  globalThis.fetch = async () => ({
+    ok: true,
+    headers: {
+      get(name) {
+        if (name === 'content-type') return 'text/event-stream';
+        return null;
+      }
+    },
+    body: {
+      getReader() {
+        const encoder = new TextEncoder();
+        return {
+          async read() {
+            if (chunkIndex >= chunks.length) return { done: true, value: undefined };
+            const value = encoder.encode(chunks[chunkIndex]);
+            chunkIndex += 1;
+            return { done: false, value };
+          },
+          cancel() {}
+        };
+      }
+    }
+  });
+
+  try {
+    const result = await requestRemoteLongBrief([{ headline: 'one' }]);
+    assert.equal(result, 'Streaming brief output.');
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
+
+test('requestRemoteLongBrief falls back to JSON extraction for non-streaming responses', async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: true,
+    headers: {
+      get(name) {
+        if (name === 'content-type') return 'application/json';
+        return null;
+      }
+    },
+    text: async () => JSON.stringify({ brief: 'json brief' })
+  });
+
+  try {
+    const result = await requestRemoteLongBrief([{ headline: 'one' }]);
+    assert.equal(result, 'json brief');
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});

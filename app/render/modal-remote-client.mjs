@@ -2,6 +2,7 @@ const LONG_BRIEF_API_URLS = [
   'https://albertalertbackend.vercel.app/api/generate-brief'
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
+const LONG_BRIEF_STREAM_IDLE_TIMEOUT_MS = 30_000;
 const TERMINAL_HTTP_STATUSES = new Set([400, 401, 403, 404, 405, 410, 501]);
 
 function resolveLongBriefApiUrls() {
@@ -45,6 +46,100 @@ async function readRemoteBriefPayload(response) {
     return response.json();
   }
   return '';
+}
+
+function isStreamingResponse(response) {
+  const contentType = String(
+    (typeof response?.headers?.get === 'function'
+      ? response.headers.get('content-type')
+      : response?.headers?.['content-type']) || ''
+  );
+  return contentType.includes('text/event-stream');
+}
+
+async function readStreamedBrief(response) {
+  const body = response.body;
+  if (!body || typeof body.getReader !== 'function') {
+    return readNonStreamingBrief(response);
+  }
+
+  const reader = body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let accumulated = '';
+  let idleTimer = null;
+
+  const resetIdleTimer = (reject) => {
+    if (idleTimer !== null) clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      try { reader.cancel(); } catch { /* ignore */ }
+      reject(new Error('Stream idle timeout'));
+    }, LONG_BRIEF_STREAM_IDLE_TIMEOUT_MS);
+  };
+
+  try {
+    accumulated = await new Promise((resolve, reject) => {
+      let text = '';
+      resetIdleTimer(reject);
+
+      (async () => {
+        try {
+          // eslint-disable-next-line no-constant-condition
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            resetIdleTimer(reject);
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+            for (const line of lines) {
+              const trimmedLine = line.trim();
+              if (!trimmedLine || trimmedLine === 'data: [DONE]') continue;
+              if (trimmedLine.startsWith('data: ')) {
+                const payload = trimmedLine.slice(6).trim();
+                try {
+                  const parsed = JSON.parse(payload);
+                  if (parsed?.error) {
+                    reject(new Error(parsed.error));
+                    return;
+                  }
+                  if (parsed?.delta) {
+                    text += parsed.delta;
+                  }
+                } catch {
+                  text += payload;
+                }
+              }
+            }
+          }
+          if (buffer.trim()) {
+            const trimmedLine = buffer.trim();
+            if (trimmedLine.startsWith('data: ') && trimmedLine !== 'data: [DONE]') {
+              const payload = trimmedLine.slice(6).trim();
+              try {
+                const parsed = JSON.parse(payload);
+                if (parsed?.delta) text += parsed.delta;
+              } catch {
+                text += payload;
+              }
+            }
+          }
+          resolve(text);
+        } catch (error) {
+          reject(error);
+        }
+      })();
+    });
+  } finally {
+    if (idleTimer !== null) clearTimeout(idleTimer);
+  }
+
+  return accumulated.trim();
+}
+
+async function readNonStreamingBrief(response) {
+  const data = await readRemoteBriefPayload(response);
+  return extractRemoteBrief(data);
 }
 
 function createAbortController() {
@@ -99,7 +194,9 @@ export async function requestRemoteLongBrief(payloadAttempts) {
           error.retryable = !TERMINAL_HTTP_STATUSES.has(response.status);
           throw error;
         }
-        const brief = extractRemoteBrief(await readRemoteBriefPayload(response));
+        const brief = isStreamingResponse(response)
+          ? await readStreamedBrief(response)
+          : await readNonStreamingBrief(response);
         if (!brief) throw new Error('Invalid brief response');
         return brief;
       } catch (error) {

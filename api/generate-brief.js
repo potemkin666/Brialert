@@ -58,6 +58,18 @@ function extractBrief(data) {
   ).trim();
 }
 
+function extractStreamedText(line) {
+  if (!line.startsWith('data: ')) return '';
+  const payload = line.slice(6).trim();
+  if (payload === '[DONE]') return '';
+  try {
+    const parsed = JSON.parse(payload);
+    return String(parsed?.delta ?? parsed?.output_text ?? parsed?.choices?.[0]?.delta?.content ?? '');
+  } catch {
+    return '';
+  }
+}
+
 export default async function handler(request, response) {
   applyCorsHeaders(request, response, 'POST,OPTIONS');
   if (request.method === 'OPTIONS') {
@@ -121,6 +133,7 @@ export default async function handler(request, response) {
     const openaiPayload = {
       model: OPENAI_MODEL,
       input: userMessage,
+      stream: true,
       tools: [{ type: 'web_search_preview' }]
     };
     if (instructions) {
@@ -152,31 +165,107 @@ export default async function handler(request, response) {
       });
     }
 
-    const result = await openaiResponse.json();
-    const brief = extractBrief(result);
+    const contentType = String(openaiResponse.headers.get('content-type') || '');
+    const isStreaming = contentType.includes('text/event-stream') || contentType.includes('stream');
 
-    if (!brief) {
-      return response.status(502).json({
-        ok: false,
-        error: 'empty-response',
-        message: 'Upstream model returned an empty brief.'
-      });
+    if (!isStreaming) {
+      const result = await openaiResponse.json();
+      const brief = extractBrief(result);
+      if (!brief) {
+        return response.status(502).json({
+          ok: false,
+          error: 'empty-response',
+          message: 'Upstream model returned an empty brief.'
+        });
+      }
+      return response.status(200).json({ ok: true, brief });
     }
 
-    return response.status(200).json({ ok: true, brief });
+    response.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive'
+    });
+
+    const upstreamBody = openaiResponse.body;
+    if (!upstreamBody) {
+      response.write(`data: ${JSON.stringify({ ok: false, error: 'empty-response' })}\n\n`);
+      response.write('data: [DONE]\n\n');
+      return response.end();
+    }
+
+    const reader = upstreamBody.getReader
+      ? upstreamBody.getReader()
+      : null;
+
+    if (!reader) {
+      const text = await openaiResponse.text();
+      const brief = extractBrief(text);
+      if (brief) {
+        response.write(`data: ${JSON.stringify({ delta: brief })}\n\n`);
+      }
+      response.write('data: [DONE]\n\n');
+      return response.end();
+    }
+
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let anyText = false;
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+      for (const line of lines) {
+        const trimmedLine = line.trim();
+        if (!trimmedLine) continue;
+        const delta = extractStreamedText(trimmedLine);
+        if (delta) {
+          anyText = true;
+          response.write(`data: ${JSON.stringify({ delta })}\n\n`);
+        }
+      }
+    }
+
+    if (buffer.trim()) {
+      const delta = extractStreamedText(buffer.trim());
+      if (delta) {
+        anyText = true;
+        response.write(`data: ${JSON.stringify({ delta })}\n\n`);
+      }
+    }
+
+    if (!anyText) {
+      response.write(`data: ${JSON.stringify({ ok: false, error: 'empty-response' })}\n\n`);
+    }
+    response.write('data: [DONE]\n\n');
+    return response.end();
   } catch (error) {
     if (error?.name === 'AbortError') {
-      return response.status(504).json({
+      if (!response.headersSent) {
+        return response.status(504).json({
+          ok: false,
+          error: 'timeout',
+          message: 'Brief generation timed out.'
+        });
+      }
+      response.write(`data: ${JSON.stringify({ ok: false, error: 'timeout' })}\n\n`);
+      response.write('data: [DONE]\n\n');
+      return response.end();
+    }
+    if (!response.headersSent) {
+      return response.status(500).json({
         ok: false,
-        error: 'timeout',
-        message: 'Brief generation timed out.'
+        error: 'internal-error',
+        message: 'An unexpected error occurred during brief generation.'
       });
     }
-    return response.status(500).json({
-      ok: false,
-      error: 'internal-error',
-      message: 'An unexpected error occurred during brief generation.'
-    });
+    response.write(`data: ${JSON.stringify({ ok: false, error: 'internal-error' })}\n\n`);
+    response.write('data: [DONE]\n\n');
+    return response.end();
   } finally {
     clearTimeout(timeout);
   }

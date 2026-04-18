@@ -117,6 +117,7 @@ test('generate-brief: returns brief on successful OpenAI response', async () => 
   process.env.OPENAI_API_KEY = 'test-key';
   globalThis.fetch = async () => ({
     ok: true,
+    headers: { get: () => 'application/json' },
     json: async () => ({ output_text: 'Generated long brief content.' })
   });
 
@@ -176,6 +177,7 @@ test('generate-brief: returns 502 when OpenAI returns empty brief', async () => 
   process.env.OPENAI_API_KEY = 'test-key';
   globalThis.fetch = async () => ({
     ok: true,
+    headers: { get: () => 'application/json' },
     json: async () => ({ output_text: '' })
   });
 
@@ -198,7 +200,7 @@ test('generate-brief: returns 502 when OpenAI returns empty brief', async () => 
   }
 });
 
-test('generate-brief: sends web_search_preview tool in OpenAI request', async () => {
+test('generate-brief: sends web_search_preview tool and stream flag in OpenAI request', async () => {
   const previousKey = process.env.OPENAI_API_KEY;
   const previousFetch = globalThis.fetch;
   process.env.OPENAI_API_KEY = 'test-key';
@@ -207,6 +209,7 @@ test('generate-brief: sends web_search_preview tool in OpenAI request', async ()
     capturedBody = JSON.parse(options.body);
     return {
       ok: true,
+      headers: { get: () => 'application/json' },
       json: async () => ({ output_text: 'Brief with web research.' })
     };
   };
@@ -223,10 +226,86 @@ test('generate-brief: sends web_search_preview tool in OpenAI request', async ()
     assert.equal(res._status, 200);
     assert.ok(capturedBody);
     assert.equal(capturedBody.model, 'gpt-4.1-mini');
+    assert.equal(capturedBody.stream, true);
     assert.equal(capturedBody.instructions, 'Write a detailed brief.');
     assert.ok(capturedBody.input.includes('Test Alert'));
     assert.ok(capturedBody.input.includes('Reuters'));
     assert.deepEqual(capturedBody.tools, [{ type: 'web_search_preview' }]);
+  } finally {
+    globalThis.fetch = previousFetch;
+    if (previousKey !== undefined) {
+      process.env.OPENAI_API_KEY = previousKey;
+    } else {
+      delete process.env.OPENAI_API_KEY;
+    }
+  }
+});
+
+test('generate-brief: streams SSE response when upstream returns event-stream', async () => {
+  const previousKey = process.env.OPENAI_API_KEY;
+  const previousFetch = globalThis.fetch;
+  process.env.OPENAI_API_KEY = 'test-key';
+
+  const chunks = [
+    'data: {"delta":"Hello "}\n\n',
+    'data: {"delta":"world."}\n\n',
+    'data: [DONE]\n\n'
+  ];
+  let chunkIndex = 0;
+
+  globalThis.fetch = async () => ({
+    ok: true,
+    headers: { get: () => 'text/event-stream' },
+    body: {
+      getReader() {
+        const encoder = new TextEncoder();
+        return {
+          async read() {
+            if (chunkIndex >= chunks.length) return { done: true, value: undefined };
+            const value = encoder.encode(chunks[chunkIndex]);
+            chunkIndex += 1;
+            return { done: false, value };
+          },
+          cancel() {}
+        };
+      }
+    }
+  });
+
+  try {
+    const handler = await loadHandler();
+    const written = [];
+    const res = {
+      ...createResponse(),
+      headersSent: false,
+      writeHead(status, headers) {
+        res._status = status;
+        Object.assign(res._headers, headers);
+        res.headersSent = true;
+      },
+      write(chunk) {
+        written.push(chunk);
+      },
+      end() {
+        res._ended = true;
+        return res;
+      }
+    };
+
+    await handler(createRequest('POST', {
+      headline: 'Test Incident',
+      sourceExtract: 'Details here.'
+    }), res);
+
+    assert.equal(res._status, 200);
+    assert.equal(res._headers['Content-Type'], 'text/event-stream');
+    assert.equal(res._ended, true);
+
+    const deltas = written
+      .filter((line) => line.startsWith('data: ') && !line.includes('[DONE]'))
+      .map((line) => JSON.parse(line.slice(6).trim()).delta);
+    assert.deepEqual(deltas, ['Hello ', 'world.']);
+    assert.ok(written.some((line) => line.includes('[DONE]')));
   } finally {
     globalThis.fetch = previousFetch;
     if (previousKey !== undefined) {
