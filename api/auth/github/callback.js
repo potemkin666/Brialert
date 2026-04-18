@@ -13,22 +13,11 @@ import {
   exchangeOAuthCode,
   fetchGithubUser
 } from '../../_lib/github-admin-access.js';
+import { createRateLimiter } from '../../_lib/rate-limit.js';
 
 const CALLBACK_RATE_LIMIT_MS = 60_000;
 const CALLBACK_RATE_LIMIT_BURST = 10;
-const recentCallbacks = [];
-
-function isCallbackRateLimited() {
-  const now = Date.now();
-  while (recentCallbacks.length > 0 && now - recentCallbacks[0] > CALLBACK_RATE_LIMIT_MS) {
-    recentCallbacks.shift();
-  }
-  if (recentCallbacks.length >= CALLBACK_RATE_LIMIT_BURST) {
-    return true;
-  }
-  recentCallbacks.push(now);
-  return false;
-}
+const callbackLimiter = createRateLimiter({ windowMs: CALLBACK_RATE_LIMIT_MS, maxBurst: CALLBACK_RATE_LIMIT_BURST });
 
 function queryValue(request, key) {
   if (request?.query && Object.prototype.hasOwnProperty.call(request.query, key)) {
@@ -68,7 +57,7 @@ export default async function handler(request, response) {
     });
   }
 
-  if (isCallbackRateLimited()) {
+  if (callbackLimiter.isLimited()) {
     return redirect(response, failRedirectTarget('rate-limited'));
   }
 

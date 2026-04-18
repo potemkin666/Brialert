@@ -7,6 +7,7 @@ import {
 } from './_lib/github-persistence.js';
 import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
 import { isPrivateUrl } from './_lib/url-safety.js';
+import { createRateLimiter } from './_lib/rate-limit.js';
 
 const REQUESTS_PATH = 'data/source-requests.json';
 const SOURCES_PATH = 'data/sources.json';
@@ -17,19 +18,7 @@ const REQUEST_HISTORY_LIMIT = 250;
 const REQUEST_RATE_LIMIT_MS = 10_000;
 const REQUEST_RATE_LIMIT_BURST = 5;
 
-const recentRequests = [];
-
-function isRateLimited() {
-  const now = Date.now();
-  while (recentRequests.length > 0 && now - recentRequests[0] > REQUEST_RATE_LIMIT_MS) {
-    recentRequests.shift();
-  }
-  if (recentRequests.length >= REQUEST_RATE_LIMIT_BURST) {
-    return true;
-  }
-  recentRequests.push(now);
-  return false;
-}
+const requestSourceLimiter = createRateLimiter({ windowMs: REQUEST_RATE_LIMIT_MS, maxBurst: REQUEST_RATE_LIMIT_BURST });
 
 function sendError(response, error) {
   const status = error instanceof ApiError ? error.status : 500;
@@ -288,7 +277,7 @@ export default async function handler(request, response) {
   }
 
   try {
-    if (isRateLimited()) {
+    if (requestSourceLimiter.isLimited()) {
       return response.status(429).json({
         ok: false,
         error: 'rate-limited',

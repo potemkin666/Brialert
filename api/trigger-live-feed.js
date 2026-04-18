@@ -1,11 +1,12 @@
 import { ApiError } from './_lib/github-persistence.js';
 import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
+import { createCooldownLimiter } from './_lib/rate-limit.js';
 
 const GITHUB_API_BASE = 'https://api.github.com';
 const WORKFLOW_FILENAME = 'update-live-feed.yml';
 const MIN_TRIGGER_INTERVAL_MS = 60_000;
 
-let lastTriggerTime = 0;
+const triggerLimiter = createCooldownLimiter({ intervalMs: MIN_TRIGGER_INTERVAL_MS });
 
 function getRepoConfig() {
   const token = process.env.GITHUB_TOKEN || '';
@@ -53,14 +54,13 @@ export default async function handler(request, response) {
   }
 
   try {
-    const now = Date.now();
-    if (now - lastTriggerTime < MIN_TRIGGER_INTERVAL_MS) {
-      const waitSeconds = Math.ceil((MIN_TRIGGER_INTERVAL_MS - (now - lastTriggerTime)) / 1000);
+    const cooldown = triggerLimiter.isLimited();
+    if (cooldown.limited) {
       return response.status(429).json({
         ok: false,
         error: 'rate-limited',
-        detail: `Workflow was recently triggered. Please wait ${waitSeconds} seconds before trying again.`,
-        retryAfterSeconds: waitSeconds
+        detail: `Workflow was recently triggered. Please wait ${cooldown.retryAfterSeconds} seconds before trying again.`,
+        retryAfterSeconds: cooldown.retryAfterSeconds
       });
     }
 
@@ -100,8 +100,6 @@ export default async function handler(request, response) {
       }
       throw new ApiError('trigger-failed', errorMessage, 500);
     }
-
-    lastTriggerTime = now;
 
     return response.status(200).json({
       ok: true,

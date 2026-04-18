@@ -6,22 +6,11 @@ import {
   setOauthStateCookie
 } from '../../_lib/admin-session.js';
 import { getOAuthClientConfig } from '../../_lib/github-admin-access.js';
+import { createRateLimiter } from '../../_lib/rate-limit.js';
 
 const START_RATE_LIMIT_MS = 60_000;
 const START_RATE_LIMIT_BURST = 10;
-const recentStarts = [];
-
-function isStartRateLimited() {
-  const now = Date.now();
-  while (recentStarts.length > 0 && now - recentStarts[0] > START_RATE_LIMIT_MS) {
-    recentStarts.shift();
-  }
-  if (recentStarts.length >= START_RATE_LIMIT_BURST) {
-    return true;
-  }
-  recentStarts.push(now);
-  return false;
-}
+const startLimiter = createRateLimiter({ windowMs: START_RATE_LIMIT_MS, maxBurst: START_RATE_LIMIT_BURST });
 
 function queryValue(request, key) {
   if (request?.query && Object.prototype.hasOwnProperty.call(request.query, key)) {
@@ -56,7 +45,7 @@ export default async function handler(request, response) {
     });
   }
 
-  if (isStartRateLimited()) {
+  if (startLimiter.isLimited()) {
     return response.status(429).json({
       ok: false,
       error: 'rate-limited',

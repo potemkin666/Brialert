@@ -1,4 +1,5 @@
 import { applyCorsHeaders } from './_lib/admin-session.js';
+import { createRateLimiter } from './_lib/rate-limit.js';
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/responses';
 const OPENAI_MODEL = 'gpt-4.1-mini';
@@ -6,19 +7,7 @@ const GENERATE_BRIEF_TIMEOUT_MS = 55_000;
 const RATE_LIMIT_WINDOW_MS = 10_000;
 const RATE_LIMIT_BURST = 10;
 
-const recentRequests = [];
-
-function isRateLimited() {
-  const now = Date.now();
-  while (recentRequests.length > 0 && now - recentRequests[0] > RATE_LIMIT_WINDOW_MS) {
-    recentRequests.shift();
-  }
-  if (recentRequests.length >= RATE_LIMIT_BURST) {
-    return true;
-  }
-  recentRequests.push(now);
-  return false;
-}
+const briefLimiter = createRateLimiter({ windowMs: RATE_LIMIT_WINDOW_MS, maxBurst: RATE_LIMIT_BURST });
 
 function parseBody(request) {
   if (request.body && typeof request.body === 'object') return request.body;
@@ -94,7 +83,7 @@ export default async function handler(request, response) {
     });
   }
 
-  if (isRateLimited()) {
+  if (briefLimiter.isLimited()) {
     return response.status(429).json({
       ok: false,
       error: 'rate-limited',
