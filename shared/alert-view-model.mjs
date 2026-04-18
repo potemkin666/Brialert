@@ -167,12 +167,24 @@ function looksGenericSummary(text) {
     summary.includes('border or screening update');
 }
 
+const SOCIAL_SHARE_NOISE = /\b(?:copy\s+link|share\s+(?:this|via|on)|tweet|facebook|whatsapp|telegram|email|twitter|linkedin|pinterest|reddit|subscribe|newsletter|sign\s+up)\b/i;
+const AUTHOR_BIO_PATTERN = /\bis\s+(?:the\s+|an?\s+)?(?:[\w']+\s+){0,5}(?:correspondent|reporter|editor|journalist|writer|columnist|contributor|producer|presenter|analyst)\b/i;
+
+function isWebCruft(sentence) {
+  const lower = sentence.toLowerCase();
+  if (SOCIAL_SHARE_NOISE.test(lower)) return true;
+  if (AUTHOR_BIO_PATTERN.test(lower)) return true;
+  if (/^(?:read\s+more|related\s+(?:articles|stories|topics)|advertisement|sponsored|©)/i.test(sentence.trim())) return true;
+  return false;
+}
+
 function articleBodyBits(alert) {
   const base = clean(alert.sourceExtract || (alert.summary && alert.summary !== alert.title ? alert.summary : ''));
   return base
     .split(/(?<=[.!?])\s+|\s{2,}/)
     .map((part) => clean(part))
     .filter(Boolean)
+    .filter((part) => !isWebCruft(part))
     .filter((part, index, all) => all.indexOf(part) === index)
     .slice(0, 14);
 }
@@ -699,3 +711,6 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     attackType: attackTypeLabel(alert)
   };
 }
+
+/* ── Exports for testing ── */
+export { isWebCruft as _isWebCruft };

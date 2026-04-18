@@ -248,7 +248,7 @@ export function computeDynamicItemLimit({ reliabilityProfile, lane, sourceHealth
   const raw = baseCap * multiplier * healthFactor * densityFactor;
   return Math.max(1, Math.round(raw));
 }
-export const MAX_STORED_ALERTS = 120;
+export const MAX_STORED_ALERTS = 400;
 export const MAX_FAILING_SOURCES_TO_LOG = 10;
 export const EXPECTED_REFRESH_MINUTES = 30;
 export const STALE_AFTER_MINUTES = 50;
