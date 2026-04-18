@@ -1,6 +1,24 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-18T08:09:30.234Z",
-  "totalSourceErrors": 0,
-  "top20": []
+  "generatedAt": "2026-04-18T09:29:55.311Z",
+  "totalSourceErrors": 1,
+  "top20": [
+    {
+      "id": "just-security",
+      "provider": "Just Security a Law, Rights & National Security",
+      "endpoint": "https://www.justsecurity.org/feed/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "Blocked by blocked access page",
+      "status": 200,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    }
+  ]
 }
