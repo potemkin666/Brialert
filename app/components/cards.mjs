@@ -93,7 +93,7 @@ export function responderCardMarkup(alert, watched) {
   const confidence = confidenceScoreLabel(alert);
   const geoBadges = geoBadgesMarkup(alert);
   return `
-    <article class="feed-card actionable" data-id="${alert.id}">
+    <article class="feed-card actionable" data-id="${alert.id}" data-severity="${escapeHtml(alert.severity)}">
       <div class="feed-top">
         <div><h4>${escapeHtml(alert.title)}</h4><p>${escapeHtml(alert.location)}</p></div>
         <div class="feed-actions">
@@ -140,5 +140,5 @@ export function supportingCardMarkup(alert) {
 }
 
 export function watchlistCardMarkup(alert) {
-  return `<article class="feed-card actionable" data-watch="${alert.id}"><div class="feed-top"><div><h4>${escapeHtml(alert.title)}</h4><p>${escapeHtml(alert.location)}</p></div><span class="severity severity-${escapeHtml(alert.severity)}">${escapeHtml(laneLabels[alert.lane])}</span></div><p>${escapeHtml(alert.summary)}</p></article>`;
+  return `<article class="feed-card actionable" data-watch="${alert.id}" data-severity="${escapeHtml(alert.severity)}"><div class="feed-top"><div><h4>${escapeHtml(alert.title)}</h4><p>${escapeHtml(alert.location)}</p></div><span class="severity severity-${escapeHtml(alert.severity)}">${escapeHtml(laneLabels[alert.lane])}</span></div><p>${escapeHtml(alert.summary)}</p></article>`;
 }

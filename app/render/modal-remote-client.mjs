@@ -68,10 +68,13 @@ async function readStreamedBrief(response) {
   let buffer = '';
   let accumulated = '';
   let idleTimer = null;
+  let settled = false;
 
   const resetIdleTimer = (reject) => {
     if (idleTimer !== null) clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
       try { reader.cancel(); } catch { /* ignore */ }
       reject(new Error('Stream idle timeout'));
     }, LONG_BRIEF_STREAM_IDLE_TIMEOUT_MS);
@@ -100,6 +103,7 @@ async function readStreamedBrief(response) {
                 try {
                   const parsed = JSON.parse(payload);
                   if (parsed?.error) {
+                    settled = true;
                     reject(new Error(parsed.error));
                     return;
                   }
@@ -124,13 +128,16 @@ async function readStreamedBrief(response) {
               }
             }
           }
+          settled = true;
           resolve(text);
         } catch (error) {
+          settled = true;
           reject(error);
         }
       })();
     });
   } finally {
+    settled = true;
     if (idleTimer !== null) clearTimeout(idleTimer);
   }
 

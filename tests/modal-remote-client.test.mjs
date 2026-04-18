@@ -175,3 +175,44 @@ test('requestRemoteLongBrief falls back to JSON extraction for non-streaming res
     globalThis.fetch = previousFetch;
   }
 });
+
+test('readStreamedBrief idle timer does not reject after stream resolves (settled guard)', async () => {
+  const previousFetch = globalThis.fetch;
+  const chunks = [
+    'data: {"delta":"done"}\n\n'
+  ];
+  let chunkIndex = 0;
+  let cancelCalls = 0;
+
+  globalThis.fetch = async () => ({
+    ok: true,
+    headers: {
+      get(name) {
+        if (name === 'content-type') return 'text/event-stream';
+        return null;
+      }
+    },
+    body: {
+      getReader() {
+        const encoder = new TextEncoder();
+        return {
+          async read() {
+            if (chunkIndex >= chunks.length) return { done: true, value: undefined };
+            const value = encoder.encode(chunks[chunkIndex]);
+            chunkIndex += 1;
+            return { done: false, value };
+          },
+          cancel() { cancelCalls += 1; }
+        };
+      }
+    }
+  });
+
+  try {
+    const result = await requestRemoteLongBrief([{ headline: 'one' }]);
+    assert.equal(result, 'done');
+    assert.equal(cancelCalls, 0, 'reader.cancel should not be called after successful resolution');
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});

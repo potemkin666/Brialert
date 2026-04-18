@@ -735,6 +735,22 @@ h1 {
   background: rgba(31, 142, 144, 0.22);
 }
 
+.feed-card[data-severity="critical"] {
+  border-left: 3px solid #d53d2f;
+}
+
+.feed-card[data-severity="high"] {
+  border-left: 3px solid #df651a;
+}
+
+.feed-card[data-severity="elevated"] {
+  border-left: 3px solid #c0a42d;
+}
+
+.feed-card[data-severity="moderate"] {
+  border-left: 3px solid #1f8e90;
+}
+
 /* ── Aesthetic: glass-morphism map container ──
    Frosted-glass border effect with a subtle inner glow gives the
    map a premium, modern look that ties into the dark UI. */
