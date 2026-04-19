@@ -1,16 +1,54 @@
 {
-  "generatedAt": "2026-04-19T17:13:24.435Z",
+  "generatedAt": "2026-04-19T18:05:04.781Z",
   "count": 442,
   "metrics": {
     "total": 442,
     "newThisWeek": 260,
-    "avgTimeInQuarantineHours": 46,
-    "avgHealthScore": 4,
+    "avgTimeInQuarantineHours": 47,
+    "avgHealthScore": 3,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
     "restoredTotal": 0
   },
   "sources": [
+    {
+      "id": "thank-you-for-the-days",
+      "provider": "Thank you for the days",
+      "endpoint": "https://thankyouforthedays.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 401",
+      "consecutiveFailures": 1,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-17T08:04:04.612Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
     {
       "id": "euaa-news",
       "provider": "EUAA (EU Agency for Asylum) a News",
@@ -3509,6 +3547,678 @@
       "lastCheckedAt": "2026-04-18T05:49:08.723Z"
     },
     {
+      "id": "ecfr-feeds-index",
+      "provider": "ECFR - Feeds",
+      "endpoint": "https://ecfr.eu/feeds/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "Blocked by blocked access page",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "Blocked by blocked access page",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "statewatch-news",
+      "provider": "Statewatch - News",
+      "endpoint": "https://www.statewatch.org/news/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "clingendael-publications",
+      "provider": "Clingendael Institute a Publications",
+      "endpoint": "https://www.clingendael.org/publications",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "ecfr-publications",
+      "provider": "European Council on Foreign Relations (ECFR) a Publications",
+      "endpoint": "https://ecfr.eu/publications/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "Blocked by blocked access page",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "Blocked by blocked access page",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "politico-europe",
+      "provider": "Politico Europe",
+      "endpoint": "https://www.politico.eu/",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "acled-updates",
+      "provider": "ACLED a Updates and Analysis",
+      "endpoint": "https://acleddata.com/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "Blocked by blocked access page",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "Blocked by blocked access page",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "reuters-uk",
+      "provider": "Reuters a UK News",
+      "endpoint": "https://www.reuters.com/world/uk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 401",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "soufan-center-intelbrief",
+      "provider": "The Soufan Center a Intel. Brief",
+      "endpoint": "https://thesoufancenter.org/category/intelbrief/",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "Blocked by blocked access page",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "Blocked by blocked access page",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "tony-blair-institute-news",
+      "provider": "Tony Blair Institute for Global Change a Publications",
+      "endpoint": "https://institute.global/insights",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "chatham-house-home",
+      "provider": "Chatham House",
+      "endpoint": "https://www.chathamhouse.org/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "chatham-house-security-defence",
+      "provider": "Chatham House - Security and Defence",
+      "endpoint": "https://www.chathamhouse.org/topics/security-and-defence",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "wiltshire-999s",
+      "provider": "Wiltshire 999s",
+      "endpoint": "https://www.wiltshire999s.co.uk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "icsr-kcl",
+      "provider": "International Centre for the Study of Radicalisation (ICSR) a Updates",
+      "endpoint": "https://icsr.info/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "rand-terrorism-topic",
+      "provider": "RAND - Terrorism Topic Updates",
+      "endpoint": "https://www.rand.org/topics/terrorism.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 4,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
       "id": "eu-fra-rss",
       "provider": "EU Agency for Fundamental Rights (FRA) a RSS",
       "endpoint": "https://fra.europa.eu/en/content/rss",
@@ -3818,6 +4528,135 @@
       "reviewBy": "2026-04-24T22:12:37.099Z",
       "lastFailureAt": "2026-04-17T22:12:37.099Z",
       "lastCheckedAt": "2026-04-17T22:12:37.099Z"
+    },
+    {
+      "id": "belgium-crisis-centre-news",
+      "provider": "Belgian National Crisis Centre - News",
+      "endpoint": "https://crisiscenter.be/en/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 5 after repeated failures",
+      "quarantinedAt": "2026-04-17T20:09:53.653Z",
+      "lastErrorCategory": "network-failure",
+      "lastErrorMessage": "fetch failed",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-17T20:09:53.653Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "german-bka-press",
+      "provider": "German BKA - Press Releases",
+      "endpoint": "https://www.bka.de/EN/Press/Listings/Press. Releases/press. Releases_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 5 after repeated failures",
+      "quarantinedAt": "2026-04-17T20:09:53.653Z",
+      "lastErrorCategory": "network-failure",
+      "lastErrorMessage": "fetch failed",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-17T20:09:53.653Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "policia-nacional-news",
+      "provider": "Policia Nacional - Press",
+      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 5 after repeated failures",
+      "quarantinedAt": "2026-04-17T20:09:53.653Z",
+      "lastErrorCategory": "not-found-404",
+      "lastErrorMessage": "HTTP 404",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T15:11:26.228Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-17T20:09:53.653Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
     },
     {
       "id": "portugal-pj-news",
@@ -5658,6 +6497,246 @@
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
       "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+    },
+    {
+      "id": "financial-times-world",
+      "provider": "Financial Times a World",
+      "endpoint": "https://www.ft.com/world",
+      "kind": "html",
+      "lane": "context",
+      "region": "europe",
+      "healthScore": 2,
+      "status": "auto-quarantined",
+      "reason": "Access protection added — errors alternate between auth blocks and anti-bot; consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 1,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "resolve-network-research",
+      "provider": "RESOLVE Network a Research",
+      "endpoint": "https://www.resolvenet.org/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "healthScore": 2,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 17 after repeated failures",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "http-status-error",
+      "lastErrorMessage": "HTTP 503",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "http-status-error",
+          "message": "HTTP 503",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "http-status-error",
+          "message": "HTTP 503",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "http-status-error",
+          "message": "HTTP 503",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "http-status-error",
+          "message": "HTTP 503",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "http-status-error",
+          "message": "HTTP 503",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "institute-global-home",
+      "provider": "Institute for Global Change",
+      "endpoint": "https://www.institute.global/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 2,
+      "status": "auto-quarantined",
+      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "brittle-selectors-or-js-rendering",
+      "lastErrorMessage": "Playwright browser not installed: browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "start-baad-database",
+      "provider": "National Consortium for the Study of Terrorism (START) - Big Allied and Dangerous (BAAD) Database",
+      "endpoint": "https://www.start.umd.edu/baad/database/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "healthScore": 2,
+      "status": "auto-quarantined",
+      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "network-failure",
+      "lastErrorMessage": "fetch failed",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
+      "id": "start-center-publications",
+      "provider": "START Center (UMD) - News & Publications",
+      "endpoint": "https://www.start.umd.edu/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "healthScore": 2,
+      "status": "auto-quarantined",
+      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
+      "quarantinedAt": "2026-04-18T03:42:22.439Z",
+      "lastErrorCategory": "network-failure",
+      "lastErrorMessage": "fetch failed",
+      "consecutiveFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T16:57:11.406Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T21:58:32.608Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-18T03:42:22.439Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
     },
     {
       "id": "quadrant2design-exhibiting-guides",
@@ -13751,120 +14830,6 @@
       "lastCheckedAt": "2026-04-17T22:12:37.099Z"
     },
     {
-      "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "healthScore": 5,
-      "status": "auto-quarantined",
-      "reason": "Health score degraded to 5 after repeated failures",
-      "quarantinedAt": "2026-04-17T20:09:53.653Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T15:11:26.228Z"
-        },
-        {
-          "category": "not-found-404",
-          "message": "HTTP 404",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "not-found-404",
-          "message": "HTTP 404",
-          "at": "2026-04-17T20:09:53.653Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T20:09:53.653Z",
-      "lastFailureAt": "2026-04-17T20:09:53.653Z",
-      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
-    },
-    {
-      "id": "german-bka-press",
-      "provider": "German BKA - Press Releases",
-      "endpoint": "https://www.bka.de/EN/Press/Listings/Press. Releases/press. Releases_node.html",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "healthScore": 5,
-      "status": "auto-quarantined",
-      "reason": "Health score degraded to 5 after repeated failures",
-      "quarantinedAt": "2026-04-17T20:09:53.653Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "timeout",
-          "message": "This operation was aborted",
-          "at": "2026-04-16T15:11:26.228Z"
-        },
-        {
-          "category": "not-found-404",
-          "message": "HTTP 404",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "not-found-404",
-          "message": "HTTP 404",
-          "at": "2026-04-17T20:09:53.653Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T20:09:53.653Z",
-      "lastFailureAt": "2026-04-17T20:09:53.653Z",
-      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
-    },
-    {
-      "id": "policia-nacional-news",
-      "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "healthScore": 5,
-      "status": "auto-quarantined",
-      "reason": "Health score degraded to 5 after repeated failures",
-      "quarantinedAt": "2026-04-17T20:09:53.653Z",
-      "lastErrorCategory": "not-found-404",
-      "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T15:11:26.228Z"
-        },
-        {
-          "category": "not-found-404",
-          "message": "HTTP 404",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "not-found-404",
-          "message": "HTTP 404",
-          "at": "2026-04-17T20:09:53.653Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T20:09:53.653Z",
-      "lastFailureAt": "2026-04-17T20:09:53.653Z",
-      "lastCheckedAt": "2026-04-17T20:09:53.653Z"
-    },
-    {
       "id": "london-resilience",
       "provider": "Resilience First - Latest Updates",
       "endpoint": "https://resiliencefirst.org/latest-updates",
@@ -13936,6 +14901,39 @@
       "lastCheckedAt": "2026-04-18T05:49:08.723Z"
     },
     {
+      "id": "a-lady-in-london",
+      "provider": "A Lady in London",
+      "endpoint": "https://www.aladyinlondon.com/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 8,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 401",
+      "consecutiveFailures": 1,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-17T22:12:37.099Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-19T18:05:04.781Z"
+    },
+    {
       "id": "arcticdry",
       "provider": "Arctic. Dry",
       "endpoint": "https://www.arcticdry.co.uk/feed/",
@@ -13962,39 +14960,6 @@
       "reviewBy": "2026-04-24T08:04:04.612Z",
       "lastFailureAt": "2026-04-17T08:04:04.612Z",
       "lastCheckedAt": "2026-04-19T11:44:44.316Z"
-    },
-    {
-      "id": "thank-you-for-the-days",
-      "provider": "Thank you for the days",
-      "endpoint": "https://thankyouforthedays.co.uk/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 8,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "timeout",
-          "message": "This operation was aborted",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "timeout",
-          "message": "This operation was aborted",
-          "at": "2026-04-17T08:04:04.612Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T08:04:04.612Z",
-      "lastFailureAt": "2026-04-17T08:04:04.612Z",
-      "lastCheckedAt": "2026-04-19T14:11:10.963Z"
     },
     {
       "id": "gnet-youth-rss",
@@ -14460,823 +15425,6 @@
       "lastCheckedAt": "2026-04-19T16:03:49.134Z"
     },
     {
-      "id": "ecfr-feeds-index",
-      "provider": "ECFR - Feeds",
-      "endpoint": "https://ecfr.eu/feeds/",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "statewatch-news",
-      "provider": "Statewatch - News",
-      "endpoint": "https://www.statewatch.org/news/",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "clingendael-publications",
-      "provider": "Clingendael Institute a Publications",
-      "endpoint": "https://www.clingendael.org/publications",
-      "kind": "html",
-      "lane": "context",
-      "region": "europe",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "ecfr-publications",
-      "provider": "European Council on Foreign Relations (ECFR) a Publications",
-      "endpoint": "https://ecfr.eu/publications/",
-      "kind": "html",
-      "lane": "context",
-      "region": "europe",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "financial-times-world",
-      "provider": "Financial Times a World",
-      "endpoint": "https://www.ft.com/world",
-      "kind": "html",
-      "lane": "context",
-      "region": "europe",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — errors alternate between auth blocks and anti-bot; consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "Playwright browser not installed: browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "politico-europe",
-      "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/",
-      "kind": "html",
-      "lane": "context",
-      "region": "europe",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "acled-updates",
-      "provider": "ACLED a Updates and Analysis",
-      "endpoint": "https://acleddata.com/",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "resolve-network-research",
-      "provider": "RESOLVE Network a Research",
-      "endpoint": "https://www.resolvenet.org/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Health score degraded to 17 after repeated failures",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "http-status-error",
-      "lastErrorMessage": "HTTP 503",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "http-status-error",
-          "message": "HTTP 503",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "http-status-error",
-          "message": "HTTP 503",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "http-status-error",
-          "message": "HTTP 503",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "http-status-error",
-          "message": "HTTP 503",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "reuters-uk",
-      "provider": "Reuters a UK News",
-      "endpoint": "https://www.reuters.com/world/uk/",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 401",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "soufan-center-intelbrief",
-      "provider": "The Soufan Center a Intel. Brief",
-      "endpoint": "https://thesoufancenter.org/category/intelbrief/",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "tony-blair-institute-news",
-      "provider": "Tony Blair Institute for Global Change a Publications",
-      "endpoint": "https://institute.global/insights",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "chatham-house-home",
-      "provider": "Chatham House",
-      "endpoint": "https://www.chathamhouse.org/",
-      "kind": "html",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "chatham-house-security-defence",
-      "provider": "Chatham House - Security and Defence",
-      "endpoint": "https://www.chathamhouse.org/topics/security-and-defence",
-      "kind": "html",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "institute-global-home",
-      "provider": "Institute for Global Change",
-      "endpoint": "https://www.institute.global/",
-      "kind": "html",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "wiltshire-999s",
-      "provider": "Wiltshire 999s",
-      "endpoint": "https://www.wiltshire999s.co.uk/",
-      "kind": "html",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "icsr-kcl",
-      "provider": "International Centre for the Study of Radicalisation (ICSR) a Updates",
-      "endpoint": "https://icsr.info/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "rand-terrorism-topic",
-      "provider": "RAND - Terrorism Topic Updates",
-      "endpoint": "https://www.rand.org/topics/terrorism.html",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Anti-bot protection active — consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 3,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "start-baad-database",
-      "provider": "National Consortium for the Study of Terrorism (START) - Big Allied and Dangerous (BAAD) Database",
-      "endpoint": "https://www.start.umd.edu/baad/database/",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
-      "id": "start-center-publications",
-      "provider": "START Center (UMD) - News & Publications",
-      "endpoint": "https://www.start.umd.edu/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "healthScore": 17,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-18T03:42:22.439Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 3,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T16:57:11.406Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T21:58:32.608Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-18T03:42:22.439Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T03:42:22.439Z",
-      "lastFailureAt": "2026-04-18T03:42:22.439Z",
-      "lastCheckedAt": "2026-04-18T03:42:22.439Z"
-    },
-    {
       "id": "church-of-england-newspaper",
       "provider": "Church of England Newspaper",
       "endpoint": "https://www.churchnewspaper.com/feed",
@@ -15453,34 +15601,6 @@
       "reviewBy": "2026-04-24T22:12:37.099Z",
       "lastFailureAt": "2026-04-17T22:12:37.099Z",
       "lastCheckedAt": "2026-04-19T16:03:49.134Z"
-    },
-    {
-      "id": "a-lady-in-london",
-      "provider": "A Lady in London",
-      "endpoint": "https://www.aladyinlondon.com/feed",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 23,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-17T22:12:37.099Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T22:12:37.099Z",
-      "lastFailureAt": "2026-04-17T22:12:37.099Z",
-      "lastCheckedAt": "2026-04-19T14:11:10.963Z"
     },
     {
       "id": "everything-zany",
