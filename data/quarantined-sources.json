@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-20T06:30:13.977Z",
+  "generatedAt": "2026-04-20T07:25:05.300Z",
   "count": 445,
   "metrics": {
     "total": 445,
     "newThisWeek": 262,
-    "avgTimeInQuarantineHours": 59,
+    "avgTimeInQuarantineHours": 60,
     "avgHealthScore": 1,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -3776,9 +3776,9 @@
       "status": "auto-quarantined",
       "reason": "Low health score – needs review",
       "quarantinedAt": "",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 1,
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -3801,7 +3801,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+      "lastCheckedAt": "2026-04-20T07:25:05.300Z"
     },
     {
       "id": "gnet-radicalisation-rss",
@@ -11993,7 +11993,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12011,12 +12011,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T07:21:41.099Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T07:25:05.300Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T07:21:41.099Z",
-      "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+      "reviewBy": "2026-04-27T07:25:05.300Z",
+      "lastFailureAt": "2026-04-20T07:25:05.300Z",
+      "lastCheckedAt": "2026-04-20T07:25:05.300Z"
     },
     {
       "id": "switzerland-fedpol-news",
@@ -12160,7 +12165,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12178,12 +12183,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T07:21:41.099Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T07:25:05.300Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T07:21:41.099Z",
-      "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+      "reviewBy": "2026-04-27T07:25:05.300Z",
+      "lastFailureAt": "2026-04-20T07:25:05.300Z",
+      "lastCheckedAt": "2026-04-20T07:25:05.300Z"
     },
     {
       "id": "nato-news-rss",
@@ -12241,7 +12251,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12259,12 +12269,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T07:21:41.099Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T07:25:05.300Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T07:21:41.099Z",
-      "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+      "reviewBy": "2026-04-27T07:25:05.300Z",
+      "lastFailureAt": "2026-04-20T07:25:05.300Z",
+      "lastCheckedAt": "2026-04-20T07:25:05.300Z"
     },
     {
       "id": "rferl-security-news-rss",
@@ -12279,7 +12294,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12297,12 +12312,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T07:21:41.099Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T07:25:05.300Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T07:21:41.099Z",
-      "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+      "reviewBy": "2026-04-27T07:25:05.300Z",
+      "lastFailureAt": "2026-04-20T07:25:05.300Z",
+      "lastCheckedAt": "2026-04-20T07:25:05.300Z"
     },
     {
       "id": "unodc-news",
@@ -12919,7 +12939,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12937,12 +12957,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T07:21:41.099Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T07:25:05.300Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T07:21:41.099Z",
-      "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+      "reviewBy": "2026-04-27T07:25:05.300Z",
+      "lastFailureAt": "2026-04-20T07:25:05.300Z",
+      "lastCheckedAt": "2026-04-20T07:25:05.300Z"
     },
     {
       "id": "joint-committee-human-rights-html",
