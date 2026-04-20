@@ -1,6 +1,75 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-20T00:04:00.988Z",
-  "totalSourceErrors": 0,
-  "top20": []
+  "generatedAt": "2026-04-20T04:05:33.139Z",
+  "totalSourceErrors": 4,
+  "top20": [
+    {
+      "id": "just-security",
+      "provider": "Just Security a Law, Rights & National Security",
+      "endpoint": "https://www.justsecurity.org/feed/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "Blocked by blocked access page",
+      "status": 200,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "gctf-news",
+      "provider": "Global Counterterrorism Forum (GCTF) a News",
+      "endpoint": "https://www.thegctf.org/News/",
+      "finalUrl": "",
+      "category": "network-failure",
+      "statusKind": "",
+      "message": "fetch failed",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "serious-fraud-office-news",
+      "provider": "Serious Fraud Office a News",
+      "endpoint": "https://www.sfo.gov.uk/news/",
+      "finalUrl": "",
+      "category": "network-failure",
+      "statusKind": "",
+      "message": "fetch failed",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "silly-old-sod",
+      "provider": "Silly Old Sod",
+      "endpoint": "https://www.sillyoldsod.com/feed/",
+      "finalUrl": "",
+      "category": "timeout",
+      "statusKind": "",
+      "message": "This operation was aborted",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    }
+  ]
 }
