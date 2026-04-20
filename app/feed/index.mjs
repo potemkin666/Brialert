@@ -4,6 +4,7 @@ import {
   loadWatchGeography
 } from '../../shared/feed-controller.mjs';
 import { reportBackgroundError } from '../../shared/logger.mjs';
+import { API_BASE } from '../../shared/api-config.mjs';
 
 const MANUAL_REFRESH_POLL_INTERVAL_MS = 5_000;
 const MANUAL_REFRESH_MAX_WAIT_MS = 90_000;
@@ -27,7 +28,7 @@ function currentOriginBase() {
 }
 
 const LIVE_FEED_TRIGGER_API_BASES = [
-  'https://albertalertbackend.vercel.app',
+  API_BASE,
   currentOriginBase()
 ].filter(Boolean);
 const LIVE_FEED_TRIGGER_API_PATHS = [
