@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-20T04:05:33.139Z",
-  "count": 444,
+  "generatedAt": "2026-04-20T06:30:13.977Z",
+  "count": 445,
   "metrics": {
-    "total": 444,
-    "newThisWeek": 261,
-    "avgTimeInQuarantineHours": 56,
+    "total": 445,
+    "newThisWeek": 262,
+    "avgTimeInQuarantineHours": 59,
     "avgHealthScore": 1,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -31,7 +31,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eulisa-news-events",
@@ -53,7 +53,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "austria-interior-ministry-news",
@@ -75,7 +75,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "austria-interior-ministry-rss-index",
@@ -97,7 +97,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eurojust-press-releases",
@@ -119,7 +119,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "europol-news-rss",
@@ -141,7 +141,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "dutch-police-rss-index",
@@ -163,7 +163,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "mossos-news",
@@ -185,7 +185,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "curia-press-rss-en",
@@ -207,7 +207,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eppo-news-node-7",
@@ -229,7 +229,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-cellar-rss-atom",
@@ -251,7 +251,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-commission-counter-terrorism-measures-2026",
@@ -273,7 +273,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-commission-home-affairs-topic",
@@ -295,7 +295,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-council-jha-meetings",
@@ -317,7 +317,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-council-jha-register-rss",
@@ -339,7 +339,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-council-press-releases",
@@ -361,7 +361,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-council-press-releases-html",
@@ -383,7 +383,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-eppo-news",
@@ -405,7 +405,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-home-affairs-news",
@@ -427,7 +427,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-olaf-news",
@@ -449,7 +449,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "eu-security-union-strategy",
@@ -471,7 +471,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "europarl-committee-libe",
@@ -493,7 +493,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "europarl-committee-sede",
@@ -515,7 +515,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "europarl-pressreleases-committees",
@@ -537,7 +537,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "norway-pst-news",
@@ -559,7 +559,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "netherlands-police-news",
@@ -581,7 +581,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "echr-key-judgments-rss",
@@ -603,7 +603,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "echr-press-releases-rss",
@@ -625,7 +625,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "french-justice-ministry-news",
@@ -647,7 +647,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "dsn-at-english",
@@ -669,7 +669,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "sapo-se-english",
@@ -691,7 +691,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "interpol-news-events",
@@ -713,7 +713,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "osce-press-releases",
@@ -735,7 +735,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "unoct-news",
@@ -757,7 +757,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "bexley-council-news",
@@ -779,7 +779,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "brent-council-news",
@@ -801,7 +801,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "camden-council-news",
@@ -823,7 +823,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "chelsea-westminster-news",
@@ -845,7 +845,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "croydon-council-news",
@@ -867,7 +867,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gosh-news",
@@ -889,7 +889,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "guys-st-thomas-news",
@@ -911,7 +911,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "hackney-council-news",
@@ -933,7 +933,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "havering-council-news",
@@ -955,7 +955,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "hillingdon-council-news",
@@ -977,7 +977,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "hounslow-council-news",
@@ -999,7 +999,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "islington-council-news",
@@ -1021,7 +1021,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "kings-college-hospital-news",
@@ -1043,7 +1043,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "kingston-council-news",
@@ -1065,7 +1065,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "lambeth-council-news",
@@ -1087,7 +1087,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "lnwh-news",
@@ -1109,7 +1109,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "london-gov-rss-80603",
@@ -1131,7 +1131,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "london-gov-rss-80610",
@@ -1153,7 +1153,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "london-gov-rss-80611",
@@ -1175,7 +1175,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "london-gov-rss-80632",
@@ -1197,7 +1197,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "merton-council-news",
@@ -1219,7 +1219,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "met-police-the-met-tag",
@@ -1241,7 +1241,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "moorfields-news",
@@ -1263,7 +1263,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "nelft-news",
@@ -1285,7 +1285,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "newham-council-news",
@@ -1307,7 +1307,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "nhs-london-nel-news",
@@ -1329,7 +1329,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "nhs-london-nwl-news",
@@ -1351,7 +1351,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "oxleas-news",
@@ -1373,7 +1373,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "redbridge-council-news",
@@ -1395,7 +1395,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "richmond-council-news",
@@ -1417,7 +1417,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "st-georges-news",
@@ -1439,7 +1439,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "sutton-council-news",
@@ -1461,7 +1461,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "swlstg-news",
@@ -1483,7 +1483,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "uclh-news",
@@ -1505,7 +1505,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "waltham-forest-council-news",
@@ -1527,7 +1527,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "wandsworth-council-news",
@@ -1549,7 +1549,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-fcdo-travel-advice",
@@ -1571,7 +1571,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "uk-border-force",
@@ -1593,7 +1593,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "uk-ukvi",
@@ -1615,7 +1615,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-terrorism-search",
@@ -1637,7 +1637,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "npcc-releases",
@@ -1659,7 +1659,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "police-uk-stops-force-leicestershire",
@@ -1681,7 +1681,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "police-uk-stops-street-leicester",
@@ -1703,7 +1703,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "west-yorkshire-police-coroner-appeals-rss",
@@ -1725,7 +1725,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "foreign-office-blogs",
@@ -1747,7 +1747,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "avon-and-somerset-police-news-html",
@@ -1769,7 +1769,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "avon-somerset-police-news",
@@ -1791,7 +1791,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "psni-latest-news",
@@ -1813,7 +1813,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "west-yorkshire-police-all-rss",
@@ -1835,7 +1835,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "west-yorkshire-police-appeals-rss",
@@ -1857,7 +1857,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "west-yorkshire-police-news",
@@ -1879,7 +1879,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "west-yorkshire-police-news-appeals",
@@ -1901,7 +1901,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "west-yorkshire-police-news-rss",
@@ -1923,7 +1923,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "west-yorkshire-police-releases-rss",
@@ -1945,7 +1945,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "attorney-generals-office-html",
@@ -1967,7 +1967,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "cabinet-office-html",
@@ -1989,7 +1989,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "crown-office-news",
@@ -2011,7 +2011,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "echr-uk-grand-chamber-rss",
@@ -2033,7 +2033,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "extremism-commission-blog",
@@ -2055,7 +2055,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "fcdo-html",
@@ -2077,7 +2077,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-scot-access-to-justice-latest",
@@ -2099,7 +2099,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-cabinet-office-atom",
@@ -2121,7 +2121,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-hmcts",
@@ -2143,7 +2143,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-home-office-atom",
@@ -2165,7 +2165,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-ipco",
@@ -2187,7 +2187,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-mod-atom",
@@ -2209,7 +2209,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-moj-atom",
@@ -2231,7 +2231,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-news-and-communications-atom",
@@ -2253,7 +2253,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "hmiprisons-news",
@@ -2275,7 +2275,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "hmiprobation-news",
@@ -2297,7 +2297,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "home-office-media-blog",
@@ -2319,7 +2319,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "independent-reviewer-terrorism-legislation",
@@ -2341,7 +2341,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "independent-reviewer-terrorism-legislation-html",
@@ -2363,7 +2363,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "judiciary-rss-feeds-page",
@@ -2385,7 +2385,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "judiciary-uk-announcements-feed",
@@ -2407,7 +2407,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "judiciary-uk-judgments-feed",
@@ -2429,7 +2429,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "judiciary-uk-publications-feed",
@@ -2451,7 +2451,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "ministry-of-defence-html",
@@ -2473,7 +2473,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "ons-html",
@@ -2495,7 +2495,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "parliament-all-bills-rss",
@@ -2517,7 +2517,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "parliament-private-bills-rss",
@@ -2539,7 +2539,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "parliament-public-bills-rss",
@@ -2561,7 +2561,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "police-uk-crime-categories-2024-01",
@@ -2583,7 +2583,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "police-uk-crimes-street-dates",
@@ -2605,7 +2605,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "police-uk-outcomes-for-crime-e11dade0",
@@ -2627,7 +2627,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-fai-determinations-rss",
@@ -2649,7 +2649,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-fai-hearings-rss",
@@ -2671,7 +2671,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-high-court-justiciary-judgments-rss",
@@ -2693,7 +2693,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-high-court-practice-notes-rss",
@@ -2715,7 +2715,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-judgments-rss",
@@ -2737,7 +2737,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-news-articles-rss",
@@ -2759,7 +2759,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-publications-rss",
@@ -2781,7 +2781,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-rss-feeds-page",
@@ -2803,7 +2803,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scotcourts-sheriff-criminal-practice-notes-rss",
@@ -2825,7 +2825,447 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "uk-iopc-news",
+      "provider": "Independent Office for Police Conduct a News",
+      "endpoint": "https://www.policeconduct.gov.uk/news",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "uk-parliament-defence-committee",
+      "provider": "UK Parliament a Defence Select Committee",
+      "endpoint": "https://committees.parliament.uk/committee/24/defence-committee/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "uk-parliament-home-affairs-committee",
+      "provider": "UK Parliament a Home Affairs Committee (News)",
+      "endpoint": "https://committees.parliament.uk/committee/83/home-affairs-committee/news/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "act-campaign",
+      "provider": "ACT Awareness Campaign",
+      "endpoint": "https://act.campaign.gov.uk/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "gov-uk-contest-strategy",
+      "provider": "GOV.UK a CONTEST Counter-Terrorism Strategy",
+      "endpoint": "https://www.gov.uk/government/collections/contest",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "gov-uk-prevent-strategy",
+      "provider": "UK Home Office - Prevent duty guidance",
+      "endpoint": "https://www.gov.uk/government/publications/prevent-duty-guidance",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "met-office-seasonal-advice",
+      "provider": "Met Office - Seasonal Advice",
+      "endpoint": "https://www.metoffice.gov.uk/weather/warnings-and-advice/seasonal-advice",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "mi5-uk-threat-level",
+      "provider": "MI5 (Security Service) a UK Threat Level",
+      "endpoint": "https://www.mi5.gov.uk/UKThreat. Level/UKThreat. Level.xml",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "npsa-national-protective-security-authority",
+      "provider": "NPSA - Activity on GOV.UK",
+      "endpoint": "https://www.gov.uk/government/organisations/national-protective-security-authority.atom",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "uk-ncsc-all-rss",
+      "provider": "UK NCSC - All Updates RSS",
+      "endpoint": "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
+      "kind": "rss",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "uk-prevent-duty-guidance",
+      "provider": "GOV.UK a Prevent Duty Guidance (Collection)",
+      "endpoint": "https://www.gov.uk/government/collections/prevent-duty-guidance",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "gov-uk-proscribed-terrorist-orgs",
+      "provider": "GOV.UK a Proscribed Terrorist Organisations",
+      "endpoint": "https://www.gov.uk/government/publications/proscribed-terror-groups-or-organisations--2",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "hm-treasury-html",
+      "provider": "HM Treasury",
+      "endpoint": "https://www.gov.uk/government/organisations/hm-treasury",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "ofsi-blog-home",
+      "provider": "OFSI - Blog",
+      "endpoint": "https://ofsi.blog.gov.uk/",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "dhs-press-releases",
+      "provider": "US Department of Homeland Security - News",
+      "endpoint": "https://www.dhs.gov/news",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "nsa-cybersecurity-news",
+      "provider": "NSA - Cybersecurity Advisories & Guidance",
+      "endpoint": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "rewards-for-justice",
+      "provider": "U.S. Department of State - Rewards for Justice",
+      "endpoint": "https://rewardsforjustice.net/rewards/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "state-dept-terrorism",
+      "provider": "US State Department - Bureau of Counterterrorism",
+      "endpoint": "https://www.state.gov/bureaus-offices/under-secretary-for-civilian-security-democracy-and-human-rights/bureau-of-counterterrorism/",
+      "kind": "html",
+      "lane": "context",
+      "region": "us",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "cisa-cybersecurity-advisories",
+      "provider": "CISA - Cybersecurity Alerts & Advisories",
+      "endpoint": "https://www.cisa.gov/news-events/cybersecurity-advisories",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "us",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
+      "id": "us-treasury-ofac-recent-actions",
+      "provider": "U.S. Treasury (OFAC) - Recent Actions",
+      "endpoint": "https://ofac.treasury.gov/recent-actions",
+      "kind": "html",
+      "lane": "sanctions",
+      "region": "us",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "serious-fraud-office-news",
@@ -2853,446 +3293,6 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T04:05:33.139Z",
       "lastFailureAt": "2026-04-20T04:05:33.139Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "uk-iopc-news",
-      "provider": "Independent Office for Police Conduct a News",
-      "endpoint": "https://www.policeconduct.gov.uk/news",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "uk-parliament-defence-committee",
-      "provider": "UK Parliament a Defence Select Committee",
-      "endpoint": "https://committees.parliament.uk/committee/24/defence-committee/news/",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "uk-parliament-home-affairs-committee",
-      "provider": "UK Parliament a Home Affairs Committee (News)",
-      "endpoint": "https://committees.parliament.uk/committee/83/home-affairs-committee/news/",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "act-campaign",
-      "provider": "ACT Awareness Campaign",
-      "endpoint": "https://act.campaign.gov.uk/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "gov-uk-contest-strategy",
-      "provider": "GOV.UK a CONTEST Counter-Terrorism Strategy",
-      "endpoint": "https://www.gov.uk/government/collections/contest",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "gov-uk-prevent-strategy",
-      "provider": "UK Home Office - Prevent duty guidance",
-      "endpoint": "https://www.gov.uk/government/publications/prevent-duty-guidance",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "met-office-seasonal-advice",
-      "provider": "Met Office - Seasonal Advice",
-      "endpoint": "https://www.metoffice.gov.uk/weather/warnings-and-advice/seasonal-advice",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "mi5-uk-threat-level",
-      "provider": "MI5 (Security Service) a UK Threat Level",
-      "endpoint": "https://www.mi5.gov.uk/UKThreat. Level/UKThreat. Level.xml",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "npsa-national-protective-security-authority",
-      "provider": "NPSA - Activity on GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/national-protective-security-authority.atom",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "uk-ncsc-all-rss",
-      "provider": "UK NCSC - All Updates RSS",
-      "endpoint": "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "uk-prevent-duty-guidance",
-      "provider": "GOV.UK a Prevent Duty Guidance (Collection)",
-      "endpoint": "https://www.gov.uk/government/collections/prevent-duty-guidance",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "gov-uk-proscribed-terrorist-orgs",
-      "provider": "GOV.UK a Proscribed Terrorist Organisations",
-      "endpoint": "https://www.gov.uk/government/publications/proscribed-terror-groups-or-organisations--2",
-      "kind": "html",
-      "lane": "sanctions",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "hm-treasury-html",
-      "provider": "HM Treasury",
-      "endpoint": "https://www.gov.uk/government/organisations/hm-treasury",
-      "kind": "html",
-      "lane": "sanctions",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "ofsi-blog-home",
-      "provider": "OFSI - Blog",
-      "endpoint": "https://ofsi.blog.gov.uk/",
-      "kind": "html",
-      "lane": "sanctions",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "dhs-press-releases",
-      "provider": "US Department of Homeland Security - News",
-      "endpoint": "https://www.dhs.gov/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "nsa-cybersecurity-news",
-      "provider": "NSA - Cybersecurity Advisories & Guidance",
-      "endpoint": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "rewards-for-justice",
-      "provider": "U.S. Department of State - Rewards for Justice",
-      "endpoint": "https://rewardsforjustice.net/rewards/",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "state-dept-terrorism",
-      "provider": "US State Department - Bureau of Counterterrorism",
-      "endpoint": "https://www.state.gov/bureaus-offices/under-secretary-for-civilian-security-democracy-and-human-rights/bureau-of-counterterrorism/",
-      "kind": "html",
-      "lane": "context",
-      "region": "us",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "cisa-cybersecurity-advisories",
-      "provider": "CISA - Cybersecurity Alerts & Advisories",
-      "endpoint": "https://www.cisa.gov/news-events/cybersecurity-advisories",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "us",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
-    },
-    {
-      "id": "us-treasury-ofac-recent-actions",
-      "provider": "U.S. Treasury (OFAC) - Recent Actions",
-      "endpoint": "https://ofac.treasury.gov/recent-actions",
-      "kind": "html",
-      "lane": "sanctions",
-      "region": "us",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
       "lastCheckedAt": "2026-04-20T04:05:33.139Z"
     },
     {
@@ -3728,6 +3728,44 @@
       "lastCheckedAt": "2026-04-20T04:05:33.139Z"
     },
     {
+      "id": "evening-shire",
+      "provider": "Evening Shire",
+      "endpoint": "https://eveningshire.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T21:04:21.166Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-16T22:57:09.120Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-18T07:21:41.099Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-25T07:21:41.099Z",
+      "lastFailureAt": "2026-04-18T07:21:41.099Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
       "id": "semibold",
       "provider": "Semibold",
       "endpoint": "https://www.semibold.co.uk/feed/",
@@ -4064,9 +4102,9 @@
       "status": "auto-quarantined",
       "reason": "Low health score – needs review",
       "quarantinedAt": "",
-      "lastErrorCategory": "http-status-error",
-      "lastErrorMessage": "HTTP 429",
-      "consecutiveFailures": 1,
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -4084,7 +4122,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T05:49:08.723Z",
       "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "ecfr-feeds-index",
@@ -11398,7 +11436,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-24T19:18:33.309Z",
       "lastFailureAt": "2026-04-17T19:18:33.309Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "bfv-de-english",
@@ -11426,7 +11464,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-24T11:07:28.674Z",
       "lastFailureAt": "2026-04-17T11:07:28.674Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "german-bka-press-releases-de",
@@ -11540,7 +11578,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-23T23:55:39.351Z",
       "lastFailureAt": "2026-04-16T23:55:39.351Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "daily-mail-online",
@@ -11682,7 +11720,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-23T19:01:30.233Z",
       "lastFailureAt": "2026-04-16T19:01:30.233Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "denmark-pet-news",
@@ -11697,7 +11735,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -11715,12 +11753,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "german-bfv-news",
@@ -11735,7 +11778,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -11753,12 +11796,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "nctv-english-rss",
@@ -11773,7 +11821,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -11791,12 +11839,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "belgian-federal-police-news",
@@ -11811,7 +11864,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -11829,12 +11882,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "czech-police-news",
@@ -11849,7 +11907,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -11867,12 +11925,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "guardia-civil-news",
@@ -11887,7 +11950,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -11905,12 +11968,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "rte-ireland-news-rss",
@@ -11963,7 +12031,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -11981,12 +12049,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "nctv-nl-english",
@@ -12001,7 +12074,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12019,12 +12092,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "pet-dk-english",
@@ -12039,7 +12117,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12057,12 +12135,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "chatham-house-rss",
@@ -12115,7 +12198,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12133,12 +12216,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "occrp-news",
@@ -12229,7 +12317,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12247,12 +12335,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gctf-news",
@@ -12310,7 +12403,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12328,12 +12421,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "bromley-council-news",
@@ -12348,7 +12446,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12366,12 +12464,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "homerton-healthcare-news",
@@ -12386,7 +12489,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12404,12 +12507,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "mayor-of-london-press-releases",
@@ -12424,7 +12532,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12442,12 +12550,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "nhs-london-sel-news",
@@ -12462,7 +12575,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12480,12 +12593,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "slam-news",
@@ -12500,7 +12618,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12518,12 +12636,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "tower-hamlets-council-news",
@@ -12538,7 +12661,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12556,12 +12679,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "westminster-city-council-news",
@@ -12576,7 +12704,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12594,12 +12722,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "whittington-health-news",
@@ -12614,7 +12747,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12632,12 +12765,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "london-assembly-press-releases",
@@ -12652,7 +12790,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12670,12 +12808,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gov-uk-defence-intelligence",
@@ -12690,7 +12833,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12708,12 +12851,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "mi5-news-rss-direct",
@@ -12728,7 +12876,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12746,12 +12894,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "daily-politics",
@@ -12804,7 +12957,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12822,12 +12975,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "scottish-government-justice-news",
@@ -12842,7 +13000,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12860,12 +13018,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "dni-press-releases",
@@ -12880,7 +13043,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12898,12 +13061,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "doj-nsd-press-releases",
@@ -12918,7 +13086,7 @@
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
       "lastErrorCategory": "not-found-404",
       "lastErrorMessage": "HTTP 404",
-      "consecutiveFailures": 3,
+      "consecutiveFailures": 4,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -12936,12 +13104,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-18T05:49:08.723Z"
+        },
+        {
+          "category": "not-found-404",
+          "message": "HTTP 404",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T05:49:08.723Z",
-      "lastFailureAt": "2026-04-18T05:49:08.723Z",
-      "lastCheckedAt": "2026-04-18T05:49:08.723Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "us-treasury-ofac-press-releases",
@@ -12969,7 +13142,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-23T15:11:26.228Z",
       "lastFailureAt": "2026-04-16T15:11:26.228Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "ocam-be-english",
@@ -13010,9 +13183,9 @@
       "lastCheckedAt": "2026-04-18T22:54:57.851Z"
     },
     {
-      "id": "evening-shire",
-      "provider": "Evening Shire",
-      "endpoint": "https://eveningshire.com/feed/",
+      "id": "quadrant2design-exhibiting-guides",
+      "provider": "Quadrant2. Design Exhibiting Guides",
+      "endpoint": "https://www.quadrant2design.com/exhibiting-guides/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -13020,9 +13193,9 @@
       "status": "auto-quarantined",
       "reason": "Low health score – needs review",
       "quarantinedAt": "",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 1,
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -13045,7 +13218,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "financial-times-world",
@@ -13319,44 +13492,6 @@
       "reviewBy": "2026-04-23T22:57:09.120Z",
       "lastFailureAt": "2026-04-16T22:57:09.120Z",
       "lastCheckedAt": "2026-04-19T21:08:30.446Z"
-    },
-    {
-      "id": "quadrant2design-exhibiting-guides",
-      "provider": "Quadrant2. Design Exhibiting Guides",
-      "endpoint": "https://www.quadrant2design.com/exhibiting-guides/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 5,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 1,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T21:04:21.166Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T22:57:09.120Z"
-        },
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-18T07:21:41.099Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T07:21:41.099Z",
-      "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-18T07:21:41.099Z"
     },
     {
       "id": "bdk-rss",
@@ -15403,6 +15538,34 @@
       "lastCheckedAt": "2026-04-20T04:05:33.139Z"
     },
     {
+      "id": "really-ree",
+      "provider": "Really Ree",
+      "endpoint": "https://reallyree.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 5,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-17T22:12:37.099Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T22:12:37.099Z",
+      "lastFailureAt": "2026-04-17T22:12:37.099Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
+    },
+    {
       "id": "british-transport-police-news",
       "provider": "British Transport Police a News",
       "endpoint": "https://www.btp.police.uk/news/btp/news/?output=rss",
@@ -16083,9 +16246,9 @@
       "lastCheckedAt": "2026-04-20T04:05:33.139Z"
     },
     {
-      "id": "really-ree",
-      "provider": "Really Ree",
-      "endpoint": "https://reallyree.com/feed/",
+      "id": "bbc-news-uk",
+      "provider": "BBC News a UK",
+      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -16100,15 +16263,15 @@
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
         {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
           "at": "2026-04-17T22:12:37.099Z"
         }
       ],
       "replacementSuggestion": "",
       "reviewBy": "2026-04-24T22:12:37.099Z",
       "lastFailureAt": "2026-04-17T22:12:37.099Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "gnet-youth-rss",
@@ -16154,32 +16317,37 @@
       "lastCheckedAt": "2026-04-18T22:00:46.520Z"
     },
     {
-      "id": "bbc-news-uk",
-      "provider": "BBC News a UK",
-      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
+      "id": "guardian-uk-top-stories",
+      "provider": "The Guardian - UK Top Stories",
+      "endpoint": "https://www.theguardian.com/uk/rss",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
-      "healthScore": 11,
+      "healthScore": 14,
       "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
+      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
+      "quarantinedAt": "2026-04-20T06:30:13.977Z",
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "Blocked by blocked access page",
+      "consecutiveFailures": 2,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
         {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-17T22:12:37.099Z"
+          "category": "blocked-or-auth",
+          "message": "Blocked by blocked access page",
+          "at": "2026-04-18T23:43:16.267Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "Blocked by blocked access page",
+          "at": "2026-04-20T06:30:13.977Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T22:12:37.099Z",
-      "lastFailureAt": "2026-04-17T22:12:37.099Z",
-      "lastCheckedAt": "2026-04-20T04:05:33.139Z"
+      "reviewBy": "2026-04-27T06:30:13.977Z",
+      "lastFailureAt": "2026-04-20T06:30:13.977Z",
+      "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
       "id": "bbc-news-front-page-legacy",
