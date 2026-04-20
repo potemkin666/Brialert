@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-20T21:17:14.299Z",
+  "generatedAt": "2026-04-20T22:10:28.118Z",
   "count": 450,
   "metrics": {
     "total": 450,
     "newThisWeek": 266,
-    "avgTimeInQuarantineHours": 72,
+    "avgTimeInQuarantineHours": 73,
     "avgHealthScore": 1,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -3617,6 +3617,44 @@
       "lastCheckedAt": "2026-04-19T11:44:44.316Z"
     },
     {
+      "id": "ocam-be-english",
+      "provider": "CUTA (Belgium) threat analysis",
+      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "europe",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-16T22:57:09.120Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-17T08:04:04.612Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-18T22:54:57.851Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-25T22:54:57.851Z",
+      "lastFailureAt": "2026-04-18T22:54:57.851Z",
+      "lastCheckedAt": "2026-04-20T22:10:28.118Z"
+    },
+    {
       "id": "gnet-youth-rss",
       "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
       "endpoint": "https://gnet-research.org/tag/youth/feed/",
@@ -3832,7 +3870,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-20T18:39:51.994Z"
+      "lastCheckedAt": "2026-04-20T22:10:28.118Z"
     },
     {
       "id": "quadrant2design-exhibiting-guides",
@@ -13280,44 +13318,6 @@
       "reviewBy": "2026-04-23T15:11:26.228Z",
       "lastFailureAt": "2026-04-16T15:11:26.228Z",
       "lastCheckedAt": "2026-04-20T21:17:14.299Z"
-    },
-    {
-      "id": "ocam-be-english",
-      "provider": "CUTA (Belgium) threat analysis",
-      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "healthScore": 2,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 1,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T22:57:09.120Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T08:04:04.612Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-18T22:54:57.851Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-25T22:54:57.851Z",
-      "lastFailureAt": "2026-04-18T22:54:57.851Z",
-      "lastCheckedAt": "2026-04-18T22:54:57.851Z"
     },
     {
       "id": "financial-times-world",
