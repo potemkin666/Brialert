@@ -7,6 +7,10 @@ const GENERATE_BRIEF_TIMEOUT_MS = 55_000;
 const RATE_LIMIT_WINDOW_MS = 10_000;
 const RATE_LIMIT_BURST = 10;
 
+const MAX_HEADLINE_LENGTH = 500;
+const MAX_EXTRACT_LENGTH = 10_000;
+const MAX_INSTRUCTIONS_LENGTH = 2_000;
+
 const briefLimiter = createRateLimiter({ windowMs: RATE_LIMIT_WINDOW_MS, maxBurst: RATE_LIMIT_BURST });
 
 function parseBody(request) {
@@ -100,8 +104,8 @@ export default async function handler(request, response) {
     });
   }
 
-  const headline = String(body.headline || '').trim();
-  const sourceExtract = String(body.sourceExtract || '').trim();
+  const headline = String(body.headline || '').trim().slice(0, MAX_HEADLINE_LENGTH);
+  const sourceExtract = String(body.sourceExtract || '').trim().slice(0, MAX_EXTRACT_LENGTH);
   if (!headline && !sourceExtract) {
     return response.status(400).json({
       ok: false,
@@ -110,7 +114,7 @@ export default async function handler(request, response) {
     });
   }
 
-  const instructions = String(body.instructions || '').trim();
+  const instructions = String(body.instructions || '').trim().slice(0, MAX_INSTRUCTIONS_LENGTH);
   const userMessage = buildUserMessage(body);
 
   const controller = new AbortController();

@@ -2,6 +2,68 @@ import { regionLabel } from './alert-view-model.mjs';
 import { loadLongBrief } from './brief-cache.mjs';
 import { reportBackgroundError } from './logger.mjs';
 
+/**
+ * Build scene-clock content as DOM nodes instead of innerHTML.
+ * Accepts the structured clock data (from buildSceneClock) and produces
+ * elements using textContent only — eliminating XSS surface.
+ */
+function buildSceneClockDOM(clock, doc) {
+  const container = doc.createElement('div');
+  container.className = 'scene-clock-grid';
+  const items = [
+    { label: 'Since first report', entry: clock.firstReport, fallback: 'No report timestamp confirmed yet.' }
+  ];
+  for (const { label, entry, fallback } of items) {
+    const article = doc.createElement('article');
+    article.className = 'scene-clock-item';
+    const strong = doc.createElement('strong');
+    strong.textContent = label;
+    const p = doc.createElement('p');
+    if (entry) {
+      const parts = [];
+      if (entry.publishedAt) parts.push(entry.publishedAt);
+      if (entry.source) parts.push(entry.source);
+      p.textContent = parts.join(' | ') || fallback;
+    } else {
+      p.textContent = fallback;
+    }
+    article.appendChild(strong);
+    article.appendChild(p);
+    container.appendChild(article);
+  }
+  return container;
+}
+
+/**
+ * Build corroborating-sources list as DOM nodes instead of innerHTML.
+ */
+function buildCorroborationDOM(sources, deps, doc) {
+  if (!sources.length) return null;
+  const container = doc.createElement('div');
+  container.className = 'corroboration-list';
+  for (const entry of sources) {
+    const article = doc.createElement('article');
+    article.className = 'corroboration-item';
+    const a = doc.createElement('a');
+    const href = deps.safeHref ? deps.safeHref(entry.sourceUrl) : '#';
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noreferrer';
+    a.textContent = entry.source || '';
+    const p = doc.createElement('p');
+    const metaParts = [
+      deps.reliabilityLabel ? deps.reliabilityLabel(entry.reliabilityProfile) : '',
+      entry.sourceTier || 'source tier unknown',
+      entry.publishedAt ? (deps.formatAge ? deps.formatAge(entry.publishedAt) : '') : 'age unknown'
+    ].filter(Boolean);
+    p.textContent = metaParts.join(' | ');
+    article.appendChild(a);
+    article.appendChild(p);
+    container.appendChild(article);
+  }
+  return container;
+}
+
 export function createModalController(elements, deps, options = {}) {
   const {
     modal,
@@ -65,11 +127,31 @@ export function createModalController(elements, deps, options = {}) {
     modalMeta.textContent = `${alert.location} | ${alert.time}`;
     modalSummary.textContent = '';
     modalSummary.hidden = true;
-    modalSceneClock.innerHTML = deps.renderSceneClock(alert);
+
+    // Scene clock — DOM construction (no innerHTML)
+    const doc = modalSceneClock.ownerDocument || document;
+    if (deps.buildSceneClock) {
+      const clock = deps.buildSceneClock(alert);
+      modalSceneClock.textContent = '';
+      modalSceneClock.appendChild(buildSceneClockDOM(clock, doc));
+    } else {
+      modalSceneClock.innerHTML = deps.renderSceneClock(alert);
+    }
     sceneClockPanel.hidden = false;
-    const corroborationMarkup = deps.renderCorroboratingSources(alert);
-    modalCorroboration.innerHTML = corroborationMarkup;
-    corroborationPanel.hidden = !corroborationMarkup;
+
+    // Corroboration — DOM construction (no innerHTML)
+    const sources = Array.isArray(alert.corroboratingSources) ? alert.corroboratingSources : [];
+    if (deps.buildSceneClock) {
+      modalCorroboration.textContent = '';
+      const corrobEl = buildCorroborationDOM(sources, deps, doc);
+      if (corrobEl) modalCorroboration.appendChild(corrobEl);
+      corroborationPanel.hidden = !sources.length;
+    } else {
+      const corroborationMarkup = deps.renderCorroboratingSources(alert);
+      modalCorroboration.innerHTML = corroborationMarkup;
+      corroborationPanel.hidden = !corroborationMarkup;
+    }
+
     modalSeverity.textContent = deps.severityLabel(alert.severity);
     modalStatus.textContent = alert.status;
     modalSource.textContent = alert.source;

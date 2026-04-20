@@ -1,5 +1,7 @@
+import { API_BASE } from '../../shared/api-config.mjs';
+
 const LONG_BRIEF_API_URLS = [
-  'https://albertalertbackend.vercel.app/api/generate-brief'
+  `${API_BASE}/api/generate-brief`
 ];
 const LONG_BRIEF_TIMEOUT_MS = 25_000;
 const LONG_BRIEF_STREAM_IDLE_TIMEOUT_MS = 30_000;

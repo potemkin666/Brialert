@@ -1,5 +1,40 @@
 import { reportBackgroundError } from './logger.mjs';
 
+let storageWarningShown = false;
+
+/**
+ * Show a transient user-visible banner when localStorage writes fail.
+ * Only fires once per session to avoid spamming the user.
+ */
+function notifyStorageFailure() {
+  if (storageWarningShown) return;
+  storageWarningShown = true;
+  try {
+    if (typeof document === 'undefined') return;
+    const banner = document.createElement('div');
+    banner.setAttribute('role', 'alert');
+    banner.setAttribute('aria-live', 'assertive');
+    banner.textContent = 'Storage full — some data could not be saved. Try clearing old notes or watchlist items.';
+    Object.assign(banner.style, {
+      position: 'fixed',
+      bottom: '0',
+      left: '0',
+      right: '0',
+      zIndex: '9999',
+      background: '#d53d2f',
+      color: '#fff',
+      padding: '10px 16px',
+      fontSize: '14px',
+      textAlign: 'center',
+      fontFamily: 'system-ui, sans-serif'
+    });
+    document.body.appendChild(banner);
+    setTimeout(() => { banner.remove(); }, 8000);
+  } catch {
+    // If we can't show the banner, fail silently — we already logged the error.
+  }
+}
+
 export function loadSet(key) {
   try {
     const raw = localStorage.getItem(key);
@@ -17,6 +52,7 @@ export function saveSet(key, values) {
     return true;
   } catch (error) {
     reportBackgroundError('persistence', `saveSet failed for ${key}`, error, { key, operation: 'saveSet' });
+    notifyStorageFailure();
     return false;
   }
 }
@@ -38,6 +74,7 @@ export function saveArray(key, values) {
     return true;
   } catch (error) {
     reportBackgroundError('persistence', `saveArray failed for ${key}`, error, { key, operation: 'saveArray' });
+    notifyStorageFailure();
     return false;
   }
 }
@@ -57,6 +94,7 @@ export function saveBoolean(key, value) {
     return true;
   } catch (error) {
     reportBackgroundError('persistence', `saveBoolean failed for ${key}`, error, { key, operation: 'saveBoolean' });
+    notifyStorageFailure();
     return false;
   }
 }

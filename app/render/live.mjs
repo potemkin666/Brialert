@@ -131,19 +131,25 @@ export function renderFeed({ state, elements, view, modalController, invalidateD
     ? `${items.length} matching alerts`
     : `${state.watched.size} watched | ${items.length}/${totalItems} shown`;
   updateLoadMoreButton(elements.feedLoadMore, items.length, totalItems, 'Load more alerts');
-  elements.feedList.querySelectorAll('.feed-card').forEach((card) => {
-    card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.id)));
-  });
-  elements.feedList.querySelectorAll('.star-button').forEach((button) => {
-    button.addEventListener('click', (event) => {
+
+  // Event delegation: single listener on the parent handles all card clicks.
+  elements.feedList.onclick = (event) => {
+    const starButton = event.target.closest('.star-button');
+    if (starButton) {
       event.stopPropagation();
-      const id = button.dataset.star;
+      const id = starButton.dataset.star;
       state.watched.has(id) ? state.watched.delete(id) : state.watched.add(id);
       saveSet(watchedStorageKey, state.watched);
       invalidateDerivedView();
       renderAll();
-    });
-  });
+      return;
+    }
+    const card = event.target.closest('.feed-card');
+    if (card) {
+      const alert = state.alerts.find((item) => item.id === card.dataset.id);
+      if (alert) modalController.openDetail(alert);
+    }
+  };
 }
 
 export function renderSupporting({ elements, view, state, modalController }) {
@@ -168,9 +174,15 @@ export function renderSupporting({ elements, view, state, modalController }) {
     card.style.animationDelay = `${index * 40}ms`;
   });
   updateLoadMoreButton(elements.supportingLoadMore, items.length, totalItems, 'Load more reporting');
-  elements.supportingList.querySelectorAll('[data-supporting]').forEach((card) => {
-    card.addEventListener('click', () => modalController.openDetail(state.alerts.find((item) => item.id === card.dataset.supporting)));
-  });
+
+  // Event delegation: single listener on the parent handles all supporting-card clicks.
+  elements.supportingList.onclick = (event) => {
+    const card = event.target.closest('[data-supporting]');
+    if (card) {
+      const alert = state.alerts.find((item) => item.id === card.dataset.supporting);
+      if (alert) modalController.openDetail(alert);
+    }
+  };
 }
 
 export function renderHero({ state, elements }) {

@@ -122,3 +122,55 @@ test('generateLongBrief does not persist when alert has no id', async () => {
 
   assert.equal(saved.length, 0);
 });
+
+// ── Button text resets when both generators fail ────────────────────
+
+test('generateLongBrief resets button text when both generators fail', async () => {
+  const alert = { id: 'alert-42', title: 'Test' };
+  const elements = createTestElements();
+  elements.generateExpandedBrief.textContent = 'Generate Long Brief';
+
+  const modalController = {
+    ...createTestController(alert),
+    setExpandedBrief() {}
+  };
+
+  const runtime = createModalRuntime(elements, {
+    modalController,
+    requestRemoteLongBrief: async () => { throw new Error('offline'); },
+    buildLocalLongBrief: () => { throw new Error('also broken'); },
+    mapAlertToLongBriefPayload: () => ({}),
+    saveLongBrief: () => {}
+  });
+
+  await runtime.generateLongBrief();
+
+  assert.equal(elements.generateExpandedBrief.textContent, 'Generate Long Brief',
+    'Button text should reset to original when both generators fail');
+  assert.equal(elements.generateExpandedBrief.disabled, false,
+    'Button should be re-enabled after failure');
+});
+
+test('generateLongBrief preserves "Regenerate" text when both generators fail after prior brief', async () => {
+  const alert = { id: 'alert-43', title: 'Test' };
+  const elements = createTestElements();
+  elements.generateExpandedBrief.textContent = 'Regenerate Long Brief';
+
+  const modalController = {
+    ...createTestController(alert),
+    setExpandedBrief() {}
+  };
+
+  const runtime = createModalRuntime(elements, {
+    modalController,
+    requestRemoteLongBrief: async () => { throw new Error('offline'); },
+    buildLocalLongBrief: () => { throw new Error('also broken'); },
+    mapAlertToLongBriefPayload: () => ({}),
+    saveLongBrief: () => {}
+  });
+
+  await runtime.generateLongBrief();
+
+  assert.equal(elements.generateExpandedBrief.textContent, 'Regenerate Long Brief',
+    'Button text should restore to "Regenerate" if that was the previous state');
+});
