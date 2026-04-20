@@ -384,7 +384,7 @@ export function contextLabel(alert) {
   return laneLabels[alert.lane] || alert.lane;
 }
 
-function reliabilityLabel(profile) {
+export function reliabilityLabel(profile) {
   const labels = {
     official_ct: 'Official CT',
     official_general: 'Official',
@@ -549,7 +549,7 @@ export function buildAuditBlock(alert) {
   ].join('\n');
 }
 
-function safeHref(url) {
+export function safeHref(url) {
   const raw = String(url ?? '').trim();
   if (!raw || raw === '#') return '#';
   try {

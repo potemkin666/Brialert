@@ -31,6 +31,7 @@ export function createModalRuntime(elements, options = {}) {
     const alert = modalController.getCurrentAlert();
     if (!alert || !elements.generateExpandedBrief || !elements.modalExpandedBrief || !elements.copyExpandedBrief) return;
 
+    const previousButtonText = elements.generateExpandedBrief.textContent;
     elements.generateExpandedBrief.disabled = true;
     elements.generateExpandedBrief.textContent = 'Generating...';
     setLongBriefFallbackNotice('');
@@ -56,6 +57,10 @@ export function createModalRuntime(elements, options = {}) {
       }
     } finally {
       elements.generateExpandedBrief.disabled = false;
+      // Reset button text if it's still "Generating..." (both generators failed)
+      if (elements.generateExpandedBrief.textContent === 'Generating...') {
+        elements.generateExpandedBrief.textContent = previousButtonText;
+      }
     }
   }
 

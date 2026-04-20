@@ -1,9 +1,13 @@
 import {
   buildAuditBlock,
   buildBriefing,
+  buildSceneClock,
   effectiveSummary,
+  formatAgeFrom,
+  reliabilityLabel,
   renderCorroboratingSources,
   renderSceneClock,
+  safeHref,
   severityLabel
 } from '../../shared/alert-view-model.mjs';
 import { createModalController } from '../../shared/modal-briefing.mjs';
@@ -33,9 +37,13 @@ export function createModalUiController(elements, options = {}) {
   }, {
     effectiveSummary,
     buildBriefing,
+    buildSceneClock,
     renderSceneClock,
     renderCorroboratingSources,
-    severityLabel
+    severityLabel,
+    safeHref,
+    reliabilityLabel,
+    formatAge: formatAgeFrom
   });
 
   return {
