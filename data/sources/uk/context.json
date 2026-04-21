@@ -79,7 +79,7 @@
     {
       "id": "gov-uk-defence-intelligence",
       "provider": "UK Defence Intelligence a GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/defence-intelligence",
+      "endpoint": "https://www.gov.uk/government/groups/defence-intelligence",
       "kind": "html",
       "lane": "context",
       "region": "uk",
@@ -166,8 +166,8 @@
     {
       "id": "mi5-news-rss-direct",
       "provider": "MI5 - News RSS",
-      "endpoint": "https://www.mi5.gov.uk/news/rss.xml",
-      "kind": "rss",
+      "endpoint": "https://www.mi5.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
@@ -276,7 +276,7 @@
     {
       "id": "rusi-terrorism-conflict",
       "provider": "RUSI - Terrorism and Conflict",
-      "endpoint": "https://www.rusi.org/explore-our-research/topics/terrorism-and-conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict",
       "kind": "html",
       "lane": "context",
       "region": "uk",
@@ -513,8 +513,8 @@
     {
       "id": "daily-politics",
       "provider": "Daily Politics",
-      "endpoint": "https://www.dailypolitics.com/feed.xml",
-      "kind": "rss",
+      "endpoint": "https://www.dailypolitics.com/categories/rRzjN-bU/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,

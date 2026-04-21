@@ -25,7 +25,7 @@
     {
       "id": "dni-press-releases",
       "provider": "Office of the Director of National Intelligence - Press Releases",
-      "endpoint": "https://www.dni.gov/index.php/newsroom/press-releases",
+      "endpoint": "https://www.dni.gov/index.php/who-we-are/348-newsroom/press-releases",
       "kind": "html",
       "lane": "context",
       "region": "us",
@@ -36,7 +36,7 @@
     {
       "id": "doj-nsd-press-releases",
       "provider": "U.S. Department of Justice - National Security Division Press Releases",
-      "endpoint": "https://www.justice.gov/nsd/press-releases",
+      "endpoint": "https://www.justice.gov/nsd/press-room",
       "kind": "html",
       "lane": "context",
       "region": "us",

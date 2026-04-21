@@ -135,7 +135,7 @@
     {
       "id": "rte-ireland-news-rss",
       "provider": "RTE News - Ireland (RSS)",
-      "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
+      "endpoint": "https://feeds.feedburner.com/ietopstories",
       "kind": "rss",
       "lane": "context",
       "region": "europe",
@@ -146,7 +146,7 @@
     {
       "id": "switzerland-fedpol-news",
       "provider": "Swiss fedpol - News",
-      "endpoint": "https://www.fedpol.admin.ch/fedpol/en/home/fedpol/aktuell.html",
+      "endpoint": "https://www.fedpol.admin.ch/en/newnsb",
       "kind": "html",
       "lane": "context",
       "region": "europe",

@@ -3,7 +3,7 @@
     {
       "id": "gctf-news",
       "provider": "Global Counterterrorism Forum (GCTF) a News",
-      "endpoint": "https://www.thegctf.org/News/",
+      "endpoint": "https://www.thegctf.org/News-Stories/PgrID/918/PageID/3",
       "kind": "html",
       "lane": "oversight",
       "region": "international",

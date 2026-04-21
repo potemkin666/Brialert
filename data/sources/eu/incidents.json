@@ -3,7 +3,7 @@
     {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
-      "endpoint": "https://www.politie.be/5998/en/news",
+      "endpoint": "https://www.police.be/5998/en/node/10868",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
@@ -14,7 +14,7 @@
     {
       "id": "czech-police-news",
       "provider": "Police of the Czech Republic - News",
-      "endpoint": "https://www.policie.cz/clanek/news.aspx",
+      "endpoint": "https://policie.gov.cz/clanek/Police-of-the-Czech-Republic.aspx",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
@@ -113,7 +113,7 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "endpoint": "https://www.policia.es/_es/comunicacion_salaprensa.php",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",

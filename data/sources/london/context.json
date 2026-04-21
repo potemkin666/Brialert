@@ -25,7 +25,7 @@
     {
       "id": "barts-health-news",
       "provider": "Barts Health NHS Trust a News",
-      "endpoint": "https://www.bartshealth.nhs.uk/latest-news",
+      "endpoint": "https://www.bartshealth.nhs.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -69,8 +69,8 @@
     {
       "id": "bromley-council-news",
       "provider": "Bromley Council a Newsroom",
-      "endpoint": "https://www.bromley.gov.uk/newsroom/news?format=rss",
-      "kind": "rss",
+      "endpoint": "https://www.bromley.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
@@ -267,7 +267,7 @@
     {
       "id": "homerton-healthcare-news",
       "provider": "Homerton Healthcare NHS Foundation Trust a News",
-      "endpoint": "https://www.homerton.nhs.uk/latest-news/",
+      "endpoint": "https://www.homerton.nhs.uk/trust-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -487,7 +487,7 @@
     {
       "id": "mayor-of-london-press-releases",
       "provider": "Mayor of London a Press Releases",
-      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases/rss.xml",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
       "kind": "rss",
       "lane": "context",
       "region": "london",
@@ -586,7 +586,7 @@
     {
       "id": "nhs-london-sel-news",
       "provider": "NHS South East London a News",
-      "endpoint": "https://www.selondonics.org/latest-news/",
+      "endpoint": "https://www.selondonics.org/icb/about-us/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -685,7 +685,7 @@
     {
       "id": "slam-news",
       "provider": "South London and Maudsley NHS Foundation Trust a News",
-      "endpoint": "https://slam.nhs.uk/news/",
+      "endpoint": "https://slam.nhs.uk/pressreleases",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -773,8 +773,8 @@
     {
       "id": "tower-hamlets-council-news",
       "provider": "Tower Hamlets Council a News",
-      "endpoint": "https://www.towerhamlets.gov.uk/rss/news.xml",
-      "kind": "rss",
+      "endpoint": "https://www.towerhamlets.gov.uk/News_events/News.aspx",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
@@ -817,8 +817,8 @@
     {
       "id": "westminster-city-council-news",
       "provider": "Westminster City Council a News",
-      "endpoint": "https://www.westminster.gov.uk/news/rss",
-      "kind": "rss",
+      "endpoint": "https://www.westminster.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
@@ -828,7 +828,7 @@
     {
       "id": "whittington-health-news",
       "provider": "Whittington Health a News",
-      "endpoint": "https://www.whittington.nhs.uk/news/default.asp",
+      "endpoint": "https://www.whittington.nhs.uk/mini-apps/news/newsItems.asp",
       "kind": "html",
       "lane": "context",
       "region": "london",
