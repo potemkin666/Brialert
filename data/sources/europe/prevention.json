@@ -58,7 +58,7 @@
     {
       "id": "ocam-be-english",
       "provider": "CUTA (Belgium) threat analysis",
-      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
+      "endpoint": "https://cuta.belgium.be/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",

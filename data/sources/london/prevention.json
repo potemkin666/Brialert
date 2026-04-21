@@ -3,7 +3,7 @@
     {
       "id": "london-resilience",
       "provider": "Resilience First - Latest Updates",
-      "endpoint": "https://resiliencefirst.org/latest-updates",
+      "endpoint": "https://www.london.gov.uk/programmes-strategies/fire-and-city-resilience/london-resilience-partnership",
       "kind": "html",
       "lane": "prevention",
       "region": "london",

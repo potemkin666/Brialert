@@ -69,8 +69,8 @@
     {
       "id": "bromley-council-news",
       "provider": "Bromley Council a Newsroom",
-      "endpoint": "https://www.bromley.gov.uk/newsroom/news?format=rss",
-      "kind": "rss",
+      "endpoint": "https://www.bromley.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
@@ -817,8 +817,8 @@
     {
       "id": "westminster-city-council-news",
       "provider": "Westminster City Council a News",
-      "endpoint": "https://www.westminster.gov.uk/news/rss",
-      "kind": "rss",
+      "endpoint": "https://www.westminster.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,

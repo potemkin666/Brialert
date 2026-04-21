@@ -58,7 +58,7 @@
     {
       "id": "portugal-pj-news",
       "provider": "Policia Judiciaria Portugal - News",
-      "endpoint": "https://www.policiajudiciaria.pt/?p=noticias",
+      "endpoint": "https://www.policiajudiciaria.pt/noticias/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",

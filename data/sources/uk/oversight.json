@@ -552,7 +552,7 @@
     {
       "id": "serious-fraud-office-news",
       "provider": "Serious Fraud Office a News",
-      "endpoint": "https://www.sfo.gov.uk/news/",
+      "endpoint": "https://www.gov.uk/search/news-and-communications?organisations%5B%5D=serious-fraud-office&parent=serious-fraud-office",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",

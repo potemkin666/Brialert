@@ -113,7 +113,7 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "endpoint": "https://www.policia.es/_es/comunicacion_salaprensa.php",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",

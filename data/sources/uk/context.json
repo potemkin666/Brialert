@@ -79,7 +79,7 @@
     {
       "id": "gov-uk-defence-intelligence",
       "provider": "UK Defence Intelligence a GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/defence-intelligence",
+      "endpoint": "https://www.gov.uk/government/groups/defence-intelligence",
       "kind": "html",
       "lane": "context",
       "region": "uk",
@@ -513,8 +513,8 @@
     {
       "id": "daily-politics",
       "provider": "Daily Politics",
-      "endpoint": "https://www.dailypolitics.com/feed.xml",
-      "kind": "rss",
+      "endpoint": "https://www.dailypolitics.com/categories/rRzjN-bU/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
