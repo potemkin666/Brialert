@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-20T23:15:54.554Z",
+  "generatedAt": "2026-04-21T00:08:15.005Z",
   "count": 451,
   "metrics": {
     "total": 451,
     "newThisWeek": 266,
-    "avgTimeInQuarantineHours": 74,
+    "avgTimeInQuarantineHours": 75,
     "avgHealthScore": 1,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -3984,7 +3984,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-20T20:06:10.175Z"
+      "lastCheckedAt": "2026-04-21T00:08:15.005Z"
     },
     {
       "id": "semibold",
@@ -4022,7 +4022,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-20T21:17:14.299Z"
+      "lastCheckedAt": "2026-04-21T00:08:15.005Z"
     },
     {
       "id": "gnet-radicalisation-rss",
@@ -16731,7 +16731,7 @@
       "region": "europe",
       "healthScore": 22,
       "status": "auto-quarantined",
-      "reason": "Needs review",
+      "reason": "Low health score – needs review",
       "quarantinedAt": "",
       "lastErrorCategory": "",
       "lastErrorMessage": "",
@@ -16769,7 +16769,7 @@
       "region": "international",
       "healthScore": 22,
       "status": "auto-quarantined",
-      "reason": "Needs review",
+      "reason": "Low health score – needs review",
       "quarantinedAt": "",
       "lastErrorCategory": "",
       "lastErrorMessage": "",
