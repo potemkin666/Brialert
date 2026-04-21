@@ -1,6 +1,6 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-21T03:57:52.244Z",
+  "generatedAt": "2026-04-21T06:12:01.477Z",
   "totalSourceErrors": 1,
   "byCategory": {
     "anti-bot-protection": 1
@@ -12,9 +12,9 @@
   "htmlErrorCount": 0,
   "top20": [
     {
-      "id": "channel-4-news",
-      "provider": "Channel 4 News",
-      "endpoint": "https://www.channel4.com/news/feed",
+      "id": "france24-europe-rss",
+      "provider": "France 24 a Europe (RSS)",
+      "endpoint": "https://www.france24.com/en/europe/rss",
       "finalUrl": "",
       "category": "anti-bot-protection",
       "statusKind": "",
@@ -31,9 +31,9 @@
   ],
   "sources": [
     {
-      "id": "channel-4-news",
-      "provider": "Channel 4 News",
-      "endpoint": "https://www.channel4.com/news/feed",
+      "id": "france24-europe-rss",
+      "provider": "France 24 a Europe (RSS)",
+      "endpoint": "https://www.france24.com/en/europe/rss",
       "finalUrl": "",
       "category": "anti-bot-protection",
       "statusKind": "",
