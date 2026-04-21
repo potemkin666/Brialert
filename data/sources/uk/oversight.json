@@ -245,7 +245,7 @@
     {
       "id": "joint-committee-human-rights-html",
       "provider": "Joint Committee on Human Rights",
-      "endpoint": "https://www.gov.uk/government/organisations/joint-committee-on-human-rights",
+      "endpoint": "https://committees.parliament.uk/committee/93/human-rights-joint-committee/",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -541,7 +541,7 @@
     {
       "id": "scottish-government-justice-news",
       "provider": "Scottish Government - Justice and Safety",
-      "endpoint": "https://www.gov.scot/justice-and-law/",
+      "endpoint": "https://www.gov.scot/policies/community-safety/latest/",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",

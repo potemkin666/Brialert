@@ -36,7 +36,7 @@
     {
       "id": "doj-nsd-press-releases",
       "provider": "U.S. Department of Justice - National Security Division Press Releases",
-      "endpoint": "https://www.justice.gov/nsd/press-releases",
+      "endpoint": "https://www.justice.gov/nsd/press-room",
       "kind": "html",
       "lane": "context",
       "region": "us",

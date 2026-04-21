@@ -66,7 +66,7 @@
     {
       "id": "chatham-house-rss",
       "provider": "Chatham House a Research & Commentary (RSS)",
-      "endpoint": "https://www.chathamhouse.org/publications.rss",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
       "kind": "rss",
       "lane": "context",
       "region": "international",
@@ -121,7 +121,7 @@
     {
       "id": "counter-extremism-project-news",
       "provider": "Counter Extremism Project a News",
-      "endpoint": "https://www.counterextremism.com/news",
+      "endpoint": "https://www.counterextremism.com/news-and-media",
       "kind": "html",
       "lane": "context",
       "region": "international",
@@ -209,8 +209,8 @@
     {
       "id": "nato-news-rss",
       "provider": "NATO a News (RSS)",
-      "endpoint": "https://www.nato.int/cps/en/natohq/rss/news.rss",
-      "kind": "rss",
+      "endpoint": "https://www.nato.int/en/news-and-events/articles/news",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
@@ -219,8 +219,8 @@
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en/announcements.rss",
-      "kind": "rss",
+      "endpoint": "https://www.occrp.org/en/announcements",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
@@ -263,8 +263,8 @@
     {
       "id": "rferl-security-news-rss",
       "provider": "Radio Free Europe/Radio Liberty a Security (RSS)",
-      "endpoint": "https://www.rferl.org/api/ep_rss_all/iu/1",
-      "kind": "rss",
+      "endpoint": "https://www.rferl.org/latest-news",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
@@ -307,7 +307,7 @@
     {
       "id": "unodc-news",
       "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
-      "endpoint": "https://www.unodc.org/unodc/en/press/releases/latest.html",
+      "endpoint": "https://www.unodc.org/unodc/en/news/news.html",
       "kind": "html",
       "lane": "context",
       "region": "international",

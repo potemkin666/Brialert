@@ -3,7 +3,7 @@
     {
       "id": "london-assembly-press-releases",
       "provider": "London Assembly a Press Releases",
-      "endpoint": "https://www.london.gov.uk/media-centre/london-assembly-press-releases/rss.xml",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
       "kind": "rss",
       "lane": "oversight",
       "region": "london",

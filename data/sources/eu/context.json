@@ -47,7 +47,7 @@
     {
       "id": "denmark-pet-news",
       "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://pet.dk/nyheder",
+      "endpoint": "https://pet.dk/aktuelt/nyhedsliste",
       "kind": "html",
       "lane": "context",
       "region": "eu",
@@ -210,8 +210,8 @@
     {
       "id": "nctv-english-rss",
       "provider": "NCTV Netherlands - English RSS",
-      "endpoint": "https://english.nctv.nl/actueel/rss.xml",
-      "kind": "rss",
+      "endpoint": "https://english.nctv.nl/latest/news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,

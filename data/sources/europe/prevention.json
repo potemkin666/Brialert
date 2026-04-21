@@ -36,7 +36,7 @@
     {
       "id": "nctv-nl-english",
       "provider": "NCTV (Netherlands) a English News",
-      "endpoint": "https://english.nctv.nl/topics/terrorist-threat-assessment-netherlands",
+      "endpoint": "https://english.nctv.nl/latest/news",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
@@ -69,7 +69,7 @@
     {
       "id": "pet-dk-english",
       "provider": "PET (Denmark) a English News",
-      "endpoint": "https://pet.dk/en/news/",
+      "endpoint": "https://pet.dk/en/news-and-publications/news-list",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
