@@ -1,24 +1,6 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-21T06:12:01.477Z",
-  "totalSourceErrors": 1,
-  "top20": [
-    {
-      "id": "france24-europe-rss",
-      "provider": "France 24 a Europe (RSS)",
-      "endpoint": "https://www.france24.com/en/europe/rss",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "statusKind": "",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    }
-  ]
+  "generatedAt": "2026-04-21T07:07:03.884Z",
+  "totalSourceErrors": 0,
+  "top20": []
 }

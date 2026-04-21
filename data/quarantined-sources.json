@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-21T06:12:01.477Z",
+  "generatedAt": "2026-04-21T07:07:03.884Z",
   "count": 450,
   "metrics": {
     "total": 450,
     "newThisWeek": 266,
-    "avgTimeInQuarantineHours": 81,
+    "avgTimeInQuarantineHours": 82,
     "avgHealthScore": 1,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -3946,7 +3946,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-21T03:57:52.244Z"
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
     },
     {
       "id": "quadrant2design-exhibiting-guides",
@@ -4022,7 +4022,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-21T03:57:52.244Z"
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
     },
     {
       "id": "gnet-radicalisation-rss",
@@ -8078,6 +8078,34 @@
       "reviewBy": "2026-04-24T22:12:37.099Z",
       "lastFailureAt": "2026-04-17T22:12:37.099Z",
       "lastCheckedAt": "2026-04-21T06:12:01.477Z"
+    },
+    {
+      "id": "really-ree",
+      "provider": "Really Ree",
+      "endpoint": "https://reallyree.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-17T22:12:37.099Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T22:12:37.099Z",
+      "lastFailureAt": "2026-04-17T22:12:37.099Z",
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
     },
     {
       "id": "bedfordshire-police-news",
@@ -13664,6 +13692,34 @@
       "lastCheckedAt": "2026-04-19T18:05:04.781Z"
     },
     {
+      "id": "bbc-news-front-page-legacy",
+      "provider": "BBC News a Front Page (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 2,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-17T22:12:37.099Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T22:12:37.099Z",
+      "lastFailureAt": "2026-04-17T22:12:37.099Z",
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
+    },
+    {
       "id": "bbc-news-uk",
       "provider": "BBC News a UK",
       "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
@@ -13692,9 +13748,9 @@
       "lastCheckedAt": "2026-04-20T23:15:54.554Z"
     },
     {
-      "id": "really-ree",
-      "provider": "Really Ree",
-      "endpoint": "https://reallyree.com/feed/",
+      "id": "everything-zany",
+      "provider": "Everything Zany",
+      "endpoint": "https://everythingzany.com/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -13717,7 +13773,35 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-24T22:12:37.099Z",
       "lastFailureAt": "2026-04-17T22:12:37.099Z",
-      "lastCheckedAt": "2026-04-20T18:39:51.994Z"
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
+    },
+    {
+      "id": "manic-mum-life",
+      "provider": "Manic Mum Life",
+      "endpoint": "https://www.manic-mumdays.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 2,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-17T22:12:37.099Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-24T22:12:37.099Z",
+      "lastFailureAt": "2026-04-17T22:12:37.099Z",
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
     },
     {
       "id": "independent-top-stories",
@@ -13784,6 +13868,39 @@
       "reviewBy": "2026-04-27T15:59:44.503Z",
       "lastFailureAt": "2026-04-20T15:59:44.503Z",
       "lastCheckedAt": "2026-04-20T15:59:44.503Z"
+    },
+    {
+      "id": "rusi-home",
+      "provider": "RUSI",
+      "endpoint": "https://www.rusi.org/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 5,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 20 after repeated failures",
+      "quarantinedAt": "2026-04-19T03:30:54.684Z",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-17T22:12:37.099Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "at": "2026-04-19T03:30:54.684Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T03:30:54.684Z",
+      "lastFailureAt": "2026-04-19T03:30:54.684Z",
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
     },
     {
       "id": "bdk-rss",
@@ -15754,34 +15871,6 @@
       "lastCheckedAt": "2026-04-19T10:46:47.709Z"
     },
     {
-      "id": "bbc-news-front-page-legacy",
-      "provider": "BBC News a Front Page (Legacy RSS)",
-      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 5,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-17T22:12:37.099Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T22:12:37.099Z",
-      "lastFailureAt": "2026-04-17T22:12:37.099Z",
-      "lastCheckedAt": "2026-04-20T18:39:51.994Z"
-    },
-    {
       "id": "mi5-news",
       "provider": "MI5 (Security Service) a News",
       "endpoint": "https://www.mi5.gov.uk/News/News.xml",
@@ -15828,62 +15917,6 @@
       "reviewBy": "2026-04-26T10:46:47.709Z",
       "lastFailureAt": "2026-04-19T10:46:47.709Z",
       "lastCheckedAt": "2026-04-19T10:46:47.709Z"
-    },
-    {
-      "id": "everything-zany",
-      "provider": "Everything Zany",
-      "endpoint": "https://everythingzany.com/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 5,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-17T22:12:37.099Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T22:12:37.099Z",
-      "lastFailureAt": "2026-04-17T22:12:37.099Z",
-      "lastCheckedAt": "2026-04-20T18:39:51.994Z"
-    },
-    {
-      "id": "manic-mum-life",
-      "provider": "Manic Mum Life",
-      "endpoint": "https://www.manic-mumdays.co.uk/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 5,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-17T22:12:37.099Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-24T22:12:37.099Z",
-      "lastFailureAt": "2026-04-17T22:12:37.099Z",
-      "lastCheckedAt": "2026-04-20T18:39:51.994Z"
     },
     {
       "id": "british-transport-police-news",
@@ -16495,39 +16528,6 @@
       "lastCheckedAt": "2026-04-19T18:05:04.781Z"
     },
     {
-      "id": "rusi-home",
-      "provider": "RUSI",
-      "endpoint": "https://www.rusi.org/",
-      "kind": "html",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 8,
-      "status": "auto-quarantined",
-      "reason": "Health score degraded to 20 after repeated failures",
-      "quarantinedAt": "2026-04-19T03:30:54.684Z",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
-          "at": "2026-04-19T03:30:54.684Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-26T03:30:54.684Z",
-      "lastFailureAt": "2026-04-19T03:30:54.684Z",
-      "lastCheckedAt": "2026-04-21T03:57:52.244Z"
-    },
-    {
       "id": "guardian-uk-top-stories",
       "provider": "The Guardian - UK Top Stories",
       "endpoint": "https://www.theguardian.com/uk/rss",
@@ -16561,35 +16561,13 @@
       "lastCheckedAt": "2026-04-20T06:30:13.977Z"
     },
     {
-      "id": "bbc-news-england-legacy",
-      "provider": "BBC News a England (Legacy RSS)",
-      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/england/rss.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 18,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "",
-      "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-20T21:17:14.299Z"
-    },
-    {
       "id": "telegraph-world-news",
       "provider": "The Telegraph a World News",
       "endpoint": "https://www.telegraph.co.uk/world-news/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
-      "healthScore": 19,
+      "healthScore": 16,
       "status": "auto-quarantined",
       "reason": "Low health score – needs review",
       "quarantinedAt": "",
@@ -16618,7 +16596,29 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T14:11:10.963Z",
       "lastFailureAt": "2026-04-19T14:11:10.963Z",
-      "lastCheckedAt": "2026-04-21T03:57:52.244Z"
+      "lastCheckedAt": "2026-04-21T07:07:03.884Z"
+    },
+    {
+      "id": "bbc-news-england-legacy",
+      "provider": "BBC News a England (Legacy RSS)",
+      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/england/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 18,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "",
+      "lastFailureAt": "",
+      "lastCheckedAt": "2026-04-20T21:17:14.299Z"
     },
     {
       "id": "aljazeera-news-rss",
