@@ -22,7 +22,8 @@
   "dependencies": {
     "cheerio": "^1.2.0",
     "fast-xml-parser": "^4.5.5",
-    "playwright": "^1.59.1"
+    "playwright": "^1.59.1",
+    "undici": "^7.25.0"
   },
   "devDependencies": {
     "eslint": "^9.24.0",

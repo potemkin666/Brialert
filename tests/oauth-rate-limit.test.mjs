@@ -107,13 +107,13 @@ describe('API endpoints use shared rate-limit module', () => {
     assert.ok(src.includes('rate-limit.js'), 'should import from shared rate-limit module');
   });
 
-  it('generate-brief.js imports from rate-limit.js and uses createRateLimiter', async () => {
+  it('generate-brief.js imports from rate-limit.js and uses createDistributedRateLimiter', async () => {
     const { readFileSync } = await import('node:fs');
     const src = readFileSync(new URL('../api/generate-brief.js', import.meta.url), 'utf8');
     assert.ok(src.includes('RATE_LIMIT_WINDOW_MS'), 'should define RATE_LIMIT_WINDOW_MS');
     assert.ok(src.includes('RATE_LIMIT_BURST'), 'should define RATE_LIMIT_BURST');
     assert.ok(src.includes("'rate-limited'"), 'should use rate-limited error code');
-    assert.ok(src.includes('createRateLimiter'), 'should import createRateLimiter');
+    assert.ok(src.includes('createDistributedRateLimiter'), 'should import createDistributedRateLimiter');
     assert.ok(src.includes('rate-limit.js'), 'should import from shared rate-limit module');
   });
 

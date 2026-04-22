@@ -7,8 +7,8 @@ import {
   normaliseEndpoint,
   validateAbsoluteHttpUrl
 } from './_lib/github-persistence.js';
-import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
-import { isPrivateUrl } from './_lib/url-safety.js';
+import { applyCorsHeaders, requireAdminSession, requireCsrfProtection } from './_lib/admin-session.js';
+import { createPinnedSafeDispatcher, isPrivateUrl } from './_lib/url-safety.js';
 
 const QUARANTINE_ONLY_FIELDS = new Set([
   'status',
@@ -48,6 +48,10 @@ async function checkUrlHealth(url) {
   if (await isPrivateUrl(url)) {
     return { ok: false, status: 0, error: 'URL resolves to a private or reserved IP range.' };
   }
+  const pinned = await createPinnedSafeDispatcher(url);
+  if (!pinned.ok) {
+    return { ok: false, status: 0, error: `URL resolves to a private or reserved IP range. (${pinned.reason})` };
+  }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), URL_HEALTH_CHECK_TIMEOUT_MS);
   try {
@@ -55,6 +59,7 @@ async function checkUrlHealth(url) {
       method: 'HEAD',
       signal: controller.signal,
       redirect: 'follow',
+      dispatcher: pinned.dispatcher,
       headers: { 'User-Agent': 'AlbertAlert-HealthCheck/1.0' }
     });
     return { ok: res.ok, status: res.status };
@@ -63,6 +68,7 @@ async function checkUrlHealth(url) {
     return { ok: false, status: 0, error: message };
   } finally {
     clearTimeout(timeout);
+    try { await pinned.dispatcher.close(); } catch { /* ignore */ }
   }
 }
 
@@ -216,6 +222,9 @@ export default async function handler(request, response) {
     });
   }
   if (!requireAdminSession(request, response)) {
+    return response;
+  }
+  if (!requireCsrfProtection(request, response)) {
     return response;
   }
 

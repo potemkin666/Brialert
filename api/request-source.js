@@ -5,7 +5,7 @@ import {
   normaliseEndpoint,
   validateAbsoluteHttpUrl
 } from './_lib/github-persistence.js';
-import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
+import { applyCorsHeaders, requireAdminSession, requireCsrfProtection } from './_lib/admin-session.js';
 import { isPrivateUrl } from './_lib/url-safety.js';
 import { createRateLimiter } from './_lib/rate-limit.js';
 
@@ -273,6 +273,9 @@ export default async function handler(request, response) {
   }
 
   if (!requireAdminSession(request, response)) {
+    return response;
+  }
+  if (!requireCsrfProtection(request, response)) {
     return response;
   }
 

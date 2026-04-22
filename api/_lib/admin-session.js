@@ -152,11 +152,38 @@ export function applyCorsHeaders(request, response, methods) {
     response.setHeader('Vary', 'Origin');
   }
   response.setHeader('Access-Control-Allow-Methods', methods);
-  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Albertalert-Csrf');
   if (request?.method === 'OPTIONS') {
     return !requestOrigin || allowedOrigins.has(requestOrigin);
   }
   return true;
+}
+
+/**
+ * CSRF protection for state-changing admin endpoints.
+ *
+ * The admin session cookie is issued with `SameSite=None; Secure` so it
+ * will be attached to cross-site requests. To prevent cross-site form
+ * posts from riding the session, every mutating request must present a
+ * custom `X-Albertalert-Csrf` header. Because this header is not in
+ * CORS's "simple" safelist, browsers issue a preflight for cross-origin
+ * requests that carry it; `applyCorsHeaders` then rejects origins that
+ * are not on the allowlist.
+ *
+ * Returns `true` when the header is present, otherwise writes a 403
+ * response and returns `false`.
+ */
+export function requireCsrfProtection(request, response) {
+  const headers = request?.headers || {};
+  const headerValue = headers['x-albertalert-csrf'] ?? headers['X-Albertalert-Csrf'];
+  const token = String(headerValue == null ? '' : headerValue).trim();
+  if (token) return true;
+  response.status(403).json({
+    ok: false,
+    error: 'csrf-required',
+    message: 'Missing CSRF header. Requests must include the X-Albertalert-Csrf header.'
+  });
+  return false;
 }
 
 export function readAdminSession(request) {

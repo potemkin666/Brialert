@@ -6,7 +6,7 @@ import {
   loadJsonFile,
   normaliseEndpoint
 } from './_lib/github-persistence.js';
-import { applyCorsHeaders, requireAdminSession } from './_lib/admin-session.js';
+import { applyCorsHeaders, requireAdminSession, requireCsrfProtection } from './_lib/admin-session.js';
 
 const REQUESTS_PATH = 'data/source-requests.json';
 const SOURCES_PATH = 'data/sources.json';
@@ -170,6 +170,9 @@ export default async function handler(request, response) {
     });
   }
   if (!requireAdminSession(request, response)) {
+    return response;
+  }
+  if (!requireCsrfProtection(request, response)) {
     return response;
   }
 

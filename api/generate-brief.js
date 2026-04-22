@@ -1,5 +1,5 @@
 import { applyCorsHeaders } from './_lib/admin-session.js';
-import { createRateLimiter } from './_lib/rate-limit.js';
+import { createDistributedRateLimiter } from './_lib/rate-limit.js';
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/responses';
 const OPENAI_MODEL = 'gpt-4.1-mini';
@@ -11,7 +11,24 @@ const MAX_HEADLINE_LENGTH = 500;
 const MAX_EXTRACT_LENGTH = 10_000;
 const MAX_INSTRUCTIONS_LENGTH = 2_000;
 
-const briefLimiter = createRateLimiter({ windowMs: RATE_LIMIT_WINDOW_MS, maxBurst: RATE_LIMIT_BURST });
+const briefLimiter = createDistributedRateLimiter({
+  keyPrefix: 'generate-brief',
+  windowMs: RATE_LIMIT_WINDOW_MS,
+  maxBurst: RATE_LIMIT_BURST
+});
+
+function resolveClientKey(request) {
+  const forwarded = String(request?.headers?.['x-forwarded-for'] || '').trim();
+  if (forwarded) {
+    const first = forwarded.split(',')[0].trim();
+    if (first) return first;
+  }
+  const real = String(request?.headers?.['x-real-ip'] || '').trim();
+  if (real) return real;
+  const remote = request?.socket?.remoteAddress || request?.connection?.remoteAddress || '';
+  if (remote) return String(remote);
+  return 'global';
+}
 
 function parseBody(request) {
   if (request.body && typeof request.body === 'object') return request.body;
@@ -87,7 +104,7 @@ export default async function handler(request, response) {
     });
   }
 
-  if (briefLimiter.isLimited()) {
+  if (await briefLimiter.isLimited(resolveClientKey(request))) {
     return response.status(429).json({
       ok: false,
       error: 'rate-limited',
