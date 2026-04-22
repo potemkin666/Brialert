@@ -4,3 +4,4 @@ node_modules/
 Thumbs.db
 data/*.sqlite-wal
 data/*.sqlite-shm
+logs/

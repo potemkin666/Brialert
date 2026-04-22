@@ -16,17 +16,72 @@
  */
 
 /**
+ * Resolve a stable client-identity string from a request for rate-limiter
+ * bucketing. Mirrors the precedence used by `createDistributedRateLimiter`.
+ *
+ * Tries, in order: the first hop of `x-forwarded-for`, then `x-real-ip`,
+ * then `socket.remoteAddress` / `connection.remoteAddress`, finally
+ * `'global'` when nothing is available.
+ */
+export function resolveClientKey(request) {
+  const headers = request?.headers || {};
+  const forwarded = String(headers['x-forwarded-for'] || '').trim();
+  if (forwarded) {
+    const first = forwarded.split(',')[0].trim();
+    if (first) return first;
+  }
+  const real = String(headers['x-real-ip'] || '').trim();
+  if (real) return real;
+  const remote = request?.socket?.remoteAddress
+    || request?.connection?.remoteAddress
+    || '';
+  if (remote) return String(remote);
+  return 'global';
+}
+
+/**
  * Create a sliding-window rate limiter (in-memory, per-instance).
+ *
+ * Buckets are keyed by `clientKey` (IP, session, etc.), so one noisy caller
+ * cannot starve every other user on the same warm instance. The number of
+ * concurrently tracked keys is capped to prevent unbounded memory growth;
+ * when the cap is reached the oldest-touched bucket is evicted (LRU).
+ *
+ * Callers that do not supply a key are lumped under the `'global'` bucket,
+ * which preserves backwards compatibility with earlier single-bucket usage.
  *
  * @param {object} options
  * @param {number} options.windowMs  - Length of the sliding window in milliseconds.
- * @param {number} options.maxBurst  - Maximum number of requests allowed within the window.
- * @returns {{ isLimited: () => boolean | Promise<boolean>, _recent: number[] }}
+ * @param {number} options.maxBurst  - Maximum number of requests allowed within the window per key.
+ * @param {number} [options.maxKeys] - Max distinct keys tracked simultaneously (default 10_000).
+ * @returns {{ isLimited: (clientKey?: string) => boolean, _recent: number[] }}
  */
-export function createRateLimiter({ windowMs, maxBurst }) {
-  const recent = [];
+export function createRateLimiter({ windowMs, maxBurst, maxKeys = 10_000 }) {
+  // Map preserves insertion/update order, so we can evict the least-recently
+  // touched key by grabbing the first entry.
+  const buckets = new Map();
 
-  function isLimited() {
+  function getBucket(clientKey) {
+    const key = clientKey == null ? 'global' : String(clientKey);
+    let recent = buckets.get(key);
+    if (recent) {
+      // Touch: move to end of insertion order so it becomes most-recent.
+      buckets.delete(key);
+      buckets.set(key, recent);
+      return recent;
+    }
+    if (buckets.size >= maxKeys) {
+      // Evict oldest (first key in insertion order).
+      const oldest = buckets.keys().next().value;
+      if (oldest !== undefined) buckets.delete(oldest);
+    }
+    recent = [];
+    buckets.set(key, recent);
+    return recent;
+  }
+
+  function isLimited(clientKey) {
+    const recent = getBucket(clientKey);
     const now = Date.now();
     while (recent.length > 0 && now - recent[0] > windowMs) {
       recent.shift();
@@ -38,7 +93,15 @@ export function createRateLimiter({ windowMs, maxBurst }) {
     return false;
   }
 
-  return { isLimited, _recent: recent };
+  // Legacy backwards-compatible accessor: tests and older callers reach into
+  // `limiter._recent` as a plain array. Expose the `'global'` bucket via a
+  // getter so mutations such as `_recent.length = 0` still work.
+  return {
+    isLimited,
+    get _recent() {
+      return getBucket('global');
+    }
+  };
 }
 
 /**
@@ -94,7 +157,7 @@ export function createDistributedRateLimiter({ keyPrefix, windowMs, maxBurst, kv
   // Fall back to in-memory when no KV store is configured.
   if (!kv) {
     const mem = createRateLimiter({ windowMs, maxBurst });
-    return { isLimited: async () => mem.isLimited() };
+    return { isLimited: async (clientKey) => mem.isLimited(clientKey) };
   }
 
   async function isLimited(clientKey = 'global') {

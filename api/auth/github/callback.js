@@ -13,7 +13,7 @@ import {
   exchangeOAuthCode,
   fetchGithubUser
 } from '../../_lib/github-admin-access.js';
-import { createRateLimiter } from '../../_lib/rate-limit.js';
+import { createRateLimiter, resolveClientKey } from '../../_lib/rate-limit.js';
 
 const CALLBACK_RATE_LIMIT_MS = 60_000;
 const CALLBACK_RATE_LIMIT_BURST = 10;
@@ -57,7 +57,7 @@ export default async function handler(request, response) {
     });
   }
 
-  if (callbackLimiter.isLimited()) {
+  if (callbackLimiter.isLimited(resolveClientKey(request))) {
     return redirect(response, failRedirectTarget('rate-limited'));
   }
 

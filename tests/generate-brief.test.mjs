@@ -227,7 +227,24 @@ test('generate-brief: sends web_search_preview tool and stream flag in OpenAI re
     assert.ok(capturedBody);
     assert.equal(capturedBody.model, 'gpt-4.1-mini');
     assert.equal(capturedBody.stream, true);
-    assert.equal(capturedBody.instructions, 'Write a detailed brief.');
+    // Server-controlled instructions must be used; the user-supplied string
+    // must NOT be passed through as the model's instruction override.
+    assert.notEqual(capturedBody.instructions, 'Write a detailed brief.');
+    assert.ok(
+      typeof capturedBody.instructions === 'string' && capturedBody.instructions.length > 0,
+      'a fixed server-side instruction must be sent'
+    );
+    assert.ok(
+      /terrorism|analyst/i.test(capturedBody.instructions),
+      'server instructions should retain analyst brief framing'
+    );
+    // The user hint is embedded in `input` as untrusted context, framed
+    // explicitly as non-authoritative.
+    assert.ok(
+      capturedBody.input.includes('Requester hint')
+        && capturedBody.input.includes('Write a detailed brief.'),
+      'user instructions should be embedded in input as a labelled requester hint'
+    );
     assert.ok(capturedBody.input.includes('Test Alert'));
     assert.ok(capturedBody.input.includes('Reuters'));
     assert.deepEqual(capturedBody.tools, [{ type: 'web_search_preview' }]);
