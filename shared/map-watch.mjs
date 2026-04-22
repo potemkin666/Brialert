@@ -276,6 +276,49 @@ function clusterPopup(entry) {
     </div>`;
 }
 
+// ── Phyllotaxis spread for coincident alerts ──
+// Many alerts fall back to regional coordinates (see shared/geo-fallback-coords.mjs:
+// EU/international/default → 50,10; UK → 54.5,-2.5; London → 51.5074,-0.1278), which
+// causes their dots to stack on a single pixel. We detect groups that share a
+// lat/lng to within COINCIDENT_COORD_PRECISION and spread them on a golden-angle
+// sunflower spiral so each marker gets its own pixel at any zoom level. The pattern
+// is deterministic (sorted by alert id) so dots don't jump around between renders.
+const GOLDEN_ANGLE_RAD = Math.PI * (3 - Math.sqrt(5));
+const METERS_PER_DEGREE_LAT = 111320;
+const SUNFLOWER_STEP_METERS = 220;
+const COINCIDENT_COORD_PRECISION = 4;
+
+export function spreadCoincidentAlerts(alerts, { precision = COINCIDENT_COORD_PRECISION, stepMeters = SUNFLOWER_STEP_METERS } = {}) {
+  if (!Array.isArray(alerts) || alerts.length <= 1) return alerts;
+  const groups = new Map();
+  alerts.forEach((alert, index) => {
+    const lat = Number(alert?.lat);
+    const lng = Number(alert?.lng);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+    const key = `${lat.toFixed(precision)},${lng.toFixed(precision)}`;
+    let bucket = groups.get(key);
+    if (!bucket) { bucket = []; groups.set(key, bucket); }
+    bucket.push(index);
+  });
+  const result = alerts.slice();
+  groups.forEach((indices) => {
+    if (indices.length <= 1) return;
+    indices.sort((a, b) => String(alerts[a]?.id ?? a).localeCompare(String(alerts[b]?.id ?? b)));
+    const baseLat = Number(alerts[indices[0]].lat);
+    const baseLng = Number(alerts[indices[0]].lng);
+    const metersPerDegreeLng = METERS_PER_DEGREE_LAT * Math.max(Math.cos((baseLat * Math.PI) / 180), 0.01); // floor guards polar latitudes where cos→0
+    indices.forEach((idx, k) => {
+      if (k === 0) return; // first item stays at origin
+      const angle = k * GOLDEN_ANGLE_RAD;
+      const radius = stepMeters * Math.sqrt(k);
+      const dLat = (radius * Math.cos(angle)) / METERS_PER_DEGREE_LAT;
+      const dLng = (radius * Math.sin(angle)) / metersPerDegreeLng;
+      result[idx] = { ...alerts[idx], lat: baseLat + dLat, lng: baseLng + dLng };
+    });
+  });
+  return result;
+}
+
 const SEVERITY_RANK = Object.freeze({ critical: 3, high: 2, elevated: 1, moderate: 0 });
 
 function clusterSeverity(items) {
@@ -575,7 +618,8 @@ export function createMapController(config) {
     lastState = state;
     lastView = view;
     const mode = resolveMapMode(state.mapViewMode);
-    const items = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
+    const rawItems = view.filtered.filter((alert) => Number.isFinite(alert.lat) && Number.isFinite(alert.lng));
+    const items = spreadCoincidentAlerts(rawItems);
     const signature = `${mode}:${liveMap.getZoom()}:${items.map((item) => `${item.id}:${(item.lat ?? 0).toFixed(3)},${(item.lng ?? 0).toFixed(3)}`).join('|')}`;
     if (!forceFit && signature === lastSignature) return;
     lastSignature = signature;
@@ -708,4 +752,4 @@ export function createMapController(config) {
   };
 }
 
-export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK, CLUSTER_FLY_DURATION as _CLUSTER_FLY_DURATION, clusterSeverity as _clusterSeverity, statusLine as _statusLine, normaliseCountryName as _normaliseCountryName, vignetteLevel as _vignetteLevel };
+export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK, CLUSTER_FLY_DURATION as _CLUSTER_FLY_DURATION, clusterSeverity as _clusterSeverity, statusLine as _statusLine, normaliseCountryName as _normaliseCountryName, vignetteLevel as _vignetteLevel, spreadCoincidentAlerts as _spreadCoincidentAlerts };
