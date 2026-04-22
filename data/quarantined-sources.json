@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-22T20:37:31.462Z",
+  "generatedAt": "2026-04-22T21:59:30.032Z",
   "count": 448,
   "metrics": {
     "total": 448,
     "newThisWeek": 265,
-    "avgTimeInQuarantineHours": 118,
+    "avgTimeInQuarantineHours": 120,
     "avgHealthScore": 0,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -31,7 +31,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eulisa-news-events",
@@ -53,7 +53,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "austria-interior-ministry-news",
@@ -75,7 +75,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "austria-interior-ministry-rss-index",
@@ -97,7 +97,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eurojust-press-releases",
@@ -119,7 +119,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "europol-news-rss",
@@ -141,7 +141,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "dutch-police-rss-index",
@@ -163,7 +163,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "mossos-news",
@@ -185,7 +185,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "curia-press-rss-en",
@@ -207,7 +207,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eppo-news-node-7",
@@ -229,7 +229,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-cellar-rss-atom",
@@ -251,7 +251,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-commission-counter-terrorism-measures-2026",
@@ -273,7 +273,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-commission-home-affairs-topic",
@@ -295,7 +295,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-council-jha-meetings",
@@ -317,7 +317,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-council-jha-register-rss",
@@ -339,7 +339,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-council-press-releases",
@@ -361,7 +361,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-council-press-releases-html",
@@ -383,7 +383,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-eppo-news",
@@ -405,7 +405,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-home-affairs-news",
@@ -427,7 +427,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-olaf-news",
@@ -449,7 +449,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-security-union-strategy",
@@ -471,7 +471,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "europarl-committee-libe",
@@ -493,7 +493,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "europarl-committee-sede",
@@ -515,7 +515,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "europarl-pressreleases-committees",
@@ -537,7 +537,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "norway-pst-news",
@@ -559,7 +559,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "netherlands-police-news",
@@ -581,7 +581,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "echr-press-releases-rss",
@@ -603,7 +603,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "french-justice-ministry-news",
@@ -625,7 +625,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "dsn-at-english",
@@ -647,7 +647,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "sapo-se-english",
@@ -669,7 +669,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "interpol-news-events",
@@ -691,7 +691,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "osce-press-releases",
@@ -713,7 +713,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "unoct-news",
@@ -735,7 +735,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "bexley-council-news",
@@ -757,7 +757,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "brent-council-news",
@@ -779,7 +779,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "camden-council-news",
@@ -801,7 +801,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "chelsea-westminster-news",
@@ -823,7 +823,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "croydon-council-news",
@@ -845,7 +845,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gosh-news",
@@ -867,7 +867,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "guys-st-thomas-news",
@@ -889,7 +889,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "hackney-council-news",
@@ -911,7 +911,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "havering-council-news",
@@ -933,7 +933,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "hillingdon-council-news",
@@ -955,7 +955,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "hounslow-council-news",
@@ -977,7 +977,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "islington-council-news",
@@ -999,7 +999,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "kings-college-hospital-news",
@@ -1021,7 +1021,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "lambeth-council-news",
@@ -1043,7 +1043,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "lnwh-news",
@@ -1065,7 +1065,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "london-gov-rss-80603",
@@ -1087,7 +1087,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "london-gov-rss-80632",
@@ -1109,7 +1109,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "met-police-the-met-tag",
@@ -1131,7 +1131,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "moorfields-news",
@@ -1153,7 +1153,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "nelft-news",
@@ -1175,7 +1175,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "newham-council-news",
@@ -1197,7 +1197,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "nhs-london-nwl-news",
@@ -1219,7 +1219,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "oxleas-news",
@@ -1241,7 +1241,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "redbridge-council-news",
@@ -1263,7 +1263,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "richmond-council-news",
@@ -1285,7 +1285,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "st-georges-news",
@@ -1307,7 +1307,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "sutton-council-news",
@@ -1329,7 +1329,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "swlstg-news",
@@ -1351,7 +1351,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "waltham-forest-council-news",
@@ -1373,7 +1373,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "wandsworth-council-news",
@@ -1395,7 +1395,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-fcdo-travel-advice",
@@ -1417,7 +1417,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "uk-border-force",
@@ -1439,7 +1439,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "uk-ukvi",
@@ -1461,7 +1461,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-terrorism-search",
@@ -1483,7 +1483,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "npcc-releases",
@@ -1505,7 +1505,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "police-uk-stops-force-leicestershire",
@@ -1527,7 +1527,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "police-uk-stops-street-leicester",
@@ -1549,7 +1549,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "foreign-office-blogs",
@@ -1571,7 +1571,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "avon-and-somerset-police-news-html",
@@ -1593,7 +1593,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "avon-somerset-police-news",
@@ -1615,7 +1615,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "psni-latest-news",
@@ -1637,7 +1637,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "west-yorkshire-police-all-rss",
@@ -1659,7 +1659,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "west-yorkshire-police-appeals-rss",
@@ -1681,7 +1681,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "west-yorkshire-police-news-appeals",
@@ -1703,7 +1703,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "west-yorkshire-police-news-rss",
@@ -1725,7 +1725,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "west-yorkshire-police-releases-rss",
@@ -1747,7 +1747,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "attorney-generals-office-html",
@@ -1769,7 +1769,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "cabinet-office-html",
@@ -1791,7 +1791,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "crown-office-news",
@@ -1813,7 +1813,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "echr-uk-grand-chamber-rss",
@@ -1835,7 +1835,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "extremism-commission-blog",
@@ -1857,7 +1857,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "fcdo-html",
@@ -1879,7 +1879,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-scot-access-to-justice-latest",
@@ -1901,7 +1901,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-cabinet-office-atom",
@@ -1923,7 +1923,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-hmcts",
@@ -1945,7 +1945,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-home-office-atom",
@@ -1967,7 +1967,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-ipco",
@@ -1989,7 +1989,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-mod-atom",
@@ -2011,7 +2011,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-moj-atom",
@@ -2033,7 +2033,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "hmiprisons-news",
@@ -2055,7 +2055,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "hmiprobation-news",
@@ -2077,7 +2077,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "home-office-media-blog",
@@ -2099,7 +2099,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "independent-reviewer-terrorism-legislation",
@@ -2121,7 +2121,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "independent-reviewer-terrorism-legislation-html",
@@ -2143,7 +2143,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "judiciary-rss-feeds-page",
@@ -2165,7 +2165,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "judiciary-uk-announcements-feed",
@@ -2187,7 +2187,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "judiciary-uk-judgments-feed",
@@ -2209,7 +2209,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "judiciary-uk-publications-feed",
@@ -2231,7 +2231,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "ministry-of-defence-html",
@@ -2253,7 +2253,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "ons-html",
@@ -2275,7 +2275,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "parliament-all-bills-rss",
@@ -2297,7 +2297,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "parliament-private-bills-rss",
@@ -2319,7 +2319,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "parliament-public-bills-rss",
@@ -2341,7 +2341,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "police-uk-crime-categories-2024-01",
@@ -2363,7 +2363,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "police-uk-crimes-street-dates",
@@ -2385,7 +2385,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "police-uk-outcomes-for-crime-e11dade0",
@@ -2407,7 +2407,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-fai-determinations-rss",
@@ -2429,7 +2429,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-fai-hearings-rss",
@@ -2451,7 +2451,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-high-court-justiciary-judgments-rss",
@@ -2473,7 +2473,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-high-court-practice-notes-rss",
@@ -2495,7 +2495,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-judgments-rss",
@@ -2517,7 +2517,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-news-articles-rss",
@@ -2539,7 +2539,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-publications-rss",
@@ -2561,7 +2561,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-rss-feeds-page",
@@ -2583,7 +2583,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scotcourts-sheriff-criminal-practice-notes-rss",
@@ -2605,7 +2605,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "uk-iopc-news",
@@ -2627,7 +2627,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "uk-parliament-defence-committee",
@@ -2649,7 +2649,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "uk-parliament-home-affairs-committee",
@@ -2671,7 +2671,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "act-campaign",
@@ -2693,7 +2693,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-contest-strategy",
@@ -2715,7 +2715,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-prevent-strategy",
@@ -2737,7 +2737,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "met-office-seasonal-advice",
@@ -2759,7 +2759,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "mi5-uk-threat-level",
@@ -2781,7 +2781,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "npsa-national-protective-security-authority",
@@ -2803,7 +2803,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "uk-ncsc-all-rss",
@@ -2825,7 +2825,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "uk-prevent-duty-guidance",
@@ -2847,7 +2847,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-proscribed-terrorist-orgs",
@@ -2869,7 +2869,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "hm-treasury-html",
@@ -2891,7 +2891,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "ofsi-blog-home",
@@ -2913,7 +2913,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "dhs-press-releases",
@@ -2935,7 +2935,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "nsa-cybersecurity-news",
@@ -2957,7 +2957,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "rewards-for-justice",
@@ -2979,7 +2979,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "state-dept-terrorism",
@@ -3001,7 +3001,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "cisa-cybersecurity-advisories",
@@ -3023,7 +3023,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "us-treasury-ofac-recent-actions",
@@ -3045,7 +3045,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "echr-key-judgments-rss",
@@ -3568,7 +3568,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T17:16:47.386Z",
       "lastFailureAt": "2026-04-20T17:16:47.386Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "portugal-pj-news",
@@ -3611,7 +3611,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T15:59:44.503Z",
       "lastFailureAt": "2026-04-20T15:59:44.503Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "guardian-uk-top-stories",
@@ -3677,7 +3677,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T04:05:33.139Z",
       "lastFailureAt": "2026-04-20T04:05:33.139Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "cheshire-police-alert",
@@ -3705,7 +3705,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "dc-police-community-messaging",
@@ -3733,7 +3733,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "devon-cornwall-alerts",
@@ -3761,7 +3761,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "south-yorkshire-police-alerts",
@@ -3789,7 +3789,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "stay-in-the-know-home",
@@ -3817,7 +3817,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "stay-in-the-know-latest-alerts",
@@ -3850,7 +3850,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "west-midlands-community-alerts",
@@ -3878,7 +3878,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "west-yorkshire-community-alert",
@@ -3906,7 +3906,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T17:13:24.435Z",
       "lastFailureAt": "2026-04-19T17:13:24.435Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "bbc-news-uk-politics-legacy",
@@ -4058,7 +4058,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T21:09:53.488Z",
       "lastFailureAt": "2026-04-18T21:09:53.488Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "my-community-alert",
@@ -4086,7 +4086,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T19:28:57.337Z",
       "lastFailureAt": "2026-04-18T19:28:57.337Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "eu-ejustice-news-rss",
@@ -4114,7 +4114,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T13:27:18.679Z",
       "lastFailureAt": "2026-04-18T13:27:18.679Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "just-security",
@@ -6623,7 +6623,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T19:32:35.264Z",
       "lastFailureAt": "2026-04-19T19:32:35.264Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "frontex-news-releases",
@@ -14718,7 +14718,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T18:05:04.781Z",
       "lastFailureAt": "2026-04-19T18:05:04.781Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "bfv-de-english",
@@ -14746,7 +14746,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-24T11:07:28.674Z",
       "lastFailureAt": "2026-04-17T11:07:28.674Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "german-bka-press-releases-de",
@@ -14893,7 +14893,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-23T23:55:39.351Z",
       "lastFailureAt": "2026-04-16T23:55:39.351Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "daily-mail-online",
@@ -15050,7 +15050,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-23T19:01:30.233Z",
       "lastFailureAt": "2026-04-16T19:01:30.233Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "denmark-pet-news",
@@ -15237,7 +15237,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "czech-police-news",
@@ -15280,7 +15280,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "guardia-civil-news",
@@ -15384,9 +15384,9 @@
       "status": "auto-quarantined",
       "reason": "Endpoint likely removed — all recent errors are HTTP 404",
       "quarantinedAt": "2026-04-16T16:57:11.406Z",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
+      "lastErrorCategory": "brittle-selectors-or-js-rendering",
+      "lastErrorMessage": "Playwright browser not installed: browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
+      "consecutiveFailures": 1,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
@@ -15409,12 +15409,17 @@
           "category": "not-found-404",
           "message": "HTTP 404",
           "at": "2026-04-20T06:30:13.977Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "at": "2026-04-22T21:59:30.032Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-27T06:30:13.977Z",
-      "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "reviewBy": "2026-04-29T21:59:30.032Z",
+      "lastFailureAt": "2026-04-22T21:59:30.032Z",
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "pet-dk-english",
@@ -15644,7 +15649,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gctf-news",
@@ -15735,7 +15740,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "bromley-council-news",
@@ -15826,7 +15831,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "mayor-of-london-press-releases",
@@ -15869,7 +15874,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "nhs-london-sel-news",
@@ -15960,7 +15965,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "tower-hamlets-council-news",
@@ -16003,7 +16008,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "westminster-city-council-news",
@@ -16142,7 +16147,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "gov-uk-defence-intelligence",
@@ -16185,7 +16190,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "mi5-news-rss-direct",
@@ -16228,7 +16233,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "daily-politics",
@@ -16314,7 +16319,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "scottish-government-justice-news",
@@ -16357,7 +16362,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "dni-press-releases",
@@ -16400,7 +16405,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "doj-nsd-press-releases",
@@ -16443,7 +16448,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T06:30:13.977Z",
       "lastFailureAt": "2026-04-20T06:30:13.977Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "us-treasury-ofac-press-releases",
@@ -16471,7 +16476,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-23T15:11:26.228Z",
       "lastFailureAt": "2026-04-16T15:11:26.228Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
       "id": "a-lady-in-london",
@@ -16844,7 +16849,7 @@
       "kind": "rss",
       "lane": "oversight",
       "region": "uk",
-      "healthScore": 21,
+      "healthScore": 18,
       "status": "auto-quarantined",
       "reason": "Needs review",
       "quarantinedAt": "",
@@ -16857,7 +16862,7 @@
       "replacementSuggestion": "",
       "reviewBy": "",
       "lastFailureAt": "",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+      "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     }
   ]
 }
