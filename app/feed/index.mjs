@@ -43,7 +43,10 @@ async function triggerFeedRunVia(url) {
   let payload = {};
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Albertalert-Csrf': '1'
+    },
     credentials: 'include',
     body: JSON.stringify({ source: 'hero-refresh-button' })
   });

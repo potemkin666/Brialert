@@ -351,10 +351,18 @@
       return base ? base + path : '';
     }
     function withSessionCredentials(options = {}) {
-      return {
+      const base = {
         ...options,
         credentials: 'include'
       };
+      const method = String(options.method || 'GET').toUpperCase();
+      if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') {
+        base.headers = {
+          ...(options.headers || {}),
+          'X-Albertalert-Csrf': '1'
+        };
+      }
+      return base;
     }
     function resolveAuthUrl(base, value, fallbackFactory) {
       const raw = String(value || '').trim();

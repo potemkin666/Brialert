@@ -86,7 +86,7 @@
     {
       "id": "denmark-pet-news",
       "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://pet.dk/nyheder",
+      "endpoint": "https://pet.dk/aktuelt/nyhedsliste",
       "kind": "html",
       "lane": "context",
       "region": "eu",
@@ -260,8 +260,8 @@
     {
       "id": "nctv-english-rss",
       "provider": "NCTV Netherlands - English RSS",
-      "endpoint": "https://english.nctv.nl/actueel/rss.xml",
-      "kind": "rss",
+      "endpoint": "https://english.nctv.nl/latest/news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
@@ -345,7 +345,7 @@
     {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
-      "endpoint": "https://www.politie.be/5998/en/news",
+      "endpoint": "https://www.police.be/5998/en/node/10868",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
@@ -357,7 +357,7 @@
     {
       "id": "czech-police-news",
       "provider": "Police of the Czech Republic - News",
-      "endpoint": "https://www.policie.cz/clanek/news.aspx",
+      "endpoint": "https://policie.gov.cz/clanek/Police-of-the-Czech-Republic.aspx",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
@@ -465,7 +465,7 @@
     {
       "id": "policia-nacional-news",
       "provider": "Policia Nacional - Press",
-      "endpoint": "https://www.policia.es/_en/comunicacion_prensa.php",
+      "endpoint": "https://www.policia.es/_es/comunicacion_salaprensa.php",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
@@ -1023,7 +1023,7 @@
     {
       "id": "rte-ireland-news-rss",
       "provider": "RTE News - Ireland (RSS)",
-      "endpoint": "https://www.rte.ie/news/rss/news-ireland.xml",
+      "endpoint": "https://feeds.feedburner.com/ietopstories",
       "kind": "rss",
       "lane": "context",
       "region": "europe",
@@ -1034,7 +1034,7 @@
     {
       "id": "switzerland-fedpol-news",
       "provider": "Swiss fedpol - News",
-      "endpoint": "https://www.fedpol.admin.ch/fedpol/en/home/fedpol/aktuell.html",
+      "endpoint": "https://www.fedpol.admin.ch/en/newnsb",
       "kind": "html",
       "lane": "context",
       "region": "europe",
@@ -1128,7 +1128,7 @@
     {
       "id": "portugal-pj-news",
       "provider": "Policia Judiciaria Portugal - News",
-      "endpoint": "https://www.policiajudiciaria.pt/?p=noticias",
+      "endpoint": "https://www.policiajudiciaria.pt/noticias/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
@@ -1245,33 +1245,9 @@
       "comment": "No stable RSS endpoint across sections; using the homepage and relying on keyword filtering."
     },
     {
-      "id": "nctv-nl-english",
-      "provider": "NCTV (Netherlands) a English News",
-      "endpoint": "https://english.nctv.nl/topics/terrorist-threat-assessment-netherlands",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Dutch National Coordinator for Security and Counterterrorism English terrorism threat assessment page.",
-      "refreshEveryHours": 1
-    },
-    {
-      "id": "nctv-nl-english-news",
-      "provider": "NCTV Netherlands latest news (English)",
-      "endpoint": "https://english.nctv.nl/latest/news",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases.",
-      "refreshEveryHours": 1
-    },
-    {
       "id": "ocam-be-english",
       "provider": "CUTA (Belgium) threat analysis",
-      "endpoint": "https://cuta.belgium.be/general-threat-in-belgium/",
+      "endpoint": "https://cuta.belgium.be/",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
@@ -1283,7 +1259,7 @@
     {
       "id": "pet-dk-english",
       "provider": "PET (Denmark) a English News",
-      "endpoint": "https://pet.dk/en/news/",
+      "endpoint": "https://pet.dk/en/news-and-publications/news-list",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
@@ -1418,7 +1394,7 @@
     {
       "id": "chatham-house-rss",
       "provider": "Chatham House a Research & Commentary (RSS)",
-      "endpoint": "https://www.chathamhouse.org/publications.rss",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
       "kind": "rss",
       "lane": "context",
       "region": "international",
@@ -1460,20 +1436,9 @@
       "comment": "Chatham House press releases feed for authoritative think-tank commentary on international security. Endpoint path is as provided."
     },
     {
-      "id": "chathamhouse-whatsnew",
-      "provider": "Chatham House a What's New (RSS)",
-      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Chatham House (RIIA) latest content feed. Endpoint path is as provided; verify against live feed if response is unexpected."
-    },
-    {
       "id": "counter-extremism-project-news",
       "provider": "Counter Extremism Project a News",
-      "endpoint": "https://www.counterextremism.com/news",
+      "endpoint": "https://www.counterextremism.com/news-and-media",
       "kind": "html",
       "lane": "context",
       "region": "international",
@@ -1562,8 +1527,8 @@
     {
       "id": "nato-news-rss",
       "provider": "NATO a News (RSS)",
-      "endpoint": "https://www.nato.int/cps/en/natohq/rss/news.rss",
-      "kind": "rss",
+      "endpoint": "https://www.nato.int/en/news-and-events/articles/news",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
@@ -1573,8 +1538,8 @@
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en/announcements.rss",
-      "kind": "rss",
+      "endpoint": "https://www.occrp.org/en/announcements",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
@@ -1618,8 +1583,8 @@
     {
       "id": "rferl-security-news-rss",
       "provider": "Radio Free Europe/Radio Liberty a Security (RSS)",
-      "endpoint": "https://www.rferl.org/api/ep_rss_all/iu/1",
-      "kind": "rss",
+      "endpoint": "https://www.rferl.org/latest-news",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
@@ -1662,7 +1627,7 @@
     {
       "id": "unodc-news",
       "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
-      "endpoint": "https://www.unodc.org/unodc/en/press/releases/latest.html",
+      "endpoint": "https://www.unodc.org/unodc/en/news/news.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
@@ -1685,7 +1650,7 @@
     {
       "id": "gctf-news",
       "provider": "Global Counterterrorism Forum (GCTF) a News",
-      "endpoint": "https://www.thegctf.org/News/",
+      "endpoint": "https://www.thegctf.org/News-Stories/PgrID/918/PageID/3",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
@@ -1845,7 +1810,7 @@
     {
       "id": "barts-health-news",
       "provider": "Barts Health NHS Trust a News",
-      "endpoint": "https://www.bartshealth.nhs.uk/latest-news",
+      "endpoint": "https://www.bartshealth.nhs.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -1892,8 +1857,8 @@
     {
       "id": "bromley-council-news",
       "provider": "Bromley Council a Newsroom",
-      "endpoint": "https://www.bromley.gov.uk/newsroom/news?format=rss",
-      "kind": "rss",
+      "endpoint": "https://www.bromley.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
@@ -2108,7 +2073,7 @@
     {
       "id": "homerton-healthcare-news",
       "provider": "Homerton Healthcare NHS Foundation Trust a News",
-      "endpoint": "https://www.homerton.nhs.uk/latest-news/",
+      "endpoint": "https://www.homerton.nhs.uk/trust-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -2310,30 +2275,6 @@
       "refreshEveryHours": 1
     },
     {
-      "id": "london-gov-rss-80610",
-      "provider": "Greater London Authority a RSS Feed 80610",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
-      "kind": "rss",
-      "lane": "context",
-      "region": "london",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80610. Verify content category against the live feed for specific topic or committee coverage.",
-      "refreshEveryHours": 1
-    },
-    {
-      "id": "london-gov-rss-80611",
-      "provider": "Greater London Authority a RSS Feed 80611",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
-      "kind": "rss",
-      "lane": "context",
-      "region": "london",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80611. Verify content category against the live feed for specific topic or committee coverage.",
-      "refreshEveryHours": 1
-    },
-    {
       "id": "london-gov-rss-80632",
       "provider": "Greater London Authority a RSS Feed 80632",
       "endpoint": "https://www.london.gov.uk/rss-feeds/80632",
@@ -2348,7 +2289,7 @@
     {
       "id": "mayor-of-london-press-releases",
       "provider": "Mayor of London a Press Releases",
-      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases/rss.xml",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
       "kind": "rss",
       "lane": "context",
       "region": "london",
@@ -2456,7 +2397,7 @@
     {
       "id": "nhs-london-sel-news",
       "provider": "NHS South East London a News",
-      "endpoint": "https://www.selondonics.org/latest-news/",
+      "endpoint": "https://www.selondonics.org/icb/about-us/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -2564,7 +2505,7 @@
     {
       "id": "slam-news",
       "provider": "South London and Maudsley NHS Foundation Trust a News",
-      "endpoint": "https://slam.nhs.uk/news/",
+      "endpoint": "https://slam.nhs.uk/pressreleases",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -2660,8 +2601,8 @@
     {
       "id": "tower-hamlets-council-news",
       "provider": "Tower Hamlets Council a News",
-      "endpoint": "https://www.towerhamlets.gov.uk/rss/news.xml",
-      "kind": "rss",
+      "endpoint": "https://www.towerhamlets.gov.uk/News_events/News.aspx",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
@@ -2708,8 +2649,8 @@
     {
       "id": "westminster-city-council-news",
       "provider": "Westminster City Council a News",
-      "endpoint": "https://www.westminster.gov.uk/news/rss",
-      "kind": "rss",
+      "endpoint": "https://www.westminster.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
@@ -2720,7 +2661,7 @@
     {
       "id": "whittington-health-news",
       "provider": "Whittington Health a News",
-      "endpoint": "https://www.whittington.nhs.uk/news/default.asp",
+      "endpoint": "https://www.whittington.nhs.uk/mini-apps/news/newsItems.asp",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -2804,7 +2745,7 @@
     {
       "id": "london-assembly-press-releases",
       "provider": "London Assembly a Press Releases",
-      "endpoint": "https://www.london.gov.uk/media-centre/london-assembly-press-releases/rss.xml",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
       "kind": "rss",
       "lane": "oversight",
       "region": "london",
@@ -2828,7 +2769,7 @@
     {
       "id": "london-resilience",
       "provider": "Resilience First - Latest Updates",
-      "endpoint": "https://resiliencefirst.org/latest-updates",
+      "endpoint": "https://www.london.gov.uk/programmes-strategies/fire-and-city-resilience/london-resilience-partnership",
       "kind": "html",
       "lane": "prevention",
       "region": "london",
@@ -2952,7 +2893,7 @@
     {
       "id": "gov-uk-defence-intelligence",
       "provider": "UK Defence Intelligence a GOV.UK",
-      "endpoint": "https://www.gov.uk/government/organisations/defence-intelligence",
+      "endpoint": "https://www.gov.uk/government/groups/defence-intelligence",
       "kind": "html",
       "lane": "context",
       "region": "uk",
@@ -3043,8 +2984,8 @@
     {
       "id": "mi5-news-rss-direct",
       "provider": "MI5 - News RSS",
-      "endpoint": "https://www.mi5.gov.uk/news/rss.xml",
-      "kind": "rss",
+      "endpoint": "https://www.mi5.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
@@ -3161,7 +3102,7 @@
     {
       "id": "rusi-terrorism-conflict",
       "provider": "RUSI - Terrorism and Conflict",
-      "endpoint": "https://www.rusi.org/explore-our-research/topics/terrorism-and-conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict",
       "kind": "html",
       "lane": "context",
       "region": "uk",
@@ -3399,8 +3340,8 @@
     {
       "id": "daily-politics",
       "provider": "Daily Politics",
-      "endpoint": "https://www.dailypolitics.com/feed.xml",
-      "kind": "rss",
+      "endpoint": "https://www.dailypolitics.com/categories/rRzjN-bU/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
@@ -5435,7 +5376,7 @@
     {
       "id": "joint-committee-human-rights-html",
       "provider": "Joint Committee on Human Rights",
-      "endpoint": "https://www.gov.uk/government/organisations/joint-committee-on-human-rights",
+      "endpoint": "https://committees.parliament.uk/committee/93/human-rights-joint-committee/",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -5758,7 +5699,7 @@
     {
       "id": "scottish-government-justice-news",
       "provider": "Scottish Government - Justice and Safety",
-      "endpoint": "https://www.gov.scot/justice-and-law/",
+      "endpoint": "https://www.gov.scot/policies/community-safety/latest/",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -5770,7 +5711,7 @@
     {
       "id": "serious-fraud-office-news",
       "provider": "Serious Fraud Office a News",
-      "endpoint": "https://www.sfo.gov.uk/news/",
+      "endpoint": "https://www.gov.uk/search/news-and-communications?organisations%5B%5D=serious-fraud-office&parent=serious-fraud-office",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -6362,7 +6303,7 @@
     {
       "id": "dni-press-releases",
       "provider": "Office of the Director of National Intelligence - Press Releases",
-      "endpoint": "https://www.dni.gov/index.php/newsroom/press-releases",
+      "endpoint": "https://www.dni.gov/index.php/who-we-are/348-newsroom/press-releases",
       "kind": "html",
       "lane": "context",
       "region": "us",
@@ -6374,7 +6315,7 @@
     {
       "id": "doj-nsd-press-releases",
       "provider": "U.S. Department of Justice - National Security Division Press Releases",
-      "endpoint": "https://www.justice.gov/nsd/press-releases",
+      "endpoint": "https://www.justice.gov/nsd/press-room",
       "kind": "html",
       "lane": "context",
       "region": "us",

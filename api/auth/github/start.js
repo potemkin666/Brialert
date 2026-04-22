@@ -6,7 +6,7 @@ import {
   setOauthStateCookie
 } from '../../_lib/admin-session.js';
 import { getOAuthClientConfig } from '../../_lib/github-admin-access.js';
-import { createRateLimiter } from '../../_lib/rate-limit.js';
+import { createRateLimiter, resolveClientKey } from '../../_lib/rate-limit.js';
 
 const START_RATE_LIMIT_MS = 60_000;
 const START_RATE_LIMIT_BURST = 10;
@@ -45,7 +45,7 @@ export default async function handler(request, response) {
     });
   }
 
-  if (startLimiter.isLimited()) {
+  if (startLimiter.isLimited(resolveClientKey(request))) {
     return response.status(429).json({
       ok: false,
       error: 'rate-limited',
