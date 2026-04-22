@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-22T21:59:30.032Z",
+  "generatedAt": "2026-04-22T22:53:26.529Z",
   "count": 448,
   "metrics": {
     "total": 448,
@@ -3680,6 +3680,39 @@
       "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
+      "id": "a-lady-in-london",
+      "provider": "A Lady in London",
+      "endpoint": "https://www.aladyinlondon.com/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-17T22:12:37.099Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 401",
+          "at": "2026-04-19T18:05:04.781Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-26T18:05:04.781Z",
+      "lastFailureAt": "2026-04-19T18:05:04.781Z",
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
+    },
+    {
       "id": "cheshire-police-alert",
       "provider": "Cheshire Police Alert",
       "endpoint": "https://www.cheshirepolicealert.co.uk/",
@@ -3982,7 +4015,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T03:30:54.684Z",
       "lastFailureAt": "2026-04-19T03:30:54.684Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
     },
     {
       "id": "gnet-youth-rss",
@@ -4238,7 +4271,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
     },
     {
       "id": "semibold",
@@ -6244,7 +6277,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T13:19:06.686Z",
       "lastFailureAt": "2026-04-19T13:19:06.686Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
     },
     {
       "id": "the-scottish-sun",
@@ -15022,7 +15055,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T12:14:24.733Z",
       "lastFailureAt": "2026-04-20T12:14:24.733Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
     },
     {
       "id": "gov-uk-counter-extremism-commissioner",
@@ -15371,7 +15404,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T08:39:19.161Z",
       "lastFailureAt": "2026-04-20T08:39:19.161Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
     },
     {
       "id": "switzerland-fedpol-news",
@@ -16479,39 +16512,6 @@
       "lastCheckedAt": "2026-04-22T21:59:30.032Z"
     },
     {
-      "id": "a-lady-in-london",
-      "provider": "A Lady in London",
-      "endpoint": "https://www.aladyinlondon.com/feed",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 2,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 401",
-          "at": "2026-04-19T18:05:04.781Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-26T18:05:04.781Z",
-      "lastFailureAt": "2026-04-19T18:05:04.781Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
-    },
-    {
       "id": "france24-europe-rss",
       "provider": "France 24 a Europe (RSS)",
       "endpoint": "https://www.france24.com/en/europe/rss",
@@ -16593,28 +16593,6 @@
       "lastCheckedAt": "2026-04-22T14:59:55.048Z"
     },
     {
-      "id": "chatham-house-rss",
-      "provider": "Chatham House a Research & Commentary (RSS)",
-      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "healthScore": 10,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-27T08:39:19.161Z",
-      "lastFailureAt": "2026-04-20T08:39:19.161Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
-    },
-    {
       "id": "cambridge-news",
       "provider": "Cambridge News",
       "endpoint": "https://www.cambridge-news.co.uk/rss.xml",
@@ -16641,6 +16619,62 @@
       "reviewBy": "2026-04-27T17:16:47.386Z",
       "lastFailureAt": "2026-04-20T17:16:47.386Z",
       "lastCheckedAt": "2026-04-22T20:37:31.462Z"
+    },
+    {
+      "id": "deadline-news",
+      "provider": "Deadline News",
+      "endpoint": "https://www.deadlinenews.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 11,
+      "status": "auto-quarantined",
+      "reason": "Health score degraded to 20 after repeated failures",
+      "quarantinedAt": "2026-04-20T17:16:47.386Z",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "http-status-error",
+          "message": "HTTP 500",
+          "at": "2026-04-20T17:16:47.386Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-27T17:16:47.386Z",
+      "lastFailureAt": "2026-04-20T17:16:47.386Z",
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
+    },
+    {
+      "id": "silly-old-sod",
+      "provider": "Silly Old Sod",
+      "endpoint": "https://www.sillyoldsod.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 11,
+      "status": "auto-quarantined",
+      "reason": "Persistent timeouts — endpoint may be overloaded or unreachable",
+      "quarantinedAt": "2026-04-20T04:05:33.139Z",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-20T04:05:33.139Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-27T04:05:33.139Z",
+      "lastFailureAt": "2026-04-20T04:05:33.139Z",
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
     },
     {
       "id": "bbc-news-england-legacy",
@@ -16721,34 +16755,6 @@
       "lastCheckedAt": "2026-04-22T19:27:33.358Z"
     },
     {
-      "id": "deadline-news",
-      "provider": "Deadline News",
-      "endpoint": "https://www.deadlinenews.co.uk/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 14,
-      "status": "auto-quarantined",
-      "reason": "Health score degraded to 20 after repeated failures",
-      "quarantinedAt": "2026-04-20T17:16:47.386Z",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "http-status-error",
-          "message": "HTTP 500",
-          "at": "2026-04-20T17:16:47.386Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-27T17:16:47.386Z",
-      "lastFailureAt": "2026-04-20T17:16:47.386Z",
-      "lastCheckedAt": "2026-04-22T19:27:33.358Z"
-    },
-    {
       "id": "fmcg-gurus",
       "provider": "FMCG Gurus",
       "endpoint": "https://fmcggurus.com/feed/",
@@ -16775,34 +16781,6 @@
       "reviewBy": "2026-04-27T17:16:47.386Z",
       "lastFailureAt": "2026-04-20T17:16:47.386Z",
       "lastCheckedAt": "2026-04-22T19:27:33.358Z"
-    },
-    {
-      "id": "silly-old-sod",
-      "provider": "Silly Old Sod",
-      "endpoint": "https://www.sillyoldsod.com/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 14,
-      "status": "auto-quarantined",
-      "reason": "Persistent timeouts — endpoint may be overloaded or unreachable",
-      "quarantinedAt": "2026-04-20T04:05:33.139Z",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "timeout",
-          "message": "This operation was aborted",
-          "at": "2026-04-20T04:05:33.139Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-27T04:05:33.139Z",
-      "lastFailureAt": "2026-04-20T04:05:33.139Z",
-      "lastCheckedAt": "2026-04-22T20:37:31.462Z"
     },
     {
       "id": "the-week-uk",
@@ -16851,7 +16829,7 @@
       "region": "uk",
       "healthScore": 18,
       "status": "auto-quarantined",
-      "reason": "Needs review",
+      "reason": "Low health score – needs review",
       "quarantinedAt": "",
       "lastErrorCategory": "",
       "lastErrorMessage": "",
@@ -16863,6 +16841,28 @@
       "reviewBy": "",
       "lastFailureAt": "",
       "lastCheckedAt": "2026-04-22T21:59:30.032Z"
+    },
+    {
+      "id": "chatham-house-rss",
+      "provider": "Chatham House a Research & Commentary (RSS)",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "healthScore": 20,
+      "status": "auto-quarantined",
+      "reason": "Needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-27T08:39:19.161Z",
+      "lastFailureAt": "2026-04-20T08:39:19.161Z",
+      "lastCheckedAt": "2026-04-22T22:53:26.529Z"
     }
   ]
 }
