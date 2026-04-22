@@ -112,6 +112,12 @@ jobs:
       ALBERTALERT_FETCH_MAX_RETRIES: "2"
       ALBERTALERT_FEED_SOURCE_CONCURRENCY: "3"
       ALBERTALERT_TARGET_SUCCESSFUL_SOURCES_PER_RUN: "12"
+      # The smoke job is heavily throttled (concurrency=3, 5s fetch timeout,
+      # HTML caps of 5–6) so upstream 403/anti-bot flakiness regularly keeps
+      # the successful-source count below the production default floor of 8.
+      # Lower the floor here so the job still enforces a non-trivial minimum
+      # without failing purely on upstream availability.
+      ALBERTALERT_GUARDRAIL_MIN_SUCCESSFUL_SOURCES: "3"
       ALBERTALERT_GUARDRAIL_MAX_RUNTIME_MS: "480000"
       ALBERTALERT_FAIL_ON_GUARDRAIL_VIOLATION: "true"
 
