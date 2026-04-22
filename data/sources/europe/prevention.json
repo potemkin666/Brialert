@@ -34,28 +34,6 @@
       "comment": "No stable RSS endpoint across sections; using the homepage and relying on keyword filtering."
     },
     {
-      "id": "nctv-nl-english",
-      "provider": "NCTV (Netherlands) a English News",
-      "endpoint": "https://english.nctv.nl/latest/news",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Dutch National Coordinator for Security and Counterterrorism English terrorism threat assessment page."
-    },
-    {
-      "id": "nctv-nl-english-news",
-      "provider": "NCTV Netherlands latest news (English)",
-      "endpoint": "https://english.nctv.nl/latest/news",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases."
-    },
-    {
       "id": "ocam-be-english",
       "provider": "CUTA (Belgium) threat analysis",
       "endpoint": "https://cuta.belgium.be/",

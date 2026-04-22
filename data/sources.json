@@ -1245,30 +1245,6 @@
       "comment": "No stable RSS endpoint across sections; using the homepage and relying on keyword filtering."
     },
     {
-      "id": "nctv-nl-english",
-      "provider": "NCTV (Netherlands) a English News",
-      "endpoint": "https://english.nctv.nl/latest/news",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Dutch National Coordinator for Security and Counterterrorism English terrorism threat assessment page.",
-      "refreshEveryHours": 1
-    },
-    {
-      "id": "nctv-nl-english-news",
-      "provider": "NCTV Netherlands latest news (English)",
-      "endpoint": "https://english.nctv.nl/latest/news",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Latest news page of the Netherlands' National Coordinator for Security and Counterterrorism (NCTV), in English, listing news and press releases.",
-      "refreshEveryHours": 1
-    },
-    {
       "id": "ocam-be-english",
       "provider": "CUTA (Belgium) threat analysis",
       "endpoint": "https://cuta.belgium.be/",
@@ -1458,17 +1434,6 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Chatham House press releases feed for authoritative think-tank commentary on international security. Endpoint path is as provided."
-    },
-    {
-      "id": "chathamhouse-whatsnew",
-      "provider": "Chatham House a What's New (RSS)",
-      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Chatham House (RIIA) latest content feed. Endpoint path is as provided; verify against live feed if response is unexpected."
     },
     {
       "id": "counter-extremism-project-news",
@@ -2307,30 +2272,6 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "GLA CMS feed ID 80603. Verify content category against the live feed; likely safety, policing, or resilience-related GLA updates.",
-      "refreshEveryHours": 1
-    },
-    {
-      "id": "london-gov-rss-80610",
-      "provider": "Greater London Authority a RSS Feed 80610",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
-      "kind": "rss",
-      "lane": "context",
-      "region": "london",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80610. Verify content category against the live feed for specific topic or committee coverage.",
-      "refreshEveryHours": 1
-    },
-    {
-      "id": "london-gov-rss-80611",
-      "provider": "Greater London Authority a RSS Feed 80611",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
-      "kind": "rss",
-      "lane": "context",
-      "region": "london",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80611. Verify content category against the live feed for specific topic or committee coverage.",
       "refreshEveryHours": 1
     },
     {

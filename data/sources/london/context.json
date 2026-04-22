@@ -452,28 +452,6 @@
       "comment": "GLA CMS feed ID 80603. Verify content category against the live feed; likely safety, policing, or resilience-related GLA updates."
     },
     {
-      "id": "london-gov-rss-80610",
-      "provider": "Greater London Authority a RSS Feed 80610",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
-      "kind": "rss",
-      "lane": "context",
-      "region": "london",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80610. Verify content category against the live feed for specific topic or committee coverage."
-    },
-    {
-      "id": "london-gov-rss-80611",
-      "provider": "Greater London Authority a RSS Feed 80611",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
-      "kind": "rss",
-      "lane": "context",
-      "region": "london",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80611. Verify content category against the live feed for specific topic or committee coverage."
-    },
-    {
       "id": "london-gov-rss-80632",
       "provider": "Greater London Authority a RSS Feed 80632",
       "endpoint": "https://www.london.gov.uk/rss-feeds/80632",
