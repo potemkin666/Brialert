@@ -1,58 +1,6 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-22T17:39:27.641Z",
-  "totalSourceErrors": 3,
-  "top20": [
-    {
-      "id": "gnet-youth-rss",
-      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
-      "endpoint": "https://gnet-research.org/tag/youth/feed/",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "statusKind": "",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "prevention",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
-    {
-      "id": "echr-key-judgments-rss",
-      "provider": "European Court of Human Rights - Key Judgments RSS",
-      "endpoint": "https://hudoc.echr.coe.int/app/transform/rss?length=20&library=echreng&query=%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28+contentsitename%3AECHR+AND+%28NOT+%28doctype%3DPR+OR+doctype%3DHFCOMOLD+OR+doctype%3DHECOMOLD%29%29+AND+%28%28importance%3D%221%22%29+OR+%28importance%3D%222%22%29+OR+%28importance%3D%223%22%29%29+AND+%28%28documentcollectionid%3D%22GRANDCHAMBER%22%29+OR+%28documentcollectionid%3D%22CHAMBER%22%29+OR+%28documentcollectionid%3D%22DECGRANDCHAMBER%22%29+OR+%28documentcollectionid%3D%22ADMISSIBILITY%22%29%29%29+XRANK%28cb%3D14%29+doctypebranch%3AGRANDCHAMBER%29+XRANK%28cb%3D13%29+doctypebranch%3ADECGRANDCHAMBER%29+XRANK%28cb%3D12%29+doctypebranch%3ACHAMBER%29+XRANK%28cb%3D11%29+doctypebranch%3AADMISSIBILITY%29+XRANK%28cb%3D10%29+doctypebranch%3ACOMMITTEE%29+XRANK%28cb%3D9%29+doctypebranch%3AADMISSIBILITYCOM%29+XRANK%28cb%3D8%29+doctypebranch%3ADECCOMMISSION%29+XRANK%28cb%3D7%29+doctypebranch%3ACOMMUNICATEDCASES%29+XRANK%28cb%3D6%29+doctypebranch%3ACLIN%29+XRANK%28cb%3D5%29+doctypebranch%3AADVISORYOPINIONS%29+XRANK%28cb%3D4%29+doctypebranch%3AREPORTS%29+XRANK%28cb%3D3%29+doctypebranch%3AEXECUTION%29+XRANK%28cb%3D2%29+doctypebranch%3AMERITS%29+XRANK%28cb%3D1%29+doctypebranch%3ASCREENINGPANEL%29+XRANK%28cb%3D4%29+importance%3A1%29+XRANK%28cb%3D3%29+importance%3A2%29+XRANK%28cb%3D2%29+importance%3A3%29+XRANK%28cb%3D1%29+importance%3A4%29+XRANK%28cb%3D2%29+languageisocode%3AENG%29+XRANK%28cb%3D1%29+languageisocode%3AFRE&ranking. Model. Id=4180000c-8692-45ca-ad63-74bc4163871b&sort=kpdate+Descending&start=0",
-      "finalUrl": "",
-      "category": "http-status-error",
-      "statusKind": "",
-      "message": "HTTP 400",
-      "status": 400,
-      "rankScore": 1,
-      "suggestedAction": "manual source review",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "oversight",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
-    {
-      "id": "german-bka-press-releases-de",
-      "provider": "BKA Germany - Press Releases",
-      "endpoint": "https://www.bka.de/DE/Aktuelle. Informationen/Aktuelle. Meldungen/Pressemeldungen/pressemitteilungen_node.html",
-      "finalUrl": "",
-      "category": "network-failure",
-      "statusKind": "",
-      "message": "fetch failed",
-      "status": 0,
-      "rankScore": 1,
-      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    }
-  ]
+  "generatedAt": "2026-04-22T19:27:33.358Z",
+  "totalSourceErrors": 0,
+  "top20": []
 }
