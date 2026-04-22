@@ -1338,7 +1338,8 @@ h1 {
 /* ── Aesthetic: dot glow ──
    Soft coloured halo lifts each severity dot off the desaturated tiles,
    giving depth without clutter. The halo colour inherits from the dot's
-   background via a layered box-shadow. */
+   background via a layered box-shadow. A subtle inner radial highlight
+   ("gloss") and a faint outer ring add depth without extra DOM. */
 .map-dot {
   position: relative;
   display: block;
@@ -1346,8 +1347,10 @@ h1 {
   height: 14px;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.92);
+  background-image: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.12) 38%, rgba(255, 255, 255, 0) 62%);
   box-shadow:
     0 0 0 1px rgba(15, 23, 42, 0.28),
+    0 0 0 3px rgba(255, 255, 255, 0.10),
     0 0 6px 2px rgba(255, 255, 255, 0.18);
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
@@ -1377,7 +1380,7 @@ h1 {
 }
 
 .map-dot--critical {
-  background: #dc2626;
+  background-color: #dc2626;
   box-shadow:
     0 0 0 1px rgba(15, 23, 42, 0.28),
     0 0 8px 3px rgba(220, 38, 38, 0.45);
@@ -1389,7 +1392,7 @@ h1 {
 }
 
 .map-dot--high {
-  background: #ea580c;
+  background-color: #ea580c;
   box-shadow:
     0 0 0 1px rgba(15, 23, 42, 0.28),
     0 0 8px 3px rgba(234, 88, 12, 0.40);
@@ -1401,7 +1404,7 @@ h1 {
 }
 
 .map-dot--elevated {
-  background: #d97706;
+  background-color: #d97706;
   box-shadow:
     0 0 0 1px rgba(15, 23, 42, 0.28),
     0 0 8px 3px rgba(217, 119, 6, 0.35);
@@ -1413,7 +1416,7 @@ h1 {
 }
 
 .map-dot--moderate {
-  background: #0284c7;
+  background-color: #0284c7;
   box-shadow:
     0 0 0 1px rgba(15, 23, 42, 0.28),
     0 0 8px 3px rgba(2, 132, 199, 0.35);
