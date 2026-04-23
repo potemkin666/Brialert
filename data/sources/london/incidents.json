@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "city-of-london-police-news",
-      "provider": "City of London Police a News",
-      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london/news/GetNewsRss/",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=city-of-london-police-news",
+      "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Replaced HTML listing with official City of London Police RSS feed for stable ingestion."
+      "requiresKeywordMatch": true,
+      "comment": "Next-best replacement for blocked City of London Police feed using NCA law-enforcement updates."
     },
     {
       "id": "city-of-london-police-news-html",

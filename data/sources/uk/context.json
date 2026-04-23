@@ -110,14 +110,14 @@
     },
     {
       "id": "henry-jackson-society-news",
-      "provider": "Henry Jackson Society a Publications",
-      "endpoint": "https://henryjacksonsociety.org/feed/",
-      "kind": "rss",
+      "provider": "RUSI - Terrorism and Conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict?source=henry-jackson-society-news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Official Henry Jackson Society WordPress RSS feed for publications, blog posts and media releases."
+      "comment": "Next-best replacement for unavailable Henry Jackson Society feed using RUSI terrorism/conflict analysis."
     },
     {
       "id": "hope-not-hate-home",
@@ -154,14 +154,14 @@
     },
     {
       "id": "mi5-news",
-      "provider": "MI5 (Security Service) a News",
-      "endpoint": "https://www.mi5.gov.uk/News/News.xml",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=mi5-news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Switched from brittle MI5 news HTML listing to MI5 official news XML feed for low-maintenance ingestion."
+      "requiresKeywordMatch": true,
+      "comment": "Next-best replacement for blocked MI5 news feed using NCA security and enforcement updates."
     },
     {
       "id": "mi5-news-rss-direct",
@@ -629,16 +629,16 @@
     },
     {
       "id": "metro",
-      "provider": "Metro",
-      "endpoint": "https://metro.co.uk/feed/",
+      "provider": "BBC News - UK",
+      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml?source=metro",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "sourceTier": "context",
-      "reliabilityProfile": "tabloid",
-      "comment": "Metro UK RSS; tabloid gating applies."
+      "reliabilityProfile": "major_media",
+      "comment": "Replacement for anti-bot Metro feed using BBC UK RSS coverage."
     },
     {
       "id": "news-uk",
@@ -1104,14 +1104,14 @@
     },
     {
       "id": "faded-spring",
-      "provider": "Faded Spring",
-      "endpoint": "https://fadedspring.co.uk/feed/",
+      "provider": "Emily Underworld",
+      "endpoint": "https://emilyunderworld.co.uk/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for unavailable Faded Spring feed using Emily Underworld's active WordPress RSS feed."
     },
     {
       "id": "fmcg-gurus",

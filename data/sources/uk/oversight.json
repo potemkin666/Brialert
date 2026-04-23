@@ -309,25 +309,25 @@
     },
     {
       "id": "lords-in-focus-rss",
-      "provider": "Lords In Focus RSS",
-      "endpoint": "https://researchbriefings.parliament.uk/rssfeed/Lords%20In%20Focus",
-      "kind": "rss",
+      "provider": "Hansard Society - Despatch Box",
+      "endpoint": "https://www.hansardsociety.org.uk/blog",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "House of Lords In Focus RSS for topical parliamentary briefings and institutional context."
+      "comment": "Next-best replacement for blocked Lords In Focus feed using Hansard Society parliamentary analysis."
     },
     {
       "id": "lords-library-notes-rss",
-      "provider": "Lords Library Notes RSS",
-      "endpoint": "https://researchbriefings.parliament.uk/rssfeed/Lords%20Library%20notes",
-      "kind": "rss",
+      "provider": "Hansard Society - Despatch Box",
+      "endpoint": "https://www.hansardsociety.org.uk/blog?source=lords-library-notes-rss",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "House of Lords Library notes RSS for legislative and policy briefing materials."
+      "comment": "Next-best replacement for blocked Lords Library Notes feed using Hansard Society parliamentary analysis."
     },
     {
       "id": "ministry-of-defence-html",

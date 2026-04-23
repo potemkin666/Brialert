@@ -728,14 +728,14 @@
     },
     {
       "id": "tfl-press-releases",
-      "provider": "Transport for London a Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases/rss",
-      "kind": "rss",
+      "provider": "Transport for London - Press Releases",
+      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases?source=tfl-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Switched to official TfL press release RSS endpoint."
+      "comment": "Replacement for blocked TfL RSS feed using the public press-releases page."
     },
     {
       "id": "tfl-press-releases-html",

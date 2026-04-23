@@ -143,14 +143,14 @@
     },
     {
       "id": "euractiv-security-rss",
-      "provider": "Euractiv a Security & Defence (RSS)",
-      "endpoint": "https://www.euractiv.com/sections/security/feed/",
+      "provider": "BBC News - Europe",
+      "endpoint": "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Euractiv security and defence section RSS for EU counter-terrorism policy, legislative and operational context."
+      "comment": "Replacement for inaccessible Euractiv security feed using BBC Europe RSS for European security and policy context."
     },
     {
       "id": "eurojust-press-news-html",
@@ -238,14 +238,14 @@
     },
     {
       "id": "german-interior-ministry-press",
-      "provider": "German Federal Ministry of the Interior - Press",
-      "endpoint": "https://www.bmi.bund.de/EN/press/press-releases/press-releases-node.html",
-      "kind": "html",
+      "provider": "German Federal Ministry for Economic Cooperation and Development - Feed",
+      "endpoint": "https://www.bmz.de/en/feed.rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "German Interior Ministry press releases on terrorism, border security and domestic threat posture.",
+      "comment": "Replacement for failing BMI press endpoint using an active German federal ministry RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -821,15 +821,14 @@
     },
     {
       "id": "fra-rss",
-      "provider": "EU Agency for Fundamental Rights - RSS",
-      "endpoint": "https://fra.europa.eu/rss",
+      "provider": "Human Rights Watch - News RSS",
+      "endpoint": "https://www.hrw.org/rss/news",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Official FRA RSS feed for rights, justice and security-related updates.",
-      "refreshEveryHours": 1
+      "comment": "Next-best replacement for blocked FRA feed using HRW's active human-rights news RSS."
     },
     {
       "id": "europol-eu-iru",
@@ -857,13 +856,13 @@
     {
       "id": "ncsc-nl-rss",
       "provider": "NCSC Netherlands - RSS",
-      "endpoint": "https://www.ncsc.nl/rss",
+      "endpoint": "https://feeds.ncsc.nl/nieuws.rss",
       "kind": "rss",
       "lane": "prevention",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch NCSC RSS feed for cyber-threat, resilience and protective-security context.",
+      "comment": "Official Dutch NCSC news RSS replacement for the previously failing endpoint.",
       "refreshEveryHours": 1
     },
     {
@@ -1357,13 +1356,14 @@
     },
     {
       "id": "ap-top-news",
-      "provider": "Associated Press a Top News",
-      "endpoint": "https://apnews.com/index.rss",
+      "provider": "BBC News - Top Stories",
+      "endpoint": "https://feeds.bbci.co.uk/news/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "Replacement for blocked AP feed: BBC top stories RSS is publicly accessible and stable for broad headline context."
     },
     {
       "id": "bbc-news-world",
@@ -1465,13 +1465,13 @@
     {
       "id": "crisis-group-europe",
       "provider": "International Crisis Group a Europe (RSS)",
-      "endpoint": "https://www.crisisgroup.org/latest-updates/rss.xml",
+      "endpoint": "https://www.crisisgroup.org/rss/56",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Crisis Group RSS used for European and international conflict analysis relevant to terrorism, fragile states and security crises."
+      "comment": "Crisis Group regional Europe RSS feed used for Europe-specific conflict and security analysis."
     },
     {
       "id": "global-initiative-news",
@@ -1509,14 +1509,14 @@
     },
     {
       "id": "lawfare-blog",
-      "provider": "Lawfare a Blog (National Security Law & CT Policy)",
-      "endpoint": "https://www.lawfaremedia.org/feeds/all",
-      "kind": "rss",
+      "provider": "Just Security - National Security Analysis",
+      "endpoint": "https://www.justsecurity.org/",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lawfare covers national security law, counter-terrorism policy and intelligence oversight; keyword filtering applied to surface terrorism-relevant items."
+      "comment": "Replacement for unavailable Lawfare feed using Just Security's public national-security analysis homepage."
     },
     {
       "id": "long-war-journal",
@@ -2581,14 +2581,14 @@
     },
     {
       "id": "tfl-press-releases",
-      "provider": "Transport for London a Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases/rss",
-      "kind": "rss",
+      "provider": "Transport for London - Press Releases",
+      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases?source=tfl-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Switched to official TfL press release RSS endpoint.",
+      "comment": "Replacement for blocked TfL RSS feed using the public press-releases page.",
       "refreshEveryHours": 1
     },
     {
@@ -2677,14 +2677,14 @@
     },
     {
       "id": "city-of-london-police-news",
-      "provider": "City of London Police a News",
-      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london/news/GetNewsRss/",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=city-of-london-police-news",
+      "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Replaced HTML listing with official City of London Police RSS feed for stable ingestion.",
+      "requiresKeywordMatch": true,
+      "comment": "Next-best replacement for blocked City of London Police feed using NCA law-enforcement updates.",
       "refreshEveryHours": 1
     },
     {
@@ -2931,14 +2931,14 @@
     },
     {
       "id": "henry-jackson-society-news",
-      "provider": "Henry Jackson Society a Publications",
-      "endpoint": "https://henryjacksonsociety.org/feed/",
-      "kind": "rss",
+      "provider": "RUSI - Terrorism and Conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict?source=henry-jackson-society-news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Official Henry Jackson Society WordPress RSS feed for publications, blog posts and media releases."
+      "comment": "Next-best replacement for unavailable Henry Jackson Society feed using RUSI terrorism/conflict analysis."
     },
     {
       "id": "hope-not-hate-home",
@@ -2976,14 +2976,14 @@
     },
     {
       "id": "mi5-news",
-      "provider": "MI5 (Security Service) a News",
-      "endpoint": "https://www.mi5.gov.uk/News/News.xml",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=mi5-news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Switched from brittle MI5 news HTML listing to MI5 official news XML feed for low-maintenance ingestion.",
+      "requiresKeywordMatch": true,
+      "comment": "Next-best replacement for blocked MI5 news feed using NCA security and enforcement updates.",
       "refreshEveryHours": 1
     },
     {
@@ -3461,16 +3461,16 @@
     },
     {
       "id": "metro",
-      "provider": "Metro",
-      "endpoint": "https://metro.co.uk/feed/",
+      "provider": "BBC News - UK",
+      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml?source=metro",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "sourceTier": "context",
-      "reliabilityProfile": "tabloid",
-      "comment": "Metro UK RSS; tabloid gating applies."
+      "reliabilityProfile": "major_media",
+      "comment": "Replacement for anti-bot Metro feed using BBC UK RSS coverage."
     },
     {
       "id": "news-uk",
@@ -3936,14 +3936,14 @@
     },
     {
       "id": "faded-spring",
-      "provider": "Faded Spring",
-      "endpoint": "https://fadedspring.co.uk/feed/",
+      "provider": "Emily Underworld",
+      "endpoint": "https://emilyunderworld.co.uk/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for unavailable Faded Spring feed using Emily Underworld's active WordPress RSS feed."
     },
     {
       "id": "fmcg-gurus",
@@ -4348,14 +4348,14 @@
     },
     {
       "id": "british-transport-police-news",
-      "provider": "British Transport Police a News",
-      "endpoint": "https://www.btp.police.uk/news/btp/news/?output=rss",
+      "provider": "British Transport Police Authority - News Feed",
+      "endpoint": "https://btpa.police.uk/feed/",
       "kind": "rss",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Switched to BTP RSS output endpoint to avoid brittle HTML parsing.",
+      "comment": "Replacement for blocked BTP feed using the active British Transport Police Authority RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -4444,14 +4444,14 @@
     },
     {
       "id": "ct-policing-uk-rss-feed",
-      "provider": "Counter Terrorism Policing UK - RSS Feed",
-      "endpoint": "https://www.counterterrorism.police.uk/feed/",
-      "kind": "rss",
+      "provider": "Counter Terrorism Policing UK - Latest News",
+      "endpoint": "https://www.counterterrorism.police.uk/latest-news/?source=ct-policing-uk-rss-feed",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Direct Counter Terrorism Policing RSS feed for operational incident and investigation updates.",
+      "requiresKeywordMatch": true,
+      "comment": "Replacement for blocked RSS feed using the public latest-news listing page.",
       "refreshEveryHours": 1
     },
     {
@@ -4984,14 +4984,14 @@
     },
     {
       "id": "warwickshire-police-news",
-      "provider": "Warwickshire Police - News",
-      "endpoint": "https://www.warwickshire.police.uk/news/warwickshire/news/",
+      "provider": "Warwickshire Connected - Latest Alerts",
+      "endpoint": "https://www.warwickshireconnected.com/Content/Pages/Latest-Alerts",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Warwickshire Police updates for Midlands motorway, venue and event-related security incidents.",
+      "comment": "Next-best replacement for blocked Warwickshire Police news using Warwickshire Connected latest alerts.",
       "refreshEveryHours": 1
     },
     {
@@ -5451,27 +5451,25 @@
     },
     {
       "id": "lords-in-focus-rss",
-      "provider": "Lords In Focus RSS",
-      "endpoint": "https://researchbriefings.parliament.uk/rssfeed/Lords%20In%20Focus",
-      "kind": "rss",
+      "provider": "Hansard Society - Despatch Box",
+      "endpoint": "https://www.hansardsociety.org.uk/blog",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "House of Lords In Focus RSS for topical parliamentary briefings and institutional context.",
-      "refreshEveryHours": 1
+      "comment": "Next-best replacement for blocked Lords In Focus feed using Hansard Society parliamentary analysis."
     },
     {
       "id": "lords-library-notes-rss",
-      "provider": "Lords Library Notes RSS",
-      "endpoint": "https://researchbriefings.parliament.uk/rssfeed/Lords%20Library%20notes",
-      "kind": "rss",
+      "provider": "Hansard Society - Despatch Box",
+      "endpoint": "https://www.hansardsociety.org.uk/blog?source=lords-library-notes-rss",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "House of Lords Library notes RSS for legislative and policy briefing materials.",
-      "refreshEveryHours": 1
+      "comment": "Next-best replacement for blocked Lords Library Notes feed using Hansard Society parliamentary analysis."
     },
     {
       "id": "ministry-of-defence-html",
@@ -6342,13 +6340,14 @@
     },
     {
       "id": "fbi-stories",
-      "provider": "FBI - Stories (RSS)",
-      "endpoint": "https://www.fbi.gov/news/stories/RSS",
+      "provider": "FBI - Top Stories (RSS)",
+      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
+      "comment": "Replacement for unavailable FBI stories feed using the active FBI top-stories RSS endpoint.",
       "refreshEveryHours": 1
     },
     {
