@@ -225,7 +225,7 @@
     {
       "id": "german-bfv-news",
       "provider": "German BfV - News",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
+      "endpoint": "https://www.verfassungsschutz.de/EN/home/home_node.html",
       "kind": "html",
       "lane": "context",
       "region": "eu",
@@ -1627,7 +1627,7 @@
     {
       "id": "unodc-news",
       "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
-      "endpoint": "https://www.unodc.org/unodc/en/news/news.html",
+      "endpoint": "https://www.unodc.org/",
       "kind": "html",
       "lane": "context",
       "region": "international",
@@ -1650,7 +1650,7 @@
     {
       "id": "gctf-news",
       "provider": "Global Counterterrorism Forum (GCTF) a News",
-      "endpoint": "https://www.thegctf.org/News-Stories/PgrID/918/PageID/3",
+      "endpoint": "https://www.thegctf.org/News-Stories",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
@@ -2289,13 +2289,13 @@
     {
       "id": "mayor-of-london-press-releases",
       "provider": "Mayor of London a Press Releases",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
-      "kind": "rss",
+      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced page endpoint with official City Hall mayoral RSS feed.",
+      "comment": "Replaced brittle City Hall RSS feed (80610) with the live HTML mayoral press-release listing.",
       "refreshEveryHours": 1
     },
     {
@@ -2661,7 +2661,7 @@
     {
       "id": "whittington-health-news",
       "provider": "Whittington Health a News",
-      "endpoint": "https://www.whittington.nhs.uk/mini-apps/news/newsItems.asp",
+      "endpoint": "https://www.whittington.nhs.uk/mini-apps/news/newsItems.asp?NewsGroupID=1",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -2745,13 +2745,13 @@
     {
       "id": "london-assembly-press-releases",
       "provider": "London Assembly a Press Releases",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
-      "kind": "rss",
+      "endpoint": "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-press-releases",
+      "kind": "html",
       "lane": "oversight",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced page endpoint with official City Hall London Assembly RSS feed.",
+      "comment": "Replaced brittle City Hall RSS feed (80611) with the live HTML London Assembly press-release listing.",
       "refreshEveryHours": 1
     },
     {
