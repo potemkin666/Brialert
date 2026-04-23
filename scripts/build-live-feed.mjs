@@ -2534,14 +2534,23 @@ async function main() {
     if (!scheduledThisRun) cadenceDeferredSources.push(source);
     return scheduledThisRun;
   });
+  // Within each priority tier, rotate source order per hourly run using a
+  // deterministic hash of (source id | runSeed). This stops the scheduler
+  // from always draining the same "works reliably" sources first when
+  // concurrency or runtime guardrails cut a run short, so over time the
+  // cron pulls from the full catalogue rather than repeatedly from the
+  // first-listed reliable feeds.
+  const rankedRunSeed = Math.floor(buildDate.getTime() / 3600000);
   const rankedScheduledSources = scheduledSources
     .map((source, index) => ({
       source,
       index,
-      priority: sourceSchedulingPriority(source)
+      priority: sourceSchedulingPriority(source),
+      rotation: sourceDeterministicHash(`${source?.id || source?.endpoint || index}|${rankedRunSeed}`)
     }))
     .sort((left, right) => {
       if (right.priority !== left.priority) return right.priority - left.priority;
+      if (left.rotation !== right.rotation) return left.rotation - right.rotation;
       return left.index - right.index;
     });
   const machineReadableScheduled = rankedScheduledSources
@@ -2576,6 +2585,11 @@ async function main() {
     .sort((left, right) => {
       const priorityDelta = sourceSchedulingPriority(right.source) - sourceSchedulingPriority(left.source);
       if (priorityDelta !== 0) return priorityDelta;
+      // Rotate within the same priority tier per hour so continuation
+      // picks don't always favour the same ids when a run terminates early.
+      const leftRotation = sourceDeterministicHash(`${left.source?.id || left.source?.endpoint || left.index}|${rankedRunSeed}`);
+      const rightRotation = sourceDeterministicHash(`${right.source?.id || right.source?.endpoint || right.index}|${rankedRunSeed}`);
+      if (leftRotation !== rightRotation) return leftRotation - rightRotation;
       return left.index - right.index;
     })
     .map((entry) => entry.source);
