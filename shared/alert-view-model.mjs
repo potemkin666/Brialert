@@ -104,11 +104,12 @@ export function inferGeoPoint(alert, geoLookup = []) {
 /**
  * Coarse geo-precision values where deterministic jitter should be applied
  * to prevent markers from stacking at the exact same coordinate.
- * Build-side fallback coords arrive with 'country' or 'region' precision
- * and many alerts share the exact same point.
+ * Build-side country-level fallback coords often stack at the exact same point.
+ * Region-level coordinates are now preserved so city/metro stories stay anchored
+ * to their actual resolved location on the map.
  * Note: 'fallback' is excluded because the fallback branch already applies jitter.
  */
-const COARSE_GEO_PRECISIONS = new Set(['country', 'region', 'unknown']);
+const COARSE_GEO_PRECISIONS = new Set(['country', 'unknown']);
 
 /**
  * Jitter ranges by precision level. Country-level alerts spread ±1.5° (~165 km)
@@ -118,12 +119,11 @@ const COARSE_GEO_PRECISIONS = new Set(['country', 'region', 'unknown']);
  * region-level fallback coordinates.
  */
 const JITTER_RANGE_COUNTRY = 1.5;
-const JITTER_RANGE_REGION = 0.5;
 const JITTER_RANGE = 0.05;
 
 function jitterRangeForPrecision(precision) {
   if (precision === 'country') return JITTER_RANGE_COUNTRY;
-  if (precision === 'region' || precision === 'unknown') return JITTER_RANGE_REGION;
+  if (precision === 'unknown') return JITTER_RANGE;
   return JITTER_RANGE;
 }
 
@@ -635,11 +635,9 @@ export function normaliseAlert(alert, index, geoLookup = []) {
     resolvedGeoPrecision = 'fallback';
   }
 
-  // Apply jitter for coarse-precision coordinates so stacked markers spread
-  // visibly on the map. Build-side fallback coords arrive with geoPrecision
-  // 'country' or 'region' and many alerts share the exact same point.
-  // Country-level uses a wider spread (±1.5°) so clusters break apart at
-  // world zoom; region-level uses ±0.5°.
+  // Apply jitter for country-level coordinates so stacked markers spread
+  // visibly on the map. Region-level coordinates stay exact so London/Paris
+  // style stories do not drift away from the place named in the article.
   if (COARSE_GEO_PRECISIONS.has(resolvedGeoPrecision)) {
     const alertId = clean(alert.id) || `live-${index}`;
     const range = jitterRangeForPrecision(resolvedGeoPrecision);

@@ -201,14 +201,12 @@ test('normaliseAlert() rejects out-of-range lat/lng and falls back', () => {
 });
 
 // ── Coarse-precision jitter tests ──────────────────────────────────────
-// Build-side assigns exact fallback coordinates with geoPrecision 'country' or
-// 'region'. Without jitter, many alerts stack at the same pixel. These tests
-// verify that coarse-precision alerts get deterministic jitter applied.
-// Country-level uses ±1.5° so clusters break apart at world zoom;
-// region-level uses ±0.5°.
+// Build-side assigns exact fallback coordinates for broad country-level items.
+// Those still get deterministic jitter so they do not stack at one pixel.
+// Region-level coordinates stay exact so city/metro incidents remain anchored
+// to the place named in the story.
 
 const COUNTRY_JITTER_TOLERANCE = 1.6; // slightly above the ±1.5° country jitter range
-const REGION_JITTER_TOLERANCE = 0.6;  // slightly above the ±0.5° region jitter range
 
 test('normaliseAlert() applies jitter for geoPrecision "country"', () => {
   const a = normaliseAlert({
@@ -224,21 +222,17 @@ test('normaliseAlert() applies jitter for geoPrecision "country"', () => {
   assert.equal(a.geoPrecision, 'country');
 });
 
-test('normaliseAlert() applies jitter for geoPrecision "region"', () => {
+test('normaliseAlert() preserves exact coords for geoPrecision "region"', () => {
   const a = normaliseAlert({
     id: 'region-jitter', region: 'london', title: 'Test',
     lat: 51.5074, lng: -0.1278, geoPrecision: 'region'
   }, 0);
-  assert.notEqual(a.lat, 51.5074, 'lat should be jittered away from exact fallback');
-  assert.notEqual(a.lng, -0.1278, 'lng should be jittered away from exact fallback');
-  assert.ok(Math.abs(a.lat - 51.5074) <= REGION_JITTER_TOLERANCE,
-    `jittered lat ${a.lat} should stay within ±0.5° of 51.5074`);
-  assert.ok(Math.abs(a.lng - (-0.1278)) <= REGION_JITTER_TOLERANCE,
-    `jittered lng ${a.lng} should stay within ±0.5° of -0.1278`);
+  assert.equal(a.lat, 51.5074, 'region-precision lat should stay exact');
+  assert.equal(a.lng, -0.1278, 'region-precision lng should stay exact');
   assert.equal(a.geoPrecision, 'region');
 });
 
-test('normaliseAlert() country jitter is wider than region jitter', () => {
+test('normaliseAlert() country jitter is wider than exact region placement', () => {
   // Compute average absolute jitter for 20 country-level and 20 region-level ids
   let countrySum = 0;
   let regionSum = 0;
@@ -254,6 +248,7 @@ test('normaliseAlert() country jitter is wider than region jitter', () => {
     }, i);
     regionSum += Math.abs(r.lat - 54.5) + Math.abs(r.lng - (-2.5));
   }
+  assert.equal(regionSum, 0, 'region precision should no longer be jittered');
   assert.ok(countrySum > regionSum,
     `country jitter total ${countrySum.toFixed(3)} should exceed region total ${regionSum.toFixed(3)}`);
 });

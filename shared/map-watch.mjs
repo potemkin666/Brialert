@@ -15,10 +15,8 @@ const WORLD_CLUSTER_MAX_ZOOM = 7;
 const NEARBY_CLUSTER_MAX_ZOOM = 10;
 const INITIAL_NEARBY_ZOOM = 9;
 const FRESH_ALERT_WINDOW_MS = 90 * 60 * 1000;
-const LEAFLET_CSS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-const LEAFLET_CSS_INTEGRITY = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-const LEAFLET_JS_URL = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-const LEAFLET_JS_INTEGRITY = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+const LEAFLET_CSS_URL = './assets/vendor/leaflet/leaflet.css';
+const LEAFLET_JS_URL = './assets/vendor/leaflet/leaflet.js';
 const MAX_MAP_INIT_ATTEMPTS = 8;
 
 const TILE_LIGHT = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
@@ -49,8 +47,6 @@ function ensureLeafletAssets() {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = LEAFLET_CSS_URL;
-    link.integrity = LEAFLET_CSS_INTEGRITY;
-    link.crossOrigin = 'anonymous';
     link.dataset.leafletCss = 'true';
     document.head.appendChild(link);
   }
@@ -65,8 +61,7 @@ function ensureLeafletLoaded() {
     ensureLeafletAssets();
     const script = document.createElement('script');
     script.src = LEAFLET_JS_URL;
-    script.integrity = LEAFLET_JS_INTEGRITY;
-    script.crossOrigin = 'anonymous';
+    script.dataset.leafletJs = 'true';
     script.async = true;
     script.onload = () => resolve(window.L);
     script.onerror = () => {
