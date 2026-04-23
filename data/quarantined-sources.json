@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-23T21:58:03.349Z",
+  "generatedAt": "2026-04-23T22:53:56.180Z",
   "count": 528,
   "metrics": {
     "total": 528,
     "newThisWeek": 233,
-    "avgTimeInQuarantineHours": 143,
+    "avgTimeInQuarantineHours": 144,
     "avgHealthScore": 3,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -3702,7 +3702,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T17:16:47.386Z",
       "lastFailureAt": "2026-04-20T17:16:47.386Z",
-      "lastCheckedAt": "2026-04-23T19:31:23.009Z"
+      "lastCheckedAt": "2026-04-23T22:53:56.180Z"
     },
     {
       "id": "deadline-news",
@@ -3956,7 +3956,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T18:05:04.781Z",
       "lastFailureAt": "2026-04-19T18:05:04.781Z",
-      "lastCheckedAt": "2026-04-23T19:31:23.009Z"
+      "lastCheckedAt": "2026-04-23T22:53:56.180Z"
     },
     {
       "id": "cheshire-police-alert",
@@ -6538,7 +6538,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T13:19:06.686Z",
       "lastFailureAt": "2026-04-19T13:19:06.686Z",
-      "lastCheckedAt": "2026-04-23T19:31:23.009Z"
+      "lastCheckedAt": "2026-04-23T22:53:56.180Z"
     },
     {
       "id": "the-scottish-sun",
@@ -15321,7 +15321,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T12:14:24.733Z",
       "lastFailureAt": "2026-04-20T12:14:24.733Z",
-      "lastCheckedAt": "2026-04-23T19:31:23.009Z"
+      "lastCheckedAt": "2026-04-23T22:53:56.180Z"
     },
     {
       "id": "gov-uk-counter-extremism-commissioner",
@@ -15867,7 +15867,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T08:39:19.161Z",
       "lastFailureAt": "2026-04-20T08:39:19.161Z",
-      "lastCheckedAt": "2026-04-23T19:31:23.009Z"
+      "lastCheckedAt": "2026-04-23T22:53:56.180Z"
     },
     {
       "id": "unodc-news",
@@ -16542,7 +16542,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T08:39:19.161Z",
       "lastFailureAt": "2026-04-20T08:39:19.161Z",
-      "lastCheckedAt": "2026-04-23T19:31:23.009Z"
+      "lastCheckedAt": "2026-04-23T22:53:56.180Z"
     },
     {
       "id": "joint-committee-human-rights-html",
@@ -16865,6 +16865,28 @@
       "lastCheckedAt": "2026-04-23T03:28:47.210Z"
     },
     {
+      "id": "rte-ireland-news-rss",
+      "provider": "RTE News - Ireland (RSS)",
+      "endpoint": "https://feeds.feedburner.com/ietopstories",
+      "kind": "rss",
+      "lane": "context",
+      "region": "europe",
+      "healthScore": 11,
+      "status": "auto-quarantined",
+      "reason": "Low health score – needs review",
+      "quarantinedAt": "",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-27T08:39:19.161Z",
+      "lastFailureAt": "2026-04-20T08:39:19.161Z",
+      "lastCheckedAt": "2026-04-23T22:53:56.180Z"
+    },
+    {
       "id": "love-my-dress",
       "provider": "Love My Dress",
       "endpoint": "https://www.lovemydress.net/feed",
@@ -16891,28 +16913,6 @@
       "reviewBy": "2026-04-29T14:59:55.048Z",
       "lastFailureAt": "2026-04-22T14:59:55.048Z",
       "lastCheckedAt": "2026-04-22T14:59:55.048Z"
-    },
-    {
-      "id": "rte-ireland-news-rss",
-      "provider": "RTE News - Ireland (RSS)",
-      "endpoint": "https://feeds.feedburner.com/ietopstories",
-      "kind": "rss",
-      "lane": "context",
-      "region": "europe",
-      "healthScore": 14,
-      "status": "auto-quarantined",
-      "reason": "Low health score – needs review",
-      "quarantinedAt": "",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-27T08:39:19.161Z",
-      "lastFailureAt": "2026-04-20T08:39:19.161Z",
-      "lastCheckedAt": "2026-04-23T19:31:23.009Z"
     },
     {
       "id": "the-week-uk",
