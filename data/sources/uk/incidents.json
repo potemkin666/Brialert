@@ -14,13 +14,13 @@
     {
       "id": "avon-somerset-police-news",
       "provider": "Avon & Somerset Police a News",
-      "endpoint": "https://www.avonandsomerset.police.uk/newsroom/",
+      "endpoint": "https://www.avonandsomerset.police.uk/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Avon & Somerset Police newsroom covering Bristol and surrounding area incidents including counter-terrorism operations."
+      "comment": "Avon & Somerset Police official news page for Bristol and surrounding area incidents including counter-terrorism operations."
     },
     {
       "id": "bedfordshire-police-news",
@@ -662,25 +662,25 @@
     },
     {
       "id": "west-yorkshire-police-all-rss",
-      "provider": "West Yorkshire Police - All Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/all/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - All News",
+      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police all-content feed for broader regional policing updates with downstream filtering."
+      "comment": "West Yorkshire Police all news stories page used as the stable official fallback for the deprecated all-feed endpoint."
     },
     {
       "id": "west-yorkshire-police-appeals-rss",
-      "provider": "West Yorkshire Police - Appeals Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/appeals/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - Appeals",
+      "endpoint": "https://www.westyorkshire.police.uk/news-appeals/appeals",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police appeals feed for incidents, wanted appeals and operational notices."
+      "comment": "West Yorkshire Police appeals page used as the stable official fallback for the brittle appeals RSS endpoint."
     },
     {
       "id": "west-yorkshire-police-missing-rss",
@@ -707,35 +707,35 @@
     {
       "id": "west-yorkshire-police-news-appeals",
       "provider": "West Yorkshire Police - News Appeals",
-      "endpoint": "https://www.westyorkshirepolice.co.uk/news-appeals",
+      "endpoint": "https://www.westyorkshire.police.uk/news-appeals",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police appeals and news page for Leeds, Bradford and regional operations."
+      "comment": "West Yorkshire Police official news and appeals page for Leeds, Bradford and regional operations."
     },
     {
       "id": "west-yorkshire-police-news-rss",
-      "provider": "West Yorkshire Police - News Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - News",
+      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police main news RSS feed for operational updates and incident reporting."
+      "comment": "West Yorkshire Police all news stories page used as the stable official fallback for the deprecated news RSS endpoint."
     },
     {
       "id": "west-yorkshire-police-releases-rss",
-      "provider": "West Yorkshire Police - Releases Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/releases/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - RSS Feeds",
+      "endpoint": "https://www.westyorkshire.police.uk/rss-feeds",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police releases feed for press statements, arrests and public-safety reporting."
+      "comment": "West Yorkshire Police official RSS index page used as the stable fallback for brittle releases feed URLs."
     },
     {
       "id": "wiltshire-police-news",
