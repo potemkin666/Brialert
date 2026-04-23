@@ -177,12 +177,12 @@ export function plainText(value) {
 }
 
 const SOCIAL_SHARE_NOISE = /\b(?:copy\s+link|share\s+(?:this|via|on)|tweet|facebook|whatsapp|telegram|email|twitter|linkedin|pinterest|reddit|subscribe|newsletter|sign\s+up)\b/i;
-const AUTHOR_BIO_PATTERN = /\bis\s+(?:the\s+|an?\s+)?(?:[\w'’.-]+\s+){0,5}(?:correspondent|reporter|editor|journalist|writer|columnist|contributor|producer|presenter|analyst)\b/i;
+const AUTHOR_BIO_PATTERN = /\bis\s+(?:the\s+|an?\s+)?(?:[\w'’.-]+\s+){0,3}(?:correspondent|reporter|editor|journalist|writer|columnist|contributor|producer|presenter|analyst)\b/i;
 const AUTHOR_BIO_CONTINUATION_PATTERN = /\b(?:he|she|they)\s+has\s+(?:covered|reported on|written for|worked as)\b/i;
 const SOCIAL_SHARE_SEQUENCE_PATTERN = /\b(?:copy\s+link|share\s+(?:this|via|on)|tweet|facebook|whatsapp|telegram|email|twitter|linkedin|pinterest|reddit)(?:\s+(?:copy\s+link|share\s+(?:this|via|on)|tweet|facebook|whatsapp|telegram|email|twitter|linkedin|pinterest|reddit))+\b/gi;
 const NEWSLETTER_INLINE_PATTERN = /\b(?:subscribe|sign\s+up)\s+(?:for|to)\s+(?:our\s+)?newsletter\b[^.!?]*/gi;
-const INLINE_AUTHOR_BIO_PATTERN = /\b[A-Z][a-z'’.-]+(?:\s+[A-Z][a-z'’.-]+){0,3}\s+is\s+(?:the\s+|an?\s+)?(?:[\w'’.-]+\s+){0,5}(?:correspondent|reporter|editor|journalist|writer|columnist|contributor|producer|presenter|analyst)\b[^.!?]{0,240}(?:[.!?]|$)/gi;
-const INLINE_AUTHOR_BIO_CONTINUATION_PATTERN = /\b(?:he|she|they)\s+has\s+(?:covered|reported on|written for|worked as)\b[^.!?]{0,240}(?:[.!?]|$)/gi;
+const INLINE_AUTHOR_BIO_PATTERN = /\b[A-Z][a-z'’.-]+(?:\s+[A-Z][a-z'’.-]+){0,3}\s+is\s+(?:the\s+|an?\s+)?(?:[\w'’.-]+\s+){0,3}(?:correspondent|reporter|editor|journalist|writer|columnist|contributor|producer|presenter|analyst)\b[^.!?]{0,160}(?:[.!?]|$)/gi;
+const INLINE_AUTHOR_BIO_CONTINUATION_PATTERN = /\b(?:he|she|they)\s+has\s+(?:covered|reported on|written for|worked as)\b[^.!?]{0,160}(?:[.!?]|$)/gi;
 export const SENTENCE_SPLIT_PATTERN = /(?<=[.!?])\s+|\s{2,}/;
 
 export function isWebCruft(sentence) {
@@ -206,13 +206,13 @@ export function stripWebCruft(text) {
 
   if (!collapsed) return '';
 
-  return collapsed
+  return Array.from(new Set(
+    collapsed
     .split(SENTENCE_SPLIT_PATTERN)
     .map((part) => clean(part))
     .filter(Boolean)
     .filter((part) => !isWebCruft(part))
-    .filter((part, index, all) => all.indexOf(part) === index)
-    .join(' ');
+  )).join(' ');
 }
 
 export function matchesKeywords(text, words = incidentKeywords) {
