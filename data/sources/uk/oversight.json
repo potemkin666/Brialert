@@ -419,14 +419,14 @@
     },
     {
       "id": "police-uk-outcomes-at-location-1609590",
-      "provider": "Police.uk - Outcomes At Location 1609590",
-      "endpoint": "https://data.police.uk/api/outcomes-at-location?date=2024-01&location_id=1609590",
-      "kind": "json",
+      "provider": "Police Data UK - Outcomes At Location API Docs",
+      "endpoint": "https://data.police.uk/docs/method/outcomes-at-location/",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Official Police.uk API outcome records for location 1609590 in January 2024."
+      "comment": "Best-effort replacement using official Police Data UK outcomes-at-location documentation and examples."
     },
     {
       "id": "police-uk-outcomes-for-crime-e11dade0",

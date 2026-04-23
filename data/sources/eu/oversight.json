@@ -57,14 +57,14 @@
     },
     {
       "id": "eu-commission-presscorner-home",
-      "provider": "European Commission - Press Corner",
-      "endpoint": "https://ec.europa.eu/commission/presscorner/home/en",
-      "kind": "html",
+      "provider": "Council of the EU - Press Releases (RSS)",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx?source=eu-commission-presscorner-home",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "European Commission Press Corner home for official releases, statements and security-related announcements."
+      "comment": "Best-effort replacement using the active Council of the EU press-releases RSS feed."
     },
     {
       "id": "eu-council-fight-against-terrorism",

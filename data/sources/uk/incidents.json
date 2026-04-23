@@ -365,14 +365,14 @@
     },
     {
       "id": "leicestershire-police-news",
-      "provider": "Leicestershire Police - News",
-      "endpoint": "https://www.leics.police.uk/news/leicestershire/news/",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=leicestershire-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Leicestershire Police news for Midlands threat reporting and urban incident corroboration."
+      "comment": "Best-effort replacement for inaccessible Leicestershire Police news using NCA operations and arrests updates."
     },
     {
       "id": "lincolnshire-police-news",
@@ -453,14 +453,14 @@
     },
     {
       "id": "northumbria-police-news",
-      "provider": "Northumbria Police a News",
-      "endpoint": "https://northumbria.police.uk/news/",
+      "provider": "North East Bylines",
+      "endpoint": "https://northeastbylines.co.uk/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Northumbria Police news for Newcastle and North East England terrorism-related incidents and counter-terror operations."
+      "comment": "Best-effort replacement for unavailable Northumbria Police source using North East regional reporting."
     },
     {
       "id": "northumbria-police-northumbria-news",

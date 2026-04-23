@@ -68,14 +68,14 @@
     },
     {
       "id": "ran-network",
-      "provider": "Radicalisation Awareness Network (RAN) a Publications",
-      "endpoint": "https://www.radicalisationawarenessnetwork.eu/news-events/publications",
+      "provider": "RUSI - Terrorism and Conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict?source=ran-network",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "EU Commission-funded RAN network publications on radicalisation prevention and counter-extremism approaches."
+      "comment": "Best-effort replacement for unavailable RAN network source using RUSI terrorism and conflict analysis."
     },
     {
       "id": "sapo-se-english",

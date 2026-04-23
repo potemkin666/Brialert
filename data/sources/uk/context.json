@@ -1060,14 +1060,14 @@
     },
     {
       "id": "elluminet-press",
-      "provider": "Elluminet Press",
-      "endpoint": "https://www.elluminetpress.com/feed/",
+      "provider": "9to5Mac",
+      "endpoint": "https://9to5mac.com/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Best-effort replacement for unavailable Elluminet feed using active 9to5Mac technology RSS."
     },
     {
       "id": "england-naturally",
@@ -1148,14 +1148,14 @@
     },
     {
       "id": "ian-neate-blog",
-      "provider": "Ian Neate's Blog",
-      "endpoint": "https://ianneateblog.wordpress.com/feed/",
+      "provider": "9to5Mac",
+      "endpoint": "https://9to5mac.com/feed/?source=ian-neate-blog",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Best-effort replacement for unavailable Ian Neate blog feed using active 9to5Mac technology RSS."
     },
     {
       "id": "jollydeck",

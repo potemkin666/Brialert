@@ -46,14 +46,14 @@
     },
     {
       "id": "paris-police-prefecture-news",
-      "provider": "Prefecture de Police de Paris - News",
-      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/actualites",
-      "kind": "html",
+      "provider": "France24 - France (RSS)",
+      "endpoint": "https://www.france24.com/en/france/rss",
+      "kind": "rss",
       "lane": "incidents",
       "region": "europe",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Paris Police Prefecture news for capital-city operational incidents and public-order security context."
+      "comment": "Best-effort replacement for blocked Paris Police Prefecture source using France24 France RSS coverage."
     },
     {
       "id": "portugal-pj-news",
@@ -68,14 +68,14 @@
     },
     {
       "id": "portugal-psp-news",
-      "provider": "Public Security Police Portugal - News",
-      "endpoint": "https://www.psp.pt/Pages/noticias.aspx",
+      "provider": "The Portugal News - Crime",
+      "endpoint": "https://www.theportugalnews.com/news/crime",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Portuguese PSP updates for public-order, terror-related incidents and urban policing context."
+      "comment": "Best-effort replacement for inaccessible PSP news using Portugal-focused crime reporting."
     }
   ]
 }
