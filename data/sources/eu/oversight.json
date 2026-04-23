@@ -46,14 +46,14 @@
     },
     {
       "id": "eu-commission-home-affairs-topic",
-      "provider": "European Commission - Home Affairs",
-      "endpoint": "https://commission.europa.eu/topics/home-affairs_en",
+      "provider": "European Commission - Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "European Commission Home Affairs topic page for migration, internal security and terrorism-policy context."
+      "comment": "Migration and Home Affairs news page used as the best active source for dated policy and security updates."
     },
     {
       "id": "eu-commission-presscorner-home",
@@ -111,14 +111,14 @@
     },
     {
       "id": "eu-council-press-releases-html",
-      "provider": "Council of the EU - Press Releases",
-      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/",
-      "kind": "html",
+      "provider": "Council of the EU - Press Releases (RSS)",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Council of the EU press releases page for official announcements, JHA outcomes and sanctions statements."
+      "comment": "Next-best replacement for the blocked HTML page using the accessible official Council press releases RSS feed."
     },
     {
       "id": "eu-council-rss-index",
@@ -199,14 +199,14 @@
     },
     {
       "id": "eu-security-union-strategy",
-      "provider": "European Commission a Security Union Strategy",
-      "endpoint": "https://home-affairs.ec.europa.eu/policies/internal-security_en",
+      "provider": "European Commission - Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EU Commission Security Union policy page for counter-terrorism, serious crime, and internal security updates."
+      "comment": "Next-best active source for internal-security developments using the Home Affairs news stream."
     },
     {
       "id": "eucrim-counter-terrorism-agenda",
