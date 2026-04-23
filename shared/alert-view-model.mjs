@@ -2,6 +2,7 @@ import {
   clean,
   plainText,
   isWebCruft,
+  SENTENCE_SPLIT_PATTERN,
   stripWebCruft,
   normaliseSourceTier,
   normaliseReliabilityProfile,
@@ -172,7 +173,7 @@ function looksGenericSummary(text) {
 function articleBodyBits(alert) {
   const base = stripWebCruft(alert.sourceExtract || (alert.summary && alert.summary !== alert.title ? alert.summary : ''));
   return base
-    .split(/(?<=[.!?])\s+|\s{2,}/)
+    .split(SENTENCE_SPLIT_PATTERN)
     .map((part) => clean(part))
     .filter(Boolean)
     .filter((part) => !isWebCruft(part))

@@ -355,7 +355,7 @@ export function shouldKeepItem(source, item) {
 
 export function buildAlert(source, item, idx) {
   const normalizedItem = normaliseItemForFiltering(item);
-  const text = `${normalizedItem.title} ${normalizedItem.summary} ${normalizedItem.sourceExtract}`;
+  const text = `${normalizedItem.title} ${normalizedItem.summary}`;
   const sourceTier = inferSourceTier(source);
   const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
   const location = inferLocation(source, normalizedItem.title, normalizedItem.summary);
