@@ -112,14 +112,14 @@
     },
     {
       "id": "norway-pst-news",
-      "provider": "Norwegian Police Security Service - News",
-      "endpoint": "https://www.pst.no/alle-artikler/",
+      "provider": "Norwegian Government - News and Press Releases",
+      "endpoint": "https://www.regjeringen.no/en/whats-new/news-and-press-releases/id4/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Norwegian PST reporting on terrorism threats, extremism and protective-security posture."
+      "comment": "Closest official substitute for unavailable PST news pages, covering justice and national-security press releases from the Norwegian government."
     },
     {
       "id": "politico-europe",

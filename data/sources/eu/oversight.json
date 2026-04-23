@@ -13,14 +13,14 @@
     },
     {
       "id": "eppo-news-node-7",
-      "provider": "European Public Prosecutor's Office - News and Media",
-      "endpoint": "https://www.eppo.europa.eu/en/node/7",
-      "kind": "html",
+      "provider": "European Public Prosecutor's Office - News (RSS)",
+      "endpoint": "https://www.eppo.europa.eu/en/news.xml",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EPPO news and media surface for investigations, prosecutions and institutional statements."
+      "comment": "Official EPPO RSS feed for investigations, warnings and institutional announcements."
     },
     {
       "id": "eu-cellar-rss-atom",
@@ -79,24 +79,25 @@
     },
     {
       "id": "eu-council-jha-meetings",
-      "provider": "Council of the European Union a Justice & Home Affairs Meetings (RSS)",
-      "endpoint": "https://www.consilium.europa.eu/en/rss/meetings.ashx?cat=jha",
-      "kind": "rss",
+      "provider": "Council of the EU - JHA Press Releases",
+      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/?cc%5B%5D=24",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false
+      "requiresKeywordMatch": false,
+      "comment": "Closest viable JHA-specific replacement: filtered Council press releases page for justice and home affairs outcomes."
     },
     {
       "id": "eu-council-jha-register-rss",
-      "provider": "Council of the EU - Justice and Home Affairs Register RSS",
-      "endpoint": "https://www.consilium.europa.eu/en/register/rss/THMJHA.xml",
+      "provider": "Council of the EU - Latest Documents RSS",
+      "endpoint": "https://www.consilium.europa.eu/en/register/rss/LD.xml",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Council register RSS for justice and home affairs documentation."
+      "comment": "Official Council public-register latest-documents RSS feed used as the workable replacement for the blocked JHA register feed."
     },
     {
       "id": "eu-council-press-releases",
@@ -154,14 +155,14 @@
     },
     {
       "id": "eu-eppo-news",
-      "provider": "European Public Prosecutor's Office a Press Releases",
-      "endpoint": "https://www.eppo.europa.eu/en/media/press-releases",
+      "provider": "European Public Prosecutor's Office - News",
+      "endpoint": "https://www.eppo.europa.eu/en/news",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EPPO press releases on cross-border EU fraud and financial crime prosecutions including terrorist financing investigations."
+      "comment": "Official EPPO news page retained as a distinct HTML companion to the RSS feed for investigations and institutional updates."
     },
     {
       "id": "eu-fra-rss",
@@ -252,23 +253,25 @@
     },
     {
       "id": "europarl-committee-libe",
-      "provider": "European Parliament a LIBE Committee (RSS)",
-      "endpoint": "https://www.europarl.europa.eu/rss/committee/libe/en.xml",
-      "kind": "rss",
+      "provider": "European Parliament - LIBE Press Releases",
+      "endpoint": "https://www.europarl.europa.eu/committees/en/libe/home/press-releases",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "LIBE committee press-releases page for civil-liberties, justice and home-affairs oversight updates."
     },
     {
       "id": "europarl-committee-sede",
-      "provider": "European Parliament a SEDE Committee (RSS)",
-      "endpoint": "https://www.europarl.europa.eu/rss/committee/sede/en.xml",
-      "kind": "rss",
+      "provider": "European Parliament - SEDE Press Releases",
+      "endpoint": "https://www.europarl.europa.eu/committees/en/sede/home/press-releases",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "SEDE committee press-releases page for security and defence oversight updates."
     },
     {
       "id": "europarl-pressreleases-committees",

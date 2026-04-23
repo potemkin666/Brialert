@@ -2,25 +2,25 @@
   "sources": [
     {
       "id": "bfv-de-english",
-      "provider": "BfV press page (Federal Office for the Protection of the Constitution)",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
+      "provider": "BfV service page (Federal Office for the Protection of the Constitution)",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/service_node.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Press page of Germany's Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English."
+      "comment": "Official English BfV service page covering reporting, prevention support and exit-programme information."
     },
     {
       "id": "dsn-at-english",
-      "provider": "DSN Austria news",
-      "endpoint": "https://www.dsn.gv.at/",
+      "provider": "DSN Austria - Aktuelles",
+      "endpoint": "https://www.dsn.gv.at/news.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Official DSN Austria homepage (German); no English-language DSN site or feed is available."
+      "comment": "German DSN Austria news page used as the closest official replacement for the unavailable English-language surface."
     },
     {
       "id": "isd-global",

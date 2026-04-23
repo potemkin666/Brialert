@@ -17,6 +17,7 @@ import {
 import { loadArray, loadBoolean, loadSet, saveArray, saveBoolean, saveSet } from '../shared/persistence-ui.mjs';
 import { reportBackgroundError } from '../shared/logger.mjs';
 import {
+  buildAlert,
   discardReasonForItem,
   recencyOkay,
   shouldKeepItem,
@@ -32,6 +33,7 @@ import {
 } from '../shared/alert-view-model.mjs';
 import {
   inferIncidentTrack,
+  stripWebCruft,
   isTerrorRelevantIncident,
   matchesKeywords,
   terrorismKeywords,
@@ -1110,6 +1112,58 @@ test('discardReasonForItem does not flag terror article as entertainment', () =>
   };
 
   assert.equal(discardReasonForItem(source, terrorArticle), null);
+});
+
+test('discardReasonForItem rejects context items whose terror hit only comes from web cruft', () => {
+  const recentDate = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+  const source = {
+    lane: 'context',
+    provider: 'The Telegraph a World News',
+    isTrustedOfficial: false,
+    requiresKeywordMatch: true
+  };
+
+  const item = {
+    title: 'Lebanon says killing of journalist Amal Khalil was an Israeli war crime',
+    summary: 'IDF accused of dropping grenade from drone to prevent rescuers from reaching dying reporter Amal Khalil Copy link twitter facebook whatsapp email',
+    sourceExtract:
+      "Henry Bodkin is The Telegraph's Jerusalem Correspondent, based in Israel. " +
+      'He has reported on the Israel-Hamas war, terrorism, Israeli politics, life in the Palestinian territories and Middle East relations.',
+    published: recentDate
+  };
+
+  const stripped = stripWebCruft(`${item.summary} ${item.sourceExtract}`);
+  assert.ok(stripped.includes('IDF accused of dropping grenade from drone'));
+  assert.ok(!stripped.includes('Copy link'));
+  assert.ok(!stripped.includes('terrorism'));
+  assert.equal(discardReasonForItem(source, item), 'insufficient-terror-hits');
+});
+
+test('buildAlert strips web cruft from stored summary and source extract', () => {
+  const recentDate = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+  const source = {
+    id: 'telegraph-world-news',
+    lane: 'context',
+    provider: 'The Telegraph a World News',
+    region: 'europe',
+    isTrustedOfficial: false,
+    requiresKeywordMatch: true
+  };
+
+  const alert = buildAlert(source, {
+    title: 'Counter-terror police disrupt suspect network in London',
+    summary: 'Counter-terror police disrupt suspect network in London. Copy link twitter facebook whatsapp email',
+    sourceExtract:
+      "John Smith is The Telegraph's security correspondent. " +
+      'He has covered terrorism and extremism for years. Police said two suspects were arrested.',
+    link: 'https://example.test/story',
+    published: recentDate
+  }, 0);
+
+  assert.ok(!alert.summary.includes('Copy link'));
+  assert.ok(!alert.sourceExtract.includes('Correspondent'));
+  assert.ok(!alert.sourceExtract.includes('covered terrorism'));
+  assert.ok(alert.sourceExtract.includes('Police said two suspects were arrested.'));
 });
 
 test("renderHero shows requested fallback copy when live pull hasn't happened yet", () => {

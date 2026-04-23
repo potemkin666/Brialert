@@ -35,14 +35,14 @@
     },
     {
       "id": "netherlands-police-news",
-      "provider": "Dutch National Police - News",
-      "endpoint": "https://www.politie.nl/nieuws/",
+      "provider": "Dutch National Police - News (EN)",
+      "endpoint": "https://www.politie.nl/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch National Police updates for terrorism-related arrests and operational incident reporting."
+      "comment": "English Dutch National Police news page for investigations, cybercrime and operational incident reporting."
     },
     {
       "id": "paris-police-prefecture-news",

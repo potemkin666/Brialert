@@ -2,25 +2,25 @@
   "sources": [
     {
       "id": "euaa-news",
-      "provider": "EUAA (EU Agency for Asylum) a News",
-      "endpoint": "https://euaa.europa.eu/news-events",
+      "provider": "EUAA (EU Agency for Asylum) - Press Releases",
+      "endpoint": "https://euaa.europa.eu/news-events/press-releases",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EU Agency for Asylum news used for border, screening, and asylum context relevant to threat movement and documentation."
+      "comment": "EUAA press releases page for asylum, reception and border-management updates relevant to screening, movement and documentation context."
     },
     {
       "id": "eulisa-news-events",
-      "provider": "eu-LISA - News and Events",
-      "endpoint": "https://www.eulisa.europa.eu/news-and-events",
-      "kind": "html",
+      "provider": "eu-LISA - News and Events (RSS)",
+      "endpoint": "https://www.eulisa.europa.eu/news-and-events.rss",
+      "kind": "rss",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "eu-LISA news and events page for EU large-scale justice, migration and border IT systems context."
+      "comment": "eu-LISA RSS feed for operational updates on EU justice, migration and border IT systems."
     },
     {
       "id": "frontex-news-releases",

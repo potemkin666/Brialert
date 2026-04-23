@@ -35,14 +35,14 @@
     },
     {
       "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
+      "provider": "Belgian National Crisis Centre - Newsroom",
+      "endpoint": "https://crisiscenter.be/en/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context."
+      "comment": "Belgian National Crisis Centre newsroom for threat level, preparedness and crisis-management context."
     },
     {
       "id": "denmark-pet-news",
@@ -123,13 +123,14 @@
     },
     {
       "id": "eurojust-press-releases",
-      "provider": "Eurojust a Press Releases (RSS)",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
-      "kind": "rss",
+      "provider": "Eurojust - Press Releases",
+      "endpoint": "https://www.eurojust.europa.eu/news/press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "Official Eurojust press releases page used as the closest viable replacement for the broken RSS endpoint."
     },
     {
       "id": "europol-media-press",
@@ -144,13 +145,14 @@
     },
     {
       "id": "europol-news-rss",
-      "provider": "Europol a Newsroom (RSS)",
-      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "provider": "Europol - Newsroom (RSS)",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "Official Europol newsroom RSS feed for operational updates, arrests and law-enforcement statements."
     },
     {
       "id": "europol-newsroom-html",
@@ -176,14 +178,14 @@
     },
     {
       "id": "german-bfv-news",
-      "provider": "German BfV - News",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/news/news_node.html",
+      "provider": "German BfV - Press",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "German domestic intelligence updates on extremism, terrorism and hostile-state activity."
+      "comment": "English BfV press page used as the closest current official surface for extremism, terrorism and domestic-security statements."
     },
     {
       "id": "german-interior-ministry-press",
