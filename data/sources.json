@@ -5752,7 +5752,7 @@
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
+      "requiresKeywordMatch": true,
       "refreshEveryHours": 1
     },
     {
@@ -5763,7 +5763,7 @@
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
+      "requiresKeywordMatch": true,
       "refreshEveryHours": 1
     },
     {
