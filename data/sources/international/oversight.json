@@ -14,13 +14,13 @@
     {
       "id": "unoct-news",
       "provider": "UN Office of Counter-Terrorism (UNOCT) - News",
-      "endpoint": "https://www.un.org/counterterrorism/news",
+      "endpoint": "https://www.un.org/counterterrorism/en/news-articles",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "UNOCT does not consistently publish RSS; using the official news page."
+      "comment": "UNOCT news/articles page used as the current official listing for Counter-Terrorism updates."
     },
     {
       "id": "unsc-counter-terrorism-committee",

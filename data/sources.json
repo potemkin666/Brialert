@@ -1553,13 +1553,13 @@
     {
       "id": "osce-press-releases",
       "provider": "OSCE a Press Releases",
-      "endpoint": "https://www.osce.org/press-releases",
+      "endpoint": "https://news.osce.org/news/list?item_type=press-release&lang=en&page=1",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "OSCE press releases are provided as web pages; using the press release index.",
+      "comment": "OSCE newsroom press-release listing filtered to press releases for a stable, current index surface.",
       "refreshEveryHours": 1
     },
     {
@@ -1666,13 +1666,13 @@
     {
       "id": "unoct-news",
       "provider": "UN Office of Counter-Terrorism (UNOCT) - News",
-      "endpoint": "https://www.un.org/counterterrorism/news",
+      "endpoint": "https://www.un.org/counterterrorism/en/news-articles",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "UNOCT does not consistently publish RSS; using the official news page.",
+      "comment": "UNOCT news/articles page used as the current official listing for Counter-Terrorism updates.",
       "refreshEveryHours": 1
     },
     {
@@ -1920,13 +1920,13 @@
     {
       "id": "croydon-council-news",
       "provider": "Croydon Council a News",
-      "endpoint": "https://news.croydon.gov.uk/",
+      "endpoint": "https://news.croydon.gov.uk/category/recent-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Croydon newsroom used for South London transport and public-safety corroboration.",
+      "comment": "Croydon recent-news listing used for a cleaner borough news index and London corroboration.",
       "refreshEveryHours": 1
     },
     {
@@ -2063,13 +2063,13 @@
     {
       "id": "hillingdon-council-news",
       "provider": "Hillingdon Council a News",
-      "endpoint": "https://www.hillingdon.gov.uk/news",
+      "endpoint": "https://pre.hillingdon.gov.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Hillingdon borough news used for Heathrow corridor and West London local context.",
+      "comment": "Hillingdon canonical news target used for Heathrow corridor and West London local context.",
       "refreshEveryHours": 1
     },
     {
@@ -2111,13 +2111,13 @@
     {
       "id": "islington-council-news",
       "provider": "Islington Council a News",
-      "endpoint": "https://www.islington.media/",
+      "endpoint": "https://www.islington.media/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Islington borough newsroom used for local London emergency and community-safety corroboration.",
+      "comment": "Islington direct news listing used for local London emergency and community-safety corroboration.",
       "refreshEveryHours": 1
     },
     {
@@ -2159,13 +2159,13 @@
     {
       "id": "lambeth-council-news",
       "provider": "Lambeth Council a News",
-      "endpoint": "https://love.lambeth.gov.uk/",
+      "endpoint": "https://love.lambeth.gov.uk/all-posts/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Lambeth news used for central-south London incident context and civic response.",
+      "comment": "Lambeth all-posts listing used for a cleaner borough news index and civic-response context.",
       "refreshEveryHours": 1
     },
     {
@@ -2265,26 +2265,26 @@
     },
     {
       "id": "london-gov-rss-80603",
-      "provider": "Greater London Authority a RSS Feed 80603",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80603",
-      "kind": "rss",
+      "provider": "Mayor of London - Press Releases",
+      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80603. Verify content category against the live feed; likely safety, policing, or resilience-related GLA updates.",
+      "comment": "Stable Mayor's press releases page used in place of intermittently unresolved RSS feed ID 80603.",
       "refreshEveryHours": 1
     },
     {
       "id": "london-gov-rss-80632",
-      "provider": "Greater London Authority a RSS Feed 80632",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80632",
-      "kind": "rss",
+      "provider": "London Assembly - Press Releases",
+      "endpoint": "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80632. Verify content category against the live feed for specific topic or committee coverage.",
+      "comment": "Stable London Assembly press releases page used in place of intermittently unresolved RSS feed ID 80632.",
       "refreshEveryHours": 1
     },
     {

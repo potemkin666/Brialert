@@ -220,13 +220,13 @@
     {
       "id": "osce-press-releases",
       "provider": "OSCE a Press Releases",
-      "endpoint": "https://www.osce.org/press-releases",
+      "endpoint": "https://news.osce.org/news/list?item_type=press-release&lang=en&page=1",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "OSCE press releases are provided as web pages; using the press release index."
+      "comment": "OSCE newsroom press-release listing filtered to press releases for a stable, current index surface."
     },
     {
       "id": "resolve-network-research",

@@ -124,13 +124,13 @@
     {
       "id": "croydon-council-news",
       "provider": "Croydon Council a News",
-      "endpoint": "https://news.croydon.gov.uk/",
+      "endpoint": "https://news.croydon.gov.uk/category/recent-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Croydon newsroom used for South London transport and public-safety corroboration."
+      "comment": "Croydon recent-news listing used for a cleaner borough news index and London corroboration."
     },
     {
       "id": "ealing-council-news",
@@ -256,13 +256,13 @@
     {
       "id": "hillingdon-council-news",
       "provider": "Hillingdon Council a News",
-      "endpoint": "https://www.hillingdon.gov.uk/news",
+      "endpoint": "https://pre.hillingdon.gov.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Hillingdon borough news used for Heathrow corridor and West London local context."
+      "comment": "Hillingdon canonical news target used for Heathrow corridor and West London local context."
     },
     {
       "id": "homerton-healthcare-news",
@@ -300,13 +300,13 @@
     {
       "id": "islington-council-news",
       "provider": "Islington Council a News",
-      "endpoint": "https://www.islington.media/",
+      "endpoint": "https://www.islington.media/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Islington borough newsroom used for local London emergency and community-safety corroboration."
+      "comment": "Islington direct news listing used for local London emergency and community-safety corroboration."
     },
     {
       "id": "kensington-chelsea-newsroom",
@@ -344,13 +344,13 @@
     {
       "id": "lambeth-council-news",
       "provider": "Lambeth Council a News",
-      "endpoint": "https://love.lambeth.gov.uk/",
+      "endpoint": "https://love.lambeth.gov.uk/all-posts/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Lambeth news used for central-south London incident context and civic response."
+      "comment": "Lambeth all-posts listing used for a cleaner borough news index and civic-response context."
     },
     {
       "id": "lewisham-council-news",
@@ -442,25 +442,25 @@
     },
     {
       "id": "london-gov-rss-80603",
-      "provider": "Greater London Authority a RSS Feed 80603",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80603",
-      "kind": "rss",
+      "provider": "Mayor of London - Press Releases",
+      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80603. Verify content category against the live feed; likely safety, policing, or resilience-related GLA updates."
+      "comment": "Stable Mayor's press releases page used in place of intermittently unresolved RSS feed ID 80603."
     },
     {
       "id": "london-gov-rss-80632",
-      "provider": "Greater London Authority a RSS Feed 80632",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80632",
-      "kind": "rss",
+      "provider": "London Assembly - Press Releases",
+      "endpoint": "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80632. Verify content category against the live feed for specific topic or committee coverage."
+      "comment": "Stable London Assembly press releases page used in place of intermittently unresolved RSS feed ID 80632."
     },
     {
       "id": "mayor-of-london-press-releases",
