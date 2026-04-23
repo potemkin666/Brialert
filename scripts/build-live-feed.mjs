@@ -2491,7 +2491,12 @@ async function main() {
   try {
     const requestedSources = normaliseSourceRequestsPayload(await readJsonFile(sourceRequestsPath));
     if (requestedSources.length) {
-      console.log(`Loaded ${requestedSources.length} pending source request(s). Manual approval required before activation.`);
+      const baseSourceCount = sources.length;
+      sources = mergeSourceCatalogs(sources, requestedSources);
+      const activatedCount = Math.max(0, sources.length - baseSourceCount);
+      console.log(
+        `Loaded ${requestedSources.length} pending source request(s); activated ${activatedCount} for this feed run.`
+      );
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
