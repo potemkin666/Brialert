@@ -3,7 +3,7 @@ name: Update live feeds
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: "*/30 * * * *"
 
 concurrency:
   group: albertalert-live-feed
@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 25
     env:
       ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK: ${{ vars.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK || 'false' }}
-      ALBERTALERT_FORCE_FEED_WRITE: 'true'
+      ALBERTALERT_FORCE_FEED_WRITE: "true"
 
     steps:
       - name: Check out repository
@@ -29,8 +29,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '20.18.1'
-          cache: 'npm'
+          node-version: "20.18.1"
+          cache: "npm"
 
       - name: Install feed builder dependencies
         run: npm ci --no-audit --no-fund
@@ -122,6 +122,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: read
 
     steps:
       - name: Check out repository
@@ -162,15 +163,30 @@ jobs:
           fi
           if git diff --cached --quiet; then
             echo 'No feed changes to commit.'
+            echo 'LIVE_FEED_COMMIT_READY=false' >> "$GITHUB_ENV"
             exit 0
           fi
           git commit -m 'Refresh live alert feed'
+          echo 'LIVE_FEED_COMMIT_READY=true' >> "$GITHUB_ENV"
+
+      - name: Wait for GitHub Pages deployment slot
+        if: env.LIVE_FEED_COMMIT_READY == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node ./scripts/ci/wait-for-pages-deployment-slot.mjs
+
+      - name: Push refreshed feed data
+        if: env.LIVE_FEED_COMMIT_READY == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
           if git push; then
             exit 0
           fi
           echo 'Initial push failed (likely non-fast-forward). Rebasing and retrying once.'
           git fetch origin main
           if git pull --rebase origin main; then
+            node ./scripts/ci/wait-for-pages-deployment-slot.mjs
             git push
             exit 0
           fi
@@ -187,6 +203,7 @@ jobs:
               data/source-remediation-sweep.json data/top-20-source-remediation.json data/albertalert.sqlite || true
             git -c core.editor=true merge --continue || git commit --no-edit
           fi
+          node ./scripts/ci/wait-for-pages-deployment-slot.mjs
           git push --force-with-lease
 
   verify-live-feed-freshness:
@@ -195,7 +212,7 @@ jobs:
     permissions:
       contents: read
     env:
-      LIVE_FEED_MAX_AGE_MINUTES: '180'
+      LIVE_FEED_MAX_AGE_MINUTES: "180"
 
     steps:
       - name: Check out repository
@@ -206,7 +223,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '20.18.1'
+          node-version: "20.18.1"
 
       - name: Fail if live feed in main is stale
         run: |

@@ -3,10 +3,11 @@ name: Catalog hygiene
 on:
   workflow_dispatch:
   schedule:
-    - cron: '23 5 * * *'
+    - cron: "23 5 * * *"
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   hygiene:
@@ -22,8 +23,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '20.18.1'
-          cache: 'npm'
+          node-version: "20.18.1"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
@@ -67,7 +68,20 @@ jobs:
           fi
           if git diff --cached --quiet; then
             echo 'No catalog hygiene changes to commit.'
+            echo 'CATALOG_HYGIENE_COMMIT_READY=false' >> "$GITHUB_ENV"
             exit 0
           fi
           git commit -m 'Catalog hygiene refresh'
+
+          echo 'CATALOG_HYGIENE_COMMIT_READY=true' >> "$GITHUB_ENV"
+
+      - name: Wait for GitHub Pages deployment slot
+        if: env.CATALOG_HYGIENE_COMMIT_READY == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node ./scripts/ci/wait-for-pages-deployment-slot.mjs
+
+      - name: Push catalog hygiene outputs
+        if: env.CATALOG_HYGIENE_COMMIT_READY == 'true'
+        run: |
           git push
