@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "bfv-de-english",
-      "provider": "BfV press page (Federal Office for the Protection of the Constitution)",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
+      "provider": "BfV service page (Federal Office for the Protection of the Constitution)",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/service_node.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Press page of Germany's Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English."
+      "comment": "Official English BfV service page covering reporting, prevention support and exit-programme information."
     },
     {
       "id": "dsn-at-english",

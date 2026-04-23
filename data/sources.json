@@ -2,26 +2,26 @@
   "sources": [
     {
       "id": "euaa-news",
-      "provider": "EUAA (EU Agency for Asylum) a News",
-      "endpoint": "https://euaa.europa.eu/news-events",
+      "provider": "EUAA (EU Agency for Asylum) - Press Releases",
+      "endpoint": "https://euaa.europa.eu/news-events/press-releases",
       "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EU Agency for Asylum news used for border, screening, and asylum context relevant to threat movement and documentation.",
+      "comment": "EUAA press releases page for asylum, reception and border-management updates relevant to screening, movement and documentation context.",
       "refreshEveryHours": 1
     },
     {
       "id": "eulisa-news-events",
-      "provider": "eu-LISA - News and Events",
-      "endpoint": "https://www.eulisa.europa.eu/news-and-events",
-      "kind": "html",
+      "provider": "eu-LISA - News and Events (RSS)",
+      "endpoint": "https://www.eulisa.europa.eu/news-and-events.rss",
+      "kind": "rss",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "eu-LISA news and events page for EU large-scale justice, migration and border IT systems context.",
+      "comment": "eu-LISA RSS feed for operational updates on EU justice, migration and border IT systems.",
       "refreshEveryHours": 1
     },
     {
@@ -73,14 +73,14 @@
     },
     {
       "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - News",
-      "endpoint": "https://crisiscenter.be/en/news",
+      "provider": "Belgian National Crisis Centre - Newsroom",
+      "endpoint": "https://crisiscenter.be/en/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Belgian crisis centre updates for threat level, emergency posture and civil contingency context.",
+      "comment": "Belgian National Crisis Centre newsroom for threat level, preparedness and crisis-management context.",
       "refreshEveryHours": 1
     },
     {
@@ -166,13 +166,14 @@
     },
     {
       "id": "eurojust-press-releases",
-      "provider": "Eurojust a Press Releases (RSS)",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
-      "kind": "rss",
+      "provider": "Eurojust - Press Releases",
+      "endpoint": "https://www.eurojust.europa.eu/news/press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
+      "comment": "Official Eurojust press releases page used as the closest viable replacement for the broken RSS endpoint.",
       "refreshEveryHours": 1
     },
     {
@@ -189,13 +190,14 @@
     },
     {
       "id": "europol-news-rss",
-      "provider": "Europol a Newsroom (RSS)",
-      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "provider": "Europol - Newsroom (RSS)",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
+      "comment": "Official Europol newsroom RSS feed for operational updates, arrests and law-enforcement statements.",
       "refreshEveryHours": 1
     },
     {
@@ -224,14 +226,14 @@
     },
     {
       "id": "german-bfv-news",
-      "provider": "German BfV - News",
-      "endpoint": "https://www.verfassungsschutz.de/EN/home/home_node.html",
+      "provider": "German BfV - Press",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "German domestic intelligence updates on extremism, terrorism and hostile-state activity.",
+      "comment": "English BfV press page used as the closest current official surface for extremism, terrorism and domestic-security statements.",
       "refreshEveryHours": 1
     },
     {
@@ -404,14 +406,14 @@
     },
     {
       "id": "german-bka-press",
-      "provider": "German BKA - Press Releases",
-      "endpoint": "https://www.bka.de/EN/Press/Listings/PressReleases/pressReleases_node.html",
+      "provider": "German BKA - Press Releases (2026 archive)",
+      "endpoint": "https://www.bka.de/DE/Presse/Listenseite_Pressemitteilungen/2026/2026_node.html",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "German Federal Criminal Police Office press releases on terrorism investigations and arrests.",
+      "comment": "Current BKA 2026 press-release archive used as the most reliable official source for investigations, arrests and operational updates.",
       "refreshEveryHours": 1
     },
     {
@@ -428,14 +430,14 @@
     },
     {
       "id": "guardia-civil-news",
-      "provider": "Guardia Civil - News",
-      "endpoint": "https://www.guardiacivil.es/es/prensa/noticias/",
+      "provider": "El Pais English - Guardia Civil",
+      "endpoint": "https://english.elpais.com/news/guardia-civil/",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Guardia Civil official news for terrorism, organised crime and border-security incident reporting.",
+      "comment": "Next-best English-language substitute covering major Guardia Civil operations when the official site is inaccessible.",
       "refreshEveryHours": 1
     },
     {
@@ -512,14 +514,14 @@
     },
     {
       "id": "eppo-news-node-7",
-      "provider": "European Public Prosecutor's Office - News and Media",
-      "endpoint": "https://www.eppo.europa.eu/en/node/7",
-      "kind": "html",
+      "provider": "European Public Prosecutor's Office - News (RSS)",
+      "endpoint": "https://www.eppo.europa.eu/en/news.xml",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EPPO news and media surface for investigations, prosecutions and institutional statements.",
+      "comment": "Official EPPO RSS feed for investigations, warnings and institutional announcements.",
       "refreshEveryHours": 1
     },
     {
@@ -584,25 +586,26 @@
     },
     {
       "id": "eu-council-jha-meetings",
-      "provider": "Council of the European Union a Justice & Home Affairs Meetings (RSS)",
-      "endpoint": "https://www.consilium.europa.eu/en/rss/meetings.ashx?cat=jha",
-      "kind": "rss",
+      "provider": "Council of the EU - JHA Press Releases",
+      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/?cc%5B%5D=24",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
+      "comment": "Closest viable JHA-specific replacement: filtered Council press releases page for justice and home affairs outcomes.",
       "refreshEveryHours": 1
     },
     {
       "id": "eu-council-jha-register-rss",
-      "provider": "Council of the EU - Justice and Home Affairs Register RSS",
-      "endpoint": "https://www.consilium.europa.eu/en/register/rss/THMJHA.xml",
+      "provider": "Council of the EU - Latest Documents RSS",
+      "endpoint": "https://www.consilium.europa.eu/en/register/rss/LD.xml",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Council register RSS for justice and home affairs documentation.",
+      "comment": "Official Council public-register latest-documents RSS feed used as the workable replacement for the blocked JHA register feed.",
       "refreshEveryHours": 1
     },
     {
@@ -666,14 +669,14 @@
     },
     {
       "id": "eu-eppo-news",
-      "provider": "European Public Prosecutor's Office a Press Releases",
-      "endpoint": "https://www.eppo.europa.eu/en/media/press-releases",
+      "provider": "European Public Prosecutor's Office - News",
+      "endpoint": "https://www.eppo.europa.eu/en/news",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EPPO press releases on cross-border EU fraud and financial crime prosecutions including terrorist financing investigations.",
+      "comment": "Official EPPO news page retained as a distinct HTML companion to the RSS feed for investigations and institutional updates.",
       "refreshEveryHours": 1
     },
     {
@@ -771,24 +774,26 @@
     },
     {
       "id": "europarl-committee-libe",
-      "provider": "European Parliament a LIBE Committee (RSS)",
-      "endpoint": "https://www.europarl.europa.eu/rss/committee/libe/en.xml",
-      "kind": "rss",
+      "provider": "European Parliament - LIBE Press Releases",
+      "endpoint": "https://www.europarl.europa.eu/committees/en/libe/home/press-releases",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
+      "comment": "LIBE committee press-releases page for civil-liberties, justice and home-affairs oversight updates.",
       "refreshEveryHours": 1
     },
     {
       "id": "europarl-committee-sede",
-      "provider": "European Parliament a SEDE Committee (RSS)",
-      "endpoint": "https://www.europarl.europa.eu/rss/committee/sede/en.xml",
-      "kind": "rss",
+      "provider": "European Parliament - SEDE Press Releases",
+      "endpoint": "https://www.europarl.europa.eu/committees/en/sede/home/press-releases",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
+      "comment": "SEDE committee press-releases page for security and defence oversight updates.",
       "refreshEveryHours": 1
     },
     {
@@ -999,14 +1004,14 @@
     },
     {
       "id": "norway-pst-news",
-      "provider": "Norwegian Police Security Service - News",
-      "endpoint": "https://www.pst.no/alle-artikler/",
+      "provider": "Norwegian Government - News and Press Releases",
+      "endpoint": "https://www.regjeringen.no/en/whats-new/news-and-press-releases/id4/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Norwegian PST reporting on terrorism threats, extremism and protective-security posture.",
+      "comment": "Closest official substitute for unavailable PST news pages, covering justice and national-security press releases from the Norwegian government.",
       "refreshEveryHours": 1
     },
     {
@@ -1103,14 +1108,14 @@
     },
     {
       "id": "netherlands-police-news",
-      "provider": "Dutch National Police - News",
-      "endpoint": "https://www.politie.nl/nieuws/",
+      "provider": "Dutch National Police - News (EN)",
+      "endpoint": "https://www.politie.nl/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch National Police updates for terrorism-related arrests and operational incident reporting.",
+      "comment": "English Dutch National Police news page for investigations, cybercrime and operational incident reporting.",
       "refreshEveryHours": 1
     },
     {
@@ -1211,26 +1216,26 @@
     },
     {
       "id": "bfv-de-english",
-      "provider": "BfV press page (Federal Office for the Protection of the Constitution)",
-      "endpoint": "https://www.verfassungsschutz.de/EN/service/press/press_node.html",
+      "provider": "BfV service page (Federal Office for the Protection of the Constitution)",
+      "endpoint": "https://www.verfassungsschutz.de/EN/service/service_node.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Press page of Germany's Federal Office for the Protection of the Constitution (BfV) providing contact information and press releases in English.",
+      "comment": "Official English BfV service page covering reporting, prevention support and exit-programme information.",
       "refreshEveryHours": 1
     },
     {
       "id": "dsn-at-english",
-      "provider": "DSN Austria news",
-      "endpoint": "https://www.dsn.gv.at/",
+      "provider": "DSN Austria - Aktuelles",
+      "endpoint": "https://www.dsn.gv.at/news.html",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Official DSN Austria homepage (German); no English-language DSN site or feed is available.",
+      "comment": "German DSN Austria news page used as the closest official replacement for the unavailable English-language surface.",
       "refreshEveryHours": 1
     },
     {
@@ -1627,7 +1632,7 @@
     {
       "id": "unodc-news",
       "provider": "UNODC (UN Office on Drugs and Crime) a Press Releases",
-      "endpoint": "https://www.unodc.org/",
+      "endpoint": "https://www.unodc.org/unodc/en/news/news.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
@@ -1650,7 +1655,7 @@
     {
       "id": "gctf-news",
       "provider": "Global Counterterrorism Forum (GCTF) a News",
-      "endpoint": "https://www.thegctf.org/News-Stories",
+      "endpoint": "https://www.thegctf.org/News-Stories/PgrID/918/PageID/3",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
@@ -2289,13 +2294,13 @@
     {
       "id": "mayor-of-london-press-releases",
       "provider": "Mayor of London a Press Releases",
-      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases",
-      "kind": "html",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80610",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced brittle City Hall RSS feed (80610) with the live HTML mayoral press-release listing.",
+      "comment": "Replaced page endpoint with official City Hall mayoral RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -2661,7 +2666,7 @@
     {
       "id": "whittington-health-news",
       "provider": "Whittington Health a News",
-      "endpoint": "https://www.whittington.nhs.uk/mini-apps/news/newsItems.asp?NewsGroupID=1",
+      "endpoint": "https://www.whittington.nhs.uk/mini-apps/news/newsItems.asp",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -2745,13 +2750,13 @@
     {
       "id": "london-assembly-press-releases",
       "provider": "London Assembly a Press Releases",
-      "endpoint": "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-press-releases",
-      "kind": "html",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611",
+      "kind": "rss",
       "lane": "oversight",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced brittle City Hall RSS feed (80611) with the live HTML London Assembly press-release listing.",
+      "comment": "Replaced page endpoint with official City Hall London Assembly RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -5752,7 +5757,7 @@
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
+      "requiresKeywordMatch": false,
       "refreshEveryHours": 1
     },
     {
@@ -5763,7 +5768,7 @@
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
+      "requiresKeywordMatch": false,
       "refreshEveryHours": 1
     },
     {
