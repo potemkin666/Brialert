@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-23T19:31:23.009Z",
+  "generatedAt": "2026-04-23T20:18:46.625Z",
   "count": 528,
   "metrics": {
     "total": 528,
     "newThisWeek": 235,
-    "avgTimeInQuarantineHours": 140,
+    "avgTimeInQuarantineHours": 141,
     "avgHealthScore": 3,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -3730,7 +3730,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T17:16:47.386Z",
       "lastFailureAt": "2026-04-20T17:16:47.386Z",
-      "lastCheckedAt": "2026-04-23T16:07:40.227Z"
+      "lastCheckedAt": "2026-04-23T20:18:46.625Z"
     },
     {
       "id": "independent-top-stories",
@@ -3758,7 +3758,35 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-27T17:16:47.386Z",
       "lastFailureAt": "2026-04-20T17:16:47.386Z",
-      "lastCheckedAt": "2026-04-23T18:02:43.923Z"
+      "lastCheckedAt": "2026-04-23T20:18:46.625Z"
+    },
+    {
+      "id": "fmcg-gurus",
+      "provider": "FMCG Gurus",
+      "endpoint": "https://fmcggurus.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "healthScore": 0,
+      "status": "auto-quarantined",
+      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
+      "quarantinedAt": "2026-04-20T17:16:47.386Z",
+      "lastErrorCategory": "",
+      "lastErrorMessage": "",
+      "consecutiveFailures": 0,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-20T17:16:47.386Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-04-27T17:16:47.386Z",
+      "lastFailureAt": "2026-04-20T17:16:47.386Z",
+      "lastCheckedAt": "2026-04-23T20:18:46.625Z"
     },
     {
       "id": "portugal-pj-news",
@@ -4466,7 +4494,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-25T07:21:41.099Z",
       "lastFailureAt": "2026-04-18T07:21:41.099Z",
-      "lastCheckedAt": "2026-04-23T08:09:12.931Z"
+      "lastCheckedAt": "2026-04-23T20:18:46.625Z"
     },
     {
       "id": "quadrant2design-exhibiting-guides",
@@ -5747,7 +5775,7 @@
     {
       "id": "bdk-rss",
       "provider": "Bund Deutscher Kriminalbeamter - RSS",
-      "endpoint": "https://www.bdk.de/rss",
+      "endpoint": "https://www.bdk.de/rss/alle-nachrichten/RSS",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
@@ -5794,8 +5822,8 @@
     },
     {
       "id": "euractiv-security-rss",
-      "provider": "Euractiv a Security & Defence (RSS)",
-      "endpoint": "https://www.euractiv.com/sections/security/feed/",
+      "provider": "BBC News - Europe",
+      "endpoint": "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
@@ -5938,8 +5966,8 @@
     },
     {
       "id": "ap-top-news",
-      "provider": "Associated Press a Top News",
-      "endpoint": "https://apnews.com/index.rss",
+      "provider": "BBC News - Top Stories",
+      "endpoint": "https://feeds.bbci.co.uk/news/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "international",
@@ -6035,7 +6063,7 @@
     {
       "id": "crisis-group-europe",
       "provider": "International Crisis Group a Europe (RSS)",
-      "endpoint": "https://www.crisisgroup.org/latest-updates/rss.xml",
+      "endpoint": "https://www.crisisgroup.org/rss/56",
       "kind": "rss",
       "lane": "context",
       "region": "international",
@@ -6082,9 +6110,9 @@
     },
     {
       "id": "lawfare-blog",
-      "provider": "Lawfare a Blog (National Security Law & CT Policy)",
-      "endpoint": "https://www.lawfaremedia.org/feeds/all",
-      "kind": "rss",
+      "provider": "Just Security - National Security Analysis",
+      "endpoint": "https://www.justsecurity.org/",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "healthScore": 0,
@@ -6130,9 +6158,9 @@
     },
     {
       "id": "henry-jackson-society-news",
-      "provider": "Henry Jackson Society a Publications",
-      "endpoint": "https://henryjacksonsociety.org/feed/",
-      "kind": "rss",
+      "provider": "RUSI - Terrorism and Conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict?source=henry-jackson-society-news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "healthScore": 0,
@@ -6370,8 +6398,8 @@
     },
     {
       "id": "metro",
-      "provider": "Metro",
-      "endpoint": "https://metro.co.uk/feed/",
+      "provider": "BBC News - UK",
+      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml?source=metro",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -6462,7 +6490,7 @@
       "replacementSuggestion": "",
       "reviewBy": "2026-04-26T13:19:06.686Z",
       "lastFailureAt": "2026-04-19T13:19:06.686Z",
-      "lastCheckedAt": "2026-04-23T16:07:40.227Z"
+      "lastCheckedAt": "2026-04-23T20:18:46.625Z"
     },
     {
       "id": "the-daily-mash",
@@ -6610,8 +6638,8 @@
     },
     {
       "id": "elluminet-press",
-      "provider": "Elluminet Press",
-      "endpoint": "https://www.elluminetpress.com/feed/",
+      "provider": "9to5. Mac",
+      "endpoint": "https://9to5mac.com/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -6658,8 +6686,8 @@
     },
     {
       "id": "faded-spring",
-      "provider": "Faded Spring",
-      "endpoint": "https://fadedspring.co.uk/feed/",
+      "provider": "Emily Underworld",
+      "endpoint": "https://emilyunderworld.co.uk/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -6706,8 +6734,8 @@
     },
     {
       "id": "ian-neate-blog",
-      "provider": "Ian Neate's Blog",
-      "endpoint": "https://ianneateblog.wordpress.com/feed/",
+      "provider": "9to5. Mac",
+      "endpoint": "https://9to5mac.com/feed/?source=ian-neate-blog",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -7229,9 +7257,9 @@
     },
     {
       "id": "german-interior-ministry-press",
-      "provider": "German Federal Ministry of the Interior - Press",
-      "endpoint": "https://www.bmi.bund.de/EN/press/press-releases/press-releases-node.html",
-      "kind": "html",
+      "provider": "German Federal Ministry for Economic Cooperation and Development - Feed",
+      "endpoint": "https://www.bmz.de/en/feed.rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "healthScore": 0,
@@ -7565,9 +7593,9 @@
     },
     {
       "id": "eu-commission-presscorner-home",
-      "provider": "European Commission - Press Corner",
-      "endpoint": "https://ec.europa.eu/commission/presscorner/home/en",
-      "kind": "html",
+      "provider": "Council of the EU - Press Releases (RSS)",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx?source=eu-commission-presscorner-home",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "healthScore": 0,
@@ -7901,8 +7929,8 @@
     },
     {
       "id": "fra-rss",
-      "provider": "EU Agency for Fundamental Rights - RSS",
-      "endpoint": "https://fra.europa.eu/rss",
+      "provider": "Human Rights Watch - News RSS",
+      "endpoint": "https://www.hrw.org/rss/news",
       "kind": "rss",
       "lane": "oversight",
       "region": "eu",
@@ -7998,7 +8026,7 @@
     {
       "id": "ncsc-nl-rss",
       "provider": "NCSC Netherlands - RSS",
-      "endpoint": "https://www.ncsc.nl/rss",
+      "endpoint": "https://feeds.ncsc.nl/nieuws.rss",
       "kind": "rss",
       "lane": "prevention",
       "region": "eu",
@@ -8381,9 +8409,9 @@
     },
     {
       "id": "paris-police-prefecture-news",
-      "provider": "Prefecture de Police de Paris - News",
-      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/actualites",
-      "kind": "html",
+      "provider": "France24 - France (RSS)",
+      "endpoint": "https://www.france24.com/en/france/rss",
+      "kind": "rss",
       "lane": "incidents",
       "region": "europe",
       "healthScore": 0,
@@ -8429,8 +8457,8 @@
     },
     {
       "id": "portugal-psp-news",
-      "provider": "Public Security Police Portugal - News",
-      "endpoint": "https://www.psp.pt/Pages/noticias.aspx",
+      "provider": "The Portugal News - Crime",
+      "endpoint": "https://www.theportugalnews.com/news/crime",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
@@ -8621,8 +8649,8 @@
     },
     {
       "id": "ran-network",
-      "provider": "Radicalisation Awareness Network (RAN) a Publications",
-      "endpoint": "https://www.radicalisationawarenessnetwork.eu/news-events/publications",
+      "provider": "RUSI - Terrorism and Conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict?source=ran-network",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
@@ -9005,8 +9033,8 @@
     },
     {
       "id": "barnet-council-news",
-      "provider": "Barnet Council a News",
-      "endpoint": "https://www.barnet.gov.uk/news",
+      "provider": "Barnet Post",
+      "endpoint": "https://barnetpost.co.uk/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -9245,8 +9273,8 @@
     },
     {
       "id": "haringey-council-news",
-      "provider": "Haringey Council a News",
-      "endpoint": "https://new.haringey.gov.uk/news",
+      "provider": "Haringey Community Press",
+      "endpoint": "https://haringeycommunitypress.co.uk/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -9485,8 +9513,8 @@
     },
     {
       "id": "lewisham-council-news",
-      "provider": "Lewisham Council a News",
-      "endpoint": "https://news.lewisham.gov.uk/",
+      "provider": "Salamander News",
+      "endpoint": "https://salamandernews.org/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -10157,9 +10185,9 @@
     },
     {
       "id": "tfl-press-releases",
-      "provider": "Transport for London a Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases/rss",
-      "kind": "rss",
+      "provider": "Transport for London - Press Releases",
+      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases?source=tfl-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "healthScore": 0,
@@ -10253,9 +10281,9 @@
     },
     {
       "id": "city-of-london-police-news",
-      "provider": "City of London Police a News",
-      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london/news/Get. News. Rss/",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=city-of-london-police-news",
+      "kind": "html",
       "lane": "incidents",
       "region": "london",
       "healthScore": 0,
@@ -10349,8 +10377,8 @@
     },
     {
       "id": "city-of-london-police-newsroom",
-      "provider": "City of London Police - Newsroom",
-      "endpoint": "https://news.cityoflondon.police.uk/",
+      "provider": "Metropolitan Police Service - News",
+      "endpoint": "https://news.met.police.uk/",
       "kind": "html",
       "lane": "incidents",
       "region": "london",
@@ -10645,9 +10673,9 @@
     },
     {
       "id": "mi5-news",
-      "provider": "MI5 (Security Service) a News",
-      "endpoint": "https://www.mi5.gov.uk/News/News.xml",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=mi5-news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "healthScore": 0,
@@ -10961,8 +10989,8 @@
     },
     {
       "id": "british-transport-police-news",
-      "provider": "British Transport Police a News",
-      "endpoint": "https://www.btp.police.uk/news/btp/news/?output=rss",
+      "provider": "British Transport Police Authority - News Feed",
+      "endpoint": "https://btpa.police.uk/feed/",
       "kind": "rss",
       "lane": "incidents",
       "region": "uk",
@@ -11345,9 +11373,9 @@
     },
     {
       "id": "ct-policing-uk-rss-feed",
-      "provider": "Counter Terrorism Policing UK - RSS Feed",
-      "endpoint": "https://www.counterterrorism.police.uk/feed/",
-      "kind": "rss",
+      "provider": "Counter Terrorism Policing UK - Latest News",
+      "endpoint": "https://www.counterterrorism.police.uk/latest-news/?source=ct-policing-uk-rss-feed",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "healthScore": 0,
@@ -12353,8 +12381,8 @@
     },
     {
       "id": "leicestershire-police-news",
-      "provider": "Leicestershire Police - News",
-      "endpoint": "https://www.leics.police.uk/news/leicestershire/news/",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=leicestershire-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -12737,8 +12765,8 @@
     },
     {
       "id": "northumbria-police-news",
-      "provider": "Northumbria Police a News",
-      "endpoint": "https://northumbria.police.uk/news/",
+      "provider": "North East Bylines",
+      "endpoint": "https://northeastbylines.co.uk/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -13409,8 +13437,8 @@
     },
     {
       "id": "warwickshire-police-news",
-      "provider": "Warwickshire Police - News",
-      "endpoint": "https://www.warwickshire.police.uk/news/warwickshire/news/",
+      "provider": "Warwickshire Connected - Latest Alerts",
+      "endpoint": "https://www.warwickshireconnected.com/Content/Pages/Latest-Alerts",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -13793,9 +13821,9 @@
     },
     {
       "id": "lords-in-focus-rss",
-      "provider": "Lords In Focus RSS",
-      "endpoint": "https://researchbriefings.parliament.uk/rssfeed/Lords%20. In%20. Focus",
-      "kind": "rss",
+      "provider": "Hansard Society - Despatch Box",
+      "endpoint": "https://www.hansardsociety.org.uk/blog",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "healthScore": 0,
@@ -13841,9 +13869,9 @@
     },
     {
       "id": "lords-library-notes-rss",
-      "provider": "Lords Library Notes RSS",
-      "endpoint": "https://researchbriefings.parliament.uk/rssfeed/Lords%20. Library%20notes",
-      "kind": "rss",
+      "provider": "Hansard Society - Despatch Box",
+      "endpoint": "https://www.hansardsociety.org.uk/blog?source=lords-library-notes-rss",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "healthScore": 0,
@@ -13937,9 +13965,9 @@
     },
     {
       "id": "police-uk-outcomes-at-location-1609590",
-      "provider": "Police.uk - Outcomes At Location 1609590",
-      "endpoint": "https://data.police.uk/api/outcomes-at-location?date=2024-01&location_id=1609590",
-      "kind": "json",
+      "provider": "Police Data UK - Outcomes At Location API Docs",
+      "endpoint": "https://data.police.uk/docs/method/outcomes-at-location/",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "healthScore": 0,
@@ -14705,8 +14733,8 @@
     },
     {
       "id": "fbi-stories",
-      "provider": "FBI - Stories (RSS)",
-      "endpoint": "https://www.fbi.gov/news/stories/RSS",
+      "provider": "FBI - Top Stories (RSS)",
+      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "us",
@@ -14754,7 +14782,7 @@
     {
       "id": "fbi-top-stories",
       "provider": "FBI - Top Stories (RSS)",
-      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/RSS",
+      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/rss.xml?source=fbi-top-stories",
       "kind": "rss",
       "lane": "context",
       "region": "us",
@@ -16720,34 +16748,6 @@
       "reviewBy": "2026-04-23T15:11:26.228Z",
       "lastFailureAt": "2026-04-16T15:11:26.228Z",
       "lastCheckedAt": "2026-04-23T19:31:23.009Z"
-    },
-    {
-      "id": "fmcg-gurus",
-      "provider": "FMCG Gurus",
-      "endpoint": "https://fmcggurus.com/feed/",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "healthScore": 2,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-20T17:16:47.386Z",
-      "lastErrorCategory": "",
-      "lastErrorMessage": "",
-      "consecutiveFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-20T17:16:47.386Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-27T17:16:47.386Z",
-      "lastFailureAt": "2026-04-20T17:16:47.386Z",
-      "lastCheckedAt": "2026-04-23T16:07:40.227Z"
     },
     {
       "id": "bbc-news-england-legacy",
