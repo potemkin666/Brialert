@@ -57,14 +57,14 @@
     },
     {
       "id": "german-bka-press",
-      "provider": "German BKA - Press Releases",
-      "endpoint": "https://www.bka.de/EN/Press/Listings/PressReleases/pressReleases_node.html",
+      "provider": "German BKA - Press Releases (2026 archive)",
+      "endpoint": "https://www.bka.de/DE/Presse/Listenseite_Pressemitteilungen/2026/2026_node.html",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "German Federal Criminal Police Office press releases on terrorism investigations and arrests."
+      "comment": "Current BKA 2026 press-release archive used as the most reliable official source for investigations, arrests and operational updates."
     },
     {
       "id": "german-bka-press-releases-de",
@@ -79,14 +79,14 @@
     },
     {
       "id": "guardia-civil-news",
-      "provider": "Guardia Civil - News",
-      "endpoint": "https://www.guardiacivil.es/es/prensa/noticias/",
+      "provider": "El Pais English - Guardia Civil",
+      "endpoint": "https://english.elpais.com/news/guardia-civil/",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Guardia Civil official news for terrorism, organised crime and border-security incident reporting."
+      "comment": "Next-best English-language substitute covering major Guardia Civil operations when the official site is inaccessible."
     },
     {
       "id": "mossos-news",
