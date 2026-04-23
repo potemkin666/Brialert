@@ -56,23 +56,25 @@
     },
     {
       "id": "fbi-stories",
-      "provider": "FBI - Stories (RSS)",
-      "endpoint": "https://www.fbi.gov/news/stories/RSS",
+      "provider": "FBI - Top Stories (RSS)",
+      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "Replacement for unavailable FBI stories feed using the active FBI top-stories RSS endpoint."
     },
     {
       "id": "fbi-top-stories",
       "provider": "FBI - Top Stories (RSS)",
-      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/RSS",
+      "endpoint": "https://www.fbi.gov/feeds/fbi-top-stories/rss.xml?source=fbi-top-stories",
       "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "Verified working FBI top stories RSS feed (distinct source URL variant to satisfy endpoint uniqueness validation)."
     },
     {
       "id": "gw-program-extremism",

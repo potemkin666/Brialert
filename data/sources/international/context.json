@@ -24,13 +24,14 @@
     },
     {
       "id": "ap-top-news",
-      "provider": "Associated Press a Top News",
-      "endpoint": "https://apnews.com/index.rss",
+      "provider": "BBC News - Top Stories",
+      "endpoint": "https://feeds.bbci.co.uk/news/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "Replacement for blocked AP feed: BBC top stories RSS is publicly accessible and stable for broad headline context."
     },
     {
       "id": "bbc-news-world",
@@ -132,13 +133,13 @@
     {
       "id": "crisis-group-europe",
       "provider": "International Crisis Group a Europe (RSS)",
-      "endpoint": "https://www.crisisgroup.org/latest-updates/rss.xml",
+      "endpoint": "https://www.crisisgroup.org/rss/56",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Crisis Group RSS used for European and international conflict analysis relevant to terrorism, fragile states and security crises."
+      "comment": "Crisis Group regional Europe RSS feed used for Europe-specific conflict and security analysis."
     },
     {
       "id": "global-initiative-news",
@@ -175,14 +176,14 @@
     },
     {
       "id": "lawfare-blog",
-      "provider": "Lawfare a Blog (National Security Law & CT Policy)",
-      "endpoint": "https://www.lawfaremedia.org/feeds/all",
-      "kind": "rss",
+      "provider": "Just Security - National Security Analysis",
+      "endpoint": "https://www.justsecurity.org/",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lawfare covers national security law, counter-terrorism policy and intelligence oversight; keyword filtering applied to surface terrorism-relevant items."
+      "comment": "Replacement for unavailable Lawfare feed using Just Security's public national-security analysis homepage."
     },
     {
       "id": "long-war-journal",

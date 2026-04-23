@@ -25,13 +25,13 @@
     {
       "id": "bdk-rss",
       "provider": "Bund Deutscher Kriminalbeamter - RSS",
-      "endpoint": "https://www.bdk.de/rss",
+      "endpoint": "https://www.bdk.de/rss/alle-nachrichten/RSS",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "German detectives association RSS feed for investigative and policing commentary; treat as non-official specialist context."
+      "comment": "Working BDK RSS replacement endpoint for German detectives association news and events."
     },
     {
       "id": "belgium-crisis-centre-news",
@@ -101,14 +101,14 @@
     },
     {
       "id": "euractiv-security-rss",
-      "provider": "Euractiv a Security & Defence (RSS)",
-      "endpoint": "https://www.euractiv.com/sections/security/feed/",
+      "provider": "BBC News - Europe",
+      "endpoint": "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Euractiv security and defence section RSS for EU counter-terrorism policy, legislative and operational context."
+      "comment": "Replacement for inaccessible Euractiv security feed using BBC Europe RSS for European security and policy context."
     },
     {
       "id": "eurojust-press-news-html",
@@ -189,14 +189,14 @@
     },
     {
       "id": "german-interior-ministry-press",
-      "provider": "German Federal Ministry of the Interior - Press",
-      "endpoint": "https://www.bmi.bund.de/EN/press/press-releases/press-releases-node.html",
-      "kind": "html",
+      "provider": "German Federal Ministry for Economic Cooperation and Development - Feed",
+      "endpoint": "https://www.bmz.de/en/feed.rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "German Interior Ministry press releases on terrorism, border security and domestic threat posture."
+      "comment": "Replacement for failing BMI press endpoint using an active German federal ministry RSS feed."
     },
     {
       "id": "icct-home",

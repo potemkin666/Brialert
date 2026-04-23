@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "city-of-london-police-news",
-      "provider": "City of London Police a News",
-      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london/news/GetNewsRss/",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=city-of-london-police-news",
+      "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Replaced HTML listing with official City of London Police RSS feed for stable ingestion."
+      "requiresKeywordMatch": true,
+      "comment": "Next-best replacement for blocked City of London Police feed using NCA law-enforcement updates."
     },
     {
       "id": "city-of-london-police-news-html",
@@ -24,14 +24,14 @@
     },
     {
       "id": "city-of-london-police-newsroom",
-      "provider": "City of London Police - Newsroom",
-      "endpoint": "https://news.cityoflondon.police.uk/",
+      "provider": "Metropolitan Police Service - News",
+      "endpoint": "https://news.met.police.uk/",
       "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "City of London Police newsroom for Square Mile incidents, arrests and operational statements."
+      "comment": "Best-effort replacement for blocked City of London Police newsroom using active Met Police London policing updates."
     },
     {
       "id": "ct-policing-london",

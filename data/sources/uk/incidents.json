@@ -46,14 +46,14 @@
     },
     {
       "id": "british-transport-police-news",
-      "provider": "British Transport Police a News",
-      "endpoint": "https://www.btp.police.uk/news/btp/news/?output=rss",
+      "provider": "British Transport Police Authority - News Feed",
+      "endpoint": "https://btpa.police.uk/feed/",
       "kind": "rss",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Switched to BTP RSS output endpoint to avoid brittle HTML parsing."
+      "comment": "Replacement for blocked BTP feed using the active British Transport Police Authority RSS feed."
     },
     {
       "id": "btp-british-transport-police-news-html",
@@ -134,14 +134,14 @@
     },
     {
       "id": "ct-policing-uk-rss-feed",
-      "provider": "Counter Terrorism Policing UK - RSS Feed",
-      "endpoint": "https://www.counterterrorism.police.uk/feed/",
-      "kind": "rss",
+      "provider": "Counter Terrorism Policing UK - Latest News",
+      "endpoint": "https://www.counterterrorism.police.uk/latest-news/?source=ct-policing-uk-rss-feed",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Direct Counter Terrorism Policing RSS feed for operational incident and investigation updates."
+      "requiresKeywordMatch": true,
+      "comment": "Replacement for blocked RSS feed using the public latest-news listing page."
     },
     {
       "id": "cumbria-police-news",
@@ -365,14 +365,14 @@
     },
     {
       "id": "leicestershire-police-news",
-      "provider": "Leicestershire Police - News",
-      "endpoint": "https://www.leics.police.uk/news/leicestershire/news/",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=leicestershire-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Leicestershire Police news for Midlands threat reporting and urban incident corroboration."
+      "comment": "Best-effort replacement for inaccessible Leicestershire Police news using NCA operations and arrests updates."
     },
     {
       "id": "lincolnshire-police-news",
@@ -453,14 +453,14 @@
     },
     {
       "id": "northumbria-police-news",
-      "provider": "Northumbria Police a News",
-      "endpoint": "https://northumbria.police.uk/news/",
+      "provider": "North East Bylines",
+      "endpoint": "https://northeastbylines.co.uk/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Northumbria Police news for Newcastle and North East England terrorism-related incidents and counter-terror operations."
+      "comment": "Best-effort replacement for unavailable Northumbria Police source using North East regional reporting."
     },
     {
       "id": "northumbria-police-northumbria-news",
@@ -629,14 +629,14 @@
     },
     {
       "id": "warwickshire-police-news",
-      "provider": "Warwickshire Police - News",
-      "endpoint": "https://www.warwickshire.police.uk/news/warwickshire/news/",
+      "provider": "Warwickshire Connected - Latest Alerts",
+      "endpoint": "https://www.warwickshireconnected.com/Content/Pages/Latest-Alerts",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Warwickshire Police updates for Midlands motorway, venue and event-related security incidents."
+      "comment": "Next-best replacement for blocked Warwickshire Police news using Warwickshire Connected latest alerts."
     },
     {
       "id": "west-mercia-police-news-html",

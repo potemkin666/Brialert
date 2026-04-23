@@ -13,14 +13,14 @@
     },
     {
       "id": "barnet-council-news",
-      "provider": "Barnet Council a News",
-      "endpoint": "https://www.barnet.gov.uk/news",
+      "provider": "Barnet Post",
+      "endpoint": "https://barnetpost.co.uk/",
       "kind": "html",
       "lane": "context",
       "region": "london",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Barnet borough news used for North London community-safety and incident corroboration."
+      "comment": "Best-effort replacement for council feed using Barnet Post local reporting."
     },
     {
       "id": "barts-health-news",
@@ -211,14 +211,14 @@
     },
     {
       "id": "haringey-council-news",
-      "provider": "Haringey Council a News",
-      "endpoint": "https://new.haringey.gov.uk/news",
+      "provider": "Haringey Community Press",
+      "endpoint": "https://haringeycommunitypress.co.uk/",
       "kind": "html",
       "lane": "context",
       "region": "london",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Haringey borough news used for North London safety context and community reassurance coverage."
+      "comment": "Best-effort replacement for unavailable Haringey council feed using local Haringey community news."
     },
     {
       "id": "harrow-council-news",
@@ -354,14 +354,14 @@
     },
     {
       "id": "lewisham-council-news",
-      "provider": "Lewisham Council a News",
-      "endpoint": "https://news.lewisham.gov.uk/",
+      "provider": "Salamander News",
+      "endpoint": "https://salamandernews.org/",
       "kind": "html",
       "lane": "context",
       "region": "london",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lewisham newsroom used for South-East London incident corroboration and borough-level safety context."
+      "comment": "Best-effort replacement for unavailable Lewisham council feed using Lewisham-focused community reporting."
     },
     {
       "id": "lnwh-news",
@@ -728,14 +728,14 @@
     },
     {
       "id": "tfl-press-releases",
-      "provider": "Transport for London a Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases/rss",
-      "kind": "rss",
+      "provider": "Transport for London - Press Releases",
+      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases?source=tfl-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Switched to official TfL press release RSS endpoint."
+      "comment": "Replacement for blocked TfL RSS feed using the public press-releases page."
     },
     {
       "id": "tfl-press-releases-html",

@@ -25,13 +25,13 @@
     {
       "id": "ncsc-nl-rss",
       "provider": "NCSC Netherlands - RSS",
-      "endpoint": "https://www.ncsc.nl/rss",
+      "endpoint": "https://feeds.ncsc.nl/nieuws.rss",
       "kind": "rss",
       "lane": "prevention",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch NCSC RSS feed for cyber-threat, resilience and protective-security context."
+      "comment": "Official Dutch NCSC news RSS replacement for the previously failing endpoint."
     }
   ]
 }
