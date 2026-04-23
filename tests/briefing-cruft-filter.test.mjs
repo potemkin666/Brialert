@@ -19,6 +19,10 @@ describe('isWebCruft', () => {
       true
     );
     assert.equal(
+      isWebCruft('He has reported on the Israel-Hamas war, terrorism, Israeli politics and Middle East relations.'),
+      true
+    );
+    assert.equal(
       isWebCruft('She is a senior security editor at Reuters.'),
       true
     );

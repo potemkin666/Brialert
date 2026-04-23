@@ -176,6 +176,44 @@ export function plainText(value) {
   );
 }
 
+const SOCIAL_SHARE_NOISE = /\b(?:copy\s+link|share\s+(?:this|via|on)|tweet|facebook|whatsapp|telegram|email|twitter|linkedin|pinterest|reddit|subscribe|newsletter|sign\s+up)\b/i;
+const AUTHOR_BIO_PATTERN = /\bis\s+(?:the\s+|an?\s+)?(?:[\w'’.-]+\s+){0,5}(?:correspondent|reporter|editor|journalist|writer|columnist|contributor|producer|presenter|analyst)\b/i;
+const AUTHOR_BIO_CONTINUATION_PATTERN = /\b(?:he|she|they)\s+has\s+(?:covered|reported on|written for|worked as)\b/i;
+const SOCIAL_SHARE_SEQUENCE_PATTERN = /\b(?:copy\s+link|share\s+(?:this|via|on)|tweet|facebook|whatsapp|telegram|email|twitter|linkedin|pinterest|reddit)(?:\s+(?:copy\s+link|share\s+(?:this|via|on)|tweet|facebook|whatsapp|telegram|email|twitter|linkedin|pinterest|reddit))+\b/gi;
+const NEWSLETTER_INLINE_PATTERN = /\b(?:subscribe|sign\s+up)\s+(?:for|to)\s+(?:our\s+)?newsletter\b[^.!?]*/gi;
+const INLINE_AUTHOR_BIO_PATTERN = /\b[A-Z][a-z'’.-]+(?:\s+[A-Z][a-z'’.-]+){0,3}\s+is\s+(?:the\s+|an?\s+)?(?:[\w'’.-]+\s+){0,5}(?:correspondent|reporter|editor|journalist|writer|columnist|contributor|producer|presenter|analyst)\b[^.!?]*(?:[.!?]|$)/gi;
+const INLINE_AUTHOR_BIO_CONTINUATION_PATTERN = /\b(?:he|she|they)\s+has\s+(?:covered|reported on|written for|worked as)\b[^.!?]*(?:[.!?]|$)/gi;
+
+export function isWebCruft(sentence) {
+  const sample = clean(sentence);
+  if (!sample) return false;
+  const lower = sample.toLowerCase();
+  if (SOCIAL_SHARE_NOISE.test(lower)) return true;
+  if (AUTHOR_BIO_PATTERN.test(lower) || AUTHOR_BIO_CONTINUATION_PATTERN.test(lower)) return true;
+  if (/^(?:read\s+more|related\s+(?:articles|stories|topics)|advertisement|sponsored|©)/i.test(sample)) return true;
+  return false;
+}
+
+export function stripWebCruft(text) {
+  const collapsed = clean(plainText(text))
+    .replace(SOCIAL_SHARE_SEQUENCE_PATTERN, ' ')
+    .replace(NEWSLETTER_INLINE_PATTERN, ' ')
+    .replace(INLINE_AUTHOR_BIO_PATTERN, ' ')
+    .replace(INLINE_AUTHOR_BIO_CONTINUATION_PATTERN, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  if (!collapsed) return '';
+
+  return collapsed
+    .split(/(?<=[.!?])\s+|\s{2,}/)
+    .map((part) => clean(part))
+    .filter(Boolean)
+    .filter((part) => !isWebCruft(part))
+    .filter((part, index, all) => all.indexOf(part) === index)
+    .join(' ');
+}
+
 export function matchesKeywords(text, words = incidentKeywords) {
   const haystack = clean(text).toLowerCase();
   return words.filter((word) => {

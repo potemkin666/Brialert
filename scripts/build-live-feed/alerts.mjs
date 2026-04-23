@@ -1,6 +1,7 @@
 import {
   clean,
   plainText,
+  stripWebCruft,
   terrorismKeywords,
   matchesKeywords,
   looksLikeEntertainment,
@@ -25,6 +26,18 @@ import { isEnglishLanguage, parseSourceDate } from './io.mjs';
 
 function currentTimeMs() {
   return Date.now();
+}
+
+function normaliseItemForFiltering(item) {
+  const title = plainText(item?.title || '');
+  const summary = stripWebCruft(item?.summary || '');
+  const sourceExtract = stripWebCruft(item?.sourceExtract || item?.summary || item?.title || '');
+  return {
+    ...item,
+    title,
+    summary,
+    sourceExtract
+  };
 }
 
 function sourceTierRankValue(sourceTier) {
@@ -305,19 +318,20 @@ function shouldKeepPeopleInvolved(reliabilityProfile, confidenceScore, needsHuma
 }
 
 export function discardReasonForItem(source, item) {
+  const normalizedItem = normaliseItemForFiltering(item);
   const sourceTier = inferSourceTier(source);
   const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
-  const text = `${item.title} ${item.summary} ${item.sourceExtract || ''}`;
+  const text = `${normalizedItem.title} ${normalizedItem.summary} ${normalizedItem.sourceExtract || ''}`;
   const eventType = inferEventType(source, text);
   const incidentHits = matchesKeywords(text);
   const terrorHits = matchesKeywords(text, terrorismKeywords);
-  const terrorRelevant = isTerrorRelevantIncident(source, item);
+  const terrorRelevant = isTerrorRelevantIncident(source, normalizedItem);
 
-  if (item.language && !isEnglishLanguage(item.language)) return 'non-english';
-  if (looksLikeProviderHeadline(source, item)) return 'provider-headline';
+  if (normalizedItem.language && !isEnglishLanguage(normalizedItem.language)) return 'non-english';
+  if (looksLikeProviderHeadline(source, normalizedItem)) return 'provider-headline';
   if (source.lane === 'incidents' && ['feature', 'recognition'].includes(eventType)) return 'non-incident-event';
-  if (!recencyOkay(source, item.published)) {
-    return hasReliableSourceDate(item.published) ? 'stale-date' : 'missing-or-invalid-date';
+  if (!recencyOkay(source, normalizedItem.published)) {
+    return hasReliableSourceDate(normalizedItem.published) ? 'stale-date' : 'missing-or-invalid-date';
   }
   if (looksLikeEntertainment(text)) return 'entertainment-content';
   if (source.lane === 'incidents' && !terrorRelevant) return 'not-terror-relevant';
@@ -340,13 +354,14 @@ export function shouldKeepItem(source, item) {
 }
 
 export function buildAlert(source, item, idx) {
-  const text = `${item.title} ${item.summary}`;
+  const normalizedItem = normaliseItemForFiltering(item);
+  const text = `${normalizedItem.title} ${normalizedItem.summary} ${normalizedItem.sourceExtract}`;
   const sourceTier = inferSourceTier(source);
   const reliabilityProfile = inferReliabilityProfile(source, sourceTier);
-  const location = inferLocation(source, item.title, item.summary);
-  const coords = geoFor(location, item.title, item.summary, source.region);
-  const publishedIso = formatWhen(item.published);
-  const displayWhen = formatDisplayDate(item.published);
+  const location = inferLocation(source, normalizedItem.title, normalizedItem.summary);
+  const coords = geoFor(location, normalizedItem.title, normalizedItem.summary, source.region);
+  const publishedIso = formatWhen(normalizedItem.published);
+  const displayWhen = formatDisplayDate(normalizedItem.published);
   const keywordHits = matchesKeywords(text);
   const terrorismHits = matchesKeywords(text, terrorismKeywords);
   const severity = inferSeverity(source, text);
@@ -354,10 +369,10 @@ export function buildAlert(source, item, idx) {
   const incidentTrack = inferIncidentTrack({ ...source, eventType, text });
   const confidenceScore = inferConfidenceScore(source, text, publishedIso, reliabilityProfile);
   const priorityScore = priorityScoreFor(source, severity, keywordHits, publishedIso, incidentTrack, reliabilityProfile);
-  const isTerrorRelevant = isTerrorRelevantIncident(source, item);
+  const isTerrorRelevant = isTerrorRelevantIncident(source, normalizedItem);
   const needsHumanReview = needsHumanReviewFor(source, severity, keywordHits, publishedIso, reliabilityProfile, incidentTrack);
-  const peopleInvolved = shouldKeepPeopleInvolved(reliabilityProfile, confidenceScore, needsHumanReview, item.peopleInvolved)
-    ? item.peopleInvolved.slice(0, 6)
+  const peopleInvolved = shouldKeepPeopleInvolved(reliabilityProfile, confidenceScore, needsHumanReview, normalizedItem.peopleInvolved)
+    ? normalizedItem.peopleInvolved.slice(0, 6)
     : [];
   const queueReason = queueReasonFor(source, {
     sourceTier,
@@ -371,9 +386,9 @@ export function buildAlert(source, item, idx) {
   });
   const queueBucket = queueBucketFor(source, { queueReason });
   const fusedIncidentId = fusedIncidentIdFor({
-    title: item.title,
-    summary: item.summary,
-    sourceExtract: item.sourceExtract,
+    title: normalizedItem.title,
+    summary: normalizedItem.summary,
+    sourceExtract: normalizedItem.sourceExtract,
     location,
     eventType,
     incidentTrack
@@ -382,7 +397,7 @@ export function buildAlert(source, item, idx) {
   return {
     id: `${source.id}-${idx}`,
     fusedIncidentId,
-    title: titleCase(item.title),
+    title: titleCase(normalizedItem.title),
     location,
     region: source.region,
     lane: source.lane,
@@ -393,12 +408,12 @@ export function buildAlert(source, item, idx) {
     happenedWhen: displayWhen,
     confidence: inferConfidence(reliabilityProfile),
     confidenceScore,
-    summary: plainText(item.summary || item.title).slice(0, 260),
-    aiSummary: makeSummary(source, item),
-    sourceExtract: plainText(item.sourceExtract || item.summary || item.title).slice(0, 1800),
+    summary: plainText(normalizedItem.summary || normalizedItem.title).slice(0, 260),
+    aiSummary: makeSummary(source, normalizedItem),
+    sourceExtract: plainText(normalizedItem.sourceExtract || normalizedItem.summary || normalizedItem.title).slice(0, 1800),
     peopleInvolved,
     source: source.provider,
-    sourceUrl: item.link,
+    sourceUrl: normalizedItem.link,
     sourceTier,
     reliabilityProfile,
     incidentTrack,
