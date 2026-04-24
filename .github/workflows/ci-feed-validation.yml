@@ -49,8 +49,7 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Install Playwright Chromium
-        if: ${{ env.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install --with-deps chromium
 
       - name: Validate feed data files
         run: npm run validate:feed-data
@@ -135,8 +134,7 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Install Playwright Chromium
-        if: ${{ env.ALBERTALERT_ENABLE_PLAYWRIGHT_FALLBACK == 'true' }}
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install --with-deps chromium
 
       - name: Seed quarantine from production health
         run: node ./scripts/ci/seed-quarantine-from-health.mjs

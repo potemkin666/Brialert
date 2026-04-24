@@ -285,6 +285,7 @@ export const AUTO_QUARANTINE_RECHECK_HOURS = 7 * 24;
 export const AUTO_SKIP_EMPTY_THRESHOLD = 10;
 export const AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD = envInt('ALBERTALERT_AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD', 4, 1);
 export const AUTO_QUARANTINE_DEAD_URL_THRESHOLD = envInt('ALBERTALERT_AUTO_QUARANTINE_DEAD_URL_THRESHOLD', 2, 1);
+export const AUTO_QUARANTINE_TIMEOUT_THRESHOLD = envInt('ALBERTALERT_AUTO_QUARANTINE_TIMEOUT_THRESHOLD', 4, 1);
 export const AUTO_QUARANTINE_FAILURE_THRESHOLD = envInt('ALBERTALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD', 6, 1);
 export const HEALTH_SCORE_INITIAL = envInt('ALBERTALERT_HEALTH_SCORE_INITIAL', 80, 0);
 export const HEALTH_SCORE_DEPRIORITISE_THRESHOLD = envInt('ALBERTALERT_HEALTH_SCORE_DEPRIORITISE_THRESHOLD', 40, 0);
@@ -427,7 +428,7 @@ export function sourceRefreshEveryHours(source) {
 
   const byLane = DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE[source?.lane] || DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE.default;
   if (source?.lane === 'incidents') return 0.25;
-  if (source?.kind === 'html') return Math.max(byLane, 1);
+  if (source?.kind === 'html') return Math.max(byLane * 2, 1);
   return byLane;
 }
 

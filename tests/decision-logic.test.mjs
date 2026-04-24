@@ -61,9 +61,11 @@ import {
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
   FEED_SOURCE_CONCURRENCY,
+  AUTO_QUARANTINE_TIMEOUT_THRESHOLD,
   MAX_FEED_PREFETCH_ITEMS,
   MAX_HTML_PREFETCH_ITEMS,
   MAX_HTML_SOURCES_PER_RUN,
+  sourceRefreshEveryHours,
   shouldRefreshSourceThisRun,
   sourceScheduleIntervalMinutes,
   sourceScheduleOffsetMinutes,
@@ -1392,6 +1394,13 @@ test('html source run cap keeps control scheduler budget at legacy value', () =>
   assert.equal(CONTROL_MAX_HTML_SOURCES_PER_RUN, 30);
 });
 
+test('non-incident HTML sources refresh less often than machine-readable equivalents', () => {
+  assert.equal(sourceRefreshEveryHours({ lane: 'context', kind: 'rss' }), 0.5);
+  assert.equal(sourceRefreshEveryHours({ lane: 'context', kind: 'html' }), 1);
+  assert.equal(sourceRefreshEveryHours({ lane: 'oversight', kind: 'rss' }), 1);
+  assert.equal(sourceRefreshEveryHours({ lane: 'oversight', kind: 'html' }), 2);
+});
+
 test('default fetch/runtime tuning constants remain stable', () => {
   assert.equal(DEFAULT_TIMEOUT_MS, 12000);
   assert.equal(DEFAULT_MAX_RETRIES, 2);
@@ -1399,6 +1408,7 @@ test('default fetch/runtime tuning constants remain stable', () => {
   assert.equal(MAX_HTML_PREFETCH_ITEMS, 12);
   assert.equal(MAX_FEED_PREFETCH_ITEMS, 8);
   assert.equal(AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD, 4);
+  assert.equal(AUTO_QUARANTINE_TIMEOUT_THRESHOLD, 4);
 });
 
 test('source error summary classifies HTTP 404 separately for direct quarantine routing', async () => {
