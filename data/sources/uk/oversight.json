@@ -46,14 +46,14 @@
     },
     {
       "id": "echr-uk-grand-chamber-rss",
-      "provider": "European Court of Human Rights - UK Grand Chamber RSS",
-      "endpoint": "https://hudoc.echr.coe.int/app/transform/rss?length=20&library=echreng&query=%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28+contentsitename%3AECHR+AND+%28NOT+%28doctype%3DPR+OR+doctype%3DHFCOMOLD+OR+doctype%3DHECOMOLD%29%29+AND+%28%28respondent%3D%22GBR%22%29%29+AND+%28%28documentcollectionid%3D%22GRANDCHAMBER%22%29%29%29+XRANK%28cb%3D14%29+doctypebranch%3AGRANDCHAMBER%29+XRANK%28cb%3D13%29+doctypebranch%3ADECGRANDCHAMBER%29+XRANK%28cb%3D12%29+doctypebranch%3ACHAMBER%29+XRANK%28cb%3D11%29+doctypebranch%3AADMISSIBILITY%29+XRANK%28cb%3D10%29+doctypebranch%3ACOMMITTEE%29+XRANK%28cb%3D9%29+doctypebranch%3AADMISSIBILITYCOM%29+XRANK%28cb%3D8%29+doctypebranch%3ADECCOMMISSION%29+XRANK%28cb%3D7%29+doctypebranch%3ACOMMUNICATEDCASES%29+XRANK%28cb%3D6%29+doctypebranch%3ACLIN%29+doctypebranch%3AADVISORYOPINIONS%29+doctypebranch%3AREPORTS%29+doctypebranch%3AEXECUTION%29+doctypebranch%3AMERITS%29+doctypebranch%3ASCREENINGPANEL%29+XRANK%28cb%3D4%29+importance%3A1%29+XRANK%28cb%3D3%29+importance%3A2%29+XRANK%28cb%3D2%29+importance%3A3%29+XRANK%28cb%3D1%29+importance%3A4%29+XRANK%28cb%3D2%29+languageisocode%3AENG%29+XRANK%28cb%3D1%29+languageisocode%3AFRE&rankingModelId=4180000c-8692-45ca-ad63-74bc4163871b&sort=kpdate+Descending&start=0",
-      "kind": "rss",
+      "provider": "European Court of Human Rights - HUDOC",
+      "endpoint": "https://hudoc.echr.coe.int/",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official ECHR HUDOC RSS feed scoped to UK Grand Chamber material."
+      "comment": "Safe official fallback to the ECHR HUDOC portal when UK Grand Chamber transform RSS URLs are brittle."
     },
     {
       "id": "extremism-commission-blog",
@@ -90,14 +90,14 @@
     },
     {
       "id": "gov-uk-cabinet-office-atom",
-      "provider": "Cabinet Office a GOV.UK Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office.atom",
-      "kind": "atom",
+      "provider": "Cabinet Office",
+      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Cabinet Office atom feed for national security council decisions, resilience strategy and COBR outputs."
+      "comment": "Stable official Cabinet Office organisation page used as fallback for brittle Atom feed endpoints."
     },
     {
       "id": "gov-uk-hmcts",
@@ -123,14 +123,14 @@
     },
     {
       "id": "gov-uk-home-office-atom",
-      "provider": "UK Home Office a Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/home-office.atom",
-      "kind": "atom",
+      "provider": "UK Home Office",
+      "endpoint": "https://www.gov.uk/government/organisations/home-office",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Home Office Atom feed for counter-terrorism, extremism, and public security publications."
+      "comment": "Stable official Home Office organisation page used as fallback for brittle Atom feed endpoints."
     },
     {
       "id": "gov-uk-ipco",
@@ -145,36 +145,36 @@
     },
     {
       "id": "gov-uk-mod-atom",
-      "provider": "Ministry of Defence a GOV.UK Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence.atom",
-      "kind": "atom",
+      "provider": "Ministry of Defence",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "MoD atom feed for defence intelligence updates, military counter-terrorism operations and threat assessments."
+      "comment": "Stable official MoD organisation page used as fallback for brittle Atom feed endpoints."
     },
     {
       "id": "gov-uk-moj-atom",
-      "provider": "Ministry of Justice a GOV.UK Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-justice.atom",
-      "kind": "atom",
+      "provider": "Ministry of Justice",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-justice",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "MoJ atom feed for terrorism sentencing, extremist prisoner management and judicial oversight updates."
+      "comment": "Stable official MoJ organisation page used as fallback for brittle Atom feed endpoints."
     },
     {
       "id": "gov-uk-news-and-communications-atom",
-      "provider": "GOV.UK - News and Communications Atom",
-      "endpoint": "https://www.gov.uk/search/news-and-communications.atom",
-      "kind": "rss",
+      "provider": "GOV.UK - News and Communications",
+      "endpoint": "https://www.gov.uk/search/news-and-communications",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Broad GOV.UK news and communications Atom feed for official UK announcements with keyword gating."
+      "comment": "Stable official GOV.UK news and communications listing used as fallback for brittle Atom feed endpoints."
     },
     {
       "id": "gov-uk-parliament-jcnss",

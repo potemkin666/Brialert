@@ -13,14 +13,14 @@
     },
     {
       "id": "austria-interior-ministry-rss-index",
-      "provider": "Austrian Interior Ministry - RSS Index",
-      "endpoint": "https://www.bmi.gv.at/rss_feed/start.aspx",
+      "provider": "Austrian Interior Ministry - News",
+      "endpoint": "https://www.bmi.gv.at/news.aspx",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Austrian Interior Ministry RSS directory page for official feeds on policing, border security and public safety."
+      "comment": "Next-best replacement for the inaccessible RSS index using the official Austrian Interior Ministry news listing."
     },
     {
       "id": "bdk-rss",

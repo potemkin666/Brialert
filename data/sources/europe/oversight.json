@@ -24,14 +24,14 @@
     },
     {
       "id": "echr-press-releases-rss",
-      "provider": "European Court of Human Rights - Press Releases RSS",
-      "endpoint": "https://hudoc.echr.coe.int/app/transform/rss?length=20&library=echrengpress&query=contentsitename%3AECHR+AND+doctype%3DPR&rankingModelId=11111111-0000-0000-0000-000000000000&sort=kpdate+Descending&start=0",
+      "provider": "UK Judiciary - Judgments Feed",
+      "endpoint": "https://www.judiciary.uk/judgments/feed/",
       "kind": "rss",
       "lane": "oversight",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official ECHR press release RSS feed from HUDOC."
+      "comment": "Next-best substitute for the inaccessible ECHR press-release feed using the active UK Judiciary judgments feed."
     },
     {
       "id": "french-justice-ministry-news",

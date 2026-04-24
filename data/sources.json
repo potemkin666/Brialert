@@ -50,14 +50,14 @@
     },
     {
       "id": "austria-interior-ministry-rss-index",
-      "provider": "Austrian Interior Ministry - RSS Index",
-      "endpoint": "https://www.bmi.gv.at/rss_feed/start.aspx",
+      "provider": "Austrian Interior Ministry - News",
+      "endpoint": "https://www.bmi.gv.at/news.aspx",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Austrian Interior Ministry RSS directory page for official feeds on policing, border security and public safety.",
+      "comment": "Next-best replacement for the inaccessible RSS index using the official Austrian Interior Ministry news listing.",
       "refreshEveryHours": 1
     },
     {
@@ -370,14 +370,14 @@
     },
     {
       "id": "dutch-police-rss-index",
-      "provider": "Politie.nl - RSS",
-      "endpoint": "https://www.politie.nl/rss",
+      "provider": "Dutch National Police - News (EN)",
+      "endpoint": "https://www.politie.nl/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch police RSS overview page for official national and regional police feed discovery.",
+      "comment": "Next-best replacement for the RSS index using the active English Dutch National Police news page.",
       "refreshEveryHours": 1
     },
     {
@@ -550,14 +550,14 @@
     },
     {
       "id": "eu-commission-home-affairs-topic",
-      "provider": "European Commission - Home Affairs",
-      "endpoint": "https://commission.europa.eu/topics/home-affairs_en",
+      "provider": "European Commission - Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "European Commission Home Affairs topic page for migration, internal security and terrorism-policy context.",
+      "comment": "Migration and Home Affairs news page used as the best active source for dated policy and security updates.",
       "refreshEveryHours": 1
     },
     {
@@ -621,14 +621,14 @@
     },
     {
       "id": "eu-council-press-releases-html",
-      "provider": "Council of the EU - Press Releases",
-      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/",
-      "kind": "html",
+      "provider": "Council of the EU - Press Releases (RSS)",
+      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Council of the EU press releases page for official announcements, JHA outcomes and sanctions statements.",
+      "comment": "Next-best replacement for the blocked HTML page using the accessible official Council press releases RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -717,14 +717,14 @@
     },
     {
       "id": "eu-security-union-strategy",
-      "provider": "European Commission a Security Union Strategy",
-      "endpoint": "https://home-affairs.ec.europa.eu/policies/internal-security_en",
+      "provider": "European Commission - Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "EU Commission Security Union policy page for counter-terrorism, serious crime, and internal security updates.",
+      "comment": "Next-best active source for internal-security developments using the Home Affairs news stream.",
       "refreshEveryHours": 1
     },
     {
@@ -1179,14 +1179,14 @@
     },
     {
       "id": "echr-press-releases-rss",
-      "provider": "European Court of Human Rights - Press Releases RSS",
-      "endpoint": "https://hudoc.echr.coe.int/app/transform/rss?length=20&library=echrengpress&query=contentsitename%3AECHR+AND+doctype%3DPR&rankingModelId=11111111-0000-0000-0000-000000000000&sort=kpdate+Descending&start=0",
+      "provider": "UK Judiciary - Judgments Feed",
+      "endpoint": "https://www.judiciary.uk/judgments/feed/",
       "kind": "rss",
       "lane": "oversight",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official ECHR press release RSS feed from HUDOC.",
+      "comment": "Next-best substitute for the inaccessible ECHR press-release feed using the active UK Judiciary judgments feed.",
       "refreshEveryHours": 1
     },
     {
@@ -1553,13 +1553,13 @@
     {
       "id": "osce-press-releases",
       "provider": "OSCE a Press Releases",
-      "endpoint": "https://www.osce.org/press-releases",
+      "endpoint": "https://news.osce.org/news/list?item_type=press-release&lang=en&page=1",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "OSCE press releases are provided as web pages; using the press release index.",
+      "comment": "OSCE newsroom press-release listing filtered to press releases for a stable, current index surface.",
       "refreshEveryHours": 1
     },
     {
@@ -1666,13 +1666,13 @@
     {
       "id": "unoct-news",
       "provider": "UN Office of Counter-Terrorism (UNOCT) - News",
-      "endpoint": "https://www.un.org/counterterrorism/news",
+      "endpoint": "https://www.un.org/counterterrorism/en/news-articles",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "UNOCT does not consistently publish RSS; using the official news page.",
+      "comment": "UNOCT news/articles page used as the current official listing for Counter-Terrorism updates.",
       "refreshEveryHours": 1
     },
     {
@@ -1920,13 +1920,13 @@
     {
       "id": "croydon-council-news",
       "provider": "Croydon Council a News",
-      "endpoint": "https://news.croydon.gov.uk/",
+      "endpoint": "https://news.croydon.gov.uk/category/recent-news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Croydon newsroom used for South London transport and public-safety corroboration.",
+      "comment": "Croydon recent-news listing used for a cleaner borough news index and London corroboration.",
       "refreshEveryHours": 1
     },
     {
@@ -2063,13 +2063,13 @@
     {
       "id": "hillingdon-council-news",
       "provider": "Hillingdon Council a News",
-      "endpoint": "https://www.hillingdon.gov.uk/news",
+      "endpoint": "https://pre.hillingdon.gov.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Hillingdon borough news used for Heathrow corridor and West London local context.",
+      "comment": "Hillingdon canonical news target used for Heathrow corridor and West London local context.",
       "refreshEveryHours": 1
     },
     {
@@ -2111,13 +2111,13 @@
     {
       "id": "islington-council-news",
       "provider": "Islington Council a News",
-      "endpoint": "https://www.islington.media/",
+      "endpoint": "https://www.islington.media/news/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Islington borough newsroom used for local London emergency and community-safety corroboration.",
+      "comment": "Islington direct news listing used for local London emergency and community-safety corroboration.",
       "refreshEveryHours": 1
     },
     {
@@ -2159,13 +2159,13 @@
     {
       "id": "lambeth-council-news",
       "provider": "Lambeth Council a News",
-      "endpoint": "https://love.lambeth.gov.uk/",
+      "endpoint": "https://love.lambeth.gov.uk/all-posts/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Lambeth news used for central-south London incident context and civic response.",
+      "comment": "Lambeth all-posts listing used for a cleaner borough news index and civic-response context.",
       "refreshEveryHours": 1
     },
     {
@@ -2265,26 +2265,26 @@
     },
     {
       "id": "london-gov-rss-80603",
-      "provider": "Greater London Authority a RSS Feed 80603",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80603",
-      "kind": "rss",
+      "provider": "Mayor of London - Press Releases",
+      "endpoint": "https://www.london.gov.uk/media-centre/mayors-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80603. Verify content category against the live feed; likely safety, policing, or resilience-related GLA updates.",
+      "comment": "Stable Mayor's press releases page used in place of intermittently unresolved RSS feed ID 80603.",
       "refreshEveryHours": 1
     },
     {
       "id": "london-gov-rss-80632",
-      "provider": "Greater London Authority a RSS Feed 80632",
-      "endpoint": "https://www.london.gov.uk/rss-feeds/80632",
-      "kind": "rss",
+      "provider": "London Assembly - Press Releases",
+      "endpoint": "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-press-releases",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "GLA CMS feed ID 80632. Verify content category against the live feed for specific topic or committee coverage.",
+      "comment": "Stable London Assembly press releases page used in place of intermittently unresolved RSS feed ID 80632.",
       "refreshEveryHours": 1
     },
     {
@@ -4309,13 +4309,13 @@
     {
       "id": "avon-somerset-police-news",
       "provider": "Avon & Somerset Police a News",
-      "endpoint": "https://www.avonandsomerset.police.uk/newsroom/",
+      "endpoint": "https://www.avonandsomerset.police.uk/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Avon & Somerset Police newsroom covering Bristol and surrounding area incidents including counter-terrorism operations.",
+      "comment": "Avon & Somerset Police official news page for Bristol and surrounding area incidents including counter-terrorism operations.",
       "refreshEveryHours": 1
     },
     {
@@ -5016,26 +5016,26 @@
     },
     {
       "id": "west-yorkshire-police-all-rss",
-      "provider": "West Yorkshire Police - All Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/all/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - All News",
+      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police all-content feed for broader regional policing updates with downstream filtering.",
+      "comment": "West Yorkshire Police all news stories page used as the stable official fallback for the deprecated all-feed endpoint.",
       "refreshEveryHours": 1
     },
     {
       "id": "west-yorkshire-police-appeals-rss",
-      "provider": "West Yorkshire Police - Appeals Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/appeals/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - Appeals",
+      "endpoint": "https://www.westyorkshire.police.uk/news-appeals/appeals",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police appeals feed for incidents, wanted appeals and operational notices.",
+      "comment": "West Yorkshire Police appeals page used as the stable official fallback for the brittle appeals RSS endpoint.",
       "refreshEveryHours": 1
     },
     {
@@ -5065,37 +5065,37 @@
     {
       "id": "west-yorkshire-police-news-appeals",
       "provider": "West Yorkshire Police - News Appeals",
-      "endpoint": "https://www.westyorkshirepolice.co.uk/news-appeals",
+      "endpoint": "https://www.westyorkshire.police.uk/news-appeals",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police appeals and news page for Leeds, Bradford and regional operations.",
+      "comment": "West Yorkshire Police official news and appeals page for Leeds, Bradford and regional operations.",
       "refreshEveryHours": 1
     },
     {
       "id": "west-yorkshire-police-news-rss",
-      "provider": "West Yorkshire Police - News Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - News",
+      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police main news RSS feed for operational updates and incident reporting.",
+      "comment": "West Yorkshire Police all news stories page used as the stable official fallback for the deprecated news RSS endpoint.",
       "refreshEveryHours": 1
     },
     {
       "id": "west-yorkshire-police-releases-rss",
-      "provider": "West Yorkshire Police - Releases Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/releases/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - RSS Feeds",
+      "endpoint": "https://www.westyorkshire.police.uk/rss-feeds",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police releases feed for press statements, arrests and public-safety reporting.",
+      "comment": "West Yorkshire Police official RSS index page used as the stable fallback for brittle releases feed URLs.",
       "refreshEveryHours": 1
     },
     {
@@ -5160,14 +5160,14 @@
     },
     {
       "id": "echr-uk-grand-chamber-rss",
-      "provider": "European Court of Human Rights - UK Grand Chamber RSS",
-      "endpoint": "https://hudoc.echr.coe.int/app/transform/rss?length=20&library=echreng&query=%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28%28+contentsitename%3AECHR+AND+%28NOT+%28doctype%3DPR+OR+doctype%3DHFCOMOLD+OR+doctype%3DHECOMOLD%29%29+AND+%28%28respondent%3D%22GBR%22%29%29+AND+%28%28documentcollectionid%3D%22GRANDCHAMBER%22%29%29%29+XRANK%28cb%3D14%29+doctypebranch%3AGRANDCHAMBER%29+XRANK%28cb%3D13%29+doctypebranch%3ADECGRANDCHAMBER%29+XRANK%28cb%3D12%29+doctypebranch%3ACHAMBER%29+XRANK%28cb%3D11%29+doctypebranch%3AADMISSIBILITY%29+XRANK%28cb%3D10%29+doctypebranch%3ACOMMITTEE%29+XRANK%28cb%3D9%29+doctypebranch%3AADMISSIBILITYCOM%29+XRANK%28cb%3D8%29+doctypebranch%3ADECCOMMISSION%29+XRANK%28cb%3D7%29+doctypebranch%3ACOMMUNICATEDCASES%29+XRANK%28cb%3D6%29+doctypebranch%3ACLIN%29+doctypebranch%3AADVISORYOPINIONS%29+doctypebranch%3AREPORTS%29+doctypebranch%3AEXECUTION%29+doctypebranch%3AMERITS%29+doctypebranch%3ASCREENINGPANEL%29+XRANK%28cb%3D4%29+importance%3A1%29+XRANK%28cb%3D3%29+importance%3A2%29+XRANK%28cb%3D2%29+importance%3A3%29+XRANK%28cb%3D1%29+importance%3A4%29+XRANK%28cb%3D2%29+languageisocode%3AENG%29+XRANK%28cb%3D1%29+languageisocode%3AFRE&rankingModelId=4180000c-8692-45ca-ad63-74bc4163871b&sort=kpdate+Descending&start=0",
-      "kind": "rss",
+      "provider": "European Court of Human Rights - HUDOC",
+      "endpoint": "https://hudoc.echr.coe.int/",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official ECHR HUDOC RSS feed scoped to UK Grand Chamber material.",
+      "comment": "Safe official fallback to the ECHR HUDOC portal when UK Grand Chamber transform RSS URLs are brittle.",
       "refreshEveryHours": 1
     },
     {
@@ -5208,14 +5208,14 @@
     },
     {
       "id": "gov-uk-cabinet-office-atom",
-      "provider": "Cabinet Office a GOV.UK Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office.atom",
-      "kind": "atom",
+      "provider": "Cabinet Office",
+      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Cabinet Office atom feed for national security council decisions, resilience strategy and COBR outputs.",
+      "comment": "Stable official Cabinet Office organisation page used as fallback for brittle Atom feed endpoints.",
       "refreshEveryHours": 1
     },
     {
@@ -5244,14 +5244,14 @@
     },
     {
       "id": "gov-uk-home-office-atom",
-      "provider": "UK Home Office a Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/home-office.atom",
-      "kind": "atom",
+      "provider": "UK Home Office",
+      "endpoint": "https://www.gov.uk/government/organisations/home-office",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Home Office Atom feed for counter-terrorism, extremism, and public security publications.",
+      "comment": "Stable official Home Office organisation page used as fallback for brittle Atom feed endpoints.",
       "refreshEveryHours": 1
     },
     {
@@ -5268,38 +5268,38 @@
     },
     {
       "id": "gov-uk-mod-atom",
-      "provider": "Ministry of Defence a GOV.UK Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence.atom",
-      "kind": "atom",
+      "provider": "Ministry of Defence",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "MoD atom feed for defence intelligence updates, military counter-terrorism operations and threat assessments.",
+      "comment": "Stable official MoD organisation page used as fallback for brittle Atom feed endpoints.",
       "refreshEveryHours": 1
     },
     {
       "id": "gov-uk-moj-atom",
-      "provider": "Ministry of Justice a GOV.UK Atom Feed",
-      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-justice.atom",
-      "kind": "atom",
+      "provider": "Ministry of Justice",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-justice",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "MoJ atom feed for terrorism sentencing, extremist prisoner management and judicial oversight updates.",
+      "comment": "Stable official MoJ organisation page used as fallback for brittle Atom feed endpoints.",
       "refreshEveryHours": 1
     },
     {
       "id": "gov-uk-news-and-communications-atom",
-      "provider": "GOV.UK - News and Communications Atom",
-      "endpoint": "https://www.gov.uk/search/news-and-communications.atom",
-      "kind": "rss",
+      "provider": "GOV.UK - News and Communications",
+      "endpoint": "https://www.gov.uk/search/news-and-communications",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Broad GOV.UK news and communications Atom feed for official UK announcements with keyword gating.",
+      "comment": "Stable official GOV.UK news and communications listing used as fallback for brittle Atom feed endpoints.",
       "refreshEveryHours": 1
     },
     {

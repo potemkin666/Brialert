@@ -24,14 +24,14 @@
     },
     {
       "id": "dutch-police-rss-index",
-      "provider": "Politie.nl - RSS",
-      "endpoint": "https://www.politie.nl/rss",
+      "provider": "Dutch National Police - News (EN)",
+      "endpoint": "https://www.politie.nl/en/news",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch police RSS overview page for official national and regional police feed discovery."
+      "comment": "Next-best replacement for the RSS index using the active English Dutch National Police news page."
     },
     {
       "id": "ertzaintza-news",
