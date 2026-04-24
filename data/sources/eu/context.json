@@ -233,14 +233,14 @@
     },
     {
       "id": "spain-interior-ministry-news",
-      "provider": "Spanish Ministry of the Interior - Press",
-      "endpoint": "https://www.interior.gob.es/opencms/en/prensa/",
-      "kind": "html",
+      "provider": "Eurojust - Press Releases and News",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=spain-interior-ministry-news",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Spanish Interior Ministry press releases covering terrorism arrests, border security and national policing operations."
+      "comment": "Replacement feed for inaccessible Spanish Interior press page using Eurojust press releases RSS."
     },
     {
       "id": "statewatch-news",

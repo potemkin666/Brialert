@@ -110,14 +110,14 @@
     },
     {
       "id": "henry-jackson-society-news",
-      "provider": "RUSI - Terrorism and Conflict",
-      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict?source=henry-jackson-society-news",
-      "kind": "html",
+      "provider": "RUSI - Latest Publications",
+      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=henry-jackson-society-news",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for unavailable Henry Jackson Society feed using RUSI terrorism/conflict analysis."
+      "comment": "Replacement feed using RUSI latest publications RSS for defence and counter-terrorism research updates."
     },
     {
       "id": "hope-not-hate-home",
@@ -176,14 +176,14 @@
     },
     {
       "id": "national-crime-agency-news",
-      "provider": "National Crime Agency a News",
-      "endpoint": "https://www.nationalcrimeagency.gov.uk/news",
-      "kind": "html",
+      "provider": "GovWire - UK Home Office News",
+      "endpoint": "https://www.govwire.co.uk/feeds/home-office/all.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint published; using the main news page and relying on keyword filtering."
+      "comment": "Replacement feed for unavailable National Crime Agency RSS coverage using GovWire's Home Office feed."
     },
     {
       "id": "npcc-releases",
@@ -265,24 +265,24 @@
     {
       "id": "rusi-publications",
       "provider": "RUSI (Royal United Services Institute) a Publications",
-      "endpoint": "https://www.rusi.org/publications",
-      "kind": "html",
+      "endpoint": "https://www.rusi.org/rss/latest-publications.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RUSI UK-based defence and security think tank publications used as specialist research and corroboration context."
+      "comment": "Official RUSI latest publications RSS feed for UK defence, security and counter-terrorism research."
     },
     {
       "id": "rusi-terrorism-conflict",
-      "provider": "RUSI - Terrorism and Conflict",
-      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict",
-      "kind": "html",
+      "provider": "RUSI - Latest Publications",
+      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=rusi-terrorism-conflict",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RUSI topic page focused on terrorism and conflict research."
+      "comment": "Replacement feed for the non-RSS terrorism/conflict topic page using RUSI latest publications RSS."
     },
     {
       "id": "skwawkbox",
@@ -1115,14 +1115,14 @@
     },
     {
       "id": "fmcg-gurus",
-      "provider": "FMCG Gurus",
-      "endpoint": "https://fmcggurus.com/feed/",
+      "provider": "Europol - Newsroom (RSS)",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for unrelated FMCG feed using Europol's official law-enforcement RSS feed."
     },
     {
       "id": "foreign-office-blogs",
@@ -1291,14 +1291,14 @@
     },
     {
       "id": "silly-old-sod",
-      "provider": "Silly Old Sod",
-      "endpoint": "https://www.sillyoldsod.com/feed/",
+      "provider": "Haringey Community Press",
+      "endpoint": "https://haringeycommunitypress.co.uk/feed/",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for personal-blog feed using active Haringey Community Press RSS."
     },
     {
       "id": "silverspoon-london",
@@ -1313,14 +1313,14 @@
     },
     {
       "id": "sks-business-services",
-      "provider": "SKS Business Services",
-      "endpoint": "https://www.sksbusinessservices.com/feed/",
+      "provider": "National Police Air Service (NPAS) - News",
+      "endpoint": "https://www.npas.police.uk/news/feed",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for unrelated business feed using NPAS policing news RSS."
     },
     {
       "id": "hnd-assignment-help-uk-medium",

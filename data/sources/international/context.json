@@ -197,6 +197,17 @@
       "comment": "Long War Journal RSS feed tracking militant ecosystem developments including al-Qaeda, Islamic State, Taliban, and affiliated groups."
     },
     {
+      "id": "jamestown-terrorism-monitor",
+      "provider": "Jamestown Foundation - Terrorism Monitor",
+      "endpoint": "https://jamestown.org/publications/tm/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Jamestown Terrorism Monitor feed for analysis of militant movements and security trends."
+    },
+    {
       "id": "nato-news-rss",
       "provider": "NATO a News (RSS)",
       "endpoint": "https://www.nato.int/en/news-and-events/articles/news",
@@ -275,13 +286,13 @@
     {
       "id": "tech-against-terrorism-podcast",
       "provider": "Tech Against Terrorism - Podcast",
-      "endpoint": "https://podcast.techagainstterrorism.org/",
-      "kind": "html",
+      "endpoint": "https://feeds.buzzsprout.com/1684819.rss",
+      "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Tech Against Terrorism podcast site for interviews and analysis on extremist content and digital threat response."
+      "comment": "Official Tech Against Terrorism podcast RSS feed."
     },
     {
       "id": "tony-blair-institute-news",

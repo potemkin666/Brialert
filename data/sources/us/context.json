@@ -3,13 +3,13 @@
     {
       "id": "ctc-sentinel",
       "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
-      "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
-      "kind": "html",
+      "endpoint": "https://ctc.westpoint.edu/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "CTC Sentinel is published as web pages; using the current issue/archive surface."
+      "comment": "Official CTC West Point RSS feed for terrorism research and trend analysis."
     },
     {
       "id": "dhs-press-releases",
@@ -122,25 +122,25 @@
     },
     {
       "id": "start-baad-database",
-      "provider": "National Consortium for the Study of Terrorism (START) - Big Allied and Dangerous (BAAD) Database",
-      "endpoint": "https://www.start.umd.edu/baad/database/",
-      "kind": "html",
+      "provider": "RUSI - Latest Publications",
+      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=start-baad-database",
+      "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "START BAAD database of designated terrorist organisations used for group identification context."
+      "comment": "Replacement feed for unavailable START BAAD endpoint using RUSI latest publications RSS."
     },
     {
       "id": "start-center-publications",
-      "provider": "START Center (UMD) - News & Publications",
-      "endpoint": "https://www.start.umd.edu/news",
-      "kind": "html",
+      "provider": "Counter Terrorism Policing UK",
+      "endpoint": "https://www.counterterrorism.police.uk/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "National Consortium for the Study of Terrorism (START) at University of Maryland publishes terrorism research and GTD data."
+      "comment": "Replacement feed for unavailable START news endpoint using Counter Terrorism Policing UK's RSS."
     },
     {
       "id": "state-dept-terrorism",

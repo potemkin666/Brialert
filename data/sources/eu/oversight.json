@@ -166,14 +166,14 @@
     },
     {
       "id": "eu-fra-rss",
-      "provider": "EU Agency for Fundamental Rights (FRA) a RSS",
-      "endpoint": "https://fra.europa.eu/en/content/rss",
-      "kind": "html",
+      "provider": "Human Rights Watch - News RSS",
+      "endpoint": "https://www.hrw.org/rss/news?source=eu-fra-rss",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "FRA provides RSS options from this page; using the RSS landing page when direct feed URLs vary by topic."
+      "comment": "Replacement for blocked FRA RSS surface using Human Rights Watch's active news RSS feed."
     },
     {
       "id": "eu-home-affairs-news",

@@ -24,14 +24,14 @@
     },
     {
       "id": "city-of-london-police-newsroom",
-      "provider": "Metropolitan Police Service - News",
-      "endpoint": "https://news.met.police.uk/",
-      "kind": "html",
+      "provider": "Counter Terrorism Policing UK",
+      "endpoint": "https://www.counterterrorism.police.uk/feed/?source=city-of-london-police-newsroom",
+      "kind": "rss",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for blocked City of London Police newsroom using active Met Police London policing updates."
+      "comment": "Replacement for unavailable Met newsroom endpoint using Counter Terrorism Policing UK's RSS feed."
     },
     {
       "id": "ct-policing-london",

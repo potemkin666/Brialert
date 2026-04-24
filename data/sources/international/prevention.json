@@ -32,14 +32,14 @@
     },
     {
       "id": "tech-against-terrorism",
-      "provider": "Tech Against Terrorism a Blog",
-      "endpoint": "https://techagainstterrorism.org/",
+      "provider": "Tech Against Terrorism - Analysis",
+      "endpoint": "https://techagainstterrorism.org/analysis",
       "kind": "html",
       "lane": "prevention",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "No stable RSS endpoint advertised; using the primary site/blog surface and relying on keyword filtering."
+      "comment": "Focused analysis page for extremist content, platform abuse and online prevention context."
     },
     {
       "id": "tech-against-terrorism-home",

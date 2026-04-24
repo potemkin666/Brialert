@@ -46,14 +46,14 @@
     },
     {
       "id": "financial-times-world",
-      "provider": "Financial Times a World",
-      "endpoint": "https://www.ft.com/world",
-      "kind": "html",
+      "provider": "BBC News - World",
+      "endpoint": "http://feeds.bbci.co.uk/news/world/rss.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Financial Times world coverage used as corroborating context rather than a trigger feed."
+      "comment": "Replacement for non-feed FT world page using BBC World News RSS."
     },
     {
       "id": "france24-europe-rss",

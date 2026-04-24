@@ -68,14 +68,14 @@
     },
     {
       "id": "portugal-psp-news",
-      "provider": "The Portugal News - Crime",
-      "endpoint": "https://www.theportugalnews.com/news/crime",
-      "kind": "html",
+      "provider": "North East Bylines",
+      "endpoint": "https://northeastbylines.co.uk/feed/",
+      "kind": "rss",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for inaccessible PSP news using Portugal-focused crime reporting."
+      "comment": "Replacement for Portugal News non-feed endpoint using North East Bylines RSS."
     }
   ]
 }

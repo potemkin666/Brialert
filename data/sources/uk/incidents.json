@@ -454,13 +454,13 @@
     {
       "id": "northumbria-police-news",
       "provider": "North East Bylines",
-      "endpoint": "https://northeastbylines.co.uk/",
-      "kind": "html",
+      "endpoint": "https://northeastbylines.co.uk/feed/",
+      "kind": "rss",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for unavailable Northumbria Police source using North East regional reporting."
+      "comment": "Replacement feed using North East Bylines RSS."
     },
     {
       "id": "northumbria-police-northumbria-news",
@@ -629,14 +629,14 @@
     },
     {
       "id": "warwickshire-police-news",
-      "provider": "Warwickshire Connected - Latest Alerts",
-      "endpoint": "https://www.warwickshireconnected.com/Content/Pages/Latest-Alerts",
-      "kind": "html",
+      "provider": "Eurojust - Press Releases and News",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=warwickshire-police-news",
+      "kind": "rss",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for blocked Warwickshire Police news using Warwickshire Connected latest alerts."
+      "comment": "Replacement feed for unavailable Warwickshire source using Eurojust press releases RSS."
     },
     {
       "id": "west-mercia-police-news-html",
