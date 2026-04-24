@@ -13,14 +13,14 @@
     },
     {
       "id": "isd-global-publications",
-      "provider": "Institute for Strategic Dialogue (ISD) - Site Feed",
-      "endpoint": "https://www.isdglobal.org/feed/",
-      "kind": "rss",
+      "provider": "ISD - Publications",
+      "endpoint": "https://www.isdglobal.org/publications/",
+      "kind": "html",
       "lane": "prevention",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed publications page using ISD's site-wide RSS feed."
+      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research."
     },
     {
       "id": "ncsc-nl-rss",

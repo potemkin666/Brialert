@@ -176,14 +176,14 @@
     },
     {
       "id": "national-crime-agency-news",
-      "provider": "GovWire - UK Home Office News",
-      "endpoint": "https://www.govwire.co.uk/feeds/home-office/all.xml",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for unavailable National Crime Agency RSS coverage using GovWire's Home Office feed."
+      "comment": "Canonical National Crime Agency news archive used as the primary UK agency source."
     },
     {
       "id": "npcc-releases",
@@ -282,7 +282,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for the non-RSS terrorism/conflict topic page using RUSI latest publications RSS."
+      "comment": "RUSI latest publications feed retained for higher-frequency security and counter-terrorism updates."
     },
     {
       "id": "skwawkbox",
@@ -1115,14 +1115,14 @@
     },
     {
       "id": "fmcg-gurus",
-      "provider": "Europol - Newsroom (RSS)",
-      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
-      "kind": "rss",
+      "provider": "Europol - Newsroom",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for unrelated FMCG feed using Europol's official law-enforcement RSS feed."
+      "comment": "Replacement for unrelated FMCG source using Europol's official newsroom archive."
     },
     {
       "id": "foreign-office-blogs",
@@ -1291,14 +1291,14 @@
     },
     {
       "id": "silly-old-sod",
-      "provider": "Haringey Community Press",
-      "endpoint": "https://haringeycommunitypress.co.uk/feed/",
-      "kind": "rss",
+      "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
+      "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for personal-blog feed using active Haringey Community Press RSS."
+      "comment": "Replacement for personal-blog source using CTC Sentinel analysis archive."
     },
     {
       "id": "silverspoon-london",
@@ -1313,14 +1313,14 @@
     },
     {
       "id": "sks-business-services",
-      "provider": "National Police Air Service (NPAS) - News",
-      "endpoint": "https://www.npas.police.uk/news/feed",
-      "kind": "rss",
+      "provider": "UN Office of Counter-Terrorism - News",
+      "endpoint": "https://www.un.org/counterterrorism/en/news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for unrelated business feed using NPAS policing news RSS."
+      "comment": "Replacement for unrelated business feed using UN counter-terrorism news updates."
     },
     {
       "id": "hnd-assignment-help-uk-medium",

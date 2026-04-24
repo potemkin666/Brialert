@@ -166,14 +166,14 @@
     },
     {
       "id": "eu-fra-rss",
-      "provider": "Human Rights Watch - News RSS",
-      "endpoint": "https://www.hrw.org/rss/news?source=eu-fra-rss",
-      "kind": "rss",
+      "provider": "OHCHR - Terrorism and Violent Extremism",
+      "endpoint": "https://www.ohchr.org/en/topic/terrorism-and-violent-extremism",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for blocked FRA RSS surface using Human Rights Watch's active news RSS feed."
+      "comment": "Replacement for FRA anti-bot RSS endpoint using OHCHR's terrorism and violent extremism topic page."
     },
     {
       "id": "eu-home-affairs-news",
@@ -296,14 +296,14 @@
     },
     {
       "id": "fra-rss",
-      "provider": "Human Rights Watch - News RSS",
-      "endpoint": "https://www.hrw.org/rss/news",
-      "kind": "rss",
+      "provider": "Human Rights Watch - Terrorism and Counterterrorism",
+      "endpoint": "https://www.hrw.org/topic/terrorism-counterterrorism",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for blocked FRA feed using HRW's active human-rights news RSS."
+      "comment": "Direct HRW terrorism and counterterrorism topic page for focused rights oversight."
     }
   ]
 }

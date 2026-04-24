@@ -629,14 +629,14 @@
     },
     {
       "id": "warwickshire-police-news",
-      "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=warwickshire-police-news",
-      "kind": "rss",
+      "provider": "Warwickshire Connected - Latest Alerts",
+      "endpoint": "https://www.warwickshireconnected.com/Content/Pages/Latest-Alerts",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for unavailable Warwickshire source using Eurojust press releases RSS."
+      "comment": "Warwickshire Connected latest-alerts page retained for local police community messaging."
     },
     {
       "id": "west-mercia-police-news-html",

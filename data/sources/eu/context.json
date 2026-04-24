@@ -233,14 +233,14 @@
     },
     {
       "id": "spain-interior-ministry-news",
-      "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=spain-interior-ministry-news",
-      "kind": "rss",
+      "provider": "Spanish Ministry of the Interior - News",
+      "endpoint": "https://www.interior.gob.es/opencms/en/prensa/noticias/",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for inaccessible Spanish Interior press page using Eurojust press releases RSS."
+      "comment": "Direct Spanish Interior Ministry news listing page."
     },
     {
       "id": "statewatch-news",

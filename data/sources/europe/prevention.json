@@ -24,14 +24,14 @@
     },
     {
       "id": "isd-global",
-      "provider": "Institute for Strategic Dialogue (ISD) - Site Feed",
-      "endpoint": "https://www.isdglobal.org/feed/",
-      "kind": "rss",
+      "provider": "Institute for Strategic Dialogue (ISD) - Publications",
+      "endpoint": "https://www.isdglobal.org/publications/",
+      "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed publications page using ISD's site-wide RSS feed."
+      "comment": "ISD publications page retained for formal extremism and online-threat reports."
     },
     {
       "id": "ocam-be-english",
@@ -68,14 +68,14 @@
     },
     {
       "id": "ran-network",
-      "provider": "RUSI - Latest Publications",
-      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=ran-network",
-      "kind": "rss",
+      "provider": "RUSI - Terrorism and Conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict",
+      "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "Replacement feed for unavailable RAN source using RUSI latest publications RSS."
+      "comment": "RUSI terrorism and conflict research-group page with stale query parameter removed."
     },
     {
       "id": "sapo-se-english",

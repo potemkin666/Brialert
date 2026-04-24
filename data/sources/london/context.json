@@ -211,14 +211,14 @@
     },
     {
       "id": "haringey-council-news",
-      "provider": "Haringey Community Press",
-      "endpoint": "https://haringeycommunitypress.co.uk/feed/",
-      "kind": "rss",
+      "provider": "Metropolitan Police - Haringey Tag",
+      "endpoint": "https://news.met.police.uk/news/tag/haringey",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed homepage using Haringey Community Press RSS."
+      "comment": "Official Met borough-tag archive for Haringey."
     },
     {
       "id": "harrow-council-news",
@@ -354,14 +354,14 @@
     },
     {
       "id": "lewisham-council-news",
-      "provider": "Salamander News",
-      "endpoint": "https://www.salamandernews.org/rss/",
-      "kind": "rss",
+      "provider": "Metropolitan Police - Lewisham Tag",
+      "endpoint": "https://news.met.police.uk/news/tag/lewisham",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed homepage using Salamander News RSS endpoint."
+      "comment": "Official Met borough-tag archive for Lewisham."
     },
     {
       "id": "lnwh-news",
@@ -673,14 +673,14 @@
     },
     {
       "id": "southwark-newsroom",
-      "provider": "National Police Air Service (NPAS) - News",
-      "endpoint": "https://www.npas.police.uk/news/feed?source=southwark-newsroom",
-      "kind": "rss",
+      "provider": "Southwark Council - News",
+      "endpoint": "https://www.southwark.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for unavailable Southwark newsroom feed using NPAS RSS."
+      "comment": "Canonical Southwark Council news listing."
     },
     {
       "id": "st-georges-news",

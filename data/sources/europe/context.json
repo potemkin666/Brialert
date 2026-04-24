@@ -46,14 +46,14 @@
     },
     {
       "id": "financial-times-world",
-      "provider": "BBC News - World",
-      "endpoint": "http://feeds.bbci.co.uk/news/world/rss.xml",
-      "kind": "rss",
+      "provider": "AP News - Terrorism",
+      "endpoint": "https://apnews.com/hub/terrorism",
+      "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed FT world page using BBC World News RSS."
+      "comment": "Replacement for subscription-heavy FT world page using AP's open terrorism hub."
     },
     {
       "id": "france24-europe-rss",

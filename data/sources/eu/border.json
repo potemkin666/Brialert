@@ -25,13 +25,13 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/feed",
-      "kind": "rss",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
+      "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Frontex news release RSS feed."
+      "comment": "Canonical Frontex news-release archive page."
     }
   ]
 }

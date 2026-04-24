@@ -27,13 +27,13 @@
     {
       "id": "frontex-news-releases",
       "provider": "Frontex a News Releases",
-      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/feed",
-      "kind": "rss",
+      "endpoint": "https://www.frontex.europa.eu/media-centre/news/news-release/",
+      "kind": "html",
       "lane": "border",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Frontex news release RSS feed.",
+      "comment": "Canonical Frontex news-release archive page.",
       "refreshEveryHours": 1
     },
     {
@@ -285,14 +285,14 @@
     },
     {
       "id": "spain-interior-ministry-news",
-      "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=spain-interior-ministry-news",
-      "kind": "rss",
+      "provider": "Spanish Ministry of the Interior - News",
+      "endpoint": "https://www.interior.gob.es/opencms/en/prensa/noticias/",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for inaccessible Spanish Interior press page using Eurojust press releases RSS.",
+      "comment": "Direct Spanish Interior Ministry news listing page.",
       "refreshEveryHours": 1
     },
     {
@@ -681,14 +681,14 @@
     },
     {
       "id": "eu-fra-rss",
-      "provider": "Human Rights Watch - News RSS",
-      "endpoint": "https://www.hrw.org/rss/news?source=eu-fra-rss",
-      "kind": "rss",
+      "provider": "OHCHR - Terrorism and Violent Extremism",
+      "endpoint": "https://www.ohchr.org/en/topic/terrorism-and-violent-extremism",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for blocked FRA RSS surface using Human Rights Watch's active news RSS feed.",
+      "comment": "Replacement for FRA anti-bot RSS endpoint using OHCHR's terrorism and violent extremism topic page.",
       "refreshEveryHours": 1
     },
     {
@@ -821,14 +821,14 @@
     },
     {
       "id": "fra-rss",
-      "provider": "Human Rights Watch - News RSS",
-      "endpoint": "https://www.hrw.org/rss/news",
-      "kind": "rss",
+      "provider": "Human Rights Watch - Terrorism and Counterterrorism",
+      "endpoint": "https://www.hrw.org/topic/terrorism-counterterrorism",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for blocked FRA feed using HRW's active human-rights news RSS."
+      "comment": "Direct HRW terrorism and counterterrorism topic page for focused rights oversight."
     },
     {
       "id": "europol-eu-iru",
@@ -844,14 +844,14 @@
     },
     {
       "id": "isd-global-publications",
-      "provider": "Institute for Strategic Dialogue (ISD) - Site Feed",
-      "endpoint": "https://www.isdglobal.org/feed/",
-      "kind": "rss",
+      "provider": "ISD - Publications",
+      "endpoint": "https://www.isdglobal.org/publications/",
+      "kind": "html",
       "lane": "prevention",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed publications page using ISD's site-wide RSS feed."
+      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research."
     },
     {
       "id": "ncsc-nl-rss",
@@ -935,14 +935,14 @@
     },
     {
       "id": "financial-times-world",
-      "provider": "BBC News - World",
-      "endpoint": "http://feeds.bbci.co.uk/news/world/rss.xml",
-      "kind": "rss",
+      "provider": "AP News - Terrorism",
+      "endpoint": "https://apnews.com/hub/terrorism",
+      "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed FT world page using BBC World News RSS."
+      "comment": "Replacement for subscription-heavy FT world page using AP's open terrorism hub."
     },
     {
       "id": "france24-europe-rss",
@@ -1143,14 +1143,14 @@
     },
     {
       "id": "portugal-psp-news",
-      "provider": "North East Bylines",
-      "endpoint": "https://northeastbylines.co.uk/feed/",
-      "kind": "rss",
+      "provider": "The Portugal News - Crime",
+      "endpoint": "https://www.theportugalnews.com/news/crime",
+      "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for Portugal News non-feed endpoint using North East Bylines RSS.",
+      "comment": "Portugal crime section retained as a live and scrapeable contextual source.",
       "refreshEveryHours": 1
     },
     {
@@ -1239,14 +1239,14 @@
     },
     {
       "id": "isd-global",
-      "provider": "Institute for Strategic Dialogue (ISD) - Site Feed",
-      "endpoint": "https://www.isdglobal.org/feed/",
-      "kind": "rss",
+      "provider": "Institute for Strategic Dialogue (ISD) - Publications",
+      "endpoint": "https://www.isdglobal.org/publications/",
+      "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed publications page using ISD's site-wide RSS feed."
+      "comment": "ISD publications page retained for formal extremism and online-threat reports."
     },
     {
       "id": "ocam-be-english",
@@ -1286,14 +1286,14 @@
     },
     {
       "id": "ran-network",
-      "provider": "RUSI - Latest Publications",
-      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=ran-network",
-      "kind": "rss",
+      "provider": "RUSI - Terrorism and Conflict",
+      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict",
+      "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "Replacement feed for unavailable RAN source using RUSI latest publications RSS."
+      "comment": "RUSI terrorism and conflict research-group page with stale query parameter removed."
     },
     {
       "id": "sapo-se-english",
@@ -2026,14 +2026,14 @@
     },
     {
       "id": "haringey-council-news",
-      "provider": "Haringey Community Press",
-      "endpoint": "https://haringeycommunitypress.co.uk/feed/",
-      "kind": "rss",
+      "provider": "Metropolitan Police - Haringey Tag",
+      "endpoint": "https://news.met.police.uk/news/tag/haringey",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed homepage using Haringey Community Press RSS."
+      "comment": "Official Met borough-tag archive for Haringey."
     },
     {
       "id": "harrow-council-news",
@@ -2181,14 +2181,14 @@
     },
     {
       "id": "lewisham-council-news",
-      "provider": "Salamander News",
-      "endpoint": "https://www.salamandernews.org/rss/",
-      "kind": "rss",
+      "provider": "Metropolitan Police - Lewisham Tag",
+      "endpoint": "https://news.met.police.uk/news/tag/lewisham",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for non-feed homepage using Salamander News RSS endpoint."
+      "comment": "Official Met borough-tag archive for Lewisham."
     },
     {
       "id": "lnwh-news",
@@ -2528,14 +2528,14 @@
     },
     {
       "id": "southwark-newsroom",
-      "provider": "National Police Air Service (NPAS) - News",
-      "endpoint": "https://www.npas.police.uk/news/feed?source=southwark-newsroom",
-      "kind": "rss",
+      "provider": "Southwark Council - News",
+      "endpoint": "https://www.southwark.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for unavailable Southwark newsroom feed using NPAS RSS.",
+      "comment": "Canonical Southwark Council news listing.",
       "refreshEveryHours": 1
     },
     {
@@ -2708,14 +2708,14 @@
     },
     {
       "id": "city-of-london-police-newsroom",
-      "provider": "Counter Terrorism Policing UK",
-      "endpoint": "https://www.counterterrorism.police.uk/feed/?source=city-of-london-police-newsroom",
-      "kind": "rss",
+      "provider": "Metropolitan Police Service - Latest News",
+      "endpoint": "https://news.met.police.uk/latest_news?source=city-of-london-police-newsroom",
+      "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for unavailable Met newsroom endpoint using Counter Terrorism Policing UK's RSS feed.",
+      "comment": "Canonical Met newsroom latest-news listing.",
       "refreshEveryHours": 1
     },
     {
@@ -3007,14 +3007,14 @@
     },
     {
       "id": "national-crime-agency-news",
-      "provider": "GovWire - UK Home Office News",
-      "endpoint": "https://www.govwire.co.uk/feeds/home-office/all.xml",
-      "kind": "rss",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for unavailable National Crime Agency RSS coverage using GovWire's Home Office feed.",
+      "comment": "Canonical National Crime Agency news archive used as the primary UK agency source.",
       "refreshEveryHours": 1
     },
     {
@@ -3120,7 +3120,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for the non-RSS terrorism/conflict topic page using RUSI latest publications RSS."
+      "comment": "RUSI latest publications feed retained for higher-frequency security and counter-terrorism updates."
     },
     {
       "id": "skwawkbox",
@@ -3954,14 +3954,14 @@
     },
     {
       "id": "fmcg-gurus",
-      "provider": "Europol - Newsroom (RSS)",
-      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
-      "kind": "rss",
+      "provider": "Europol - Newsroom",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for unrelated FMCG feed using Europol's official law-enforcement RSS feed."
+      "comment": "Replacement for unrelated FMCG source using Europol's official newsroom archive."
     },
     {
       "id": "foreign-office-blogs",
@@ -4131,14 +4131,14 @@
     },
     {
       "id": "silly-old-sod",
-      "provider": "Haringey Community Press",
-      "endpoint": "https://haringeycommunitypress.co.uk/feed/",
-      "kind": "rss",
+      "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
+      "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for personal-blog feed using active Haringey Community Press RSS."
+      "comment": "Replacement for personal-blog source using CTC Sentinel analysis archive."
     },
     {
       "id": "silverspoon-london",
@@ -4153,14 +4153,14 @@
     },
     {
       "id": "sks-business-services",
-      "provider": "National Police Air Service (NPAS) - News",
-      "endpoint": "https://www.npas.police.uk/news/feed",
-      "kind": "rss",
+      "provider": "UN Office of Counter-Terrorism - News",
+      "endpoint": "https://www.un.org/counterterrorism/en/news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for unrelated business feed using NPAS policing news RSS."
+      "comment": "Replacement for unrelated business feed using UN counter-terrorism news updates."
     },
     {
       "id": "hnd-assignment-help-uk-medium",
@@ -4991,14 +4991,14 @@
     },
     {
       "id": "warwickshire-police-news",
-      "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=warwickshire-police-news",
-      "kind": "rss",
+      "provider": "Warwickshire Connected - Latest Alerts",
+      "endpoint": "https://www.warwickshireconnected.com/Content/Pages/Latest-Alerts",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement feed for unavailable Warwickshire source using Eurojust press releases RSS.",
+      "comment": "Warwickshire Connected latest-alerts page retained for local police community messaging.",
       "refreshEveryHours": 1
     },
     {
@@ -6417,25 +6417,25 @@
     },
     {
       "id": "start-baad-database",
-      "provider": "RUSI - Latest Publications",
-      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=start-baad-database",
-      "kind": "rss",
+      "provider": "National Consortium for the Study of Terrorism (START) - BAAD Database",
+      "endpoint": "https://www.start.umd.edu/baad/database.html?page=1",
+      "kind": "html",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "Replacement feed for unavailable START BAAD endpoint using RUSI latest publications RSS."
+      "comment": "Canonical START BAAD entry page for reference-database context."
     },
     {
       "id": "start-center-publications",
-      "provider": "Counter Terrorism Policing UK",
-      "endpoint": "https://www.counterterrorism.police.uk/feed/",
-      "kind": "rss",
+      "provider": "START Center (UMD) - News & Publications",
+      "endpoint": "https://www.start.umd.edu/news",
+      "kind": "html",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "Replacement feed for unavailable START news endpoint using Counter Terrorism Policing UK's RSS."
+      "comment": "START news and publications page retained as a live and current research source."
     },
     {
       "id": "state-dept-terrorism",
