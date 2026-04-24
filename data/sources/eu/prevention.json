@@ -32,6 +32,39 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Official Dutch NCSC news RSS replacement for the previously failing endpoint."
+    },
+    {
+      "id": "de-cemas-digital-seismograph",
+      "provider": "CeMAS - Digital Seismograph",
+      "endpoint": "https://cemas.io/en/projects/digital-seismograph/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CeMAS monitoring project for early warning on right-wing extremist and terrorist activity online."
+    },
+    {
+      "id": "de-cemas-right-terror-database",
+      "provider": "CeMAS - Right-Wing Terrorism Database",
+      "endpoint": "https://report.cemas.io/terror/de/analysis",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "CeMAS analysis database of right-wing terrorism in Germany for trend and case enrichment."
+    },
+    {
+      "id": "de-knix-islamism-prevention",
+      "provider": "KN:IX - Islamism Prevention Network",
+      "endpoint": "https://kn-ix.de/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": false,
+      "comment": "KN:IX prevention network for Islamism, deradicalisation and practitioner prevention context."
     }
   ]
 }

@@ -326,6 +326,72 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "War on the Rocks publishes analysis on national security, military affairs and counter-terrorism; keyword filtering applied."
+    },
+    {
+      "id": "usgs-earthquakes-all-hour",
+      "provider": "USGS - Earthquakes (All Hour)",
+      "endpoint": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.atom",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "USGS near-real-time earthquake alerts used as global disruption tripwire context."
+    },
+    {
+      "id": "krebs-on-security",
+      "provider": "Krebs on Security",
+      "endpoint": "https://krebsonsecurity.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Cyber incident reporting feed for infrastructure and disruption-relevant threat context."
+    },
+    {
+      "id": "sans-isc-diary",
+      "provider": "SANS Internet Storm Center",
+      "endpoint": "https://isc.sans.edu/rssfeed.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "SANS ISC feed for emerging cyber threat activity and defensive incident signals."
+    },
+    {
+      "id": "aviation-herald-rss",
+      "provider": "The Aviation Herald",
+      "endpoint": "https://avherald.com/rss.php",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Aviation incident feed for diversions, emergency landings, and disruption early warning."
+    },
+    {
+      "id": "broadcastify-feeds-rss",
+      "provider": "Broadcastify - Feeds",
+      "endpoint": "https://www.broadcastify.com/feeds/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Public scanner-feed index RSS used as responder-chatter proxy context."
+    },
+    {
+      "id": "maritime-executive-rss",
+      "provider": "The Maritime Executive",
+      "endpoint": "https://www.maritime-executive.com/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Maritime incidents and shipping-security feed for ports and vessel disruption context."
     }
   ]
 }

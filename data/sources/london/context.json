@@ -813,6 +813,61 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Whittington Health updates used for North London hospital and local incident context."
+    },
+    {
+      "id": "londonist-rss",
+      "provider": "Londonist",
+      "endpoint": "https://londonist.com/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Londonist feed for local transport, event and disruption-adjacent London context."
+    },
+    {
+      "id": "ian-visits-rss",
+      "provider": "IanVisits",
+      "endpoint": "https://www.ianvisits.co.uk/articles/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "IanVisits feed for London transport, closures and infrastructure disruption context."
+    },
+    {
+      "id": "secret-london-rss",
+      "provider": "Secret London",
+      "endpoint": "https://secretldn.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Secret London feed for public gatherings, pop-ups and crowd-behaviour context."
+    },
+    {
+      "id": "time-out-london-rss",
+      "provider": "Time Out London",
+      "endpoint": "https://www.timeout.com/london/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Time Out London events feed for venue and crowd planning context."
+    },
+    {
+      "id": "diamond-geezer-rss",
+      "provider": "Diamond Geezer",
+      "endpoint": "https://diamondgeezer.blogspot.com/feeds/posts/default",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Hyper-local London blog feed for neighbourhood-level location awareness context."
     }
   ]
 }

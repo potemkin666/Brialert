@@ -289,6 +289,50 @@
       "sourceTier": "context",
       "reliabilityProfile": "major_media",
       "comment": "Ireland Independent RSS feed."
+    },
+    {
+      "id": "de-bfv-islamist-extremism",
+      "provider": "BfV - Islamist Extremism and Terrorism",
+      "endpoint": "https://www.verfassungsschutz.de/EN/topics/islamist-extremism-and-islamist-terrorism/islamist-extremism-and-islamist-terrorism_node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BfV thematic page for Islamist extremism and terrorism threat context in Germany."
+    },
+    {
+      "id": "de-bayern-stmi-press-rss",
+      "provider": "Bavarian Interior Ministry - Press RSS",
+      "endpoint": "https://www.stmi.bayern.de/news/rss/pressemitteilungen?type=9818",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Bavarian Interior Ministry RSS for security-policy and operational interior updates."
+    },
+    {
+      "id": "de-bmj-press-rss",
+      "provider": "German Federal Ministry of Justice - RSS",
+      "endpoint": "https://www.bmj.de/DE/presse/newsletter/rssnewsfeed/rss_node.html",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BMJ RSS feed for legal and criminal-justice changes relevant to terrorism prosecutions."
+    },
+    {
+      "id": "de-bdk-bka-rss",
+      "provider": "Bund Deutscher Kriminalbeamter - BKA RSS",
+      "endpoint": "https://www.bdk.de/rss/bundeskriminalamt/RSS",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "BDK BKA-focused feed for secondary investigative-policy and capability context."
     }
   ]
 }

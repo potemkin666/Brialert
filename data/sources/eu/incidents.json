@@ -142,6 +142,127 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Swedish Police updates for major incidents, terrorism arrests and public-safety operations."
+    },
+    {
+      "id": "de-bka-press",
+      "provider": "BKA Germany - Press Releases",
+      "endpoint": "https://www.bka.de/DE/Presse/Listenseite_Pressemitteilungen/listenseite_Pressemitteilungen_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BKA national press-release listing for federal investigations, arrests and PMK-related operations."
+    },
+    {
+      "id": "de-bka-current-alerts",
+      "provider": "BKA Germany - Current Notices",
+      "endpoint": "https://www.bka.de/DE/AktuelleInformationen/AktuelleMeldungen/aktuelleMeldungen_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BKA current notices for warnings, wanted bulletins and official federal security updates."
+    },
+    {
+      "id": "de-bundespolizei-presseportal",
+      "provider": "Bundespolizei via Presseportal",
+      "endpoint": "https://www.presseportal.de/blaulicht/d/bundespolizei",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Bundespolizei operational releases covering border, rail, airport and cross-border incidents."
+    },
+    {
+      "id": "de-zoll-press",
+      "provider": "German Customs (Zoll) - Press",
+      "endpoint": "https://www.zoll.de/DE/Presse/presse_node.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Zoll press page for sanctions, smuggling, trafficking and financial-crime enforcement updates."
+    },
+    {
+      "id": "de-zoll-press-rss",
+      "provider": "German Customs (Zoll) - Press RSS",
+      "endpoint": "https://www.zoll.de/SiteGlobals/Functions/RSSFeed/DE/RSSNewsfeed/RSSPressemitteilungen.xml?nn=280690",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Cron-friendly Zoll RSS feed for customs enforcement and sanctions-related press releases."
+    },
+    {
+      "id": "de-berlin-police-rss",
+      "provider": "Berlin Police - Press RSS",
+      "endpoint": "https://www.berlin.de/polizei/polizeimeldungen/index.php/rss",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Berlin police incident RSS feed for urban public-safety and state-protection reporting."
+    },
+    {
+      "id": "de-brandenburg-police-overregional-rss",
+      "provider": "Brandenburg Police - Overregional RSS",
+      "endpoint": "https://polizei.brandenburg.de/pressemeldungen/rss/region/57581",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Brandenburg police overregional RSS feed for Berlin-adjacent incident and alert context."
+    },
+    {
+      "id": "de-sachsen-police-rss",
+      "provider": "Saxony Police - RSS",
+      "endpoint": "https://www.polizei.sachsen.de/de/presse_rss_pdl.xml",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Saxony police RSS for regional incidents, extremist violence and operational policing updates."
+    },
+    {
+      "id": "de-sachsen-generalstaatsanwaltschaft",
+      "provider": "General Prosecutor Dresden - Press 2026",
+      "endpoint": "https://www.justiz.sachsen.de/gensta/pressemitteilungen-2026-4747.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "General Prosecutor Dresden 2026 press page for prosecution updates in extremist and terrorism cases."
+    },
+    {
+      "id": "de-sachsen-zesa-archive",
+      "provider": "General Prosecutor Dresden - Press 2025 Archive",
+      "endpoint": "https://www.justiz.sachsen.de/gensta/pressemitteilungen-2025-4611.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "General Prosecutor Dresden 2025 archive for historical extremist and terrorism case coverage."
+    },
+    {
+      "id": "de-bayern-police-press",
+      "provider": "Bavarian Police - Press Releases",
+      "endpoint": "https://www.polizei.bayern.de/aktuelles/pressemitteilungen/index.html",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Bavarian police press listing for statewide operational and public-safety incidents."
     }
   ]
 }

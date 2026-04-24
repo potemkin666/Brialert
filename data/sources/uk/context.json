@@ -1464,6 +1464,138 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+    },
+    {
+      "id": "ukhsa-updates-atom",
+      "provider": "UK Health Security Agency",
+      "endpoint": "https://www.gov.uk/government/organisations/uk-health-security-agency.atom",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "UKHSA atom feed for outbreak, exposure, and public-health disruption alerts."
+    },
+    {
+      "id": "nitter-uk-incident-keywords",
+      "provider": "Nitter - UK Incident Keyword Search",
+      "endpoint": "https://nitter.net/search/rss?f=tweets&q=explosion+OR+shooting+OR+police+UK",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Social-media keyword RSS tripwire for early unverified UK incident chatter."
+    },
+    {
+      "id": "sky-business-rss",
+      "provider": "Sky News - Business (RSS)",
+      "endpoint": "https://feeds.skynews.com/feeds/rss/business.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Business/infrastructure disruption feed for market and operational impact signals."
+    },
+    {
+      "id": "mi5-news-rss",
+      "provider": "MI5 - News and Updates (RSS)",
+      "endpoint": "https://www.mi5.gov.uk/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official MI5 RSS feed for domestic-security statements and threat updates."
+    },
+    {
+      "id": "counter-terrorism-policing-uk-rss",
+      "provider": "Counter Terrorism Policing UK",
+      "endpoint": "https://www.counterterrorism.police.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Counter Terrorism Policing UK public feed for CT alerts and campaigns."
+    },
+    {
+      "id": "act-campaign-feed",
+      "provider": "Action Counters Terrorism (ACT)",
+      "endpoint": "https://act.campaign.gov.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ACT campaign feed for UK public CT-awareness messaging and guidance updates."
+    },
+    {
+      "id": "missing-people-uk-rss",
+      "provider": "Missing People UK",
+      "endpoint": "https://www.missingpeople.org.uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Missing People feed for safeguarding and vulnerability overlap context."
+    },
+    {
+      "id": "home-office-atom",
+      "provider": "UK Home Office",
+      "endpoint": "https://www.gov.uk/government/organisations/home-office.atom",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Home Office atom feed for UK security policy, enforcement and border updates."
+    },
+    {
+      "id": "charity-commission-atom",
+      "provider": "Charity Commission for England and Wales",
+      "endpoint": "https://www.gov.uk/government/organisations/charity-commission.atom",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Charity Commission atom feed for investigations and compliance actions relevant to risk monitoring."
+    },
+    {
+      "id": "national-trust-news-rss",
+      "provider": "National Trust",
+      "endpoint": "https://www.nationaltrust.org.uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "National Trust feed for major-site events and public-crowd context."
+    },
+    {
+      "id": "visitbritain-rss",
+      "provider": "VisitBritain",
+      "endpoint": "https://www.visitbritain.org/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "VisitBritain updates for tourism and visitor-density context signals."
+    },
+    {
+      "id": "time-out-uk-rss",
+      "provider": "Time Out UK",
+      "endpoint": "https://www.timeout.com/uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK-wide Time Out events feed for planned gatherings and crowd context."
     }
   ]
 }
