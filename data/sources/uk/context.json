@@ -628,19 +628,6 @@
       "comment": "Manchester local news RSS."
     },
     {
-      "id": "metro",
-      "provider": "BBC News - UK",
-      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "sourceTier": "context",
-      "reliabilityProfile": "major_media",
-      "comment": "BBC UK RSS without legacy query baggage."
-    },
-    {
       "id": "news-uk",
       "provider": "News UK",
       "endpoint": "https://www.news.co.uk/feed/",

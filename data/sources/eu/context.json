@@ -133,17 +133,6 @@
       "comment": "Official Eurojust press releases page used as the closest viable replacement for the broken RSS endpoint."
     },
     {
-      "id": "europol-media-press",
-      "provider": "Europol a Media and Press",
-      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
-      "kind": "rss",
-      "lane": "context",
-      "region": "eu",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Official Europol newsroom RSS feed."
-    },
-    {
       "id": "europol-news-rss",
       "provider": "Europol - Newsroom (RSS)",
       "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
