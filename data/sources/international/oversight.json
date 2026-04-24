@@ -19,7 +19,7 @@
       "lane": "oversight",
       "region": "international",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
+      "requiresKeywordMatch": true,
       "comment": "UNOCT news/articles page used as the current official listing for Counter-Terrorism updates."
     },
     {
