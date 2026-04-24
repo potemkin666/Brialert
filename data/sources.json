@@ -2535,6 +2535,84 @@
       "comment": "CSIS strategic analysis page used for macro security context on Ecuador risk evolution."
     },
     {
+      "id": "jamestown-foundation-feed",
+      "provider": "Jamestown Foundation - Main Feed",
+      "endpoint": "https://jamestown.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Jamestown Foundation primary feed for geopolitical, conflict and security analysis beyond terrorism-only coverage."
+    },
+    {
+      "id": "kyle-orton-blog-feed",
+      "provider": "Kyle Orton's Blog",
+      "endpoint": "https://kyleorton.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Specialist long-form analysis feed covering extremism, insurgency and geopolitical-security history context."
+    },
+    {
+      "id": "caert-feed",
+      "provider": "African Centre for the Study and Research on Terrorism (ACSRT/CAERT)",
+      "endpoint": "https://caert.org.dz/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "African Union ACSRT feed for regional counter-terrorism documentation, initiatives and institutional updates.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "security-magazine-rss",
+      "provider": "Security Magazine",
+      "endpoint": "https://www.securitymagazine.com/rss/15",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Operational security and cyber-physical risk feed relevant to public-safety, protection and infrastructure threat context."
+    },
+    {
+      "id": "leiden-security-global-affairs-feed",
+      "provider": "Leiden Security and Global Affairs Blog",
+      "endpoint": "https://www.leidensecurityandglobalaffairs.nl/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Academic security-analysis feed for strategic foresight, state violence and conflict-theory context."
+    },
+    {
+      "id": "borealis-threat-risk-feed",
+      "provider": "Borealis Threat and Risk Consulting",
+      "endpoint": "https://borealisthreatandrisk.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Threat-intelligence commentary feed with counter-terrorism and intelligence-policy practitioner perspectives."
+    },
+    {
+      "id": "insight-crime-feed",
+      "provider": "InSight Crime",
+      "endpoint": "https://insightcrime.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Investigative organized-crime reporting feed focused on Latin America criminal ecosystems and violence dynamics."
+    },
+    {
       "id": "gctf-news",
       "provider": "Global Counterterrorism Forum (GCTF) a News",
       "endpoint": "https://www.thegctf.org/News-Stories/PgrID/918/PageID/3",
@@ -5575,6 +5653,40 @@
       "comment": "UK politics RSS stream for policy and institutional narrative context."
     },
     {
+      "id": "uk-met-office-rss-guides",
+      "provider": "Met Office - RSS feeds guide",
+      "endpoint": "https://weather.metoffice.gov.uk/guides/rss",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Met Office RSS guide for weather alert surfaces used as situational context impacting incidents and responder operations.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "novara-media-feed",
+      "provider": "Novara Media",
+      "endpoint": "https://novaramedia.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK political-analysis feed retained as low-confidence protest and unrest narrative context."
+    },
+    {
+      "id": "byline-times-feed",
+      "provider": "Byline Times",
+      "endpoint": "https://bylinetimes.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Investigative UK commentary feed used as narrative and corruption-related context under keyword gating."
+    },
+    {
       "id": "avon-and-somerset-police-news-html",
       "provider": "Avon and Somerset Police - News",
       "endpoint": "https://www.avonandsomerset.police.uk/news/",
@@ -7199,6 +7311,18 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "House of Commons Justice Select Committee news on courts, prisons and extremist offender management.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "uk-parliament-rss-feeds-index",
+      "provider": "UK Parliament - RSS Feeds",
+      "endpoint": "https://www.parliament.uk/site-information/rss-feeds/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official UK Parliament RSS index page for legislative and committee feed discovery and institutional movement signals.",
       "refreshEveryHours": 1
     },
     {
