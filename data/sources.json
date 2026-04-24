@@ -558,6 +558,54 @@
       "comment": "Slovensko channel RSS used as broad Slovakia trigger feed under strict keyword gating."
     },
     {
+      "id": "germany-federal-prosecutor-current-press-en",
+      "provider": "German Federal Public Prosecutor - Current Press Releases (EN)",
+      "endpoint": "https://www.generalbundesanwalt.de/EN/Press/current_press_releases/current_press_releases_node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official German federal prosecutor English press releases covering terrorism and national-security prosecutions.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "netherlands-om-terrorisme",
+      "provider": "Dutch Public Prosecution Service - Terrorisme",
+      "endpoint": "https://www.om.nl/onderwerpen/terrorisme",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch prosecution service terrorism topic page for arrests, charges and court actions linked to terrorism cases.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "netherlands-om-terrorismefinanciering-nieuws",
+      "provider": "Dutch Public Prosecution Service - Terrorismefinanciering Nieuws",
+      "endpoint": "https://www.om.nl/onderwerpen/terrorismefinanciering/nieuws",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch prosecution updates focused on terrorism-financing investigations and prosecutions.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "guardia-civil-rss-list",
+      "provider": "Guardia Civil - RSS List",
+      "endpoint": "https://web.guardiacivil.es/va/tramites/rss_list/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Spanish Guardia Civil RSS index page for official feed discovery on law-enforcement and security operations.",
+      "refreshEveryHours": 1
+    },
+    {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
       "endpoint": "https://www.police.be/5998/en/node/10868",
@@ -2611,6 +2659,128 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Investigative organized-crime reporting feed focused on Latin America criminal ecosystems and violence dynamics."
+    },
+    {
+      "id": "southfront-feed",
+      "provider": "SouthFront",
+      "endpoint": "https://southfront.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Military-conflict narrative feed tracked only as low-confidence geopolitical context under strict keyword gating."
+    },
+    {
+      "id": "inteltechniques-blog-feed",
+      "provider": "IntelTechniques Blog",
+      "endpoint": "https://inteltechniques.com/blog/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "OSINT tradecraft blog feed for investigative methods, tooling and source-discovery context."
+    },
+    {
+      "id": "reddit-worldnews-rss",
+      "provider": "Reddit - r/worldnews",
+      "endpoint": "https://www.reddit.com/r/worldnews/.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "High-noise social signal feed retained as low-confidence early narrative and incident chatter context."
+    },
+    {
+      "id": "urban-terrorism-europe-feed",
+      "provider": "Urban Terrorism in Europe (University of Birmingham)",
+      "endpoint": "https://blog.bham.ac.uk/urbterr/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Academic research feed focused on urban terrorism trends, impacts and far-right violence in Europe."
+    },
+    {
+      "id": "investigative-project-terrorism-rss",
+      "provider": "Investigative Project on Terrorism",
+      "endpoint": "https://www.investigativeproject.org/articles_rss_2.0.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Specialist terrorism-analysis feed used for extremist-network and financing narrative monitoring."
+    },
+    {
+      "id": "allafrica-international-terrorism-rdf",
+      "provider": "AllAfrica - International Terrorism",
+      "endpoint": "https://allafrica.com/tools/headlines/rdf/terrorism/headlines.rdf",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Africa-focused terrorism headline feed for regional incident and counter-terror operation context."
+    },
+    {
+      "id": "strategic-intelligence-terrorism-war-feed",
+      "provider": "Strategic Intelligence Service - Terrorism and War Updates",
+      "endpoint": "https://intelligencebriefs.com/category/terrorism-war/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Counter-terrorism intelligence update feed for East Africa and broader conflict developments."
+    },
+    {
+      "id": "intelnews-feed",
+      "provider": "IntelNews",
+      "endpoint": "https://intelnews.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Intelligence and espionage reporting feed used for security-service and geopolitical escalation context."
+    },
+    {
+      "id": "aymennaltamimi-substack-feed",
+      "provider": "Aymenn's Monstrous Publications",
+      "endpoint": "https://www.aymennaltamimi.com/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Middle East conflict-analysis Substack feed with primary-source interviews and militant-group coverage."
+    },
+    {
+      "id": "ict-israel-feed",
+      "provider": "International Institute for Counter-Terrorism (ICT)",
+      "endpoint": "https://ict.org.il/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "ICT research and situational update feed on terrorism, regional conflict and threat analysis."
+    },
+    {
+      "id": "interpol-news-page-en",
+      "provider": "INTERPOL - News",
+      "endpoint": "https://www.interpol.int/en/News-and-Events/News",
+      "kind": "html",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "INTERPOL English news listing for global law-enforcement operations, terrorism and border-security statements.",
+      "refreshEveryHours": 1
     },
     {
       "id": "gctf-news",
@@ -5687,6 +5857,17 @@
       "comment": "Investigative UK commentary feed used as narrative and corruption-related context under keyword gating."
     },
     {
+      "id": "reddit-unitedkingdom-rss",
+      "provider": "Reddit - r/unitedkingdom",
+      "endpoint": "https://www.reddit.com/r/unitedkingdom/.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "High-noise UK social-discourse feed retained only as low-confidence local narrative and unrest context."
+    },
+    {
       "id": "avon-and-somerset-police-news-html",
       "provider": "Avon and Somerset Police - News",
       "endpoint": "https://www.avonandsomerset.police.uk/news/",
@@ -6584,6 +6765,30 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "BTP searchable news listing for incident retrieval across rail and station policing topics.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "mi5-terrorism-news-category",
+      "provider": "MI5 - Terrorism News",
+      "endpoint": "https://www.mi5.gov.uk/news-categories/terrorism",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MI5 terrorism news category page for official statements and operationally relevant threat-related updates.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "cps-news-category-feed",
+      "provider": "Crown Prosecution Service - News",
+      "endpoint": "https://www.cps.gov.uk/cps/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "CPS news listing used for terrorism charging and sentencing announcements in UK criminal proceedings.",
       "refreshEveryHours": 1
     },
     {
@@ -7692,6 +7897,64 @@
       "requiresKeywordMatch": true,
       "comment": "West Yorkshire Police community alert portal for local warning and prevention notices.",
       "refreshEveryHours": 1
+    },
+    {
+      "id": "protectuk-news",
+      "provider": "ProtectUK - News",
+      "endpoint": "https://www.protectuk.police.uk/news",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ProtectUK preventative-security updates including protective security guidance, preparedness and Martyn's Law context.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "home-office-terrorism-police-powers-collection",
+      "provider": "UK Home Office - Operation of Police Powers under the Terrorism Act 2000",
+      "endpoint": "https://www.gov.uk/government/collections/operation-of-police-powers-under-the-terrorism-act-2000",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Official Home Office collection for quarterly terrorism arrest, outcomes and stop-search statistics trend monitoring.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "npsa-national-security-threats",
+      "provider": "National Protective Security Authority - National Security Threats",
+      "endpoint": "https://www.npsa.gov.uk/threat-and-risk-management/national-security-threats",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "NPSA guidance on terrorism, state threats and protective-security risk management for prevention context.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "hedayah-news",
+      "provider": "Hedayah - News",
+      "endpoint": "https://hedayah.com/news/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "PVE/CVE programme updates feed for radicalisation prevention, reintegration and community resilience context."
+    },
+    {
+      "id": "tech-against-terrorism-news",
+      "provider": "Tech Against Terrorism - News",
+      "endpoint": "https://techagainstterrorism.org/news",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Online terrorist-content moderation and platform-abuse analysis updates relevant to digital CT prevention."
     },
     {
       "id": "gov-uk-proscribed-terrorist-orgs",
