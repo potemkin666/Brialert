@@ -1,86 +1,51 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-24T22:12:47.520Z",
-  "totalSourceErrors": 2,
+  "generatedAt": "2026-04-24T23:16:11.061Z",
+  "totalSourceErrors": 1,
   "byCategory": {
-    "brittle-selectors-or-js-rendering": 2
+    "brittle-selectors-or-js-rendering": 1
   },
   "byKind": {
-    "rss": 1,
-    "html": 1
+    "rss": 1
   },
   "machineReadableErrorCount": 1,
-  "htmlErrorCount": 1,
+  "htmlErrorCount": 0,
   "top20": [
     {
-      "id": "secret-london-rss",
-      "provider": "Secret London",
-      "endpoint": "https://secretldn.com/feed/",
+      "id": "de-brandenburg-police-overregional-rss",
+      "provider": "Brandenburg Police - Overregional RSS",
+      "endpoint": "https://polizei.brandenburg.de/pressemeldungen/rss/region/57581",
       "finalUrl": "",
       "category": "brittle-selectors-or-js-rendering",
       "statusKind": "",
       "message": "No items parsed from source payload",
-      "status": 202,
+      "status": 200,
       "rankScore": 2,
       "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
       "replacementCandidate": "",
       "sourceKind": "rss",
-      "sourceLane": "context",
+      "sourceLane": "incidents",
       "sourceRegion": "",
       "isMachineReadable": true
-    },
-    {
-      "id": "switzerland-fedpol-news",
-      "provider": "Swiss fedpol - News",
-      "endpoint": "https://www.fedpol.admin.ch/en/newnsb",
-      "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
-      "statusKind": "",
-      "message": "Playwright browser not installed: browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "status": 0,
-      "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
     }
   ],
   "sources": [
     {
-      "id": "secret-london-rss",
-      "provider": "Secret London",
-      "endpoint": "https://secretldn.com/feed/",
+      "id": "de-brandenburg-police-overregional-rss",
+      "provider": "Brandenburg Police - Overregional RSS",
+      "endpoint": "https://polizei.brandenburg.de/pressemeldungen/rss/region/57581",
       "finalUrl": "",
       "category": "brittle-selectors-or-js-rendering",
       "statusKind": "",
       "message": "No items parsed from source payload",
-      "status": 202,
+      "status": 200,
       "rankScore": 2,
       "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
       "replacementCandidate": "",
       "sourceKind": "rss",
-      "sourceLane": "context",
+      "sourceLane": "incidents",
       "sourceRegion": "",
       "isMachineReadable": true
-    },
-    {
-      "id": "switzerland-fedpol-news",
-      "provider": "Swiss fedpol - News",
-      "endpoint": "https://www.fedpol.admin.ch/en/newnsb",
-      "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
-      "statusKind": "",
-      "message": "Playwright browser not installed: browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "status": 0,
-      "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": false
     }
   ]
 }
