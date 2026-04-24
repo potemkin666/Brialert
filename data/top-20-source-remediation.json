@@ -1,25 +1,8 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-24T11:47:26.601Z",
-  "totalSourceErrors": 7,
+  "generatedAt": "2026-04-24T13:53:37.949Z",
+  "totalSourceErrors": 4,
   "top20": [
-    {
-      "id": "echr-uk-grand-chamber-rss",
-      "provider": "European Court of Human Rights - HUDOC",
-      "endpoint": "https://hudoc.echr.coe.int/",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "statusKind": "",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "oversight",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
     {
       "id": "requested-neighbourhood-alerts-feed-8ad5321239de",
       "provider": "Neighbourhood Alerts Feed",
@@ -87,40 +70,6 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": true
-    },
-    {
-      "id": "west-yorkshire-police-appeals-rss",
-      "provider": "West Yorkshire Police - Appeals",
-      "endpoint": "https://www.westyorkshire.police.uk/news-appeals/appeals",
-      "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
-      "statusKind": "",
-      "message": "Playwright browser not installed: browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "status": 0,
-      "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "west-yorkshire-police-releases-rss",
-      "provider": "West Yorkshire Police - RSS Feeds",
-      "endpoint": "https://www.westyorkshire.police.uk/rss-feeds",
-      "finalUrl": "",
-      "category": "blocked-or-auth",
-      "statusKind": "",
-      "message": "HTTP 403",
-      "status": 403,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
-      "sourceRegion": "",
-      "isMachineReadable": false
     }
   ]
 }
