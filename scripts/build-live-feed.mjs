@@ -346,18 +346,19 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     const penalty = isCritical ? HEALTH_SCORE_CRITICAL_FAILURE_PENALTY : HEALTH_SCORE_FAILURE_PENALTY;
     next.healthScore = Math.max(0, priorHealthScore - penalty);
 
-    // Derive quarantine state from health score threshold, or immediately
-    // quarantine never-verified sources (zero successful runs) that hit a
-    // definitive failure such as 404 or dead/moved URL.
-    const neverVerified = next.successfulRuns === 0 && !prior.lastSuccessfulAt;
-    const immediateQuarantine = neverVerified && (notFoundFailure || deadUrlFailure);
-    if ((next.healthScore < HEALTH_SCORE_REVIEW_THRESHOLD || immediateQuarantine) && !next.quarantined) {
+    // Auto-quarantine only after repeated consecutive failures.
+    const overFailureThreshold = next.consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
+    if (overFailureThreshold && !next.quarantined) {
       next.quarantined = true;
       next.quarantinedAt = generatedAt;
       next.quarantineReason = analyseErrorPattern(next.recentErrors, {
         healthScore: next.healthScore,
         kind: source?.kind
       });
+    } else if (!overFailureThreshold) {
+      next.quarantined = false;
+      next.quarantinedAt = null;
+      next.quarantineReason = null;
     }
 
     // Low-health sources are deprioritised with a longer interval instead of a hard block.
@@ -380,6 +381,9 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   next.consecutiveFailures = 0;
   next.consecutiveBlockedFailures = 0;
   next.consecutiveDeadUrlFailures = 0;
+  next.quarantined = false;
+  next.quarantinedAt = null;
+  next.quarantineReason = null;
   next.lastErrorCategory = null;
   next.lastErrorMessage = null;
   next.lastEmptyAt = generatedAt;
@@ -1022,8 +1026,9 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
       const health = healthMap[source.id] && typeof healthMap[source.id] === 'object' ? healthMap[source.id] : {};
       const manuallyQuarantined = Boolean(source?.quarantined);
       const healthScore = Number.isFinite(Number(health?.healthScore)) ? Number(health.healthScore) : HEALTH_SCORE_INITIAL;
-      const healthQuarantined = Boolean(health?.quarantined);
-      const needsReview = manuallyQuarantined || healthQuarantined || healthScore < HEALTH_SCORE_REVIEW_THRESHOLD;
+      const consecutiveFailures = Number(health?.consecutiveFailures || 0);
+      const healthQuarantined = Boolean(health?.quarantined) && consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
+      const needsReview = manuallyQuarantined || healthQuarantined || consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
       if (!needsReview) return null;
       return {
         id: clean(source?.id),
@@ -1040,7 +1045,7 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
         quarantinedAt: clean(health?.quarantinedAt),
         lastErrorCategory: clean(health?.lastErrorCategory),
         lastErrorMessage: clean(health?.lastErrorMessage),
-        consecutiveFailures: Number(health?.consecutiveFailures || 0),
+        consecutiveFailures,
         consecutiveBlockedFailures: Number(health?.consecutiveBlockedFailures || 0),
         consecutiveDeadUrlFailures: Number(health?.consecutiveDeadUrlFailures || 0),
         recentErrors: Array.isArray(health?.recentErrors) ? health.recentErrors : [],
@@ -3071,9 +3076,11 @@ async function main() {
     const deferred = autoDeferredSources.find((entry) => entry.id === source.id);
     if (deferred) {
       const priorHealthScore = Number.isFinite(Number(priorEntry?.healthScore)) ? Number(priorEntry.healthScore) : HEALTH_SCORE_INITIAL;
-      const isLowHealth = priorHealthScore < HEALTH_SCORE_REVIEW_THRESHOLD;
+      const priorConsecutiveFailures = Number(priorEntry?.consecutiveFailures || 0);
+      const isQuarantined = Boolean(priorEntry?.quarantined)
+        && priorConsecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
       const deferredNextFetchAt = deferred.until
-        || (isLowHealth ? priorEntry?.nextFetchAt : null)
+        || (isQuarantined ? priorEntry?.nextFetchAt : null)
         || sourceScheduleNextFetchAt(source, buildDate, priorEntry, true);
       nextSourceHealth[source.id] = {
         ...(priorEntry || {}),
@@ -3081,10 +3088,10 @@ async function main() {
         lane: source.lane,
         kind: source.kind,
         healthScore: priorHealthScore,
-        quarantined: isLowHealth,
+        quarantined: isQuarantined,
         quarantinedAt: priorEntry?.quarantinedAt || null,
-        quarantineReason: isLowHealth
-          ? clean(priorEntry?.quarantineReason || 'Low health score – needs review')
+        quarantineReason: isQuarantined
+          ? clean(priorEntry?.quarantineReason || 'Consecutive failures exceeded threshold')
           : (priorEntry?.quarantineReason || null),
         autoSkipReason: deferred.reason,
         cooldownUntil: deferred.until,

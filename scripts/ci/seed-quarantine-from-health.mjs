@@ -15,9 +15,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // ── Thresholds (mirror build-live-feed/config defaults) ──────────────
-const HEALTH_SCORE_REVIEW_THRESHOLD = Number(
-  process.env.ALBERTALERT_HEALTH_SCORE_REVIEW_THRESHOLD || 25
-);
 const AUTO_QUARANTINE_FAILURE_THRESHOLD = Number(
   process.env.ALBERTALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD || 6
 );
@@ -38,7 +35,6 @@ const sourcesPath = process.argv[3] || path.join(repoRoot, 'data', 'sources.json
  * return a Set of source IDs that should be pre-quarantined.
  */
 export function deriveQuarantineIds(sourceHealth, options = {}) {
-  const threshold = options.healthScoreThreshold ?? HEALTH_SCORE_REVIEW_THRESHOLD;
   const failureThreshold = options.failureThreshold ?? AUTO_QUARANTINE_FAILURE_THRESHOLD;
 
   const ids = new Set();
@@ -47,15 +43,11 @@ export function deriveQuarantineIds(sourceHealth, options = {}) {
   for (const [id, entry] of Object.entries(sourceHealth)) {
     if (!entry || typeof entry !== 'object') continue;
 
-    const healthScore = Number.isFinite(Number(entry.healthScore))
-      ? Number(entry.healthScore)
-      : null;
     const alreadyQuarantined = Boolean(entry.quarantined);
     const consecutiveFailures = Number(entry.consecutiveFailures || 0);
 
     if (
       alreadyQuarantined ||
-      (healthScore !== null && healthScore < threshold) ||
       consecutiveFailures >= failureThreshold
     ) {
       ids.add(id);

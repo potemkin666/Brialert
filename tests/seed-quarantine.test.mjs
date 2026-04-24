@@ -18,18 +18,18 @@ test('deriveQuarantineIds returns empty set for null/undefined input', () => {
   assert.equal(deriveQuarantineIds({}).size, 0);
 });
 
-test('deriveQuarantineIds flags source below health threshold', () => {
+test('deriveQuarantineIds does not flag source by low health score alone', () => {
   const ids = deriveQuarantineIds(
     { 'src-a': { healthScore: 20, quarantined: false, consecutiveFailures: 0 } },
-    { healthScoreThreshold: 25, failureThreshold: 6 }
+    { failureThreshold: 6 }
   );
-  assert.ok(ids.has('src-a'));
+  assert.equal(ids.size, 0);
 });
 
 test('deriveQuarantineIds flags source already quarantined', () => {
   const ids = deriveQuarantineIds(
     { 'src-b': { healthScore: 80, quarantined: true, consecutiveFailures: 0 } },
-    { healthScoreThreshold: 25, failureThreshold: 6 }
+    { failureThreshold: 6 }
   );
   assert.ok(ids.has('src-b'));
 });
@@ -37,7 +37,7 @@ test('deriveQuarantineIds flags source already quarantined', () => {
 test('deriveQuarantineIds flags source at or above failure threshold', () => {
   const ids = deriveQuarantineIds(
     { 'src-c': { healthScore: 50, quarantined: false, consecutiveFailures: 6 } },
-    { healthScoreThreshold: 25, failureThreshold: 6 }
+    { failureThreshold: 6 }
   );
   assert.ok(ids.has('src-c'));
 });
@@ -45,7 +45,7 @@ test('deriveQuarantineIds flags source at or above failure threshold', () => {
 test('deriveQuarantineIds does not flag healthy source', () => {
   const ids = deriveQuarantineIds(
     { 'src-d': { healthScore: 80, quarantined: false, consecutiveFailures: 1 } },
-    { healthScoreThreshold: 25, failureThreshold: 6 }
+    { failureThreshold: 6 }
   );
   assert.equal(ids.size, 0);
 });
@@ -57,11 +57,11 @@ test('deriveQuarantineIds handles multiple sources', () => {
     bad2: { healthScore: 50, quarantined: true, consecutiveFailures: 0 },
     bad3: { healthScore: 40, quarantined: false, consecutiveFailures: 8 }
   };
-  const ids = deriveQuarantineIds(health, { healthScoreThreshold: 25, failureThreshold: 6 });
-  assert.equal(ids.size, 3);
-  assert.ok(ids.has('bad1'));
+  const ids = deriveQuarantineIds(health, { failureThreshold: 6 });
+  assert.equal(ids.size, 2);
   assert.ok(ids.has('bad2'));
   assert.ok(ids.has('bad3'));
+  assert.ok(!ids.has('bad1'));
   assert.ok(!ids.has('good'));
 });
 
@@ -71,7 +71,7 @@ test('deriveQuarantineIds skips malformed entries', () => {
     garbage: 'not-an-object',
     empty: null
   };
-  const ids = deriveQuarantineIds(health, { healthScoreThreshold: 25, failureThreshold: 6 });
+  const ids = deriveQuarantineIds(health, { failureThreshold: 6 });
   assert.equal(ids.size, 0);
 });
 
@@ -138,13 +138,13 @@ test('run() patches sources.json based on health data', async () => {
   fs.writeFileSync(sourcesFile, JSON.stringify(catalog));
 
   const result = await run(alertsFile, sourcesFile);
-  assert.equal(result.seeded, 2);
+  assert.equal(result.seeded, 1);
   assert.equal(result.total, 4);
 
   const updated = JSON.parse(fs.readFileSync(sourcesFile, 'utf8'));
   const byId = Object.fromEntries(updated.sources.map((s) => [s.id, s]));
   assert.equal(byId.healthy.quarantined, undefined);
-  assert.equal(byId.sick.quarantined, true);
+  assert.equal(byId.sick.quarantined, undefined);
   assert.equal(byId.quarantined.quarantined, true);
   assert.equal(byId.unknown.quarantined, undefined);
 

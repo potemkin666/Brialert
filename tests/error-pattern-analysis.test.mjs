@@ -235,20 +235,19 @@ test('nextSourceHealthEntry – prior recentErrors carried through from previous
 // nextSourceHealthEntry() – never-verified immediate quarantine
 // ---------------------------------------------------------------------------
 
-test('nextSourceHealthEntry – never-verified source with 404 is immediately quarantined', () => {
+test('nextSourceHealthEntry – never-verified source with 404 is not immediately quarantined', () => {
   const source = makeSource();
   // Empty prior = brand-new source with no history
   const result = nextSourceHealthEntry(source, failStat('not-found-404'), {}, '2026-01-01T00:00:00Z');
-  assert.equal(result.quarantined, true, 'should be quarantined on first 404 when never verified');
-  assert.equal(result.quarantinedAt, '2026-01-01T00:00:00Z');
-  assert.ok(result.quarantineReason, 'should have a quarantine reason');
+  assert.equal(result.quarantined, false, 'should not be quarantined before failure threshold is exceeded');
+  assert.equal(result.quarantinedAt, null);
 });
 
-test('nextSourceHealthEntry – never-verified source with dead-or-moved-url is immediately quarantined', () => {
+test('nextSourceHealthEntry – never-verified source with dead-or-moved-url is not immediately quarantined', () => {
   const source = makeSource();
   const result = nextSourceHealthEntry(source, failStat('dead-or-moved-url', 'DNS NXDOMAIN'), {}, '2026-01-01T00:00:00Z');
-  assert.equal(result.quarantined, true, 'should be quarantined on first dead-url when never verified');
-  assert.ok(result.quarantineReason);
+  assert.equal(result.quarantined, false, 'should not be quarantined before failure threshold is exceeded');
+  assert.equal(result.quarantinedAt, null);
 });
 
 test('nextSourceHealthEntry – never-verified source with non-definitive failure is NOT immediately quarantined', () => {
