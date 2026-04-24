@@ -1695,6 +1695,105 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "London local-news RSS for borough-level incidents, policing and disruption context."
+    },
+    {
+      "id": "uk-data-police-api",
+      "provider": "Police.uk - API root",
+      "endpoint": "https://data.police.uk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Police.uk data API documentation root for UK policing dataset and endpoint context."
+    },
+    {
+      "id": "uk-judiciary-sentencing-remarks",
+      "provider": "Judiciary UK - Sentencing remarks",
+      "endpoint": "https://www.judiciary.uk/judgment-types/sentencing-remarks/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official UK judiciary sentencing-remarks archive for court outcome and legal context signals."
+    },
+    {
+      "id": "uk-college-policing-news",
+      "provider": "College of Policing - News and views",
+      "endpoint": "https://www.college.police.uk/news-views",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "College of Policing policy and guidance updates relevant to UK policing practice and standards context."
+    },
+    {
+      "id": "uk-ons-crime-england-wales",
+      "provider": "ONS - Crime in England and Wales",
+      "endpoint": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/bulletins/crimeinenglandandwales/latest",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official ONS latest crime bulletin page for statistical trend context across England and Wales."
+    },
+    {
+      "id": "uk-serious-fraud-office-news",
+      "provider": "Serious Fraud Office - GOV.UK organisation",
+      "endpoint": "https://www.gov.uk/government/organisations/serious-fraud-office",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "SFO organisation page for major fraud, bribery and economic-crime enforcement updates."
+    },
+    {
+      "id": "uk-hmrc-news",
+      "provider": "HM Revenue & Customs - News and communications",
+      "endpoint": "https://www.gov.uk/search/news-and-communications?organisations[]=hm-revenue-customs",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "HMRC news search filter for tax, customs and financial-crime enforcement communication context."
+    },
+    {
+      "id": "uk-ukfinance-fraud-news",
+      "provider": "UK Finance - News and insight",
+      "endpoint": "https://www.ukfinance.org.uk/news-and-insight",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Industry perspective on UK fraud trends and payment/economic-crime narratives."
+    },
+    {
+      "id": "uk-cifas-newsroom",
+      "provider": "Cifas - Newsroom",
+      "endpoint": "https://www.cifas.org.uk/newsroom",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Fraud-prevention organisation newsroom for UK fraud threat and prevention narrative context."
+    },
+    {
+      "id": "politics-co-uk-rss",
+      "provider": "Politics.co.uk",
+      "endpoint": "https://www.politics.co.uk/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK politics RSS stream for policy and institutional narrative context."
     }
   ]
 }
