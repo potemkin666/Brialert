@@ -366,6 +366,127 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "MONEYVAL page for AML/CFT and terrorist-financing compliance context."
+    },
+    {
+      "id": "sk-minv-press",
+      "provider": "Slovak Ministry of Interior - Press",
+      "endpoint": "https://www.minv.sk/?tlacove-spravy-2=",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Slovak interior ministry press listing for police, migration, border and security updates."
+    },
+    {
+      "id": "sk-sis-news",
+      "provider": "Slovak Information Service - News",
+      "endpoint": "https://www.sis.gov.sk/news/news.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "SIS intelligence service news page for high-authority Slovak security context."
+    },
+    {
+      "id": "sk-sis-annual-report",
+      "provider": "Slovak Information Service - Annual Report",
+      "endpoint": "https://www.sis.gov.sk/for-you/sis-annual-report.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "SIS annual report page for terrorism, extremism, organised-crime and hybrid-threat background context."
+    },
+    {
+      "id": "sk-general-prosecutor-news",
+      "provider": "Slovak General Prosecutor - News",
+      "endpoint": "https://www.genpro.gov.sk/informacie/spravy/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "General Prosecutor news for Slovak prosecution and cross-border criminal-justice developments."
+    },
+    {
+      "id": "sk-justice-press",
+      "provider": "Slovak Ministry of Justice - Press",
+      "endpoint": "https://www.justice.gov.sk/tlacovespravy/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Justice ministry press archive for court, criminal-law and terrorism-victim support context."
+    },
+    {
+      "id": "sk-defence-press",
+      "provider": "Slovak Ministry of Defence - Press",
+      "endpoint": "https://www.mosr.sk/tlacove-spravy/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Defence ministry releases for Slovak military posture, NATO activity and security-sector context."
+    },
+    {
+      "id": "sk-mfa-all-news",
+      "provider": "Slovak Foreign Ministry - All News",
+      "endpoint": "https://www.mzv.sk/en/web/en/what-is-new/all-news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Foreign ministry all-news page for crisis, sanctions and diplomatic-security updates."
+    },
+    {
+      "id": "sk-csirt",
+      "provider": "Government CSIRT Slovakia",
+      "endpoint": "https://www.csirt.gov.sk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Government CSIRT site for Slovak cyber incident and vulnerability-warning context."
+    },
+    {
+      "id": "sk-iom-press-rss",
+      "provider": "IOM Slovakia - Press RSS",
+      "endpoint": "https://iom.sk/en/press-room/press-releases-articles?format=feed&type=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "IOM Slovakia RSS for migration, trafficking, return and integration context updates."
+    },
+    {
+      "id": "sk-aktuality-krimi-rss",
+      "provider": "Aktuality.sk - Krimi",
+      "endpoint": "https://www.aktuality.sk/rss/krimi/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Slovak crime RSS feed used as civilian trigger context for public-safety and organised-crime reporting."
+    },
+    {
+      "id": "sk-teraz-slovensko-rss",
+      "provider": "Teraz.sk - Slovensko",
+      "endpoint": "https://www.teraz.sk/rss/slovensko.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Slovensko channel RSS used as broad Slovakia trigger feed under strict keyword gating."
     }
   ]
 }

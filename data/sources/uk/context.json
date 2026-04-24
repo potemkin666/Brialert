@@ -1640,6 +1640,61 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Partisan UK-focused feed retained as low-confidence framing and chatter context."
+    },
+    {
+      "id": "gb-news-uk-politics-rss",
+      "provider": "GB News - UK Politics",
+      "endpoint": "https://www.gbnews.com/feeds/politics/uk.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK politics RSS feed for narrative and grievance spike monitoring in Westminster discourse."
+    },
+    {
+      "id": "the-canary-feed",
+      "provider": "The Canary",
+      "endpoint": "https://www.thecanary.co/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Activist-left UK feed retained as low-confidence protest and narrative context."
+    },
+    {
+      "id": "sky-news-home-rss",
+      "provider": "Sky News - Home",
+      "endpoint": "https://feeds.skynews.com/feeds/rss/home.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Sky News home feed for rapid UK and global breaking-incident pickup."
+    },
+    {
+      "id": "telegraph-all-news-rss",
+      "provider": "The Telegraph - News",
+      "endpoint": "https://www.telegraph.co.uk/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Telegraph aggregate RSS used as an editorial-contrast UK trigger source."
+    },
+    {
+      "id": "my-london-rss",
+      "provider": "MyLondon",
+      "endpoint": "https://www.mylondon.news/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "London local-news RSS for borough-level incidents, policing and disruption context."
     }
   ]
 }
