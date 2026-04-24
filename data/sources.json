@@ -177,18 +177,6 @@
       "refreshEveryHours": 1
     },
     {
-      "id": "europol-media-press",
-      "provider": "Europol a Media and Press",
-      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
-      "kind": "rss",
-      "lane": "context",
-      "region": "eu",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Official Europol newsroom RSS feed.",
-      "refreshEveryHours": 1
-    },
-    {
       "id": "europol-news-rss",
       "provider": "Europol - Newsroom (RSS)",
       "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
@@ -1332,17 +1320,6 @@
       "refreshEveryHours": 1
     },
     {
-      "id": "isd-global-publications",
-      "provider": "ISD - Publications",
-      "endpoint": "https://www.isdglobal.org/publications/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "eu",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research."
-    },
-    {
       "id": "ncsc-nl-rss",
       "provider": "NCSC Netherlands - RSS",
       "endpoint": "https://feeds.ncsc.nl/nieuws.rss",
@@ -1918,17 +1895,6 @@
       "requiresKeywordMatch": true
     },
     {
-      "id": "chatham-house-rss",
-      "provider": "Chatham House a Research & Commentary (RSS)",
-      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Chatham House Royal Institute of International Affairs RSS for geopolitical security, terrorism and UK foreign policy research."
-    },
-    {
       "id": "chathamhouse-events",
       "provider": "Chatham House a Events (RSS)",
       "endpoint": "https://www.chathamhouse.org/path/events.xml",
@@ -2149,17 +2115,6 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Official Tech Against Terrorism podcast RSS feed."
-    },
-    {
-      "id": "tony-blair-institute-news",
-      "provider": "Tony Blair Institute for Global Change a Publications",
-      "endpoint": "https://institute.global/insights/geopolitics-and-security",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Focused TBI geopolitics and security page for relevant context."
     },
     {
       "id": "unodc-news",
@@ -4640,19 +4595,6 @@
       "sourceTier": "context",
       "reliabilityProfile": "general_media",
       "comment": "Manchester local news RSS."
-    },
-    {
-      "id": "metro",
-      "provider": "BBC News - UK",
-      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "uk",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "sourceTier": "context",
-      "reliabilityProfile": "major_media",
-      "comment": "BBC UK RSS without legacy query baggage."
     },
     {
       "id": "news-uk",
