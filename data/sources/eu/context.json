@@ -487,6 +487,50 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Slovensko channel RSS used as broad Slovakia trigger feed under strict keyword gating."
+    },
+    {
+      "id": "germany-federal-prosecutor-current-press-en",
+      "provider": "German Federal Public Prosecutor - Current Press Releases (EN)",
+      "endpoint": "https://www.generalbundesanwalt.de/EN/Press/current_press_releases/current_press_releases_node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official German federal prosecutor English press releases covering terrorism and national-security prosecutions."
+    },
+    {
+      "id": "netherlands-om-terrorisme",
+      "provider": "Dutch Public Prosecution Service - Terrorisme",
+      "endpoint": "https://www.om.nl/onderwerpen/terrorisme",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch prosecution service terrorism topic page for arrests, charges and court actions linked to terrorism cases."
+    },
+    {
+      "id": "netherlands-om-terrorismefinanciering-nieuws",
+      "provider": "Dutch Public Prosecution Service - Terrorismefinanciering Nieuws",
+      "endpoint": "https://www.om.nl/onderwerpen/terrorismefinanciering/nieuws",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch prosecution updates focused on terrorism-financing investigations and prosecutions."
+    },
+    {
+      "id": "guardia-civil-rss-list",
+      "provider": "Guardia Civil - RSS List",
+      "endpoint": "https://web.guardiacivil.es/va/tramites/rss_list/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Spanish Guardia Civil RSS index page for official feed discovery on law-enforcement and security operations."
     }
   ]
 }

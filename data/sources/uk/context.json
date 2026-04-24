@@ -1827,6 +1827,17 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Investigative UK commentary feed used as narrative and corruption-related context under keyword gating."
+    },
+    {
+      "id": "reddit-unitedkingdom-rss",
+      "provider": "Reddit - r/unitedkingdom",
+      "endpoint": "https://www.reddit.com/r/unitedkingdom/.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "High-noise UK social-discourse feed retained only as low-confidence local narrative and unrest context."
     }
   ]
 }

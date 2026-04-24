@@ -824,6 +824,28 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "BTP searchable news listing for incident retrieval across rail and station policing topics."
+    },
+    {
+      "id": "mi5-terrorism-news-category",
+      "provider": "MI5 - Terrorism News",
+      "endpoint": "https://www.mi5.gov.uk/news-categories/terrorism",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MI5 terrorism news category page for official statements and operationally relevant threat-related updates."
+    },
+    {
+      "id": "cps-news-category-feed",
+      "provider": "Crown Prosecution Service - News",
+      "endpoint": "https://www.cps.gov.uk/cps/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "CPS news listing used for terrorism charging and sentencing announcements in UK criminal proceedings."
     }
   ]
 }
