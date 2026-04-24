@@ -58,13 +58,13 @@
     {
       "id": "ecfr-feeds-index",
       "provider": "ECFR - Feeds",
-      "endpoint": "https://ecfr.eu/feeds/",
-      "kind": "html",
+      "endpoint": "https://ecfr.eu/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR feed index page for European foreign-policy and security research feed discovery."
+      "comment": "ECFR main RSS feed endpoint."
     },
     {
       "id": "enisa-news",
@@ -78,15 +78,15 @@
       "comment": "ENISA news on EU cybersecurity threats, state-sponsored attacks and critical infrastructure security relevant to CT context."
     },
     {
-      "id": "enisa-rss-transition-page",
-      "provider": "ENISA - RSS Feeds Transition Notice",
-      "endpoint": "https://www.enisa.europa.eu/rss-feeds-discontinued-new-subscription-mechanism-coming-soon",
-      "kind": "html",
+      "id": "cert-eu-security-advisories-rss",
+      "provider": "CERT-EU - Security Advisories (RSS)",
+      "endpoint": "https://cert.europa.eu/publications/security-advisories-rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "ENISA notice page documenting RSS feed changes and subscription transition."
+      "requiresKeywordMatch": true,
+      "comment": "Active CERT-EU security advisories RSS replacing ENISA RSS-discontinued notice page."
     },
     {
       "id": "euiss-home",
@@ -113,13 +113,13 @@
     {
       "id": "eurojust-press-news-html",
       "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/media-and-events/press-releases-and-news",
-      "kind": "html",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Eurojust press and news page for prosecutions, judicial cooperation and terrorism-case updates."
+      "comment": "Official Eurojust press releases/news RSS feed."
     },
     {
       "id": "eurojust-press-releases",
@@ -135,13 +135,13 @@
     {
       "id": "europol-media-press",
       "provider": "Europol a Media and Press",
-      "endpoint": "https://www.europol.europa.eu/media-press",
-      "kind": "html",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Europol media and press releases page; no dedicated RSS endpoint, using the listing page with keyword filtering."
+      "comment": "Official Europol newsroom RSS feed."
     },
     {
       "id": "europol-news-rss",
@@ -157,24 +157,24 @@
     {
       "id": "europol-newsroom-html",
       "provider": "Europol - Newsroom",
-      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
-      "kind": "html",
+      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Europol newsroom page variant for press releases, operational updates and EU policing statements."
+      "comment": "Alternative Europol RSS feed to avoid JS-heavy newsroom pages."
     },
     {
       "id": "finland-supo-news",
       "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/current-issues",
-      "kind": "html",
+      "endpoint": "https://supo.fi/en/news-and-press-releases/-/asset_publisher/LVkvGHGkmM3J/rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish Supo updates on terrorism, extremism and hostile-state security concerns."
+      "comment": "Official Finnish Security and Intelligence Service RSS feed."
     },
     {
       "id": "german-bfv-news",
@@ -245,13 +245,13 @@
     {
       "id": "statewatch-news",
       "provider": "Statewatch - News",
-      "endpoint": "https://www.statewatch.org/news/",
-      "kind": "html",
+      "endpoint": "https://www.statewatch.org/news/rssfeed",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Statewatch news page for civil-liberties, policing, borders and counter-terror policy scrutiny."
+      "comment": "Direct Statewatch news RSS feed."
     },
     {
       "id": "sweden-sapo-news",

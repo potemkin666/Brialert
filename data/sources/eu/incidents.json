@@ -47,13 +47,13 @@
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/news",
-      "kind": "html",
+      "endpoint": "https://poliisi.fi/en/national-bureau-of-investigation/-/asset_publisher/ZtAEeHB39Lxr/rss",
+      "kind": "rss",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations."
+      "comment": "Finnish NBI RSS feed for serious crime and CT-relevant police updates."
     },
     {
       "id": "german-bka-press",

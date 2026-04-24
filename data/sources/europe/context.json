@@ -25,13 +25,13 @@
     {
       "id": "ecfr-publications",
       "provider": "European Council on Foreign Relations (ECFR) a Publications",
-      "endpoint": "https://ecfr.eu/publications/",
-      "kind": "html",
+      "endpoint": "https://ecfr.eu/feed/?post_type=publication",
+      "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR research and commentary on European security, terrorism, and foreign policy used as specialist context."
+      "comment": "Direct ECFR publications feed."
     },
     {
       "id": "euronews-europe",
@@ -124,13 +124,13 @@
     {
       "id": "politico-europe",
       "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/",
-      "kind": "html",
+      "endpoint": "https://www.politico.eu/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Politico Europe used as corroborating political-security context rather than live trigger input."
+      "comment": "Politico Europe RSS feed for context coverage."
     },
     {
       "id": "rte-ireland-news-rss",

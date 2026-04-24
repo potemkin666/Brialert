@@ -3,13 +3,13 @@
     {
       "id": "acled-updates",
       "provider": "ACLED a Updates and Analysis",
-      "endpoint": "https://acleddata.com/",
+      "endpoint": "https://acleddata.com/global-analysis",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ACLED provides conflict event reporting and analysis; RSS varies by section, so the main site is used with keyword filtering."
+      "comment": "Focused ACLED global analysis page; official RSS is not consistently available."
     },
     {
       "id": "aljazeera-news-rss",
@@ -264,13 +264,13 @@
     {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center a IntelBrief",
-      "endpoint": "https://thesoufancenter.org/category/intelbrief/",
-      "kind": "html",
+      "endpoint": "https://thesoufancenter.org/category/intelbrief/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "No official RSS link advertised; using the IntelBrief category page and relying on keyword filtering."
+      "comment": "WordPress category RSS feed for Soufan IntelBrief."
     },
     {
       "id": "tech-against-terrorism-podcast",
@@ -286,13 +286,13 @@
     {
       "id": "tony-blair-institute-news",
       "provider": "Tony Blair Institute for Global Change a Publications",
-      "endpoint": "https://institute.global/insights",
+      "endpoint": "https://institute.global/insights/geopolitics-and-security",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "TBI publications on counter-extremism, technology and political violence used for strategic context."
+      "comment": "Focused TBI geopolitics and security page for relevant context."
     },
     {
       "id": "unodc-news",

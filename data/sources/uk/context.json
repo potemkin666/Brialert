@@ -35,24 +35,24 @@
     {
       "id": "bbc-news-uk-politics-legacy",
       "provider": "BBC News a UK Politics (Legacy RSS)",
-      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/uk_politics/rss.xml",
+      "endpoint": "https://feeds.bbci.co.uk/news/politics/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for UK political coverage."
+      "comment": "Modern BBC Politics RSS endpoint replacing the legacy newsrss host."
     },
     {
       "id": "chatham-house-home",
       "provider": "Chatham House",
-      "endpoint": "https://www.chathamhouse.org/",
-      "kind": "html",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Chatham House homepage for international security, state threat and terrorism-adjacent analysis."
+      "comment": "Official Chatham House all-content RSS feed."
     },
     {
       "id": "chatham-house-security-defence",
@@ -133,13 +133,13 @@
     {
       "id": "institute-global-home",
       "provider": "Institute for Global Change",
-      "endpoint": "https://www.institute.global/",
+      "endpoint": "https://institute.global/insights/geopolitics-and-security",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Tony Blair Institute homepage for extremism, geopolitical and public-policy context."
+      "comment": "Focused TBI geopolitics and security page used for relevant strategic context."
     },
     {
       "id": "kent-police-news",
@@ -323,7 +323,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun aggregate feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun aggregate feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-all-english",
@@ -334,7 +334,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun all English app feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun all English app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-homepage",
@@ -345,7 +345,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun curated homepage feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun curated homepage feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-news-english",
@@ -356,7 +356,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun English news app feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun English news app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "west-yorkshire-police-coroner-appeals-rss",
@@ -372,13 +372,13 @@
     {
       "id": "wiltshire-999s",
       "provider": "Wiltshire 999s",
-      "endpoint": "https://www.wiltshire999s.co.uk/",
-      "kind": "html",
+      "endpoint": "https://www.wiltshire999s.co.uk/news/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Wiltshire emergency services news site for local incident corroboration and public reporting."
+      "comment": "Wiltshire emergency services news RSS feed."
     },
     {
       "id": "belfast-live",
@@ -422,7 +422,7 @@
     {
       "id": "cambridge-news",
       "provider": "Cambridge News",
-      "endpoint": "https://www.cambridge-news.co.uk/rss.xml",
+      "endpoint": "https://www.cambridge-news.co.uk/news/?service=rss",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -430,7 +430,7 @@
       "requiresKeywordMatch": true,
       "sourceTier": "context",
       "reliabilityProfile": "general_media",
-      "comment": "Cambridgeshire local news RSS."
+      "comment": "Reach/Live-style Cambridge News RSS endpoint."
     },
     {
       "id": "channel-4-news",
@@ -630,7 +630,7 @@
     {
       "id": "metro",
       "provider": "BBC News - UK",
-      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml?source=metro",
+      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -638,7 +638,7 @@
       "requiresKeywordMatch": true,
       "sourceTier": "context",
       "reliabilityProfile": "major_media",
-      "comment": "Replacement for anti-bot Metro feed using BBC UK RSS coverage."
+      "comment": "BBC UK RSS without legacy query baggage."
     },
     {
       "id": "news-uk",

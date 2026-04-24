@@ -98,13 +98,13 @@
     {
       "id": "ecfr-feeds-index",
       "provider": "ECFR - Feeds",
-      "endpoint": "https://ecfr.eu/feeds/",
-      "kind": "html",
+      "endpoint": "https://ecfr.eu/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR feed index page for European foreign-policy and security research feed discovery."
+      "comment": "ECFR main RSS feed endpoint."
     },
     {
       "id": "enisa-news",
@@ -119,15 +119,15 @@
       "refreshEveryHours": 1
     },
     {
-      "id": "enisa-rss-transition-page",
-      "provider": "ENISA - RSS Feeds Transition Notice",
-      "endpoint": "https://www.enisa.europa.eu/rss-feeds-discontinued-new-subscription-mechanism-coming-soon",
-      "kind": "html",
+      "id": "cert-eu-security-advisories-rss",
+      "provider": "CERT-EU - Security Advisories (RSS)",
+      "endpoint": "https://cert.europa.eu/publications/security-advisories-rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "ENISA notice page documenting RSS feed changes and subscription transition.",
+      "requiresKeywordMatch": true,
+      "comment": "Active CERT-EU security advisories RSS replacing ENISA RSS-discontinued notice page.",
       "refreshEveryHours": 1
     },
     {
@@ -155,13 +155,13 @@
     {
       "id": "eurojust-press-news-html",
       "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/media-and-events/press-releases-and-news",
-      "kind": "html",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Eurojust press and news page for prosecutions, judicial cooperation and terrorism-case updates.",
+      "comment": "Official Eurojust press releases/news RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -179,13 +179,13 @@
     {
       "id": "europol-media-press",
       "provider": "Europol a Media and Press",
-      "endpoint": "https://www.europol.europa.eu/media-press",
-      "kind": "html",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Europol media and press releases page; no dedicated RSS endpoint, using the listing page with keyword filtering.",
+      "comment": "Official Europol newsroom RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -203,25 +203,25 @@
     {
       "id": "europol-newsroom-html",
       "provider": "Europol - Newsroom",
-      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
-      "kind": "html",
+      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Europol newsroom page variant for press releases, operational updates and EU policing statements.",
+      "comment": "Alternative Europol RSS feed to avoid JS-heavy newsroom pages.",
       "refreshEveryHours": 1
     },
     {
       "id": "finland-supo-news",
       "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/current-issues",
-      "kind": "html",
+      "endpoint": "https://supo.fi/en/news-and-press-releases/-/asset_publisher/LVkvGHGkmM3J/rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish Supo updates on terrorism, extremism and hostile-state security concerns.",
+      "comment": "Official Finnish Security and Intelligence Service RSS feed.",
       "refreshEveryHours": 1
     },
     {
@@ -298,13 +298,13 @@
     {
       "id": "statewatch-news",
       "provider": "Statewatch - News",
-      "endpoint": "https://www.statewatch.org/news/",
-      "kind": "html",
+      "endpoint": "https://www.statewatch.org/news/rssfeed",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Statewatch news page for civil-liberties, policing, borders and counter-terror policy scrutiny."
+      "comment": "Direct Statewatch news RSS feed."
     },
     {
       "id": "sweden-sapo-news",
@@ -395,13 +395,13 @@
     {
       "id": "finland-police-news",
       "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/news",
-      "kind": "html",
+      "endpoint": "https://poliisi.fi/en/national-bureau-of-investigation/-/asset_publisher/ZtAEeHB39Lxr/rss",
+      "kind": "rss",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish Police updates on major incidents, terror-related investigations and national policing operations.",
+      "comment": "Finnish NBI RSS feed for serious crime and CT-relevant police updates.",
       "refreshEveryHours": 1
     },
     {
@@ -914,13 +914,13 @@
     {
       "id": "ecfr-publications",
       "provider": "European Council on Foreign Relations (ECFR) a Publications",
-      "endpoint": "https://ecfr.eu/publications/",
-      "kind": "html",
+      "endpoint": "https://ecfr.eu/feed/?post_type=publication",
+      "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR research and commentary on European security, terrorism, and foreign policy used as specialist context."
+      "comment": "Direct ECFR publications feed."
     },
     {
       "id": "euronews-europe",
@@ -1016,13 +1016,13 @@
     {
       "id": "politico-europe",
       "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/",
-      "kind": "html",
+      "endpoint": "https://www.politico.eu/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Politico Europe used as corroborating political-security context rather than live trigger input."
+      "comment": "Politico Europe RSS feed for context coverage."
     },
     {
       "id": "rte-ireland-news-rss",
@@ -1334,13 +1334,13 @@
     {
       "id": "acled-updates",
       "provider": "ACLED a Updates and Analysis",
-      "endpoint": "https://acleddata.com/",
+      "endpoint": "https://acleddata.com/global-analysis",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ACLED provides conflict event reporting and analysis; RSS varies by section, so the main site is used with keyword filtering."
+      "comment": "Focused ACLED global analysis page; official RSS is not consistently available."
     },
     {
       "id": "aljazeera-news-rss",
@@ -1598,13 +1598,13 @@
     {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center a IntelBrief",
-      "endpoint": "https://thesoufancenter.org/category/intelbrief/",
-      "kind": "html",
+      "endpoint": "https://thesoufancenter.org/category/intelbrief/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "No official RSS link advertised; using the IntelBrief category page and relying on keyword filtering."
+      "comment": "WordPress category RSS feed for Soufan IntelBrief."
     },
     {
       "id": "tech-against-terrorism-podcast",
@@ -1620,13 +1620,13 @@
     {
       "id": "tony-blair-institute-news",
       "provider": "Tony Blair Institute for Global Change a Publications",
-      "endpoint": "https://institute.global/insights",
+      "endpoint": "https://institute.global/insights/geopolitics-and-security",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "TBI publications on counter-extremism, technology and political violence used for strategic context."
+      "comment": "Focused TBI geopolitics and security page for relevant context."
     },
     {
       "id": "unodc-news",
@@ -2849,24 +2849,24 @@
     {
       "id": "bbc-news-uk-politics-legacy",
       "provider": "BBC News a UK Politics (Legacy RSS)",
-      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/uk_politics/rss.xml",
+      "endpoint": "https://feeds.bbci.co.uk/news/politics/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for UK political coverage."
+      "comment": "Modern BBC Politics RSS endpoint replacing the legacy newsrss host."
     },
     {
       "id": "chatham-house-home",
       "provider": "Chatham House",
-      "endpoint": "https://www.chathamhouse.org/",
-      "kind": "html",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Chatham House homepage for international security, state threat and terrorism-adjacent analysis."
+      "comment": "Official Chatham House all-content RSS feed."
     },
     {
       "id": "chatham-house-security-defence",
@@ -2950,13 +2950,13 @@
     {
       "id": "institute-global-home",
       "provider": "Institute for Global Change",
-      "endpoint": "https://www.institute.global/",
+      "endpoint": "https://institute.global/insights/geopolitics-and-security",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Tony Blair Institute homepage for extremism, geopolitical and public-policy context."
+      "comment": "Focused TBI geopolitics and security page used for relevant strategic context."
     },
     {
       "id": "kent-police-news",
@@ -3150,7 +3150,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun aggregate feed; tabloid â€“ strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun aggregate feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-all-english",
@@ -3161,7 +3161,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun all English app feed; tabloid â€“ strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun all English app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-homepage",
@@ -3172,7 +3172,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun curated homepage feed; tabloid â€“ strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun curated homepage feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-news-english",
@@ -3183,7 +3183,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun English news app feed; tabloid â€“ strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun English news app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "west-yorkshire-police-coroner-appeals-rss",
@@ -3200,13 +3200,13 @@
     {
       "id": "wiltshire-999s",
       "provider": "Wiltshire 999s",
-      "endpoint": "https://www.wiltshire999s.co.uk/",
-      "kind": "html",
+      "endpoint": "https://www.wiltshire999s.co.uk/news/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Wiltshire emergency services news site for local incident corroboration and public reporting."
+      "comment": "Wiltshire emergency services news RSS feed."
     },
     {
       "id": "belfast-live",
@@ -3250,7 +3250,7 @@
     {
       "id": "cambridge-news",
       "provider": "Cambridge News",
-      "endpoint": "https://www.cambridge-news.co.uk/rss.xml",
+      "endpoint": "https://www.cambridge-news.co.uk/news/?service=rss",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -3258,7 +3258,7 @@
       "requiresKeywordMatch": true,
       "sourceTier": "context",
       "reliabilityProfile": "general_media",
-      "comment": "Cambridgeshire local news RSS."
+      "comment": "Reach/Live-style Cambridge News RSS endpoint."
     },
     {
       "id": "channel-4-news",
@@ -3458,7 +3458,7 @@
     {
       "id": "metro",
       "provider": "BBC News - UK",
-      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml?source=metro",
+      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -3466,7 +3466,7 @@
       "requiresKeywordMatch": true,
       "sourceTier": "context",
       "reliabilityProfile": "major_media",
-      "comment": "Replacement for anti-bot Metro feed using BBC UK RSS coverage."
+      "comment": "BBC UK RSS without legacy query baggage."
     },
     {
       "id": "news-uk",
@@ -5982,13 +5982,13 @@
     {
       "id": "icsr-kcl",
       "provider": "International Centre for the Study of Radicalisation (ICSR) a Updates",
-      "endpoint": "https://icsr.info/",
-      "kind": "html",
+      "endpoint": "https://icsr.info/category/publications/reports/feed/",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "ICSR content is published as web pages; RSS availability varies by section."
+      "comment": "ICSR reports RSS feed."
     },
     {
       "id": "met-office-seasonal-advice",
@@ -6384,13 +6384,13 @@
     {
       "id": "rand-terrorism-topic",
       "provider": "RAND - Terrorism Topic Updates",
-      "endpoint": "https://www.rand.org/topics/terrorism.html",
-      "kind": "html",
+      "endpoint": "https://www.rand.org/pubs/new.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RAND topic pages are HTML; using the terrorism topic index and relying on keyword filtering."
+      "comment": "Official RAND new publications RSS feed replacing the topic HTML page."
     },
     {
       "id": "rewards-for-justice",

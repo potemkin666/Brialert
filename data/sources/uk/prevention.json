@@ -134,13 +134,13 @@
     {
       "id": "icsr-kcl",
       "provider": "International Centre for the Study of Radicalisation (ICSR) a Updates",
-      "endpoint": "https://icsr.info/",
-      "kind": "html",
+      "endpoint": "https://icsr.info/category/publications/reports/feed/",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "ICSR content is published as web pages; RSS availability varies by section."
+      "comment": "ICSR reports RSS feed."
     },
     {
       "id": "met-office-seasonal-advice",
