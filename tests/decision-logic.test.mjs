@@ -65,6 +65,7 @@ import {
   MAX_FEED_PREFETCH_ITEMS,
   MAX_HTML_PREFETCH_ITEMS,
   MAX_HTML_SOURCES_PER_RUN,
+  sourceRefreshEveryHours,
   shouldRefreshSourceThisRun,
   sourceScheduleIntervalMinutes,
   sourceScheduleOffsetMinutes,
@@ -1391,6 +1392,13 @@ test('html source run cap is increased for candidate scheduler mode', () => {
 
 test('html source run cap keeps control scheduler budget at legacy value', () => {
   assert.equal(CONTROL_MAX_HTML_SOURCES_PER_RUN, 30);
+});
+
+test('non-incident HTML sources refresh less often than machine-readable equivalents', () => {
+  assert.equal(sourceRefreshEveryHours({ lane: 'context', kind: 'rss' }), 0.5);
+  assert.equal(sourceRefreshEveryHours({ lane: 'context', kind: 'html' }), 1);
+  assert.equal(sourceRefreshEveryHours({ lane: 'oversight', kind: 'rss' }), 1);
+  assert.equal(sourceRefreshEveryHours({ lane: 'oversight', kind: 'html' }), 2);
 });
 
 test('default fetch/runtime tuning constants remain stable', () => {

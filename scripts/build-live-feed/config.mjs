@@ -428,7 +428,7 @@ export function sourceRefreshEveryHours(source) {
 
   const byLane = DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE[source?.lane] || DEFAULT_SOURCE_REFRESH_HOURS_BY_LANE.default;
   if (source?.lane === 'incidents') return 0.25;
-  if (source?.kind === 'html') return Math.max(byLane, 1);
+  if (source?.kind === 'html') return Math.max(byLane * 2, 1);
   return byLane;
 }
 
