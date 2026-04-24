@@ -29,6 +29,7 @@ import {
   isLiveIncidentCandidate,
   isQuarantineCandidate,
   normaliseAlert,
+  sortAlertsByFreshness,
   trustSignal
 } from '../shared/alert-view-model.mjs';
 import {
@@ -907,6 +908,42 @@ test('stored alert selection keeps live incidents and fresh official corroborati
   assert.ok(retentionScoreFor(freshOfficialContext) > retentionScoreFor(staleWeakContext));
 });
 
+test('stored alert selection caps source output to two alerts per day', () => {
+  const source = 'UN Office of Counter-Terrorism (UNOCT) - News';
+  const unoct1 = makeAlert({
+    id: 'unoct-1',
+    source,
+    sourceUrl: 'https://example.test/unoct-1',
+    publishedAt: '2026-04-24T10:49:55.000Z',
+    priorityScore: 9
+  });
+  const unoct2 = makeAlert({
+    id: 'unoct-2',
+    source,
+    sourceUrl: 'https://example.test/unoct-2',
+    publishedAt: '2026-04-24T09:49:55.000Z',
+    priorityScore: 8
+  });
+  const unoct3 = makeAlert({
+    id: 'unoct-3',
+    source,
+    sourceUrl: 'https://example.test/unoct-3',
+    publishedAt: '2026-04-24T08:49:55.000Z',
+    priorityScore: 7
+  });
+  const other = makeAlert({
+    id: 'other-1',
+    source: 'Counter Terrorism Policing',
+    sourceUrl: 'https://example.test/other-1',
+    publishedAt: '2026-04-24T07:49:55.000Z',
+    priorityScore: 6
+  });
+
+  const selected = selectStoredAlerts([unoct1, unoct2, unoct3, other], 10);
+
+  assert.deepEqual(selected.map((alert) => alert.id), ['unoct-1', 'unoct-2', 'other-1']);
+});
+
 test('shouldKeepItem rejects items without a reliable publish date', () => {
   const source = {
     lane: 'context',
@@ -1604,6 +1641,24 @@ test('renderSupporting merges context and quarantine into one progressive list',
   assert.equal(elements.supportingCount.textContent, '2/6 items');
   assert.match(elements.supportingList.innerHTML, /Quarantine|Context/i);
   assert.equal(supportingLoadMore.hasClass('hidden'), false);
+});
+
+test('sortAlertsByFreshness prioritises newer stories inside the same freshness bucket', () => {
+  const newerButLowerSignal = makeAlert({
+    id: 'newer',
+    incidentTrack: 'case',
+    sourceTier: 'research',
+    publishedAt: isoMinutesAgo(13 * 60)
+  });
+  const olderButHigherSignal = makeAlert({
+    id: 'older',
+    incidentTrack: 'live',
+    sourceTier: 'trigger',
+    publishedAt: isoMinutesAgo(20 * 60)
+  });
+
+  const sorted = sortAlertsByFreshness([olderButHigherSignal, newerButLowerSignal]);
+  assert.deepEqual(sorted.map((alert) => alert.id), ['newer', 'older']);
 });
 
 test('addSourceRequest accepts valid http/https links and stores newest first', () => {

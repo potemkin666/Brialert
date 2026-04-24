@@ -31,7 +31,7 @@
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint consistently published; using the News Release listing and relying on keyword filtering."
+      "comment": "Canonical Frontex news-release archive page."
     }
   ]
 }

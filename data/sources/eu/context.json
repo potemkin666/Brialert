@@ -58,13 +58,13 @@
     {
       "id": "ecfr-feeds-index",
       "provider": "ECFR - Feeds",
-      "endpoint": "https://ecfr.eu/feeds/",
-      "kind": "html",
+      "endpoint": "https://ecfr.eu/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR feed index page for European foreign-policy and security research feed discovery."
+      "comment": "ECFR main RSS feed endpoint."
     },
     {
       "id": "enisa-news",
@@ -78,15 +78,15 @@
       "comment": "ENISA news on EU cybersecurity threats, state-sponsored attacks and critical infrastructure security relevant to CT context."
     },
     {
-      "id": "enisa-rss-transition-page",
-      "provider": "ENISA - RSS Feeds Transition Notice",
-      "endpoint": "https://www.enisa.europa.eu/rss-feeds-discontinued-new-subscription-mechanism-coming-soon",
-      "kind": "html",
+      "id": "cert-eu-security-advisories-rss",
+      "provider": "CERT-EU - Security Advisories (RSS)",
+      "endpoint": "https://cert.europa.eu/publications/security-advisories-rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "ENISA notice page documenting RSS feed changes and subscription transition."
+      "requiresKeywordMatch": true,
+      "comment": "Active CERT-EU security advisories RSS replacing ENISA RSS-discontinued notice page."
     },
     {
       "id": "euiss-home",
@@ -113,13 +113,13 @@
     {
       "id": "eurojust-press-news-html",
       "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/media-and-events/press-releases-and-news",
-      "kind": "html",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Eurojust press and news page for prosecutions, judicial cooperation and terrorism-case updates."
+      "comment": "Official Eurojust press releases/news RSS feed."
     },
     {
       "id": "eurojust-press-releases",
@@ -135,13 +135,13 @@
     {
       "id": "europol-media-press",
       "provider": "Europol a Media and Press",
-      "endpoint": "https://www.europol.europa.eu/media-press",
-      "kind": "html",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Europol media and press releases page; no dedicated RSS endpoint, using the listing page with keyword filtering."
+      "comment": "Official Europol newsroom RSS feed."
     },
     {
       "id": "europol-news-rss",
@@ -157,24 +157,24 @@
     {
       "id": "europol-newsroom-html",
       "provider": "Europol - Newsroom",
-      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
-      "kind": "html",
+      "endpoint": "https://www.europol.europa.eu/rss.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Europol newsroom page variant for press releases, operational updates and EU policing statements."
+      "comment": "Alternative Europol RSS feed to avoid JS-heavy newsroom pages."
     },
     {
       "id": "finland-supo-news",
       "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/current-issues",
-      "kind": "html",
+      "endpoint": "https://supo.fi/en/news-and-press-releases/-/asset_publisher/LVkvGHGkmM3J/rss",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish Supo updates on terrorism, extremism and hostile-state security concerns."
+      "comment": "Official Finnish Security and Intelligence Service RSS feed."
     },
     {
       "id": "german-bfv-news",
@@ -233,25 +233,25 @@
     },
     {
       "id": "spain-interior-ministry-news",
-      "provider": "Spanish Ministry of the Interior - Press",
-      "endpoint": "https://www.interior.gob.es/opencms/en/prensa/",
+      "provider": "Spanish Ministry of the Interior - News",
+      "endpoint": "https://www.interior.gob.es/opencms/en/prensa/noticias/",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Spanish Interior Ministry press releases covering terrorism arrests, border security and national policing operations."
+      "comment": "Direct Spanish Interior Ministry news listing page."
     },
     {
       "id": "statewatch-news",
       "provider": "Statewatch - News",
-      "endpoint": "https://www.statewatch.org/news/",
-      "kind": "html",
+      "endpoint": "https://www.statewatch.org/news/rssfeed",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Statewatch news page for civil-liberties, policing, borders and counter-terror policy scrutiny."
+      "comment": "Direct Statewatch news RSS feed."
     },
     {
       "id": "sweden-sapo-news",
@@ -289,6 +289,248 @@
       "sourceTier": "context",
       "reliabilityProfile": "major_media",
       "comment": "Ireland Independent RSS feed."
+    },
+    {
+      "id": "de-bfv-islamist-extremism",
+      "provider": "BfV - Islamist Extremism and Terrorism",
+      "endpoint": "https://www.verfassungsschutz.de/EN/topics/islamist-extremism-and-islamist-terrorism/islamist-extremism-and-islamist-terrorism_node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BfV thematic page for Islamist extremism and terrorism threat context in Germany."
+    },
+    {
+      "id": "de-bayern-stmi-press-rss",
+      "provider": "Bavarian Interior Ministry - Press RSS",
+      "endpoint": "https://www.stmi.bayern.de/news/rss/pressemitteilungen?type=9818",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Bavarian Interior Ministry RSS for security-policy and operational interior updates."
+    },
+    {
+      "id": "de-bmj-press-rss",
+      "provider": "German Federal Ministry of Justice - RSS",
+      "endpoint": "https://www.bmj.de/DE/presse/newsletter/rssnewsfeed/rss_node.html",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BMJ RSS feed for legal and criminal-justice changes relevant to terrorism prosecutions."
+    },
+    {
+      "id": "de-bdk-bka-rss",
+      "provider": "Bund Deutscher Kriminalbeamter - BKA RSS",
+      "endpoint": "https://www.bdk.de/rss/bundeskriminalamt/RSS",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "BDK BKA-focused feed for secondary investigative-policy and capability context."
+    },
+    {
+      "id": "me-ministry-defence",
+      "provider": "Montenegro Ministry of Defence",
+      "endpoint": "https://www.gov.me/en/mod",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Defence ministry page for security posture, NATO and defence-sector context."
+    },
+    {
+      "id": "me-osce-montenegro-security",
+      "provider": "OSCE Mission to Montenegro",
+      "endpoint": "https://montenegro.osce.org/mission-to-montenegro/what-we-do",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OSCE mission work page covering security-sector reform, small arms and justice context."
+    },
+    {
+      "id": "me-moneyval-aml-cft",
+      "provider": "Council of Europe MONEYVAL",
+      "endpoint": "https://www.coe.int/en/web/moneyval",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MONEYVAL page for AML/CFT and terrorist-financing compliance context."
+    },
+    {
+      "id": "sk-minv-press",
+      "provider": "Slovak Ministry of Interior - Press",
+      "endpoint": "https://www.minv.sk/?tlacove-spravy-2=",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Slovak interior ministry press listing for police, migration, border and security updates."
+    },
+    {
+      "id": "sk-sis-news",
+      "provider": "Slovak Information Service - News",
+      "endpoint": "https://www.sis.gov.sk/news/news.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "SIS intelligence service news page for high-authority Slovak security context."
+    },
+    {
+      "id": "sk-sis-annual-report",
+      "provider": "Slovak Information Service - Annual Report",
+      "endpoint": "https://www.sis.gov.sk/for-you/sis-annual-report.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "SIS annual report page for terrorism, extremism, organised-crime and hybrid-threat background context."
+    },
+    {
+      "id": "sk-general-prosecutor-news",
+      "provider": "Slovak General Prosecutor - News",
+      "endpoint": "https://www.genpro.gov.sk/informacie/spravy/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "General Prosecutor news for Slovak prosecution and cross-border criminal-justice developments."
+    },
+    {
+      "id": "sk-justice-press",
+      "provider": "Slovak Ministry of Justice - Press",
+      "endpoint": "https://www.justice.gov.sk/tlacovespravy/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Justice ministry press archive for court, criminal-law and terrorism-victim support context."
+    },
+    {
+      "id": "sk-defence-press",
+      "provider": "Slovak Ministry of Defence - Press",
+      "endpoint": "https://www.mosr.sk/tlacove-spravy/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Defence ministry releases for Slovak military posture, NATO activity and security-sector context."
+    },
+    {
+      "id": "sk-mfa-all-news",
+      "provider": "Slovak Foreign Ministry - All News",
+      "endpoint": "https://www.mzv.sk/en/web/en/what-is-new/all-news",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Foreign ministry all-news page for crisis, sanctions and diplomatic-security updates."
+    },
+    {
+      "id": "sk-csirt",
+      "provider": "Government CSIRT Slovakia",
+      "endpoint": "https://www.csirt.gov.sk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Government CSIRT site for Slovak cyber incident and vulnerability-warning context."
+    },
+    {
+      "id": "sk-iom-press-rss",
+      "provider": "IOM Slovakia - Press RSS",
+      "endpoint": "https://iom.sk/en/press-room/press-releases-articles?format=feed&type=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "IOM Slovakia RSS for migration, trafficking, return and integration context updates."
+    },
+    {
+      "id": "sk-aktuality-krimi-rss",
+      "provider": "Aktuality.sk - Krimi",
+      "endpoint": "https://www.aktuality.sk/rss/krimi/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Slovak crime RSS feed used as civilian trigger context for public-safety and organised-crime reporting."
+    },
+    {
+      "id": "sk-teraz-slovensko-rss",
+      "provider": "Teraz.sk - Slovensko",
+      "endpoint": "https://www.teraz.sk/rss/slovensko.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Slovensko channel RSS used as broad Slovakia trigger feed under strict keyword gating."
+    },
+    {
+      "id": "germany-federal-prosecutor-current-press-en",
+      "provider": "German Federal Public Prosecutor - Current Press Releases (EN)",
+      "endpoint": "https://www.generalbundesanwalt.de/EN/Press/current_press_releases/current_press_releases_node.html",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official German federal prosecutor English press releases covering terrorism and national-security prosecutions."
+    },
+    {
+      "id": "netherlands-om-terrorisme",
+      "provider": "Dutch Public Prosecution Service - Terrorisme",
+      "endpoint": "https://www.om.nl/onderwerpen/terrorisme",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch prosecution service terrorism topic page for arrests, charges and court actions linked to terrorism cases."
+    },
+    {
+      "id": "netherlands-om-terrorismefinanciering-nieuws",
+      "provider": "Dutch Public Prosecution Service - Terrorismefinanciering Nieuws",
+      "endpoint": "https://www.om.nl/onderwerpen/terrorismefinanciering/nieuws",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Dutch prosecution updates focused on terrorism-financing investigations and prosecutions."
+    },
+    {
+      "id": "guardia-civil-rss-list",
+      "provider": "Guardia Civil - RSS List",
+      "endpoint": "https://web.guardiacivil.es/va/tramites/rss_list/",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Spanish Guardia Civil RSS index page for official feed discovery on law-enforcement and security operations."
     }
   ]
 }

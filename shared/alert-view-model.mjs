@@ -355,14 +355,14 @@ export function sortAlertsByFreshness(alertList) {
   return [...alertList].sort((a, b) => {
     const freshnessGap = freshnessBucketForAlert(b) - freshnessBucketForAlert(a);
     if (freshnessGap !== 0) return freshnessGap;
+    const timeGap = alertPublishedTime(b) - alertPublishedTime(a);
+    if (timeGap !== 0) return timeGap;
     const trackGap = incidentTrackRank(b) - incidentTrackRank(a);
     if (trackGap !== 0) return trackGap;
     const tierGap = sourceTierRank(b) - sourceTierRank(a);
     if (tierGap !== 0) return tierGap;
     const londonGap = Number(isLondonAlert(b)) - Number(isLondonAlert(a));
     if (londonGap !== 0) return londonGap;
-    const timeGap = alertPublishedTime(b) - alertPublishedTime(a);
-    if (timeGap !== 0) return timeGap;
     const scoreGap = incidentScore(b) - incidentScore(a);
     if (scoreGap !== 0) return scoreGap;
     if (!!a.major !== !!b.major) return a.major ? -1 : 1;

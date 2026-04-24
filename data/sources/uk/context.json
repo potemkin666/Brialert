@@ -35,24 +35,24 @@
     {
       "id": "bbc-news-uk-politics-legacy",
       "provider": "BBC News a UK Politics (Legacy RSS)",
-      "endpoint": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/uk_politics/rss.xml",
+      "endpoint": "https://feeds.bbci.co.uk/news/politics/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Legacy BBC RSS feed (newsrss.bbc.co.uk). May be discontinued; retained for UK political coverage."
+      "comment": "Modern BBC Politics RSS endpoint replacing the legacy newsrss host."
     },
     {
       "id": "chatham-house-home",
       "provider": "Chatham House",
-      "endpoint": "https://www.chathamhouse.org/",
-      "kind": "html",
+      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Chatham House homepage for international security, state threat and terrorism-adjacent analysis."
+      "comment": "Official Chatham House all-content RSS feed."
     },
     {
       "id": "chatham-house-security-defence",
@@ -110,14 +110,14 @@
     },
     {
       "id": "henry-jackson-society-news",
-      "provider": "RUSI - Terrorism and Conflict",
-      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict?source=henry-jackson-society-news",
-      "kind": "html",
+      "provider": "RUSI - Latest Publications",
+      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=henry-jackson-society-news",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for unavailable Henry Jackson Society feed using RUSI terrorism/conflict analysis."
+      "comment": "Replacement feed using RUSI latest publications RSS for defence and counter-terrorism research updates."
     },
     {
       "id": "hope-not-hate-home",
@@ -133,13 +133,13 @@
     {
       "id": "institute-global-home",
       "provider": "Institute for Global Change",
-      "endpoint": "https://www.institute.global/",
+      "endpoint": "https://institute.global/insights/geopolitics-and-security",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Tony Blair Institute homepage for extremism, geopolitical and public-policy context."
+      "comment": "Focused TBI geopolitics and security page used for relevant strategic context."
     },
     {
       "id": "kent-police-news",
@@ -176,14 +176,14 @@
     },
     {
       "id": "national-crime-agency-news",
-      "provider": "National Crime Agency a News",
+      "provider": "National Crime Agency - News",
       "endpoint": "https://www.nationalcrimeagency.gov.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint published; using the main news page and relying on keyword filtering."
+      "comment": "Canonical National Crime Agency news archive used as the primary UK agency source."
     },
     {
       "id": "npcc-releases",
@@ -265,24 +265,24 @@
     {
       "id": "rusi-publications",
       "provider": "RUSI (Royal United Services Institute) a Publications",
-      "endpoint": "https://www.rusi.org/publications",
-      "kind": "html",
+      "endpoint": "https://www.rusi.org/rss/latest-publications.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RUSI UK-based defence and security think tank publications used as specialist research and corroboration context."
+      "comment": "Official RUSI latest publications RSS feed for UK defence, security and counter-terrorism research."
     },
     {
       "id": "rusi-terrorism-conflict",
-      "provider": "RUSI - Terrorism and Conflict",
-      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict",
-      "kind": "html",
+      "provider": "RUSI - Latest Publications",
+      "endpoint": "https://www.rusi.org/rss/latest-publications.xml?source=rusi-terrorism-conflict",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RUSI topic page focused on terrorism and conflict research."
+      "comment": "RUSI latest publications feed retained for higher-frequency security and counter-terrorism updates."
     },
     {
       "id": "skwawkbox",
@@ -323,7 +323,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun aggregate feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun aggregate feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-all-english",
@@ -334,7 +334,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun all English app feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun all English app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-homepage",
@@ -345,7 +345,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun curated homepage feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun curated homepage feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "the-sun-news-english",
@@ -356,7 +356,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "The Sun English news app feed; tabloid \u00e2\u20ac\u201c strict keyword and terrorism-hit thresholds apply before inclusion."
+      "comment": "The Sun English news app feed; tabloid – strict keyword and terrorism-hit thresholds apply before inclusion."
     },
     {
       "id": "west-yorkshire-police-coroner-appeals-rss",
@@ -372,13 +372,13 @@
     {
       "id": "wiltshire-999s",
       "provider": "Wiltshire 999s",
-      "endpoint": "https://www.wiltshire999s.co.uk/",
-      "kind": "html",
+      "endpoint": "https://www.wiltshire999s.co.uk/news/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Wiltshire emergency services news site for local incident corroboration and public reporting."
+      "comment": "Wiltshire emergency services news RSS feed."
     },
     {
       "id": "belfast-live",
@@ -422,7 +422,7 @@
     {
       "id": "cambridge-news",
       "provider": "Cambridge News",
-      "endpoint": "https://www.cambridge-news.co.uk/rss.xml",
+      "endpoint": "https://www.cambridge-news.co.uk/news/?service=rss",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -430,7 +430,7 @@
       "requiresKeywordMatch": true,
       "sourceTier": "context",
       "reliabilityProfile": "general_media",
-      "comment": "Cambridgeshire local news RSS."
+      "comment": "Reach/Live-style Cambridge News RSS endpoint."
     },
     {
       "id": "channel-4-news",
@@ -630,7 +630,7 @@
     {
       "id": "metro",
       "provider": "BBC News - UK",
-      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml?source=metro",
+      "endpoint": "https://feeds.bbci.co.uk/news/uk/rss.xml",
       "kind": "rss",
       "lane": "context",
       "region": "uk",
@@ -638,7 +638,7 @@
       "requiresKeywordMatch": true,
       "sourceTier": "context",
       "reliabilityProfile": "major_media",
-      "comment": "Replacement for anti-bot Metro feed using BBC UK RSS coverage."
+      "comment": "BBC UK RSS without legacy query baggage."
     },
     {
       "id": "news-uk",
@@ -1115,14 +1115,14 @@
     },
     {
       "id": "fmcg-gurus",
-      "provider": "FMCG Gurus",
-      "endpoint": "https://fmcggurus.com/feed/",
-      "kind": "rss",
+      "provider": "Europol - Newsroom",
+      "endpoint": "https://www.europol.europa.eu/media-press/newsroom",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for unrelated FMCG source using Europol's official newsroom archive."
     },
     {
       "id": "foreign-office-blogs",
@@ -1291,14 +1291,14 @@
     },
     {
       "id": "silly-old-sod",
-      "provider": "Silly Old Sod",
-      "endpoint": "https://www.sillyoldsod.com/feed/",
-      "kind": "rss",
+      "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
+      "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for personal-blog source using CTC Sentinel analysis archive."
     },
     {
       "id": "silverspoon-london",
@@ -1313,14 +1313,14 @@
     },
     {
       "id": "sks-business-services",
-      "provider": "SKS Business Services",
-      "endpoint": "https://www.sksbusinessservices.com/feed/",
-      "kind": "rss",
+      "provider": "UN Office of Counter-Terrorism - News",
+      "endpoint": "https://www.un.org/counterterrorism/en/news",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+      "comment": "Replacement for unrelated business feed using UN counter-terrorism news updates."
     },
     {
       "id": "hnd-assignment-help-uk-medium",
@@ -1464,6 +1464,380 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Lifestyle/travel RSS from Free RSS Feed Catalog; keyword match required to avoid noise."
+    },
+    {
+      "id": "ukhsa-updates-atom",
+      "provider": "UK Health Security Agency",
+      "endpoint": "https://www.gov.uk/government/organisations/uk-health-security-agency.atom",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "UKHSA atom feed for outbreak, exposure, and public-health disruption alerts."
+    },
+    {
+      "id": "nitter-uk-incident-keywords",
+      "provider": "Nitter - UK Incident Keyword Search",
+      "endpoint": "https://nitter.net/search/rss?f=tweets&q=explosion+OR+shooting+OR+police+UK",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Social-media keyword RSS tripwire for early unverified UK incident chatter."
+    },
+    {
+      "id": "sky-business-rss",
+      "provider": "Sky News - Business (RSS)",
+      "endpoint": "https://feeds.skynews.com/feeds/rss/business.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Business/infrastructure disruption feed for market and operational impact signals."
+    },
+    {
+      "id": "mi5-news-rss",
+      "provider": "MI5 - News and Updates (RSS)",
+      "endpoint": "https://www.mi5.gov.uk/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official MI5 RSS feed for domestic-security statements and threat updates."
+    },
+    {
+      "id": "counter-terrorism-policing-uk-rss",
+      "provider": "Counter Terrorism Policing UK",
+      "endpoint": "https://www.counterterrorism.police.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Counter Terrorism Policing UK public feed for CT alerts and campaigns."
+    },
+    {
+      "id": "act-campaign-feed",
+      "provider": "Action Counters Terrorism (ACT)",
+      "endpoint": "https://act.campaign.gov.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ACT campaign feed for UK public CT-awareness messaging and guidance updates."
+    },
+    {
+      "id": "missing-people-uk-rss",
+      "provider": "Missing People UK",
+      "endpoint": "https://www.missingpeople.org.uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Missing People feed for safeguarding and vulnerability overlap context."
+    },
+    {
+      "id": "home-office-atom",
+      "provider": "UK Home Office",
+      "endpoint": "https://www.gov.uk/government/organisations/home-office.atom",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Home Office atom feed for UK security policy, enforcement and border updates."
+    },
+    {
+      "id": "charity-commission-atom",
+      "provider": "Charity Commission for England and Wales",
+      "endpoint": "https://www.gov.uk/government/organisations/charity-commission.atom",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Charity Commission atom feed for investigations and compliance actions relevant to risk monitoring."
+    },
+    {
+      "id": "national-trust-news-rss",
+      "provider": "National Trust",
+      "endpoint": "https://www.nationaltrust.org.uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "National Trust feed for major-site events and public-crowd context."
+    },
+    {
+      "id": "visitbritain-rss",
+      "provider": "VisitBritain",
+      "endpoint": "https://www.visitbritain.org/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "VisitBritain updates for tourism and visitor-density context signals."
+    },
+    {
+      "id": "time-out-uk-rss",
+      "provider": "Time Out UK",
+      "endpoint": "https://www.timeout.com/uk/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK-wide Time Out events feed for planned gatherings and crowd context."
+    },
+    {
+      "id": "guido-fawkes-feed",
+      "provider": "Guido Fawkes",
+      "endpoint": "https://order-order.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK Westminster gossip and leak-oriented feed for political smoke-signal context."
+    },
+    {
+      "id": "wings-over-scotland-feed",
+      "provider": "Wings Over Scotland",
+      "endpoint": "https://wingsoverscotland.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Scottish political commentary feed used only for low-confidence narrative context."
+    },
+    {
+      "id": "skwawkbox-feed",
+      "provider": "Skwawkbox",
+      "endpoint": "https://skwawkbox.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK factional political feed used for protest-adjacent and discourse context only."
+    },
+    {
+      "id": "breitbart-london-feed",
+      "provider": "Breitbart London",
+      "endpoint": "https://www.breitbart.com/london/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Partisan UK-focused feed retained as low-confidence framing and chatter context."
+    },
+    {
+      "id": "gb-news-uk-politics-rss",
+      "provider": "GB News - UK Politics",
+      "endpoint": "https://www.gbnews.com/feeds/politics/uk.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK politics RSS feed for narrative and grievance spike monitoring in Westminster discourse."
+    },
+    {
+      "id": "the-canary-feed",
+      "provider": "The Canary",
+      "endpoint": "https://www.thecanary.co/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Activist-left UK feed retained as low-confidence protest and narrative context."
+    },
+    {
+      "id": "sky-news-home-rss",
+      "provider": "Sky News - Home",
+      "endpoint": "https://feeds.skynews.com/feeds/rss/home.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Sky News home feed for rapid UK and global breaking-incident pickup."
+    },
+    {
+      "id": "telegraph-all-news-rss",
+      "provider": "The Telegraph - News",
+      "endpoint": "https://www.telegraph.co.uk/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Telegraph aggregate RSS used as an editorial-contrast UK trigger source."
+    },
+    {
+      "id": "my-london-rss",
+      "provider": "MyLondon",
+      "endpoint": "https://www.mylondon.news/?service=rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "London local-news RSS for borough-level incidents, policing and disruption context."
+    },
+    {
+      "id": "uk-data-police-api",
+      "provider": "Police.uk - API root",
+      "endpoint": "https://data.police.uk/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Police.uk data API documentation root for UK policing dataset and endpoint context."
+    },
+    {
+      "id": "uk-judiciary-sentencing-remarks",
+      "provider": "Judiciary UK - Sentencing remarks",
+      "endpoint": "https://www.judiciary.uk/judgment-types/sentencing-remarks/",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official UK judiciary sentencing-remarks archive for court outcome and legal context signals."
+    },
+    {
+      "id": "uk-college-policing-news",
+      "provider": "College of Policing - News and views",
+      "endpoint": "https://www.college.police.uk/news-views",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "College of Policing policy and guidance updates relevant to UK policing practice and standards context."
+    },
+    {
+      "id": "uk-ons-crime-england-wales",
+      "provider": "ONS - Crime in England and Wales",
+      "endpoint": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/bulletins/crimeinenglandandwales/latest",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official ONS latest crime bulletin page for statistical trend context across England and Wales."
+    },
+    {
+      "id": "uk-serious-fraud-office-news",
+      "provider": "Serious Fraud Office - GOV.UK organisation",
+      "endpoint": "https://www.gov.uk/government/organisations/serious-fraud-office",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "SFO organisation page for major fraud, bribery and economic-crime enforcement updates."
+    },
+    {
+      "id": "uk-hmrc-news",
+      "provider": "HM Revenue & Customs - News and communications",
+      "endpoint": "https://www.gov.uk/search/news-and-communications?organisations[]=hm-revenue-customs",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "HMRC news search filter for tax, customs and financial-crime enforcement communication context."
+    },
+    {
+      "id": "uk-ukfinance-fraud-news",
+      "provider": "UK Finance - News and insight",
+      "endpoint": "https://www.ukfinance.org.uk/news-and-insight",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Industry perspective on UK fraud trends and payment/economic-crime narratives."
+    },
+    {
+      "id": "uk-cifas-newsroom",
+      "provider": "Cifas - Newsroom",
+      "endpoint": "https://www.cifas.org.uk/newsroom",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Fraud-prevention organisation newsroom for UK fraud threat and prevention narrative context."
+    },
+    {
+      "id": "politics-co-uk-rss",
+      "provider": "Politics.co.uk",
+      "endpoint": "https://www.politics.co.uk/rss/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK politics RSS stream for policy and institutional narrative context."
+    },
+    {
+      "id": "uk-met-office-rss-guides",
+      "provider": "Met Office - RSS feeds guide",
+      "endpoint": "https://weather.metoffice.gov.uk/guides/rss",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Met Office RSS guide for weather alert surfaces used as situational context impacting incidents and responder operations."
+    },
+    {
+      "id": "novara-media-feed",
+      "provider": "Novara Media",
+      "endpoint": "https://novaramedia.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK political-analysis feed retained as low-confidence protest and unrest narrative context."
+    },
+    {
+      "id": "byline-times-feed",
+      "provider": "Byline Times",
+      "endpoint": "https://bylinetimes.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Investigative UK commentary feed used as narrative and corruption-related context under keyword gating."
+    },
+    {
+      "id": "reddit-unitedkingdom-rss",
+      "provider": "Reddit - r/unitedkingdom",
+      "endpoint": "https://www.reddit.com/r/unitedkingdom/.rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "High-noise UK social-discourse feed retained only as low-confidence local narrative and unrest context."
     }
   ]
 }

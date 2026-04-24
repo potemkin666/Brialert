@@ -554,7 +554,32 @@ export function retentionScoreFor(alert) {
 
 export function selectStoredAlerts(items, maxStored) {
   if (!Array.isArray(items) || maxStored <= 0) return [];
-  if (items.length <= maxStored) return items.slice();
+  const SOURCE_DAY_ALERT_CAP = 2;
+
+  function sourceDayKeyFor(item) {
+    const source = clean(item?.source || item?.actor || item?.subject || '').toLowerCase();
+    if (!source) return '';
+    const publishedAt = clean(item?.publishedAt || '');
+    if (!publishedAt) return '';
+    const parsed = new Date(publishedAt);
+    if (Number.isNaN(parsed.getTime())) return '';
+    return `${source}|${parsed.toISOString().slice(0, 10)}`;
+  }
+
+  function applySourceDayCap(candidates, maxPerSourceDay) {
+    const sourceDayCounts = new Map();
+    const kept = [];
+    for (const item of candidates) {
+      const sourceDayKey = sourceDayKeyFor(item);
+      const sourceDayCount = sourceDayKey ? (sourceDayCounts.get(sourceDayKey) || 0) : 0;
+      if (sourceDayKey && sourceDayCount >= maxPerSourceDay) continue;
+      kept.push(item);
+      if (sourceDayKey) sourceDayCounts.set(sourceDayKey, sourceDayCount + 1);
+    }
+    return kept;
+  }
+
+  if (items.length <= maxStored) return applySourceDayCap(items, SOURCE_DAY_ALERT_CAP);
 
   const ranked = items
     .map((item, index) => ({
@@ -570,6 +595,7 @@ export function selectStoredAlerts(items, maxStored) {
   const retainedIndices = new Set();
   const fusedCounts = new Map();
   const sourceUrlCounts = new Map();
+  const sourceDayCounts = new Map();
 
   function fusedKeyFor(item) {
     return clean(item?.fusedIncidentId || item?.sourceUrl || item?.id || '');
@@ -579,39 +605,48 @@ export function selectStoredAlerts(items, maxStored) {
     return clean(item?.sourceUrl || item?.id || '');
   }
 
-  function canTake(entry, maxPerFused, maxPerSource) {
+  function sourceDayKeyForEntry(item) {
+    return sourceDayKeyFor(item);
+  }
+
+  function canTake(entry, maxPerFused, maxPerSource, maxPerSourceDay) {
     const fusedKey = fusedKeyFor(entry.item);
     const sourceKey = sourceKeyFor(entry.item);
+    const sourceDayKey = sourceDayKeyForEntry(entry.item);
     const fusedCount = fusedKey ? (fusedCounts.get(fusedKey) || 0) : 0;
     const sourceCount = sourceKey ? (sourceUrlCounts.get(sourceKey) || 0) : 0;
+    const sourceDayCount = sourceDayKey ? (sourceDayCounts.get(sourceDayKey) || 0) : 0;
     if (fusedKey && fusedCount >= maxPerFused) return false;
     if (sourceKey && sourceCount >= maxPerSource) return false;
+    if (sourceDayKey && sourceDayCount >= maxPerSourceDay) return false;
     return true;
   }
 
   function take(entry) {
     const fusedKey = fusedKeyFor(entry.item);
     const sourceKey = sourceKeyFor(entry.item);
+    const sourceDayKey = sourceDayKeyForEntry(entry.item);
     retainedIndices.add(entry.index);
     if (fusedKey) fusedCounts.set(fusedKey, (fusedCounts.get(fusedKey) || 0) + 1);
     if (sourceKey) sourceUrlCounts.set(sourceKey, (sourceUrlCounts.get(sourceKey) || 0) + 1);
+    if (sourceDayKey) sourceDayCounts.set(sourceDayKey, (sourceDayCounts.get(sourceDayKey) || 0) + 1);
   }
 
   for (const entry of ranked) {
     if (retainedIndices.size >= maxStored) break;
-    if (canTake(entry, 1, 1)) take(entry);
-  }
-
-  for (const entry of ranked) {
-    if (retainedIndices.size >= maxStored) break;
-    if (retainedIndices.has(entry.index)) continue;
-    if (canTake(entry, 2, 1)) take(entry);
+    if (canTake(entry, 1, 1, SOURCE_DAY_ALERT_CAP)) take(entry);
   }
 
   for (const entry of ranked) {
     if (retainedIndices.size >= maxStored) break;
     if (retainedIndices.has(entry.index)) continue;
-    if (canTake(entry, 2, 2)) take(entry);
+    if (canTake(entry, 2, 1, SOURCE_DAY_ALERT_CAP)) take(entry);
+  }
+
+  for (const entry of ranked) {
+    if (retainedIndices.size >= maxStored) break;
+    if (retainedIndices.has(entry.index)) continue;
+    if (canTake(entry, 2, 2, SOURCE_DAY_ALERT_CAP)) take(entry);
   }
 
   return items.filter((_, index) => retainedIndices.has(index));

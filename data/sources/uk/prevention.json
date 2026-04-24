@@ -134,13 +134,13 @@
     {
       "id": "icsr-kcl",
       "provider": "International Centre for the Study of Radicalisation (ICSR) a Updates",
-      "endpoint": "https://icsr.info/",
-      "kind": "html",
+      "endpoint": "https://icsr.info/category/publications/reports/feed/",
+      "kind": "rss",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "ICSR content is published as web pages; RSS availability varies by section."
+      "comment": "ICSR reports RSS feed."
     },
     {
       "id": "met-office-seasonal-advice",
@@ -338,6 +338,61 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "West Yorkshire Police community alert portal for local warning and prevention notices."
+    },
+    {
+      "id": "protectuk-news",
+      "provider": "ProtectUK - News",
+      "endpoint": "https://www.protectuk.police.uk/news",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "ProtectUK preventative-security updates including protective security guidance, preparedness and Martyn's Law context."
+    },
+    {
+      "id": "home-office-terrorism-police-powers-collection",
+      "provider": "UK Home Office - Operation of Police Powers under the Terrorism Act 2000",
+      "endpoint": "https://www.gov.uk/government/collections/operation-of-police-powers-under-the-terrorism-act-2000",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": false,
+      "comment": "Official Home Office collection for quarterly terrorism arrest, outcomes and stop-search statistics trend monitoring."
+    },
+    {
+      "id": "npsa-national-security-threats",
+      "provider": "National Protective Security Authority - National Security Threats",
+      "endpoint": "https://www.npsa.gov.uk/threat-and-risk-management/national-security-threats",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "NPSA guidance on terrorism, state threats and protective-security risk management for prevention context."
+    },
+    {
+      "id": "hedayah-news",
+      "provider": "Hedayah - News",
+      "endpoint": "https://hedayah.com/news/",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "PVE/CVE programme updates feed for radicalisation prevention, reintegration and community resilience context."
+    },
+    {
+      "id": "tech-against-terrorism-news",
+      "provider": "Tech Against Terrorism - News",
+      "endpoint": "https://techagainstterrorism.org/news",
+      "kind": "html",
+      "lane": "prevention",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Online terrorist-content moderation and platform-abuse analysis updates relevant to digital CT prevention."
     }
   ]
 }

@@ -24,14 +24,14 @@
     },
     {
       "id": "city-of-london-police-newsroom",
-      "provider": "Metropolitan Police Service - News",
-      "endpoint": "https://news.met.police.uk/",
+      "provider": "Metropolitan Police Service - Latest News",
+      "endpoint": "https://news.met.police.uk/latest_news?source=city-of-london-police-newsroom",
       "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for blocked City of London Police newsroom using active Met Police London policing updates."
+      "comment": "Canonical Met newsroom latest-news listing."
     },
     {
       "id": "ct-policing-london",

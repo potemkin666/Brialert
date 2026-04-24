@@ -454,13 +454,13 @@
     {
       "id": "northumbria-police-news",
       "provider": "North East Bylines",
-      "endpoint": "https://northeastbylines.co.uk/",
-      "kind": "html",
+      "endpoint": "https://northeastbylines.co.uk/feed/",
+      "kind": "rss",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for unavailable Northumbria Police source using North East regional reporting."
+      "comment": "Replacement feed using North East Bylines RSS."
     },
     {
       "id": "northumbria-police-northumbria-news",
@@ -636,7 +636,7 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for blocked Warwickshire Police news using Warwickshire Connected latest alerts."
+      "comment": "Warwickshire Connected latest-alerts page retained for local police community messaging."
     },
     {
       "id": "west-mercia-police-news-html",
@@ -747,6 +747,105 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Wiltshire Police news for South-West incident corroboration and military-adjacent security context."
+    },
+    {
+      "id": "uk-npcc-news",
+      "provider": "National Police Chiefs' Council - News",
+      "endpoint": "https://news.npcc.police.uk/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "NPCC news portal root for national policing operational announcements and campaigns."
+    },
+    {
+      "id": "uk-npcc-county-lines",
+      "provider": "National Police Chiefs' Council - Crime Operations releases",
+      "endpoint": "https://news.npcc.police.uk/releases/t/crime-operations",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "NPCC crime-operations release filter for county-lines and organised-crime policing updates."
+    },
+    {
+      "id": "uk-btp-england-news",
+      "provider": "British Transport Police - England news",
+      "endpoint": "https://www.btp.police.uk/news/btp/news/?newsCategory=England",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BTP England-filtered newsroom page for rail-network incidents and transport security operations."
+    },
+    {
+      "id": "uk-city-london-police-news",
+      "provider": "City of London Police - News",
+      "endpoint": "https://www.cityoflondon.police.uk/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "City of London Police news root for central-London policing incidents and force statements."
+    },
+    {
+      "id": "uk-city-london-police-fraud",
+      "provider": "City of London Police - Fraud category",
+      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london/news/?newsCategory=Fraud",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "City of London Police fraud category page for economic crime and fraud investigation updates."
+    },
+    {
+      "id": "uk-west-mercia-police-news",
+      "provider": "West Mercia Police - News",
+      "endpoint": "https://www.westmercia.police.uk/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "West Mercia Police newsroom root for county incidents, arrests and operational notices."
+    },
+    {
+      "id": "uk-british-transport-police-search",
+      "provider": "British Transport Police - News search",
+      "endpoint": "https://www.btp.police.uk/news/news-search/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "BTP searchable news listing for incident retrieval across rail and station policing topics."
+    },
+    {
+      "id": "mi5-terrorism-news-category",
+      "provider": "MI5 - Terrorism News",
+      "endpoint": "https://www.mi5.gov.uk/news-categories/terrorism",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MI5 terrorism news category page for official statements and operationally relevant threat-related updates."
+    },
+    {
+      "id": "cps-news-category-feed",
+      "provider": "Crown Prosecution Service - News",
+      "endpoint": "https://www.cps.gov.uk/cps/news",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "CPS news listing used for terrorism charging and sentencing announcements in UK criminal proceedings."
     }
   ]
 }

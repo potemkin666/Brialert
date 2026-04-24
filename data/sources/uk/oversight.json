@@ -667,6 +667,17 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "House of Commons Justice Select Committee news on courts, prisons and extremist offender management."
+    },
+    {
+      "id": "uk-parliament-rss-feeds-index",
+      "provider": "UK Parliament - RSS Feeds",
+      "endpoint": "https://www.parliament.uk/site-information/rss-feeds/",
+      "kind": "html",
+      "lane": "oversight",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official UK Parliament RSS index page for legislative and committee feed discovery and institutional movement signals."
     }
   ]
 }

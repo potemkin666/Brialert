@@ -211,14 +211,14 @@
     },
     {
       "id": "haringey-council-news",
-      "provider": "Haringey Community Press",
-      "endpoint": "https://haringeycommunitypress.co.uk/",
+      "provider": "Metropolitan Police - Haringey Tag",
+      "endpoint": "https://news.met.police.uk/news/tag/haringey",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for unavailable Haringey council feed using local Haringey community news."
+      "comment": "Official Met borough-tag archive for Haringey."
     },
     {
       "id": "harrow-council-news",
@@ -354,14 +354,14 @@
     },
     {
       "id": "lewisham-council-news",
-      "provider": "Salamander News",
-      "endpoint": "https://salamandernews.org/",
+      "provider": "Metropolitan Police - Lewisham Tag",
+      "endpoint": "https://news.met.police.uk/news/tag/lewisham",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for unavailable Lewisham council feed using Lewisham-focused community reporting."
+      "comment": "Official Met borough-tag archive for Lewisham."
     },
     {
       "id": "lnwh-news",
@@ -673,14 +673,14 @@
     },
     {
       "id": "southwark-newsroom",
-      "provider": "Southwark Council a Newsroom",
-      "endpoint": "https://news.southwark.gov.uk/newsroom/news/rss",
-      "kind": "rss",
+      "provider": "Southwark Council - News",
+      "endpoint": "https://www.southwark.gov.uk/news",
+      "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced newsroom HTML front page with Southwark news RSS endpoint."
+      "comment": "Canonical Southwark Council news listing."
     },
     {
       "id": "st-georges-news",
@@ -813,6 +813,61 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Whittington Health updates used for North London hospital and local incident context."
+    },
+    {
+      "id": "londonist-rss",
+      "provider": "Londonist",
+      "endpoint": "https://londonist.com/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Londonist feed for local transport, event and disruption-adjacent London context."
+    },
+    {
+      "id": "ian-visits-rss",
+      "provider": "IanVisits",
+      "endpoint": "https://www.ianvisits.co.uk/articles/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "IanVisits feed for London transport, closures and infrastructure disruption context."
+    },
+    {
+      "id": "secret-london-rss",
+      "provider": "Secret London",
+      "endpoint": "https://secretldn.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Secret London feed for public gatherings, pop-ups and crowd-behaviour context."
+    },
+    {
+      "id": "time-out-london-rss",
+      "provider": "Time Out London",
+      "endpoint": "https://www.timeout.com/london/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Time Out London events feed for venue and crowd planning context."
+    },
+    {
+      "id": "diamond-geezer-rss",
+      "provider": "Diamond Geezer",
+      "endpoint": "https://diamondgeezer.blogspot.com/feeds/posts/default",
+      "kind": "rss",
+      "lane": "context",
+      "region": "london",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Hyper-local London blog feed for neighbourhood-level location awareness context."
     }
   ]
 }

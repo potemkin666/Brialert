@@ -75,7 +75,7 @@
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Best-effort replacement for inaccessible PSP news using Portugal-focused crime reporting."
+      "comment": "Portugal crime section retained as a live and scrapeable contextual source."
     }
   ]
 }

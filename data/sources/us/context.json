@@ -3,13 +3,13 @@
     {
       "id": "ctc-sentinel",
       "provider": "Combating Terrorism Center at West Point - CTC Sentinel",
-      "endpoint": "https://ctc.westpoint.edu/ctc-sentinel/",
-      "kind": "html",
+      "endpoint": "https://ctc.westpoint.edu/feed/",
+      "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "CTC Sentinel is published as web pages; using the current issue/archive surface."
+      "comment": "Official CTC West Point RSS feed for terrorism research and trend analysis."
     },
     {
       "id": "dhs-press-releases",
@@ -101,13 +101,13 @@
     {
       "id": "rand-terrorism-topic",
       "provider": "RAND - Terrorism Topic Updates",
-      "endpoint": "https://www.rand.org/topics/terrorism.html",
-      "kind": "html",
+      "endpoint": "https://www.rand.org/pubs/new.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "RAND topic pages are HTML; using the terrorism topic index and relying on keyword filtering."
+      "comment": "Official RAND new publications RSS feed replacing the topic HTML page."
     },
     {
       "id": "rewards-for-justice",
@@ -122,14 +122,14 @@
     },
     {
       "id": "start-baad-database",
-      "provider": "National Consortium for the Study of Terrorism (START) - Big Allied and Dangerous (BAAD) Database",
-      "endpoint": "https://www.start.umd.edu/baad/database/",
+      "provider": "National Consortium for the Study of Terrorism (START) - BAAD Database",
+      "endpoint": "https://www.start.umd.edu/baad/database.html?page=1",
       "kind": "html",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "START BAAD database of designated terrorist organisations used for group identification context."
+      "comment": "Canonical START BAAD entry page for reference-database context."
     },
     {
       "id": "start-center-publications",
@@ -140,7 +140,7 @@
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "National Consortium for the Study of Terrorism (START) at University of Maryland publishes terrorism research and GTD data."
+      "comment": "START news and publications page retained as a live and current research source."
     },
     {
       "id": "state-dept-terrorism",

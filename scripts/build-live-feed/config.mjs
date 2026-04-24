@@ -317,7 +317,6 @@ export const HARD_SKIP_SOURCE_IDS = new Set([
   'besa-terrorism',
   'icct-main',
   'jamestown-militant-leadership-monitor',
-  'jamestown-terrorism-monitor',
   'washington-institute-countering-terrorism',
   'cps-terrorism-news',
   'cps-terrorism-search',
