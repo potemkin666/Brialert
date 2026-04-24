@@ -13,8 +13,8 @@
     },
     {
       "id": "avon-somerset-police-news",
-      "provider": "Avon & Somerset Police a News",
-      "endpoint": "https://www.avonandsomerset.police.uk/news/",
+      "provider": "Avon & Somerset Police - News",
+      "endpoint": "https://www.avonandsomerset.police.uk/news/?source=avon-somerset-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -718,7 +718,7 @@
     {
       "id": "west-yorkshire-police-news-rss",
       "provider": "West Yorkshire Police - News",
-      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all",
+      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all?source=west-yorkshire-police-news-rss",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",

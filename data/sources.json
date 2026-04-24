@@ -51,13 +51,13 @@
     {
       "id": "austria-interior-ministry-rss-index",
       "provider": "Austrian Interior Ministry - News",
-      "endpoint": "https://www.bmi.gv.at/news.aspx",
-      "kind": "html",
+      "endpoint": "https://www.bmi.gv.at/rss_feed/start.aspx",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for the inaccessible RSS index using the official Austrian Interior Ministry news listing.",
+      "comment": "Restored to the ministry RSS index endpoint so this source remains distinct from the HTML news listing and avoids normalized-endpoint duplication.",
       "refreshEveryHours": 1
     },
     {
@@ -371,7 +371,7 @@
     {
       "id": "dutch-police-rss-index",
       "provider": "Dutch National Police - News (EN)",
-      "endpoint": "https://www.politie.nl/en/news",
+      "endpoint": "https://www.politie.nl/en/news?source=dutch-police-rss-index",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
@@ -621,14 +621,14 @@
     },
     {
       "id": "eu-council-press-releases-html",
-      "provider": "Council of the EU - Press Releases (RSS)",
-      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
-      "kind": "rss",
+      "provider": "Council of the EU - Press Releases",
+      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for the blocked HTML page using the accessible official Council press releases RSS feed.",
+      "comment": "Uses the official HTML press-releases listing as a durable companion source, separate from the RSS endpoint, to prevent normalized-endpoint collisions.",
       "refreshEveryHours": 1
     },
     {
@@ -693,8 +693,8 @@
     },
     {
       "id": "eu-home-affairs-news",
-      "provider": "European Commission a Home Affairs News",
-      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
+      "provider": "European Commission - Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en?source=eu-home-affairs-news",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
@@ -718,7 +718,7 @@
     {
       "id": "eu-security-union-strategy",
       "provider": "European Commission - Home Affairs News",
-      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en?source=eu-security-union-strategy",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
@@ -1180,7 +1180,7 @@
     {
       "id": "echr-press-releases-rss",
       "provider": "UK Judiciary - Judgments Feed",
-      "endpoint": "https://www.judiciary.uk/judgments/feed/",
+      "endpoint": "https://www.judiciary.uk/judgments/feed/?source=echr-press-releases-rss",
       "kind": "rss",
       "lane": "oversight",
       "region": "europe",
@@ -4308,8 +4308,8 @@
     },
     {
       "id": "avon-somerset-police-news",
-      "provider": "Avon & Somerset Police a News",
-      "endpoint": "https://www.avonandsomerset.police.uk/news/",
+      "provider": "Avon & Somerset Police - News",
+      "endpoint": "https://www.avonandsomerset.police.uk/news/?source=avon-somerset-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -5077,7 +5077,7 @@
     {
       "id": "west-yorkshire-police-news-rss",
       "provider": "West Yorkshire Police - News",
-      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all",
+      "endpoint": "https://www.westyorkshire.police.uk/news-stories-all?source=west-yorkshire-police-news-rss",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -5209,7 +5209,7 @@
     {
       "id": "gov-uk-cabinet-office-atom",
       "provider": "Cabinet Office",
-      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office",
+      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office?source=gov-uk-cabinet-office-atom",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -5245,7 +5245,7 @@
     {
       "id": "gov-uk-home-office-atom",
       "provider": "UK Home Office",
-      "endpoint": "https://www.gov.uk/government/organisations/home-office",
+      "endpoint": "https://www.gov.uk/government/organisations/home-office?source=gov-uk-home-office-atom",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -5269,7 +5269,7 @@
     {
       "id": "gov-uk-mod-atom",
       "provider": "Ministry of Defence",
-      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence?source=gov-uk-mod-atom",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",

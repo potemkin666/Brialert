@@ -111,14 +111,14 @@
     },
     {
       "id": "eu-council-press-releases-html",
-      "provider": "Council of the EU - Press Releases (RSS)",
-      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
-      "kind": "rss",
+      "provider": "Council of the EU - Press Releases",
+      "endpoint": "https://www.consilium.europa.eu/en/press/press-releases/",
+      "kind": "html",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for the blocked HTML page using the accessible official Council press releases RSS feed."
+      "comment": "Uses the official HTML press-releases listing as a durable companion source, separate from the RSS endpoint, to prevent normalized-endpoint collisions."
     },
     {
       "id": "eu-council-rss-index",
@@ -177,8 +177,8 @@
     },
     {
       "id": "eu-home-affairs-news",
-      "provider": "European Commission a Home Affairs News",
-      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
+      "provider": "European Commission - Home Affairs News",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en?source=eu-home-affairs-news",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",
@@ -200,7 +200,7 @@
     {
       "id": "eu-security-union-strategy",
       "provider": "European Commission - Home Affairs News",
-      "endpoint": "https://home-affairs.ec.europa.eu/news_en",
+      "endpoint": "https://home-affairs.ec.europa.eu/news_en?source=eu-security-union-strategy",
       "kind": "html",
       "lane": "oversight",
       "region": "eu",

@@ -91,7 +91,7 @@
     {
       "id": "gov-uk-cabinet-office-atom",
       "provider": "Cabinet Office",
-      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office",
+      "endpoint": "https://www.gov.uk/government/organisations/cabinet-office?source=gov-uk-cabinet-office-atom",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -124,7 +124,7 @@
     {
       "id": "gov-uk-home-office-atom",
       "provider": "UK Home Office",
-      "endpoint": "https://www.gov.uk/government/organisations/home-office",
+      "endpoint": "https://www.gov.uk/government/organisations/home-office?source=gov-uk-home-office-atom",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
@@ -146,7 +146,7 @@
     {
       "id": "gov-uk-mod-atom",
       "provider": "Ministry of Defence",
-      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence",
+      "endpoint": "https://www.gov.uk/government/organisations/ministry-of-defence?source=gov-uk-mod-atom",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
