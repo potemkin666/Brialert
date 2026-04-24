@@ -1596,6 +1596,50 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "UK-wide Time Out events feed for planned gatherings and crowd context."
+    },
+    {
+      "id": "guido-fawkes-feed",
+      "provider": "Guido Fawkes",
+      "endpoint": "https://order-order.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK Westminster gossip and leak-oriented feed for political smoke-signal context."
+    },
+    {
+      "id": "wings-over-scotland-feed",
+      "provider": "Wings Over Scotland",
+      "endpoint": "https://wingsoverscotland.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Scottish political commentary feed used only for low-confidence narrative context."
+    },
+    {
+      "id": "skwawkbox-feed",
+      "provider": "Skwawkbox",
+      "endpoint": "https://skwawkbox.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK factional political feed used for protest-adjacent and discourse context only."
+    },
+    {
+      "id": "breitbart-london-feed",
+      "provider": "Breitbart London",
+      "endpoint": "https://www.breitbart.com/london/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Partisan UK-focused feed retained as low-confidence framing and chatter context."
     }
   ]
 }

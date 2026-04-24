@@ -333,6 +333,39 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "BDK BKA-focused feed for secondary investigative-policy and capability context."
+    },
+    {
+      "id": "me-ministry-defence",
+      "provider": "Montenegro Ministry of Defence",
+      "endpoint": "https://www.gov.me/en/mod",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Defence ministry page for security posture, NATO and defence-sector context."
+    },
+    {
+      "id": "me-osce-montenegro-security",
+      "provider": "OSCE Mission to Montenegro",
+      "endpoint": "https://montenegro.osce.org/mission-to-montenegro/what-we-do",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OSCE mission work page covering security-sector reform, small arms and justice context."
+    },
+    {
+      "id": "me-moneyval-aml-cft",
+      "provider": "Council of Europe MONEYVAL",
+      "endpoint": "https://www.coe.int/en/web/moneyval",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MONEYVAL page for AML/CFT and terrorist-financing compliance context."
     }
   ]
 }

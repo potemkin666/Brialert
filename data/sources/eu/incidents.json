@@ -263,6 +263,94 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Bavarian police press listing for statewide operational and public-safety incidents."
+    },
+    {
+      "id": "me-police-administration",
+      "provider": "Montenegro Police Directorate",
+      "endpoint": "https://www.gov.me/mup/policija",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Montenegro police page for operations, border/security updates and incident signals."
+    },
+    {
+      "id": "me-ministry-interior",
+      "provider": "Montenegro Ministry of the Interior",
+      "endpoint": "https://www.gov.me/en/mup",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Interior ministry page for internal-security policy and ministry news/press surfaces."
+    },
+    {
+      "id": "me-govme-all-news",
+      "provider": "Government of Montenegro - News",
+      "endpoint": "https://www.gov.me/en/news?at=1&sort=published_at",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Government-wide Montenegro news stream for cross-ministry security announcements."
+    },
+    {
+      "id": "me-national-security-agency",
+      "provider": "Montenegro National Security Agency",
+      "endpoint": "https://www.gov.me/en/national-security-agency",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "National Security Agency page for low-volume, high-value domestic-security updates."
+    },
+    {
+      "id": "me-national-security-authority",
+      "provider": "Montenegro National Security Authority",
+      "endpoint": "https://www.gov.me/en/dztp",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "National Security Authority page for security architecture and official announcements."
+    },
+    {
+      "id": "me-customs-administration",
+      "provider": "Montenegro Customs Administration",
+      "endpoint": "https://www.gov.me/upravacarina",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Customs page for seizures, smuggling, sanctions and border-enforcement updates."
+    },
+    {
+      "id": "me-vijesti-black-chronicle",
+      "provider": "Vijesti - Black Chronicle",
+      "endpoint": "https://en.vijesti.me/news-b/black-chronicle",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "English black-chronicle section for civilian trigger reporting on crime/security incidents."
+    },
+    {
+      "id": "me-rtcg-hronika",
+      "provider": "RTCG - Hronika",
+      "endpoint": "https://rtcg.me/hronika/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Montenegro public broadcaster chronicle page for arrest, weapons and public-safety incident reporting."
     }
   ]
 }

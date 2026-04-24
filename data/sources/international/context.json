@@ -392,6 +392,94 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Maritime incidents and shipping-security feed for ports and vessel disruption context."
+    },
+    {
+      "id": "above-top-secret-rss",
+      "provider": "AboveTopSecret Forum",
+      "endpoint": "https://www.abovetopsecret.com/forum/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Conspiracy-forum chatter feed used only as low-confidence topic-spike context."
+    },
+    {
+      "id": "godlike-productions-rss",
+      "provider": "Godlike Productions",
+      "endpoint": "https://www.godlikeproductions.com/external.php?type=RSS2",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "High-noise conspiracy forum feed retained only as weak early chatter context."
+    },
+    {
+      "id": "hacker-news-rss",
+      "provider": "Hacker News",
+      "endpoint": "https://news.ycombinator.com/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Tech community feed for infrastructure and cyber disruption early signals."
+    },
+    {
+      "id": "lobsters-rss",
+      "provider": "Lobsters",
+      "endpoint": "https://lobste.rs/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Niche engineering/security forum feed for low-volume technical disruption chatter."
+    },
+    {
+      "id": "zerohedge-feed",
+      "provider": "ZeroHedge",
+      "endpoint": "https://feeds.feedburner.com/zerohedge/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Market-panic and geopolitical commentary feed used only as corroborative context."
+    },
+    {
+      "id": "moon-of-alabama-atom",
+      "provider": "Moon of Alabama",
+      "endpoint": "https://www.moonofalabama.org/atom.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Opinionated geopolitical analysis feed tracked as low-confidence narrative context."
+    },
+    {
+      "id": "volcano-discovery-rss",
+      "provider": "Volcano Discovery",
+      "endpoint": "https://www.volcanodiscovery.com/rss.html",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Volcanic activity feed for natural-disruption anomaly context and corroboration."
+    },
+    {
+      "id": "sans-isc-full",
+      "provider": "SANS Internet Storm Center (Full Feed)",
+      "endpoint": "https://isc.sans.edu/rssfeed_full.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Full ISC feed for higher-volume cyber anomaly and defensive intelligence context."
     }
   ]
 }

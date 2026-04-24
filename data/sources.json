@@ -392,6 +392,42 @@
       "comment": "BDK BKA-focused feed for secondary investigative-policy and capability context."
     },
     {
+      "id": "me-ministry-defence",
+      "provider": "Montenegro Ministry of Defence",
+      "endpoint": "https://www.gov.me/en/mod",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Defence ministry page for security posture, NATO and defence-sector context.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-osce-montenegro-security",
+      "provider": "OSCE Mission to Montenegro",
+      "endpoint": "https://montenegro.osce.org/mission-to-montenegro/what-we-do",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "OSCE mission work page covering security-sector reform, small arms and justice context.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-moneyval-aml-cft",
+      "provider": "Council of Europe MONEYVAL",
+      "endpoint": "https://www.coe.int/en/web/moneyval",
+      "kind": "html",
+      "lane": "context",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "MONEYVAL page for AML/CFT and terrorist-financing compliance context.",
+      "refreshEveryHours": 1
+    },
+    {
       "id": "belgian-federal-police-news",
       "provider": "Belgian Federal Police - News",
       "endpoint": "https://www.police.be/5998/en/node/10868",
@@ -677,6 +713,102 @@
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
       "comment": "Bavarian police press listing for statewide operational and public-safety incidents.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-police-administration",
+      "provider": "Montenegro Police Directorate",
+      "endpoint": "https://www.gov.me/mup/policija",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Official Montenegro police page for operations, border/security updates and incident signals.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-ministry-interior",
+      "provider": "Montenegro Ministry of the Interior",
+      "endpoint": "https://www.gov.me/en/mup",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Interior ministry page for internal-security policy and ministry news/press surfaces.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-govme-all-news",
+      "provider": "Government of Montenegro - News",
+      "endpoint": "https://www.gov.me/en/news?at=1&sort=published_at",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Government-wide Montenegro news stream for cross-ministry security announcements.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-national-security-agency",
+      "provider": "Montenegro National Security Agency",
+      "endpoint": "https://www.gov.me/en/national-security-agency",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "National Security Agency page for low-volume, high-value domestic-security updates.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-national-security-authority",
+      "provider": "Montenegro National Security Authority",
+      "endpoint": "https://www.gov.me/en/dztp",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "National Security Authority page for security architecture and official announcements.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-customs-administration",
+      "provider": "Montenegro Customs Administration",
+      "endpoint": "https://www.gov.me/upravacarina",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Customs page for seizures, smuggling, sanctions and border-enforcement updates.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-vijesti-black-chronicle",
+      "provider": "Vijesti - Black Chronicle",
+      "endpoint": "https://en.vijesti.me/news-b/black-chronicle",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "English black-chronicle section for civilian trigger reporting on crime/security incidents.",
+      "refreshEveryHours": 1
+    },
+    {
+      "id": "me-rtcg-hronika",
+      "provider": "RTCG - Hronika",
+      "endpoint": "https://rtcg.me/hronika/",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Montenegro public broadcaster chronicle page for arrest, weapons and public-safety incident reporting.",
       "refreshEveryHours": 1
     },
     {
@@ -1940,6 +2072,94 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Maritime incidents and shipping-security feed for ports and vessel disruption context."
+    },
+    {
+      "id": "above-top-secret-rss",
+      "provider": "AboveTopSecret Forum",
+      "endpoint": "https://www.abovetopsecret.com/forum/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Conspiracy-forum chatter feed used only as low-confidence topic-spike context."
+    },
+    {
+      "id": "godlike-productions-rss",
+      "provider": "Godlike Productions",
+      "endpoint": "https://www.godlikeproductions.com/external.php?type=RSS2",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "High-noise conspiracy forum feed retained only as weak early chatter context."
+    },
+    {
+      "id": "hacker-news-rss",
+      "provider": "Hacker News",
+      "endpoint": "https://news.ycombinator.com/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Tech community feed for infrastructure and cyber disruption early signals."
+    },
+    {
+      "id": "lobsters-rss",
+      "provider": "Lobsters",
+      "endpoint": "https://lobste.rs/rss",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Niche engineering/security forum feed for low-volume technical disruption chatter."
+    },
+    {
+      "id": "zerohedge-feed",
+      "provider": "ZeroHedge",
+      "endpoint": "https://feeds.feedburner.com/zerohedge/feed",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Market-panic and geopolitical commentary feed used only as corroborative context."
+    },
+    {
+      "id": "moon-of-alabama-atom",
+      "provider": "Moon of Alabama",
+      "endpoint": "https://www.moonofalabama.org/atom.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Opinionated geopolitical analysis feed tracked as low-confidence narrative context."
+    },
+    {
+      "id": "volcano-discovery-rss",
+      "provider": "Volcano Discovery",
+      "endpoint": "https://www.volcanodiscovery.com/rss.html",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Volcanic activity feed for natural-disruption anomaly context and corroboration."
+    },
+    {
+      "id": "sans-isc-full",
+      "provider": "SANS Internet Storm Center (Full Feed)",
+      "endpoint": "https://isc.sans.edu/rssfeed_full.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Full ISC feed for higher-volume cyber anomaly and defensive intelligence context."
     },
     {
       "id": "gctf-news",
@@ -4776,6 +4996,50 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "UK-wide Time Out events feed for planned gatherings and crowd context."
+    },
+    {
+      "id": "guido-fawkes-feed",
+      "provider": "Guido Fawkes",
+      "endpoint": "https://order-order.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK Westminster gossip and leak-oriented feed for political smoke-signal context."
+    },
+    {
+      "id": "wings-over-scotland-feed",
+      "provider": "Wings Over Scotland",
+      "endpoint": "https://wingsoverscotland.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Scottish political commentary feed used only for low-confidence narrative context."
+    },
+    {
+      "id": "skwawkbox-feed",
+      "provider": "Skwawkbox",
+      "endpoint": "https://skwawkbox.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK factional political feed used for protest-adjacent and discourse context only."
+    },
+    {
+      "id": "breitbart-london-feed",
+      "provider": "Breitbart London",
+      "endpoint": "https://www.breitbart.com/london/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Partisan UK-focused feed retained as low-confidence framing and chatter context."
     },
     {
       "id": "avon-and-somerset-police-news-html",
