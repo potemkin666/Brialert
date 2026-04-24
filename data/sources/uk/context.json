@@ -1794,6 +1794,39 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "UK politics RSS stream for policy and institutional narrative context."
+    },
+    {
+      "id": "uk-met-office-rss-guides",
+      "provider": "Met Office - RSS feeds guide",
+      "endpoint": "https://weather.metoffice.gov.uk/guides/rss",
+      "kind": "html",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Met Office RSS guide for weather alert surfaces used as situational context impacting incidents and responder operations."
+    },
+    {
+      "id": "novara-media-feed",
+      "provider": "Novara Media",
+      "endpoint": "https://novaramedia.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "UK political-analysis feed retained as low-confidence protest and unrest narrative context."
+    },
+    {
+      "id": "byline-times-feed",
+      "provider": "Byline Times",
+      "endpoint": "https://bylinetimes.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "uk",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Investigative UK commentary feed used as narrative and corruption-related context under keyword gating."
     }
   ]
 }

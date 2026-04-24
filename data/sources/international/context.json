@@ -711,6 +711,83 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "CSIS strategic analysis page used for macro security context on Ecuador risk evolution."
+    },
+    {
+      "id": "jamestown-foundation-feed",
+      "provider": "Jamestown Foundation - Main Feed",
+      "endpoint": "https://jamestown.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Jamestown Foundation primary feed for geopolitical, conflict and security analysis beyond terrorism-only coverage."
+    },
+    {
+      "id": "kyle-orton-blog-feed",
+      "provider": "Kyle Orton's Blog",
+      "endpoint": "https://kyleorton.co.uk/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Specialist long-form analysis feed covering extremism, insurgency and geopolitical-security history context."
+    },
+    {
+      "id": "caert-feed",
+      "provider": "African Centre for the Study and Research on Terrorism (ACSRT/CAERT)",
+      "endpoint": "https://caert.org.dz/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "African Union ACSRT feed for regional counter-terrorism documentation, initiatives and institutional updates."
+    },
+    {
+      "id": "security-magazine-rss",
+      "provider": "Security Magazine",
+      "endpoint": "https://www.securitymagazine.com/rss/15",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Operational security and cyber-physical risk feed relevant to public-safety, protection and infrastructure threat context."
+    },
+    {
+      "id": "leiden-security-global-affairs-feed",
+      "provider": "Leiden Security and Global Affairs Blog",
+      "endpoint": "https://www.leidensecurityandglobalaffairs.nl/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Academic security-analysis feed for strategic foresight, state violence and conflict-theory context."
+    },
+    {
+      "id": "borealis-threat-risk-feed",
+      "provider": "Borealis Threat and Risk Consulting",
+      "endpoint": "https://borealisthreatandrisk.com/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Threat-intelligence commentary feed with counter-terrorism and intelligence-policy practitioner perspectives."
+    },
+    {
+      "id": "insight-crime-feed",
+      "provider": "InSight Crime",
+      "endpoint": "https://insightcrime.org/feed/",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "isTrustedOfficial": false,
+      "requiresKeywordMatch": true,
+      "comment": "Investigative organized-crime reporting feed focused on Latin America criminal ecosystems and violence dynamics."
     }
   ]
 }
