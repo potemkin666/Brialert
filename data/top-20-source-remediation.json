@@ -1,24 +1,41 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-24T16:38:34.841Z",
-  "totalSourceErrors": 1,
+  "generatedAt": "2026-04-24T17:57:58.900Z",
+  "totalSourceErrors": 2,
   "top20": [
     {
-      "id": "judiciary-uk-news",
-      "provider": "Judiciary of England and Wales a News",
-      "endpoint": "https://www.judiciary.uk/feed/",
+      "id": "gnet-youth-rss",
+      "provider": "Global Network on Extremism & Technology (GNET) a Youth (RSS)",
+      "endpoint": "https://gnet-research.org/tag/youth/feed/",
       "finalUrl": "",
-      "category": "blocked-or-auth",
+      "category": "anti-bot-protection",
       "statusKind": "",
-      "message": "Blocked by blocked access page",
+      "message": "Blocked by anti-bot protection",
       "status": 200,
       "rankScore": 2,
       "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
       "replacementCandidate": "",
       "sourceKind": "rss",
-      "sourceLane": "oversight",
+      "sourceLane": "prevention",
       "sourceRegion": "",
       "isMachineReadable": true
+    },
+    {
+      "id": "act-campaign",
+      "provider": "ACT Awareness Campaign",
+      "endpoint": "https://act.campaign.gov.uk/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "statusKind": "",
+      "message": "HTTP 421",
+      "status": 421,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ]
 }
