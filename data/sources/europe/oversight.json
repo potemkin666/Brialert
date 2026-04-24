@@ -25,7 +25,7 @@
     {
       "id": "echr-press-releases-rss",
       "provider": "UK Judiciary - Judgments Feed",
-      "endpoint": "https://www.judiciary.uk/judgments/feed/",
+      "endpoint": "https://www.judiciary.uk/judgments/feed/?source=echr-press-releases-rss",
       "kind": "rss",
       "lane": "oversight",
       "region": "europe",

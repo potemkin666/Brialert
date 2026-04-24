@@ -14,13 +14,13 @@
     {
       "id": "austria-interior-ministry-rss-index",
       "provider": "Austrian Interior Ministry - News",
-      "endpoint": "https://www.bmi.gv.at/news.aspx",
-      "kind": "html",
+      "endpoint": "https://www.bmi.gv.at/rss_feed/start.aspx",
+      "kind": "rss",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for the inaccessible RSS index using the official Austrian Interior Ministry news listing."
+      "comment": "Restored to the ministry RSS index endpoint so this source remains distinct from the HTML news listing and avoids normalized-endpoint duplication."
     },
     {
       "id": "bdk-rss",

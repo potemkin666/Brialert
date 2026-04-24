@@ -25,7 +25,7 @@
     {
       "id": "dutch-police-rss-index",
       "provider": "Dutch National Police - News (EN)",
-      "endpoint": "https://www.politie.nl/en/news",
+      "endpoint": "https://www.politie.nl/en/news?source=dutch-police-rss-index",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
