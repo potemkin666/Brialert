@@ -8,6 +8,7 @@ import {
   AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD,
   AUTO_QUARANTINE_DEAD_URL_THRESHOLD,
   AUTO_QUARANTINE_RECHECK_HOURS,
+  AUTO_QUARANTINE_TIMEOUT_THRESHOLD,
   AUTO_SKIP_EMPTY_THRESHOLD,
   BLOCKED_NON_CONTENT_COOLDOWN_HOURS,
   BLOCKED_NON_CONTENT_FAIL_THRESHOLD,
@@ -163,6 +164,17 @@ function isNotFoundFailureCategory(category) {
   return category === 'not-found-404';
 }
 
+function isTimeoutFailureCategory(category) {
+  return category === 'timeout';
+}
+
+function shouldAutoQuarantineHealthEntry(entry = {}) {
+  const consecutiveFailures = Number(entry.consecutiveFailures || 0);
+  const consecutiveTimeoutFailures = Number(entry.consecutiveTimeoutFailures || 0);
+  return consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD
+    || consecutiveTimeoutFailures >= AUTO_QUARANTINE_TIMEOUT_THRESHOLD;
+}
+
 function sourceMayAutoCooldown(source, previousEntry, buildDate) {
   if (!previousEntry) return null;
 
@@ -265,6 +277,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   const prior = previousEntry && typeof previousEntry === 'object' ? previousEntry : {};
   const priorBlockedFailures = Number(prior.consecutiveBlockedFailures || 0);
   const priorDeadUrlFailures = Number(prior.consecutiveDeadUrlFailures || 0);
+  const priorTimeoutFailures = Number(prior.consecutiveTimeoutFailures || 0);
   const priorHealthScore = Number.isFinite(Number(prior.healthScore)) ? Number(prior.healthScore) : HEALTH_SCORE_INITIAL;
   const priorRecentErrors = Array.isArray(prior.recentErrors) ? prior.recentErrors : [];
   const generatedAtMs = Date.parse(generatedAt);
@@ -283,6 +296,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     consecutiveEmptyRuns: Number(prior.consecutiveEmptyRuns || 0),
     consecutiveBlockedFailures: priorBlockedFailures,
     consecutiveDeadUrlFailures: priorDeadUrlFailures,
+    consecutiveTimeoutFailures: priorTimeoutFailures,
     lastSuccessfulAt: prior.lastSuccessfulAt || null,
     lastFailureAt: prior.lastFailureAt || null,
     lastEmptyAt: prior.lastEmptyAt || null,
@@ -304,6 +318,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     next.consecutiveEmptyRuns = 0;
     next.consecutiveBlockedFailures = 0;
     next.consecutiveDeadUrlFailures = 0;
+    next.consecutiveTimeoutFailures = 0;
     next.lastErrorCategory = null;
     next.lastErrorMessage = null;
     next.recentErrors = [];
@@ -321,11 +336,13 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     const blockedNonContent = stat?.statusKind === 'blocked_non_content' || blockedFailure;
     const deadUrlFailure = isDeadUrlFailureCategory(stat?.lastErrorCategory);
     const notFoundFailure = isNotFoundFailureCategory(stat?.lastErrorCategory);
+    const timeoutFailure = isTimeoutFailureCategory(stat?.lastErrorCategory);
     next.failedRuns += 1;
     next.consecutiveFailures += 1;
     next.consecutiveEmptyRuns = 0;
     next.consecutiveBlockedFailures = blockedNonContent ? priorBlockedFailures + 1 : 0;
     next.consecutiveDeadUrlFailures = deadUrlFailure ? priorDeadUrlFailures + 1 : 0;
+    next.consecutiveTimeoutFailures = timeoutFailure ? priorTimeoutFailures + 1 : 0;
     next.lastFailureAt = generatedAt;
     next.lastErrorCategory = stat?.lastErrorCategory || null;
     next.lastErrorMessage = stat?.lastErrorMessage || null;
@@ -342,20 +359,21 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
     const isCritical = notFoundFailure || deadUrlFailure
       || (source?.kind === 'html' && next.consecutiveBlockedFailures >= AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD)
       || next.consecutiveDeadUrlFailures >= AUTO_QUARANTINE_DEAD_URL_THRESHOLD
+      || next.consecutiveTimeoutFailures >= AUTO_QUARANTINE_TIMEOUT_THRESHOLD
       || next.consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
     const penalty = isCritical ? HEALTH_SCORE_CRITICAL_FAILURE_PENALTY : HEALTH_SCORE_FAILURE_PENALTY;
     next.healthScore = Math.max(0, priorHealthScore - penalty);
 
     // Auto-quarantine only after repeated consecutive failures.
-    const overFailureThreshold = next.consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
-    if (overFailureThreshold && !next.quarantined) {
+    const shouldAutoQuarantine = shouldAutoQuarantineHealthEntry(next);
+    if (shouldAutoQuarantine && !next.quarantined) {
       next.quarantined = true;
       next.quarantinedAt = generatedAt;
       next.quarantineReason = analyseErrorPattern(next.recentErrors, {
         healthScore: next.healthScore,
         kind: source?.kind
       });
-    } else if (!overFailureThreshold) {
+    } else if (!shouldAutoQuarantine) {
       next.quarantined = false;
       next.quarantinedAt = null;
       next.quarantineReason = null;
@@ -381,6 +399,7 @@ function nextSourceHealthEntry(source, stat, previousEntry, generatedAt) {
   next.consecutiveFailures = 0;
   next.consecutiveBlockedFailures = 0;
   next.consecutiveDeadUrlFailures = 0;
+  next.consecutiveTimeoutFailures = 0;
   next.quarantined = false;
   next.quarantinedAt = null;
   next.quarantineReason = null;
@@ -1027,8 +1046,9 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
       const manuallyQuarantined = Boolean(source?.quarantined);
       const healthScore = Number.isFinite(Number(health?.healthScore)) ? Number(health.healthScore) : HEALTH_SCORE_INITIAL;
       const consecutiveFailures = Number(health?.consecutiveFailures || 0);
-      const healthQuarantined = Boolean(health?.quarantined) && consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
-      const needsReview = manuallyQuarantined || healthQuarantined || consecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
+      const consecutiveTimeoutFailures = Number(health?.consecutiveTimeoutFailures || 0);
+      const healthQuarantined = Boolean(health?.quarantined) && shouldAutoQuarantineHealthEntry(health);
+      const needsReview = manuallyQuarantined || healthQuarantined || shouldAutoQuarantineHealthEntry(health);
       if (!needsReview) return null;
       return {
         id: clean(source?.id),
@@ -1046,6 +1066,7 @@ function buildQuarantinedSourceEntries(sources, sourceHealth) {
         lastErrorCategory: clean(health?.lastErrorCategory),
         lastErrorMessage: clean(health?.lastErrorMessage),
         consecutiveFailures,
+        consecutiveTimeoutFailures,
         consecutiveBlockedFailures: Number(health?.consecutiveBlockedFailures || 0),
         consecutiveDeadUrlFailures: Number(health?.consecutiveDeadUrlFailures || 0),
         recentErrors: Array.isArray(health?.recentErrors) ? health.recentErrors : [],
@@ -3076,9 +3097,8 @@ async function main() {
     const deferred = autoDeferredSources.find((entry) => entry.id === source.id);
     if (deferred) {
       const priorHealthScore = Number.isFinite(Number(priorEntry?.healthScore)) ? Number(priorEntry.healthScore) : HEALTH_SCORE_INITIAL;
-      const priorConsecutiveFailures = Number(priorEntry?.consecutiveFailures || 0);
       const isQuarantined = Boolean(priorEntry?.quarantined)
-        && priorConsecutiveFailures >= AUTO_QUARANTINE_FAILURE_THRESHOLD;
+        && shouldAutoQuarantineHealthEntry(priorEntry);
       const deferredNextFetchAt = deferred.until
         || (isQuarantined ? priorEntry?.nextFetchAt : null)
         || sourceScheduleNextFetchAt(source, buildDate, priorEntry, true);

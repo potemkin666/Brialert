@@ -61,6 +61,7 @@ import {
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT_MS,
   FEED_SOURCE_CONCURRENCY,
+  AUTO_QUARANTINE_TIMEOUT_THRESHOLD,
   MAX_FEED_PREFETCH_ITEMS,
   MAX_HTML_PREFETCH_ITEMS,
   MAX_HTML_SOURCES_PER_RUN,
@@ -1399,6 +1400,7 @@ test('default fetch/runtime tuning constants remain stable', () => {
   assert.equal(MAX_HTML_PREFETCH_ITEMS, 12);
   assert.equal(MAX_FEED_PREFETCH_ITEMS, 8);
   assert.equal(AUTO_QUARANTINE_BLOCKED_HTML_THRESHOLD, 4);
+  assert.equal(AUTO_QUARANTINE_TIMEOUT_THRESHOLD, 4);
 });
 
 test('source error summary classifies HTTP 404 separately for direct quarantine routing', async () => {

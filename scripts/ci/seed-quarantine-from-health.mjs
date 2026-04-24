@@ -18,6 +18,9 @@ import path from 'node:path';
 const AUTO_QUARANTINE_FAILURE_THRESHOLD = Number(
   process.env.ALBERTALERT_AUTO_QUARANTINE_FAILURE_THRESHOLD || 6
 );
+const AUTO_QUARANTINE_TIMEOUT_THRESHOLD = Number(
+  process.env.ALBERTALERT_AUTO_QUARANTINE_TIMEOUT_THRESHOLD || 4
+);
 
 // ── Paths ────────────────────────────────────────────────────────────
 const repoRoot = path.resolve(
@@ -36,6 +39,7 @@ const sourcesPath = process.argv[3] || path.join(repoRoot, 'data', 'sources.json
  */
 export function deriveQuarantineIds(sourceHealth, options = {}) {
   const failureThreshold = options.failureThreshold ?? AUTO_QUARANTINE_FAILURE_THRESHOLD;
+  const timeoutThreshold = options.timeoutThreshold ?? AUTO_QUARANTINE_TIMEOUT_THRESHOLD;
 
   const ids = new Set();
   if (!sourceHealth || typeof sourceHealth !== 'object') return ids;
@@ -45,10 +49,12 @@ export function deriveQuarantineIds(sourceHealth, options = {}) {
 
     const alreadyQuarantined = Boolean(entry.quarantined);
     const consecutiveFailures = Number(entry.consecutiveFailures || 0);
+    const consecutiveTimeoutFailures = Number(entry.consecutiveTimeoutFailures || 0);
 
     if (
       alreadyQuarantined ||
-      consecutiveFailures >= failureThreshold
+      consecutiveFailures >= failureThreshold ||
+      consecutiveTimeoutFailures >= timeoutThreshold
     ) {
       ids.add(id);
     }

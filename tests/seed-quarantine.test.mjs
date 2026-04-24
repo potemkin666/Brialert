@@ -42,6 +42,14 @@ test('deriveQuarantineIds flags source at or above failure threshold', () => {
   assert.ok(ids.has('src-c'));
 });
 
+test('deriveQuarantineIds flags source at or above timeout threshold', () => {
+  const ids = deriveQuarantineIds(
+    { 'src-timeout': { healthScore: 50, quarantined: false, consecutiveFailures: 4, consecutiveTimeoutFailures: 4 } },
+    { failureThreshold: 6, timeoutThreshold: 4 }
+  );
+  assert.ok(ids.has('src-timeout'));
+});
+
 test('deriveQuarantineIds does not flag healthy source', () => {
   const ids = deriveQuarantineIds(
     { 'src-d': { healthScore: 80, quarantined: false, consecutiveFailures: 1 } },

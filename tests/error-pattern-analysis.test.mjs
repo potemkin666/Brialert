@@ -136,6 +136,7 @@ test('nextSourceHealthEntry – failure appends to empty recentErrors', () => {
   assert.equal(result.recentErrors.length, 1);
   assert.equal(result.recentErrors[0].category, 'not-found-404');
   assert.equal(result.recentErrors[0].at, '2026-01-01T00:00:00Z');
+  assert.equal(result.consecutiveTimeoutFailures, 0);
 });
 
 test('nextSourceHealthEntry – failures accumulate in rolling window', () => {
@@ -147,6 +148,7 @@ test('nextSourceHealthEntry – failures accumulate in rolling window', () => {
   assert.equal(prior.recentErrors.length, 3);
   assert.equal(prior.recentErrors[0].category, 'timeout');
   assert.equal(prior.recentErrors[2].at, '2026-01-03T00:00:00Z');
+  assert.equal(prior.consecutiveTimeoutFailures, 3);
 });
 
 test('nextSourceHealthEntry – rolling window caps at configured size', () => {
@@ -175,6 +177,7 @@ test('nextSourceHealthEntry – success clears recentErrors', () => {
   const result = nextSourceHealthEntry(source, successStat(), prior, '2026-01-03T00:00:00Z');
   assert.deepEqual(result.recentErrors, []);
   assert.equal(result.lastErrorCategory, null);
+  assert.equal(result.consecutiveTimeoutFailures, 0);
 });
 
 test('nextSourceHealthEntry – empty run preserves existing recentErrors', () => {
@@ -186,6 +189,7 @@ test('nextSourceHealthEntry – empty run preserves existing recentErrors', () =
   const result = nextSourceHealthEntry(source, emptyStat(), prior, '2026-01-02T00:00:00Z');
   assert.equal(result.recentErrors.length, 1);
   assert.equal(result.recentErrors[0].category, 'timeout');
+  assert.equal(result.consecutiveTimeoutFailures, 0);
 });
 
 test('nextSourceHealthEntry – quarantine reason uses pattern analysis', () => {
@@ -254,6 +258,29 @@ test('nextSourceHealthEntry – never-verified source with non-definitive failur
   const source = makeSource();
   const result = nextSourceHealthEntry(source, failStat('timeout', 'Timed out'), {}, '2026-01-01T00:00:00Z');
   assert.equal(result.quarantined, false, 'timeout alone should not immediately quarantine a new source');
+  assert.equal(result.consecutiveTimeoutFailures, 1);
+});
+
+test('nextSourceHealthEntry – four consecutive timeouts trigger auto-quarantine', () => {
+  const source = makeSource();
+  let prior = {};
+  for (let i = 0; i < 4; i++) {
+    prior = nextSourceHealthEntry(source, failStat('timeout', 'Timed out'), prior, `2026-01-0${i + 1}T00:00:00Z`);
+  }
+  assert.equal(prior.consecutiveFailures, 4);
+  assert.equal(prior.consecutiveTimeoutFailures, 4);
+  assert.equal(prior.quarantined, true);
+  assert.match(prior.quarantineReason, /persistent timeouts/i);
+});
+
+test('nextSourceHealthEntry – non-timeout failure resets timeout streak', () => {
+  const source = makeSource();
+  let prior = {};
+  prior = nextSourceHealthEntry(source, failStat('timeout', 'Timed out'), prior, '2026-01-01T00:00:00Z');
+  prior = nextSourceHealthEntry(source, failStat('timeout', 'Timed out'), prior, '2026-01-02T00:00:00Z');
+  prior = nextSourceHealthEntry(source, failStat('network-failure', 'ECONNRESET'), prior, '2026-01-03T00:00:00Z');
+  assert.equal(prior.consecutiveTimeoutFailures, 0);
+  assert.equal(prior.quarantined, false);
 });
 
 test('nextSourceHealthEntry – previously-verified source with 404 is NOT immediately quarantined', () => {
