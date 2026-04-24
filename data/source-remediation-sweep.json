@@ -1,11 +1,87 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-23T23:57:53.617Z",
-  "totalSourceErrors": 0,
-  "byCategory": {},
-  "byKind": {},
-  "machineReadableErrorCount": 0,
-  "htmlErrorCount": 0,
-  "top20": [],
-  "sources": []
+  "generatedAt": "2026-04-24T03:29:13.488Z",
+  "totalSourceErrors": 2,
+  "byCategory": {
+    "blocked-or-auth": 1,
+    "http-status-error": 1
+  },
+  "byKind": {
+    "rss": 1,
+    "html": 1
+  },
+  "machineReadableErrorCount": 1,
+  "htmlErrorCount": 1,
+  "top20": [
+    {
+      "id": "a-lady-in-london",
+      "provider": "A Lady in London",
+      "endpoint": "https://www.aladyinlondon.com/feed",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "HTTP 401",
+      "status": 401,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "north-wales-community-alert",
+      "provider": "North Wales Community Alert",
+      "endpoint": "https://www.northwalescommunityalert.co.uk/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "statusKind": "",
+      "message": "HTTP 429",
+      "status": 429,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    }
+  ],
+  "sources": [
+    {
+      "id": "a-lady-in-london",
+      "provider": "A Lady in London",
+      "endpoint": "https://www.aladyinlondon.com/feed",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "HTTP 401",
+      "status": 401,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "north-wales-community-alert",
+      "provider": "North Wales Community Alert",
+      "endpoint": "https://www.northwalescommunityalert.co.uk/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "statusKind": "",
+      "message": "HTTP 429",
+      "status": 429,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    }
+  ]
 }
