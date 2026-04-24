@@ -29,6 +29,7 @@ import {
   isLiveIncidentCandidate,
   isQuarantineCandidate,
   normaliseAlert,
+  sortAlertsByFreshness,
   trustSignal
 } from '../shared/alert-view-model.mjs';
 import {
@@ -1604,6 +1605,24 @@ test('renderSupporting merges context and quarantine into one progressive list',
   assert.equal(elements.supportingCount.textContent, '2/6 items');
   assert.match(elements.supportingList.innerHTML, /Quarantine|Context/i);
   assert.equal(supportingLoadMore.hasClass('hidden'), false);
+});
+
+test('sortAlertsByFreshness prioritises newer stories inside the same freshness bucket', () => {
+  const newerButLowerSignal = makeAlert({
+    id: 'newer',
+    incidentTrack: 'case',
+    sourceTier: 'research',
+    publishedAt: isoMinutesAgo(13 * 60)
+  });
+  const olderButHigherSignal = makeAlert({
+    id: 'older',
+    incidentTrack: 'live',
+    sourceTier: 'trigger',
+    publishedAt: isoMinutesAgo(20 * 60)
+  });
+
+  const sorted = sortAlertsByFreshness([olderButHigherSignal, newerButLowerSignal]);
+  assert.deepEqual(sorted.map((alert) => alert.id), ['newer', 'older']);
 });
 
 test('addSourceRequest accepts valid http/https links and stores newest first', () => {
