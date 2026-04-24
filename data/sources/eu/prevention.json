@@ -12,17 +12,6 @@
       "comment": "EU IRU page within the European Counter Terrorism Centre; monitors and counters terrorist online content."
     },
     {
-      "id": "isd-global-publications",
-      "provider": "ISD - Publications",
-      "endpoint": "https://www.isdglobal.org/publications/",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "eu",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Institute for Strategic Dialogue publications page for extremism, radicalisation and online-threat research."
-    },
-    {
       "id": "ncsc-nl-rss",
       "provider": "NCSC Netherlands - RSS",
       "endpoint": "https://feeds.ncsc.nl/nieuws.rss",

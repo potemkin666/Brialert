@@ -65,17 +65,6 @@
       "requiresKeywordMatch": true
     },
     {
-      "id": "chatham-house-rss",
-      "provider": "Chatham House a Research & Commentary (RSS)",
-      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
-      "kind": "rss",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Chatham House Royal Institute of International Affairs RSS for geopolitical security, terrorism and UK foreign policy research."
-    },
-    {
       "id": "chathamhouse-events",
       "provider": "Chatham House a Events (RSS)",
       "endpoint": "https://www.chathamhouse.org/path/events.xml",
@@ -293,17 +282,6 @@
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
       "comment": "Official Tech Against Terrorism podcast RSS feed."
-    },
-    {
-      "id": "tony-blair-institute-news",
-      "provider": "Tony Blair Institute for Global Change a Publications",
-      "endpoint": "https://institute.global/insights/geopolitics-and-security",
-      "kind": "html",
-      "lane": "context",
-      "region": "international",
-      "isTrustedOfficial": false,
-      "requiresKeywordMatch": true,
-      "comment": "Focused TBI geopolitics and security page for relevant context."
     },
     {
       "id": "unodc-news",
