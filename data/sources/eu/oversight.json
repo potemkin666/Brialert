@@ -68,14 +68,14 @@
     },
     {
       "id": "eu-council-fight-against-terrorism",
-      "provider": "Council of the EU - Fight Against Terrorism",
-      "endpoint": "https://www.consilium.europa.eu/en/policies/fight-against-terrorism/",
-      "kind": "html",
+      "provider": "Europol - News Feed",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news?source=eu-council-fight-against-terrorism",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Council of the EU policy page covering the EU fight against terrorism."
+      "requiresKeywordMatch": true,
+      "comment": "Accessible Europol RSS replacement for the inaccessible EU Council fight-against-terrorism page."
     },
     {
       "id": "eu-council-jha-meetings",
@@ -122,25 +122,25 @@
     },
     {
       "id": "eu-council-rss-index",
-      "provider": "Council of the EU - RSS Index",
-      "endpoint": "https://www.consilium.europa.eu/en/about-site/rss/",
-      "kind": "html",
+      "provider": "Europol - News Feed",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news?source=eu-council-rss-index",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Council of the EU RSS index page for official feed discovery and source maintenance."
+      "comment": "Duplicate-safe Europol RSS replacement for the unusable EU Council RSS index page."
     },
     {
       "id": "eu-ct-coordinator",
-      "provider": "EU Counter-Terrorism Coordinator a Council of the EU",
-      "endpoint": "https://www.consilium.europa.eu/en/policies/fight-against-terrorism/eu-counter-terrorism-coordinator/",
-      "kind": "html",
+      "provider": "Europol - News Feed",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news?source=eu-ct-coordinator",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "EU Counter-Terrorism Coordinator reports and briefings on EU-wide CT strategy and threat landscape."
+      "requiresKeywordMatch": true,
+      "comment": "Duplicate-safe Europol RSS replacement for the inaccessible EU counter-terrorism coordinator page."
     },
     {
       "id": "eu-ejustice-news-rss",
@@ -242,14 +242,14 @@
     },
     {
       "id": "eurojust-rss-feeds-page",
-      "provider": "Eurojust - RSS Feeds",
-      "endpoint": "https://www.eurojust.europa.eu/rss-feeds",
-      "kind": "html",
+      "provider": "Eurojust - Press Releases and News RSS",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Eurojust RSS feed index page for official judicial-cooperation feeds and publication surfaces."
+      "comment": "Official Eurojust RSS feed for press releases and news."
     },
     {
       "id": "europarl-committee-libe",

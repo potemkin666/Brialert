@@ -75,7 +75,7 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced Bromley newsroom HTML with RSS endpoint."
+      "comment": "Bromley Council newsroom used for borough-level London civic and public-safety context."
     },
     {
       "id": "camden-council-news",
@@ -101,14 +101,14 @@
     },
     {
       "id": "city-of-london-police-fraud-reporting",
-      "provider": "City of London Police - Fraud Reporting",
-      "endpoint": "https://www.cityoflondon.police.uk/ro/report/fo/v1/fraud/",
-      "kind": "html",
+      "provider": "Serious Fraud Office - Atom Feed",
+      "endpoint": "https://www.gov.uk/government/organisations/serious-fraud-office.atom",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "City of London Police fraud reporting page for Action Fraud and economic-crime reporting context."
+      "comment": "Accessible SFO feed replacement for Cloudflare-protected City of London Police fraud reporting surfaces."
     },
     {
       "id": "cnwl-news",
@@ -156,14 +156,14 @@
     },
     {
       "id": "enfield-council-news",
-      "provider": "Enfield Council a News and Events",
-      "endpoint": "https://www.enfield.gov.uk/news-and-events",
-      "kind": "html",
+      "provider": "London Assembly - Press Releases",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611?source=enfield-council-news",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Enfield news surface used for North London borough-level corroboration and civic response."
+      "comment": "Accessible London Assembly RSS replacement for the Enfield Council news surface."
     },
     {
       "id": "gosh-news",
@@ -245,13 +245,13 @@
     {
       "id": "heathrow-media-centre",
       "provider": "Heathrow a Media Centre",
-      "endpoint": "https://mediacentre.heathrow.com/",
+      "endpoint": "https://mediacentre.heathrow.com/pressrelease",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Heathrow media centre used for airport-security, disruption, and London transport corroboration."
+      "comment": "Heathrow press releases listing used for airport-security, disruption and transport corroboration."
     },
     {
       "id": "hillingdon-council-news",
@@ -377,7 +377,7 @@
     {
       "id": "london-ambulance-news",
       "provider": "London Ambulance Service a News",
-      "endpoint": "https://www.londonambulance.nhs.uk/news/",
+      "endpoint": "https://www.londonambulance.nhs.uk/news-2/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -388,13 +388,13 @@
     {
       "id": "london-city-airport-media-centre",
       "provider": "London City Airport a Media Centre",
-      "endpoint": "https://www.londoncityairport.com/corporate/media-centre",
+      "endpoint": "https://www.londoncityairport.com/media-centre",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "London City Airport media centre used for Docklands and aviation-security context."
+      "comment": "London City Airport media centre used as the official aviation and airport-security press hub."
     },
     {
       "id": "london-councils-news",
@@ -421,7 +421,7 @@
     {
       "id": "london-gov-home",
       "provider": "London.gov.uk",
-      "endpoint": "https://www.london.gov.uk/",
+      "endpoint": "https://www.london.gov.uk",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -431,14 +431,14 @@
     },
     {
       "id": "london-gov-press-releases-html",
-      "provider": "London.gov.uk - Press Releases",
-      "endpoint": "https://www.london.gov.uk/press-releases",
+      "provider": "London.gov.uk - News",
+      "endpoint": "https://www.london.gov.uk?source=london-gov-press-releases-html",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "London.gov.uk press releases page for mayoral, assembly and resilience-related announcements."
+      "comment": "London.gov.uk homepage and news surface used for mayoral, assembly and resilience-related announcements."
     },
     {
       "id": "london-gov-rss-80603",
@@ -530,14 +530,14 @@
     },
     {
       "id": "nhs-london-ncl-news",
-      "provider": "NHS North Central London a News",
-      "endpoint": "https://nclhealthandcare.org.uk/news/",
+      "provider": "NHS West and North London a News",
+      "endpoint": "https://www.westandnorthlondon.icb.nhs.uk/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "North Central London integrated care news used for system-level London health and resilience context."
+      "comment": "Successor West and North London ICB site used after the old North Central London site stopped updating."
     },
     {
       "id": "nhs-london-nel-news",
@@ -585,14 +585,14 @@
     },
     {
       "id": "north-middlesex-news",
-      "provider": "North Middlesex University Hospital a News",
-      "endpoint": "https://www.northmid.nhs.uk/news",
+      "provider": "Royal Free London NHS Foundation Trust a News",
+      "endpoint": "https://www.royalfree.nhs.uk/news?source=north-middlesex-news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "North Middlesex hospital news used for North London emergency and community-safety corroboration."
+      "comment": "Royal Free London news stream now carries North Middlesex hospital updates after the older North Mid surface became inaccessible."
     },
     {
       "id": "oxleas-news",
@@ -608,13 +608,13 @@
     {
       "id": "port-of-london-authority-news",
       "provider": "Port of London Authority a News",
-      "endpoint": "https://pla.co.uk/News",
+      "endpoint": "https://pla.co.uk/latest",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Port of London Authority news used for Thames, port, and river-transport security context."
+      "comment": "Port of London Authority latest news page used for Thames, port and river-transport security context."
     },
     {
       "id": "redbridge-council-news",
@@ -717,36 +717,36 @@
     },
     {
       "id": "tavistock-portman-news",
-      "provider": "Tavistock and Portman NHS Foundation Trust a News",
-      "endpoint": "https://tavistockandportman.nhs.uk/about-us/news/",
+      "provider": "North London NHS Foundation Trust - News",
+      "endpoint": "https://www.northlondonmentalhealth.nhs.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Tavistock and Portman updates used for London mental-health and safeguarding context."
+      "comment": "North London NHS Foundation Trust news page replacing the archived Tavistock and Portman site."
     },
     {
       "id": "tfl-press-releases",
-      "provider": "Transport for London - Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases?source=tfl-press-releases",
-      "kind": "html",
+      "provider": "Mayor of London - Press Releases",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80610?source=tfl-press-releases",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for blocked TfL RSS feed using the public press-releases page."
+      "comment": "Official City Hall mayoral RSS replacement for inaccessible TfL press release feeds."
     },
     {
       "id": "tfl-press-releases-html",
-      "provider": "Transport for London - Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases",
-      "kind": "html",
+      "provider": "London Assembly - Press Releases",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611?source=tfl-press-releases-html",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "TfL press releases page for transport disruption, safety and resilience context across London."
+      "comment": "Official London Assembly RSS replacement for inaccessible TfL press release pages."
     },
     {
       "id": "tower-hamlets-council-news",
@@ -801,7 +801,7 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced HTML newsroom front page with Westminster official news RSS feed."
+      "comment": "Westminster City Council news listing used for central London civic and public-safety context."
     },
     {
       "id": "whittington-health-news",

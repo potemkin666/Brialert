@@ -13,14 +13,14 @@
     },
     {
       "id": "mopac-html",
-      "provider": "Mayor's Office for Policing and Crime",
-      "endpoint": "https://www.london.gov.uk/programmes-strategies/mayors-office-policing-and-crime-mopac",
+      "provider": "London.gov.uk - Media Centre",
+      "endpoint": "https://www.london.gov.uk/media-centre",
       "kind": "html",
       "lane": "oversight",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "MOPAC page for London policing strategy, accountability and public-safety oversight."
+      "comment": "City Hall media centre used as the most current public source for MOPAC and policing-related London announcements."
     }
   ]
 }

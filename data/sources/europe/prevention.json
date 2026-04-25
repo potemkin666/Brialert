@@ -47,13 +47,13 @@
     {
       "id": "pet-dk-english",
       "provider": "PET (Denmark) a English News",
-      "endpoint": "https://pet.dk/en/news-and-publications/news-list",
+      "endpoint": "https://pet.dk/en/news-and-publications/news",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Danish Police Intelligence Service English news for terrorism threat assessment and prevention context."
+      "comment": "PET English news listing for terrorism threat assessment and prevention context."
     },
     {
       "id": "pst-no-english",

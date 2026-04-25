@@ -112,14 +112,14 @@
     },
     {
       "id": "gov-uk-hmic",
-      "provider": "HM Inspectorate of Constabulary a GOV.UK",
-      "endpoint": "https://hmicfrs.justiceinspectorates.gov.uk/news/",
+      "provider": "Criminal Justice Joint Inspection - HMICFRS",
+      "endpoint": "https://cjji.justiceinspectorates.gov.uk/participating-inspectorate/hm-inspectorate-of-constabulary-and-fire-rescue-services/",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "HMICFRS inspectorate news on police performance, counter-terrorism preparedness and force capability assessments."
+      "comment": "Accessible CJJI listing used as the best current public fallback for HMICFRS outputs while the direct news page is challenge-protected."
     },
     {
       "id": "gov-uk-home-office-atom",
@@ -178,14 +178,15 @@
     },
     {
       "id": "gov-uk-parliament-jcnss",
-      "provider": "UK Parliament a Joint Committee on National Security Strategy",
-      "endpoint": "https://committees.parliament.uk/committee/54/joint-committee-on-the-national-security-strategy/news/",
-      "kind": "html",
+      "provider": "GovWire - Home Office",
+      "endpoint": "https://www.govwire.co.uk/rss/home-office",
+      "kind": "rss",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "JCNSS parliamentary oversight committee news for national security, intelligence, and counter-terrorism scrutiny."
+      "comment": "GovWire Home Office RSS replacement for the Cloudflare-blocked JCNSS committee site.",
+      "refreshEveryHours": 1
     },
     {
       "id": "hmiprisons-news",
@@ -594,13 +595,14 @@
     },
     {
       "id": "uk-ncsc-threat-reports",
-      "provider": "National Cyber Security Centre (UK) a Threat Reports",
-      "endpoint": "https://www.ncsc.gov.uk/api/1/services/v1/report-rss-feed.xml",
-      "kind": "rss",
+      "provider": "National Cyber Security Centre (UK) - Threat Reports",
+      "endpoint": "https://www.ncsc.gov.uk/section/keep-up-to-date/threat-reports",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false
+      "requiresKeywordMatch": false,
+      "comment": "NCSC threat-reports listing page used after the older feed endpoint stopped serving current report data."
     },
     {
       "id": "uk-parliament-business-news",
@@ -626,14 +628,15 @@
     },
     {
       "id": "uk-parliament-foreign-affairs-committee",
-      "provider": "UK Parliament a Foreign Affairs Select Committee",
-      "endpoint": "https://committees.parliament.uk/committee/78/foreign-affairs-committee/news/",
-      "kind": "html",
+      "provider": "GovWire - Foreign, Commonwealth & Development Office",
+      "endpoint": "https://www.govwire.co.uk/rss/foreign-commonwealth-development-office",
+      "kind": "rss",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Foreign Affairs Select Committee news on overseas counter-terrorism, sanctions and international security partnerships."
+      "comment": "GovWire FCDO RSS replacement for the Cloudflare-blocked Foreign Affairs Committee site.",
+      "refreshEveryHours": 1
     },
     {
       "id": "uk-parliament-home-affairs-committee",
@@ -659,14 +662,15 @@
     },
     {
       "id": "uk-parliament-justice-committee",
-      "provider": "UK Parliament a Justice Select Committee",
-      "endpoint": "https://committees.parliament.uk/committee/102/justice-committee/news/",
-      "kind": "html",
+      "provider": "GovWire - Ministry of Justice",
+      "endpoint": "https://www.govwire.co.uk/rss/ministry-of-justice",
+      "kind": "rss",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "House of Commons Justice Select Committee news on courts, prisons and extremist offender management."
+      "comment": "GovWire Ministry of Justice RSS replacement for the Cloudflare-blocked Justice Committee site.",
+      "refreshEveryHours": 1
     },
     {
       "id": "uk-parliament-rss-feeds-index",

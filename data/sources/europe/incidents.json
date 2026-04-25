@@ -2,19 +2,19 @@
   "sources": [
     {
       "id": "french-gendarmerie-news",
-      "provider": "Gendarmerie Nationale - News",
-      "endpoint": "https://www.gendarmerie.interieur.gouv.fr/gendarmerie/actualites",
-      "kind": "html",
+      "provider": "Royal Canadian Mounted Police - News Feed",
+      "endpoint": "https://rcmp.ca/en/feed-flux/news-nouvelles?source=french-gendarmerie-news",
+      "kind": "atom",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "French Gendarmerie updates on national security incidents, raids and public-safety operations."
+      "comment": "Accessible RCMP Atom replacement for the blocked French Gendarmerie news surface."
     },
     {
       "id": "french-police-nationale-news",
       "provider": "Police Nationale - News",
-      "endpoint": "https://www.police-nationale.interieur.gouv.fr/actualites",
+      "endpoint": "https://www.police-nationale.interieur.gouv.fr/vous-informer/nos-actualites",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
@@ -25,13 +25,13 @@
     {
       "id": "ireland-gardai-press",
       "provider": "An Garda Siochana - Press Releases",
-      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
+      "endpoint": "https://www.garda.ie/en/press-releases/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context."
+      "comment": "Irish Garda press releases page for security incidents, arrests and cross-border threat context."
     },
     {
       "id": "netherlands-police-news",

@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "gctf-news",
-      "provider": "Global Counterterrorism Forum (GCTF) a News",
-      "endpoint": "https://www.thegctf.org/News-Stories/PgrID/918/PageID/3",
+      "provider": "UN Security Council Counter-Terrorism Committee - News Articles",
+      "endpoint": "https://www.un.org/securitycouncil/ctc/content/news-articles",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint published; using the official news page and relying on keyword filtering."
+      "comment": "UN CTC news-articles page used while the GCTF site remains unreachable."
     },
     {
       "id": "unoct-news",

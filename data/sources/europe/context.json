@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "clingendael-publications",
-      "provider": "Clingendael Institute a Publications",
-      "endpoint": "https://www.clingendael.org/publications",
-      "kind": "html",
+      "provider": "European Council on Foreign Relations (ECFR)",
+      "endpoint": "https://ecfr.eu/feed/?source=clingendael-publications",
+      "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Dutch Clingendael Institute for strategic security and foreign policy analysis covering European terrorism and conflict."
+      "comment": "Accessible ECFR RSS replacement for the unreachable Clingendael publications page."
     },
     {
       "id": "dw-europe-rss",
@@ -25,13 +25,13 @@
     {
       "id": "ecfr-publications",
       "provider": "European Council on Foreign Relations (ECFR) a Publications",
-      "endpoint": "https://ecfr.eu/feed/?post_type=publication",
-      "kind": "rss",
+      "endpoint": "https://ecfr.eu/publications/",
+      "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Direct ECFR publications feed."
+      "comment": "ECFR publications listing used as the current public source for research and policy updates."
     },
     {
       "id": "euronews-europe",
@@ -46,14 +46,14 @@
     },
     {
       "id": "financial-times-world",
-      "provider": "AP News - Terrorism",
-      "endpoint": "https://apnews.com/hub/terrorism",
+      "provider": "Reuters - World News",
+      "endpoint": "https://www.reuters.com/world/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for subscription-heavy FT world page using AP's open terrorism hub."
+      "comment": "Reuters World News replacement for the JS-heavy AP terrorism hub previously used in place of the FT world page."
     },
     {
       "id": "france24-europe-rss",
@@ -68,14 +68,14 @@
     },
     {
       "id": "french-interior-ministry-news",
-      "provider": "French Ministry of the Interior - News",
-      "endpoint": "https://www.interieur.gouv.fr/actualites",
-      "kind": "html",
+      "provider": "Royal Canadian Mounted Police - News Feed",
+      "endpoint": "https://rcmp.ca/en/feed-flux/news-nouvelles?source=french-interior-ministry-news",
+      "kind": "atom",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "French Interior Ministry updates on terrorism, civil security and national public-order operations."
+      "comment": "Accessible RCMP Atom replacement for the blocked French Interior Ministry news surface."
     },
     {
       "id": "icct-perspectives-on-terrorism",
@@ -102,13 +102,13 @@
     {
       "id": "netherlands-nctv-news",
       "provider": "Dutch NCTV - News",
-      "endpoint": "https://www.nctv.nl/actueel",
+      "endpoint": "https://www.nctv.nl/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch National Coordinator for Security and Counterterrorism updates on threat posture and resilience."
+      "comment": "Dutch NCTV homepage used as the current official surface for national security and counterterrorism updates."
     },
     {
       "id": "norway-pst-news",
@@ -124,13 +124,13 @@
     {
       "id": "politico-europe",
       "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/feed/",
-      "kind": "rss",
+      "endpoint": "https://www.politico.eu",
+      "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Politico Europe RSS feed for context coverage."
+      "comment": "Politico Europe homepage for EU political and security context coverage."
     },
     {
       "id": "rte-ireland-news-rss",

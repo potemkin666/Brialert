@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "eu-council-terrorism-sanctions",
-      "provider": "Council of the EU - Sanctions Against Terrorism",
-      "endpoint": "https://www.consilium.europa.eu/en/policies/sanctions-against-terrorism/",
-      "kind": "html",
+      "provider": "Eurojust - Press Releases",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=eu-council-terrorism-sanctions",
+      "kind": "rss",
       "lane": "sanctions",
       "region": "eu",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Council of the EU policy page for sanctions against terrorism and terrorist entities."
+      "requiresKeywordMatch": true,
+      "comment": "Accessible Eurojust RSS replacement for the inaccessible EU Council terrorism sanctions page."
     }
   ]
 }

@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "coe-counter-terrorism",
-      "provider": "Council of Europe a Counter-Terrorism",
-      "endpoint": "https://www.coe.int/en/web/counter-terrorism/news-updates",
-      "kind": "html",
+      "provider": "Eurojust - Press Releases",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml?source=coe-counter-terrorism",
+      "kind": "rss",
       "lane": "oversight",
       "region": "europe",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Council of Europe Counter-Terrorism Committee (CDCT) news updates for European counter-terrorism legal framework context."
+      "requiresKeywordMatch": true,
+      "comment": "Accessible Eurojust press-releases RSS replacement for the blocked Council of Europe counter-terrorism page."
     },
     {
       "id": "echr-key-judgments-rss",

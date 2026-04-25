@@ -35,36 +35,36 @@
     },
     {
       "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - Newsroom",
-      "endpoint": "https://crisiscenter.be/en/newsroom",
+      "provider": "Centre de Crise - Newsroom",
+      "endpoint": "https://centredecrise.be/fr/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Belgian National Crisis Centre newsroom for threat level, preparedness and crisis-management context."
+      "comment": "French Centre de Crise newsroom replacement for the sparsely updated English Belgian Crisis Centre page."
     },
     {
       "id": "denmark-pet-news",
       "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://pet.dk/aktuelt/nyhedsliste",
+      "endpoint": "https://pet.dk/nyheder",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "PET updates on Danish terrorism threats, extremism and national security alerts."
+      "comment": "PET Danish news listing used as the current official source for terrorism, extremism and national-security updates."
     },
     {
       "id": "ecfr-feeds-index",
-      "provider": "ECFR - Feeds",
-      "endpoint": "https://ecfr.eu/feed/",
-      "kind": "rss",
+      "provider": "ECFR - Newsroom",
+      "endpoint": "https://ecfr.eu/newsroom/",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR main RSS feed endpoint."
+      "comment": "ECFR newsroom page used as the safest public updates stream in place of an unverified feeds index."
     },
     {
       "id": "enisa-news",
@@ -113,13 +113,13 @@
     {
       "id": "eurojust-press-news-html",
       "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
-      "kind": "rss",
+      "endpoint": "https://www.eurojust.europa.eu/media-and-events/press-releases-and-news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Eurojust press releases/news RSS feed."
+      "comment": "Official Eurojust press releases and news listing page."
     },
     {
       "id": "eurojust-press-releases",
@@ -156,14 +156,14 @@
     },
     {
       "id": "finland-supo-news",
-      "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/news-and-press-releases/-/asset_publisher/LVkvGHGkmM3J/rss",
-      "kind": "rss",
+      "provider": "Finnish Security Intelligence Service - News and Press Releases",
+      "endpoint": "https://supo.fi/en/news-and-press-releases?source=finland-supo-news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Finnish Security and Intelligence Service RSS feed."
+      "comment": "English SUPO news and press releases page used as the current official source for Finnish security-service updates."
     },
     {
       "id": "german-bfv-news",
@@ -200,14 +200,14 @@
     },
     {
       "id": "nctv-english-rss",
-      "provider": "NCTV Netherlands - English RSS",
+      "provider": "NCTV Netherlands - Latest News",
       "endpoint": "https://english.nctv.nl/latest/news",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "English NCTV RSS feed for Dutch threat posture, terrorism and national security updates."
+      "comment": "English NCTV latest-news page for Dutch threat posture, terrorism and national-security updates."
     },
     {
       "id": "paris-prefecture-police-rss-page",
@@ -229,7 +229,8 @@
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Direct Spanish Interior Ministry news listing page."
+      "quarantined": true,
+      "comment": "Held under review after repeated certificate and 502 failures on the Spanish Interior Ministry news page."
     },
     {
       "id": "statewatch-news",

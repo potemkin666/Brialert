@@ -35,25 +35,25 @@
     },
     {
       "id": "ertzaintza-news",
-      "provider": "Ertzaintza - News",
-      "endpoint": "https://www.ertzaintza.euskadi.eus/lfr/eu/webertzaintza/noticias",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Basque police newsroom for regional security incidents and public-order operations."
-    },
-    {
-      "id": "finland-police-news",
-      "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/national-bureau-of-investigation/-/asset_publisher/ZtAEeHB39Lxr/rss",
+      "provider": "Ertzaintza - RSS",
+      "endpoint": "https://www.ertzaintza.euskadi.eus/lfr/en/web/ertzaintza/ultimas-noticias/-/asset_publisher/HqAtdHx7jB7q/rss",
       "kind": "rss",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish NBI RSS feed for serious crime and CT-relevant police updates."
+      "comment": "Working official Ertzaintza RSS feed for Basque police incident and public-order updates."
+    },
+    {
+      "id": "finland-police-news",
+      "provider": "Finnish Police - Newsroom",
+      "endpoint": "https://poliisi.fi/en/newsroom",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "eu",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "English Finnish Police newsroom page that links current news posts and feed options."
     },
     {
       "id": "german-bka-press",
@@ -124,13 +124,13 @@
     {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
-      "endpoint": "https://www.politiaromana.ro/en/news",
+      "endpoint": "https://politiaromana.ro/en",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration."
+      "comment": "Romanian Police English-language site used as the current official news surface."
     },
     {
       "id": "sweden-police-news",

@@ -3,13 +3,13 @@
     {
       "id": "acled-updates",
       "provider": "ACLED a Updates and Analysis",
-      "endpoint": "https://acleddata.com/global-analysis",
+      "endpoint": "https://acleddata.com/updates",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Focused ACLED global analysis page; official RSS is not consistently available."
+      "comment": "ACLED updates page used as the best current public stream for fresh regional overviews and analysis."
     },
     {
       "id": "aljazeera-news-rss",
@@ -111,24 +111,24 @@
     {
       "id": "crisis-group",
       "provider": "International Crisis Group a Research & Analysis",
-      "endpoint": "https://www.crisisgroup.org/rss.xml",
+      "endpoint": "https://www.crisisgroup.org/rss",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Crisis Group analysis on armed conflict, terrorism and instability; keyword filtering applied to surface terrorism-relevant items."
+      "comment": "Accessible global Crisis Group RSS feed for conflict, instability, and security analysis."
     },
     {
       "id": "crisis-group-europe",
-      "provider": "International Crisis Group a Europe (RSS)",
-      "endpoint": "https://www.crisisgroup.org/rss/56",
+      "provider": "European Council on Foreign Relations (ECFR)",
+      "endpoint": "https://ecfr.eu/feed/?source=crisis-group-europe",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Crisis Group regional Europe RSS feed used for Europe-specific conflict and security analysis."
+      "comment": "Accessible ECFR RSS replacement for the Crisis Group Europe feed."
     },
     {
       "id": "global-initiative-news",
@@ -155,13 +155,13 @@
     {
       "id": "just-security",
       "provider": "Just Security a Law, Rights & National Security",
-      "endpoint": "https://www.justsecurity.org/feed/",
-      "kind": "rss",
+      "endpoint": "https://www.justsecurity.org/recent-articles/",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Just Security covers law, rights and national security including terrorism prosecutions and CT legislation; keyword filtering applied."
+      "comment": "Just Security recent-articles page used as the safest current public replacement for national-security analysis coverage."
     },
     {
       "id": "lawfare-blog",
@@ -198,24 +198,25 @@
     },
     {
       "id": "nato-news-rss",
-      "provider": "NATO a News (RSS)",
-      "endpoint": "https://www.nato.int/en/news-and-events/articles/news",
+      "provider": "NATO - News and Events",
+      "endpoint": "https://www.nato.int/en/news-and-events/index.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "NATO news-and-events index used as the stable replacement for the defunct NATO RSS feed."
     },
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en/announcements",
+      "endpoint": "https://www.occrp.org/en/news",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
+      "comment": "OCCRP all-news listing for investigative reporting on organised crime, corruption and illicit financial networks."
     },
     {
       "id": "osce-press-releases",
@@ -230,14 +231,14 @@
     },
     {
       "id": "resolve-network-research",
-      "provider": "RESOLVE Network a Research",
-      "endpoint": "https://www.resolvenet.org/news",
+      "provider": "RAND - Terrorism Topic",
+      "endpoint": "https://www.rand.org/topics/terrorism.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "RESOLVE Network global research on violent extremism, community resilience and counter-terrorism effectiveness."
+      "comment": "Stable RAND terrorism research hub replacement for the RESOLVE Network site while it remains under maintenance."
     },
     {
       "id": "reuters-uk",
@@ -264,13 +265,13 @@
     {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center a IntelBrief",
-      "endpoint": "https://thesoufancenter.org/category/intelbrief/feed/",
-      "kind": "rss",
+      "endpoint": "https://thesoufancenter.org/intelbrief",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "WordPress category RSS feed for Soufan IntelBrief."
+      "comment": "Soufan Center IntelBrief listing page for current analysis on terrorism and security threats."
     },
     {
       "id": "tech-against-terrorism-podcast",
