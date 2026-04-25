@@ -293,6 +293,27 @@ function vignetteLevel(items) {
   return clusterSeverity(items);
 }
 
+function pointDistance(a, b) {
+  const dx = a.x - b.x;
+  const dy = a.y - b.y;
+  return Math.hypot(dx, dy);
+}
+
+function clusterAnchorFor(projectedItems, center) {
+  if (!Array.isArray(projectedItems) || projectedItems.length === 0) return null;
+  let best = projectedItems[0];
+  let bestDistance = pointDistance(projectedItems[0].point, center);
+  for (let i = 1; i < projectedItems.length; i += 1) {
+    const entry = projectedItems[i];
+    const distance = pointDistance(entry.point, center);
+    if (distance < bestDistance) {
+      best = entry;
+      bestDistance = distance;
+    }
+  }
+  return best.alert;
+}
+
 function clusterThreshold(zoom) {
   if (zoom <= 3) return 52;
   if (zoom <= 5) return 40;
@@ -503,15 +524,12 @@ export function createMapController(config) {
     items.forEach((alert) => {
       const point = liveMap.project([alert.lat, alert.lng], zoom);
       const match = clusters.find((cluster) => {
-        const dx = cluster.center.x - point.x;
-        const dy = cluster.center.y - point.y;
-        if (Math.hypot(dx, dy) > threshold) return false;
-        const sdx = cluster.seed.x - point.x;
-        const sdy = cluster.seed.y - point.y;
-        return Math.hypot(sdx, sdy) <= maxRadius;
+        if (pointDistance(cluster.center, point) > threshold) return false;
+        return pointDistance(cluster.seed, point) <= maxRadius;
       });
       if (match) {
         match.items.push(alert);
+        match.projectedItems.push({ alert, point });
         const total = match.items.length;
         match.center.x = ((match.center.x * (total - 1)) + point.x) / total;
         match.center.y = ((match.center.y * (total - 1)) + point.y) / total;
@@ -519,15 +537,21 @@ export function createMapController(config) {
         clusters.push({
           center: { x: point.x, y: point.y },
           seed: { x: point.x, y: point.y },
-          items: [alert]
+          items: [alert],
+          projectedItems: [{ alert, point }]
         });
       }
     });
 
     return clusters.map((cluster) => {
       if (cluster.items.length === 1) return { type: 'single', alert: cluster.items[0] };
-      const latLng = liveMap.unproject(L.point(cluster.center.x, cluster.center.y), zoom);
-      return { type: 'cluster', lat: latLng.lat, lng: latLng.lng, items: cluster.items };
+      const anchorAlert = clusterAnchorFor(cluster.projectedItems, cluster.center) || cluster.items[0];
+      return {
+        type: 'cluster',
+        lat: anchorAlert.lat,
+        lng: anchorAlert.lng,
+        items: cluster.items
+      };
     });
   }
 
@@ -703,4 +727,4 @@ export function createMapController(config) {
   };
 }
 
-export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK, CLUSTER_FLY_DURATION as _CLUSTER_FLY_DURATION, clusterSeverity as _clusterSeverity, statusLine as _statusLine, normaliseCountryName as _normaliseCountryName, vignetteLevel as _vignetteLevel };
+export { markerPopup as _markerPopup, clusterPopup as _clusterPopup, SEVERITY_LEGEND_ITEMS as _SEVERITY_LEGEND_ITEMS, TILE_LIGHT as _TILE_LIGHT, TILE_DARK as _TILE_DARK, CLUSTER_FLY_DURATION as _CLUSTER_FLY_DURATION, clusterSeverity as _clusterSeverity, statusLine as _statusLine, normaliseCountryName as _normaliseCountryName, vignetteLevel as _vignetteLevel, clusterAnchorFor as _clusterAnchorFor };
