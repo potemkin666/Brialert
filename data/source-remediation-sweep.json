@@ -1,20 +1,38 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-25T06:49:23.653Z",
-  "totalSourceErrors": 1,
+  "generatedAt": "2026-04-25T07:34:50.373Z",
+  "totalSourceErrors": 2,
   "byCategory": {
+    "blocked-or-auth": 1,
     "timeout": 1
   },
   "byKind": {
-    "html": 1
+    "rss": 2
   },
-  "machineReadableErrorCount": 0,
-  "htmlErrorCount": 1,
+  "machineReadableErrorCount": 2,
+  "htmlErrorCount": 0,
   "top20": [
     {
-      "id": "de-bka-press",
-      "provider": "BKA Germany - Press Releases",
-      "endpoint": "https://www.bka.de/DE/Presse/Listenseite_Pressemitteilungen/listenseite_Pressemitteilungen_node.html",
+      "id": "arcticdry",
+      "provider": "Arctic. Dry",
+      "endpoint": "https://www.arcticdry.co.uk/feed/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "tenura",
+      "provider": "Tenura",
+      "endpoint": "https://www.tenura.co.uk/rss.xml",
       "finalUrl": "",
       "category": "timeout",
       "statusKind": "",
@@ -23,17 +41,34 @@
       "rankScore": 1,
       "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
+      "sourceKind": "rss",
+      "sourceLane": "context",
       "sourceRegion": "",
-      "isMachineReadable": false
+      "isMachineReadable": true
     }
   ],
   "sources": [
     {
-      "id": "de-bka-press",
-      "provider": "BKA Germany - Press Releases",
-      "endpoint": "https://www.bka.de/DE/Presse/Listenseite_Pressemitteilungen/listenseite_Pressemitteilungen_node.html",
+      "id": "arcticdry",
+      "provider": "Arctic. Dry",
+      "endpoint": "https://www.arcticdry.co.uk/feed/",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "HTTP 403",
+      "status": 403,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "tenura",
+      "provider": "Tenura",
+      "endpoint": "https://www.tenura.co.uk/rss.xml",
       "finalUrl": "",
       "category": "timeout",
       "statusKind": "",
@@ -42,10 +77,10 @@
       "rankScore": 1,
       "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "incidents",
+      "sourceKind": "rss",
+      "sourceLane": "context",
       "sourceRegion": "",
-      "isMachineReadable": false
+      "isMachineReadable": true
     }
   ]
 }
