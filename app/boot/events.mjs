@@ -20,6 +20,7 @@ export function bindEvents({
   actions,
   rendering,
   setActiveTab,
+  onMapModeChange,
   triggerLiveFeedRun,
   refreshFeedNow,
   refreshFeedUntilUpdated
@@ -165,12 +166,14 @@ export function bindEvents({
               state.userLocation = { lat, lng };
             }
             actions.setMapViewMode(state, nextMode);
+            if (typeof onMapModeChange === 'function') onMapModeChange(nextMode);
             syncMapModeTabs(nextMode);
             mapController.renderMap(state, filteredMapView(state, rendering.currentView()), true);
             mapController.invalidateSize();
           },
           () => {
             actions.setMapViewMode(state, nextMode);
+            if (typeof onMapModeChange === 'function') onMapModeChange(nextMode);
             syncMapModeTabs(nextMode);
             mapController.renderMap(state, filteredMapView(state, rendering.currentView()), true);
             mapController.invalidateSize();
@@ -182,6 +185,7 @@ export function bindEvents({
     }
 
     actions.setMapViewMode(state, nextMode);
+    if (typeof onMapModeChange === 'function') onMapModeChange(nextMode);
     syncMapModeTabs(nextMode);
     mapController.renderMap(state, filteredMapView(state, rendering.currentView()), true);
     mapController.invalidateSize();
