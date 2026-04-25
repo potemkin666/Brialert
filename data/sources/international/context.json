@@ -111,24 +111,24 @@
     {
       "id": "crisis-group",
       "provider": "International Crisis Group a Research & Analysis",
-      "endpoint": "https://www.crisisgroup.org/rss.xml",
+      "endpoint": "https://www.crisisgroup.org/rss",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Crisis Group analysis on armed conflict, terrorism and instability; keyword filtering applied to surface terrorism-relevant items."
+      "comment": "Accessible global Crisis Group RSS feed for conflict, instability, and security analysis."
     },
     {
       "id": "crisis-group-europe",
-      "provider": "International Crisis Group a Europe (RSS)",
-      "endpoint": "https://www.crisisgroup.org/rss/56",
+      "provider": "European Council on Foreign Relations (ECFR)",
+      "endpoint": "https://ecfr.eu/feed/?source=crisis-group-europe",
       "kind": "rss",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Crisis Group regional Europe RSS feed used for Europe-specific conflict and security analysis."
+      "comment": "Accessible ECFR RSS replacement for the Crisis Group Europe feed."
     },
     {
       "id": "global-initiative-news",

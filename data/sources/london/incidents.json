@@ -13,14 +13,14 @@
     },
     {
       "id": "city-of-london-police-news-html",
-      "provider": "City of London Police - News",
-      "endpoint": "https://www.cityoflondon.police.uk/news/city-of-london-police/news/",
-      "kind": "html",
+      "provider": "City of London Corporation - Newsroom RSS",
+      "endpoint": "https://news.cityoflondon.gov.uk/tagfeed/en/tags/news",
+      "kind": "rss",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official City of London Police news listing for London financial district policing and security reporting."
+      "comment": "Accessible City of London Corporation newsroom RSS replacement for the Cloudflare-blocked City of London Police news page."
     },
     {
       "id": "city-of-london-police-newsroom",

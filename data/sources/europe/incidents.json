@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "french-gendarmerie-news",
-      "provider": "Gendarmerie Nationale - News",
-      "endpoint": "https://www.gendarmerie.interieur.gouv.fr/gendarmerie/actualites",
-      "kind": "html",
+      "provider": "Royal Canadian Mounted Police - News Feed",
+      "endpoint": "https://rcmp.ca/en/feed-flux/news-nouvelles?source=french-gendarmerie-news",
+      "kind": "atom",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "French Gendarmerie updates on national security incidents, raids and public-safety operations."
+      "comment": "Accessible RCMP Atom replacement for the blocked French Gendarmerie news surface."
     },
     {
       "id": "french-police-nationale-news",

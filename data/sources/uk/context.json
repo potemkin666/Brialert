@@ -67,14 +67,14 @@
     },
     {
       "id": "essex-police-news",
-      "provider": "Essex Police a News",
-      "endpoint": "https://www.essex.police.uk/news/",
+      "provider": "Essex PFCC - News",
+      "endpoint": "https://www.essex.pfcc.police.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Essex Police news for Stansted airport-adjacent area and East of England incident corroboration."
+      "comment": "Accessible Essex PFCC news replacement for the Cloudflare-blocked Essex Police news page."
     },
     {
       "id": "gov-uk-defence-intelligence",

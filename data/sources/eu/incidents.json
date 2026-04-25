@@ -35,14 +35,14 @@
     },
     {
       "id": "ertzaintza-news",
-      "provider": "Ertzaintza - News",
-      "endpoint": "https://www.ertzaintza.euskadi.eus/lfr/eu/webertzaintza/noticias",
-      "kind": "html",
+      "provider": "Ertzaintza - RSS",
+      "endpoint": "https://www.ertzaintza.euskadi.eus/lfr/en/web/ertzaintza/ultimas-noticias/-/asset_publisher/HqAtdHx7jB7q/rss",
+      "kind": "rss",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Basque police newsroom for regional security incidents and public-order operations."
+      "comment": "Working official Ertzaintza RSS feed for Basque police incident and public-order updates."
     },
     {
       "id": "finland-police-news",

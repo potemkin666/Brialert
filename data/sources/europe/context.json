@@ -2,14 +2,14 @@
   "sources": [
     {
       "id": "clingendael-publications",
-      "provider": "Clingendael Institute a Publications",
-      "endpoint": "https://www.clingendael.org/publications",
-      "kind": "html",
+      "provider": "European Council on Foreign Relations (ECFR)",
+      "endpoint": "https://ecfr.eu/feed/?source=clingendael-publications",
+      "kind": "rss",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Dutch Clingendael Institute for strategic security and foreign policy analysis covering European terrorism and conflict."
+      "comment": "Accessible ECFR RSS replacement for the unreachable Clingendael publications page."
     },
     {
       "id": "dw-europe-rss",
@@ -68,14 +68,14 @@
     },
     {
       "id": "french-interior-ministry-news",
-      "provider": "French Ministry of the Interior - News",
-      "endpoint": "https://www.interieur.gouv.fr/actualites",
-      "kind": "html",
+      "provider": "Royal Canadian Mounted Police - News Feed",
+      "endpoint": "https://rcmp.ca/en/feed-flux/news-nouvelles?source=french-interior-ministry-news",
+      "kind": "atom",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "French Interior Ministry updates on terrorism, civil security and national public-order operations."
+      "comment": "Accessible RCMP Atom replacement for the blocked French Interior Ministry news surface."
     },
     {
       "id": "icct-perspectives-on-terrorism",

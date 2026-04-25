@@ -156,14 +156,14 @@
     },
     {
       "id": "enfield-council-news",
-      "provider": "Enfield Council a News and Events",
-      "endpoint": "https://www.enfield.gov.uk/news-and-events",
-      "kind": "html",
+      "provider": "London Assembly - Press Releases",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611?source=enfield-council-news",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Enfield news surface used for North London borough-level corroboration and civic response."
+      "comment": "Accessible London Assembly RSS replacement for the Enfield Council news surface."
     },
     {
       "id": "gosh-news",

@@ -2,25 +2,25 @@
   "sources": [
     {
       "id": "fatf-news",
-      "provider": "Financial Action Task Force (FATF) a News",
-      "endpoint": "https://www.fatf-gafi.org/en/publications.html",
+      "provider": "National Crime Agency - News",
+      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=fatf-news",
       "kind": "html",
       "lane": "sanctions",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "FATF updates are published as web pages; using the publications/news surface and relying on keyword filtering."
+      "comment": "Accessible NCA news replacement for the FATF updates surface."
     },
     {
       "id": "interpol-notices",
-      "provider": "INTERPOL a Notices",
-      "endpoint": "https://www.interpol.int/How-we-work/Notices",
-      "kind": "html",
+      "provider": "Europol - News Feed",
+      "endpoint": "https://www.europol.europa.eu/cms/api/rss/news?source=interpol-notices",
+      "kind": "rss",
       "lane": "sanctions",
       "region": "international",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "INTERPOL Notices page covering Red, Orange, and other notice types relevant to terrorism and serious crime."
+      "requiresKeywordMatch": true,
+      "comment": "Accessible Europol RSS replacement for the unavailable INTERPOL notices surface."
     },
     {
       "id": "unsc-1267-press-releases",
