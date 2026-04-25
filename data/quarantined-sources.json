@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-25T10:04:35.232Z",
-  "count": 214,
+  "generatedAt": "2026-04-25T10:57:22.432Z",
+  "count": 197,
   "metrics": {
-    "total": 214,
+    "total": 197,
     "newThisWeek": 1,
-    "avgTimeInQuarantineHours": 180,
+    "avgTimeInQuarantineHours": 181,
     "avgHealthScore": 0,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
@@ -2266,104 +2266,6 @@
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
     },
     {
-      "id": "german-interior-ministry-press",
-      "provider": "German Federal Ministry for Economic Cooperation and Development - Feed",
-      "endpoint": "https://www.bmz.de/en/feed.rss",
-      "kind": "rss",
-      "lane": "context",
-      "region": "eu",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Health score degraded to 20 after repeated failures",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "http-status-error",
-      "lastErrorMessage": "HTTP 400",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "http-status-error",
-          "message": "HTTP 400",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "http-status-error",
-          "message": "HTTP 400",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "http-status-error",
-          "message": "HTTP 400",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "http-status-error",
-          "message": "HTTP 400",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "http-status-error",
-          "message": "HTTP 400",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
-      "id": "paris-prefecture-police-rss-page",
-      "provider": "Paris Prefecture of Police - RSS",
-      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/presentation/les-directions-et-services/le-cabinet-du-prefet-de-police/service-de-la-communication/abonnez-vous-aux-flux-rss",
-      "kind": "html",
-      "lane": "context",
-      "region": "eu",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "HTML structure changed — selectors no longer match; needs parser update",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
       "id": "spain-interior-ministry-news",
       "provider": "Spanish Ministry of the Interior - News",
       "endpoint": "https://www.interior.gob.es/opencms/en/prensa/noticias/",
@@ -2376,16 +2278,11 @@
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
       "lastErrorCategory": "network-failure",
       "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "network-failure",
           "message": "fetch failed",
@@ -2405,12 +2302,17 @@
           "category": "network-failure",
           "message": "fetch failed",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "network-failure",
+          "message": "fetch failed",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "ertzaintza-news",
@@ -2511,55 +2413,6 @@
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
     },
     {
-      "id": "paris-prefecture-police-press-releases",
-      "provider": "Paris Prefecture of Police - Press Releases",
-      "endpoint": "https://www.prefecturedepolice.interieur.gouv.fr/actualites-et-presse/communiques-de-presse/communiques-de-presse",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "eu",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "HTML structure changed — selectors no longer match; needs parser update",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
       "endpoint": "https://www.politiaromana.ro/en/news",
@@ -2607,55 +2460,6 @@
       "reviewBy": "2026-05-01T15:22:10.638Z",
       "lastFailureAt": "2026-04-24T15:22:10.638Z",
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
-    },
-    {
-      "id": "eu-commission-presscorner-home",
-      "provider": "Council of the EU - Press Releases (RSS)",
-      "endpoint": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx?source=eu-commission-presscorner-home",
-      "kind": "rss",
-      "lane": "oversight",
-      "region": "eu",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "HTML structure changed — selectors no longer match; needs parser update",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
     },
     {
       "id": "eu-council-fight-against-terrorism",
@@ -2913,18 +2717,13 @@
       "status": "auto-quarantined",
       "reason": "Access protection added — errors alternate between auth blocks and anti-bot; consider Playwright fallback or new endpoint",
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "anti-bot-protection",
-      "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 7,
+      "lastErrorCategory": "blocked-or-auth",
+      "lastErrorMessage": "HTTP 403",
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "anti-bot-protection",
           "message": "Blocked by anti-bot protection",
@@ -2944,12 +2743,17 @@
           "category": "anti-bot-protection",
           "message": "Blocked by anti-bot protection",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "europol-eu-iru",
@@ -2999,55 +2803,6 @@
       "reviewBy": "2026-05-01T15:22:10.638Z",
       "lastFailureAt": "2026-04-24T15:22:10.638Z",
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
-    },
-    {
-      "id": "ncsc-nl-rss",
-      "provider": "NCSC Netherlands - RSS",
-      "endpoint": "https://feeds.ncsc.nl/nieuws.rss",
-      "kind": "rss",
-      "lane": "prevention",
-      "region": "eu",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "Blocked by blocked access page",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "Blocked by blocked access page",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "Blocked by blocked access page",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "Blocked by blocked access page",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "Blocked by blocked access page",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "Blocked by blocked access page",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
     },
     {
       "id": "eu-council-terrorism-sanctions",
@@ -3393,104 +3148,6 @@
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
     },
     {
-      "id": "paris-police-prefecture-news",
-      "provider": "France24 - France (RSS)",
-      "endpoint": "https://www.france24.com/en/france/rss",
-      "kind": "rss",
-      "lane": "incidents",
-      "region": "europe",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "HTML structure changed — selectors no longer match; needs parser update",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
-      "id": "portugal-psp-news",
-      "provider": "The Portugal News - Crime",
-      "endpoint": "https://www.theportugalnews.com/news/crime",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "europe",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "timeout",
-          "message": "This operation was aborted",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
       "id": "coe-counter-terrorism",
       "provider": "Council of Europe a Counter-Terrorism",
       "endpoint": "https://www.coe.int/en/web/counter-terrorism/news-updates",
@@ -3636,55 +3293,6 @@
       "reviewBy": "2026-05-01T15:22:10.638Z",
       "lastFailureAt": "2026-04-24T15:22:10.638Z",
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
-    },
-    {
-      "id": "ran-network",
-      "provider": "RUSI - Terrorism and Conflict",
-      "endpoint": "https://www.rusi.org/explore-our-research/research-groups/terrorism-and-conflict",
-      "kind": "html",
-      "lane": "prevention",
-      "region": "europe",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
     },
     {
       "id": "supo-fi-english",
@@ -3993,16 +3601,11 @@
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
       "lastErrorCategory": "anti-bot-protection",
       "lastErrorMessage": "Blocked by anti-bot protection",
-      "consecutiveFailures": 7,
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "anti-bot-protection",
-          "message": "Blocked by anti-bot protection",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "anti-bot-protection",
           "message": "Blocked by anti-bot protection",
@@ -4022,12 +3625,17 @@
           "category": "anti-bot-protection",
           "message": "Blocked by anti-bot protection",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "barnet-council-news",
@@ -4040,18 +3648,13 @@
       "status": "auto-quarantined",
       "reason": "HTML structure changed — selectors no longer match; needs parser update",
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
@@ -4071,12 +3674,17 @@
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "city-of-london-police-fraud-reporting",
@@ -4275,55 +3883,6 @@
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
     },
     {
-      "id": "haringey-council-news",
-      "provider": "Metropolitan Police - Haringey Tag",
-      "endpoint": "https://news.met.police.uk/news/tag/haringey",
-      "kind": "html",
-      "lane": "context",
-      "region": "london",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
       "id": "harrow-council-news",
       "provider": "Harrow Council a News",
       "endpoint": "https://www.harrow.gov.uk/news",
@@ -4518,55 +4077,6 @@
       "reviewBy": "2026-05-01T15:22:10.638Z",
       "lastFailureAt": "2026-04-24T15:22:10.638Z",
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
-    },
-    {
-      "id": "lewisham-council-news",
-      "provider": "Metropolitan Police - Lewisham Tag",
-      "endpoint": "https://news.met.police.uk/news/tag/lewisham",
-      "kind": "html",
-      "lane": "context",
-      "region": "london",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
     },
     {
       "id": "london-ambulance-news",
@@ -5108,55 +4618,6 @@
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
     },
     {
-      "id": "southwark-newsroom",
-      "provider": "Southwark Council - News",
-      "endpoint": "https://www.southwark.gov.uk/news",
-      "kind": "html",
-      "lane": "context",
-      "region": "london",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
       "id": "tavistock-portman-news",
       "provider": "Tavistock and Portman NHS Foundation Trust a News",
       "endpoint": "https://tavistockandportman.nhs.uk/about-us/news/",
@@ -5218,16 +4679,11 @@
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
       "lastErrorCategory": "blocked-or-auth",
       "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "blocked-or-auth",
           "message": "HTTP 403",
@@ -5247,12 +4703,17 @@
           "category": "blocked-or-auth",
           "message": "HTTP 403",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "blocked-or-auth",
+          "message": "HTTP 403",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "tfl-press-releases-html",
@@ -5314,18 +4775,13 @@
       "status": "auto-quarantined",
       "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
+      "lastErrorCategory": "timeout",
+      "lastErrorMessage": "page.goto: Timeout 12000ms exceeded. Call log: - navigating to \"https://www.nationalcrimeagency.gov.uk/news?source=city-of-london-police-news\", waiting until \"domcontentloaded\"",
+      "consecutiveFailures": 8,
+      "consecutiveTimeoutFailures": 1,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "blocked-or-auth",
           "message": "HTTP 403",
@@ -5345,12 +4801,17 @@
           "category": "blocked-or-auth",
           "message": "HTTP 403",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "timeout",
+          "message": "page.goto: Timeout 12000ms exceeded.\nCall log:\n  - navigating to \"https://www.nationalcrimeagency.gov.uk/news?source=city-of-london-police-news\", waiting until \"domcontentloaded\"\n",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "city-of-london-police-news-html",
@@ -5400,55 +4861,6 @@
       "reviewBy": "2026-05-01T15:22:10.638Z",
       "lastFailureAt": "2026-04-24T15:22:10.638Z",
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
-    },
-    {
-      "id": "city-of-london-police-newsroom",
-      "provider": "Metropolitan Police Service - Latest News",
-      "endpoint": "https://news.met.police.uk/latest_news?source=city-of-london-police-newsroom",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "london",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
     },
     {
       "id": "ct-policing-london",
@@ -5657,18 +5069,13 @@
       "status": "auto-quarantined",
       "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "blocked-or-auth",
           "message": "HTTP 403",
@@ -5688,12 +5095,17 @@
           "category": "blocked-or-auth",
           "message": "HTTP 403",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "national-crime-agency-news",
@@ -5951,18 +5363,13 @@
       "status": "auto-quarantined",
       "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
+      "lastErrorCategory": "brittle-selectors-or-js-rendering",
+      "lastErrorMessage": "No items parsed from source payload",
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "blocked-or-auth",
           "message": "HTTP 403",
@@ -5982,12 +5389,17 @@
           "category": "blocked-or-auth",
           "message": "HTTP 403",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "No items parsed from source payload",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "btp-british-transport-police-news-html",
@@ -7372,18 +6784,13 @@
       "status": "auto-quarantined",
       "reason": "Access protection added — errors alternate between auth blocks and anti-bot; consider Playwright fallback or new endpoint",
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "Playwright browser not installed: browser. Type.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell ╔════════════════════════════════════════════════════════════╗ ║ Looks like Playwright was just installed or updated. ║ ║ Please run the following command to download new browsers: ║ ║ ║ ║ npx playwright install ║ ║ ║ ║ <3 Playwright Team ║ ╚════════════════════════════════════════════════════════════╝",
-      "consecutiveFailures": 7,
+      "lastErrorCategory": "anti-bot-protection",
+      "lastErrorMessage": "Blocked by anti-bot protection",
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
+      "consecutiveBlockedFailures": 1,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "brittle-selectors-or-js-rendering",
           "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
@@ -7403,12 +6810,17 @@
           "category": "brittle-selectors-or-js-rendering",
           "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "anti-bot-protection",
+          "message": "Blocked by anti-bot protection",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "lincolnshire-police-news",
@@ -7752,55 +7164,6 @@
       "reviewBy": "2026-05-01T15:22:10.638Z",
       "lastFailureAt": "2026-04-24T15:22:10.638Z",
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
-    },
-    {
-      "id": "northumbria-police-news",
-      "provider": "North East Bylines",
-      "endpoint": "https://northeastbylines.co.uk/feed/",
-      "kind": "rss",
-      "lane": "incidents",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Persistent network failures — DNS/connection issues; infrastructure may be down",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "network-failure",
-      "lastErrorMessage": "fetch failed",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "network-failure",
-          "message": "fetch failed",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
     },
     {
       "id": "northumbria-police-northumbria-news",
@@ -8440,55 +7803,6 @@
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
     },
     {
-      "id": "warwickshire-police-news",
-      "provider": "Warwickshire Connected - Latest Alerts",
-      "endpoint": "https://www.warwickshireconnected.com/Content/Pages/Latest-Alerts",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — errors alternate between auth blocks and anti-bot; consider Playwright fallback or new endpoint",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 2,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "Playwright browser not installed: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
       "id": "west-mercia-police-news-html",
       "provider": "West Mercia Police - News",
       "endpoint": "https://www.westmercia.police.uk/news/west-mercia/news/",
@@ -8599,16 +7913,11 @@
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
       "lastErrorCategory": "brittle-selectors-or-js-rendering",
       "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
@@ -8628,12 +7937,17 @@
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "No items parsed from source payload",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "wiltshire-police-news",
@@ -8832,104 +8146,6 @@
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
     },
     {
-      "id": "lords-in-focus-rss",
-      "provider": "Hansard Society - Despatch Box",
-      "endpoint": "https://www.hansardsociety.org.uk/blog",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
-      "id": "lords-library-notes-rss",
-      "provider": "Hansard Society - Despatch Box",
-      "endpoint": "https://www.hansardsociety.org.uk/blog?source=lords-library-notes-rss",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
-    },
-    {
       "id": "police-ombudsman-current-investigations",
       "provider": "Police Ombudsman - Current Investigations",
       "endpoint": "https://www.policeombudsman.org/investigation-reports/current-investigations",
@@ -8977,55 +8193,6 @@
       "reviewBy": "2026-05-01T15:22:10.638Z",
       "lastFailureAt": "2026-04-24T15:22:10.638Z",
       "lastCheckedAt": "2026-04-24T15:22:10.638Z"
-    },
-    {
-      "id": "police-uk-outcomes-at-location-1609590",
-      "provider": "Police Data UK - Outcomes At Location API Docs",
-      "endpoint": "https://data.police.uk/docs/method/outcomes-at-location/",
-      "kind": "html",
-      "lane": "oversight",
-      "region": "uk",
-      "healthScore": 0,
-      "status": "auto-quarantined",
-      "reason": "HTML structure changed — selectors no longer match; needs parser update",
-      "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "brittle-selectors-or-js-rendering",
-      "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
-      "consecutiveTimeoutFailures": 0,
-      "consecutiveBlockedFailures": 0,
-      "consecutiveDeadUrlFailures": 0,
-      "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-17T22:12:37.099Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-19T10:46:47.709Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-21T08:24:19.478Z"
-        },
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-23T10:13:21.253Z"
-        }
-      ],
-      "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
     },
     {
       "id": "uk-parliament-business-news",
@@ -9677,16 +8844,11 @@
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
       "lastErrorCategory": "brittle-selectors-or-js-rendering",
       "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
@@ -9706,12 +8868,17 @@
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "No items parsed from source payload",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "fbi-national-press-releases",
@@ -9726,16 +8893,11 @@
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
       "lastErrorCategory": "brittle-selectors-or-js-rendering",
       "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
@@ -9755,12 +8917,17 @@
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "No items parsed from source payload",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "fbi-stories",
@@ -9773,18 +8940,13 @@
       "status": "auto-quarantined",
       "reason": "Access protection added — consistent 401/403 blocks; consider new endpoint",
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
-      "lastErrorCategory": "blocked-or-auth",
-      "lastErrorMessage": "HTTP 403",
-      "consecutiveFailures": 7,
+      "lastErrorCategory": "brittle-selectors-or-js-rendering",
+      "lastErrorMessage": "No items parsed from source payload",
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "blocked-or-auth",
-          "message": "HTTP 403",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "blocked-or-auth",
           "message": "HTTP 403",
@@ -9804,12 +8966,17 @@
           "category": "blocked-or-auth",
           "message": "HTTP 403",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "No items parsed from source payload",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "fbi-top-stories",
@@ -9824,16 +8991,11 @@
       "quarantinedAt": "2026-04-17T22:12:37.099Z",
       "lastErrorCategory": "brittle-selectors-or-js-rendering",
       "lastErrorMessage": "No items parsed from source payload",
-      "consecutiveFailures": 7,
+      "consecutiveFailures": 8,
       "consecutiveTimeoutFailures": 0,
       "consecutiveBlockedFailures": 0,
       "consecutiveDeadUrlFailures": 0,
       "recentErrors": [
-        {
-          "category": "brittle-selectors-or-js-rendering",
-          "message": "No items parsed from source payload",
-          "at": "2026-04-16T19:01:30.233Z"
-        },
         {
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
@@ -9853,12 +9015,17 @@
           "category": "brittle-selectors-or-js-rendering",
           "message": "No items parsed from source payload",
           "at": "2026-04-23T10:13:21.253Z"
+        },
+        {
+          "category": "brittle-selectors-or-js-rendering",
+          "message": "No items parsed from source payload",
+          "at": "2026-04-25T10:57:22.432Z"
         }
       ],
       "replacementSuggestion": "",
-      "reviewBy": "2026-04-30T10:13:21.253Z",
-      "lastFailureAt": "2026-04-23T10:13:21.253Z",
-      "lastCheckedAt": "2026-04-23T10:13:21.253Z"
+      "reviewBy": "2026-05-02T10:57:22.432Z",
+      "lastFailureAt": "2026-04-25T10:57:22.432Z",
+      "lastCheckedAt": "2026-04-25T10:57:22.432Z"
     },
     {
       "id": "us-house-homeland-security",
