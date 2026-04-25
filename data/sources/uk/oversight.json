@@ -185,7 +185,8 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "GovWire Home Office RSS replacement for the Cloudflare-blocked JCNSS committee site."
+      "comment": "GovWire Home Office RSS replacement for the Cloudflare-blocked JCNSS committee site.",
+      "refreshEveryHours": 1
     },
     {
       "id": "hmiprisons-news",
@@ -633,7 +634,8 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "GovWire FCDO RSS replacement for the Cloudflare-blocked Foreign Affairs Committee site."
+      "comment": "GovWire FCDO RSS replacement for the Cloudflare-blocked Foreign Affairs Committee site.",
+      "refreshEveryHours": 1
     },
     {
       "id": "uk-parliament-home-affairs-committee",
@@ -666,7 +668,8 @@
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "GovWire Ministry of Justice RSS replacement for the Cloudflare-blocked Justice Committee site."
+      "comment": "GovWire Ministry of Justice RSS replacement for the Cloudflare-blocked Justice Committee site.",
+      "refreshEveryHours": 1
     },
     {
       "id": "uk-parliament-rss-feeds-index",
