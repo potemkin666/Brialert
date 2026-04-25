@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-25T10:57:22.432Z",
+  "generatedAt": "2026-04-25T11:48:31.947Z",
   "count": 197,
   "metrics": {
     "total": 197,
     "newThisWeek": 1,
-    "avgTimeInQuarantineHours": 181,
+    "avgTimeInQuarantineHours": 182,
     "avgHealthScore": 0,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
