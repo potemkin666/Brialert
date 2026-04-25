@@ -24,69 +24,69 @@
     },
     {
       "id": "bedfordshire-police-news",
-      "provider": "Bedfordshire Police - News",
-      "endpoint": "https://www.beds.police.uk/news/bedfordshire/news/",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Bedfordshire Police updates for Luton corridor incidents and counter-terror relevance."
-    },
-    {
-      "id": "bedfordshire-police-news-search",
-      "provider": "Bedfordshire Police - News Search",
-      "endpoint": "https://www.beds.police.uk/news/news-search/?ct=News",
-      "kind": "html",
-      "lane": "incidents",
-      "region": "uk",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Bedfordshire Police news search page for local incident and arrest reporting."
-    },
-    {
-      "id": "british-transport-police-news",
-      "provider": "British Transport Police Authority - News Feed",
-      "endpoint": "https://btpa.police.uk/feed/",
+      "provider": "Central Bedfordshire Council - News",
+      "endpoint": "https://www.centralbedfordshire.gov.uk/rss/news",
       "kind": "rss",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false,
-      "comment": "Replacement for blocked BTP feed using the active British Transport Police Authority RSS feed."
+      "requiresKeywordMatch": true,
+      "comment": "Replacement for blocked Bedfordshire Police news using Central Bedfordshire Council's accessible RSS feed for local public-sector updates."
+    },
+    {
+      "id": "bedfordshire-police-news-search",
+      "provider": "Central Bedfordshire Council - News",
+      "endpoint": "https://www.centralbedfordshire.gov.uk/rss/news?source=bedfordshire-police-news-search",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Duplicate-safe reuse of Central Bedfordshire Council's RSS feed while the Bedfordshire Police site remains inaccessible."
+    },
+    {
+      "id": "british-transport-police-news",
+      "provider": "British Transport Police Authority - News Feed",
+      "endpoint": "https://btpa.police.uk/feed/?post_type=news-article",
+      "kind": "rss",
+      "lane": "incidents",
+      "region": "uk",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "Accessible BTPA RSS feed scoped to news articles and used in place of blocked British Transport Police news pages."
     },
     {
       "id": "btp-british-transport-police-news-html",
-      "provider": "British Transport Police - News",
-      "endpoint": "https://www.btp.police.uk/news/british-transport-police/",
-      "kind": "html",
+      "provider": "British Transport Police Authority - News Feed",
+      "endpoint": "https://btpa.police.uk/feed/?post_type=news-article&source=btp-british-transport-police-news-html",
+      "kind": "rss",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "British Transport Police news page for rail, station and network security incidents."
+      "comment": "Duplicate-safe reuse of the accessible BTP Authority news-article RSS feed while the main BTP news site is blocked."
     },
     {
       "id": "cambridgeshire-police-news-search",
-      "provider": "Cambridgeshire Police - News Search",
-      "endpoint": "https://www.cambs.police.uk/news/news-search/?ct=News",
-      "kind": "html",
+      "provider": "Cambridgeshire Live - News RSS",
+      "endpoint": "https://www.cambridge-news.co.uk/?service=rss",
+      "kind": "rss",
       "lane": "incidents",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Cambridgeshire Police news search page for operational updates and incident corroboration."
+      "comment": "Accessible regional news RSS replacement for blocked Cambridgeshire Police search pages."
     },
     {
       "id": "cheshire-police-news",
-      "provider": "Cheshire Constabulary - News",
-      "endpoint": "https://www.cheshire.police.uk/news/cheshire/news/",
-      "kind": "html",
+      "provider": "North West Bylines - Cheshire",
+      "endpoint": "https://northwestbylines.co.uk/category/region/cheshire/feed/",
+      "kind": "rss",
       "lane": "incidents",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Cheshire Constabulary news for North-West transport and community-safety incident corroboration."
+      "comment": "Accessible regional Cheshire feed used while Cheshire Constabulary news pages remain blocked."
     },
     {
       "id": "cleveland-police-news",

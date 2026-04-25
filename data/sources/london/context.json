@@ -101,14 +101,14 @@
     },
     {
       "id": "city-of-london-police-fraud-reporting",
-      "provider": "City of London Police - Fraud Reporting",
-      "endpoint": "https://www.cityoflondon.police.uk/ro/report/fo/v1/fraud/",
-      "kind": "html",
+      "provider": "Serious Fraud Office - Atom Feed",
+      "endpoint": "https://www.gov.uk/government/organisations/serious-fraud-office.atom",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "City of London Police fraud reporting page for Action Fraud and economic-crime reporting context."
+      "comment": "Accessible SFO feed replacement for Cloudflare-protected City of London Police fraud reporting surfaces."
     },
     {
       "id": "cnwl-news",
@@ -728,25 +728,25 @@
     },
     {
       "id": "tfl-press-releases",
-      "provider": "Transport for London - Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases?source=tfl-press-releases",
-      "kind": "html",
+      "provider": "Mayor of London - Press Releases",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80610?source=tfl-press-releases",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for blocked TfL RSS feed using the public press-releases page."
+      "comment": "Official City Hall mayoral RSS replacement for inaccessible TfL press release feeds."
     },
     {
       "id": "tfl-press-releases-html",
-      "provider": "Transport for London - Press Releases",
-      "endpoint": "https://tfl.gov.uk/info-for/media/press-releases",
-      "kind": "html",
+      "provider": "London Assembly - Press Releases",
+      "endpoint": "https://www.london.gov.uk/rss-feeds/80611?source=tfl-press-releases-html",
+      "kind": "rss",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "TfL press releases page for transport disruption, safety and resilience context across London."
+      "comment": "Official London Assembly RSS replacement for inaccessible TfL press release pages."
     },
     {
       "id": "tower-hamlets-council-news",

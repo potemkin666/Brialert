@@ -56,14 +56,14 @@
     },
     {
       "id": "chatham-house-security-defence",
-      "provider": "Chatham House - Security and Defence",
-      "endpoint": "https://www.chathamhouse.org/topics/security-and-defence",
-      "kind": "html",
+      "provider": "RUSI - Latest Commentary",
+      "endpoint": "https://www.rusi.org/rss/latest-commentary.xml",
+      "kind": "rss",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Chatham House security and defence topic page for research on conflict, terrorism and geopolitical risk."
+      "comment": "Accessible RUSI commentary RSS replacement for the Cloudflare-blocked Chatham House security and defence feed."
     },
     {
       "id": "essex-police-news",
