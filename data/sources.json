@@ -155,13 +155,13 @@
     {
       "id": "eurojust-press-news-html",
       "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
-      "kind": "rss",
+      "endpoint": "https://www.eurojust.europa.eu/media-and-events/press-releases-and-news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Eurojust press releases/news RSS feed.",
+      "comment": "Official Eurojust press releases and news listing page.",
       "refreshEveryHours": 1
     },
     {
@@ -202,14 +202,14 @@
     },
     {
       "id": "finland-supo-news",
-      "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/news-and-press-releases/-/asset_publisher/LVkvGHGkmM3J/rss",
-      "kind": "rss",
+      "provider": "Finnish Security Intelligence Service - News and Press Releases",
+      "endpoint": "https://supo.fi/en/news-and-press-releases?source=finland-supo-news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Finnish Security and Intelligence Service RSS feed.",
+      "comment": "English SUPO news and press releases page used as the current official source for Finnish security-service updates.",
       "refreshEveryHours": 1
     },
     {
@@ -644,14 +644,14 @@
     },
     {
       "id": "finland-police-news",
-      "provider": "Finnish Police - News",
-      "endpoint": "https://poliisi.fi/en/national-bureau-of-investigation/-/asset_publisher/ZtAEeHB39Lxr/rss",
-      "kind": "rss",
+      "provider": "Finnish Police - Newsroom",
+      "endpoint": "https://poliisi.fi/en/newsroom",
+      "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Finnish NBI RSS feed for serious crime and CT-relevant police updates.",
+      "comment": "English Finnish Police newsroom page that links current news posts and feed options.",
       "refreshEveryHours": 1
     },
     {
@@ -729,13 +729,13 @@
     {
       "id": "romanian-police-news",
       "provider": "Romanian Police - News",
-      "endpoint": "https://www.politiaromana.ro/en/news",
+      "endpoint": "https://politiaromana.ro/en",
       "kind": "html",
       "lane": "incidents",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Romanian Police news for arrests, organised-crime overlap and regional security incident corroboration.",
+      "comment": "Romanian Police English-language site used as the current official news surface.",
       "refreshEveryHours": 1
     },
     {
@@ -1240,14 +1240,14 @@
     },
     {
       "id": "eurojust-rss-feeds-page",
-      "provider": "Eurojust - RSS Feeds",
-      "endpoint": "https://www.eurojust.europa.eu/rss-feeds",
-      "kind": "html",
+      "provider": "Eurojust - Press Releases and News RSS",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Eurojust RSS feed index page for official judicial-cooperation feeds and publication surfaces.",
+      "comment": "Official Eurojust RSS feed for press releases and news.",
       "refreshEveryHours": 1
     },
     {
@@ -1492,13 +1492,13 @@
     {
       "id": "netherlands-nctv-news",
       "provider": "Dutch NCTV - News",
-      "endpoint": "https://www.nctv.nl/actueel",
+      "endpoint": "https://www.nctv.nl/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch National Coordinator for Security and Counterterrorism updates on threat posture and resilience.",
+      "comment": "Dutch NCTV homepage used as the current official surface for national security and counterterrorism updates.",
       "refreshEveryHours": 1
     },
     {
@@ -1516,13 +1516,13 @@
     {
       "id": "politico-europe",
       "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/feed/",
-      "kind": "rss",
+      "endpoint": "https://www.politico.eu",
+      "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Politico Europe RSS feed for context coverage."
+      "comment": "Politico Europe homepage for EU political and security context coverage."
     },
     {
       "id": "rte-ireland-news-rss",
@@ -1596,13 +1596,13 @@
     {
       "id": "ireland-gardai-press",
       "provider": "An Garda Siochana - Press Releases",
-      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
+      "endpoint": "https://www.garda.ie/en/press-releases/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context.",
+      "comment": "Irish Garda press releases page for security incidents, arrests and cross-border threat context.",
       "refreshEveryHours": 1
     },
     {
@@ -2099,13 +2099,13 @@
     {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center a IntelBrief",
-      "endpoint": "https://thesoufancenter.org/category/intelbrief/feed/",
-      "kind": "rss",
+      "endpoint": "https://thesoufancenter.org/intelbrief",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "WordPress category RSS feed for Soufan IntelBrief."
+      "comment": "Soufan Center IntelBrief listing page for current analysis on terrorism and security threats."
     },
     {
       "id": "tech-against-terrorism-podcast",
@@ -3282,7 +3282,7 @@
     {
       "id": "london-ambulance-news",
       "provider": "London Ambulance Service a News",
-      "endpoint": "https://www.londonambulance.nhs.uk/news/",
+      "endpoint": "https://www.londonambulance.nhs.uk/news-2/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -3330,7 +3330,7 @@
     {
       "id": "london-gov-home",
       "provider": "London.gov.uk",
-      "endpoint": "https://www.london.gov.uk/",
+      "endpoint": "https://www.london.gov.uk",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -3341,14 +3341,14 @@
     },
     {
       "id": "london-gov-press-releases-html",
-      "provider": "London.gov.uk - Press Releases",
-      "endpoint": "https://www.london.gov.uk/press-releases",
+      "provider": "London.gov.uk - News",
+      "endpoint": "https://www.london.gov.uk?source=london-gov-press-releases-html",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "London.gov.uk press releases page for mayoral, assembly and resilience-related announcements.",
+      "comment": "London.gov.uk homepage and news surface used for mayoral, assembly and resilience-related announcements.",
       "refreshEveryHours": 1
     },
     {
@@ -3534,13 +3534,13 @@
     {
       "id": "port-of-london-authority-news",
       "provider": "Port of London Authority a News",
-      "endpoint": "https://pla.co.uk/News",
+      "endpoint": "https://pla.co.uk/latest",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Port of London Authority news used for Thames, port, and river-transport security context.",
+      "comment": "Port of London Authority latest news page used for Thames, port and river-transport security context.",
       "refreshEveryHours": 1
     },
     {
@@ -3653,14 +3653,14 @@
     },
     {
       "id": "tavistock-portman-news",
-      "provider": "Tavistock and Portman NHS Foundation Trust a News",
-      "endpoint": "https://tavistockandportman.nhs.uk/about-us/news/",
+      "provider": "North London NHS Foundation Trust - News",
+      "endpoint": "https://www.northlondonmentalhealth.nhs.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Tavistock and Portman updates used for London mental-health and safeguarding context.",
+      "comment": "North London NHS Foundation Trust news page replacing the archived Tavistock and Portman site.",
       "refreshEveryHours": 1
     },
     {
@@ -3853,7 +3853,7 @@
     {
       "id": "ct-policing-london",
       "provider": "Counter Terrorism Policing London",
-      "endpoint": "https://www.counterterrorism.police.uk/counter-terrorism-policing-london/",
+      "endpoint": "https://www.counterterrorism.police.uk/counter-terrorism-policing-london",
       "kind": "html",
       "lane": "incidents",
       "region": "london",
@@ -4003,13 +4003,13 @@
     {
       "id": "chatham-house-home",
       "provider": "Chatham House",
-      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
-      "kind": "rss",
+      "endpoint": "https://www.chathamhouse.org",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Official Chatham House all-content RSS feed."
+      "comment": "Chatham House homepage used as the current surface for latest analysis and news."
     },
     {
       "id": "chatham-house-security-defence",
@@ -4343,13 +4343,13 @@
     {
       "id": "wiltshire-999s",
       "provider": "Wiltshire 999s",
-      "endpoint": "https://www.wiltshire999s.co.uk/news/feed/",
-      "kind": "rss",
+      "endpoint": "https://www.wiltshire999s.co.uk/all-about/wiltshire-police/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Wiltshire emergency services news RSS feed."
+      "comment": "Wiltshire 999s local policing page used for Wiltshire Police and emergency-services reporting."
     },
     {
       "id": "belfast-live",
@@ -5934,7 +5934,7 @@
     {
       "id": "ct-policing-north-west",
       "provider": "Counter Terrorism Policing North West",
-      "endpoint": "https://www.counterterrorism.police.uk/north-west/",
+      "endpoint": "https://www.counterterrorism.police.uk/north-west",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -5946,7 +5946,7 @@
     {
       "id": "ct-policing-uk-latest-news",
       "provider": "Counter Terrorism Policing UK a Latest News",
-      "endpoint": "https://www.counterterrorism.police.uk/latest-news/",
+      "endpoint": "https://www.counterterrorism.police.uk/latest-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -5958,7 +5958,7 @@
     {
       "id": "ct-policing-uk-rss-feed",
       "provider": "Counter Terrorism Policing UK - Latest News",
-      "endpoint": "https://www.counterterrorism.police.uk/latest-news/?source=ct-policing-uk-rss-feed",
+      "endpoint": "https://www.counterterrorism.police.uk/latest-news?source=ct-policing-uk-rss-feed",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -7502,7 +7502,7 @@
     {
       "id": "ct-policing-prevent-programme",
       "provider": "Counter Terrorism Policing - Prevent",
-      "endpoint": "https://www.counterterrorism.police.uk/what-we-do/counter-terrorism/prevent/",
+      "endpoint": "https://www.counterterrorism.police.uk/what-we-do/counter-terrorism/prevent",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
@@ -7514,7 +7514,7 @@
     {
       "id": "ct-policing-what-you-can-do",
       "provider": "Counter Terrorism Policing - What You Can Do",
-      "endpoint": "https://www.counterterrorism.police.uk/what-you-can-do/",
+      "endpoint": "https://www.counterterrorism.police.uk/what-you-can-do",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
@@ -7608,7 +7608,7 @@
     {
       "id": "gov-uk-terrorism-national-emergency",
       "provider": "GOV.UK - Terrorism National Emergency",
-      "endpoint": "https://www.gov.uk/terrorism-national-emergency",
+      "endpoint": "https://www.gov.uk/terrorism-national-emergency/national-emergencies",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
@@ -7714,13 +7714,13 @@
     {
       "id": "npsa-blog-news",
       "provider": "NPSA - Blog News",
-      "endpoint": "https://www.npsa.gov.uk/blog/news",
+      "endpoint": "https://www.npsa.gov.uk/blog?source=npsa-blog-news",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "NPSA blog news listing for protective-security, venue hardening and public-safety updates.",
+      "comment": "NPSA news and blog page for protective-security, venue hardening and public-safety updates.",
       "refreshEveryHours": 1
     },
     {
@@ -7738,13 +7738,13 @@
     {
       "id": "protectuk",
       "provider": "ProtectUK (NPSA) a Protective Security Guidance",
-      "endpoint": "https://www.protectuk.police.uk/",
+      "endpoint": "https://www.protectuk.police.uk/news?source=protectuk",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "No RSS endpoint published; using the primary guidance/news surface.",
+      "comment": "ProtectUK news page used as the current public surface for protective-security updates.",
       "refreshEveryHours": 1
     },
     {
@@ -8079,14 +8079,14 @@
     },
     {
       "id": "rand-terrorism-topic",
-      "provider": "RAND - Terrorism Topic Updates",
-      "endpoint": "https://www.rand.org/pubs/new.xml",
-      "kind": "rss",
+      "provider": "RAND - Terrorism Topic",
+      "endpoint": "https://www.rand.org/topics/terrorism.html?source=rand-terrorism-topic",
+      "kind": "html",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Official RAND new publications RSS feed replacing the topic HTML page."
+      "comment": "RAND terrorism topic page used as the current research hub for terrorism analysis and commentary."
     },
     {
       "id": "rewards-for-justice",

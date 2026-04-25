@@ -102,13 +102,13 @@
     {
       "id": "netherlands-nctv-news",
       "provider": "Dutch NCTV - News",
-      "endpoint": "https://www.nctv.nl/actueel",
+      "endpoint": "https://www.nctv.nl/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Dutch National Coordinator for Security and Counterterrorism updates on threat posture and resilience."
+      "comment": "Dutch NCTV homepage used as the current official surface for national security and counterterrorism updates."
     },
     {
       "id": "norway-pst-news",
@@ -124,13 +124,13 @@
     {
       "id": "politico-europe",
       "provider": "Politico Europe",
-      "endpoint": "https://www.politico.eu/feed/",
-      "kind": "rss",
+      "endpoint": "https://www.politico.eu",
+      "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Politico Europe RSS feed for context coverage."
+      "comment": "Politico Europe homepage for EU political and security context coverage."
     },
     {
       "id": "rte-ireland-news-rss",

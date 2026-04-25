@@ -100,14 +100,14 @@
     },
     {
       "id": "rand-terrorism-topic",
-      "provider": "RAND - Terrorism Topic Updates",
-      "endpoint": "https://www.rand.org/pubs/new.xml",
-      "kind": "rss",
+      "provider": "RAND - Terrorism Topic",
+      "endpoint": "https://www.rand.org/topics/terrorism.html?source=rand-terrorism-topic",
+      "kind": "html",
       "lane": "context",
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Official RAND new publications RSS feed replacing the topic HTML page."
+      "comment": "RAND terrorism topic page used as the current research hub for terrorism analysis and commentary."
     },
     {
       "id": "rewards-for-justice",

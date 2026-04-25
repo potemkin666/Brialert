@@ -113,7 +113,7 @@
     {
       "id": "ct-policing-north-west",
       "provider": "Counter Terrorism Policing North West",
-      "endpoint": "https://www.counterterrorism.police.uk/north-west/",
+      "endpoint": "https://www.counterterrorism.police.uk/north-west",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -124,7 +124,7 @@
     {
       "id": "ct-policing-uk-latest-news",
       "provider": "Counter Terrorism Policing UK a Latest News",
-      "endpoint": "https://www.counterterrorism.police.uk/latest-news/",
+      "endpoint": "https://www.counterterrorism.police.uk/latest-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
@@ -135,7 +135,7 @@
     {
       "id": "ct-policing-uk-rss-feed",
       "provider": "Counter Terrorism Policing UK - Latest News",
-      "endpoint": "https://www.counterterrorism.police.uk/latest-news/?source=ct-policing-uk-rss-feed",
+      "endpoint": "https://www.counterterrorism.police.uk/latest-news?source=ct-policing-uk-rss-feed",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",

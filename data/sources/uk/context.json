@@ -46,13 +46,13 @@
     {
       "id": "chatham-house-home",
       "provider": "Chatham House",
-      "endpoint": "https://www.chathamhouse.org/path/whatsnew.xml",
-      "kind": "rss",
+      "endpoint": "https://www.chathamhouse.org",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Official Chatham House all-content RSS feed."
+      "comment": "Chatham House homepage used as the current surface for latest analysis and news."
     },
     {
       "id": "chatham-house-security-defence",
@@ -372,13 +372,13 @@
     {
       "id": "wiltshire-999s",
       "provider": "Wiltshire 999s",
-      "endpoint": "https://www.wiltshire999s.co.uk/news/feed/",
-      "kind": "rss",
+      "endpoint": "https://www.wiltshire999s.co.uk/all-about/wiltshire-police/",
+      "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Wiltshire emergency services news RSS feed."
+      "comment": "Wiltshire 999s local policing page used for Wiltshire Police and emergency-services reporting."
     },
     {
       "id": "belfast-live",

@@ -242,14 +242,14 @@
     },
     {
       "id": "eurojust-rss-feeds-page",
-      "provider": "Eurojust - RSS Feeds",
-      "endpoint": "https://www.eurojust.europa.eu/rss-feeds",
-      "kind": "html",
+      "provider": "Eurojust - Press Releases and News RSS",
+      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
+      "kind": "rss",
       "lane": "oversight",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Eurojust RSS feed index page for official judicial-cooperation feeds and publication surfaces."
+      "comment": "Official Eurojust RSS feed for press releases and news."
     },
     {
       "id": "europarl-committee-libe",

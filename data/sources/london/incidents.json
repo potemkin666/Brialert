@@ -36,7 +36,7 @@
     {
       "id": "ct-policing-london",
       "provider": "Counter Terrorism Policing London",
-      "endpoint": "https://www.counterterrorism.police.uk/counter-terrorism-policing-london/",
+      "endpoint": "https://www.counterterrorism.police.uk/counter-terrorism-policing-london",
       "kind": "html",
       "lane": "incidents",
       "region": "london",

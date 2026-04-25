@@ -25,7 +25,7 @@
     {
       "id": "ct-policing-prevent-programme",
       "provider": "Counter Terrorism Policing - Prevent",
-      "endpoint": "https://www.counterterrorism.police.uk/what-we-do/counter-terrorism/prevent/",
+      "endpoint": "https://www.counterterrorism.police.uk/what-we-do/counter-terrorism/prevent",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
@@ -36,7 +36,7 @@
     {
       "id": "ct-policing-what-you-can-do",
       "provider": "Counter Terrorism Policing - What You Can Do",
-      "endpoint": "https://www.counterterrorism.police.uk/what-you-can-do/",
+      "endpoint": "https://www.counterterrorism.police.uk/what-you-can-do",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
@@ -123,7 +123,7 @@
     {
       "id": "gov-uk-terrorism-national-emergency",
       "provider": "GOV.UK - Terrorism National Emergency",
-      "endpoint": "https://www.gov.uk/terrorism-national-emergency",
+      "endpoint": "https://www.gov.uk/terrorism-national-emergency/national-emergencies",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
@@ -221,13 +221,13 @@
     {
       "id": "npsa-blog-news",
       "provider": "NPSA - Blog News",
-      "endpoint": "https://www.npsa.gov.uk/blog/news",
+      "endpoint": "https://www.npsa.gov.uk/blog?source=npsa-blog-news",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "NPSA blog news listing for protective-security, venue hardening and public-safety updates."
+      "comment": "NPSA news and blog page for protective-security, venue hardening and public-safety updates."
     },
     {
       "id": "npsa-national-protective-security-authority",
@@ -243,13 +243,13 @@
     {
       "id": "protectuk",
       "provider": "ProtectUK (NPSA) a Protective Security Guidance",
-      "endpoint": "https://www.protectuk.police.uk/",
+      "endpoint": "https://www.protectuk.police.uk/news?source=protectuk",
       "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "No RSS endpoint published; using the primary guidance/news surface."
+      "comment": "ProtectUK news page used as the current public surface for protective-security updates."
     },
     {
       "id": "south-yorkshire-police-alerts",

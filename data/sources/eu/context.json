@@ -113,13 +113,13 @@
     {
       "id": "eurojust-press-news-html",
       "provider": "Eurojust - Press Releases and News",
-      "endpoint": "https://www.eurojust.europa.eu/rss/press-releases.xml",
-      "kind": "rss",
+      "endpoint": "https://www.eurojust.europa.eu/media-and-events/press-releases-and-news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Eurojust press releases/news RSS feed."
+      "comment": "Official Eurojust press releases and news listing page."
     },
     {
       "id": "eurojust-press-releases",
@@ -156,14 +156,14 @@
     },
     {
       "id": "finland-supo-news",
-      "provider": "Finnish Security Intelligence Service - News",
-      "endpoint": "https://supo.fi/en/news-and-press-releases/-/asset_publisher/LVkvGHGkmM3J/rss",
-      "kind": "rss",
+      "provider": "Finnish Security Intelligence Service - News and Press Releases",
+      "endpoint": "https://supo.fi/en/news-and-press-releases?source=finland-supo-news",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Official Finnish Security and Intelligence Service RSS feed."
+      "comment": "English SUPO news and press releases page used as the current official source for Finnish security-service updates."
     },
     {
       "id": "german-bfv-news",

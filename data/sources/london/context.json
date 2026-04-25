@@ -377,7 +377,7 @@
     {
       "id": "london-ambulance-news",
       "provider": "London Ambulance Service a News",
-      "endpoint": "https://www.londonambulance.nhs.uk/news/",
+      "endpoint": "https://www.londonambulance.nhs.uk/news-2/",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -421,7 +421,7 @@
     {
       "id": "london-gov-home",
       "provider": "London.gov.uk",
-      "endpoint": "https://www.london.gov.uk/",
+      "endpoint": "https://www.london.gov.uk",
       "kind": "html",
       "lane": "context",
       "region": "london",
@@ -431,14 +431,14 @@
     },
     {
       "id": "london-gov-press-releases-html",
-      "provider": "London.gov.uk - Press Releases",
-      "endpoint": "https://www.london.gov.uk/press-releases",
+      "provider": "London.gov.uk - News",
+      "endpoint": "https://www.london.gov.uk?source=london-gov-press-releases-html",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "London.gov.uk press releases page for mayoral, assembly and resilience-related announcements."
+      "comment": "London.gov.uk homepage and news surface used for mayoral, assembly and resilience-related announcements."
     },
     {
       "id": "london-gov-rss-80603",
@@ -608,13 +608,13 @@
     {
       "id": "port-of-london-authority-news",
       "provider": "Port of London Authority a News",
-      "endpoint": "https://pla.co.uk/News",
+      "endpoint": "https://pla.co.uk/latest",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Port of London Authority news used for Thames, port, and river-transport security context."
+      "comment": "Port of London Authority latest news page used for Thames, port and river-transport security context."
     },
     {
       "id": "redbridge-council-news",
@@ -717,14 +717,14 @@
     },
     {
       "id": "tavistock-portman-news",
-      "provider": "Tavistock and Portman NHS Foundation Trust a News",
-      "endpoint": "https://tavistockandportman.nhs.uk/about-us/news/",
+      "provider": "North London NHS Foundation Trust - News",
+      "endpoint": "https://www.northlondonmentalhealth.nhs.uk/news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Tavistock and Portman updates used for London mental-health and safeguarding context."
+      "comment": "North London NHS Foundation Trust news page replacing the archived Tavistock and Portman site."
     },
     {
       "id": "tfl-press-releases",

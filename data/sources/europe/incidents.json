@@ -25,13 +25,13 @@
     {
       "id": "ireland-gardai-press",
       "provider": "An Garda Siochana - Press Releases",
-      "endpoint": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/",
+      "endpoint": "https://www.garda.ie/en/press-releases/",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Irish Garda press releases for security incidents, arrests and cross-border threat context."
+      "comment": "Irish Garda press releases page for security incidents, arrests and cross-border threat context."
     },
     {
       "id": "netherlands-police-news",

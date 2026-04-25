@@ -265,13 +265,13 @@
     {
       "id": "soufan-center-intelbrief",
       "provider": "The Soufan Center a IntelBrief",
-      "endpoint": "https://thesoufancenter.org/category/intelbrief/feed/",
-      "kind": "rss",
+      "endpoint": "https://thesoufancenter.org/intelbrief",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "WordPress category RSS feed for Soufan IntelBrief."
+      "comment": "Soufan Center IntelBrief listing page for current analysis on terrorism and security threats."
     },
     {
       "id": "tech-against-terrorism-podcast",
