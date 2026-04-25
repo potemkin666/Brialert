@@ -34,6 +34,7 @@ import { applyDeviceProfile } from '../utils/device.mjs';
 import { createElements } from './elements.mjs';
 import { createRenderingCoordinator } from './rendering.mjs';
 import { bindEvents } from './events.mjs';
+import { createTrafficReporter } from './traffic.mjs';
 import * as actions from './actions.mjs';
 import { bootstrapMap, refreshFeed, refreshFeedUntilUpdated, startRuntimeLifecycle } from './startup.mjs';
 import { filteredMapView } from '../render/map.mjs';
@@ -44,6 +45,7 @@ export function initialiseApp() {
   const state = createState();
   const derivedViewStore = createDerivedViewStore(deriveView, { sortAlertsByFreshness });
   const elements = createElements();
+  const trafficReporter = createTrafficReporter();
 
   let modalController = null;
   function syncModalWatchToggle() {
@@ -74,6 +76,7 @@ export function initialiseApp() {
 
   function setActiveTab(next) {
     actions.setActiveTabState(state, next);
+    trafficReporter.trackTabView(state, next);
     applyTabState(next, { tabbar: elements.tabbar }, {
       onTabChange(tab) {
         if (tab === 'map') {
@@ -126,6 +129,7 @@ export function initialiseApp() {
     actions,
     rendering,
     setActiveTab,
+    onMapModeChange: (nextMode) => trafficReporter.trackMapMode(state, nextMode),
     triggerLiveFeedRun,
     refreshFeedNow: () => refreshFeed({
       state,
@@ -164,6 +168,8 @@ export function initialiseApp() {
   }
   applyBriefingMode();
   rendering.renderAll();
+  trafficReporter.trackPageView(state);
+  trafficReporter.trackTabView(state, state.activeTab);
 
   startRuntimeLifecycle({
     state,

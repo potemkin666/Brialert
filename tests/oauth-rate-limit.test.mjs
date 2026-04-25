@@ -185,6 +185,16 @@ describe('API endpoints use shared rate-limit module', () => {
     assert.ok(src.includes('rate-limit.js'), 'should import from shared rate-limit module');
   });
 
+  it('traffic.js imports from rate-limit.js and uses createDistributedRateLimiter', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync(new URL('../api/traffic.js', import.meta.url), 'utf8');
+    assert.ok(src.includes('RATE_LIMIT_WINDOW_MS'), 'should define RATE_LIMIT_WINDOW_MS');
+    assert.ok(src.includes('RATE_LIMIT_BURST'), 'should define RATE_LIMIT_BURST');
+    assert.ok(src.includes("'rate-limited'"), 'should use rate-limited error code');
+    assert.ok(src.includes('createDistributedRateLimiter'), 'should import createDistributedRateLimiter');
+    assert.ok(src.includes('rate-limit.js'), 'should import from shared rate-limit module');
+  });
+
   it('trigger-live-feed.js imports from rate-limit.js and uses createCooldownLimiter', async () => {
     const { readFileSync } = await import('node:fs');
     const src = readFileSync(new URL('../api/trigger-live-feed.js', import.meta.url), 'utf8');
@@ -198,6 +208,7 @@ describe('API endpoints use shared rate-limit module', () => {
     const { readFileSync } = await import('node:fs');
     const files = [
       '../api/generate-brief.js',
+      '../api/traffic.js',
       '../api/request-source.js',
       '../api/auth/github/callback.js',
       '../api/auth/github/start.js',

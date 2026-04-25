@@ -8,6 +8,7 @@ import {
   _TILE_DARK,
   _CLUSTER_FLY_DURATION,
   _clusterSeverity,
+  _clusterAnchorFor,
   _statusLine,
   _normaliseCountryName,
   _vignetteLevel
@@ -132,6 +133,31 @@ describe('clusterSeverity ordering', () => {
 
   it('handles single-item clusters', () => {
     assert.equal(_clusterSeverity([{ severity: 'elevated' }]), 'elevated');
+  });
+});
+
+describe('clusterAnchorFor', () => {
+  it('anchors clusters to a real alert coordinate instead of a synthetic midpoint', () => {
+    const london = { id: 'london', lat: 51.5074, lng: -0.1278 };
+    const paris = { id: 'paris', lat: 48.8566, lng: 2.3522 };
+    const madrid = { id: 'madrid', lat: 40.4168, lng: -3.7038 };
+
+    const anchor = _clusterAnchorFor(
+      [
+        { alert: london, point: { x: 0, y: 0 } },
+        { alert: paris, point: { x: 10, y: 0 } },
+        { alert: madrid, point: { x: 11, y: 0 } }
+      ],
+      { x: 7, y: 0 }
+    );
+
+    assert.equal(anchor.id, 'paris');
+    assert.equal(anchor.lat, paris.lat);
+    assert.equal(anchor.lng, paris.lng);
+  });
+
+  it('returns null when asked to anchor an empty cluster', () => {
+    assert.equal(_clusterAnchorFor([], { x: 0, y: 0 }), null);
   });
 });
 

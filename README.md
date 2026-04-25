@@ -78,6 +78,9 @@ npm run build:feeds
   - `GITHUB_OAUTH_CLIENT_SECRET`
   - at least one allowlist: `ALBERTALERT_ADMIN_ALLOWED_USERS` (comma-separated logins), `ALBERTALERT_ADMIN_ALLOWED_ORGS` (comma-separated orgs), or `ALBERTALERT_ADMIN_ALLOWED_TEAMS` (comma-separated `org/team-slug`)
   - optional: `ALBERTALERT_ALLOWED_ORIGINS` (comma-separated frontend origins), `ALBERTALERT_GITHUB_OAUTH_REDIRECT_URI`, `ALBERTALERT_AUTH_SUCCESS_REDIRECT`, `ALBERTALERT_AUTH_FAILURE_REDIRECT`
+- Lightweight traffic capture is available at `/api/traffic`; page loads, tab changes, and map-mode changes are recorded anonymously as aggregate counts only.
+- Traffic capture stores daily summaries in KV when `KV_REST_API_URL` and `KV_REST_API_TOKEN` are configured on the backend; `GET /api/traffic` returns recent daily summaries for signed-in admins.
+- Optional: set `ALBERTALERT_TRAFFIC_SALT` to rotate the visitor-hash salt used for approximate unique-visitor counting without storing raw IP addresses.
 - The browser should trust upstream lane and queue decisions in the feed payload rather than re-inferring terrorism relevance, source reliability, or incident classification.
 - The feed builder is designed to fail soft per source, skip duplicate source IDs at runtime with a warning, and preserve last-known-good output when possible.
 - The feed builder now writes a SQLite sidecar for source reputation, cooldown memory, and alert churn history so source intelligence can persist across runs.
