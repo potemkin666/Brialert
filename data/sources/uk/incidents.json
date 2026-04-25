@@ -684,14 +684,14 @@
     },
     {
       "id": "west-yorkshire-police-missing-rss",
-      "provider": "West Yorkshire Police - Missing Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/missing/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - Missing",
+      "endpoint": "https://www.westyorkshire.police.uk/news-appeals/missing",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police missing persons feed for time-sensitive operational notices."
+      "comment": "Missing-persons listing used as the accessible replacement for the blocked West Yorkshire Police missing feed."
     },
     {
       "id": "west-yorkshire-police-news",

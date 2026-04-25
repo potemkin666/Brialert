@@ -46,14 +46,14 @@
     },
     {
       "id": "financial-times-world",
-      "provider": "AP News - Terrorism",
-      "endpoint": "https://apnews.com/hub/terrorism",
+      "provider": "Reuters - World News",
+      "endpoint": "https://www.reuters.com/world/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for subscription-heavy FT world page using AP's open terrorism hub."
+      "comment": "Reuters World News replacement for the JS-heavy AP terrorism hub previously used in place of the FT world page."
     },
     {
       "id": "france24-europe-rss",

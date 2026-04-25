@@ -595,13 +595,14 @@
     },
     {
       "id": "uk-ncsc-threat-reports",
-      "provider": "National Cyber Security Centre (UK) a Threat Reports",
-      "endpoint": "https://www.ncsc.gov.uk/api/1/services/v1/report-rss-feed.xml",
-      "kind": "rss",
+      "provider": "National Cyber Security Centre (UK) - Threat Reports",
+      "endpoint": "https://www.ncsc.gov.uk/section/keep-up-to-date/threat-reports",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": false
+      "requiresKeywordMatch": false,
+      "comment": "NCSC threat-reports listing page used after the older feed endpoint stopped serving current report data."
     },
     {
       "id": "uk-parliament-business-news",

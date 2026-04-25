@@ -75,7 +75,7 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced Bromley newsroom HTML with RSS endpoint."
+      "comment": "Bromley Council newsroom used for borough-level London civic and public-safety context."
     },
     {
       "id": "camden-council-news",
@@ -801,7 +801,7 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced HTML newsroom front page with Westminster official news RSS feed."
+      "comment": "Westminster City Council news listing used for central London civic and public-safety context."
     },
     {
       "id": "whittington-health-news",

@@ -73,26 +73,26 @@
     },
     {
       "id": "belgium-crisis-centre-news",
-      "provider": "Belgian National Crisis Centre - Newsroom",
-      "endpoint": "https://crisiscenter.be/en/newsroom",
+      "provider": "Centre de Crise - Newsroom",
+      "endpoint": "https://centredecrise.be/fr/newsroom",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Belgian National Crisis Centre newsroom for threat level, preparedness and crisis-management context.",
+      "comment": "French Centre de Crise newsroom replacement for the sparsely updated English Belgian Crisis Centre page.",
       "refreshEveryHours": 1
     },
     {
       "id": "denmark-pet-news",
       "provider": "Danish Security and Intelligence Service - News",
-      "endpoint": "https://pet.dk/aktuelt/nyhedsliste",
+      "endpoint": "https://pet.dk/nyheder",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "PET updates on Danish terrorism threats, extremism and national security alerts.",
+      "comment": "PET Danish news listing used as the current official source for terrorism, extremism and national-security updates.",
       "refreshEveryHours": 1
     },
     {
@@ -249,14 +249,14 @@
     },
     {
       "id": "nctv-english-rss",
-      "provider": "NCTV Netherlands - English RSS",
+      "provider": "NCTV Netherlands - Latest News",
       "endpoint": "https://english.nctv.nl/latest/news",
       "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "English NCTV RSS feed for Dutch threat posture, terrorism and national security updates.",
+      "comment": "English NCTV latest-news page for Dutch threat posture, terrorism and national-security updates.",
       "refreshEveryHours": 1
     },
     {
@@ -280,7 +280,8 @@
       "region": "eu",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Direct Spanish Interior Ministry news listing page.",
+      "quarantined": true,
+      "comment": "Held under review after repeated certificate and 502 failures on the Spanish Interior Ministry news page.",
       "refreshEveryHours": 1
     },
     {
@@ -1434,14 +1435,14 @@
     },
     {
       "id": "financial-times-world",
-      "provider": "AP News - Terrorism",
-      "endpoint": "https://apnews.com/hub/terrorism",
+      "provider": "Reuters - World News",
+      "endpoint": "https://www.reuters.com/world/",
       "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Replacement for subscription-heavy FT world page using AP's open terrorism hub."
+      "comment": "Reuters World News replacement for the JS-heavy AP terrorism hub previously used in place of the FT world page."
     },
     {
       "id": "france24-europe-rss",
@@ -1762,13 +1763,13 @@
     {
       "id": "pet-dk-english",
       "provider": "PET (Denmark) a English News",
-      "endpoint": "https://pet.dk/en/news-and-publications/news-list",
+      "endpoint": "https://pet.dk/en/news-and-publications/news",
       "kind": "html",
       "lane": "prevention",
       "region": "europe",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Danish Police Intelligence Service English news for terrorism threat assessment and prevention context.",
+      "comment": "PET English news listing for terrorism threat assessment and prevention context.",
       "refreshEveryHours": 1
     },
     {
@@ -2029,25 +2030,26 @@
     },
     {
       "id": "nato-news-rss",
-      "provider": "NATO a News (RSS)",
-      "endpoint": "https://www.nato.int/en/news-and-events/articles/news",
+      "provider": "NATO - News and Events",
+      "endpoint": "https://www.nato.int/en/news-and-events/index.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
+      "comment": "NATO news-and-events index used as the stable replacement for the defunct NATO RSS feed.",
       "refreshEveryHours": 1
     },
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en/announcements",
+      "endpoint": "https://www.occrp.org/en/news",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
+      "comment": "OCCRP all-news listing for investigative reporting on organised crime, corruption and illicit financial networks."
     },
     {
       "id": "osce-press-releases",
@@ -2063,14 +2065,14 @@
     },
     {
       "id": "resolve-network-research",
-      "provider": "RESOLVE Network a Research",
-      "endpoint": "https://www.resolvenet.org/news",
+      "provider": "RAND - Terrorism Topic",
+      "endpoint": "https://www.rand.org/topics/terrorism.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "RESOLVE Network global research on violent extremism, community resilience and counter-terrorism effectiveness."
+      "comment": "Stable RAND terrorism research hub replacement for the RESOLVE Network site while it remains under maintenance."
     },
     {
       "id": "reuters-uk",
@@ -2739,14 +2741,14 @@
     },
     {
       "id": "gctf-news",
-      "provider": "Global Counterterrorism Forum (GCTF) a News",
-      "endpoint": "https://www.thegctf.org/News-Stories/PgrID/918/PageID/3",
+      "provider": "UN Security Council Counter-Terrorism Committee - News Articles",
+      "endpoint": "https://www.un.org/securitycouncil/ctc/content/news-articles",
       "kind": "html",
       "lane": "oversight",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "No RSS endpoint published; using the official news page and relying on keyword filtering.",
+      "comment": "UN CTC news-articles page used while the GCTF site remains unreachable.",
       "refreshEveryHours": 1
     },
     {
@@ -2952,7 +2954,7 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced Bromley newsroom HTML with RSS endpoint.",
+      "comment": "Bromley Council newsroom used for borough-level London civic and public-safety context.",
       "refreshEveryHours": 1
     },
     {
@@ -3742,7 +3744,7 @@
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Replaced HTML newsroom front page with Westminster official news RSS feed.",
+      "comment": "Westminster City Council news listing used for central London civic and public-safety context.",
       "refreshEveryHours": 1
     },
     {
@@ -6555,14 +6557,14 @@
     },
     {
       "id": "west-yorkshire-police-missing-rss",
-      "provider": "West Yorkshire Police - Missing Feed",
-      "endpoint": "https://www.westyorkshire.police.uk/news/missing/feed",
-      "kind": "rss",
+      "provider": "West Yorkshire Police - Missing",
+      "endpoint": "https://www.westyorkshire.police.uk/news-appeals/missing",
+      "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "West Yorkshire Police missing persons feed for time-sensitive operational notices.",
+      "comment": "Missing-persons listing used as the accessible replacement for the blocked West Yorkshire Police missing feed.",
       "refreshEveryHours": 1
     },
     {
@@ -7379,13 +7381,14 @@
     },
     {
       "id": "uk-ncsc-threat-reports",
-      "provider": "National Cyber Security Centre (UK) a Threat Reports",
-      "endpoint": "https://www.ncsc.gov.uk/api/1/services/v1/report-rss-feed.xml",
-      "kind": "rss",
+      "provider": "National Cyber Security Centre (UK) - Threat Reports",
+      "endpoint": "https://www.ncsc.gov.uk/section/keep-up-to-date/threat-reports",
+      "kind": "html",
       "lane": "oversight",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
+      "comment": "NCSC threat-reports listing page used after the older feed endpoint stopped serving current report data.",
       "refreshEveryHours": 1
     },
     {
@@ -8106,7 +8109,8 @@
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "Canonical START BAAD entry page for reference-database context."
+      "quarantined": true,
+      "comment": "Temporarily quarantined after repeated START site 502 failures on the BAAD database page."
     },
     {
       "id": "start-center-publications",
@@ -8117,7 +8121,8 @@
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "START news and publications page retained as a live and current research source."
+      "quarantined": true,
+      "comment": "Temporarily quarantined after repeated START site 502 failures on the news and publications page."
     },
     {
       "id": "state-dept-terrorism",

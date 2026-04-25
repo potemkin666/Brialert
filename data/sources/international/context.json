@@ -198,24 +198,25 @@
     },
     {
       "id": "nato-news-rss",
-      "provider": "NATO a News (RSS)",
-      "endpoint": "https://www.nato.int/en/news-and-events/articles/news",
+      "provider": "NATO - News and Events",
+      "endpoint": "https://www.nato.int/en/news-and-events/index.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": true,
-      "requiresKeywordMatch": true
+      "requiresKeywordMatch": true,
+      "comment": "NATO news-and-events index used as the stable replacement for the defunct NATO RSS feed."
     },
     {
       "id": "occrp-news",
       "provider": "OCCRP a Organized Crime and Corruption Reporting Project",
-      "endpoint": "https://www.occrp.org/en/announcements",
+      "endpoint": "https://www.occrp.org/en/news",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "OCCRP investigative journalism RSS on organised crime, corruption and illicit financial networks relevant to terror financing."
+      "comment": "OCCRP all-news listing for investigative reporting on organised crime, corruption and illicit financial networks."
     },
     {
       "id": "osce-press-releases",
@@ -230,14 +231,14 @@
     },
     {
       "id": "resolve-network-research",
-      "provider": "RESOLVE Network a Research",
-      "endpoint": "https://www.resolvenet.org/news",
+      "provider": "RAND - Terrorism Topic",
+      "endpoint": "https://www.rand.org/topics/terrorism.html",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "RESOLVE Network global research on violent extremism, community resilience and counter-terrorism effectiveness."
+      "comment": "Stable RAND terrorism research hub replacement for the RESOLVE Network site while it remains under maintenance."
     },
     {
       "id": "reuters-uk",

@@ -129,7 +129,8 @@
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "Canonical START BAAD entry page for reference-database context."
+      "quarantined": true,
+      "comment": "Temporarily quarantined after repeated START site 502 failures on the BAAD database page."
     },
     {
       "id": "start-center-publications",
@@ -140,7 +141,8 @@
       "region": "us",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "START news and publications page retained as a live and current research source."
+      "quarantined": true,
+      "comment": "Temporarily quarantined after repeated START site 502 failures on the news and publications page."
     },
     {
       "id": "state-dept-terrorism",
