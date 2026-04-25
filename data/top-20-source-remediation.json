@@ -1,41 +1,41 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-25T00:10:29.100Z",
+  "generatedAt": "2026-04-25T05:58:37.999Z",
   "totalSourceErrors": 2,
   "top20": [
     {
-      "id": "london-resilience",
-      "provider": "Resilience First - Latest Updates",
-      "endpoint": "https://www.london.gov.uk/programmes-strategies/fire-and-city-resilience/london-resilience-partnership",
+      "id": "france24-europe-rss",
+      "provider": "France 24 a Europe (RSS)",
+      "endpoint": "https://www.france24.com/en/europe/rss",
       "finalUrl": "",
       "category": "anti-bot-protection",
       "statusKind": "",
       "message": "Blocked by anti-bot protection",
-      "status": 0,
+      "status": 200,
       "rankScore": 2,
       "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "html",
-      "sourceLane": "prevention",
-      "sourceRegion": "",
-      "isMachineReadable": false
-    },
-    {
-      "id": "secret-london-rss",
-      "provider": "Secret London",
-      "endpoint": "https://secretldn.com/feed/",
-      "finalUrl": "",
-      "category": "brittle-selectors-or-js-rendering",
-      "statusKind": "",
-      "message": "No items parsed from source payload",
-      "status": 202,
-      "rankScore": 2,
-      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
       "replacementCandidate": "",
       "sourceKind": "rss",
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": true
+    },
+    {
+      "id": "ec-fiscalia-news",
+      "provider": "Fiscalía General del Estado - Noticias",
+      "endpoint": "https://www.fiscalia.gob.ec/",
+      "finalUrl": "",
+      "category": "timeout",
+      "statusKind": "",
+      "message": "This operation was aborted",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ]
 }
