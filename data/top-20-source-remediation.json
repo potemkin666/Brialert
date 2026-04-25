@@ -1,29 +1,12 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-25T05:58:37.999Z",
-  "totalSourceErrors": 2,
+  "generatedAt": "2026-04-25T06:49:23.653Z",
+  "totalSourceErrors": 1,
   "top20": [
     {
-      "id": "france24-europe-rss",
-      "provider": "France 24 a Europe (RSS)",
-      "endpoint": "https://www.france24.com/en/europe/rss",
-      "finalUrl": "",
-      "category": "anti-bot-protection",
-      "statusKind": "",
-      "message": "Blocked by anti-bot protection",
-      "status": 200,
-      "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
-      "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
-      "sourceRegion": "",
-      "isMachineReadable": true
-    },
-    {
-      "id": "ec-fiscalia-news",
-      "provider": "Fiscalía General del Estado - Noticias",
-      "endpoint": "https://www.fiscalia.gob.ec/",
+      "id": "de-bka-press",
+      "provider": "BKA Germany - Press Releases",
+      "endpoint": "https://www.bka.de/DE/Presse/Listenseite_Pressemitteilungen/listenseite_Pressemitteilungen_node.html",
       "finalUrl": "",
       "category": "timeout",
       "statusKind": "",
@@ -33,7 +16,7 @@
       "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
       "sourceKind": "html",
-      "sourceLane": "context",
+      "sourceLane": "incidents",
       "sourceRegion": "",
       "isMachineReadable": false
     }
