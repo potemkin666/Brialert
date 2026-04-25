@@ -25,6 +25,7 @@ import {
   POLL_INTERVAL_MS,
   SOURCE_REQUEST_API_URL,
   SOURCE_REQUESTS_STORAGE_KEY,
+  WEATHER_POLL_INTERVAL_MS,
   WATCHED_STORAGE_KEY,
   WATCH_GEOGRAPHY_URL,
   createDerivedViewStore,
@@ -180,6 +181,7 @@ export function initialiseApp() {
       sourceRequestApiUrl: SOURCE_REQUEST_API_URL
     },
     pollIntervalMs: POLL_INTERVAL_MS,
+    weatherPollIntervalMs: WEATHER_POLL_INTERVAL_MS,
     normaliseAlert,
     invalidateDerivedView: rendering.invalidateDerivedView,
     renderAll: rendering.renderAll,
