@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content, shrink-to-fit=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://*.basemaps.cartocdn.com; connect-src 'self' https://albertalertbackend.vercel.app; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://*.basemaps.cartocdn.com; connect-src 'self' https://albertalertbackend.vercel.app https://api.open-meteo.com; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <title>AlbertAlert</title>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#070914">
@@ -45,11 +45,11 @@
                   placeholder="Search incidents, places, sources...">
               </div>
             </div>
-            <div class="metric hero-update-metric">
-              <span class="metric-label">Updated</span>
-              <strong id="hero-updated">Just now</strong>
-              <button class="secondary-button hero-refresh-button" id="hero-refresh" type="button">Refresh feed</button>
-              <p class="hero-status" id="hero-status" aria-live="polite">Feed status pending.</p>
+            <div class="metric hero-weather-metric">
+              <span class="metric-label">London weather</span>
+              <strong class="hero-weather-temperature" id="hero-weather-temp">--°C</strong>
+              <p class="hero-weather-summary" id="hero-weather-summary">Loading latest conditions…</p>
+              <p class="hero-weather-meta" id="hero-weather-meta" aria-live="polite">Live conditions for central London.</p>
             </div>
           </div>
         </header>

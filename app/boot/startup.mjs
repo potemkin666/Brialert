@@ -5,6 +5,7 @@ import {
   startFeedPolling
 } from '../feed/index.mjs';
 import { syncSourceRequests } from '../feed/source-requests.mjs';
+import { startLondonWeatherPolling } from '../weather/index.mjs';
 
 export function bootstrapMap(mapController, { idleTimeoutMs, fallbackDelayMs }) {
   if (window.requestIdleCallback) {
@@ -18,6 +19,7 @@ export function startRuntimeLifecycle({
   state,
   urls,
   pollIntervalMs,
+  weatherPollIntervalMs,
   normaliseAlert,
   invalidateDerivedView,
   renderAll,
@@ -40,6 +42,10 @@ export function startRuntimeLifecycle({
 
   startFeedPolling(state, pollIntervalMs, urls.liveFeedUrl, normaliseAlert, () => {
     invalidateDerivedView();
+    renderAll();
+  });
+
+  startLondonWeatherPolling(state, weatherPollIntervalMs, () => {
     renderAll();
   });
 

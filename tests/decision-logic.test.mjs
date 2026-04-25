@@ -1219,13 +1219,19 @@ test("renderHero shows requested fallback copy when live pull hasn't happened ye
   const elements = {
     heroSearch: { value: '' },
     heroUpdated: { textContent: '' },
-    heroStatus: { textContent: '' }
+    heroStatus: { textContent: '' },
+    heroWeatherTemp: { textContent: '' },
+    heroWeatherSummary: { textContent: '' },
+    heroWeatherMeta: { textContent: '' }
   };
 
   renderHero({ state, elements });
 
   assert.equal(elements.heroUpdated.textContent, 'Waiting for first live update');
   assert.equal(elements.heroStatus.textContent, 'Feed fetch: idle. Manual trigger: not attempted.');
+  assert.equal(elements.heroWeatherTemp.textContent, '--°C');
+  assert.equal(elements.heroWeatherSummary.textContent, 'Loading latest conditions…');
+  assert.equal(elements.heroWeatherMeta.textContent, 'Checking the latest London conditions.');
 });
 
 test('renderHero uses last successful source count when current source count is zero', () => {
@@ -1247,7 +1253,10 @@ test('renderHero uses last successful source count when current source count is 
   const elements = {
     heroSearch: { value: '' },
     heroUpdated: { textContent: '' },
-    heroStatus: { textContent: '' }
+    heroStatus: { textContent: '' },
+    heroWeatherTemp: { textContent: '' },
+    heroWeatherSummary: { textContent: '' },
+    heroWeatherMeta: { textContent: '' }
   };
 
   renderHero({ state, elements });
@@ -1277,7 +1286,10 @@ test('renderHero reports rendered vs fetched article totals when they differ', (
   const elements = {
     heroSearch: { value: '' },
     heroUpdated: { textContent: '' },
-    heroStatus: { textContent: '' }
+    heroStatus: { textContent: '' },
+    heroWeatherTemp: { textContent: '' },
+    heroWeatherSummary: { textContent: '' },
+    heroWeatherMeta: { textContent: '' }
   };
 
   renderHero({ state, elements });
@@ -1317,13 +1329,67 @@ test('renderHero keeps only update time in primary copy when run stats exist', (
   const elements = {
     heroSearch: { value: '' },
     heroUpdated: { textContent: '' },
-    heroStatus: { textContent: '' }
+    heroStatus: { textContent: '' },
+    heroWeatherTemp: { textContent: '' },
+    heroWeatherSummary: { textContent: '' },
+    heroWeatherMeta: { textContent: '' }
   };
 
   renderHero({ state, elements });
 
   assert.match(elements.heroUpdated.textContent, /^Feed updated at /);
   assert.match(elements.heroStatus.textContent, /^Feed fetch: idle\. Manual trigger: failed \(.+\) - Unable to trigger live-feed run automatically\.$/);
+});
+
+test('renderHero populates London weather copy when current conditions are available', () => {
+  const state = {
+    searchQuery: '',
+    liveFeedGeneratedAt: null,
+    londonWeather: {
+      status: 'success',
+      temperatureC: 14.2,
+      apparentTemperatureC: 12.7,
+      windKph: 18.4,
+      conditionLabel: 'Partly cloudy',
+      conditionIcon: '⛅',
+      observedAt: '2026-04-25T18:10:00.000Z'
+    }
+  };
+  const elements = {
+    heroSearch: { value: '' },
+    heroWeatherTemp: { textContent: '' },
+    heroWeatherSummary: { textContent: '' },
+    heroWeatherMeta: { textContent: '' }
+  };
+
+  renderHero({ state, elements });
+
+  assert.equal(elements.heroWeatherTemp.textContent, '14°C');
+  assert.equal(elements.heroWeatherSummary.textContent, '⛅ Partly cloudy');
+  assert.match(elements.heroWeatherMeta.textContent, /^Feels like 13°C · Wind 18 km\/h · Updated /);
+});
+
+test('renderHero shows a fallback message when London weather fails to load', () => {
+  const state = {
+    searchQuery: '',
+    liveFeedGeneratedAt: null,
+    londonWeather: {
+      status: 'error',
+      error: 'HTTP 503'
+    }
+  };
+  const elements = {
+    heroSearch: { value: '' },
+    heroWeatherTemp: { textContent: '' },
+    heroWeatherSummary: { textContent: '' },
+    heroWeatherMeta: { textContent: '' }
+  };
+
+  renderHero({ state, elements });
+
+  assert.equal(elements.heroWeatherTemp.textContent, '--°C');
+  assert.equal(elements.heroWeatherSummary.textContent, 'Weather unavailable');
+  assert.equal(elements.heroWeatherMeta.textContent, 'London weather is unavailable right now.');
 });
 
 test('normaliseSourcesPayload drops duplicate source IDs and keeps first occurrence', () => {

@@ -11,6 +11,7 @@ import {
   supportingCardMarkup,
   responderCardMarkup
 } from '../components/cards.mjs';
+import { formatLondonWeatherMeta } from '../weather/index.mjs';
 import { escapeHtml } from '../utils/text.mjs';
 
 function displaySourceCount(state) {
@@ -192,9 +193,29 @@ export function renderHero({ state, elements }) {
   const healthRefresh = state.liveFeedHealth?.lastSuccessfulRefreshTime;
   const stamp = healthRefresh ? new Date(healthRefresh) : state.liveFeedGeneratedAt;
   const hasValidStamp = stamp instanceof Date && !Number.isNaN(stamp.getTime());
-  elements.heroUpdated.textContent = hasValidStamp
-    ? `Feed updated at ${formatTimeHm(stamp)}`
-    : 'Waiting for first live update';
+  if (elements.heroUpdated) {
+    elements.heroUpdated.textContent = hasValidStamp
+      ? `Feed updated at ${formatTimeHm(stamp)}`
+      : 'Waiting for first live update';
+  }
+
+  if (elements.heroWeatherTemp) {
+    elements.heroWeatherTemp.textContent = Number.isFinite(state.londonWeather?.temperatureC)
+      ? `${Math.round(state.londonWeather.temperatureC)}°C`
+      : '--°C';
+  }
+  if (elements.heroWeatherSummary) {
+    if (state.londonWeather?.status === 'error') {
+      elements.heroWeatherSummary.textContent = 'Weather unavailable';
+    } else if (state.londonWeather?.status === 'success') {
+      elements.heroWeatherSummary.textContent = `${state.londonWeather.conditionIcon || '☁️'} ${state.londonWeather.conditionLabel || 'Conditions unavailable'}`;
+    } else {
+      elements.heroWeatherSummary.textContent = 'Loading latest conditions…';
+    }
+  }
+  if (elements.heroWeatherMeta) {
+    elements.heroWeatherMeta.textContent = formatLondonWeatherMeta(state.londonWeather);
+  }
 
   if (!elements.heroStatus) return;
   const fetchState = state.liveFeedFetchState || 'idle';

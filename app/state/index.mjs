@@ -2,6 +2,7 @@ export const LIVE_FEED_URL = 'live-alerts.json';
 export const GEO_LOOKUP_URL = 'data/geo-lookup.json';
 export const WATCH_GEOGRAPHY_URL = 'data/watch-geography.json';
 export const POLL_INTERVAL_MS = 20_000;
+export const WEATHER_POLL_INTERVAL_MS = 15 * 60_000;
 export const SOURCE_PULL_MINUTES = 15;
 export const WATCHED_STORAGE_KEY = 'albertalert.watched';
 export const NOTES_STORAGE_KEY = 'albertalert.notes';
@@ -34,6 +35,17 @@ export function createState() {
     liveFeedFetchError: null,
     liveFeedFetchState: 'idle',
     liveFeedLastAttemptAt: null,
+    londonWeather: {
+      status: 'idle',
+      temperatureC: null,
+      apparentTemperatureC: null,
+      windKph: null,
+      conditionLabel: '',
+      conditionIcon: '☁️',
+      isDay: true,
+      observedAt: null,
+      error: null
+    },
     manualRefreshTriggerStatus: {
       state: 'idle',
       message: null,
