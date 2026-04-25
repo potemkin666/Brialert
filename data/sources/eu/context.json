@@ -57,14 +57,14 @@
     },
     {
       "id": "ecfr-feeds-index",
-      "provider": "ECFR - Feeds",
-      "endpoint": "https://ecfr.eu/feed/",
-      "kind": "rss",
+      "provider": "ECFR - Newsroom",
+      "endpoint": "https://ecfr.eu/newsroom/",
+      "kind": "html",
       "lane": "context",
       "region": "eu",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "ECFR main RSS feed endpoint."
+      "comment": "ECFR newsroom page used as the safest public updates stream in place of an unverified feeds index."
     },
     {
       "id": "enisa-news",

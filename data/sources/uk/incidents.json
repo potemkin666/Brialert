@@ -344,24 +344,24 @@
     {
       "id": "kent-police-news-html",
       "provider": "Kent Police - News",
-      "endpoint": "https://www.kent.police.uk/news/kent/news/",
+      "endpoint": "https://www.kent.police.uk/news/kent/latest/?source=kent-police-news-html",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Kent Police news page for Channel, port and county security incidents."
+      "comment": "Kent Police latest-news listing retained with a query variant for incident catalog uniqueness."
     },
     {
       "id": "lancashire-constabulary-news",
-      "provider": "Lancashire Constabulary a News",
-      "endpoint": "https://www.lancashire.police.uk/news/",
+      "provider": "Lancashire Police - Newsroom",
+      "endpoint": "https://news.lancashire.police.uk/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Lancashire Constabulary news for Blackpool, Preston and Lancashire terrorism-related incidents."
+      "comment": "Lancashire Police newsroom homepage used as the current official public news surface."
     },
     {
       "id": "leicestershire-police-news",
@@ -388,24 +388,24 @@
     {
       "id": "merseyside-police-news",
       "provider": "Merseyside Police a News",
-      "endpoint": "https://www.merseyside.police.uk/news/",
+      "endpoint": "https://www.merseyside.police.uk/news/merseyside/news/?source=merseyside-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Merseyside Police news for Liverpool-area terrorism-related incidents and counter-terror operations."
+      "comment": "Merseyside Police latest-news listing used for Liverpool-area incidents and counter-terror operations."
     },
     {
       "id": "merseyside-police-news-html",
       "provider": "Merseyside Police - News",
-      "endpoint": "https://www.merseyside.police.uk/news/merseyside-police/news/",
+      "endpoint": "https://www.merseyside.police.uk/news/merseyside/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Merseyside Police news page for Liverpool-area incidents, arrests and operational notices."
+      "comment": "Merseyside Police current official latest-news listing."
     },
     {
       "id": "norfolk-constabulary-news",
@@ -432,13 +432,13 @@
     {
       "id": "north-yorkshire-police-news-html",
       "provider": "North Yorkshire Police - News",
-      "endpoint": "https://www.northyorkshire.police.uk/news/north-yorkshire/news/",
+      "endpoint": "https://www.northyorkshire.police.uk/news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "North Yorkshire Police detailed news page for county incidents, rural threats and operational notices."
+      "comment": "North Yorkshire Police current official latest-news page."
     },
     {
       "id": "northamptonshire-police-news-html",
@@ -465,35 +465,35 @@
     {
       "id": "northumbria-police-northumbria-news",
       "provider": "Northumbria Police - Northumbria News",
-      "endpoint": "https://www.northumbria.police.uk/news/northumbria/news/",
+      "endpoint": "https://www.northumbria.police.uk/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Northumbria Police detailed news page for regional incidents and operational statements."
+      "comment": "Northumbria Police current official news homepage."
     },
     {
       "id": "nottinghamshire-police-news",
       "provider": "Nottinghamshire Police a News",
-      "endpoint": "https://www.nottinghamshire.police.uk/news/",
+      "endpoint": "https://www.nottinghamshire.police.uk/news/news-search/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Nottinghamshire Police news for the East Midlands region including terrorism-related incident reporting."
+      "comment": "Nottinghamshire Police public news-search listing used as the verified current news surface."
     },
     {
       "id": "nottinghamshire-police-nottinghamshire-news",
       "provider": "Nottinghamshire Police - Nottinghamshire News",
-      "endpoint": "https://www.nottinghamshire.police.uk/news/nottinghamshire/news/",
+      "endpoint": "https://www.nottinghamshire.police.uk/news/news-search/?source=nottinghamshire-police-nottinghamshire-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Nottinghamshire Police detailed news listing for incidents, arrests and operational reporting."
+      "comment": "Nottinghamshire Police news-search listing retained with a query variant for catalog uniqueness."
     },
     {
       "id": "police-scotland-news",
@@ -520,13 +520,13 @@
     {
       "id": "psni-news",
       "provider": "Police Service of Northern Ireland a News",
-      "endpoint": "https://www.psni.police.uk/news/",
+      "endpoint": "https://www.psni.police.uk/latest-news?source=psni-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "PSNI news used for Northern Ireland terrorism-related incidents, dissident republican and loyalist paramilitary activity."
+      "comment": "PSNI latest-news page retained with a query variant for Northern Ireland incident tracking."
     },
     {
       "id": "south-wales-police-news",
@@ -542,13 +542,13 @@
     {
       "id": "south-yorkshire-police-news",
       "provider": "South Yorkshire Police a News",
-      "endpoint": "https://www.southyorkshire.police.uk/news/",
+      "endpoint": "https://www.southyorkshire.police.uk/news/south-yorkshire/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "South Yorkshire Police news for Sheffield and Rotherham-area terrorism-related incidents."
+      "comment": "South Yorkshire Police current official latest-news listing."
     },
     {
       "id": "staffordshire-police-news",
@@ -608,13 +608,13 @@
     {
       "id": "thames-valley-police-news",
       "provider": "Thames Valley Police a News",
-      "endpoint": "https://www.thamesvalley.police.uk/news/",
+      "endpoint": "https://www.thamesvalley.police.uk/news/thames-valley/news/?source=thames-valley-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Thames Valley Police news for Reading, Oxford, and Heathrow-corridor terrorism-related incidents."
+      "comment": "Thames Valley Police latest-news listing retained with a query variant for catalog uniqueness."
     },
     {
       "id": "thames-valley-police-news-html",
@@ -740,13 +740,13 @@
     {
       "id": "wiltshire-police-news",
       "provider": "Wiltshire Police - News",
-      "endpoint": "https://www.wiltshire.police.uk/news/wiltshire/news/",
+      "endpoint": "https://www.wiltshire.police.uk/news/",
       "kind": "html",
       "lane": "incidents",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Wiltshire Police news for South-West incident corroboration and military-adjacent security context."
+      "comment": "Wiltshire Police current official news page."
     },
     {
       "id": "uk-npcc-news",

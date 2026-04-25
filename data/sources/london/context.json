@@ -245,13 +245,13 @@
     {
       "id": "heathrow-media-centre",
       "provider": "Heathrow a Media Centre",
-      "endpoint": "https://mediacentre.heathrow.com/",
+      "endpoint": "https://mediacentre.heathrow.com/pressrelease",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Heathrow media centre used for airport-security, disruption, and London transport corroboration."
+      "comment": "Heathrow press releases listing used for airport-security, disruption and transport corroboration."
     },
     {
       "id": "hillingdon-council-news",
@@ -388,13 +388,13 @@
     {
       "id": "london-city-airport-media-centre",
       "provider": "London City Airport a Media Centre",
-      "endpoint": "https://www.londoncityairport.com/corporate/media-centre",
+      "endpoint": "https://www.londoncityairport.com/media-centre",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "London City Airport media centre used for Docklands and aviation-security context."
+      "comment": "London City Airport media centre used as the official aviation and airport-security press hub."
     },
     {
       "id": "london-councils-news",
@@ -530,14 +530,14 @@
     },
     {
       "id": "nhs-london-ncl-news",
-      "provider": "NHS North Central London a News",
-      "endpoint": "https://nclhealthandcare.org.uk/news/",
+      "provider": "NHS West and North London a News",
+      "endpoint": "https://www.westandnorthlondon.icb.nhs.uk/",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "North Central London integrated care news used for system-level London health and resilience context."
+      "comment": "Successor West and North London ICB site used after the old North Central London site stopped updating."
     },
     {
       "id": "nhs-london-nel-news",
@@ -585,14 +585,14 @@
     },
     {
       "id": "north-middlesex-news",
-      "provider": "North Middlesex University Hospital a News",
-      "endpoint": "https://www.northmid.nhs.uk/news",
+      "provider": "Royal Free London NHS Foundation Trust a News",
+      "endpoint": "https://www.royalfree.nhs.uk/news?source=north-middlesex-news",
       "kind": "html",
       "lane": "context",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "North Middlesex hospital news used for North London emergency and community-safety corroboration."
+      "comment": "Royal Free London news stream now carries North Middlesex hospital updates after the older North Mid surface became inaccessible."
     },
     {
       "id": "oxleas-news",

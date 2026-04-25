@@ -133,14 +133,14 @@
     },
     {
       "id": "icsr-kcl",
-      "provider": "International Centre for the Study of Radicalisation (ICSR) a Updates",
-      "endpoint": "https://icsr.info/category/publications/reports/feed/",
-      "kind": "rss",
+      "provider": "Centre for Statecraft & National Security - Publications",
+      "endpoint": "https://csns.uk/publications/",
+      "kind": "html",
       "lane": "prevention",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": false,
-      "comment": "ICSR reports RSS feed."
+      "comment": "CSNS publications page used after ICSR merged into the Centre for Statecraft & National Security and the old site became archival."
     },
     {
       "id": "met-office-seasonal-advice",

@@ -112,14 +112,14 @@
     },
     {
       "id": "gov-uk-hmic",
-      "provider": "HM Inspectorate of Constabulary a GOV.UK",
-      "endpoint": "https://hmicfrs.justiceinspectorates.gov.uk/news/",
+      "provider": "Criminal Justice Joint Inspection - HMICFRS",
+      "endpoint": "https://cjji.justiceinspectorates.gov.uk/participating-inspectorate/hm-inspectorate-of-constabulary-and-fire-rescue-services/",
       "kind": "html",
       "lane": "oversight",
       "region": "uk",
-      "isTrustedOfficial": true,
+      "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "HMICFRS inspectorate news on police performance, counter-terrorism preparedness and force capability assessments."
+      "comment": "Accessible CJJI listing used as the best current public fallback for HMICFRS outputs while the direct news page is challenge-protected."
     },
     {
       "id": "gov-uk-home-office-atom",

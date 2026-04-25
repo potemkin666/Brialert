@@ -25,13 +25,13 @@
     {
       "id": "ecfr-publications",
       "provider": "European Council on Foreign Relations (ECFR) a Publications",
-      "endpoint": "https://ecfr.eu/feed/?post_type=publication",
-      "kind": "rss",
+      "endpoint": "https://ecfr.eu/publications/",
+      "kind": "html",
       "lane": "context",
       "region": "europe",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Direct ECFR publications feed."
+      "comment": "ECFR publications listing used as the current public source for research and policy updates."
     },
     {
       "id": "euronews-europe",

@@ -3,13 +3,13 @@
     {
       "id": "acled-updates",
       "provider": "ACLED a Updates and Analysis",
-      "endpoint": "https://acleddata.com/global-analysis",
+      "endpoint": "https://acleddata.com/updates",
       "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Focused ACLED global analysis page; official RSS is not consistently available."
+      "comment": "ACLED updates page used as the best current public stream for fresh regional overviews and analysis."
     },
     {
       "id": "aljazeera-news-rss",
@@ -155,13 +155,13 @@
     {
       "id": "just-security",
       "provider": "Just Security a Law, Rights & National Security",
-      "endpoint": "https://www.justsecurity.org/feed/",
-      "kind": "rss",
+      "endpoint": "https://www.justsecurity.org/recent-articles/",
+      "kind": "html",
       "lane": "context",
       "region": "international",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Just Security covers law, rights and national security including terrorism prosecutions and CT legislation; keyword filtering applied."
+      "comment": "Just Security recent-articles page used as the safest current public replacement for national-security analysis coverage."
     },
     {
       "id": "lawfare-blog",

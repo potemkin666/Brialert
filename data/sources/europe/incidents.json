@@ -14,7 +14,7 @@
     {
       "id": "french-police-nationale-news",
       "provider": "Police Nationale - News",
-      "endpoint": "https://www.police-nationale.interieur.gouv.fr/actualites",
+      "endpoint": "https://www.police-nationale.interieur.gouv.fr/vous-informer/nos-actualites",
       "kind": "html",
       "lane": "incidents",
       "region": "europe",

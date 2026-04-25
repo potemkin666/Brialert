@@ -133,35 +133,35 @@
     {
       "id": "institute-global-home",
       "provider": "Institute for Global Change",
-      "endpoint": "https://institute.global/insights/geopolitics-and-security",
+      "endpoint": "https://institute.global/insights",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": false,
       "requiresKeywordMatch": true,
-      "comment": "Focused TBI geopolitics and security page used for relevant strategic context."
+      "comment": "Institute for Global Change insights hub used as the current public content stream."
     },
     {
       "id": "kent-police-news",
       "provider": "Kent Police a News",
-      "endpoint": "https://www.kent.police.uk/news/",
+      "endpoint": "https://www.kent.police.uk/news/kent/latest/",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Kent Police news for Channel port area, Dover, and border security incident corroboration."
+      "comment": "Kent Police latest-news listing for Channel port area, Dover and county security context."
     },
     {
       "id": "mi5-news",
-      "provider": "National Crime Agency - News",
-      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=mi5-news",
+      "provider": "MI5 - News",
+      "endpoint": "https://www.mi5.gov.uk/news?source=mi5-news",
       "kind": "html",
       "lane": "context",
       "region": "uk",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for blocked MI5 news feed using NCA security and enforcement updates."
+      "comment": "MI5 latest-news page aligned with the source slug and official public Security Service updates."
     },
     {
       "id": "mi5-news-rss-direct",

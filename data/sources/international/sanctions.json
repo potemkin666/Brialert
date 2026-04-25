@@ -35,14 +35,14 @@
     },
     {
       "id": "unsc-consolidated-list",
-      "provider": "UN Security Council - Consolidated Sanctions List Updates (RSS)",
-      "endpoint": "https://main.un.org/securitycouncil/en/rss-updates-unsc-consolidated-list",
-      "kind": "rss",
+      "provider": "UN Security Council - Consolidated Sanctions List",
+      "endpoint": "https://main.un.org/securitycouncil/en/sanctions/1267/aq_sanctions_list",
+      "kind": "html",
       "lane": "sanctions",
       "region": "international",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": false,
-      "comment": "Official UNSC RSS feed for updates to the consolidated sanctions list covering all UN sanctions regimes."
+      "comment": "Official UN sanctions-list page linking the current 1267 consolidated-list data and XML export."
     }
   ]
 }

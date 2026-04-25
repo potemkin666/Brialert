@@ -2,36 +2,36 @@
   "sources": [
     {
       "id": "city-of-london-police-news",
-      "provider": "National Crime Agency - News",
-      "endpoint": "https://www.nationalcrimeagency.gov.uk/news?source=city-of-london-police-news",
+      "provider": "City of London Police - News",
+      "endpoint": "https://www.cityoflondon.police.uk/news?source=city-of-london-police-news",
       "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Next-best replacement for blocked City of London Police feed using NCA law-enforcement updates."
+      "comment": "City of London Police news listing aligned with the slug and current official public news surface."
     },
     {
       "id": "city-of-london-police-news-html",
-      "provider": "City of London Corporation - Newsroom RSS",
-      "endpoint": "https://news.cityoflondon.gov.uk/tagfeed/en/tags/news",
-      "kind": "rss",
-      "lane": "incidents",
-      "region": "london",
-      "isTrustedOfficial": true,
-      "requiresKeywordMatch": true,
-      "comment": "Accessible City of London Corporation newsroom RSS replacement for the Cloudflare-blocked City of London Police news page."
-    },
-    {
-      "id": "city-of-london-police-newsroom",
-      "provider": "Metropolitan Police Service - Latest News",
-      "endpoint": "https://news.met.police.uk/latest_news?source=city-of-london-police-newsroom",
+      "provider": "City of London Police - News",
+      "endpoint": "https://www.cityoflondon.police.uk/news?source=city-of-london-police-news-html",
       "kind": "html",
       "lane": "incidents",
       "region": "london",
       "isTrustedOfficial": true,
       "requiresKeywordMatch": true,
-      "comment": "Canonical Met newsroom latest-news listing."
+      "comment": "City of London Police public news listing retained with a distinct query variant for catalog uniqueness."
+    },
+    {
+      "id": "city-of-london-police-newsroom",
+      "provider": "City of London Police - Newsroom",
+      "endpoint": "https://www.cityoflondon.police.uk/news?source=city-of-london-police-newsroom",
+      "kind": "html",
+      "lane": "incidents",
+      "region": "london",
+      "isTrustedOfficial": true,
+      "requiresKeywordMatch": true,
+      "comment": "City of London Police newsroom listing aligned with the current official public news page."
     },
     {
       "id": "ct-policing-london",
