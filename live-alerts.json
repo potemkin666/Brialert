@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-25T17:36:26.075Z",
+  "generatedAt": "2026-04-25T17:41:50.857Z",
   "sourceCount": 4,
   "alertCount": 183,
   "alerts": [
@@ -10376,9 +10376,19 @@
       "freshUntil": "2026-04-12T10:10:00.000Z",
       "needsHumanReview": false,
       "isTerrorRelevant": true,
-      "corroboratingSources": [],
-      "corroborationCount": 0,
-      "isDuplicateOf": null
+      "corroboratingSources": [
+        {
+          "fusedIncidentId": "fusion-b4a9eb5890206d91",
+          "source": "Fixture Oversight Feed",
+          "sourceUrl": "https://fixtures.albertalert.local/oversight/1",
+          "sourceTier": "context",
+          "reliabilityProfile": "official_context",
+          "publishedAt": "2026-04-04T10:10:00.000Z",
+          "confidence": "Verified official source update"
+        }
+      ],
+      "corroborationCount": 1,
+      "isDuplicateOf": "fusion-b4a9eb5890206d91"
     },
     {
       "id": "uk-ncsc-news-4",
@@ -10758,9 +10768,19 @@
       "freshUntil": "2026-04-12T09:30:00.000Z",
       "needsHumanReview": false,
       "isTerrorRelevant": true,
-      "corroboratingSources": [],
-      "corroborationCount": 0,
-      "isDuplicateOf": null
+      "corroboratingSources": [
+        {
+          "fusedIncidentId": "fusion-f5cb7bfa16235fcf",
+          "source": "Fixture Prevention Feed",
+          "sourceUrl": "https://fixtures.albertalert.local/prevention/1",
+          "sourceTier": "research",
+          "reliabilityProfile": "specialist_research",
+          "publishedAt": "2026-04-04T09:30:00.000Z",
+          "confidence": "Research or analytical source"
+        }
+      ],
+      "corroborationCount": 1,
+      "isDuplicateOf": "fusion-f5cb7bfa16235fcf"
     }
   ],
   "sourceErrors": [],
@@ -12644,7 +12664,7 @@
       "sourcesFailedThisRun": 0,
       "sourcesUnchangedThisRun": 0
     },
-    "runDurationMs": 274,
+    "runDurationMs": 200,
     "playwrightFallback": {
       "attempts": 0,
       "successes": 0,
@@ -12666,7 +12686,7 @@
         "totalSuccessful": 2,
         "failedRate": 0,
         "successRate": 0.5,
-        "avgSourceDurationMs": 63,
+        "avgSourceDurationMs": 46,
         "criticalOnly": false,
         "skipPlaywright": false,
         "transitions": []
@@ -12676,13 +12696,13 @@
   "health": {
     "expectedRefreshMinutes": 30,
     "staleAfterMinutes": 50,
-    "lastAttemptedRefreshTime": "2026-04-25T17:36:26.075Z",
+    "lastAttemptedRefreshTime": "2026-04-25T17:41:50.857Z",
     "usedFallback": false,
-    "lastSuccessfulRefreshTime": "2026-04-25T17:36:26.075Z",
-    "lastSuccessfulRunId": "24936637121",
-    "lastSuccessfulRunNumber": "405",
+    "lastSuccessfulRefreshTime": "2026-04-25T17:41:50.857Z",
+    "lastSuccessfulRunId": "24936733703",
+    "lastSuccessfulRunNumber": "406",
     "lastSuccessfulRunAttempt": "1",
-    "lastSuccessfulHeadSha": "2cccb02b6583ac0b618d251d9c2a02106dff3516",
+    "lastSuccessfulHeadSha": "6182130d721f24ebde79d33376a68d2c20fef167",
     "lastSuccessfulEvent": "dynamic",
     "lastSuccessfulSourceCount": 4,
     "sourceErrorCount": 0,
@@ -12743,7 +12763,7 @@
         "totalSuccessful": 2,
         "failedRate": 0,
         "successRate": 0.5,
-        "avgSourceDurationMs": 63,
+        "avgSourceDurationMs": 46,
         "criticalOnly": false,
         "skipPlaywright": false,
         "transitions": []
@@ -12754,65 +12774,65 @@
         "provider": "Fixture Incidents Feed",
         "lane": "incidents",
         "kind": "rss",
-        "lastCheckedAt": "2026-04-25T17:36:26.075Z",
+        "lastCheckedAt": "2026-04-25T17:41:50.857Z",
         "lastBuiltCount": 0,
         "successfulRuns": 0,
-        "emptyRuns": 1,
+        "emptyRuns": 2,
         "failedRuns": 0,
         "consecutiveFailures": 0,
-        "consecutiveEmptyRuns": 1,
+        "consecutiveEmptyRuns": 2,
         "consecutiveBlockedFailures": 0,
         "consecutiveDeadUrlFailures": 0,
         "consecutiveTimeoutFailures": 0,
         "lastSuccessfulAt": null,
         "lastFailureAt": null,
-        "lastEmptyAt": "2026-04-25T17:36:26.075Z",
+        "lastEmptyAt": "2026-04-25T17:41:50.857Z",
         "lastErrorCategory": null,
         "lastErrorMessage": null,
         "recentErrors": [],
         "cooldownUntil": null,
         "autoSkipReason": null,
-        "healthScore": 77,
+        "healthScore": 74,
         "quarantined": false,
         "quarantinedAt": null,
         "quarantineReason": null,
-        "nextFetchAt": "2026-04-25T18:33:26.075Z"
+        "nextFetchAt": "2026-04-25T18:38:50.857Z"
       },
       "fixture-rss-context": {
         "provider": "Fixture Context Feed",
         "lane": "context",
         "kind": "rss",
-        "lastCheckedAt": "2026-04-25T17:36:26.075Z",
+        "lastCheckedAt": "2026-04-25T17:41:50.857Z",
         "lastBuiltCount": 0,
         "successfulRuns": 0,
-        "emptyRuns": 1,
+        "emptyRuns": 2,
         "failedRuns": 0,
         "consecutiveFailures": 0,
-        "consecutiveEmptyRuns": 1,
+        "consecutiveEmptyRuns": 2,
         "consecutiveBlockedFailures": 0,
         "consecutiveDeadUrlFailures": 0,
         "consecutiveTimeoutFailures": 0,
         "lastSuccessfulAt": null,
         "lastFailureAt": null,
-        "lastEmptyAt": "2026-04-25T17:36:26.075Z",
+        "lastEmptyAt": "2026-04-25T17:41:50.857Z",
         "lastErrorCategory": null,
         "lastErrorMessage": null,
         "recentErrors": [],
         "cooldownUntil": null,
         "autoSkipReason": null,
-        "healthScore": 77,
+        "healthScore": 74,
         "quarantined": false,
         "quarantinedAt": null,
         "quarantineReason": null,
-        "nextFetchAt": "2026-04-25T20:13:26.075Z"
+        "nextFetchAt": "2026-04-25T20:18:50.857Z"
       },
       "fixture-atom-oversight": {
         "provider": "Fixture Oversight Feed",
         "lane": "oversight",
         "kind": "atom",
-        "lastCheckedAt": "2026-04-25T17:36:26.075Z",
+        "lastCheckedAt": "2026-04-25T17:41:50.857Z",
         "lastBuiltCount": 1,
-        "successfulRuns": 1,
+        "successfulRuns": 2,
         "emptyRuns": 0,
         "failedRuns": 0,
         "consecutiveFailures": 0,
@@ -12820,7 +12840,7 @@
         "consecutiveBlockedFailures": 0,
         "consecutiveDeadUrlFailures": 0,
         "consecutiveTimeoutFailures": 0,
-        "lastSuccessfulAt": "2026-04-25T17:36:26.075Z",
+        "lastSuccessfulAt": "2026-04-25T17:41:50.857Z",
         "lastFailureAt": null,
         "lastEmptyAt": null,
         "lastErrorCategory": null,
@@ -12828,19 +12848,19 @@
         "recentErrors": [],
         "cooldownUntil": null,
         "autoSkipReason": null,
-        "healthScore": 90,
+        "healthScore": 100,
         "quarantined": false,
         "quarantinedAt": null,
         "quarantineReason": null,
-        "nextFetchAt": "2026-04-25T18:14:26.075Z"
+        "nextFetchAt": "2026-04-25T18:19:50.857Z"
       },
       "fixture-json-prevention": {
         "provider": "Fixture Prevention Feed",
         "lane": "prevention",
         "kind": "json",
-        "lastCheckedAt": "2026-04-25T17:36:26.075Z",
+        "lastCheckedAt": "2026-04-25T17:41:50.857Z",
         "lastBuiltCount": 1,
-        "successfulRuns": 1,
+        "successfulRuns": 2,
         "emptyRuns": 0,
         "failedRuns": 0,
         "consecutiveFailures": 0,
@@ -12848,7 +12868,7 @@
         "consecutiveBlockedFailures": 0,
         "consecutiveDeadUrlFailures": 0,
         "consecutiveTimeoutFailures": 0,
-        "lastSuccessfulAt": "2026-04-25T17:36:26.075Z",
+        "lastSuccessfulAt": "2026-04-25T17:41:50.857Z",
         "lastFailureAt": null,
         "lastEmptyAt": null,
         "lastErrorCategory": null,
@@ -12856,11 +12876,11 @@
         "recentErrors": [],
         "cooldownUntil": null,
         "autoSkipReason": null,
-        "healthScore": 90,
+        "healthScore": 100,
         "quarantined": false,
         "quarantinedAt": null,
         "quarantineReason": null,
-        "nextFetchAt": "2026-04-25T21:04:26.075Z"
+        "nextFetchAt": "2026-04-25T21:09:50.857Z"
       }
     }
   }
