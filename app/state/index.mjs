@@ -2,6 +2,7 @@ export const LIVE_FEED_URL = 'live-alerts.json';
 export const GEO_LOOKUP_URL = 'data/geo-lookup.json';
 export const WATCH_GEOGRAPHY_URL = 'data/watch-geography.json';
 export const POLL_INTERVAL_MS = 20_000;
+// Weather changes much more slowly than the alert feed, so poll a lot less often.
 export const WEATHER_POLL_INTERVAL_MS = 15 * 60_000;
 export const SOURCE_PULL_MINUTES = 15;
 export const WATCHED_STORAGE_KEY = 'albertalert.watched';
