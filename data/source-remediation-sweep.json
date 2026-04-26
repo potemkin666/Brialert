@@ -1,16 +1,52 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-26T11:52:46.428Z",
-  "totalSourceErrors": 1,
+  "generatedAt": "2026-04-26T13:27:52.538Z",
+  "totalSourceErrors": 4,
   "byCategory": {
-    "anti-bot-protection": 1
+    "anti-bot-protection": 3,
+    "timeout": 1
   },
   "byKind": {
-    "rss": 1
+    "rss": 3,
+    "html": 1
   },
-  "machineReadableErrorCount": 1,
-  "htmlErrorCount": 0,
+  "machineReadableErrorCount": 3,
+  "htmlErrorCount": 1,
   "top20": [
+    {
+      "id": "evening-shire",
+      "provider": "Evening Shire",
+      "endpoint": "https://eveningshire.com/feed/",
+      "finalUrl": "",
+      "category": "anti-bot-protection",
+      "statusKind": "",
+      "message": "Blocked by anti-bot protection",
+      "status": 202,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "semibold",
+      "provider": "Semibold",
+      "endpoint": "https://www.semibold.co.uk/feed/",
+      "finalUrl": "",
+      "category": "anti-bot-protection",
+      "statusKind": "",
+      "message": "Blocked by anti-bot protection",
+      "status": 202,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
     {
       "id": "the-canary-feed",
       "provider": "The Canary",
@@ -27,10 +63,61 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": true
+    },
+    {
+      "id": "de-bfv-islamist-extremism",
+      "provider": "BfV - Islamist Extremism and Terrorism",
+      "endpoint": "https://www.verfassungsschutz.de/EN/topics/islamist-extremism-and-islamist-terrorism/islamist-extremism-and-islamist-terrorism_node.html",
+      "finalUrl": "",
+      "category": "timeout",
+      "statusKind": "",
+      "message": "This operation was aborted",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ],
   "sources": [
     {
+      "id": "evening-shire",
+      "provider": "Evening Shire",
+      "endpoint": "https://eveningshire.com/feed/",
+      "finalUrl": "",
+      "category": "anti-bot-protection",
+      "statusKind": "",
+      "message": "Blocked by anti-bot protection",
+      "status": 202,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
+      "id": "semibold",
+      "provider": "Semibold",
+      "endpoint": "https://www.semibold.co.uk/feed/",
+      "finalUrl": "",
+      "category": "anti-bot-protection",
+      "statusKind": "",
+      "message": "Blocked by anti-bot protection",
+      "status": 202,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "rss",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": true
+    },
+    {
       "id": "the-canary-feed",
       "provider": "The Canary",
       "endpoint": "https://www.thecanary.co/feed/",
@@ -46,6 +133,23 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": true
+    },
+    {
+      "id": "de-bfv-islamist-extremism",
+      "provider": "BfV - Islamist Extremism and Terrorism",
+      "endpoint": "https://www.verfassungsschutz.de/EN/topics/islamist-extremism-and-islamist-terrorism/islamist-extremism-and-islamist-terrorism_node.html",
+      "finalUrl": "",
+      "category": "timeout",
+      "statusKind": "",
+      "message": "This operation was aborted",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "context",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ]
 }
