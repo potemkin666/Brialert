@@ -1,16 +1,36 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-26T14:33:01.586Z",
-  "totalSourceErrors": 1,
+  "generatedAt": "2026-04-26T15:18:30.552Z",
+  "totalSourceErrors": 3,
   "byCategory": {
-    "anti-bot-protection": 1
+    "blocked-or-auth": 1,
+    "anti-bot-protection": 1,
+    "network-failure": 1
   },
   "byKind": {
+    "html": 2,
     "rss": 1
   },
   "machineReadableErrorCount": 1,
-  "htmlErrorCount": 0,
+  "htmlErrorCount": 2,
   "top20": [
+    {
+      "id": "fra-rss",
+      "provider": "Human Rights Watch - Terrorism and Counterterrorism",
+      "endpoint": "https://www.hrw.org/topic/terrorism-counterterrorism",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "Blocked by blocked access page",
+      "status": 0,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
     {
       "id": "gb-news-uk-politics-rss",
       "provider": "GB News - UK Politics",
@@ -27,10 +47,44 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": true
+    },
+    {
+      "id": "ocam-be-english",
+      "provider": "CUTA (Belgium) threat analysis",
+      "endpoint": "https://cuta.belgium.be/",
+      "finalUrl": "",
+      "category": "network-failure",
+      "statusKind": "",
+      "message": "fetch failed",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ],
   "sources": [
     {
+      "id": "fra-rss",
+      "provider": "Human Rights Watch - Terrorism and Counterterrorism",
+      "endpoint": "https://www.hrw.org/topic/terrorism-counterterrorism",
+      "finalUrl": "",
+      "category": "blocked-or-auth",
+      "statusKind": "",
+      "message": "Blocked by blocked access page",
+      "status": 0,
+      "rankScore": 2,
+      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
       "id": "gb-news-uk-politics-rss",
       "provider": "GB News - UK Politics",
       "endpoint": "https://www.gbnews.com/feeds/politics/uk.rss",
@@ -46,6 +100,23 @@
       "sourceLane": "context",
       "sourceRegion": "",
       "isMachineReadable": true
+    },
+    {
+      "id": "ocam-be-english",
+      "provider": "CUTA (Belgium) threat analysis",
+      "endpoint": "https://cuta.belgium.be/",
+      "finalUrl": "",
+      "category": "network-failure",
+      "statusKind": "",
+      "message": "fetch failed",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ]
 }
