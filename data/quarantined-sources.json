@@ -1,16 +1,60 @@
 {
-  "generatedAt": "2026-04-27T00:08:00.385Z",
-  "count": 3,
+  "generatedAt": "2026-04-27T04:20:08.357Z",
+  "count": 4,
   "metrics": {
-    "total": 3,
-    "newThisWeek": 0,
+    "total": 4,
+    "newThisWeek": 1,
     "avgTimeInQuarantineHours": 0,
-    "avgHealthScore": 80,
+    "avgHealthScore": 61,
     "reQuarantineRate": 0,
     "reQuarantined": 0,
     "restoredTotal": 0
   },
   "sources": [
+    {
+      "id": "above-top-secret-rss",
+      "provider": "Above. Top. Secret Forum",
+      "endpoint": "https://www.abovetopsecret.com/forum/rss.xml",
+      "kind": "rss",
+      "lane": "context",
+      "region": "international",
+      "healthScore": 5,
+      "status": "auto-quarantined",
+      "reason": "Persistent timeouts — endpoint may be overloaded or unreachable",
+      "quarantinedAt": "2026-04-27T04:20:08.357Z",
+      "lastErrorCategory": "timeout",
+      "lastErrorMessage": "This operation was aborted",
+      "consecutiveFailures": 4,
+      "consecutiveTimeoutFailures": 4,
+      "consecutiveBlockedFailures": 0,
+      "consecutiveDeadUrlFailures": 0,
+      "recentErrors": [
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-25T18:18:46.639Z"
+        },
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-25T19:40:51.795Z"
+        },
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-25T22:06:21.687Z"
+        },
+        {
+          "category": "timeout",
+          "message": "This operation was aborted",
+          "at": "2026-04-27T04:20:08.357Z"
+        }
+      ],
+      "replacementSuggestion": "",
+      "reviewBy": "2026-05-04T04:20:08.357Z",
+      "lastFailureAt": "2026-04-27T04:20:08.357Z",
+      "lastCheckedAt": "2026-04-27T04:20:08.357Z"
+    },
     {
       "id": "spain-interior-ministry-news",
       "provider": "Spanish Ministry of the Interior - News",
