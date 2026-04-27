@@ -1,7 +1,7 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-27T07:43:02.767Z",
-  "totalSourceErrors": 15,
+  "generatedAt": "2026-04-27T09:47:00.583Z",
+  "totalSourceErrors": 17,
   "top20": [
     {
       "id": "aviation-herald-rss",
@@ -242,21 +242,55 @@
       "isMachineReadable": true
     },
     {
-      "id": "arcticdry",
-      "provider": "Arctic. Dry",
-      "endpoint": "https://www.arcticdry.co.uk/feed/",
+      "id": "french-justice-ministry-news",
+      "provider": "French Ministry of Justice - News",
+      "endpoint": "https://www.justice.gouv.fr/actualites",
       "finalUrl": "",
-      "category": "blocked-or-auth",
+      "category": "brittle-selectors-or-js-rendering",
       "statusKind": "",
-      "message": "HTTP 403",
-      "status": 403,
+      "message": "No items parsed from source payload",
+      "status": 200,
       "rankScore": 2,
-      "suggestedAction": "downgrade to non-bot-protected endpoint or quarantine if no public feed",
+      "suggestedAction": "switch to known stable RSS/Atom if available or adjust parser selector",
       "replacementCandidate": "",
-      "sourceKind": "rss",
-      "sourceLane": "context",
+      "sourceKind": "html",
+      "sourceLane": "oversight",
       "sourceRegion": "",
-      "isMachineReadable": true
+      "isMachineReadable": false
+    },
+    {
+      "id": "belgian-federal-police-news",
+      "provider": "Belgian Federal Police - News",
+      "endpoint": "https://www.police.be/5998/en/node/10868",
+      "finalUrl": "",
+      "category": "timeout",
+      "statusKind": "",
+      "message": "This operation was aborted",
+      "status": 0,
+      "rankScore": 1,
+      "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "incidents",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
+    {
+      "id": "north-wales-community-alert",
+      "provider": "North Wales Community Alert",
+      "endpoint": "https://www.northwalescommunityalert.co.uk/",
+      "finalUrl": "",
+      "category": "http-status-error",
+      "statusKind": "",
+      "message": "HTTP 429",
+      "status": 429,
+      "rankScore": 1,
+      "suggestedAction": "manual source review",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
+      "sourceRegion": "",
+      "isMachineReadable": false
     }
   ]
 }
