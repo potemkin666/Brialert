@@ -1,8 +1,25 @@
 {
   "generatedFrom": "live-alerts.json",
-  "generatedAt": "2026-04-27T21:16:05.058Z",
-  "totalSourceErrors": 2,
+  "generatedAt": "2026-04-27T22:34:51.410Z",
+  "totalSourceErrors": 3,
   "top20": [
+    {
+      "id": "hedayah-news",
+      "provider": "Hedayah - News",
+      "endpoint": "https://hedayah.com/news/",
+      "finalUrl": "",
+      "category": "not-found-404",
+      "statusKind": "",
+      "message": "HTTP 404",
+      "status": 404,
+      "rankScore": 5,
+      "suggestedAction": "move source to quarantine and replace endpoint with current live URL",
+      "replacementCandidate": "",
+      "sourceKind": "html",
+      "sourceLane": "prevention",
+      "sourceRegion": "",
+      "isMachineReadable": false
+    },
     {
       "id": "euronews-europe",
       "provider": "Euronews a Europe",
@@ -21,19 +38,19 @@
       "isMachineReadable": false
     },
     {
-      "id": "joint-committee-human-rights-html",
-      "provider": "Joint Committee on Human Rights",
-      "endpoint": "https://committees.parliament.uk/committee/93/human-rights-joint-committee/",
+      "id": "german-bka-press-releases-de",
+      "provider": "BKA Germany - Press Releases",
+      "endpoint": "https://www.bka.de/DE/Aktuelle. Informationen/Aktuelle. Meldungen/Pressemeldungen/pressemitteilungen_node.html",
       "finalUrl": "",
-      "category": "timeout",
+      "category": "network-failure",
       "statusKind": "",
-      "message": "This operation was aborted",
+      "message": "fetch failed",
       "status": 0,
       "rankScore": 1,
       "suggestedAction": "retry later and monitor domain circuit-breaker/failure trend",
       "replacementCandidate": "",
       "sourceKind": "html",
-      "sourceLane": "oversight",
+      "sourceLane": "incidents",
       "sourceRegion": "",
       "isMachineReadable": false
     }
